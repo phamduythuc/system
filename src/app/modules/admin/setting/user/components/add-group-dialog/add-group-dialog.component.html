@@ -1,0 +1,75 @@
+<ng-container *transloco="let t">
+<!--    header-->
+    <div class="header border-b flex justify-between items-center pb-3">
+        <div class="text-xl font-bold card-title">
+            {{data ? 'Sửa nhóm' : 'Thêm mới nhóm'}}
+        </div>
+        <div>
+            <button mat-icon-button class="hover:bg-slate-500" (click)="dialogRef.close()">
+                <mat-icon svgIcon="heroicons_outline:x" title="Edit"  class="icon-size-5"></mat-icon>
+            </button>
+        </div>
+    </div>
+<!--    content-->
+    <div class="content mt-6" [formGroup]="formGroup">
+        <div class="field flex mb-4">
+            <label class="w-1/4 required" for="group-name">Tên nhóm</label>
+            <div class="input w-3/4">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                    <input class="w-full" id="group-name"
+                           placeholder="Nhập tên nhóm"
+                           formControlName="name"
+                           matInput>
+                </mat-form-field>
+                <app-error-message [control]="formGroup.get('name')" name="Tên nhóm"></app-error-message>
+            </div>
+        </div>
+        <div class="field flex mb-4">
+            <label class="w-1/4 required" for="groupAccount">Tài khoản server</label>
+            <div class="input w-3/4">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                    <input class="w-full" id="groupAccount"
+                           placeholder="Nhập tài khoản server"
+                           formControlName="groupAcc"
+                           matInput>
+                </mat-form-field>
+                <app-error-message [control]="formGroup.get('groupAcc')" name="Tài khoản server"></app-error-message>
+            </div>
+        </div>
+        <div class="field flex mb-4">
+            <label class="w-1/4" for="description">Mô tả</label>
+            <div class="input w-3/4">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                    <textarea class="w-full" id="description"
+                           placeholder="Nhập mô tả"
+                           formControlName="description"
+                              matInput></textarea>
+                </mat-form-field>
+                <app-error-message [control]="formGroup.get('description')" name="Mô tả"></app-error-message>
+            </div>
+        </div>
+        <div class="field flex mb-4">
+            <label class="w-1/4" for="description">Trạng thái</label>
+            <div class="input w-3/4">
+                <mat-radio-group formControlName="activated">
+                    <mat-radio-button [value]="1" class="mr-10 text-lime-500">Hoạt động</mat-radio-button>
+                    <mat-radio-button [value]="0" class="text-red-500">Bị khóa</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+    </div>
+<!--    footer-->
+    <div class="footer mt-6 flex justify-end">
+        <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save()">
+            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+            <span>Thêm mới</span>
+        </button>
+        <button mat-raised-button (click)="dialogRef.close()">
+            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+            <span>Hủy bỏ</span>
+        </button>
+    </div>
+</ng-container>

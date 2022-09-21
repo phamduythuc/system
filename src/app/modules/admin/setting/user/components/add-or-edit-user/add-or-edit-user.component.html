@@ -1,0 +1,173 @@
+<ng-container *transloco="let t">
+    <div class="flex flex-col h-full">
+        <!--    header-->
+        <div class="header border-b flex justify-between items-center pb-3">
+            <div class="text-xl font-bold card-title">
+                {{userData ? 'Thông tin người dùng' : 'Thêm mới người dùng'}}
+            </div>
+            <div>
+                <button mat-icon-button class="hover:bg-slate-500" (click)="dialogRef.close()">
+                    <mat-icon svgIcon="heroicons_outline:x" title="Edit"  class="icon-size-5"></mat-icon>
+                </button>
+            </div>
+        </div>
+        <!--    content-->
+        <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
+            <div class="field flex mb-4">
+                <label class="w-1/6 required">Họ và tên</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập họ và tên"
+                               formControlName="firstName"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('firstName')" name="Họ và tên"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6 required">Tên đăng nhập</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập tên đăng nhập"
+                               formControlName="login"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('login')" name="Tên đăng nhập"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6 required">Mật khẩu</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập mật khẩu"
+                               formControlName="password"
+                               type="password"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('password')" name="Mật khẩu"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6 required">Xác nhận mật khẩu</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập mật khẩu"
+                               type="password"
+                               formControlName="confirmPassword"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('confirmPassword')" name="Mật khẩu"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6 required">Email</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập email"
+                               formControlName="email"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('email')" name="Email"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6">Điện thoại</label>
+                <div class="input w-5/6">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                        <input class="w-full"
+                               placeholder="Nhập điện thoại"
+                               formControlName="phone"
+                               matInput>
+                    </mat-form-field>
+                    <app-error-message [control]="formGroup.get('phone')" name="Phone"></app-error-message>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <div class="w-1/2 flex">
+                    <label class="w-1/3 required">Nhóm</label>
+                    <div class="input w-2/3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full bg-card">
+                            <mat-select placeholder="Chọn nhóm" formControlName="team">
+                                <mat-option *ngFor="let authority of groups" [value]="authority.name">{{authority.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <app-error-message [control]="formGroup.get('team')" name="Nhóm"></app-error-message>
+                    </div>
+                </div>
+                <div class="w-1/2 flex pl-10">
+                    <label class="w-1/3 required ">Nhóm quyền</label>
+                    <div class="input w-2/3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full bg-card">
+                            <mat-select placeholder="Chọn nhóm quyền" formControlName="authorities" [multiple]="true">
+                                <mat-option *ngFor="let authority of authorities" [value]="authority.name">{{authority.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <app-error-message [control]="formGroup.get('authorities')" name="Nhóm quyền"></app-error-message>
+                    </div>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <div class="w-1/2 flex">
+                    <label class="w-1/3">Tài khoản HDFS</label>
+                    <div class="input w-2/3">
+                        <mat-form-field class="fuse-mat-no-subscript w-full bg-card">
+                            <mat-select placeholder="Chọn tài khoản HDFS" formControlName="hdfsUserList">
+                                <mat-option *ngFor="let user of hdfsUsers" [value]="user.name">{{user.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <app-error-message [control]="formGroup.get('hdfsUserList')" name="Tài khoản HDFS"></app-error-message>
+                    </div>
+                </div>
+                <div class="w-1/2 flex pl-10">
+                    <label class="w-1/3 required ">Loại tài khoản</label>
+                    <div class="input w-2/3">
+                        <mat-radio-group formControlName="userType">
+                            <mat-radio-button [value]="1" class="mr-10 text-lime-500">SSO</mat-radio-button>
+                            <mat-radio-button [value]="0" class="text-red-500">Thường</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="field flex mb-4">
+                <label class="w-1/6">IP</label>
+                <div class="input w-5/6">
+                    <div class="ip border-2 rounded w-full h-30 p-2 pr-5 relative flex flex-wrap bg-card">
+                        <ng-container *ngFor="let ip of formGroup.value.userIpList">
+                            <div class="pl-3 pr-2 py-1 mr-3 mb-3 rounded h-fit bg-stone-500 text-gray-200 flex items-center">
+                                <span>
+                                    {{ip?.ipAddress}}
+                                </span>
+                                <mat-icon class="rounded hover:bg-gray-400 ml-2 cursor-pointer text-gray-200" svgIcon="heroicons_outline:x" (click)="removeIp(ip)"></mat-icon>
+                            </div>
+                        </ng-container>
+                        <button class="absolute top-0 right-0" mat-raised-button color="primary" (click)="addIp()">
+                            <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    footer-->
+        <div class="footer mt-6 flex justify-end">
+            <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save()">
+                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+                <span>Thêm mới</span>
+            </button>
+            <button mat-raised-button (click)="dialogRef.close()">
+                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+                <span>Hủy bỏ</span>
+            </button>
+        </div>
+    </div>
+</ng-container>

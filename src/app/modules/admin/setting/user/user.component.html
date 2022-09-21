@@ -1,0 +1,90 @@
+<ng-container *transloco="let t">
+    <div class="px-4 flex md:px-6 w-full">
+        <div class="w-1/4 h-full pr-6">
+            <mat-card class="bg-card h-full">
+                <div class="header border-b">
+                    <div class="text-xl font-bold card-title mb-3">
+                        {{t('setting.user.group')}}
+                    </div>
+                </div>
+                <div class="content mt-4">
+                    <button mat-raised-button color="primary" (click)="openAddOrEditGroupDialog()">
+                        <mat-icon class="icon-size-6 mr-2" svgIcon="heroicons_outline:plus"></mat-icon>
+                        {{t('setting.user.newGroup')}}
+                    </button>
+                    <div class="group-list my-4">
+                        <app-group-list
+                            [groups]="groups"
+                            [(group)]="paginate.groupId"
+                            (groupChange)="getListUser()"
+                            (action)="groupAction($event)"
+                        >
+                        </app-group-list>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="w-3/4 h-full">
+            <mat-card class="bg-card h-full">
+                <div class="header border-b">
+                    <div class="text-xl font-bold card-title mb-3">
+                        {{t('setting.user.userList')}}
+                    </div>
+                </div>
+                <div class="content mt-4 w-full">
+                    <div class="actions flex justify-end">
+                        <div class="search-and-filter flex mr-4 items-center">
+                            <mat-form-field
+                                class="fuse-mat-no-subscript w-full sm:w-72 mt-4 sm:mt-0 sm:ml-4 bg-default"
+                                [floatLabel]="'always'">
+                                <mat-icon
+                                    matPrefix
+                                    class="icon-size-5"
+                                    [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                <input
+                                    placeholder="Nội dung tìm kiếm"
+                                    [(ngModel)]="paginate.keyword"
+                                    (keyup.enter)="getListUser()"
+                                    matInput>
+                            </mat-form-field>
+                            <mat-form-field class="fuse-mat-no-subscript w-full sm:w-36 sm:ml-4 bg-default">
+                                <mat-select placeholder="Chọn role" [(ngModel)]="paginate.authority" (selectionChange)="getListUser()">
+                                    <mat-option [value]="''">All Role</mat-option>
+                                    <mat-option *ngFor="let authority of authorities" [value]="authority.name">{{authority.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="add-user">
+                            <button mat-raised-button color="primary" (click)="addOrEditUser()">
+                                <mat-icon class="icon-size-6 mr-2" svgIcon="heroicons_outline:plus"></mat-icon>
+                                {{t('setting.user.newUser')}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="data-table w-full mt-4">
+                        <app-data-table [rows]="users"
+                                        [columns]="columns"
+                                        [paginate]="true"
+                                        [limit]="paginate.size"
+                                        [count]="paginate.total"
+                                        [actionTemplate]="actionTemplate"
+                                        (pageChange)="changePage($event)"
+                        >
+                            <ng-template #actionTemplate let-row >
+                                <button mat-icon-button (click)="addOrEditUser(row)">
+                                    <mat-icon svgIcon="heroicons_outline:pencil-alt" [style.color]="'orange'" class="icon-size-5"></mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                    <mat-icon svgIcon="heroicons_outline:trash" [style.color]="'red'"  class="icon-size-5"></mat-icon>
+                                </button>
+                                <!--                <button mat-raised-button (click)="(row?.description)" class="icon-size-4">-->
+                                <!--                  <mat-icon svgIcon="heroicons_outline:eye" color="primary"></mat-icon></button>-->
+                            </ng-template>
+                        </app-data-table>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+</ng-container>

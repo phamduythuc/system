@@ -1,0 +1,33 @@
+<table mat-table [dataSource]="rows" class="demo-table w-full" [class.table-fixed]="columnWidth">
+  <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+    <th mat-header-cell *matHeaderCellDef [style.width]="calcColumnWidth(column)">
+      <span [class.pl-4]="column.columnDef === 'action'">{{column.header}}</span>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <ng-container [ngSwitch]="column.columnDef">
+        <ng-container *ngSwitchCase="'action'">
+          <ng-container [ngTemplateOutlet]="actionTemplate" [ngTemplateOutletContext]="{$implicit: row}">
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'stt'">
+          <div>{{getRowIndex(row) + 1}}</div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <ng-container [ngTemplateOutlet]="rowTemplate || defaultRowTemplate" [ngTemplateOutletContext]="{row: row, column: column}">
+          </ng-container>
+          <ng-template #defaultRowTemplate>
+            <div [innerHTML]="column.cellRenderer ? column.cellRenderer(row) : row[column.columnDef]" class="whitespace-nowrap"></div>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator *ngIf="paginate" [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               [pageSize]="limit"
+               [length]="count"
+               (page)="changePage($event)">
+</mat-paginator>

@@ -1,0 +1,28 @@
+<div class="bg-default">
+    <ul>
+        <li class="border-b-2 bg-white dark:bg-default border-slate-900  hover:bg-slate-200 hover:dark:bg-slate-600"
+            [class.bg-slate-200]="group === ''" [class.dark:bg-slate-600]="group === ''">
+            <div class="flex items-center cursor-pointer w-full p-3" (click)="groupClick('')">
+                <mat-icon class="mr-2" svgIcon="heroicons_outline:home"></mat-icon>
+                Tất cả người dùng
+            </div>
+        </li>
+        <li *ngFor="let gr of groups"
+            class="border-b-2  bg-white dark:bg-default border-slate-900 flex hover:bg-slate-200 hover:dark:bg-slate-600"
+            [class.bg-slate-200]="group === gr.id"
+            [class.dark:bg-slate-600]="group === gr.id">
+            <div class="flex items-center cursor-pointer w-3/4 p-3" (click)="groupClick(gr.id)">
+                <mat-icon class="mr-2 icon-size-5" svgIcon="heroicons_outline:user-group"></mat-icon>
+                {{gr.name}}
+            </div>
+            <div class="actions flex w-1/4">
+                <button mat-icon-button class="hover:bg-slate-500" (click)="emitEvent('edit', gr)">
+                    <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
+                </button>
+                <button mat-icon-button class="hover:bg-slate-500" (click)="emitEvent('delete', gr)">
+                    <mat-icon svgIcon="heroicons_outline:trash" title="Delete" class="icon-size-5"></mat-icon>
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
