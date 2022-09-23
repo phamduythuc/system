@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, 
 import { Observable, of, switchMap, map } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 import {AccountService} from "../account.service";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +33,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
     {
-        return true;
+        if(this._authService.accessToken){
+            this._authService.signInSSO();
+        }else{
+            window.location.href = environment.linkSSO;
+            return false;
+        }
         // return this.accountService.identity().pipe(
         //     map(account => {
         //         if (account) {

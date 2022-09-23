@@ -5,6 +5,7 @@ import { AuthService } from 'app/core/auth/auth.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -43,6 +44,7 @@ export class AuthInterceptor implements HttpInterceptor
             });
         }
 
+
         // Response
         return next.handle(newReq).pipe(
             catchError((error) => {
@@ -58,7 +60,7 @@ export class AuthInterceptor implements HttpInterceptor
                 }
                 if ( error instanceof HttpErrorResponse && error.status === 403 && error.url.includes('/account'))
                 {
-                   this._router.navigateByUrl('unlock-session')
+                   this._router.navigateByUrl('unlock-session');
                 }
 
                 if (error instanceof HttpErrorResponse && error.status === 400 || error.status === 405 || error.status === 500) {

@@ -188,4 +188,7 @@ export class AuthService
         // return this.signInUsingToken();
         return of (true);
     }
+    signInSSO(){
+        // call api get user sso
+    }
 }

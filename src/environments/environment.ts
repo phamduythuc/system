@@ -9,6 +9,7 @@ export const environment = {
     imageUrl: 'http://localhost:8081/api/application-images/show-image/',
     sso: 'https://sso2.viettel.vn:8001/sso',
     webportalURL: 'http://localhost:4201',
+    linkSSO: 'http://103.226.248.168:8082/login?client_id=lifesup_hrm&redirect_uri=localhost:4200&scope=read%27',
     appCode: 'DWP'
 };
 
