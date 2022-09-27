@@ -14,9 +14,6 @@ export class DashboardsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.dashboardService.getAllCluster().subscribe(res => {
-          console.log(res);
-      });
   }
 
 }

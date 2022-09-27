@@ -1,15 +1,26 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable, of, switchMap, map } from 'rxjs';
-import { AuthService } from 'app/core/auth/auth.service';
+import {Injectable} from '@angular/core';
+import {
+    ActivatedRouteSnapshot,
+    CanActivate,
+    CanActivateChild,
+    CanLoad,
+    Route,
+    Router,
+    RouterStateSnapshot,
+    UrlSegment,
+    UrlTree
+} from '@angular/router';
+import {Observable, of, switchMap, map} from 'rxjs';
+import {AuthService} from 'app/core/auth/auth.service';
 import {AccountService} from "../account.service";
 import {environment} from "../../../../environments/environment";
+import {tick} from "@angular/core/testing";
+import {trigger} from "@angular/animations";
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
-{
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     /**
      * Constructor
      */
@@ -17,8 +28,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
         private _authService: AuthService,
         private _router: Router,
         private accountService: AccountService
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -31,14 +41,20 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      * @param route
      * @param state
      */
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
-    {
-        if(this._authService.accessToken){
-            this._authService.signInSSO();
-        }else{
-            window.location.href = environment.linkSSO;
-            return false;
-        }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        return this._authService.getUserInfoSSO()
+            .pipe(map((acc) => {
+                if(acc){
+                    const auth = acc.permissions;
+                    if(auth){
+                        return true;
+                    }
+                }else{
+                    window.location.href = environment.linkSSO;
+                    return false;
+                }
+            }));
+
         // return this.accountService.identity().pipe(
         //     map(account => {
         //         if (account) {
@@ -66,8 +82,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      * @param childRoute
      * @param state
      */
-    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
-    {
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         const redirectUrl = state.url === '/sign-out' ? '/' : state.url;
         return this._check(redirectUrl);
     }
@@ -78,8 +93,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      * @param route
      * @param segments
      */
-    canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean
-    {
+    canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
         return this._check('/');
     }
 
@@ -93,8 +107,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      * @param redirectURL
      * @private
      */
-    private _check(redirectURL: string): Observable<boolean>
-    {
+    private _check(redirectURL: string): Observable<boolean> {
         // Check the authentication status
         return of(true);
         // return this._authService.check()

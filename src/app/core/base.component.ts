@@ -6,7 +6,6 @@ import {take} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import {ComponentType} from "@angular/cdk/portal";
 import {FormBuilder} from "@angular/forms";
-import {BaseService} from "./base.service";
 
 @Component({
     selector: 'app-base',
@@ -18,6 +17,7 @@ export class BaseComponent implements OnInit {
     public dialogService: MatDialog;
     public fb: FormBuilder;
     public service: any;
+    public data: any;
 
     constructor(injector: Injector) {
         this.snackBar = injector.get(MatSnackBar);
@@ -34,22 +34,24 @@ export class BaseComponent implements OnInit {
         });
     }
 
-    showDialog(component?: any, options: MatDialogConfig = {}, callback?: any) {
+    showDialog(component?: any, options: MatDialogConfig = {}, callback?: any): any {
         const ref = this.dialogService.open(component, {
             width: '30vw',
             ...options
         });
-        ref.afterClosed().pipe(take(1)).subscribe(value => {
+        ref.afterClosed().pipe(take(1)).subscribe((value) => {
             callback && callback(value);
         });
     }
-    AddOrEdit(){
-        return '';
+    addOrEdit(message?: any, callback?: any): any{
+        this.showSnackBar(message, 'success');
+        callback();
     }
-    delete(){
-        return '';
-    }
-    getAll(){
-        return ''
+    delete(callback?: any): any{
+        this.showDialog(ConfirmDialogComponent, {}, (value) => {
+            if(value){
+                callback();
+            }
+        });
     }
 }
