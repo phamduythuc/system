@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import {catchError, Observable, takeUntil, throwError} from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
-import { AuthUtils } from 'app/core/auth/auth.utils';
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {environment} from "../../../environments/environment";
+import {FuseConfigService} from "../../../@fuse/services/config";
+import {TranslocoService} from "@ngneat/transloco";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -13,7 +13,8 @@ export class AuthInterceptor implements HttpInterceptor
     /**
      * Constructor
      */
-    constructor(private _authService: AuthService, private _router: Router, private matSnackBar: MatSnackBar)
+    constructor(private _authService: AuthService, private _router: Router, private matSnackBar: MatSnackBar,
+                private _translocoService: TranslocoService )
     {
     }
 
@@ -25,6 +26,7 @@ export class AuthInterceptor implements HttpInterceptor
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
+        const language = this._translocoService.getActiveLang();
         // Clone the request object
         let newReq = req.clone();
 
@@ -40,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor
         if ( this._authService.accessToken)
         {
             newReq = req.clone({
-                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken)
+                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken).set('LANG_KEY', language)
             });
         }
 

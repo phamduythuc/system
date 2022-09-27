@@ -14,16 +14,16 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
             useValue: translocoConfig({
                 availableLangs      : [
                     {
+                        id   : 'vi',
+                        label: 'Viet Nam'
+                    },
+                    {
                         id   : 'en',
                         label: 'English'
                     },
-                    {
-                        id   : 'vi',
-                        label: 'Viet Nam'
-                    }
                 ],
-                defaultLang         : 'en',
-                fallbackLang        : 'en',
+                defaultLang         : 'vi',
+                fallbackLang        : 'vi',
                 reRenderOnLangChange: true,
                 prodMode            : environment.production
             })
@@ -39,7 +39,12 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
             deps      : [TranslocoService],
             useFactory: (translocoService: TranslocoService): any => (): Promise<Translation> => {
                 const defaultLang = translocoService.getDefaultLang();
-                translocoService.setActiveLang(defaultLang);
+                const config = JSON.parse(localStorage.getItem('config'));
+                if (config && config?.language) {
+                    translocoService.setActiveLang(config.language);
+                } else {
+                    translocoService.setActiveLang(defaultLang);
+                }
                 return translocoService.load(defaultLang).toPromise();
             },
             multi     : true

@@ -44,6 +44,12 @@ export class FuseConfigService
         return this._config.asObservable();
     }
 
+
+    get configValue(): any
+    {
+        return this._config.getValue();
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------

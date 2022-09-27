@@ -54,7 +54,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                     return false;
                 }
             }));
-
+        // return true;
         // return this.accountService.identity().pipe(
         //     map(account => {
         //         if (account) {

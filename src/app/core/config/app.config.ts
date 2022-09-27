@@ -17,6 +17,7 @@ export interface AppConfig
     screens: Screens;
     theme: Theme;
     themes: Themes;
+    language: string;
 }
 
 /**
@@ -33,7 +34,7 @@ export interface AppConfig
  * "Themes" are required for Tailwind to generate themes.
  */
 export const appConfig: AppConfig = {
-    layout : 'classy',
+    layout : 'classic',
     scheme : 'light',
     screens: {
         sm: '600px',
@@ -67,5 +68,6 @@ export const appConfig: AppConfig = {
             id  : 'theme-amber',
             name: 'Amber'
         }
-    ]
+    ],
+    language: 'vi'
 };
