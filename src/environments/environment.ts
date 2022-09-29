@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://103.226.248.168:8082/api',
+    apiUrl: 'http://103.226.248.168:8089/api',
+    apiSSO: 'http://103.226.248.168:8082/api',
     apiUrlFe: 'http://localhost:8081',
     imageUrl: 'http://localhost:8081/api/application-images/show-image/',
     sso: 'https://sso2.viettel.vn:8001/sso',

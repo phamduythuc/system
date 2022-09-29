@@ -104,6 +104,11 @@ export const appRoutes: Route[] = [
         },
         children: [
             {
+                path: 'hrm-management',
+                loadChildren: () => import('app/modules/admin/hrm-management/hrm-management.module').then(m => m.HrmManagementModule),
+                data: {breadcrumb: {label: 'Hrm Management', url: ''}}
+            },
+            {
                 path: 'example',
                 loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule),
                 data: {breadcrumb: {label: 'example', url: '/'}}
