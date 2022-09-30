@@ -12,6 +12,79 @@
                     </button>
                 </div>
             </div>
+            <div class="search-group">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Tìm kiếm
+                            </mat-panel-title>
+<!--                            <mat-panel-description>-->
+<!--                                Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+<!--                            </mat-panel-description>-->
+                        </mat-expansion-panel-header>
+                        <ng-container *transloco="let t">
+                            <div class="flex flex-col h-full">
+                                <!--        header-->
+
+                                <!--        content-->
+                                <div class="content mt-6 overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
+                                    <div class="field flex-col w-1/3 mb-4 p-4">
+                                        <label class=>Tên</label>
+                                        <div class="input">
+                                            <mat-form-field
+                                                class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                                                <input class="w-full"
+                                                       placeholder="Nhập tên"
+                                                       formControlName="name"
+                                                       matInput>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="field flex-col w-1/3 mb-4 p-4">
+                                        <label class=>Người thêm</label>
+                                        <div class="input">
+                                            <mat-form-field
+                                                class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                                                <input class="w-full"
+                                                       placeholder="..."
+                                                       formControlName="createBy"
+                                                       matInput>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="field flex-col w-1/3 mb-4 p-4">
+                                        <label class=>Ngày thêm</label>
+                                        <div class="input">
+                                            <mat-form-field
+                                                class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                                                <input class="w-full"
+                                                       placeholder="Chọn ngày"
+                                                       formControlName="createdDate"
+                                                       matInput>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="footer mt-6 flex justify-center">
+                                    <button mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid" (click)="doSeach(formSearch.value)">
+<!--                                        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>-->
+                                        <mat-icon
+                                            matPrefix
+                                            class="icon-size-5"
+                                            [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                        <span>Tim kiếm</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
             <div class="content mt-4 w-full">
                 <div class="data-table w-full mt-4 h-3/5">
                     <app-data-table
@@ -20,8 +93,17 @@
                         [paginate]="true"
                         [limit]="paginate.size"
                         [count]="searchResult.totalRecords"
+                        [rowTemplate]="rowTemplate"
                         (action)="actionClick($event)"
                         (pageChange)="changePage($event)">
+                        <ng-template #rowTemplate let-row='row' let-column="column" >
+                           <ng-container  [ngSwitch]="column.columnDef">
+                               <ng-container *ngSwitchDefault>{{row[column.columnDef]}}</ng-container>
+                               <ng-container *ngSwitchCase="'createdDate'">{{row[column.columnDef]|date :'short'}}</ng-container>
+                           </ng-container>
+                            <!--                <button mat-raised-button (click)="(row?.description)" class="icon-size-4">-->
+                            <!--                  <mat-icon svgIcon="heroicons_outline:eye" color="primary"></mat-icon></button>-->
+                        </ng-template>
                     </app-data-table>
                 </div>
             </div>

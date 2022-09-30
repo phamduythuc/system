@@ -7,6 +7,8 @@ import { PositionManagementComponent } from './position-management/position-mana
 import {TranslocoModule} from "@ngneat/transloco";
 import {SharedModule} from "../../../shared/shared.module";
 import {DataTableModule} from "../../../layout/common/data-table/data-table.module";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {FuseModule} from "../../../../@fuse";
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import {DataTableModule} from "../../../layout/common/data-table/data-table.modu
         HrmManagementRoutingModule,
         TranslocoModule,
         SharedModule,
-        DataTableModule
+        DataTableModule,
+        MatExpansionModule,
+        FuseModule
     ]
 })
 export class HrmManagementModule { }

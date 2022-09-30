@@ -42,9 +42,8 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
             actions: ['edit', 'delete'],
         }
     ];
-    formGroupSearch =this.fb.group({
+    formSearch =this.fb.group({
         name : [null],
-        status: [null],
         createdDate:[null],
         createBy:[null]
     })
@@ -55,6 +54,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
         total: 0
     };
     positions = [];
+    panelOpenState: false;
     constructor(injector: Injector,
                 positionService: PositionManagementService) {
         super(injector, positionService);
@@ -65,15 +65,15 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
         this.doSeach();
         console.log(this.searchResult.data)
         // this.positions = this.searchResult.data
-        this.formGroupSearch.valueChanges.subscribe(res=>{
+        this.formSearch.valueChanges.subscribe(res=>{
             console.log(res)
-            this.searchModel= {...this.searchModel,...this.formGroupSearch.value}
+            this.searchModel= {...this.searchModel,...this.formSearch.value}
         })
     }
 
-    doSeach(){
-        // this.searchModel= {...this.searchModel,...this.formGroupSearch.value}
-
+    doSeach(paramSearch?:any){
+        // this.searchModel= {...this.searchModel,...this.formSearch.value}
+console.log(paramSearch)
         this.processSearch()
     }
 
