@@ -116,7 +116,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'dashboards',
                 loadChildren: () => import('app/modules/admin/dashboards/dashboards.module').then(m => m.DashboardsModule),
-                data: {breadcrumb: {label: 'Dashboards', url: 'dashboards'}}
+                data: {breadcrumb: {label: 'Dashboards', url: ''}}
             },
             // datalake-management
             {

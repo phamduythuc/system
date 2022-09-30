@@ -179,7 +179,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Alert Manager',
                 type : 'basic',
                 icon : 'heroicons_outline:currency-dollar',
-                link : '/alert-manager',
+                // link : '/alert-manager',
                 // role: [
                 //     AuthoritiesConstant.ALERT_CONFIG.ALERT_CONFIG_READ
                 // ]
