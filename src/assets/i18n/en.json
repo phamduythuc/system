@@ -7,5 +7,12 @@
             "newGroup": "New Group",
             "newUser": "New User"
         }
+    },
+    "management": {
+        "position": {
+            "header" : "Position",
+            "newPosition": "New Position"
+
+        }
     }
 }

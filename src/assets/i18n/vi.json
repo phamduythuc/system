@@ -7,5 +7,12 @@
           "newGroup": "Nhóm mới",
           "newUser": "Thêm người dùng"
       }
+    },
+    "management": {
+        "position": {
+            "header" : "Chức vụ",
+            "newPosition": "Thêm chức vụ"
+
+        }
     }
 }

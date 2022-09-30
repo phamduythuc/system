@@ -1,1 +1,30 @@
-<p>position-management works!</p>
+<ng-container *transloco="let t">
+    <div class="w-full h-full px-4">
+        <mat-card class="bg-card h-full">
+            <div class="header border-b flex justify-between">
+                <div class="text-xl font-bold card-title mb-3 capitalize">
+                    {{t('management.position.header')}}
+                </div>
+                <div class="mb-2">
+                    <button mat-raised-button color="primary" (click)="addOrEditPosition()">
+                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
+                        {{t('management.position.newPosition')}}
+                    </button>
+                </div>
+            </div>
+            <div class="content mt-4 w-full">
+                <div class="data-table w-full mt-4 h-3/5">
+                    <app-data-table
+                        [rows]="searchResult.data | slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+                        [columns]="columns"
+                        [paginate]="true"
+                        [limit]="paginate.size"
+                        [count]="searchResult.totalRecords"
+                        (action)="actionClick($event)"
+                        (pageChange)="changePage($event)">
+                    </app-data-table>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</ng-container>
