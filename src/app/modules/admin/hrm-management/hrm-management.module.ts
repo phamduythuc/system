@@ -8,7 +8,6 @@ import {TranslocoModule} from "@ngneat/transloco";
 import {SharedModule} from "../../../shared/shared.module";
 import {DataTableModule} from "../../../layout/common/data-table/data-table.module";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {FuseModule} from "../../../../@fuse";
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import {FuseModule} from "../../../../@fuse";
         TranslocoModule,
         SharedModule,
         DataTableModule,
-        MatExpansionModule,
-        FuseModule
+        MatExpansionModule
     ]
 })
 export class HrmManagementModule { }

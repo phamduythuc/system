@@ -10,7 +10,7 @@ import {BaseComponent} from "../../../core/base.component";
 export class DashboardsComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, private dashboardService: DashboardService) {
-      super(injector);
+      super(injector,dashboardService);
   }
 
   ngOnInit(): void {
