@@ -15,6 +15,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatRadioModule} from "@angular/material/radio";
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 export const MatModules = [
     MatCardModule,
     MatIconModule,
@@ -24,7 +26,9 @@ export const MatModules = [
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDatepickerModule,
+    MatMomentDateModule
 ]
 
 @NgModule({

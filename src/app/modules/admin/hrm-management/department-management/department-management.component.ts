@@ -1,43 +1,46 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from "../../../../core/base.component";
-import {DepartmentManagementService} from "./department-management.service";
-import {IColumn} from "../../../../layout/common/data-table/data-table.component";
+import {BaseComponent} from '../../../../core/base.component';
+import {DepartmentManagementService} from './department-management.service';
+import {IColumn} from '../../../../layout/common/data-table/data-table.component';
+import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
+import {ConfirmDialogComponent} from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
-  selector: 'app-department-management',
-  templateUrl: './department-management.component.html',
-  styleUrls: ['./department-management.component.scss']
+    selector: 'app-department-management',
+    templateUrl: './department-management.component.html',
+    styleUrls: ['./department-management.component.scss']
 })
 export class DepartmentManagementComponent extends BaseComponent implements OnInit {
     columns: IColumn[] = [
         {
             columnDef: 'name',
-            header: 'Tên',
+            header: this.translocoService.translate('common.name'),
             flex: 0.3,
         },
         {
-            columnDef: 'description',
-            header: 'Mô tả',
+            columnDef: 'code',
+            header: this.translocoService.translate('common.code'),
         },
         {
-            columnDef: 'code',
-            header: 'Code',
+            columnDef: 'description',
+            header: this.translocoService.translate('common.description'),
         },
         {
             columnDef: 'createdDate',
-            header: 'Ngày tạo',
+            header: this.translocoService.translate('common.createdDate'),
         },
         {
             columnDef: 'modifiedDate',
-            header: 'Ngày chỉnh sửa',
+            header: this.translocoService.translate('common.modifiedDate'),
         },
         {
             columnDef: 'status',
-            header: 'Trạng thái',
+            header: this.translocoService.translate('common.status'),
         },
         {
             columnDef: 'action',
-            header: 'Hành động',
+            header: this.translocoService.translate('common.action'),
             actions: ['edit', 'delete'],
         }
     ];
@@ -47,18 +50,25 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
         size: 10,
         total: 0
     };
-  constructor(injector: Injector, private departmentService: DepartmentManagementService) {
-      super(injector);
-  }
 
-  ngOnInit(): void {
-      this.departmentService.getDepartment().subscribe(res => {
-          if(res.status === 200){
-              this.departments = res.body.data;
-              this.paginate.total = this.departments.length;
-          }
-      });
-  }
+    constructor(injector: Injector, private departmentService: DepartmentManagementService,
+                public translocoService: TranslocoService) {
+        super(injector);
+        console.log( this.translocoService.translate('common.name'))
+    }
+
+    ngOnInit(): void {
+        this.getDepartments();
+    }
+
+    getDepartments(): void {
+        this.departmentService.getDepartment().subscribe((res) => {
+            if (res.status === 200) {
+                this.departments = res.body.data;
+                this.paginate.total = this.departments.length;
+            }
+        });
+    }
 
     changePage(e: any): void {
         this.paginate.size = e.pageSize;
@@ -66,6 +76,41 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     }
 
     actionClick(e: any): void {
-        console.log(e);
+        switch (e.type){
+            case 'delete':
+                this.deleteDepartment(e.data.id);
+                break;
+            case 'edit':
+                this.addOrEditDepartment(e.data);
+                break;
+        }
+    }
+    deleteDepartment(id: any): void{
+        this.showDialog(ConfirmDialogComponent, {
+
+        }, (value) => {
+            if(value){
+                this.departmentService.deleteDepartment(id).subscribe((res) => {
+                    if(res.status){
+                        this.showSnackBar('Xóa thành công', 'success');
+                        this.getDepartments();
+                    }
+                });
+            }
+        });
+    }
+
+    addOrEditDepartment(department: any): void {
+        this.showDialog(AddOrEditDepartmentComponent, {
+            data: {
+                department
+            },
+            width: '50vw'
+        }, (value) => {
+            if (value) {
+                this.showSnackBar('Thêm mới thành công', 'success');
+                this.getDepartments();
+            }
+        });
     }
 }

@@ -1,11 +1,30 @@
 {
     "sign-in": "Đăng nhập",
+    "common": {
+        "name": "Name",
+        "code": "Code",
+        "description": "Description",
+        "createdDate": "Created Date",
+        "modifiedDate": "Modified Date",
+        "status": "Status",
+        "action": "Actions"
+    },
     "setting": {
         "user": {
             "group": "Group",
             "userList": "User list",
             "newGroup": "New Group",
             "newUser": "New User"
+        }
+    },
+    "add-new": "Add new",
+    "confirm-delete": {
+        "title": "Delete item",
+        "content": "Are you sure want to delete the record??"
+    },
+    "hrm-management": {
+        "department": {
+            "title": "Department"
         }
     }
 }

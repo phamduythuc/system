@@ -7,8 +7,16 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class DepartmentManagementService extends BaseService{
-    apiUrl = environment.apiUrl;
     getDepartment(): Observable<any>{
-        return this.get(this.apiUrl + '/department');
+        return this.get(`${environment.apiUrl}/department`);
+    }
+    deleteDepartment(id: any): Observable<any>{
+        return this.delete(`${environment.apiUrl}/department`, id);
+    }
+    addDepartment(body): Observable<any>{
+        return this.post(`${environment.apiUrl}/department`, body);
+    }
+    updateDepartment(body): Observable<any>{
+        return this.put(`${environment.apiUrl}/department/update`, body);
     }
 }

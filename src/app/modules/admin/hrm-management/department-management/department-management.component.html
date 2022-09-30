@@ -3,12 +3,12 @@
         <mat-card class="bg-card h-full">
             <div class="header border-b flex justify-between">
                 <div class="text-xl font-bold card-title mb-3 capitalize">
-                    Phòng ban
+                    {{t('hrm-management.department.title')}}
                 </div>
                 <div class="mb-2">
-                    <button mat-raised-button color="primary" (click)="addDepartment()">
+                    <button mat-raised-button color="primary" (click)="addOrEditDepartment()">
                         <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-                        Thêm mới
+                        {{t('add-new')}}
                     </button>
                 </div>
             </div>

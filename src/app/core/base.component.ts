@@ -6,6 +6,7 @@ import {take} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import {ComponentType} from "@angular/cdk/portal";
 import {FormBuilder} from "@angular/forms";
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
     selector: 'app-base',
@@ -14,6 +15,7 @@ import {FormBuilder} from "@angular/forms";
 })
 export class BaseComponent implements OnInit {
     public snackBar: MatSnackBar;
+    public translocoService: TranslocoService;
     public dialogService: MatDialog;
     public fb: FormBuilder;
     public service: any;
@@ -21,6 +23,7 @@ export class BaseComponent implements OnInit {
 
     constructor(injector: Injector) {
         this.snackBar = injector.get(MatSnackBar);
+        this.translocoService = injector.get(TranslocoService);
         this.dialogService = injector.get(MatDialog);
         this.fb = injector.get(FormBuilder);
     }
@@ -43,15 +46,15 @@ export class BaseComponent implements OnInit {
             callback && callback(value);
         });
     }
-    addOrEdit(message?: any, callback?: any): any{
-        this.showSnackBar(message, 'success');
-        callback();
-    }
-    delete(callback?: any): any{
-        this.showDialog(ConfirmDialogComponent, {}, (value) => {
-            if(value){
-                callback();
-            }
-        });
-    }
+    // addOrEdit(message?: any, callback?: any): any{
+    //     this.showSnackBar(message, 'success');
+    //     callback();
+    // }
+    // delete(callback?: any): any{
+    //     this.showDialog(ConfirmDialogComponent, {}, (value) => {
+    //         if(value){
+    //             callback();
+    //         }
+    //     });
+    // }
 }

@@ -1,5 +1,14 @@
 {
     "sign-in": "Đăng nhập",
+    "common": {
+        "name": "Tên",
+        "code": "Mã",
+        "description": "Mô tả",
+        "createdDate": "Ngày tạo",
+        "modifiedDate": "Ngày chỉnh sửa",
+        "status": "Trạng thái",
+        "action": "Hành động"
+    },
     "setting": {
       "user": {
           "group": "Nhóm",
@@ -7,5 +16,15 @@
           "newGroup": "Nhóm mới",
           "newUser": "Thêm người dùng"
       }
+    },
+    "add-new": "Thêm mới",
+    "confirm-delete": {
+        "title": "Xóa bản ghi",
+        "content": "Bạn chắc chắn muốn xóa bản ghi?"
+    },
+    "hrm-management": {
+        "department": {
+            "title": "Phòng ban"
+        }
     }
 }

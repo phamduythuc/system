@@ -5,10 +5,13 @@ import { DepartmentManagementRoutingModule } from './department-management-routi
 import {SharedModule} from "../../../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageModule} from "../../../../shared/components/error-message/error-message.module";
+import { AddOrEditDepartmentComponent } from './add-or-edit-department/add-or-edit-department.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddOrEditDepartmentComponent
+  ],
   imports: [
     CommonModule,
     DepartmentManagementRoutingModule,

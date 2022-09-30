@@ -25,7 +25,7 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
                 defaultLang         : 'vi',
                 fallbackLang        : 'vi',
                 reRenderOnLangChange: true,
-                prodMode            : environment.production
+                prodMode            : environment.production,
             })
         },
         {
