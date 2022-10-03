@@ -1,4 +1,8 @@
 {
+    "lang": {
+        "vi": "Tiếng Việt",
+        "en": "Tiếng Anh"
+    },
     "sign-in": "Đăng nhập",
     "common": {
         "name": "Tên",
@@ -23,6 +27,7 @@
         "content": "Bạn chắc chắn muốn xóa bản ghi?"
     },
     "hrm-management": {
+        "label": "Quản lý chung",
         "department": {
             "title": "Phòng ban"
         }

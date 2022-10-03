@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: 'department-management',
         loadChildren: () => import('app/modules/admin/hrm-management/department-management/department-management.module').then(m => m.DepartmentManagementModule),
-        data: {breadcrumb: {label: 'Department Management', url: 'hrm-management/department-management'}}
+        data: {breadcrumb: {label: 'hrm-management.department.title', url: 'hrm-management/department-management'}}
     },
     {
         path: 'position-management',

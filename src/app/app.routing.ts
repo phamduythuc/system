@@ -98,7 +98,7 @@ export const appRoutes: Route[] = [
         },
         data: {
             breadcrumb: {
-                label: 'VDP',
+                label: 'HRM',
                 url: '/'
             }
         },
@@ -106,7 +106,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'hrm-management',
                 loadChildren: () => import('app/modules/admin/hrm-management/hrm-management.module').then(m => m.HrmManagementModule),
-                data: {breadcrumb: {label: 'Hrm Management', url: ''}}
+                data: {breadcrumb: {label: 'hrm-management.label', url: ''}}
             },
             {
                 path: 'example',

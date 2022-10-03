@@ -1,10 +1,10 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from '../../../../core/base.component';
+import {BaseComponent} from '@core/base.component';
 import {DepartmentManagementService} from './department-management.service';
-import {IColumn} from '../../../../layout/common/data-table/data-table.component';
+import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
-import {ConfirmDialogComponent} from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
-import {TranslocoService} from "@ngneat/transloco";
+import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
+import {TranslocoService} from '@ngneat/transloco';
 
 @Component({
     selector: 'app-department-management',
@@ -15,32 +15,32 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     columns: IColumn[] = [
         {
             columnDef: 'name',
-            header: this.translocoService.translate('common.name'),
+            header: 'common.name',
             flex: 0.3,
         },
         {
             columnDef: 'code',
-            header: this.translocoService.translate('common.code'),
+            header: 'common.code',
         },
         {
             columnDef: 'description',
-            header: this.translocoService.translate('common.description'),
+            header: 'common.description',
         },
         {
             columnDef: 'createdDate',
-            header: this.translocoService.translate('common.createdDate'),
+            header: 'common.createdDate',
         },
         {
             columnDef: 'modifiedDate',
-            header: this.translocoService.translate('common.modifiedDate'),
+            header: 'common.modifiedDate',
         },
         {
             columnDef: 'status',
-            header: this.translocoService.translate('common.status'),
+            header: 'common.status',
         },
         {
             columnDef: 'action',
-            header: this.translocoService.translate('common.action'),
+            header: 'common.action',
             actions: ['edit', 'delete'],
         }
     ];
@@ -54,7 +54,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     constructor(injector: Injector, private departmentService: DepartmentManagementService,
                 public translocoService: TranslocoService) {
         super(injector);
-        console.log( this.translocoService.translate('common.name'))
+
     }
 
     ngOnInit(): void {
