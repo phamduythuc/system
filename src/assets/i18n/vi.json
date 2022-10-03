@@ -21,6 +21,38 @@
           "newUser": "Thêm người dùng"
       }
     },
+    "management": {
+        "position": {
+            "header" : "Chức vụ",
+            "newPosition": "Thêm mới",
+            "addHeader": "Thêm chức vụ",
+            "editHeader": "Thông tin chức vụ"
+
+        }, "level": {
+            "header" : "Cấp bậc",
+            "newPosition": "Thêm cấp bậc",
+            "addHeader": "Thêm cấp bậc",
+            "editHeader": "Thông tin cấp bậc"
+
+        }
+    },
+    "button": {
+        "new" : "Thêm mới",
+        "save": "Lưu",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "cancel": "Hủy bỏ"
+    },
+    "form": {
+        "search":"Tìm kiếm",
+        "name": "Tên",
+        "createBy": "Người thêm",
+        "createdDate": "Ngày thêm",
+        "description" : "Mô tả",
+        "status": "Trạng thái",
+        "active": "Hoạt động",
+        "notActive": "không Hoạt động"
+    },
     "add-new": "Thêm mới",
     "confirm-delete": {
         "title": "Xóa bản ghi",
@@ -32,4 +64,5 @@
             "title": "Phòng ban"
         }
     }
+
 }

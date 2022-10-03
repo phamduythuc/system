@@ -1,17 +1,19 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+export const envConfig = {
+  apiSSO: 'http://103.226.248.168:8082',
+  baseUrl: 'http://localhost:4200',
+  clientId: 'lifesup_hrm',
+  scope: 'read',
+};
 
 export const environment = {
-    production: false,
-    apiUrl: 'http://103.226.248.168:8089/api',
-    apiSSO: 'http://103.226.248.168:8082/api',
-    apiUrlFe: 'http://localhost:8081',
-    imageUrl: 'http://localhost:8081/api/application-images/show-image/',
-    sso: 'https://sso2.viettel.vn:8001/sso',
-    webportalURL: 'http://localhost:4201',
-    linkSSO: 'http://103.226.248.168:8082/auth?client_id=lifesup_hrm&redirect_uri=http://localhost:4200&scope=read%27',
-    appCode: 'DWP'
+  production: false,
+  baseUrl: 'http://localhost:4201',
+  apiUrl: 'http://103.226.248.168:8089/api',
+  apiSSO: `${envConfig.apiSSO}/api`,
+  redirectUrl: `${envConfig.apiSSO}/login?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
 };
 
 

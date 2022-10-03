@@ -1,30 +1,30 @@
 <ng-container *transloco="let t">
-    <div class="w-full h-full px-4">
-        <mat-card class="bg-card h-full">
-            <div class="header border-b flex justify-between">
-                <div class="text-xl font-bold card-title mb-3 capitalize">
-                    {{t('hrm-management.department.title')}}
-                </div>
-                <div class="mb-2">
-                    <button mat-raised-button color="primary" (click)="addOrEditDepartment()">
-                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-                        {{t('add-new')}}
-                    </button>
-                </div>
-            </div>
-            <div class="content mt-4 w-full">
-                <div class="data-table w-full mt-4">
-                    <app-data-table
-                        [rows]="departments | slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
-                        [columns]="columns"
-                        [paginate]="true"
-                        [limit]="paginate.size"
-                        [count]="paginate.total"
-                        (action)="actionClick($event)"
-                        (pageChange)="changePage($event)">
-                    </app-data-table>
-                </div>
-            </div>
-        </mat-card>
-    </div>
+  <div class="w-full h-full px-4">
+    <mat-card class="bg-card h-full">
+      <div class="header border-b flex justify-between">
+        <div class="text-xl font-bold card-title mb-3 capitalize">
+          {{t('hrm-management.department.title')}}
+        </div>
+        <div class="mb-2">
+          <button mat-raised-button color="primary" (click)="addOrEditDepartment()">
+            <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
+            {{t('add-new')}}
+          </button>
+        </div>
+      </div>
+      <div class="content mt-4 w-full">
+        <div class="data-table w-full mt-4">
+          <app-data-table
+            [rows]="searchResult.data"
+            [columns]="columns"
+            [paginate]="true"
+            [limit]="searchModel.pageSize"
+            [count]="searchResult.totalRecords"
+            (action)="actionClick($event)"
+            (pageChange)="changePage($event)">
+          </app-data-table>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </ng-container>

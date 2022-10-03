@@ -21,6 +21,39 @@
             "newUser": "New User"
         }
     },
+    "management": {
+        "position": {
+            "header" : "Position",
+            "newPosition": "Add new",
+            "addHeader": "Add position",
+            "editHeader": "Position information"
+
+        },
+        "level": {
+            "header" : "Start level",
+            "newPosition": "New level",
+            "addHeader": "Add level",
+            "editHeader": "Level information"
+
+        }
+    },
+    "button": {
+        "new" : "Add new",
+        "save": "Save",
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel"
+    },
+    "form": {
+        "search":"Search",
+        "name": "Name",
+        "createBy": "Create by",
+        "createdDate": "Created date",
+        "description" : "Description",
+        "status": "Status",
+        "active": "Active",
+        "notActive": "Not active"
+    },
     "add-new": "Add new",
     "confirm-delete": {
         "title": "Delete item",
@@ -32,4 +65,5 @@
             "title": "Department"
         }
     }
+
 }

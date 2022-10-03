@@ -53,9 +53,9 @@ export class UserComponent extends BaseComponent implements OnInit {
             flex: 1.5
         }
     ];
-    groups = []
-    users = []
-    authorities = []
+    groups = [];
+    users = [];
+    authorities = [];
 
     paginate: any = {
         keyword: '',
@@ -64,7 +64,7 @@ export class UserComponent extends BaseComponent implements OnInit {
         size: 10,
         page: 0,
         total: 0
-    }
+    };
 
     constructor(injector: Injector, private settingService: SettingService) {
         super(injector);

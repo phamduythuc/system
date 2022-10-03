@@ -50,7 +50,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                         return true;
                     }
                 }else{
-                    window.location.href = environment.linkSSO;
+                    window.location.href = environment.redirectUrl;
                     return false;
                 }
             }));

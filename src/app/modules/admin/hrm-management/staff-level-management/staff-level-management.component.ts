@@ -1,15 +1,16 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {IColumn} from "../../../../layout/common/data-table/data-table.component";
 import {BaseComponent} from "../../../../core/base.component";
-import {PositionManagementService} from "./position-management.service";
-import {AddOrEditPositionComponent} from "./compoment/add-or-edit-position/add-or-edit-position.component";
+import {StaffLevelService} from "./staff-level.service";
+import {AddOrEditStaffLevelComponent} from "./compoment/add-or-edit-staff-level/add-or-edit-staff-level.component";
 
 @Component({
-  selector: 'app-position-management',
-  templateUrl: './position-management.component.html',
-  styleUrls: ['./position-management.component.scss']
+  selector: 'app-staff-level-management',
+  templateUrl: './staff-level-management.component.html',
+  styleUrls: ['./staff-level-management.component.scss']
 })
-export class PositionManagementComponent extends BaseComponent implements OnInit {
+export class StaffLevelManagementComponent extends BaseComponent implements OnInit {
+
     columns: IColumn[] = [
         {
             columnDef: 'name',
@@ -53,18 +54,18 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
         size: 10,
         total: 0
     };
-    positions = [];
+    staffLevels = [];
     panelOpenState: false;
     constructor(injector: Injector,
-                positionService: PositionManagementService) {
-        super(injector, positionService);
+                staffLevelService: StaffLevelService) {
+        super(injector, staffLevelService);
     }
 
     ngOnInit(): void {
         this.searchModel.status=1
         this.doSeach();
         console.log(this.searchResult.data)
-        // this.positions = this.searchResult.data
+        // this.staffLevels = this.searchResult.data
         this.formSearch.valueChanges.subscribe(res=>{
             console.log(res)
             this.searchModel= {...this.searchModel,...this.formSearch.value}
@@ -73,7 +74,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
 
     doSeach(paramSearch?:any){
         // this.searchModel= {...this.searchModel,...this.formSearch.value}
-console.log(paramSearch)
+        console.log(paramSearch)
         this.processSearch()
     }
 
@@ -87,31 +88,32 @@ console.log(paramSearch)
     actionClick(e: any): void {
         console.log(e);
         if(e.type==='edit'){
-            this.addOrEditPosition(e.data)
+            this.addOrEditStaffLevel(e.data)
         }
         if(e.type === 'delete'){
-            this.deletePosition( e.data.id)
+            this.deleteStaffLevel( e.data.id)
         }
     }
 
-    deletePosition(id:any){
+    deleteStaffLevel(id:any){
         console.log(this.searchModel);
 
         this.deleteConfirmDialog(id)
     }
 
-    addOrEditPosition(positionData?: any): void {
-        const ref = this.showDialog(AddOrEditPositionComponent,{
+    addOrEditStaffLevel(staffLevelData?: any): void {
+        const ref = this.showDialog(AddOrEditStaffLevelComponent,{
             data:{
-                positionData,
+                staffLevelData,
             },
             width:'60vw',
             height:'45vh',
             disableClose:true
         },(value)=>{
             if(value)
-            this.addOrEdit(value)
+                this.addOrEdit(value)
         });
         // ref.onclose()
     }
+
 }

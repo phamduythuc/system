@@ -5,7 +5,7 @@ import { TranslocoCoreModule } from 'app/core/transloco/transloco.module';
 import {BaseComponent} from "./base.component";
 
 @NgModule({
-    declarations: [BaseComponent],
+    // declarations: [BaseComponent],
     imports: [
         AuthModule,
         IconsModule,
