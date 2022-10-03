@@ -10,6 +10,7 @@ import {DataTableModule} from "../../../layout/common/data-table/data-table.modu
 import {MatExpansionModule} from "@angular/material/expansion";
 import { StaffLevelManagementComponent } from './staff-level-management/staff-level-management.component';
 import { AddOrEditStaffLevelComponent } from './staff-level-management/compoment/add-or-edit-staff-level/add-or-edit-staff-level.component';
+import {ErrorMessageModule} from "../../../shared/components/error-message/error-message.module";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddOrEditStaffLevelComponent } from './staff-level-management/compoment
         TranslocoModule,
         SharedModule,
         DataTableModule,
-        MatExpansionModule
+        MatExpansionModule,
+        ErrorMessageModule
     ]
 })
 export class HrmManagementModule { }

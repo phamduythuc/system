@@ -3,7 +3,7 @@
 <!--        header-->
         <div class="header border-b flex justify-between items-center pb-3">
             <div class="text-lx font-bold card-title">
-                {{positionData?'Thong tin chuc vu':'Them chuc vu'}}
+                {{positionData?t("management.position.editHeader"):t("management.position.addHeader")}}
             </div>
             <div>
                 <button mat-icon-button class="hover:bg-slate-500" (click)="dialogRef.close()">
@@ -14,7 +14,7 @@
 <!--        content-->
         <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
             <div class="field flex mb-4">
-                <label class="w-1/6 required">Tên</label>
+                <label class="w-1/6 required">{{t("form.name")}}</label>
                 <div class="input w-5/6">
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="field flex mb-4">
-                <label class="w-1/6 ">Mo ta</label>
+                <label class="w-1/6 ">{{t("form.description")}}</label>
                 <div class="input w-5/6">
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
@@ -40,11 +40,11 @@
             </div>
             <div class="field flex mb-4">
                 <div class="w-1/2 flex">
-                    <label class="w-1/3 required ">Trang thai</label>
+                    <label class="w-1/3 required ">{{t("form.status")}}</label>
                     <div class="input w-2/3">
                         <mat-radio-group class="flex flex-row" formControlName="status">
-                            <mat-radio-button [value]="1" class="mr-10 text-lime-500">Hoat dong</mat-radio-button>
-                            <mat-radio-button [value]="0" class="text-red-500">Khong hoat dong</mat-radio-button>
+                            <mat-radio-button [value]="1" class="mr-10 text-lime-500">{{t('form.active')}}</mat-radio-button>
+                            <mat-radio-button [value]="0" class="text-red-500">{{t('form.notActive')}}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
@@ -53,11 +53,11 @@
         <div class="footer mt-6 flex justify-end">
             <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save(formGroup.value)">
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
-                <span>Thêm mới</span>
+                <span>{{t('button.save')}}</span>
             </button>
             <button mat-raised-button (click)="dialogRef.close()">
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
-                <span>Hủy bỏ</span>
+                <span>{{t('button.cancel')}}</span>
             </button>
         </div>
     </div>

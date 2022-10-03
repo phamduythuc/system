@@ -11,24 +11,34 @@
     "management": {
         "position": {
             "header" : "Chức vụ",
-            "newPosition": "Thêm mới"
+            "newPosition": "Thêm mới",
+            "addHeader": "Thêm chức vụ",
+            "editHeader": "Thông tin chức vụ"
 
         }, "level": {
             "header" : "Cấp bậc",
-            "newPosition": "Thêm cấp bậc"
+            "newPosition": "Thêm cấp bậc",
+            "addHeader": "Thêm cấp bậc",
+            "editHeader": "Thông tin cấp bậc"
 
         }
     },
-    "Button": {
+    "button": {
         "new" : "Thêm mới",
         "save": "Lưu",
         "edit": "Chỉnh sửa",
-        "delete": "Xóa"
+        "delete": "Xóa",
+        "cancel": "Hủy bỏ"
     },
     "form": {
         "search":"Tìm kiếm",
         "name": "Tên",
-        "createBy": "Người thêm"
+        "createBy": "Người thêm",
+        "createdDate": "Ngày thêm",
+        "description" : "Mô tả",
+        "status": "Trạng thái",
+        "active": "Hoạt động",
+        "notActive": "không Hoạt động"
     }
 
 }
