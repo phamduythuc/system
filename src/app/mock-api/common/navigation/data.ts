@@ -28,7 +28,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Cấp bậc',
                 type: 'basic',
                 icon: 'heroicons_outline:chart-pie',
-                link: ''
+                link: '/hrm-management/staff-level-management'
             },
             {
                 id: 'department',

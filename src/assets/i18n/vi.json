@@ -13,6 +13,22 @@
             "header" : "Chức vụ",
             "newPosition": "Thêm mới"
 
+        }, "level": {
+            "header" : "Cấp bậc",
+            "newPosition": "Thêm cấp bậc"
+
         }
+    },
+    "Button": {
+        "new" : "Thêm mới",
+        "save": "Lưu",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa"
+    },
+    "form": {
+        "search":"Tìm kiếm",
+        "name": "Tên",
+        "createBy": "Người thêm"
     }
+
 }

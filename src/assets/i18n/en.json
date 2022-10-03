@@ -11,8 +11,25 @@
     "management": {
         "position": {
             "header" : "Position",
-            "newPosition": "New Position"
+            "newPosition": "Add new"
+
+        },
+        "level": {
+            "header" : "Start level",
+            "newPosition": "New level"
 
         }
+    },
+    "button": {
+        "new" : "Add new",
+        "save": "Save",
+        "edit": "Edit",
+        "delete": "Delete"
+    },
+    "form": {
+        "search":"Search",
+        "name": "Name",
+        "createBy": "Create by"
     }
+
 }

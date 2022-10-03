@@ -8,12 +8,16 @@ import {TranslocoModule} from "@ngneat/transloco";
 import {SharedModule} from "../../../shared/shared.module";
 import {DataTableModule} from "../../../layout/common/data-table/data-table.module";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { StaffLevelManagementComponent } from './staff-level-management/staff-level-management.component';
+import { AddOrEditStaffLevelComponent } from './staff-level-management/compoment/add-or-edit-staff-level/add-or-edit-staff-level.component';
 
 
 @NgModule({
   declarations: [
     DepartmentManagementComponent,
-    PositionManagementComponent
+    PositionManagementComponent,
+    StaffLevelManagementComponent,
+    AddOrEditStaffLevelComponent
   ],
     imports: [
         CommonModule,
