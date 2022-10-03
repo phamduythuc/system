@@ -2,6 +2,7 @@ import { Translation, TRANSLOCO_CONFIG, TRANSLOCO_LOADER, translocoConfig, Trans
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { environment } from 'environments/environment';
 import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
+import {Observable} from 'rxjs';
 
 @NgModule({
     exports  : [
@@ -14,18 +15,22 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
             useValue: translocoConfig({
                 availableLangs      : [
                     {
-                        id   : 'en',
-                        label: 'English'
+                        id   : 'vi',
+                        label: 'lang.vi'
                     },
                     {
-                        id   : 'vi',
-                        label: 'Viet Nam'
-                    }
+                        id   : 'en',
+                        label: 'lang.en'
+                    },
                 ],
-                defaultLang         : 'en',
-                fallbackLang        : 'en',
+                defaultLang         : 'vi',
+                fallbackLang        : 'vi',
                 reRenderOnLangChange: true,
-                prodMode            : environment.production
+                prodMode            : environment.production,
+                missingHandler: {
+                    useFallbackTranslation: true,
+                    logMissingKey: false
+                }
             })
         },
         {
@@ -37,10 +42,15 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
             // Preload the default language before the app starts to prevent empty/jumping content
             provide   : APP_INITIALIZER,
             deps      : [TranslocoService],
-            useFactory: (translocoService: TranslocoService): any => (): Promise<Translation> => {
+            useFactory: (translocoService: TranslocoService): any => (): Observable<Translation> => {
                 const defaultLang = translocoService.getDefaultLang();
-                translocoService.setActiveLang(defaultLang);
-                return translocoService.load(defaultLang).toPromise();
+                const config = JSON.parse(localStorage.getItem('config'));
+                if (config && config?.language) {
+                    translocoService.setActiveLang(config.language);
+                } else {
+                    translocoService.setActiveLang(defaultLang);
+                }
+                return translocoService.load(defaultLang).pipe();
             },
             multi     : true
         }

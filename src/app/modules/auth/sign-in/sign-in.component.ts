@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {fuseAnimations} from '@fuse/animations';
 import {FuseAlertType} from '@fuse/components/alert';
 import {AuthService} from 'app/core/auth/auth.service';
-import {environment} from "../../../../environments/environment";
+import {environment} from '@env/environment';
 
 @Component({
     selector: 'auth-sign-in',
@@ -112,13 +112,13 @@ export class AuthSignInComponent implements OnInit {
     }
 
 
-    b64EncodeUnicode(str) {
-        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
-            return String.fromCharCode(parseInt(p1, 16))
-        }))
+    b64EncodeUnicode(str): any {
+        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+            return String.fromCharCode(parseInt(p1, 16));
+        }));
     }
 
-    signInBySSO() {
-        window.location.href = environment.sso + `/login?appCode=${environment.appCode}&service=` + encodeURIComponent(environment.webportalURL);
+    signInBySSO(): any {
+        // window.location.href = environment.sso + `/login?appCode=${environment.appCode}&service=` + encodeURIComponent(environment.baseUrl);
     }
 }

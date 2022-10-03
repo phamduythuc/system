@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs';
+import {config, map, mergeMap, of, Subject, switchMap, take, takeUntil} from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
+import {FuseConfigService} from "../../../../@fuse/services/config";
+import {AppConfig} from "../../../core/config/app.config";
 
 @Component({
     selector       : 'languages',
@@ -15,6 +17,9 @@ export class LanguagesComponent implements OnInit, OnDestroy
     availableLangs: AvailableLangs;
     activeLang: string;
     flagCodes: any;
+    config: AppConfig;
+    language: string;
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
      * Constructor
@@ -22,7 +27,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseNavigationService: FuseNavigationService,
-        private _translocoService: TranslocoService
+        private _translocoService: TranslocoService, private _fuseConfigService: FuseConfigService
     )
     {
     }
@@ -36,15 +41,14 @@ export class LanguagesComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.config = this._fuseConfigService.configValue;
         // Get the available languages from transloco
         this.availableLangs = this._translocoService.getAvailableLangs();
-
         // Subscribe to language changes
         this._translocoService.langChanges$.subscribe((activeLang) => {
-
             // Get the active lang
             this.activeLang = activeLang;
-
+            this._fuseConfigService.config = {...this.config, language: activeLang};
             // Update the navigation
             this._updateNavigation(activeLang);
         });
@@ -61,6 +65,8 @@ export class LanguagesComponent implements OnInit, OnDestroy
      */
     ngOnDestroy(): void
     {
+        this._unsubscribeAll.next(null);
+        this._unsubscribeAll.complete();
     }
 
     // -----------------------------------------------------------------------------------------------------

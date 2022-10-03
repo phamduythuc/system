@@ -7,7 +7,7 @@
                   [class.text-lime-600]="i === breadcrumbs.length - 1"
                   (click)="navigateToUrl(item.url)"
             >
-            {{item?.label}}
+            {{item?.label | transloco}}
             </span>
         </div>
     </ng-container>

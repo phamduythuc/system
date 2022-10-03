@@ -11,6 +11,35 @@ export const defaultNavigation: FuseNavigationItem[] = [
         // role: [AuthoritiesConstant.DASHBOARD.DASHBOARD_READ]
     },
     {
+        id: 'hrmManagement',
+        title: 'Quản lý chung',
+        type: 'group',
+        role: [],
+        children: [
+            {
+                id: 'position',
+                title: 'Chức vụ',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/position-management'
+            },
+            {
+                id: 'level',
+                title: 'Cấp bậc',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/staff-level-management'
+            },
+            {
+                id: 'department',
+                title: 'Phòng ban',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/department-management'
+            }
+        ]
+    },
+    {
         id      : 'datalakeManagement',
         title   : 'Datalake Management',
         type    : 'group',
@@ -150,7 +179,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Alert Manager',
                 type : 'basic',
                 icon : 'heroicons_outline:currency-dollar',
-                link : '/alert-manager',
+                // link : '/alert-manager',
                 // role: [
                 //     AuthoritiesConstant.ALERT_CONFIG.ALERT_CONFIG_READ
                 // ]

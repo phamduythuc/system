@@ -2,6 +2,9 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+body{
+    box-sizing: border-box;
+}
 .sign-in-background {
     background-image: url("~assets/images/ui/login-bg.png");
     background-size: cover;

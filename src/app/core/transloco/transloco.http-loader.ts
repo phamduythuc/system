@@ -25,8 +25,8 @@ export class TranslocoHttpLoader implements TranslocoLoader
      *
      * @param lang
      */
-    getTranslation(lang: string): Observable<Translation>
-    {
+    getTranslation(lang: string): Observable<Translation> {
+        console.log(lang);
         return this._httpClient.get<Translation>(`./assets/i18n/${lang}.json`);
     }
 }

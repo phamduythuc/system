@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, AbstractControlDirective } from '@angular/forms';
+import {AbstractControl, AbstractControlDirective, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-error-message',

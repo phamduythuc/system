@@ -188,4 +188,7 @@ export class AuthService
         // return this.signInUsingToken();
         return of (true);
     }
+    getUserInfoSSO(): Observable<any>{
+        return this._httpClient.get<any>(`${environment.apiSSO}/user-info`);
+    }
 }

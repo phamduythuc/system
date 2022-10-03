@@ -98,11 +98,16 @@ export const appRoutes: Route[] = [
         },
         data: {
             breadcrumb: {
-                label: 'VDP',
+                label: 'HRM',
                 url: '/'
             }
         },
         children: [
+            {
+                path: 'hrm-management',
+                loadChildren: () => import('app/modules/admin/hrm-management/hrm-management.module').then(m => m.HrmManagementModule),
+                data: {breadcrumb: {label: 'hrm-management.label', url: ''}}
+            },
             {
                 path: 'example',
                 loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule),
@@ -111,7 +116,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'dashboards',
                 loadChildren: () => import('app/modules/admin/dashboards/dashboards.module').then(m => m.DashboardsModule),
-                data: {breadcrumb: {label: 'Dashboards', url: 'dashboards'}}
+                data: {breadcrumb: {label: 'Dashboards', url: ''}}
             },
             // datalake-management
             {
