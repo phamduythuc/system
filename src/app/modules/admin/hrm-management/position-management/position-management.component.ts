@@ -3,6 +3,7 @@ import {IColumn} from "../../../../layout/common/data-table/data-table.component
 import {BaseComponent} from "../../../../core/base.component";
 import {PositionManagementService} from "./position-management.service";
 import {AddOrEditPositionComponent} from "./compoment/add-or-edit-position/add-or-edit-position.component";
+import {CommonUtilsService} from "@shared/common-utils.service";
 
 @Component({
   selector: 'app-position-management',
@@ -10,38 +11,39 @@ import {AddOrEditPositionComponent} from "./compoment/add-or-edit-position/add-o
   styleUrls: ['./position-management.component.scss']
 })
 export class PositionManagementComponent extends BaseComponent implements OnInit {
-    columns: IColumn[] = [
-        {
-            columnDef: 'name',
-            header: 'Tên',
-            flex: 0.3,
-        },
-        {
-            columnDef: 'description',
-            header: 'Mô tả',
-        },
-        {
-            columnDef: 'code',
-            header: 'Code',
-        },
-        {
-            columnDef: 'createdDate',
-            header: 'Ngày tạo',
-        },
-        {
-            columnDef: 'createBy',
-            header: 'Nguoi chỉnh sửa',
-        },
-        {
-            columnDef: 'status',
-            header: 'Trạng thái',
-        },
-        {
-            columnDef: 'action',
-            header: 'Hành động',
-            actions: ['edit', 'delete'],
-        }
-    ];
+  columns: IColumn[] = [
+    {
+      columnDef: 'name',
+      header: 'common.name',
+      flex: 0.3,
+    },
+    {
+      columnDef: 'description',
+      header: 'common.description',
+    },
+    {
+      columnDef: 'code',
+      header: 'common.code',
+    },
+    {
+      columnDef: 'createdDate',
+      header: 'common.createdDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+    },
+    {
+      columnDef: 'createBy',
+      header: 'common.createBy',
+    },
+    {
+      columnDef: 'status',
+      header: 'common.status',
+    },
+    {
+      columnDef: 'action',
+      header: 'common.action',
+      actions: ['edit', 'delete'],
+    }
+  ];
     formSearch =this.fb.group({
         name : [null],
         createdDate:[null],
@@ -100,18 +102,18 @@ console.log(paramSearch)
         this.deleteConfirmDialog(id)
     }
 
-    addOrEditPosition(positionData?: any): void {
-        const ref = this.showDialog(AddOrEditPositionComponent,{
-            data:{
-                positionData,
-            },
-            width:'60vw',
-            height:'45vh',
-            disableClose:true
-        },(value)=>{
-            if(value)
-            this.addOrEdit(value)
-        });
-        // ref.onclose()
-    }
+  addOrEditPosition(positionData?: any): void {
+    const ref = this.showDialog(AddOrEditPositionComponent, {
+      data: {
+        positionData,
+      },
+      width: '60vw',
+      height: '45vh',
+      disableClose: true
+    }, (value) => {
+      if (value)
+        this.addOrEdit(value)
+    });
+    // ref.onclose()
+  }
 }

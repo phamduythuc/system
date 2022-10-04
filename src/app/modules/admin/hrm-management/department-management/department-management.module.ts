@@ -6,6 +6,7 @@ import {SharedModule} from "../../../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageModule} from "../../../../shared/components/error-message/error-message.module";
 import { AddOrEditDepartmentComponent } from './add-or-edit-department/add-or-edit-department.component';
+import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 
 
 @NgModule({
@@ -15,10 +16,11 @@ import { AddOrEditDepartmentComponent } from './add-or-edit-department/add-or-ed
   imports: [
     CommonModule,
     DepartmentManagementRoutingModule,
-      SharedModule,
-      FormsModule,
-      ErrorMessageModule,
-      ReactiveFormsModule
+    SharedModule,
+    FormsModule,
+    ErrorMessageModule,
+    ReactiveFormsModule,
+    NgxTrimDirectiveModule
   ]
 })
 export class DepartmentManagementModule { }

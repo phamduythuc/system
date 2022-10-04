@@ -8,10 +8,12 @@
         "name": "Tên",
         "code": "Mã",
         "description": "Mô tả",
+        "createBy": "Ngưởi tạo",
         "createdDate": "Ngày tạo",
         "modifiedDate": "Ngày chỉnh sửa",
         "status": "Trạng thái",
-        "action": "Hành động"
+        "action": "Hoạt động",
+        "notAction": "Không hoạt động"
     },
     "setting": {
       "user": {
@@ -62,7 +64,13 @@
         "label": "Quản lý chung",
         "department": {
             "title": "Phòng ban"
-        }
+        },
+      "staffLevel": {
+        "title": "Cấp bậc"
+      },
+      "position": {
+        "title": "Chức vụ"
+      }
     }
 
 }

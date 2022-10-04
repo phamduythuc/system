@@ -3,6 +3,7 @@ import {IColumn} from "../../../../layout/common/data-table/data-table.component
 import {BaseComponent} from "../../../../core/base.component";
 import {StaffLevelService} from "./staff-level.service";
 import {AddOrEditStaffLevelComponent} from "./compoment/add-or-edit-staff-level/add-or-edit-staff-level.component";
+import {CommonUtilsService} from "@shared/common-utils.service";
 
 @Component({
   selector: 'app-staff-level-management',
@@ -14,32 +15,33 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     columns: IColumn[] = [
         {
             columnDef: 'name',
-            header: 'Tên',
+            header: 'common.name',
             flex: 0.3,
         },
         {
             columnDef: 'description',
-            header: 'Mô tả',
+            header: 'common.description',
         },
         {
             columnDef: 'code',
-            header: 'Code',
+            header: 'common.code',
         },
         {
             columnDef: 'createdDate',
-            header: 'Ngày tạo',
+            header: 'common.createdDate',
+          cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
         },
         {
             columnDef: 'createBy',
-            header: 'Nguoi chỉnh sửa',
+            header: 'common.createBy',
         },
         {
             columnDef: 'status',
-            header: 'Trạng thái',
+            header: 'common.status',
         },
         {
             columnDef: 'action',
-            header: 'Hành động',
+            header: 'common.action',
             actions: ['edit', 'delete'],
         }
     ];

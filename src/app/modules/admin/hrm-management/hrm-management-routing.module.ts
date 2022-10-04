@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {StaffLevelManagementComponent} from "./staff-level-management/staff-level-management.component";
 
 
 const routes: Routes = [
@@ -11,13 +10,13 @@ const routes: Routes = [
     },
     {
         path: 'staff-level-management',
-        component: StaffLevelManagementComponent,
-        data: {breadcrumb: {label: 'Staff level Management', url: 'hrm-management/department-management'}}
+      loadChildren: () => import('app/modules/admin/hrm-management/staff-level-management/staff-level-management.module').then(m => m.StaffLevelManagementModule),
+      data: {breadcrumb: {label: 'hrm-management.staffLevel.title', url: 'hrm-management/staff-level-management'}}
     },
     {
         path: 'position-management',
         loadChildren: () => import('app/modules/admin/hrm-management/position-management/position-management.module').then(m => m.PositionManagementModule),
-        data: {breadcrumb: {label: 'Position Management', url: 'hrm-management/position-management'}}
+        data: {breadcrumb: {label: 'hrm-management.position.title', url: 'hrm-management/position-management'}}
     }
 ];
 

@@ -21,7 +21,7 @@
                         <input class="w-full"
                                placeholder="Nhập tên"
                                formControlName="name"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('name')" name="Tên"></app-error-message>
                 </div>
@@ -34,7 +34,7 @@
                         <input class="w-full"
                                placeholder="Mo ta ..."
                                formControlName="description"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                 </div>
             </div>

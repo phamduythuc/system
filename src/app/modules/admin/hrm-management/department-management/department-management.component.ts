@@ -3,7 +3,6 @@ import {BaseComponent} from '@core/base.component';
 import {DepartmentManagementService} from './department-management.service';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
-import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
 
 @Component({
@@ -46,6 +45,13 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
       actions: ['edit', 'delete'],
     }
   ];
+  formSearch =this.fb.group({
+    name : [null],
+    createdDate:[null],
+    createBy:[null]
+  })
+  panelOpenState: false;
+  parentIds =[]
 
   constructor(injector: Injector, private departmentService: DepartmentManagementService) {
     super(injector, departmentService);
@@ -55,12 +61,26 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.processSearch();
+    this.formSearch.valueChanges.subscribe(res=>{
+      console.log(res)
+      this.searchModel= {...this.searchModel,...this.formSearch.value}
+    })
+  }
+
+  getParentIds(arr:any[]):any[]{
+    return arr.map(item=>item.parentId).filter(item=>item)
+  }
+
+  doSeach(paramSearch?:any){
+    // this.searchModel= {...this.searchModel,...this.formSearch.value}
+    console.log(paramSearch)
+    this.processSearch()
   }
 
   actionClick(e: any): void {
     switch (e.type) {
       case 'delete':
-        this.deleteDepartment(e.data.id);
+        this.deleteConfirmDialog(e.data.id);
         break;
       case 'edit':
         this.addOrEditDepartment(e.data);
@@ -68,30 +88,45 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     }
   }
 
-  deleteDepartment(id: any): void {
-    this.showDialog(ConfirmDialogComponent, {}, (value) => {
-      if (value) {
-        this.departmentService.delete(id).subscribe((res) => {
-          if (res.status) {
-            this.showSnackBar('Xóa thành công', 'success');
-            this.processSearch();
-          }
-        });
-      }
+  // deleteDepartment(id: any): void {
+  //   this.showDialog(ConfirmDialogComponent, {}, (value) => {
+  //     if (value) {
+  //       this.departmentService.delete(id).subscribe((res) => {
+  //         if (res.status) {
+  //           this.showSnackBar('Xóa thành công', 'success');
+  //           this.processSearch();
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+  addOrEditDepartment(department?: any): void {
+    const ref = this.showDialog(AddOrEditDepartmentComponent,{
+      data:{
+        department,
+        departments:this.searchResult.data ,
+      },
+      width:'60vw',
+      height:'45vh',
+      disableClose:true
+    },(value)=>{
+      if(value)
+        this.addOrEdit(value)
     });
+    // ref.onclose()
   }
 
-  addOrEditDepartment(department: any): void {
-    this.showDialog(AddOrEditDepartmentComponent, {
-      data: {
-        department
-      },
-      width: '50vw'
-    }, (value) => {
-      if (value) {
-        this.showSnackBar('Thêm mới thành công', 'success');
-        this.processSearch();
-      }
-    });
-  }
+  // addOrEditDepartment(department: any): void {
+  //   this.showDialog(AddOrEditDepartmentComponent, {
+  //     data: {
+  //       department
+  //     },
+  //     width: '50vw'
+  //   }, (value) => {
+  //     if (value) {
+  //       this.showSnackBar('Thêm mới thành công', 'success');
+  //       this.processSearch();
+  //     }
+  //   });
+  // }
 }

@@ -20,7 +20,7 @@
                     <input class="w-full" id="group-name"
                            placeholder="Nhập tên nhóm"
                            formControlName="name"
-                           matInput>
+                           matInput trim='blur'>
                 </mat-form-field>
                 <app-error-message [control]="formGroup.get('name')" name="Tên nhóm"></app-error-message>
             </div>
@@ -33,7 +33,7 @@
                     <input class="w-full" id="groupAccount"
                            placeholder="Nhập tài khoản server"
                            formControlName="groupAcc"
-                           matInput>
+                           matInput trim='blur'>
                 </mat-form-field>
                 <app-error-message [control]="formGroup.get('groupAcc')" name="Tài khoản server"></app-error-message>
             </div>

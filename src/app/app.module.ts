@@ -14,6 +14,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import {SharedModule} from '@shared/shared.module';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 
 const routerConfig: ExtraOptions = {
     // preloadingStrategy       : PreloadAllModules,
@@ -46,7 +47,8 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
         SharedModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+      NgxTrimDirectiveModule,
     ],
     bootstrap   : [
         AppComponent

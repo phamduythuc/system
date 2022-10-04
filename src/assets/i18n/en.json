@@ -1,69 +1,75 @@
 {
-    "lang": {
-        "vi": "Vietnamese",
-        "en": "English"
+  "lang": {
+    "vi": "Vietnamese",
+    "en": "English"
+  },
+  "sign-in": "Đăng nhập",
+  "common": {
+    "name": "Name",
+    "code": "Code",
+    "description": "Description",
+    "createBy": "Create by",
+    "createdDate": "Created Date",
+    "modifiedDate": "Modified Date",
+    "status": "Status",
+    "action": "Action",
+    "notAction": "Not action"
+  },
+  "setting": {
+    "user": {
+      "group": "Group",
+      "userList": "User list",
+      "newGroup": "New Group",
+      "newUser": "New User"
+    }
+  },
+  "management": {
+    "position": {
+      "header": "Position",
+      "newPosition": "Add new",
+      "addHeader": "Add position",
+      "editHeader": "Position information"
     },
-    "sign-in": "Đăng nhập",
-    "common": {
-        "name": "Name",
-        "code": "Code",
-        "description": "Description",
-        "createdDate": "Created Date",
-        "modifiedDate": "Modified Date",
-        "status": "Status",
-        "action": "Actions"
+    "level": {
+      "header": "Start level",
+      "newPosition": "New level",
+      "addHeader": "Add level",
+      "editHeader": "Level information"
+    }
+  },
+  "button": {
+    "new": "Add new",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "form": {
+    "search": "Search",
+    "name": "Name",
+    "createBy": "Create by",
+    "createdDate": "Created date",
+    "description": "Description",
+    "status": "Status",
+    "active": "Active",
+    "notActive": "Not active"
+  },
+  "add-new": "Add new",
+  "confirm-delete": {
+    "title": "Delete item",
+    "content": "Are you sure want to delete the record??"
+  },
+  "hrm-management": {
+    "label": "Category Management",
+    "department": {
+      "title": "Department"
     },
-    "setting": {
-        "user": {
-            "group": "Group",
-            "userList": "User list",
-            "newGroup": "New Group",
-            "newUser": "New User"
-        }
+    "staffLevel": {
+      "title": "Staff level"
     },
-    "management": {
-        "position": {
-            "header" : "Position",
-            "newPosition": "Add new",
-            "addHeader": "Add position",
-            "editHeader": "Position information"
-
-        },
-        "level": {
-            "header" : "Start level",
-            "newPosition": "New level",
-            "addHeader": "Add level",
-            "editHeader": "Level information"
-
-        }
-    },
-    "button": {
-        "new" : "Add new",
-        "save": "Save",
-        "edit": "Edit",
-        "delete": "Delete",
-        "cancel": "Cancel"
-    },
-    "form": {
-        "search":"Search",
-        "name": "Name",
-        "createBy": "Create by",
-        "createdDate": "Created date",
-        "description" : "Description",
-        "status": "Status",
-        "active": "Active",
-        "notActive": "Not active"
-    },
-    "add-new": "Add new",
-    "confirm-delete": {
-        "title": "Delete item",
-        "content": "Are you sure want to delete the record??"
-    },
-    "hrm-management": {
-        "label": "Category Management",
-        "department": {
-            "title": "Department"
-        }
+    "position": {
+      "title": "Position"
     }
 
+}
 }

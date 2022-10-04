@@ -36,7 +36,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 icon: 'heroicons_outline:chart-pie',
                 link: '/hrm-management/department-management'
-            }
+            },
+          {
+                id: 'partner',
+                title: 'Đối tác',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/partner-management'
+            },
         ]
     },
     {

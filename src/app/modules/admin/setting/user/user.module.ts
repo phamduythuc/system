@@ -11,6 +11,7 @@ import { AddGroupDialogComponent } from './components/add-group-dialog/add-group
 import {ErrorMessageModule} from "../../../../shared/components/error-message/error-message.module";
 import { AddOrEditUserComponent } from './components/add-or-edit-user/add-or-edit-user.component';
 import { CreateIpDialogComponent } from './components/add-or-edit-user/create-ip-dialog/create-ip-dialog.component';
+import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CreateIpDialogComponent } from './components/add-or-edit-user/create-ip
         DataTableModule,
         FormsModule,
         ErrorMessageModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxTrimDirectiveModule
     ]
 })
 export class UserModule {

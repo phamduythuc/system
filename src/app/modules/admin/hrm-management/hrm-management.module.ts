@@ -9,8 +9,8 @@ import {SharedModule} from '@shared/shared.module';
 import {DataTableModule} from '@layout/common/data-table/data-table.module';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { StaffLevelManagementComponent } from './staff-level-management/staff-level-management.component';
-import { AddOrEditStaffLevelComponent } from './staff-level-management/compoment/add-or-edit-staff-level/add-or-edit-staff-level.component';
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
+import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 
 
 @NgModule({
@@ -18,7 +18,6 @@ import {ErrorMessageModule} from '@shared/components/error-message/error-message
     DepartmentManagementComponent,
     PositionManagementComponent,
     StaffLevelManagementComponent,
-    AddOrEditStaffLevelComponent
   ],
     imports: [
         CommonModule,
@@ -27,7 +26,8 @@ import {ErrorMessageModule} from '@shared/components/error-message/error-message
         SharedModule,
         DataTableModule,
         MatExpansionModule,
-        ErrorMessageModule
+        ErrorMessageModule,
+        NgxTrimDirectiveModule
     ]
 })
 export class HrmManagementModule { }
