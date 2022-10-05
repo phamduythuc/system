@@ -13,6 +13,11 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 export class DepartmentManagementComponent extends BaseComponent implements OnInit {
   columns: IColumn[] = [
     {
+      columnDef: 'stt',
+      header: 'common.stt',
+      flex: 0.3,
+    },
+    {
       columnDef: 'name',
       header: 'common.name',
       flex: 0.3,
@@ -41,17 +46,15 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     },
     {
       columnDef: 'action',
-      header: 'common.action',
-      actions: ['edit', 'delete'],
+      header: 'common.actions',
+      actions: ['view','edit', 'delete'],
     }
   ];
-  formSearch =this.fb.group({
-    name : [null],
-    createdDate:[null],
-    createBy:[null]
+  formSearch = this.fb.group({
+    name: ['']
   })
   panelOpenState: false;
-  parentIds =[]
+  parentIds = []
 
   constructor(injector: Injector, private departmentService: DepartmentManagementService) {
     super(injector, departmentService);
@@ -60,20 +63,15 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
 
   ngOnInit(): void {
     this.searchModel.status = 1;
-    this.processSearch();
-    this.formSearch.valueChanges.subscribe(res=>{
-      console.log(res)
-      this.searchModel= {...this.searchModel,...this.formSearch.value}
-    })
+    this.doSearch();
   }
 
-  getParentIds(arr:any[]):any[]{
-    return arr.map(item=>item.parentId).filter(item=>item)
+  getParentIds(arr: any[]): any[] {
+    return arr.map(item => item.parentId).filter(item => item)
   }
 
-  doSeach(paramSearch?:any){
-    // this.searchModel= {...this.searchModel,...this.formSearch.value}
-    console.log(paramSearch)
+  doSearch() {
+      this.searchModel = {...this.searchModel, ...this.formSearch.value}
     this.processSearch()
   }
 
@@ -88,30 +86,18 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     }
   }
 
-  // deleteDepartment(id: any): void {
-  //   this.showDialog(ConfirmDialogComponent, {}, (value) => {
-  //     if (value) {
-  //       this.departmentService.delete(id).subscribe((res) => {
-  //         if (res.status) {
-  //           this.showSnackBar('Xóa thành công', 'success');
-  //           this.processSearch();
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
   addOrEditDepartment(department?: any): void {
-    const ref = this.showDialog(AddOrEditDepartmentComponent,{
-      data:{
+    const ref = this.showDialog(AddOrEditDepartmentComponent, {
+      data: {
         department,
-        departments:this.searchResult.data ,
+        departments: this.searchResult.data,
       },
-      width:'60vw',
-      height:'45vh',
-      disableClose:true
-    },(value)=>{
-      if(value)
-        this.addOrEdit(value)
+      width: '60vw',
+      height: '45vh',
+      disableClose: true
+    }, (value) => {
+      if (value)
+        this.doSearch()
     });
     // ref.onclose()
   }

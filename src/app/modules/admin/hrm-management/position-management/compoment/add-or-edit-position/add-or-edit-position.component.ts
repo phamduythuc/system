@@ -3,7 +3,6 @@ import {BaseComponent} from "../../../../../../core/base.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PositionManagementService} from "../../position-management.service";
 import {Validators} from "@angular/forms";
-import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-add-or-edit-position',
@@ -12,29 +11,30 @@ import {data} from "autoprefixer";
 })
 export class AddOrEditPositionComponent extends BaseComponent implements OnInit {
 
-    positionData: any;
-    formGroup = this.fb.group({
-        name: [null,Validators.required],
-        description: [null],
-        status: [1,Validators.required],
-    });
+  positionData: any;
+  formGroup = this.fb.group({
+    name: [null, Validators.required],
+    description: [null],
+    status: [1, Validators.required],
+  });
+
   constructor(injector: Injector,
-              private dialogRef: MatDialogRef<AddOrEditPositionComponent>,
+              public dialogRef: MatDialogRef<AddOrEditPositionComponent>,
               private positionService: PositionManagementService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-      super(injector, positionService);
-      this.positionData = data?.positionData;
+    super(injector, positionService, dialogRef);
+    this.positionData = data?.positionData;
   }
 
   ngOnInit(): void {
-      if (this.positionData) {
-          this.formGroup.patchValue(this.positionData);
-      }
+    if (this.positionData) {
+      this.formGroup.patchValue(this.positionData);
+    }
   }
 
-    save(data) {
-      console.log(this.searchModel)
-        data.id = this.positionData?.id||null
-        this.dialogRef.close(data)
-    }
+  save(data) {
+    console.log(this.searchModel)
+    data.id = this.positionData?.id || null
+    this.addOrEdit(data)
+  }
 }

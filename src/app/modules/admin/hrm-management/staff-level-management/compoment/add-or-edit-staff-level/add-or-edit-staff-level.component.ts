@@ -18,10 +18,10 @@ export class AddOrEditStaffLevelComponent extends BaseComponent implements OnIni
         status: [1,Validators.required],
     });
     constructor(injector: Injector,
-                private dialogRef: MatDialogRef<AddOrEditStaffLevelComponent>,
+                public dialogRef: MatDialogRef<AddOrEditStaffLevelComponent>,
                 private staffLevelService: StaffLevelService,
                 @Inject(MAT_DIALOG_DATA) public data: any) {
-        super(injector, staffLevelService);
+        super(injector, staffLevelService,dialogRef);
         this.staffLevelData = data?.staffLevelData;
     }
 
@@ -34,7 +34,7 @@ export class AddOrEditStaffLevelComponent extends BaseComponent implements OnIni
     save(data) {
         console.log(this.searchModel)
         data.id = this.staffLevelData?.id||null
-        this.dialogRef.close(data)
+        this.addOrEdit(data)
     }
 
 }

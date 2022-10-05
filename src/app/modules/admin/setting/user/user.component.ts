@@ -19,7 +19,7 @@ export class UserComponent extends BaseComponent implements OnInit {
     columns: IColumn[] = [
         {
             columnDef: 'stt',
-            header: 'STT',
+            header: 'common.stt',
             flex: 0.3,
         },
         {
@@ -49,7 +49,7 @@ export class UserComponent extends BaseComponent implements OnInit {
         },
         {
             columnDef: 'action',
-            header: 'Actions',
+            header: 'common.actions',
             flex: 1.5
         }
     ];

@@ -3,10 +3,10 @@
 <!--        header-->
         <div class="header border-b flex justify-between items-center pb-3">
             <div class="text-lx font-bold card-title">
-                {{positionData?t("management.position.editHeader"):t("management.position.addHeader")}}
+                {{positionData?t("hrm-management.editHeader"):t("hrm-management.addHeader")}}
             </div>
             <div>
-                <button mat-icon-button class="hover:bg-slate-500" (click)="dialogRef.close()">
+                <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
                     <mat-icon class="icon-size-5" svgIcon="heroicons_outline:x" title="Close"></mat-icon>
                 </button>
             </div>
@@ -21,7 +21,7 @@
                         <input class="w-full"
                                placeholder="Nhập tên"
                                formControlName="name"
-                               matInput trim='blur'>
+                               matInput trim='blur' disabled>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('name')" name="Tên"></app-error-message>
                 </div>

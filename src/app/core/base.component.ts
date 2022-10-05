@@ -3,7 +3,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
 import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
 import {take} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
@@ -27,14 +27,17 @@ export class BaseComponent {
   public dialogService: MatDialog;
   public fb: FormBuilder;
   private baseService: BaseService;
+  public dialogRef: MatDialogRef<any>;
 
   constructor(injector: Injector,
-              service?: BaseService) {
+              service?: BaseService,
+              dialogRef?: MatDialogRef<any>) {
     this.snackBar = injector.get(MatSnackBar);
     this.translocoService = injector.get(TranslocoService);
     this.dialogService = injector.get(MatDialog);
     this.fb = injector.get(FormBuilder);
     this.baseService = service;
+    this.dialogRef = dialogRef;
   }
 
   showSnackBar(messages?: string, type?: string): void {
@@ -80,8 +83,7 @@ export class BaseComponent {
     this.baseService.save(data).subscribe(res => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
-        this.closeDial0g();
-        this.processSearch();
+        this.dialogRef.close(data);
       } else {
         this.showSnackBar(res.message, 'error');
       }
@@ -93,8 +95,7 @@ export class BaseComponent {
     this.baseService.update(data).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
-        this.closeDial0g();
-        this.processSearch();
+        this.dialogRef.close(data);
       } else {
         this.showSnackBar(res.message, 'error');
       }

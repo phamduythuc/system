@@ -12,110 +12,101 @@ import {CommonUtilsService} from "@shared/common-utils.service";
 })
 export class StaffLevelManagementComponent extends BaseComponent implements OnInit {
 
-    columns: IColumn[] = [
-        {
-            columnDef: 'name',
-            header: 'common.name',
-            flex: 0.3,
-        },
-        {
-            columnDef: 'description',
-            header: 'common.description',
-        },
-        {
-            columnDef: 'code',
-            header: 'common.code',
-        },
-        {
-            columnDef: 'createdDate',
-            header: 'common.createdDate',
-          cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
-        },
-        {
-            columnDef: 'createBy',
-            header: 'common.createBy',
-        },
-        {
-            columnDef: 'status',
-            header: 'common.status',
-        },
-        {
-            columnDef: 'action',
-            header: 'common.action',
-            actions: ['edit', 'delete'],
-        }
-    ];
-    formSearch =this.fb.group({
-        name : [null],
-        createdDate:[null],
-        createBy:[null]
-    })
-
-    paginate = {
-        page: 0,
-        size: 10,
-        total: 0
-    };
-    staffLevels = [];
-    panelOpenState: false;
-    constructor(injector: Injector,
-                staffLevelService: StaffLevelService) {
-        super(injector, staffLevelService);
+  columns: IColumn[] = [
+    {
+      columnDef: 'stt',
+      header: 'common.stt',
+      flex: 0.3,
+    },
+    {
+      columnDef: 'name',
+      header: 'common.name',
+      flex: 0.3,
+    },
+    {
+      columnDef: 'description',
+      header: 'common.description',
+    },
+    {
+      columnDef: 'code',
+      header: 'common.code',
+    },
+    {
+      columnDef: 'createdDate',
+      header: 'common.createdDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+    },
+    {
+      columnDef: 'createdBy',
+      header: 'common.createdBy',
+    },
+    {
+      columnDef: 'status',
+      header: 'common.status',
+    },
+    {
+      columnDef: 'action',
+      header: 'common.actions',
+      actions: ['view','edit', 'delete'],
     }
+  ];
+  formSearch = this.fb.group({
+    name: [''],
+  })
 
-    ngOnInit(): void {
-        this.searchModel.status=1
-        this.doSeach();
-        console.log(this.searchResult.data)
-        // this.staffLevels = this.searchResult.data
-        this.formSearch.valueChanges.subscribe(res=>{
-            console.log(res)
-            this.searchModel= {...this.searchModel,...this.formSearch.value}
-        })
+  paginate = {
+    page: 0,
+    size: 10,
+    total: 0
+  };
+  staffLevels = [];
+  panelOpenState: false;
+
+  constructor(injector: Injector,
+              staffLevelService: StaffLevelService) {
+    super(injector, staffLevelService);
+  }
+
+  ngOnInit(): void {
+    this.searchModel.status = 1
+    this.doSearch();
+  }
+
+  doSearch() {
+    this.searchModel = {...this.searchModel, ...this.formSearch.value}
+    this.processSearch()
+  }
+
+  // changePage(e: any): void {
+  //     this.paginate.size = e.pageSize;
+  //     this.paginate.page = e.pageIndex;
+  //     this.searchModel.page = this.paginate.page
+  //     this.searchModel.pageSize = this.paginate.size
+  // }
+
+  actionClick(e: any): void {
+    console.log(e);
+    if (e.type === 'edit') {
+      this.addOrEditStaffLevel(e.data)
     }
-
-    doSeach(paramSearch?:any){
-        // this.searchModel= {...this.searchModel,...this.formSearch.value}
-        console.log(paramSearch)
-        this.processSearch()
+    if (e.type === 'delete') {
+      this.deleteConfirmDialog(e.data.id)
     }
+  }
 
-    changePage(e: any): void {
-        this.paginate.size = e.pageSize;
-        this.paginate.page = e.pageIndex;
-        this.searchModel.page = this.paginate.page
-        this.searchModel.pageSize = this.paginate.size
-    }
-
-    actionClick(e: any): void {
-        console.log(e);
-        if(e.type==='edit'){
-            this.addOrEditStaffLevel(e.data)
-        }
-        if(e.type === 'delete'){
-            this.deleteStaffLevel( e.data.id)
-        }
-    }
-
-    deleteStaffLevel(id:any){
-        console.log(this.searchModel);
-
-        this.deleteConfirmDialog(id)
-    }
-
-    addOrEditStaffLevel(staffLevelData?: any): void {
-        const ref = this.showDialog(AddOrEditStaffLevelComponent,{
-            data:{
-                staffLevelData,
-            },
-            width:'60vw',
-            height:'45vh',
-            disableClose:true
-        },(value)=>{
-            if(value)
-                this.addOrEdit(value)
-        });
-        // ref.onclose()
-    }
+  addOrEditStaffLevel(staffLevelData?: any): void {
+    const ref = this.showDialog(AddOrEditStaffLevelComponent, {
+      data: {
+        staffLevelData,
+      },
+      width: '60vw',
+      height: '45vh',
+      disableClose: true
+    }, (value) => {
+      if (value)
+        this.doSearch()
+    });
+    // ref.onclose()
+  }
 
 }

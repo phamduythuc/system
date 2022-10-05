@@ -4,6 +4,7 @@ import {BaseComponent} from "../../../../core/base.component";
 import {PositionManagementService} from "./position-management.service";
 import {AddOrEditPositionComponent} from "./compoment/add-or-edit-position/add-or-edit-position.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
+import {DetailPositionComponent} from "./compoment/detail-position/detail-position.component";
 
 @Component({
   selector: 'app-position-management',
@@ -12,6 +13,11 @@ import {CommonUtilsService} from "@shared/common-utils.service";
 })
 export class PositionManagementComponent extends BaseComponent implements OnInit {
   columns: IColumn[] = [
+    {
+      columnDef: 'stt',
+      header: 'common.stt',
+      flex: 0.3,
+    },
     {
       columnDef: 'name',
       header: 'common.name',
@@ -31,8 +37,8 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
     },
     {
-      columnDef: 'createBy',
-      header: 'common.createBy',
+      columnDef: 'createdBy',
+      header: 'common.createdBy',
     },
     {
       columnDef: 'status',
@@ -40,67 +46,57 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     },
     {
       columnDef: 'action',
-      header: 'common.action',
-      actions: ['edit', 'delete'],
+      header: 'common.actions',
+      actions: ['view', 'edit', 'delete'],
     }
   ];
-    formSearch =this.fb.group({
-        name : [null],
-        createdDate:[null],
-        createBy:[null]
-    })
+  formSearch = this.fb.group({
+    name: [''],
+  })
 
-    paginate = {
-        page: 0,
-        size: 10,
-        total: 0
-    };
-    positions = [];
-    panelOpenState: false;
-    constructor(injector: Injector,
-                positionService: PositionManagementService) {
-        super(injector, positionService);
-    }
+  paginate = {
+    page: 0,
+    size: 10,
+    total: 0
+  };
+  positions = [];
+  panelOpenState: false;
 
-    ngOnInit(): void {
-        this.searchModel.status=1
-        this.doSeach();
-        console.log(this.searchResult.data)
-        // this.positions = this.searchResult.data
-        this.formSearch.valueChanges.subscribe(res=>{
-            console.log(res)
-            this.searchModel= {...this.searchModel,...this.formSearch.value}
-        })
-    }
+  constructor(injector: Injector,
+              private positionService: PositionManagementService) {
+    super(injector, positionService);
+  }
 
-    doSeach(paramSearch?:any){
-        // this.searchModel= {...this.searchModel,...this.formSearch.value}
-console.log(paramSearch)
-        this.processSearch()
-    }
+  ngOnInit(): void {
+    this.searchModel.status = 1
+    this.doSearch();
+  }
 
-    changePage(e: any): void {
-        this.paginate.size = e.pageSize;
-        this.paginate.page = e.pageIndex;
-        this.searchModel.page = this.paginate.page
-        this.searchModel.pageSize = this.paginate.size
-    }
+  doSearch() {
+    this.searchModel = {...this.searchModel, ...this.formSearch.value}
+    this.processSearch()
+  }
 
-    actionClick(e: any): void {
-        console.log(e);
-        if(e.type==='edit'){
-            this.addOrEditPosition(e.data)
+  actionClick(e: any): void {
+    console.log(e.type)
+    if (e.type === 'view') {
+      this.showDialog(DetailPositionComponent, {
+          data: {
+            position: e.data
+          },
+          width: '60vw',
+          height: '45vh',
+          disableClose: true
         }
-        if(e.type === 'delete'){
-            this.deletePosition( e.data.id)
-        }
+      )
     }
-
-    deletePosition(id:any){
-        console.log(this.searchModel);
-
-        this.deleteConfirmDialog(id)
+    if (e.type === 'edit') {
+      this.addOrEditPosition(e.data)
     }
+    if (e.type === 'delete') {
+      this.deleteConfirmDialog(e.data.id)
+    }
+  }
 
   addOrEditPosition(positionData?: any): void {
     const ref = this.showDialog(AddOrEditPositionComponent, {
@@ -112,7 +108,7 @@ console.log(paramSearch)
       disableClose: true
     }, (value) => {
       if (value)
-        this.addOrEdit(value)
+        this.doSearch()
     });
     // ref.onclose()
   }

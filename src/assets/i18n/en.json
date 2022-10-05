@@ -5,15 +5,20 @@
   },
   "sign-in": "Đăng nhập",
   "common": {
+    "stt" : "No.",
     "name": "Name",
     "code": "Code",
+    "note": "Note",
+    "phone": "Phone",
+    "address": "Address",
     "description": "Description",
-    "createBy": "Create by",
+    "createdBy": "Created by",
     "createdDate": "Created Date",
     "modifiedDate": "Modified Date",
+    "actions": "Actions",
     "status": "Status",
-    "action": "Action",
-    "notAction": "Not action"
+    "active": "Active",
+    "notActive": "Not active"
   },
   "setting": {
     "user": {
@@ -47,7 +52,7 @@
   "form": {
     "search": "Search",
     "name": "Name",
-    "createBy": "Create by",
+    "createdBy": "Created by",
     "createdDate": "Created date",
     "description": "Description",
     "status": "Status",
@@ -61,15 +66,24 @@
   },
   "hrm-management": {
     "label": "Category Management",
+    "addHeader": "Add new",
+    "editHeader": "edit information",
+    "detailHeader": "Information",
     "department": {
-      "title": "Department"
+      "title": "Department",
+      "form": {
+        "name": "Department name",
+        "code": "Department code"
+      }
     },
     "staffLevel": {
       "title": "Staff level"
     },
     "position": {
       "title": "Position"
+    },
+    "partner": {
+      "title":"Partner"
     }
-
 }
 }

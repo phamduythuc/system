@@ -22,13 +22,13 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
   department: any;
   departments:[]
 
-  constructor(injector: Injector, public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
+  constructor(injector: Injector,
+              public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
               private departmentService: DepartmentManagementService,
               @Inject(MAT_DIALOG_DATA) public dialogData: any) {
-    super(injector);
+    super(injector, departmentService, dialogRef);
     this.department = dialogData?.department;
     this.departments = dialogData?.departments
-    console.log(this.departments);
   }
 
   ngOnInit(): void {
@@ -40,7 +40,8 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
   save(data) {
     console.log(this.searchModel)
     data.id = this.department?.id||null
-    this.dialogRef.close(data)
+    this.addOrEdit(data);
+    // this.dialogRef.close(data)
   }
   // save(): void {
   //   const body = {

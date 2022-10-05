@@ -1,76 +1,89 @@
 {
-    "lang": {
-        "vi": "Tiếng Việt",
-        "en": "Tiếng Anh"
-    },
-    "sign-in": "Đăng nhập",
-    "common": {
-        "name": "Tên",
-        "code": "Mã",
-        "description": "Mô tả",
-        "createBy": "Ngưởi tạo",
-        "createdDate": "Ngày tạo",
-        "modifiedDate": "Ngày chỉnh sửa",
-        "status": "Trạng thái",
-        "action": "Hoạt động",
-        "notAction": "Không hoạt động"
-    },
-    "setting": {
-      "user": {
-          "group": "Nhóm",
-          "userList": "Danh sách người dùng",
-          "newGroup": "Nhóm mới",
-          "newUser": "Thêm người dùng"
-      }
-    },
-    "management": {
-        "position": {
-            "header" : "Chức vụ",
-            "newPosition": "Thêm mới",
-            "addHeader": "Thêm chức vụ",
-            "editHeader": "Thông tin chức vụ"
-
-        }, "level": {
-            "header" : "Cấp bậc",
-            "newPosition": "Thêm cấp bậc",
-            "addHeader": "Thêm cấp bậc",
-            "editHeader": "Thông tin cấp bậc"
-
-        }
-    },
-    "button": {
-        "new" : "Thêm mới",
-        "save": "Lưu",
-        "edit": "Chỉnh sửa",
-        "delete": "Xóa",
-        "cancel": "Hủy bỏ"
-    },
-    "form": {
-        "search":"Tìm kiếm",
-        "name": "Tên",
-        "createBy": "Người thêm",
-        "createdDate": "Ngày thêm",
-        "description" : "Mô tả",
-        "status": "Trạng thái",
-        "active": "Hoạt động",
-        "notActive": "không Hoạt động"
-    },
-    "add-new": "Thêm mới",
-    "confirm-delete": {
-        "title": "Xóa bản ghi",
-        "content": "Bạn chắc chắn muốn xóa bản ghi?"
-    },
-    "hrm-management": {
-        "label": "Quản lý chung",
-        "department": {
-            "title": "Phòng ban"
-        },
-      "staffLevel": {
-        "title": "Cấp bậc"
-      },
-      "position": {
-        "title": "Chức vụ"
-      }
+  "lang": {
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh"
+  },
+  "sign-in": "Đăng nhập",
+  "common": {
+    "stt" : "Stt",
+    "name": "Tên",
+    "code": "Mã",
+    "note": "Ghi chú",
+    "phone": "Điện thoại",
+    "address": "Địa chỉ",
+    "description": "Mô tả",
+    "createdBy": "Ngưởi tạo",
+    "createdDate": "Ngày tạo",
+    "modifiedDate": "Ngày chỉnh sửa",
+    "actions": "Hành động",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "notActive": "Không hoạt động"
+  },
+  "setting": {
+    "user": {
+      "group": "Nhóm",
+      "userList": "Danh sách người dùng",
+      "newGroup": "Nhóm mới",
+      "newUser": "Thêm người dùng"
     }
-
+  },
+  "management": {
+    "position": {
+      "header": "Chức vụ",
+      "newPosition": "Thêm mới",
+      "addHeader": "Thêm chức vụ",
+      "editHeader": "Thông tin chức vụ"
+    },
+    "level": {
+      "header": "Cấp bậc",
+      "newPosition": "Thêm cấp bậc",
+      "addHeader": "Thêm cấp bậc",
+      "editHeader": "Thông tin cấp bậc"
+    }
+  },
+  "button": {
+    "new": "Thêm mới",
+    "save": "Lưu",
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "cancel": "Hủy bỏ"
+  },
+  "form": {
+    "search": "Tìm kiếm",
+    "name": "Tên",
+    "createdBy": "Người thêm",
+    "createdDate": "Ngày thêm",
+    "description": "Mô tả",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "notActive": "không Hoạt động"
+  },
+  "add-new": "Thêm mới",
+  "confirm-delete": {
+    "title": "Xóa bản ghi",
+    "content": "Bạn chắc chắn muốn xóa bản ghi?"
+  },
+  "hrm-management": {
+    "label": "Quản lý chung",
+    "addHeader": "Thêm mới",
+    "editHeader": "Sửa thông tin",
+    "detailHeader": "Thông tin",
+    "department": {
+      "title": "Phòng ban",
+      "form": {
+        "name": "Tên phòng ban",
+        "code": "Mã phòng ban"
+      }
+    },
+    "staffLevel": {
+      "title": "Cấp bậc"
+    },
+    "position": {
+      "title": "Chức vụ"
+    },
+    "partner": {
+      "title": "Đối tác"
+    }
+  }
 }

@@ -9,7 +9,7 @@ export interface User {
     imageUrl:        any;
     activated:       boolean;
     langKey:         string;
-    createBy:        any;
+    createdBy:        any;
     createAt:        any;
     updateBy:        any;
     updateAt:        any;
