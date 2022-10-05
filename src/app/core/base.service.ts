@@ -11,7 +11,7 @@ export class BaseService {
                 public url?: string,public subUrl?:string) {
     }
 
-    search(searchData: any): Observable<any> {
+    search(searchData?: any): Observable<any> {
         return this.http.get<any>(this.url, {params: searchData});
     }
 

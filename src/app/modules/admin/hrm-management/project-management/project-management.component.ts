@@ -115,7 +115,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
           data
         },
         width: '60vw',
-        height: '45vh',
+        height: '55vh',
         disableClose: true
       }
     )
@@ -125,6 +125,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     const ref = this.showDialog(AddOrEditProjectComponent, {
       data: {
         data,
+        projects:this.searchResult.data
       },
       width: '60vw',
       height: '45vh',

@@ -17,7 +17,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-
+import { DatePickerFormatDirective } from './directives/date-picker-format.directive';
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -43,16 +43,18 @@ export const MAT_MODULES = [
     declarations: [
         HasAnyAuthorityDirective,
         BreadcrumbComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        DatePickerFormatDirective
     ],
-    exports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HasAnyAuthorityDirective,
-        BreadcrumbComponent,
-        ...MAT_MODULES
-    ]
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HasAnyAuthorityDirective,
+    BreadcrumbComponent,
+    ...MAT_MODULES,
+    DatePickerFormatDirective
+  ]
 })
 export class SharedModule {
 }

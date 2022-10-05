@@ -67,6 +67,7 @@
     "project": {
       "title": "Dự án",
       "form": {
+        "partner": "Partner",
         "budget": "Budget",
         "projectType": "Project type",
         "startTime": "Start time",
