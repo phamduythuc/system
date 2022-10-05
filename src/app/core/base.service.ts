@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 export class BaseService {
 
     constructor(public http?: HttpClient,
-                public url?: string) {
+                public url?: string,public subUrl?:string) {
     }
 
     search(searchData: any): Observable<any> {

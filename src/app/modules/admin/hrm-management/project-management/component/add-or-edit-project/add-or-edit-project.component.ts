@@ -3,6 +3,8 @@ import {BaseComponent} from "@core/base.component";
 import {Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ProjectManagementService} from "../../project-management.service";
+import {CategoriesService} from "@core/categories.service";
+import moment from "moment";
 
 @Component({
   selector: 'app-add-or-edit-project',
@@ -26,11 +28,14 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   projectTypes: any=[];
 
   constructor(injector: Injector,
+              private categories: CategoriesService,
               public dialogRef: MatDialogRef<AddOrEditProjectComponent>,
               private projectService: ProjectManagementService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, projectService, dialogRef);
     this.dialogData = data?.data;
+    this.getCategories()
+
   }
 
   ngOnInit(): void {
@@ -39,10 +44,20 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     }
   }
 
+  getCategories(){
+    this.categories.getCategories('PROJECT_TYPE').subscribe(res=>{
+      this.projectTypes = res.data;
+    })
+  }
+
   save(data) {
     console.log(this.searchModel)
     data.id = this.dialogData?.id || null
     this.addOrEdit(data)
   }
 
+  formatDate(date){
+    const dates =(moment(date).format('DD/MM/yyyy'));
+    return moment(date).format('DD/MM/yyyy')
+  }
 }

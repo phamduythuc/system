@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class ProjectManagementService extends BaseService{
 
   constructor(public http: HttpClient) {
-    super(http,environment.apiUrl+'/project')
+    super(http,environment.apiUrl + '/project')
   }
   getProjectTypes(group: string): Observable<any>{
     return this.http.get(`${environment.apiUrl}/categories/group/${group}`)

@@ -51,3 +51,15 @@ body{
 .mat-snack-bar-container{
     color: #fff !important;
 }
+.my-border{
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 40px;
+  border-radius: 6px;
+  padding: 0 16px;
+  border-width: 1px;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity)) !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
