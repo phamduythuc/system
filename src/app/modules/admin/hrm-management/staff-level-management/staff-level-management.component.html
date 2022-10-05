@@ -3,7 +3,7 @@
         <mat-card class="bg-card h-full">
             <div class="header border-b flex justify-between">
                 <div class="text-xl font-bold card-title mb-3 capitalize">
-                    {{t('management.level.header')}}
+                    {{t('hrm-management.staffLevel.title')}}
                 </div>
                 <div class="mb-2">
                     <button mat-raised-button color="primary" (click)="addOrEditStaffLevel()">
@@ -18,7 +18,7 @@
                                          (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                {{t('form.search')}}
+                                {{t('common.search')}}
                             </mat-panel-title>
                             <!--                            <mat-panel-description>-->
                             <!--                                Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
@@ -32,7 +32,7 @@
                                 <div class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
                                     <div class="field flex-col w-full  p-4">
                                         <div class="input">
-                                            <label >{{t('form.name')}}</label>
+                                            <label >{{t('common.name')}}</label>
                                             <mat-form-field
                                                 class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
                                                 <input class="w-full"

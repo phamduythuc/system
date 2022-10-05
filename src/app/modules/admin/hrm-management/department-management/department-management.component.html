@@ -18,7 +18,7 @@
                                (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{t("form.search")}}
+                {{t("common.search")}}
               </mat-panel-title>
               <!--                            <mat-panel-description>-->
               <!--                                Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
@@ -32,7 +32,7 @@
                 <div class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
                   <div class="field flex-col w-full  p-4">
                     <div class="input">
-                      <label >{{t("form.name")}}</label>
+                      <label >{{t("common.name")}}</label>
                       <mat-form-field
                         class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
                         <input class="w-full"
@@ -64,7 +64,7 @@
                       matPrefix
                       class="icon-size-5"
                       [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                    <span>{{t("form.search")}}</span>
+                    <span>{{t("common.search")}}</span>
                   </button>
                 </div>
               </div>

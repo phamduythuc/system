@@ -28,7 +28,13 @@ export class CommonUtilsService {
     if (value == null || value.toString().trim() === '') {
       return null;
     }
-    const a = moment(value);
+    let a;
+    if (isNaN(value)) {
+      a = moment(value);
+    } else {
+      a = moment(Number(value));
+    }
+
     if (!a.isValid()) {
       return value;
     }

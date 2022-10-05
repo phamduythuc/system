@@ -11,6 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { StaffLevelManagementComponent } from './staff-level-management/staff-level-management.component';
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import { ProjectManagementComponent } from './project-management/project-management.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {NgxTrimDirectiveModule} from "ngx-trim-directive";
     DepartmentManagementComponent,
     PositionManagementComponent,
     StaffLevelManagementComponent,
+    ProjectManagementComponent,
   ],
     imports: [
         CommonModule,

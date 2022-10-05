@@ -80,15 +80,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
   actionClick(e: any): void {
     console.log(e.type)
     if (e.type === 'view') {
-      this.showDialog(DetailPositionComponent, {
-          data: {
-            position: e.data
-          },
-          width: '60vw',
-          height: '45vh',
-          disableClose: true
-        }
-      )
+      this.showDetail(e.data)
     }
     if (e.type === 'edit') {
       this.addOrEditPosition(e.data)
@@ -96,6 +88,18 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id)
     }
+  }
+
+  showDetail(data){
+    this.showDialog(DetailPositionComponent, {
+        data: {
+          position: data
+        },
+        width: '60vw',
+        height: '45vh',
+        disableClose: true
+      }
+    )
   }
 
   addOrEditPosition(positionData?: any): void {

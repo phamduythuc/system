@@ -5,7 +5,8 @@
   },
   "sign-in": "Đăng nhập",
   "common": {
-    "stt" : "Stt",
+    "search": "Tìm kiếm",
+    "stt": "Stt",
     "name": "Tên",
     "code": "Mã",
     "note": "Ghi chú",
@@ -18,7 +19,9 @@
     "actions": "Hành động",
     "status": "Trạng thái",
     "active": "Hoạt động",
-    "notActive": "Không hoạt động"
+    "notActive": "Không hoạt động",
+    "parent": "Cha",
+    "partner": "Đối tác"
   },
   "setting": {
     "user": {
@@ -28,36 +31,12 @@
       "newUser": "Thêm người dùng"
     }
   },
-  "management": {
-    "position": {
-      "header": "Chức vụ",
-      "newPosition": "Thêm mới",
-      "addHeader": "Thêm chức vụ",
-      "editHeader": "Thông tin chức vụ"
-    },
-    "level": {
-      "header": "Cấp bậc",
-      "newPosition": "Thêm cấp bậc",
-      "addHeader": "Thêm cấp bậc",
-      "editHeader": "Thông tin cấp bậc"
-    }
-  },
   "button": {
     "new": "Thêm mới",
     "save": "Lưu",
     "edit": "Chỉnh sửa",
     "delete": "Xóa",
     "cancel": "Hủy bỏ"
-  },
-  "form": {
-    "search": "Tìm kiếm",
-    "name": "Tên",
-    "createdBy": "Người thêm",
-    "createdDate": "Ngày thêm",
-    "description": "Mô tả",
-    "status": "Trạng thái",
-    "active": "Hoạt động",
-    "notActive": "không Hoạt động"
   },
   "add-new": "Thêm mới",
   "confirm-delete": {
@@ -84,6 +63,16 @@
     },
     "partner": {
       "title": "Đối tác"
+    },
+    "project": {
+      "title": "Dự án",
+      "form": {
+        "budget": "Ngân sách",
+        "projectType": "Kiểu dự án",
+        "startTime": "Ngày bắt đầu",
+        "expectEndTime": "Tiến độ hoàn thành",
+        "actualEndTime": "Ngày hoàn thành"
+      }
     }
   }
 }

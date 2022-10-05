@@ -5,7 +5,8 @@
   },
   "sign-in": "Đăng nhập",
   "common": {
-    "stt" : "No.",
+    "search": "Search",
+    "stt": "No.",
     "name": "Name",
     "code": "Code",
     "note": "Note",
@@ -18,7 +19,9 @@
     "actions": "Actions",
     "status": "Status",
     "active": "Active",
-    "notActive": "Not active"
+    "notActive": "Not active",
+    "parent": "Parent",
+    "partner": "Partner"
   },
   "setting": {
     "user": {
@@ -28,36 +31,12 @@
       "newUser": "New User"
     }
   },
-  "management": {
-    "position": {
-      "header": "Position",
-      "newPosition": "Add new",
-      "addHeader": "Add position",
-      "editHeader": "Position information"
-    },
-    "level": {
-      "header": "Start level",
-      "newPosition": "New level",
-      "addHeader": "Add level",
-      "editHeader": "Level information"
-    }
-  },
   "button": {
     "new": "Add new",
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel"
-  },
-  "form": {
-    "search": "Search",
-    "name": "Name",
-    "createdBy": "Created by",
-    "createdDate": "Created date",
-    "description": "Description",
-    "status": "Status",
-    "active": "Active",
-    "notActive": "Not active"
   },
   "add-new": "Add new",
   "confirm-delete": {
@@ -83,7 +62,17 @@
       "title": "Position"
     },
     "partner": {
-      "title":"Partner"
+      "title": "Partner"
+    },
+    "project": {
+      "title": "Dự án",
+      "form": {
+        "budget": "Budget",
+        "projectType": "Project type",
+        "startTime": "Start time",
+        "expectEndTime": "Expect end time",
+        "actualEndTime": "Actual end time"
+      }
     }
-}
+  }
 }

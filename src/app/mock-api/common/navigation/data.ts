@@ -44,6 +44,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:chart-pie',
                 link: '/hrm-management/partner-management'
             },
+          {
+                id: 'project',
+                title: 'Dự án',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/project-management'
+            },
         ]
     },
     {

@@ -59,7 +59,6 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     size: 10,
     total: 0
   };
-  staffLevels = [];
   panelOpenState: false;
 
   constructor(injector: Injector,
