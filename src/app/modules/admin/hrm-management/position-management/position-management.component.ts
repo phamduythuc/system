@@ -80,20 +80,20 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
   actionClick(e: any): void {
     console.log(e.type)
     if (e.type === 'view') {
-      this.showDetail(e.data)
+      this.showDetail(e.data.id)
     }
     if (e.type === 'edit') {
-      this.addOrEditPosition(e.data)
+      this.addOrEditPosition(e.data.id)
     }
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id)
     }
   }
 
-  showDetail(data){
+  showDetail(id){
     this.showDialog(DetailPositionComponent, {
         data: {
-          position: data
+          id
         },
         width: '60vw',
         height: '45vh',
@@ -102,10 +102,10 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     )
   }
 
-  addOrEditPosition(positionData?: any): void {
+  addOrEditPosition(id?: any): void {
     const ref = this.showDialog(AddOrEditPositionComponent, {
       data: {
-        positionData,
+        id,
       },
       width: '60vw',
       height: '45vh',

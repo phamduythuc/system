@@ -1,5 +1,5 @@
 import {Component, Inject, Injector, OnInit,} from '@angular/core';
-import {BaseComponent} from "../../../../../../core/base.component";
+import {BaseComponent} from "@core/base.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PositionManagementService} from "../../position-management.service";
 import {Validators} from "@angular/forms";
@@ -10,8 +10,7 @@ import {Validators} from "@angular/forms";
   styleUrls: ['./add-or-edit-position.component.scss']
 })
 export class AddOrEditPositionComponent extends BaseComponent implements OnInit {
-
-  positionData: any;
+  private readonly dialogId: any;
   formGroup = this.fb.group({
     name: [null, Validators.required],
     description: [null],
@@ -23,18 +22,18 @@ export class AddOrEditPositionComponent extends BaseComponent implements OnInit 
               private positionService: PositionManagementService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, positionService, dialogRef);
-    this.positionData = data?.positionData;
+    this.dialogId = data?.id;
+    if(this.dialogId){
+      this.getDetails(this.dialogId)
+    }
   }
 
   ngOnInit(): void {
-    if (this.positionData) {
-      this.formGroup.patchValue(this.positionData);
-    }
   }
 
   save(data) {
     console.log(this.searchModel)
-    data.id = this.positionData?.id || null
+    data.id = this.dialogId || null
     this.addOrEdit(data)
   }
 }

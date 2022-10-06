@@ -4,6 +4,7 @@ import {BaseComponent} from "../../../../core/base.component";
 import {StaffLevelService} from "./staff-level.service";
 import {AddOrEditStaffLevelComponent} from "./compoment/add-or-edit-staff-level/add-or-edit-staff-level.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
+import {DetailsStaffLevelComponent} from "./compoment/details-staff-level/details-staff-level.component";
 
 @Component({
   selector: 'app-staff-level-management',
@@ -86,17 +87,32 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
   actionClick(e: any): void {
     console.log(e);
     if (e.type === 'edit') {
-      this.addOrEditStaffLevel(e.data)
+      this.addOrEditStaffLevel(e.data.id)
     }
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id)
     }
+    if (e.type === 'view') {
+      this.showDetail(e.data.id)
+    }
   }
 
-  addOrEditStaffLevel(staffLevelData?: any): void {
+  showDetail(id){
+    this.showDialog(DetailsStaffLevelComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '50vh',
+        disableClose: true
+      }
+    )
+  }
+
+  addOrEditStaffLevel(id?: any): void {
     const ref = this.showDialog(AddOrEditStaffLevelComponent, {
       data: {
-        staffLevelData,
+        id,
       },
       width: '60vw',
       height: '45vh',

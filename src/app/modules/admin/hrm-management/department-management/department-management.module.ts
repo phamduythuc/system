@@ -7,11 +7,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageModule} from "../../../../shared/components/error-message/error-message.module";
 import { AddOrEditDepartmentComponent } from './add-or-edit-department/add-or-edit-department.component';
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import { DetailsDepartmentComponent } from './details-department/details-department.component';
 
 
 @NgModule({
   declarations: [
-    AddOrEditDepartmentComponent
+    AddOrEditDepartmentComponent,
+    DetailsDepartmentComponent
   ],
   imports: [
     CommonModule,

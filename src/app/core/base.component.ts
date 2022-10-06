@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from "@core/base.service";
+import {CommonUtilsService} from "@shared/common-utils.service";
 
 @Injectable()
 export class BaseComponent {
@@ -28,6 +29,7 @@ export class BaseComponent {
   public fb: FormBuilder;
   private baseService: BaseService;
   public dialogRef: MatDialogRef<any>;
+  public detailsData: any;
 
   constructor(injector: Injector,
               service?: BaseService,
@@ -58,6 +60,35 @@ export class BaseComponent {
 
   closeDial0g(): void {
     this.dialogService.closeAll();
+  }
+
+  handleCoverTime(data) {
+    if (data['createdDate']) {
+      data['createdDate'] = CommonUtilsService.dateToString(data['createdDate']);
+    }
+    if (data['modifiedDate']) {
+      data['modifiedDate'] = CommonUtilsService.dateToString(data['modifiedDate']);
+    }
+    if (data['expectEndTime']) {
+      data['expectEndTime'] = CommonUtilsService.dateToString(data['expectEndTime']);
+    }
+    if (data['startTime']) {
+      data['expectEndTime'] = CommonUtilsService.dateToString(data['startTime']);
+    }
+    if (data['actualEndTime']) {
+      data['actualEndTime'] = CommonUtilsService.dateToString(data['expectEndTime']);
+    }
+  }
+
+  getDetails(id, callback?) {
+    this.baseService.getOne(id).subscribe(res => {
+      this.detailsData = res.data
+      if (callback) {
+        callback(this.detailsData);
+      }
+      this.formGroup.patchValue(this.detailsData)
+    })
+
   }
 
   processSearch(): void {

@@ -15,6 +15,7 @@
     "description": "Mô tả",
     "createdBy": "Ngưởi tạo",
     "createdDate": "Ngày tạo",
+    "modifiedBy": "Người chỉnh sửa",
     "modifiedDate": "Ngày chỉnh sửa",
     "actions": "Hành động",
     "status": "Trạng thái",
@@ -47,12 +48,13 @@
     "label": "Quản lý chung",
     "addHeader": "Thêm mới",
     "editHeader": "Sửa thông tin",
-    "detailHeader": "Thông tin",
+    "detailsHeader": "Thông tin",
     "department": {
       "title": "Phòng ban",
       "form": {
         "name": "Tên phòng ban",
-        "code": "Mã phòng ban"
+        "code": "Mã phòng ban",
+        "parent": "Cấp quản lí"
       }
     },
     "staffLevel": {

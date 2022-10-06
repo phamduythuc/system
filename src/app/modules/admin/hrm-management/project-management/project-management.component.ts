@@ -69,7 +69,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit', 'delete'],
+      actions: [ 'view','edit', 'delete'],
     }
   ];
   formSearch = this.fb.group({
@@ -99,20 +99,20 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   actionClick(e: any): void {
     console.log(e.type)
     if (e.type === 'view') {
-      this.showDetail(e.data)
+      this.showDetail(e.data.id)
     }
     if (e.type === 'edit') {
-      this.addOrEdit(e.data)
+      this.addOrEdit(e.data.id)
     }
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id)
     }
   }
 
-  showDetail(data){
+  showDetail(id){
     this.showDialog(DetailProjectComponent, {
         data: {
-          data
+          id
         },
         width: '60vw',
         height: '55vh',
@@ -121,10 +121,10 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     )
   }
 
-  addOrEdit(data?: any): void {
+  addOrEdit(id?: any): void {
     const ref = this.showDialog(AddOrEditProjectComponent, {
       data: {
-        data,
+        id,
         projects:this.searchResult.data
       },
       width: '60vw',

@@ -4,6 +4,7 @@ import {DepartmentManagementService} from './department-management.service';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
+import {DetailsDepartmentComponent} from "./details-department/details-department.component";
 
 @Component({
   selector: 'app-department-management',
@@ -81,15 +82,29 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
         this.deleteConfirmDialog(e.data.id);
         break;
       case 'edit':
-        this.addOrEditDepartment(e.data);
+        this.addOrEditDepartment(e.data.id);
         break;
+      case 'view':
+        this.showDetail(e.data.id)
     }
   }
 
-  addOrEditDepartment(department?: any): void {
+  showDetail(id){
+    this.showDialog(DetailsDepartmentComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '50vh',
+        disableClose: true
+      }
+    )
+  }
+
+  addOrEditDepartment(id?: any): void {
     const ref = this.showDialog(AddOrEditDepartmentComponent, {
       data: {
-        department,
+        id,
         departments: this.searchResult.data,
       },
       width: '60vw',

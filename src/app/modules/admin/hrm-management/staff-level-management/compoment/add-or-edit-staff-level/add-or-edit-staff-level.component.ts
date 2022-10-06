@@ -11,30 +11,31 @@ import {StaffLevelService} from "../../staff-level.service";
 })
 export class AddOrEditStaffLevelComponent extends BaseComponent implements OnInit {
 
-    staffLevelData: any;
-    formGroup = this.fb.group({
-        name: [null,Validators.required],
-        description: [null],
-        status: [1,Validators.required],
-    });
-    constructor(injector: Injector,
-                public dialogRef: MatDialogRef<AddOrEditStaffLevelComponent>,
-                private staffLevelService: StaffLevelService,
-                @Inject(MAT_DIALOG_DATA) public data: any) {
-        super(injector, staffLevelService,dialogRef);
-        this.staffLevelData = data?.staffLevelData;
-    }
+  dialogId: any;
+  formGroup = this.fb.group({
+    name: [null, Validators.required],
+    description: [null],
+    status: [1, Validators.required],
+  });
 
-    ngOnInit(): void {
-        if (this.staffLevelData) {
-            this.formGroup.patchValue(this.staffLevelData);
-        }
+  constructor(injector: Injector,
+              public dialogRef: MatDialogRef<AddOrEditStaffLevelComponent>,
+              private staffLevelService: StaffLevelService,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    super(injector, staffLevelService, dialogRef);
+    this.dialogId = data?.id;
+    if (this.dialogId) {
+      this.getDetails(this.dialogId);
     }
+  }
 
-    save(data) {
-        console.log(this.searchModel)
-        data.id = this.staffLevelData?.id||null
-        this.addOrEdit(data)
-    }
+  ngOnInit(): void {
+  }
+
+  save(data) {
+    console.log(this.searchModel)
+    data.id = this.dialogId || null
+    this.addOrEdit(data)
+  }
 
 }

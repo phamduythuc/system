@@ -15,6 +15,7 @@
     "description": "Description",
     "createdBy": "Created by",
     "createdDate": "Created Date",
+    "modifiedBy": "Modified By",
     "modifiedDate": "Modified Date",
     "actions": "Actions",
     "status": "Status",
@@ -47,12 +48,13 @@
     "label": "Category Management",
     "addHeader": "Add new",
     "editHeader": "edit information",
-    "detailHeader": "Information",
+    "detailsHeader": "Information",
     "department": {
       "title": "Department",
       "form": {
         "name": "Department name",
-        "code": "Department code"
+        "code": "Department code",
+        "parent": "Parent"
       }
     },
     "staffLevel": {

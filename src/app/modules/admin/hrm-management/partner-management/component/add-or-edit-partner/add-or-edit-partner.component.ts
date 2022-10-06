@@ -11,10 +11,10 @@ import {PartnerService} from "../../partner.service";
 })
 export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
 
-  partnerData: any;
+  diaLogId;
   formGroup = this.fb.group({
     name: [null,Validators.required],
-    phone:[null,Validators.required],
+    phone:[null,[Validators.required,Validators.pattern('[0-9]{10}')]],
     address:[null],
     note: [null],
   });
@@ -23,18 +23,18 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
               private partnerService: PartnerService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, partnerService, dialogRef);
-    this.partnerData = data?.partnerData;
+    this.diaLogId = data?.id;
+    if(this.diaLogId){
+      this.getDetails(this.diaLogId)
+    }
   }
 
   ngOnInit(): void {
-    if (this.partnerData) {
-      this.formGroup.patchValue(this.partnerData);
-    }
   }
 
   save(data) {
     console.log(this.searchModel)
-    data.id = this.partnerData?.id||null
+    data.id = this.diaLogId||null
     this.addOrEdit(data)
     // this.dialogRef.close(data)
   }

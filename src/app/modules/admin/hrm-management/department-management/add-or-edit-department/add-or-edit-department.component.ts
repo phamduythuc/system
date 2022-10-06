@@ -2,9 +2,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from "../../../../../core/base.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Validators} from "@angular/forms";
-import {data} from "autoprefixer";
 import {DepartmentManagementService} from "../department-management.service";
-import moment from "moment";
 
 @Component({
   selector: 'app-add-or-edit-department',
@@ -19,7 +17,7 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
     parentId: [null],
     status: [1]
   });
-  department: any;
+  dialogId
   departments:[]
 
   constructor(injector: Injector,
@@ -27,19 +25,23 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
               private departmentService: DepartmentManagementService,
               @Inject(MAT_DIALOG_DATA) public dialogData: any) {
     super(injector, departmentService, dialogRef);
-    this.department = dialogData?.department;
+    this.dialogId = dialogData?.id;
+    if(this.dialogId){
+      this.getDetails(this.dialogId)
+    }
     this.departments = dialogData?.departments
   }
 
   ngOnInit(): void {
-    if (this.department) {
-      this.formGroup.patchValue(this.department);
-    }
+    // if (this.department) {
+    //   this.formGroup.patchValue(this.department);
+    // }
 
   }
+
   save(data) {
     console.log(this.searchModel)
-    data.id = this.department?.id||null
+    data.id = this.dialogId||null
     this.addOrEdit(data);
     // this.dialogRef.close(data)
   }

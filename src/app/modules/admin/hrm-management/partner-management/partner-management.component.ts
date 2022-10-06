@@ -4,6 +4,8 @@ import {PartnerService} from "./partner.service";
 import {IColumn} from "@layout/common/data-table/data-table.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {AddOrEditPartnerComponent} from "./component/add-or-edit-partner/add-or-edit-partner.component";
+import {DetailsDepartmentComponent} from "../department-management/details-department/details-department.component";
+import {DetailsPartnerComponent} from "./component/details-partner/details-partner.component";
 
 @Component({
   selector: 'app-partner-management',
@@ -52,7 +54,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   formSearch = this.fb.group({
     name: [''],
     address: [''],
-    phone: ['']
+    // phone: ['']
   })
 
   paginate = {
@@ -88,11 +90,26 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   actionClick(e: any): void {
     console.log(e);
     if (e.type === 'edit') {
-      this.addOrEditPartner(e.data)
+      this.addOrEditPartner(e.data.id)
     }
     if (e.type === 'delete') {
       this.deletePartner(e.data.id)
     }
+    if (e.type === 'view') {
+      this.showDetail(e.data.id)
+    }
+  }
+
+  showDetail(id){
+    this.showDialog(DetailsPartnerComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '50vh',
+        disableClose: true
+      }
+    )
   }
 
   deletePartner(id: any) {
@@ -101,10 +118,10 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     this.deleteConfirmDialog(id)
   }
 
-  addOrEditPartner(partnerData?: any): void {
+  addOrEditPartner(id?: any): void {
     const ref = this.showDialog(AddOrEditPartnerComponent, {
       data: {
-        partnerData,
+        id,
       },
       width: '60vw',
       height: '50vh',

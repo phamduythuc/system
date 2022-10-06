@@ -15,7 +15,7 @@ import {PartnerService} from "../../../partner-management/partner.service";
 })
 export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
-  dialogData: any;
+  private readonly dialogId: any;
   formGroup = this.fb.group({
     name: [null, Validators.required],
     code: [null, Validators.required],
@@ -29,6 +29,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     expectEndTime: [null,Validators.required],
     status: [1, Validators.required],
   });
+  projectData
   projectTypes: any = [];
   projects: any = [];
   listPartner: any = [];
@@ -40,20 +41,26 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
               private partnerService: PartnerService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, projectService, dialogRef);
-    this.dialogData = data?.data;
+    this.dialogId = data?.id;
     this.projects=data?.projects
+    this.getDetails(this.dialogId)
     this.getCategories()
     this.getListPartner()
   }
 
   ngOnInit(): void {
-    if (this.dialogData) {
-      this.dialogData.startTime = this.dialogData.startTime&&new Date(+this.dialogData.startTime)
-      this.dialogData.actualEndTime = this.dialogData.actualEndTime&&new Date(+this.dialogData.actualEndTime)
-      this.dialogData.expectEndTime = this.dialogData.expectEndTime&&new Date(+this.dialogData.expectEndTime)
-      this.formGroup.patchValue(this.dialogData);
-    }
-    console.log(this.formGroup);
+  }
+
+  getDetails(id) {
+    this.projectService.getOne(id).subscribe(res=>{
+      this.projectData = res.data;
+      if(this.projectData){
+      this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
+      this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
+      this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
+      this.formGroup.patchValue(this.projectData);
+      }
+    });
   }
 
   getListPartner(){
@@ -73,7 +80,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime)
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime)
     console.log(this.searchModel)
-    data.id = this.dialogData?.id || null
+    data.id = this.dialogId || null
     this.addOrEdit(data)
   }
 }

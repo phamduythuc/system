@@ -6,11 +6,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
 import {StaffLevelManagementRoutingModule} from "./staff-level-management-routing.module";
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import { DetailsStaffLevelComponent } from './compoment/details-staff-level/details-staff-level.component';
 
 
 
 @NgModule({
-  declarations: [AddOrEditStaffLevelComponent],
+  declarations: [AddOrEditStaffLevelComponent, DetailsStaffLevelComponent],
     imports: [
         CommonModule,
         StaffLevelManagementRoutingModule,

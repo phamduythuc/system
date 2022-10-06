@@ -6,12 +6,14 @@ import {SharedModule} from "@shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import { DetailsPartnerComponent } from './component/details-partner/details-partner.component';
 
 
 
 @NgModule({
   declarations: [
-    AddOrEditPartnerComponent
+    AddOrEditPartnerComponent,
+    DetailsPartnerComponent
   ],
   imports: [
     CommonModule,

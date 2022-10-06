@@ -1,20 +1,24 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {TranslocoService} from '@ngneat/transloco';
+import {BaseComponent} from "@core/base.component";
+import {PositionManagementService} from "../../position-management.service";
 
 @Component({
   selector: 'app-detail-position',
   templateUrl: './detail-position.component.html',
   styleUrls: ['./detail-position.component.scss']
 })
-export class DetailPositionComponent implements OnInit {
-  position: any
+export class DetailPositionComponent extends BaseComponent implements OnInit {
+  private readonly dialogId: any;
 
-  constructor(
-    private transloco:TranslocoService,
-    private dialogRef: MatDialogRef<DetailPositionComponent>,
+  constructor(injector: Injector,public positionService:PositionManagementService,
+     public dialogRef: MatDialogRef<DetailPositionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.position = data?.position
+    super(injector,positionService,dialogRef)
+    this.dialogId = data?.id;
+    if(this.dialogId){
+      this.getDetails(this.dialogId)
+    }
   }
 
   ngOnInit(): void {
