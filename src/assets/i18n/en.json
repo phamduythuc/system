@@ -4,6 +4,15 @@
     "en": "English"
   },
   "sign-in": "Đăng nhập",
+  "paging": {
+    "visible": "Visible",
+    "previous": "Previous page",
+    "next": "Next page",
+    "first_page": "First page",
+    "last_page": "Last page",
+    "range_label": "{{startIndex}} - {{endIndex}} of {{length}}",
+    "no_date": "No data visible"
+  },
   "common": {
     "search": "Search",
     "stt": "No.",

@@ -4,6 +4,15 @@
     "en": "Tiếng Anh"
   },
   "sign-in": "Đăng nhập",
+  "paging": {
+    "visible": "Hiển thị",
+    "previous": "Trang trước",
+    "next": "Trang sau",
+    "first_page": "Trang đầu",
+    "last_page": "Trang cuối",
+    "range_label": "{{startIndex}} - {{endIndex}} của {{length}}",
+    "no_date": "Không có dữ liêu"
+  },
   "common": {
     "search": "Tìm kiếm",
     "stt": "Stt",
