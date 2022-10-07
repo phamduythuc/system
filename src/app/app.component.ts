@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Route, Router} from "@angular/router";
-import {AuthService} from "./core/auth/auth.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '@core/auth/auth.service';
 
 @Component({
     selector   : 'app-root',
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit
         const token = window.location.href.split('access_token=')[1];
         if (token) {
             this.authService.accessToken = token;
+            this.router.navigate(['/']);
         }
     }
 

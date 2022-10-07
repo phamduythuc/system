@@ -27,7 +27,7 @@ export class PaginatorI18nService {
 
   private getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0 || pageSize === 0) {
-      return 'paging.no_data';
+      return this.translate.translate('paging.no_data');
     }
     length = Math.max(length, 0);
 

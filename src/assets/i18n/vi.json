@@ -11,9 +11,15 @@
     "first_page": "Trang đầu",
     "last_page": "Trang cuối",
     "range_label": "{{startIndex}} - {{endIndex}} của {{length}}",
-    "no_date": "Không có dữ liêu"
+    "no_data": "Không có dữ liêu"
   },
   "common": {
+    "label": {
+      "hello": "Xin chào, ",
+      "profile": "Thông tin cá nhân",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất"
+    },
     "search": "Tìm kiếm",
     "stt": "Stt",
     "name": "Tên",
