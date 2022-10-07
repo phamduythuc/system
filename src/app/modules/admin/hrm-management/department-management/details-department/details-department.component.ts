@@ -18,7 +18,7 @@ export class DetailsDepartmentComponent extends BaseComponent implements OnInit 
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId,this.handleCoverTime)
+      this.getDetails(this.dialogId,this.handleCoverTimeToString)
     }
   }
   ngOnInit(): void {

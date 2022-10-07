@@ -1,0 +1,449 @@
+<ng-container *transloco="let t">
+  <div class="flex flex-col h-full">
+    <!--        header-->
+    <div class="header border-b flex justify-between items-center pb-3">
+      <!--      <div class="text-lx font-bold card-title">-->
+      <!--        {{dialogId ? t("hrm-management.editHeader") : t("hrm-management.addHeader")}}-->
+      <!--      </div>-->
+      <div class="w-full">
+        <div class="text-xl">Profile</div>
+        <div class="text-secondary">Following information is publicly displayed, be careful!</div>
+      </div>
+      <div>
+        <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
+          <mat-icon class="icon-size-5" svgIcon="heroicons_outline:x" title="Close"></mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="w-full pl-2 pr-2 content overflow-auto">
+
+      <!-- Form -->
+      <form [formGroup]="formGroup">
+
+        <!-- Section -->
+        <div class="grid sm:grid-cols-6 gap-6 w-full mt-8">
+          <!-- Full name -->
+          <div class="sm:col-span-3">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>Full Name</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'fullName'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- gender -->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{"common.gender"|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Giới tính" [formControlName]="'gender'">
+                <mat-option *ngFor="let item of genderCategories" [value]="item?.code">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- national -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.national'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'nationalId'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- position -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{"common.position"|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Chức vụ" [formControlName]="'positionId'">
+                <mat-option *ngFor="let item of listPositions" [value]="item?.id">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- department -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{"common.department"|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Phòng ban" [formControlName]="'departmentId'">
+                <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- levelId -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.level'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Cấp bậc" [formControlName]="'levelId'">
+                <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- positionJob -->
+          <div class="sm:col-span-4">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+              <mat-label>{{'common.positionJob'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'positionJob'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- companyEmail -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.companyEmail'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:mail'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'companyEmail'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- dateOfBirth -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{'common.dateOfBirth'|transloco}}</mat-label>
+                <input class=" " matInput [matDatepicker]="dateOfBirth" datePickerFormat="DD/MM/YYYY" [formControlName]="'dateOfBirth'"
+                       placeholder="Choose a date">
+                <mat-datepicker-toggle [for]="dateOfBirth">
+                </mat-datepicker-toggle>
+                <mat-datepicker  #dateOfBirth></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- address -->
+          <div class="sm:col-span-4">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+              <mat-label>{{'common.address'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'address'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- domicile -Chỗ ở hiện tại -->
+          <div class="sm:col-span-4">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+              <mat-label>{{'common.domicile'|transloco}}</mat-label>
+              <div
+                class="text-secondary"
+                matPrefix>
+                fusetheme.com/
+              </div>
+              <input
+                [formControlName]="'domicile'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- ethnic -Dân tộc -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.ethnic'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'ethnic'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- emergencyUser -Thông tin liên lạc khẩn cấp -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.emergencyUser'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'emergencyUser'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- hireDate -Ngày tuyển dụng -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.hireDate'|transloco}}</mat-label>
+              <input class=" " matInput [matDatepicker]="hireDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'hireDate'"
+                     placeholder="Choose a date">
+              <mat-datepicker-toggle [for]="hireDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker  #hireDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- staOfficalDate -Ngày bắt đầu đi làm -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.staOfficalDate'|transloco}}</mat-label>
+              <input class=" " matInput [matDatepicker]="staOfficalDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'staOfficalDate'"
+                     placeholder="Choose a date">
+              <mat-datepicker-toggle [for]="staOfficalDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker  #staOfficalDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- leaveDate -Ngày nghỉ -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.leaveDate'|transloco}}</mat-label>
+              <input class=" " matInput [matDatepicker]="leaveDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'leaveDate'"
+                     placeholder="Choose a date">
+              <mat-datepicker-toggle [for]="leaveDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker  #leaveDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- maritalStatus -Tình trạng hôn nhân -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.marriage'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Hôn nhân" [formControlName]="'maritalStatus'">
+                <mat-option *ngFor="let item of maritalCategories" [value]="item?.code">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- religion -Tôn giáo -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.religion'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Tôn giáo" [formControlName]="'religion'">
+                <mat-option *ngFor="let item of religionCategories" [value]="item?.code">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- seniority -Thâm niêm -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.seniority'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'seniority'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- staffCode -Mã nhân viên -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.staffCode'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'staffCode'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.status'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:phone'"
+                matPrefix></mat-icon>
+              <mat-select placeholder="Hôn nhân" [formControlName]="'staffStatus'">
+                <mat-option *ngFor="let item of staffStatusCategories" [value]="item?.code">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- idNhanVienChamCong -Mã chấm công của công ty-->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.idNhanVienChamCong'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'idNhanVienChamCong'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- username -Tên đăng nhập -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.username'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'username'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- workExperience -Kinh nghiệm -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.workExperience'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:briefcase'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'workExperience'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- summary Mô tả tổng quan -->
+          <div class="sm:col-span-4">
+            <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+              <mat-label>{{"common.summary"|transloco}}</mat-label>
+              <textarea
+                matInput
+                [formControlName]="'summary'"
+                cdkTextareaAutosize
+                [cdkAutosizeMinRows]="5"></textarea>
+            </mat-form-field>
+            <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.
+            </div>
+          </div>
+        </div>
+
+        <!-- education_Cấp bậc giáo dục -->
+        <div class="sm:col-span-2">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <mat-label>{{'common.education'|transloco}}</mat-label>
+            <mat-icon
+              class="icon-size-5"
+              [svgIcon]="'heroicons_solid:office-building'"
+              matPrefix></mat-icon>
+            <input
+              [formControlName]="'education'"
+              matInput>
+          </mat-form-field>
+        </div>
+        <!-- status -->
+        <div class="sm:col-span-4">
+          <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+            <mat-label>{{"common.status"|transloco}}</mat-label>
+            <textarea
+              matInput
+              [formControlName]="'status'"
+              cdkTextareaAutosize
+              [cdkAutosizeMinRows]="5"></textarea>
+          </mat-form-field>
+          <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-10 border-t"></div>
+
+        <!-- Section -->
+        <div class="w-full">
+          <div class="text-xl">Personal Information</div>
+          <div class="text-secondary">Communication details in case we want to connect with you. These will be kept
+            private.
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+          <!-- Email -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.email'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:mail'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'email'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- Phone -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.phone'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:phone'"
+                matPrefix></mat-icon>
+              <input
+                [formControlName]="'phone'"
+                matInput>
+            </mat-form-field>
+          </div>
+          <!-- Country -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.country'|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:location-marker'"
+                matPrefix></mat-icon>
+              <mat-select [formControlName]="'country'">
+                <mat-option [value]="'usa'">United States</mat-option>
+                <mat-option [value]="'canada'">Canada</mat-option>
+                <mat-option [value]="'mexico'">Mexico</mat-option>
+                <mat-option [value]="'france'">France</mat-option>
+                <mat-option [value]="'germany'">Germany</mat-option>
+                <mat-option [value]="'italy'">Italy</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="mt-11 mb-10 border-t"></div>
+
+
+      </form>
+
+    </div>
+    <!-- Actions -->
+    <div class="footer mt-6 flex justify-end">
+      <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
+              (click)="formGroup.valid && save(formGroup.value)">
+        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+        <span>{{t('button.save')}}</span>
+      </button>
+      <button mat-raised-button (click)="dialogRef.close()">
+        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+        <span>{{t('button.cancel')}}</span>
+      </button>
+    </div>
+
+  </div>
+</ng-container>

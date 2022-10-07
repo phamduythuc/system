@@ -25,7 +25,7 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
     super(injector, partnerService, dialogRef);
     this.diaLogId = data?.id;
     if(this.diaLogId){
-      this.getDetails(this.diaLogId)
+      this.getDetails(this.diaLogId);
     }
   }
 

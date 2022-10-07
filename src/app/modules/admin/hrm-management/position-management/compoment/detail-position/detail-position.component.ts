@@ -17,7 +17,7 @@ export class DetailPositionComponent extends BaseComponent implements OnInit {
     super(injector,positionService,dialogRef)
     this.dialogId = data?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId)
+      this.getDetails(this.dialogId);
     }
   }
 

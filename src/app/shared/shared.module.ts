@@ -18,6 +18,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePickerFormatDirective } from './directives/date-picker-format.directive';
+import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -52,6 +54,8 @@ export const MAT_MODULES = [
     ReactiveFormsModule,
     HasAnyAuthorityDirective,
     BreadcrumbComponent,
+    NgxTrimDirectiveModule,
+    ErrorMessageModule,
     ...MAT_MODULES,
     DatePickerFormatDirective
   ]

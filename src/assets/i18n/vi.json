@@ -31,7 +31,38 @@
     "active": "Hoạt động",
     "notActive": "Không hoạt động",
     "parent": "Cha",
-    "partner": "Đối tác"
+    "partner": "Đối tác",
+    "fullName": "Họ tên",
+    "department": "Phòng ban",
+    "gender": "Giới tính",
+    "position": "Chức vụ",
+    "companyEmail": "Email c.ty",
+    "dateOfBirth": "Ngày sinh",
+
+    "country": "Quốc gia",
+    "cvUrl": "File CV",
+    "domicile": "Chỗ ở hiện tại",
+    "education": "Cấp bậc giáo dục",
+    "email": "Email",
+    "emergencyUser": "liên lạc khẩn cấp",
+    "ethnic": "Dân tộc",
+    "hireDate": "Ngày tuyển dụng",
+    "idNhanVienChamCong": "Mã chấm công",
+    "imageUrl": "Ảnh đại diện",
+    "leaveDate": "Ngày nghỉ",
+    "level": "Cấp bậc",
+    "marriage": "Tình trạng hôn nhân",
+    "national": "CCCD/CMT",
+    "nationality": "Quốc tịch",
+    "positionJob": "Chức vụ hiện tại",
+    "religion": "Tôn giáo",
+    "seniority": "Thâm niên",
+    "staOfficalDate": "Ngày bắt đầu đi làm",
+    "staffCode": "Mã nhân viên",
+    "staffStatus": "Trạng thái nhân viên",
+    "summary": "Mô tả tổng quan",
+    "username": "Tên đăng nhập",
+    "workExperience": "Kinh nghiệm"
   },
   "setting": {
     "user": {
@@ -85,6 +116,9 @@
         "expectEndTime": "Tiến độ hoàn thành",
         "actualEndTime": "Ngày hoàn thành"
       }
+    },
+    "staff": {
+      "title": "Nhân viên"
     }
   }
 }

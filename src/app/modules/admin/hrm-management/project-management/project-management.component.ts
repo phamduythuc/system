@@ -52,10 +52,10 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       header: 'hrm-management.project.form.actualEndTime',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.actualEndTime))
     },
-    {
-      columnDef: 'parentName',
-      header: 'common.parent',
-    },
+    // {
+    //   columnDef: 'parentName',
+    //   header: 'common.parent',
+    // },
     {
       columnDef: 'partnerName',
       header: 'common.partner',

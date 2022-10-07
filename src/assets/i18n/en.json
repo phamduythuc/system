@@ -31,7 +31,38 @@
     "active": "Active",
     "notActive": "Not active",
     "parent": "Parent",
-    "partner": "Partner"
+    "partner": "Partner",
+    "fullName": "FullName",
+    "department": "Department",
+    "gender": "Gender",
+    "position" : "Position",
+    "companyEmail": "Company email",
+    "dateOfBirth": "Date Of Birth",
+
+    "country": "Country",
+    "cvUrl": "Cv",
+    "domicile": "Domicile",
+    "education": "Education",
+    "email": "Email",
+    "emergencyUser": "Emergency User",
+    "ethnic": "Ethnic",
+    "hireDate": "Hire Date",
+    "idNhanVienChamCong": "IdNhanVienChamCong",
+    "imageUrl": "avata",
+    "leaveDate": "Leave Date",
+    "level": "Level",
+    "marriage": "Marriage",
+    "national": "National",
+    "nationality": "Nationality",
+    "positionJob": "Position Job",
+    "religion": "Religion",
+    "seniority": "Seniority",
+    "staOfficalDate": "StaOffical Date",
+    "staffCode": "Staff Code",
+    "staffStatus": "Staff Status",
+    "summary": "Summary",
+    "username": "Username",
+    "workExperience": "Work eExperience"
   },
   "setting": {
     "user": {
@@ -85,6 +116,8 @@
         "expectEndTime": "Expect end time",
         "actualEndTime": "Actual end time"
       }
+    },"staff": {
+      "title": "Nhân viên"
     }
   }
 }

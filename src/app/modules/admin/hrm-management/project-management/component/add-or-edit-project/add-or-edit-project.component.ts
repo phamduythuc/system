@@ -42,10 +42,12 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, projectService, dialogRef);
     this.dialogId = data?.id;
-    this.projects=data?.projects
-    this.getDetails(this.dialogId)
-    this.getCategories()
-    this.getListPartner()
+    this.projects=data?.projects;
+    this.getCategories();
+    this.getListPartner();
+    if(this.dialogId){
+      this.getDetails(this.dialogId);
+    }
   }
 
   ngOnInit(): void {

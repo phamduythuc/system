@@ -12,6 +12,7 @@ import { StaffLevelManagementComponent } from './staff-level-management/staff-le
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 import { ProjectManagementComponent } from './project-management/project-management.component';
+import { StaffManagementComponent } from './staff-management/staff-management.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ProjectManagementComponent } from './project-management/project-managem
     PositionManagementComponent,
     StaffLevelManagementComponent,
     ProjectManagementComponent,
+    StaffManagementComponent,
   ],
     imports: [
         CommonModule,
@@ -29,7 +31,7 @@ import { ProjectManagementComponent } from './project-management/project-managem
         DataTableModule,
         MatExpansionModule,
         ErrorMessageModule,
-        NgxTrimDirectiveModule
+        NgxTrimDirectiveModule,
     ]
 })
 export class HrmManagementModule { }

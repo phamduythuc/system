@@ -50,6 +50,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 icon: 'heroicons_outline:chart-pie',
                 link: '/hrm-management/project-management'
+            },{
+                id: 'staff',
+                title: 'Nhân viên',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/hrm-management/staff-management'
             },
         ]
     },

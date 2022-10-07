@@ -19,7 +19,7 @@ export class DetailsPartnerComponent extends BaseComponent implements OnInit {
     super(injector, partnerService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId,this.handleCoverTime)
+      this.getDetails(this.dialogId,this.handleCoverTimeToString)
     }
   }
   ngOnInit(): void {

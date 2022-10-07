@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {StaffManagementModule} from "./staff-management/staff-management.module";
 
 
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
     path: 'project-management',
     loadChildren: () => import('app/modules/admin/hrm-management/project-management/project-management.module').then(m => m.ProjectManagementModule),
     data: {breadcrumb: {label: 'hrm-management.project.title', url: 'hrm-management/project-management'}}
+  },
+  {
+    path: 'staff-management',
+    loadChildren: () => import('app/modules/admin/hrm-management/staff-management/staff-management.module').then(m => m.StaffManagementModule),
+    data: {breadcrumb: {label: 'hrm-management.staff.title', url: 'hrm-management/staff-management'}}
   },
 ];
 

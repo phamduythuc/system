@@ -22,6 +22,7 @@ export class BaseComponent {
     data: [],
     totalRecords: 0
   };
+  listTimeType=['createdDate','modifiedDate','expectEndTime','actualEndTime','dateOfBirth','leaveDate','staOfficalDate','hireDate']
 
   public snackBar: MatSnackBar;
   public translocoService: TranslocoService;
@@ -62,22 +63,12 @@ export class BaseComponent {
     this.dialogService.closeAll();
   }
 
-  handleCoverTime(data) {
-    if (data['createdDate']) {
-      data['createdDate'] = CommonUtilsService.dateToString(data['createdDate']);
-    }
-    if (data['modifiedDate']) {
-      data['modifiedDate'] = CommonUtilsService.dateToString(data['modifiedDate']);
-    }
-    if (data['expectEndTime']) {
-      data['expectEndTime'] = CommonUtilsService.dateToString(data['expectEndTime']);
-    }
-    if (data['startTime']) {
-      data['expectEndTime'] = CommonUtilsService.dateToString(data['startTime']);
-    }
-    if (data['actualEndTime']) {
-      data['actualEndTime'] = CommonUtilsService.dateToString(data['expectEndTime']);
-    }
+  handleCoverTimeToString(data) {
+    this.listTimeType.forEach(item=>{
+      if(data[item]){
+        data[item]= CommonUtilsService.dateToString(data[item])
+      }
+    })
   }
 
   getDetails(id, callback?) {

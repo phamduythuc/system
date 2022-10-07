@@ -20,7 +20,7 @@ export class DetailsStaffLevelComponent extends BaseComponent implements OnInit 
     super(injector, staffLevelService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId,this.handleCoverTime)
+      this.getDetails(this.dialogId,this.handleCoverTimeToString)
     }
   }
 
