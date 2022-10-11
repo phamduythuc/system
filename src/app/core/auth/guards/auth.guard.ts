@@ -43,17 +43,26 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
      */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         return this._authService.getUserInfoSSO()
-            .pipe(map((acc) => {
-                if(acc){
-                    const auth = acc.permissions;
-                    if(auth){
-                        return true;
-                    }
-                }else{
-                    window.location.href = environment.redirectUrl;
-                    return false;
-                }
-            }));
+          .pipe(map((acc) => {
+            if (acc) {
+              const authorities = route.data['authorities'];
+              if (!authorities) {
+                return true;
+              }
+              const auth = acc.permissions;
+              const found = authorities.some(r => auth.indexOf(r) >= 0)
+              if (!found) {
+                this._router.navigateByUrl('/dashboards');
+              }
+              // if(auth){
+              //     return true;
+              // }
+              return true;
+            } else {
+              window.location.href = environment.redirectUrl;
+              return false;
+            }
+          }));
         // return true;
         // return this.accountService.identity().pipe(
         //     map(account => {

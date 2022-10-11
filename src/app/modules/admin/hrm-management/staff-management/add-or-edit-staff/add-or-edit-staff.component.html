@@ -21,111 +21,157 @@
       <form [formGroup]="formGroup">
 
         <!-- Section -->
+
         <div class="grid sm:grid-cols-6 gap-6 w-full mt-8">
-          <!-- Full name -->
-          <div class="sm:col-span-3">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>Full Name</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <input
-                [formControlName]="'fullName'"
-                matInput>
-            </mat-form-field>
+          <div class="col-span-2 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" >
+<!--            <div class="group-gap">-->
+
+              <!-- Upload image -->
+              <div class="avatar-upload">
+
+                <div class="avatar-preview">
+                  <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                  </div>
+                </div>
+              </div>
+<!--            </div>-->
+<!--            <div class="flex justify-center items-center">-->
+              <label class="btn btn-danger btn-lg btn-block text-center h-10 text-2xl" style="vertical-align: center">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+                <i class="fa fa-cloud-upload"></i> Custom Upload
+              </label>
+
+<!--            </div>-->
+            <!-- Submit Button -->
+<!--            <button  class="btn btn-danger btn-lg btn-block" (click)="fileInput.click()">Upload Image</button>-->
+
           </div>
-          <!-- gender -->
-          <div class="sm:col-span-1">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{"common.gender"|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <mat-select placeholder="Giới tính" [formControlName]="'gender'">
-                <mat-option *ngFor="let item of genderCategories" [value]="item?.code">{{item?.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+
+          <div class="sx:col-span-2 col-span-4 grid grid-cols-4  gap-6 gap-y-6">
+            <!-- Full name -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>Full Name</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <input
+                  [formControlName]="'fullName'"
+                  matInput>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('fullName')" name="Họ tên"></app-error-message>
+
+            </div>
+            <!-- gender -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{"common.gender"|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <mat-select placeholder="Giới tính" [formControlName]="'gender'">
+                  <mat-option *ngFor="let item of genderCategories" [value]="item?.code">{{item?.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('gender')" name="Giới tính"></app-error-message>
+
+            </div>
+            <!-- national -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{'common.national'|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <input
+                  [formControlName]="'nationalId'"
+                  matInput>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('nationalId')" textPattern="Vui lòng nhập mã căn cước hoặc số CMT" name="CMT/CCCD"></app-error-message>
+
+            </div>
+            <!-- position -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{"common.position"|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <mat-select placeholder="Chức vụ" [formControlName]="'positionId'">
+                  <mat-option *ngFor="let item of listPositions" [value]="item?.id">{{item?.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('positionId')" name="Chức vụ"></app-error-message>
+
+            </div>
+            <!-- department -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{"common.department"|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:office-building'"
+                  matPrefix></mat-icon>
+                <mat-select placeholder="Phòng ban" [formControlName]="'departmentId'">
+                  <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('departmentId')" name="Phòng ban"></app-error-message>
+
+            </div>
+            <!-- levelId -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{'common.level'|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <mat-select placeholder="Cấp bậc" [formControlName]="'levelId'">
+                  <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">{{item?.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('levelId')" name="Cấp bậc"></app-error-message>
+
+            </div>
+            <!-- positionJob -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+                <mat-label>{{'common.positionJob'|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:user'"
+                  matPrefix></mat-icon>
+                <input
+                  [formControlName]="'positionJob'"
+                  matInput>
+              </mat-form-field>
+
+            </div>
+            <!-- companyEmail -->
+            <div class="sm:col-span-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{'common.companyEmail'|transloco}}</mat-label>
+                <mat-icon
+                  class="icon-size-5"
+                  [svgIcon]="'heroicons_solid:mail'"
+                  matPrefix></mat-icon>
+                <input
+                  [formControlName]="'companyEmail'"
+                  matInput>
+              </mat-form-field>
+            </div>
+<!--            <div class="sm:col-span-2 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"></div>-->
+<!--            <div class="sm:col-span-2 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"></div>-->
+<!--            <div class="sm:col-span-2 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"></div>-->
           </div>
-          <!-- national -->
-          <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{'common.national'|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <input
-                [formControlName]="'nationalId'"
-                matInput>
-            </mat-form-field>
-          </div>
-          <!-- position -->
-          <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{"common.position"|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <mat-select placeholder="Chức vụ" [formControlName]="'positionId'">
-                <mat-option *ngFor="let item of listPositions" [value]="item?.id">{{item?.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- department -->
-          <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{"common.department"|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <mat-select placeholder="Phòng ban" [formControlName]="'departmentId'">
-                <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- levelId -->
-          <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{'common.level'|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <mat-select placeholder="Cấp bậc" [formControlName]="'levelId'">
-                <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">{{item?.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- positionJob -->
-          <div class="sm:col-span-4">
-            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
-              <mat-label>{{'common.positionJob'|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix></mat-icon>
-              <input
-                [formControlName]="'positionJob'"
-                matInput>
-            </mat-form-field>
-          </div>
-          <!-- companyEmail -->
-          <div class="sm:col-span-2">
-            <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{'common.companyEmail'|transloco}}</mat-label>
-              <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:mail'"
-                matPrefix></mat-icon>
-              <input
-                [formControlName]="'companyEmail'"
-                matInput>
-            </mat-form-field>
-          </div>
+          <div class="col-span-6 grid grid-cols-6 gap-6 gap-y-6">
+
+
           <!-- dateOfBirth -->
           <div class="sm:col-span-2">
             <mat-form-field class="fuse-mat-no-subscript w-full">
@@ -136,6 +182,8 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker  #dateOfBirth></mat-datepicker>
             </mat-form-field>
+            <app-error-message [control]="formGroup.get('dateOfBirth')" name="Ngày sinh"></app-error-message>
+
           </div>
           <!-- address -->
           <div class="sm:col-span-4">
@@ -211,6 +259,8 @@
               </mat-datepicker-toggle>
               <mat-datepicker  #staOfficalDate></mat-datepicker>
             </mat-form-field>
+            <app-error-message [control]="formGroup.get('staOfficalDate')" name="Ngày bắt đầu đi làm"></app-error-message>
+
           </div>
           <!-- leaveDate -Ngày nghỉ -->
           <div class="sm:col-span-2">
@@ -330,6 +380,10 @@
           <div class="sm:col-span-4">
             <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
               <mat-label>{{"common.summary"|transloco}}</mat-label>
+              <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:bookmark'"
+                matPrefix></mat-icon>
               <textarea
                 matInput
                 [formControlName]="'summary'"
@@ -340,14 +394,14 @@
             </div>
           </div>
         </div>
-
+        </div>
         <!-- education_Cấp bậc giáo dục -->
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'common.education'|transloco}}</mat-label>
             <mat-icon
               class="icon-size-5"
-              [svgIcon]="'heroicons_solid:office-building'"
+              [svgIcon]="'heroicons_solid:academic-cap'"
               matPrefix></mat-icon>
             <input
               [formControlName]="'education'"
@@ -404,6 +458,8 @@
                 [formControlName]="'phone'"
                 matInput>
             </mat-form-field>
+            <app-error-message [control]="formGroup.get('phone')" textPattern="Vui lòng nhập theo format (+84)xxxxxxxxx" name="Phone"></app-error-message>
+
           </div>
           <!-- Country -->
           <div class="sm:col-span-2">

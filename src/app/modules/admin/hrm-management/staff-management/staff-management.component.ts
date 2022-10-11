@@ -21,8 +21,8 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       flex: 0.3,
     },
     {
-      columnDef: 'fullName',
-      header: 'common.fullName',
+      columnDef: 'username',
+      header: 'common.username',
       flex: 0.3,
     },
     {

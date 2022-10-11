@@ -9,11 +9,11 @@ import {AbstractControl, AbstractControlDirective, Validators} from '@angular/fo
 export class ErrorMessageComponent {
   @Input() control!: AbstractControlDirective | AbstractControl | any;
   @Input() name = 'Trường này';
-  @Input() textPatterm = 'Trường này';
+  @Input() textPattern = 'Trường này';
 
   private errorMessages: { [key: string]: any } = {
     required: (params: any, name: any) => `${name} là trường bắt buộc`,
-    pattern: (params: any, name: any) => `${this.textPatterm}`,
+    pattern: (params: any, name: any) => `${this.textPattern}`,
     onlyNumber: (params: any, name: any) => `${name} value must be number`,
     minlength: (params: any, name: any) => `Length of ${name} can not lower than ${params.requiredLength} characters`,
     maxlength: (params: any, name: any) => `Length of ${name} can not exceed ${params.requiredLength} characters`,

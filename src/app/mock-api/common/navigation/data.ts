@@ -8,7 +8,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type    : 'basic',
         icon    : 'heroicons_outline:home',
         link : '/dashboards',
-        // role: [AuthoritiesConstant.DASHBOARD.DASHBOARD_READ]
+         // role: [AuthoritiesConstant.DASHBOARD.DASHBOARD_READ]
     },
     {
         id: 'hrmManagement',
@@ -21,7 +21,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Chức vụ',
                 type: 'basic',
                 icon: 'heroicons_outline:chart-pie',
-                link: '/hrm-management/position-management'
+                link: '/hrm-management/position-management',
+
             },
             {
                 id: 'level',
@@ -124,9 +125,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type : 'basic',
                         icon : 'heroicons_outline:chart-pie',
                         link : '/cluster-manager/du-file-hdfs-rule',
-                        // role: [
-                        //     AuthoritiesConstant.DU_FILE_HDFS.DU_FILE_HDFS_READ
-                        // ],
+                        role: [
+                            AuthoritiesConstant.DU_FILE_HDFS.DU_FILE_HDFS_READ
+                        ],
                     },
                 ]
             },

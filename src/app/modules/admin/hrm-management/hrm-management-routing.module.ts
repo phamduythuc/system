@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {StaffManagementModule} from "./staff-management/staff-management.module";
+import {AuthGuard} from "@core/auth/guards/auth.guard";
 
 
 const routes: Routes = [
@@ -31,6 +32,8 @@ const routes: Routes = [
   },
   {
     path: 'staff-management',
+    canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     loadChildren: () => import('app/modules/admin/hrm-management/staff-management/staff-management.module').then(m => m.StaffManagementModule),
     data: {breadcrumb: {label: 'hrm-management.staff.title', url: 'hrm-management/staff-management'}}
   },

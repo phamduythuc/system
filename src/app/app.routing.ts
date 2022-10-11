@@ -105,8 +105,12 @@ export const appRoutes: Route[] = [
         children: [
             {
                 path: 'hrm-management',
+              // canActivate: [AuthGuard],
+              canActivateChild: [AuthGuard],
                 loadChildren: () => import('app/modules/admin/hrm-management/hrm-management.module').then(m => m.HrmManagementModule),
-                data: {breadcrumb: {label: 'hrm-management.label', url: ''}}
+                data: {breadcrumb: {label: 'hrm-management.label', url: ''},
+                  // authorities: ['DSNV_CREATE']
+                }
             },
             {
                 path: 'example',

@@ -1,17 +1,20 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Inject, Injector, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
 import {Validators} from "@angular/forms";
 import {CategoriesService} from "@core/categories.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {StaffManagementService} from "../staff-management.service";
-
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 @Component({
   selector: 'app-add-or-edit-staff',
   templateUrl: './add-or-edit-staff.component.html',
   styleUrls: ['./add-or-edit-staff.component.scss']
 })
 export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
-
+  @ViewChild('fileInput') el: ElementRef;
+  imageUrl: any = "https://i.ibb.co/fDWsn3G/buck.jpg";
+  editFile: boolean = true;
+  removeUpload: boolean = false;
   private readonly dialogId: any;
   formGroup = this.fb.group({
     //Địa chỉ đầy đủ
@@ -61,11 +64,11 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     //Ngày giờ cập nhật
     modifiedDate: [],
     //Mã căn cước công dân/Chứng minh nhân dân
-    nationalId: [null, Validators.required],
+    nationalId: [null, [Validators.required,Validators.pattern('[0-9]*')]],
     //Quốc gia
     nationality: [],
     //Số điện thoại
-    phone: [],
+    phone: [null,[Validators.pattern('[0-9]{10}')]],
     //Mã chức vụ
     positionId: [null, Validators.required],
     //Chức vụ hiện tại
@@ -75,7 +78,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     //N/A
     seniority: [],
     //Ngày bắt đầu đi làm
-    staOfficalDate: [],
+    staOfficalDate: [null,Validators.required],
     //Mã nhân viên
     staffCode: [null, Validators.required],
     //Trạng thái của nhân viên
@@ -98,21 +101,25 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
   religionCategories = []
   staffStatusCategories = []
   categoriesList = ['GENDER', 'MARITAL_STAtUS', 'RELIGION', 'STAFF_STATUS']
-  private listPositions: any;
-  private listStaffLevels: any;
-  private listDepartment: any;
+  listPositions: any;
+  listStaffLevels: any;
+  listDepartment: any;
+  imagePath: any;
 
   constructor(injector: Injector,
+              private _sanitizer: DomSanitizer,
               private categoriesService: CategoriesService,
               public dialogRef: MatDialogRef<AddOrEditStaffComponent>,
               private staffService: StaffManagementService,
+              private cd: ChangeDetectorRef,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService, dialogRef);
     this.dialogId = data?.id;
     if (this.dialogId) {
-      this.getDetails(this.dialogId);
+      this.getDetails(this.dialogId,this.coverBase64);
     }
-    this.getCategories()
+    this.getCategories();
+
   }
 
   ngOnInit(): void {
@@ -120,6 +127,13 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     this.getListDepartment()
     this.getListStaffLevel()
     this.getListPosition()
+  }
+
+  coverBase64(){
+    if(this.formGroup.get('imageUrl').value){
+    this.imageUrl = this._sanitizer.bypassSecurityTrustResourceUrl( this.formGroup.get('imageUrl').value);
+    }
+    console.log(this.imagePath)
   }
 
   getCategories() {
@@ -167,6 +181,37 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     this.handleCoverTimeToString(data)
     data.id = this.dialogId || null
     this.addOrEdit(data)
+  }
+
+  uploadFile(event) {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+        this.formGroup.get('imageUrl').patchValue(
+          reader.result
+        );
+        this.editFile = false;
+        this.removeUpload = true;
+      }
+      // ChangeDetectorRef since file is loading outside the zone
+      this.cd.markForCheck();
+    }
+  }
+
+  // Function to remove uploaded file
+  removeUploadedFile() {
+    let newFileList = Array.from(this.el.nativeElement.files);
+    this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    this.editFile = true;
+    this.removeUpload = false;
+    this.formGroup.patchValue({
+      file: [null]
+    });
   }
 
 }
