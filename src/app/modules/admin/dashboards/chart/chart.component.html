@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="startMonth">
+      <mat-option>None</mat-option>
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>From: {{ startMonth }}</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="endMonth">
+      <mat-option>None</mat-option>
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>To: {{ endMonth }}</p>
+
+  <h4>Select user</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="id">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let element of data" value="{{element.uid}}">{{element.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-card>
+
+<button type="button" (click)="getRange()">Click me</button>
+
+<highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
+

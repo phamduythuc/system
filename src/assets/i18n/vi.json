@@ -63,6 +63,9 @@
         "department": {
             "title": "Phòng ban"
         }
-    }
+    },
+  "chart": {
+    "label": "Nỗ lực"
+  }
 
 }

@@ -64,6 +64,8 @@
         "department": {
             "title": "Department"
         }
+    },
+    "chart": {
+      "label": "Number of Effort"
     }
-
 }
