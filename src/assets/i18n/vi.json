@@ -65,7 +65,8 @@
         }
     },
   "chart": {
-    "label": "Nỗ lực"
+    "xAxis": "Tháng",
+    "yAxis": "Nỗ lực"
   }
 
 }

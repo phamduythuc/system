@@ -74,7 +74,7 @@ export class ChartComponent extends BaseComponent implements OnInit {
 
 
 
-  getRange() {
+  getChart() {
 
     console.log(this.months.indexOf(this.startMonth));
     console.log(this.months.indexOf(this.endMonth));
@@ -99,7 +99,7 @@ export class ChartComponent extends BaseComponent implements OnInit {
 
     this.chartOptions = {
       chart: {
-        type: 'spline'
+        type: 'line'
       },
       title: {
         text: 'HRM'
@@ -107,14 +107,17 @@ export class ChartComponent extends BaseComponent implements OnInit {
 
       yAxis: {
         title: {
-          text: this.translocoService.translate('Number of Effort')
+          text: this.translocoService.translate('chart.yAxis')
         },
 
       },
 
       xAxis: {
 
-        categories: this.dataDraft.range
+        categories: this.dataDraft.range,
+        title: {
+          text: this.translocoService.translate('chart.xAxis')
+        },
       },
 
       credits: {
