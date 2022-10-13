@@ -57,6 +57,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 icon: 'heroicons_outline:chart-pie',
                 link: '/hrm-management/staff-management'
+            },{
+                id: 'team',
+                title: 'Team',
+                type: 'basic',
+                icon: 'heroicons_outline:user-group',
+                link: '/hrm-management/team-management'
             },
         ]
     },

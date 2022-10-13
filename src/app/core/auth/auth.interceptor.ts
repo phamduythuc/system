@@ -60,7 +60,7 @@ export class AuthInterceptor implements HttpInterceptor
                     // Reload the app
                     // location.reload();
                 }
-                if ( error instanceof HttpErrorResponse && error.status === 403 && error.url.includes('/account'))
+                if ( error instanceof HttpErrorResponse && error.status === 403)
                 {
                    this._router.navigateByUrl('unlock-session');
                 }

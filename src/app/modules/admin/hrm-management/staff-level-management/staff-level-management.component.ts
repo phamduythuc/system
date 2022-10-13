@@ -74,7 +74,7 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
 
   doSearch() {
     this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch()
+    this.processSearch(this.searchModel)
   }
 
   // changePage(e: any): void {

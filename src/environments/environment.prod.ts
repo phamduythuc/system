@@ -2,7 +2,7 @@ export const envConfig = {
   apiSSO: 'http://103.226.248.168:8082',
   clientId: 'lifesup_hrm',
   scope: 'read',
-  baseUrl: 'http://103.226.248.168:8097'
+  baseUrl: window.location.origin,
 };
 export const environment = {
   production: true,

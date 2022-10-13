@@ -118,6 +118,9 @@
       }
     },"staff": {
       "title": "Nhân viên"
+    },
+    "team": {
+      "title": "Team"
     }
   }
 }

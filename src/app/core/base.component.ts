@@ -82,13 +82,16 @@ export class BaseComponent {
 
   }
 
-  processSearch(): void {
+  processSearch(searchModel,callback?): void {
     // this.searchResult.data = [];
     // this.searchResult.totalRecords = 0;
-    this.baseService.search(this.searchModel).subscribe(res => {
+    this.baseService.search(searchModel).subscribe(res => {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
         this.searchResult.totalRecords = res.totalRecords;
+        if(callback){
+          callback()
+        }
       } else {
         this.showSnackBar(res.message, 'error');
       }
@@ -98,7 +101,7 @@ export class BaseComponent {
   changePage(e: any): void {
     this.searchModel.pageSize = e.pageSize;
     this.searchModel.page = e.pageIndex;
-    this.processSearch();
+    this.processSearch(this.searchModel);
   }
 
   create(data: any, onSuccess?: any, onError?: any): void {
@@ -149,7 +152,7 @@ export class BaseComponent {
     this.baseService.delete(id).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
-        this.processSearch();
+        this.processSearch(this.searchModel);
       } else {
         this.showSnackBar(res.message, 'error');
       }

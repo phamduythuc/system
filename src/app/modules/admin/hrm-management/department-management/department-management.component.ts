@@ -73,7 +73,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
 
   doSearch() {
       this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch()
+    this.processSearch(this.searchModel)
   }
 
   actionClick(e: any): void {
@@ -126,7 +126,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   //   }, (value) => {
   //     if (value) {
   //       this.showSnackBar('Thêm mới thành công', 'success');
-  //       this.processSearch();
+  //       this.processSearch(this.searchModel);
   //     }
   //   });
   // }

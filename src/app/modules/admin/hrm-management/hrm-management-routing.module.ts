@@ -32,10 +32,13 @@ const routes: Routes = [
   },
   {
     path: 'staff-management',
-    canActivate: [AuthGuard],
-    // canActivateChild: [AuthGuard],
     loadChildren: () => import('app/modules/admin/hrm-management/staff-management/staff-management.module').then(m => m.StaffManagementModule),
     data: {breadcrumb: {label: 'hrm-management.staff.title', url: 'hrm-management/staff-management'}}
+  },
+  {
+    path: 'team-management',
+    loadChildren: () => import('app/modules/admin/hrm-management/team-management/team-management.module').then(m => m.TeamManagementModule),
+    data: {breadcrumb: {label: 'hrm-management.team.title', url: 'hrm-management/team-management'}}
   },
 ];
 

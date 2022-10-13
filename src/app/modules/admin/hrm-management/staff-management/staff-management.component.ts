@@ -5,7 +5,6 @@ import {BaseComponent} from "@core/base.component";
 import {StaffManagementService} from "./staff-management.service";
 import {AddOrEditStaffComponent} from "./add-or-edit-staff/add-or-edit-staff.component";
 import {DetailsStaffComponent} from "./details-staff/details-staff.component";
-import {CategoriesService} from "@core/categories.service";
 
 @Component({
   selector: 'app-staff-management',
@@ -68,7 +67,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   };
   panelOpenState: false;
 
-  constructor(injector: Injector, public staffService: StaffManagementService,private categoriesService: CategoriesService) {
+  constructor(injector: Injector, public staffService: StaffManagementService) {
     super(injector, staffService)
   }
 
@@ -79,7 +78,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
 
   doSearch() {
     this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch()
+    this.processSearch(this.searchModel)
   }
 
   actionClick(e: any): void {

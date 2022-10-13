@@ -13,6 +13,10 @@ import {ErrorMessageModule} from '@shared/components/error-message/error-message
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 import { ProjectManagementComponent } from './project-management/project-management.component';
 import { StaffManagementComponent } from './staff-management/staff-management.component';
+import { TeamManagementComponent } from './team-management/team-management.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {UserModule} from "../setting/user/user.module";
+import {TeamManagementModule} from "./team-management/team-management.module";
 
 
 @NgModule({
@@ -22,16 +26,20 @@ import { StaffManagementComponent } from './staff-management/staff-management.co
     StaffLevelManagementComponent,
     ProjectManagementComponent,
     StaffManagementComponent,
+    TeamManagementComponent,
   ],
-    imports: [
-        CommonModule,
-        HrmManagementRoutingModule,
-        TranslocoModule,
-        SharedModule,
-        DataTableModule,
-        MatExpansionModule,
-        ErrorMessageModule,
-        NgxTrimDirectiveModule,
-    ]
+  imports: [
+    CommonModule,
+    HrmManagementRoutingModule,
+    TranslocoModule,
+    SharedModule,
+    DataTableModule,
+    MatExpansionModule,
+    ErrorMessageModule,
+    NgxTrimDirectiveModule,
+    MatSidenavModule,
+    UserModule,
+    TeamManagementModule,
+  ]
 })
 export class HrmManagementModule { }

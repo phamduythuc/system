@@ -3,14 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 export const envConfig = {
   apiSSO: 'http://103.226.248.168:8082',
-  baseUrl: 'http://localhost:4200',
+  baseUrl: window.location.origin,
   clientId: 'lifesup_hrm',
   scope: 'read',
 };
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4201',
+  baseUrl: window.location.origin,
   apiUrl: 'http://103.226.248.168:8089/api',
   apiSSO: `${envConfig.apiSSO}/api`,
   redirectUrl: `${envConfig.apiSSO}/login?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`

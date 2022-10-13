@@ -22,6 +22,9 @@ import {NgxTrimDirectiveModule} from "ngx-trim-directive";
         AddOrEditUserComponent,
         CreateIpDialogComponent
     ],
+    exports: [
+        GroupListComponent
+    ],
     imports: [
         CommonModule,
         UserRoutingModule,

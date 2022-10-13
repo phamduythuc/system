@@ -77,7 +77,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
 
   doSearch() {
     this.searchModel= {...this.searchModel,...this.formSearch.value}
-    this.processSearch()
+    this.processSearch(this.searchModel)
   }
 
   // changePage(e: any): void {
