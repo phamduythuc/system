@@ -11,9 +11,15 @@
     "first_page": "First page",
     "last_page": "Last page",
     "range_label": "{{startIndex}} - {{endIndex}} of {{length}}",
-    "no_date": "No data visible"
+    "no_data": "No data visible"
   },
   "common": {
+    "label": {
+      "hello": "Hello, ",
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
     "search": "Search",
     "stt": "No.",
     "name": "Name",
