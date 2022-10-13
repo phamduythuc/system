@@ -14,6 +14,7 @@ import {User} from 'app/core/user/user.types';
 import {UserService} from 'app/core/user/user.service';
 import {environment} from "@env/environment";
 import {DOCUMENT} from "@angular/common";
+import {AccountService} from "@core/auth/account.service";
 
 @Component({
   selector: 'user',
@@ -38,7 +39,7 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _router: Router,
-    private _userService: UserService,
+    private _accountService: AccountService,
     @Inject(DOCUMENT) private document: Document
   ) {
   }
@@ -52,9 +53,10 @@ export class UserComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     // Subscribe to user changes
-    this._userService.user$
+    this._accountService.identity()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((user: User) => {
+        console.log(user);
         this.user = user;
 
         // Mark for check

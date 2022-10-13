@@ -2,6 +2,7 @@
 <div
     class="fuse-vertical-navigation-item-wrapper"
     [class.fuse-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+    *hasAnyAuthority="item.role"
     [ngClass]="item.classes?.wrapper">
 
 <!--    *hasAnyAuthority="item.role"-->
