@@ -127,7 +127,13 @@
       "title": "Nhân viên"
     },
     "team": {
-      "title": "Team"
+      "title": "Team",
+      "form": {
+        "member": "Thành viên",
+        "startDate": "Từ ngày",
+        "endDate": "Đến ngày",
+        "addMember": "Thêm thành viên"
+      }
     }
   }
 }

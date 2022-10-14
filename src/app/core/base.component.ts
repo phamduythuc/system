@@ -22,7 +22,7 @@ export class BaseComponent {
     data: [],
     totalRecords: 0
   };
-  listTimeType=['createdDate','modifiedDate','expectEndTime','actualEndTime','dateOfBirth','leaveDate','staOfficalDate','hireDate']
+  listTimeType=['createdDate','modifiedDate','expectEndTime','actualEndTime','dateOfBirth','leaveDate','staOfficalDate','hireDate','staDate','endDate']
 
   public snackBar: MatSnackBar;
   public translocoService: TranslocoService;

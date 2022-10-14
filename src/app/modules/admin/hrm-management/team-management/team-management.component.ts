@@ -29,6 +29,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchModel.pageSize = 9999999
     this.formSearch.get('text').valueChanges.pipe(
       map(event=>{
         return event;
@@ -45,8 +46,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.doSearch()
+    this.processSearch(this.searchModel)
   }
 
 

@@ -15,7 +15,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     id: 'hrmManagement',
     title: 'Quản lý chung',
     type: 'group',
-    role: [],
+    role: [AuthoritiesConstant.DSPB_READ,],
     children: [
       {
         id: 'position',

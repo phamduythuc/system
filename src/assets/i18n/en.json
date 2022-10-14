@@ -123,10 +123,16 @@
         "actualEndTime": "Actual end time"
       }
     },"staff": {
-      "title": "Nhân viên"
+      "title": "Staff"
     },
     "team": {
-      "title": "Team"
+      "title": "Team",
+      "form": {
+        "member": "Member",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "addMember": "Add member"
+      }
     }
   }
 }

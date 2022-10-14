@@ -35,12 +35,6 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
             if (this.teamId) {
               this.addMember.get('name').patchValue('')
               this.getListMember()
-              // forkJoin([this.getListMember()]).subscribe(([res])=>{
-              //   console.log(res)
-              //   this.getListStaff()
-              // })
-              // this.getListMember()
-
             }
             console.log(this.teamId)
           }
@@ -106,19 +100,15 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
 
     // Setup the roles
     this.roles = [
-      {
-        label: 'Read',
-        value: 'read',
-        description: 'Can read and clone this repository. Can also open and comment on issues and pull requests.'
-      },
+
       {
         label: 'Write',
-        value: 'write',
+        value: '2',
         description: 'Can read, clone, and push to this repository. Can also manage issues and pull requests.'
       },
       {
         label: 'Admin',
-        value: 'admin',
+        value: '1',
         description: 'Can read, clone, and push to this repository. Can also manage issues, pull requests, and repository settings, including adding collaborators.'
       }
     ];
@@ -141,7 +131,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   getListMember() {
     this.searchModel.teamId = this.teamId
     this.processSearch(this.searchModel,()=>{
-      // this.members = this.searchResult.data
+      this.members = this.searchResult.data
       this.getListStaff()
     })
   }
