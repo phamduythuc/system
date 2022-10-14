@@ -89,7 +89,7 @@
       <!-- Divider -->
       <div class="my-10 border-t"></div>
 
-      <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+      <div *ngIf="!dialogId" class="grid sm:grid-cols-4 gap-6 w-full mt-8">
         <!-- members -->
         <div class="sm:col-span-4">
           <div class="w-full">

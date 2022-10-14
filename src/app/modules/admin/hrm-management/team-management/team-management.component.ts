@@ -93,7 +93,11 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     return item.id || index;
   }
 
-  emitEvent(edit: string, gr: any) {
-
+  emitEvent(type: string, gr: any) {
+    if(type === 'edit'){
+      this.addOrEdit(gr.id);
+    }else {
+      this.delete(gr.id)
+    }
   }
 }
