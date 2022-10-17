@@ -74,8 +74,8 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       data: {
         id,
       },
-      width: '80vw',
-      height: '80vh',
+      width: '70vw',
+      height: '70vh',
       disableClose: true
     }, (value) => {
       if (value)

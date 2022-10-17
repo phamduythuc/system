@@ -19,7 +19,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   members:any;
   addMember: any;
 
-  constructor(injector: Injector, staffService: StaffManagementService,fb:FormBuilder) {
+  constructor(injector: Injector,public staffService: StaffManagementService,fb:FormBuilder) {
     super(injector, staffService)
     this.addMember = fb.group({
       name : [],
@@ -45,58 +45,58 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
 
 
   ngOnInit(): void {
-    this.getListStaff()
-    this.members = [
-      {
-        id:1,
-        avatar: 'assets/images/avatars/male-01.jpg',
-        fullName: 'Dejesus Michael',
-        email: 'dejesusmichael@mail.org',
-        isManager: 'admin'
-      },
-      {
-        id:2,
-        avatar: 'assets/images/avatars/male-03.jpg',
-        fullName: 'Mclaughlin Steele',
-        email: 'mclaughlinsteele@mail.me',
-        isManager: 'admin'
-      },
-      {
-        id:3,
-        avatar: 'assets/images/avatars/female-02.jpg',
-        fullName: 'Laverne Dodson',
-        email: 'lavernedodson@mail.ca',
-        isManager: 'write'
-      },
-      {
-        id:4,
-        avatar: 'assets/images/avatars/female-03.jpg',
-        fullName: 'Trudy Berg',
-        email: 'trudyberg@mail.us',
-        isManager: 'read'
-      },
-      {
-        id:5,
-        avatar: 'assets/images/avatars/male-07.jpg',
-        fullName: 'Lamb Underwood',
-        email: 'lambunderwood@mail.me',
-        isManager: 'read'
-      },
-      {
-        id:6,
-        avatar: 'assets/images/avatars/male-08.jpg',
-        fullName: 'Mcleod Wagner',
-        email: 'mcleodwagner@mail.biz',
-        isManager: 'read'
-      },
-      {
-        id:7,
-        avatar: 'assets/images/avatars/female-07.jpg',
-        fullName: 'Shannon Kennedy',
-        email: 'shannonkennedy@mail.ca',
-        isManager: 'read'
-      }
-    ];
+    // this.getListStaff()
+    // this.members = [
+    //   {
+    //     id:1,
+    //     avatar: 'assets/images/avatars/male-01.jpg',
+    //     fullName: 'Dejesus Michael',
+    //     email: 'dejesusmichael@mail.org',
+    //     isManager: 'admin'
+    //   },
+    //   {
+    //     id:2,
+    //     avatar: 'assets/images/avatars/male-03.jpg',
+    //     fullName: 'Mclaughlin Steele',
+    //     email: 'mclaughlinsteele@mail.me',
+    //     isManager: 'admin'
+    //   },
+    //   {
+    //     id:3,
+    //     avatar: 'assets/images/avatars/female-02.jpg',
+    //     fullName: 'Laverne Dodson',
+    //     email: 'lavernedodson@mail.ca',
+    //     isManager: 'write'
+    //   },
+    //   {
+    //     id:4,
+    //     avatar: 'assets/images/avatars/female-03.jpg',
+    //     fullName: 'Trudy Berg',
+    //     email: 'trudyberg@mail.us',
+    //     isManager: 'read'
+    //   },
+    //   {
+    //     id:5,
+    //     avatar: 'assets/images/avatars/male-07.jpg',
+    //     fullName: 'Lamb Underwood',
+    //     email: 'lambunderwood@mail.me',
+    //     isManager: 'read'
+    //   },
+    //   {
+    //     id:6,
+    //     avatar: 'assets/images/avatars/male-08.jpg',
+    //     fullName: 'Mcleod Wagner',
+    //     email: 'mcleodwagner@mail.biz',
+    //     isManager: 'read'
+    //   },
+    //   {
+    //     id:7,
+    //     avatar: 'assets/images/avatars/female-07.jpg',
+    //     fullName: 'Shannon Kennedy',
+    //     email: 'shannonkennedy@mail.ca',
+    //     isManager: 'read'
+    //   }
+    // ];
 
     // Setup the roles
     this.roles = [
@@ -156,8 +156,10 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   }
 
   addMemberToTeam() {
+    this.addMember.get('name').patchValue('')
     const addList = this.addMember.get('addList').value;
     this.members = [...addList,...this.members]
+    this.getListStaff()
     console.log(this.members);
   }
 
@@ -169,10 +171,14 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   }
 
   saveMemberList() {
-    const sendDataa = {
+    const sendData = {
       id: this.teamId,
       listMembers: this.members.map(res=>({staffId:res.id,isManager: res.isManager}))
     }
-    console.log(sendDataa);
+    // this.staffService
+    this.staffService.addMemberTeam(sendData).subscribe(res=>{
+      this.getListMember()
+    })
+    console.log(sendData);
   }
 }

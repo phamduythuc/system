@@ -422,7 +422,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     title: 'Setting',
     type: 'group',
     icon: 'heroicons_outline:home',
-    role: [],
+    role: [AuthoritiesConstant.DSPB_READ,],
     children: [
       {
         id: 'user',
@@ -438,7 +438,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/setting/authorization',
-        role: []
+        role: [AuthoritiesConstant.DSPB_READ,]
       },
       {
         id: 'module',

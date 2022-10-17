@@ -23,4 +23,8 @@ export class StaffManagementService extends BaseService{
     return this.http.get<any>(`${environment.apiUrl}/staff-level`,{params: searchData});
   };
 
+  addMemberTeam(addData):Observable<any>{
+    return this.http.post(`${environment}/team-member/add-teamMember`,{params:addData})
+  };
+
 }
