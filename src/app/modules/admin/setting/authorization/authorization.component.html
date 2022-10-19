@@ -1,1 +1,138 @@
-<p>authorization works!</p>
+<ng-container *transloco="let t">
+  <div class="flex flex-col w-full">
+    <div class="header flex items-center justify-between p-4 border-b md:px-6 py-6 bg-white dark:bg-default">
+      <div class="title xl:text-4xl md:text-3xl font-bold">
+        Nhóm Quyền
+      </div>
+      <div class="flex justify-center items-center">
+        <mat-form-field
+          class="fuse-mat-no-subscript w-full sm:w-64 sm:ml-4 bg-default text-lg rounded-input mr-2">
+          <mat-select [(ngModel)]="selectedRole" (selectionChange)="choseRole()">
+            <mat-option *ngFor="let authority of listRole"
+                        [value]="authority">{{authority.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">
+          <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+        </button>
+        <button mat-mini-fab class="text-white shadow-none bg-[#F2A104] mr-2" (click)="addOrEditRole(selectedRole)">
+          <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
+        </button>
+        <button mat-raised-button color="primary" class="w-36" (click)="submitPermission()">
+          Cập nhật
+        </button>
+      </div>
+    </div>
+    <div class="content h-full flex bg-white dark:bg-default">
+      <div class="module w-1/4 border-r p-6 py-4">
+        <div class="title flex justify-between text-3xl font-bold h-18 px-5 pt-3">
+          <span>Role</span>
+          <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">
+            <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+          </button>
+        </div>
+        <div class="overflow-auto h-full">
+          <div class="flex flex-col divide-y border-t border-b">
+            <ng-container *ngFor="let role of roles; index as i">
+              <div
+                class="flex col-span-5 py-5 cursor-pointer w-full"
+                [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedRoleId || selectedRoleId !== role.id,
+                                    'bg-primary-50 dark:bg-hover': selectedRoleId && selectedRoleId === role.id}"
+                (click)="goToRole(role.id)">
+                <mat-icon class="w-1/5"
+                          [ngClass]="{'text-hint': !selectedRoleId || selectedRoleId !== role.id,
+                                        'text-primary dark:text-primary-500': selectedRoleId && selectedRoleId === role.id}"
+                          [svgIcon]="'heroicons_solid:user-group'"></mat-icon>
+                <div class="ml-3 col-span-3 w-3/5">
+                  <div
+                    class="font-medium leading-6"
+                    [ngClass]="{'text-primary dark:text-primary-500': selectedRoleId && selectedRoleId === role.id}">
+                    {{role.name}}
+                  </div>
+                  <div class="mt-0.5 text-secondary">
+                    {{role.description}}
+                  </div>
+                </div>
+                <div class="actions flex w-2/5">
+                  <button mat-icon-button class="hover:bg-slate-200" (click)="emitEvent('edit', role)">
+                    <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
+                  </button>
+                  <button mat-icon-button class="hover:bg-slate-200" (click)="emitEvent('delete', role)">
+                    <mat-icon svgIcon="heroicons_outline:trash" title="Delete" class="icon-size-5"></mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="permission w-3/4">
+        <div
+          class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-4 sm:px-4 bg-default dark:bg-transparent">
+          <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+              <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                Menu
+              </h2>
+            </div>
+          </div>
+          <!-- Actions -->
+          <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+              mat-icon-button
+              (click)="matDrawer.toggle()">
+              <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-drawer-container class="flex flex-col flex-auto rounded-t-2xl shadow bg-card">
+          <!-- Drawer -->
+          <mat-drawer
+            class="w-72 dark:bg-gray-900"
+            [autoFocus]="false"
+            [mode]="drawerMode"
+            [opened]="drawerOpened"
+            [position]="'end'"
+            #matDrawer>
+            <!-- Demo sidebar -->
+<!--            <demo-sidebar></demo-sidebar>-->
+          </mat-drawer>
+
+          <!-- Drawer content -->
+          <mat-drawer-content class="flex flex-col overflow-hidden">
+
+            <!-- Main -->
+            <div
+              class="flex-auto p-6 sm:p-10 overflow-y-auto"
+              cdkScrollable>
+
+              <!-- CONTENT GOES HERE -->
+              <div class="h-full border-2 border-dashed border-gray-300 rounded-2xl">
+                <app-menu-tree></app-menu-tree>
+              </div>
+
+            </div>
+
+          </mat-drawer-content>
+
+        </mat-drawer-container>
+        <!--        <div class="title text-3xl font-bold h-18 border-b p-6 py-4 flex items-center justify-between">-->
+        <!--          <span>Menu</span>-->
+        <!--          <div class="tree">-->
+        <!--            <app-module-tree [modules]="modules" [(selectedModule)]="selectedModule"-->
+        <!--                             (selectedModuleChange)="selectNode($event)">-->
+        <!--            </app-module-tree>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash;                    <mat-checkbox [color]="'primary'" (change)="changeSelectedAll($event)"&ndash;&gt;-->
+        <!--          &lt;!&ndash;                                  [checked]="selectAll"></mat-checkbox>&ndash;&gt;-->
+        <!--        </div>-->
+        <!--        <div class="tree">-->
+        <!--          <app-permission-tree [permission]="selectedPermission"-->
+        <!--                               [(selectedAll)]="selectAll"-->
+        <!--                               (checkPermission)="changeCheck($event)"></app-permission-tree>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+</ng-container>

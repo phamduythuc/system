@@ -53,7 +53,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getDetails(id) {
+  getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
       this.projectData = res.data;
       if(this.projectData){

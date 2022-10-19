@@ -13,6 +13,20 @@ export class StaffManagementService extends BaseService{
     super(http,`${environment.apiUrl}/staff`)
   }
 
+  createStaff(data):Observable<any>{
+    const formData = new FormData();
+    formData.append('file', null);
+    formData.append('data',  new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    return this.http.post(`${environment.apiUrl}/staff/create`,formData)
+  }
+
+  updateStaff(data):Observable<any>{
+    const formData = new FormData();
+    formData.append('file', null);
+    formData.append('data',  new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    return this.http.post(`${environment.apiUrl}/staff/update`,formData)
+  }
+
   getListDepartment(searchData) :Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/department`,{params: searchData});
   };
@@ -24,7 +38,12 @@ export class StaffManagementService extends BaseService{
   };
 
   addMemberTeam(addData):Observable<any>{
-    return this.http.post(`${environment}/team-member/add-teamMember`,{params:addData})
+    return this.http.post(`${environment.apiUrl}/team-member/add-teamMember`,{params:addData})
   };
+
+  getAvatar(linkPath):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/achievement/download?filePath=${linkPath}`,
+      {responseType: 'blob', observe: "response"})
+  }
 
 }

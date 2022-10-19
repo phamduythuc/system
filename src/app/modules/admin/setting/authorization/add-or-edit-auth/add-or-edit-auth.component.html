@@ -1,0 +1,57 @@
+<ng-container *transloco="let t">
+    <!--    header-->
+    <div class="header border-b flex justify-between items-center border-borderDialog">
+        <div class="text-4xl font-bold card-title capitalize py-8 pl-8 leading-9">
+            {{role ? 'Sửa Nhóm Quyền' : 'Thêm Nhóm Quyền Mới'}}
+        </div>
+        <div class="mr-8">
+            <button mat-icon-button (click)="dialogRef.close()">
+                <mat-icon svgIcon="heroicons_outline:x" title="Edit" class="icon-size-5"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <!--    content-->
+    <div class="content mt-8 flex-1 px-8 overflow-auto" [formGroup]="formGroup">
+        <div class="field flex mb-4">
+            <label class="w-1/6 text-base required">Tên</label>
+            <div class="w-5/6 input">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                    <input class="w-full inputDialog" id="name"
+                           formControlName="name"
+                           matInput>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="field flex mb-4" *ngIf="role">
+            <label class="w-1/6 text-base required">Trạng thái</label>
+            <div class="input w-5/6">
+                <mat-radio-group formControlName="activated">
+                    <mat-radio-button [value]="0" class="text-base mr-40">Tắt</mat-radio-button>
+                    <mat-radio-button [value]="1" class="text-base">Bật</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="field flex mb-4">
+            <label class="w-1/6 text-base">Mô tả</label>
+            <div class="w-5/6 input">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                    <textarea class="w-full inputDialog h-20" id="description"
+                              formControlName="description"
+                              matInput></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="footer my-8 flex justify-center">
+            <button mat-raised-button color="primary" class="mr-3 w-36" [disabled]="formGroup.invalid" (click)="formGroup.valid && save()">
+                <!--            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>-->
+                <span>Xác nhận</span>
+            </button>
+            <button mat-raised-button (click)="dialogRef.close()" class="w-36 cancel text-[#ff313c]">
+                <!--            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>-->
+                <span>Hủy</span>
+            </button>
+        </div>
+    </div>
+</ng-container>

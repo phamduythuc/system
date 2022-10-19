@@ -9,5 +9,5 @@ export const environment = {
   clientId: 'lifesup_hrm',
   apiUrl: 'http://103.226.248.168:8089/api',
   apiSSO: `${envConfig.apiSSO}/api`,
-  redirectUrl: `${envConfig.apiSSO}/login?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
+  redirectUrl: `${envConfig.apiSSO}/auth?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
 };

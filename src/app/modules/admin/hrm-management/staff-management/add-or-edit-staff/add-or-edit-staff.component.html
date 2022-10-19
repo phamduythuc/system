@@ -458,7 +458,7 @@
                 [formControlName]="'phone'"
                 matInput>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('phone')" textPattern="Vui lòng nhập theo format (+84)xxxxxxxxx" name="Phone"></app-error-message>
+            <app-error-message [control]="formGroup.get('phone')" textPattern="Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx" name="Phone"></app-error-message>
 
           </div>
           <!-- Country -->
@@ -494,6 +494,11 @@
               (click)="formGroup.valid && save(formGroup.value)">
         <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
         <span>{{t('button.save')}}</span>
+      </button>
+      <button mat-raised-button color="primary" class="mr-3"
+              (click)="log()">
+        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+        <span>Show</span>
       </button>
       <button mat-raised-button (click)="dialogRef.close()">
         <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>

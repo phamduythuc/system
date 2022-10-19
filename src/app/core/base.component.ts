@@ -64,21 +64,27 @@ export class BaseComponent {
   }
 
   handleCoverTimeToString(data) {
-    this.listTimeType.forEach(item=>{
-      if(data[item]){
-        data[item]= CommonUtilsService.dateToString(data[item])
+    this.listTimeType.forEach(item => {
+      if (data[item]) {
+        data[item] = CommonUtilsService.dateToString(data[item])
       }
-    })
+    });
   }
 
-  getDetails(id, callback?) {
-    this.baseService.getOne(id).subscribe(res => {
-      this.detailsData = res.data
+  async getDetails(id, callback?): Promise<any> {
+    const res = await this.baseService.getOne(id).toPromise();// .subscribe(res => {
+    if (res.code === '00') {
+      this.detailsData = res.data;
+      this.formGroup.patchValue(this.detailsData);
+      this.formGroup.markAllAsTouched();
       if (callback) {
         callback(this.detailsData);
       }
-      this.formGroup.patchValue(this.detailsData)
-    })
+    } else {
+      this.showSnackBar(res.message,  'error');
+    }
+
+    // })
 
   }
 

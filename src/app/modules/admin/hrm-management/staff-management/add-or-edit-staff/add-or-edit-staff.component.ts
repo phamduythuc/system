@@ -1,4 +1,14 @@
-import {ChangeDetectorRef, Component, ElementRef, Inject, Injector, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  Injector,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
 import {Validators} from "@angular/forms";
 import {CategoriesService} from "@core/categories.service";
@@ -68,7 +78,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     //Quốc gia
     nationality: [],
     //Số điện thoại
-    phone: [null,[Validators.pattern('[0-9]{10}')]],
+    phone: [null,[Validators.required,Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
     //Mã chức vụ
     positionId: [null, Validators.required],
     //Chức vụ hiện tại
@@ -116,7 +126,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     super(injector, staffService, dialogRef);
     this.dialogId = data?.id;
     if (this.dialogId) {
-      this.getDetails(this.dialogId,this.coverBase64);
+      this.getDetails(this.dialogId).then(() => this.coverBase64(this.detailsData));
     }
     this.getCategories();
 
@@ -129,9 +139,15 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     this.getListPosition()
   }
 
-  coverBase64(){
-    if(this.formGroup.get('imageUrl').value){
-    this.imageUrl = this._sanitizer.bypassSecurityTrustResourceUrl( this.formGroup.get('imageUrl').value);
+  coverBase64(res) {
+    console.log(res)
+    if (res.imageUrl) {
+      this.staffService.getAvatar(res.imageUrl).subscribe(res => {
+        // this.imageUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res.body);
+        this.imageUrl = URL.createObjectURL(res.body);
+        console.log(this.imageUrl);
+      });
+
     }
     console.log(this.imagePath)
   }
@@ -179,8 +195,27 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
 
   save(data) {
     this.handleCoverTimeToString(data)
-    data.id = this.dialogId || null
-    this.addOrEdit(data)
+    console.log(data);
+    if(this.dialogId){
+      data.id = this.dialogId;
+      this.staffService.updateStaff(data).subscribe(res=>{
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(data);
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      })
+    }else {
+      this.staffService.createStaff(data).subscribe(res=>{
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(data);
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      })
+    }
   }
 
   uploadFile(event) {
@@ -214,4 +249,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     });
   }
 
+  log() {
+    console.log(this.formGroup)
+  }
 }
