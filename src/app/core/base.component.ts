@@ -67,14 +67,26 @@ export class BaseComponent {
     this.listTimeType.forEach(item => {
       if (data[item]) {
         data[item] = CommonUtilsService.dateToString(data[item])
+        console.log(data[item])
       }
     });
   }
+
+  handleCoverStringToDate(data){
+    this.listTimeType.forEach(item => {
+      if (data[item]) {
+        data[item] = CommonUtilsService.stringToDate(CommonUtilsService.dateToString(data[item]))
+        console.log(data[item])
+      }
+    });
+  }
+
 
   async getDetails(id, callback?): Promise<any> {
     const res = await this.baseService.getOne(id).toPromise();// .subscribe(res => {
     if (res.code === '00') {
       this.detailsData = res.data;
+      this.handleCoverStringToDate(this.detailsData)
       this.formGroup.patchValue(this.detailsData);
       this.formGroup.markAllAsTouched();
       if (callback) {
@@ -82,6 +94,7 @@ export class BaseComponent {
       }
     } else {
       this.showSnackBar(res.message,  'error');
+      this.dialogService.closeAll()
     }
 
     // })

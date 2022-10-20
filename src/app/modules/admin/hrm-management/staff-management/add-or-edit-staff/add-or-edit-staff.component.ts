@@ -15,6 +15,7 @@ import {CategoriesService} from "@core/categories.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {StaffManagementService} from "../staff-management.service";
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+
 @Component({
   selector: 'app-add-or-edit-staff',
   templateUrl: './add-or-edit-staff.component.html',
@@ -74,11 +75,11 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     //Ngày giờ cập nhật
     modifiedDate: [],
     //Mã căn cước công dân/Chứng minh nhân dân
-    nationalId: [null, [Validators.required,Validators.pattern('[0-9]*')]],
+    nationalId: [null, [Validators.required, Validators.pattern('[0-9]*')]],
     //Quốc gia
     nationality: [],
     //Số điện thoại
-    phone: [null,[Validators.required,Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+    phone: [null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
     //Mã chức vụ
     positionId: [null, Validators.required],
     //Chức vụ hiện tại
@@ -88,7 +89,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     //N/A
     seniority: [],
     //Ngày bắt đầu đi làm
-    staOfficalDate: [null,Validators.required],
+    staOfficalDate: [null, Validators.required],
     //Mã nhân viên
     staffCode: [null, Validators.required],
     //Trạng thái của nhân viên
@@ -124,11 +125,15 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
               private cd: ChangeDetectorRef,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService, dialogRef);
+    this.getCategories();
     this.dialogId = data?.id;
     if (this.dialogId) {
-      this.getDetails(this.dialogId).then(() => this.coverBase64(this.detailsData));
+      this.getDetails(this.dialogId).then(() => {
+          // this.handleCoverStringToDate(this.detailsData);
+          this.coverBase64(this.detailsData)
+        }
+      );
     }
-    this.getCategories();
 
   }
 
@@ -196,9 +201,9 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
   save(data) {
     this.handleCoverTimeToString(data)
     console.log(data);
-    if(this.dialogId){
+    if (this.dialogId) {
       data.id = this.dialogId;
-      this.staffService.updateStaff(data).subscribe(res=>{
+      this.staffService.updateStaff(data).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.dialogRef.close(data);
@@ -206,8 +211,8 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
           this.showSnackBar(res.message, 'error');
         }
       })
-    }else {
-      this.staffService.createStaff(data).subscribe(res=>{
+    } else {
+      this.staffService.createStaff(data).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.dialogRef.close(data);

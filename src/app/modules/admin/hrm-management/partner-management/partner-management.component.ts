@@ -106,7 +106,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
           id
         },
         width: '60vw',
-        height: '50vh',
+        // height: '50vh',
         disableClose: true
       }
     )
@@ -124,7 +124,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
         id,
       },
       width: '60vw',
-      height: '50vh',
+      // height: '20vh',
       disableClose: true
     }, (value) => {
       if (value)

@@ -6,6 +6,7 @@ import {distinctUntilChanged, map} from 'rxjs/operators';
 import {TeamManagementService} from "./team-management.service";
 import {AddOrEditTeamComponent} from "./add-or-edit-team/add-or-edit-team.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {ConfirmDialogComponent} from "@shared/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-team-management',
@@ -75,7 +76,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
         id,
       },
       width: '70vw',
-      height: '70vh',
+      // maxHeight: '90vh',
       disableClose: true
     }, (value) => {
       if (value)
@@ -97,7 +98,15 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     if(type === 'edit'){
       this.addOrEdit(gr.id);
     }else {
-      this.delete(gr.id)
+      this.deleteConfirmDialog(gr.id)
     }
+  }
+
+  deleteConfirmDialog(id?: any): any {
+    this.showDialog(ConfirmDialogComponent, {}, (value) => {
+      if (value) {
+        this.delete(id);
+      }
+    });
   }
 }

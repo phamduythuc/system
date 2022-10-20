@@ -10,17 +10,26 @@ import {deepCloneNode} from "@angular/cdk/drag-drop/clone-node";
  * Node for to-do item
  */
 export class TodoItemNode {
-  children: TodoItemNode[];
-  item: string;
-  label:string;
+  children?: TodoItemNode[];
+  item?: string;
+  label?:string;
+  child:any[];
+  code:string;
+  permissions:any[];
+  checked:boolean;
+
 }
 
 /** Flat to-do item node with expandable and level information */
 export class TodoItemFlatNode {
-  item: string;
-  label:string;
+  item?: string;
+  label?:string;
   level: number;
   expandable: boolean;
+  child:any[];
+  code:string;
+  permissions:any[];
+  checked:boolean;
 }
 
 /**
@@ -64,50 +73,58 @@ export class ChecklistDatabase {
       {
         "item": "Groceries",
         "label": "Groceries label",
+        'checked':true,
         "children": [
           {
             "item": "Almond Meal flour",
-            'label': "APple label"
-
+            'label': "APple label",
+            'checked':false,
           },
           {
             "item": "Organic eggs",
-            'label': "APple label"
-
+            'label': "APple label",
+            'checked':true,
           },
           {
             "item": "Protein Powder",
-            'label': "APple label"
+            'label': "APple label",
+            'checked':true,
 
           },
           {
             "item": "Fruits",
             'label': "APple label",
+          'checked':true,
             "children": [
               {
                 "item": "Apple",
-                'label': "APple label"
+                'label': "APple label",
+                'checked':true,
               },
               {
                 "item": "Berries",
                 'label': "APple label",
+                'checked':true,
 
                 "children": [
                   {
                     "item": "Blueberry",
-                    'label': "APple label"
+                    'label': "APple label",
+                    'checked':true,
 
                   },
                   {
                     "item": "Raspberry",
-                    'label': "APple label"
+                    'label': "APple label",
+                    'checked':true,
 
                   }
                 ]
               },
               {
                 "item": "Orange",
-                'label': "APple label"
+                'label': "APple label",
+                'checked':true,
               }
             ]
           }
@@ -116,21 +133,25 @@ export class ChecklistDatabase {
       {
         "item": "Reminders",
         "label": "Groceries Reminders",
+        'checked':true,
 
         "children": [
           {
             "item": "Cook dinner",
             "label": "Groceries Reminders",
+            'checked':true,
 
           },
           {
             "item": "Read the Material Design spec",
             "label": "Groceries Reminders",
+            'checked':true,
 
           },
           {
             "item": "Upgrade Application to Angular",
             "label": "Groceries Reminders",
+            'checked':true,
 
           }
         ]
@@ -240,10 +261,10 @@ export class MenuTreeComponent implements OnInit {
    */
   transformer = (node: TodoItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
-    const flatNode =
-      existingNode && existingNode.item === node.item ? existingNode : new TodoItemFlatNode();
+    const flatNode = existingNode && existingNode.item === node.item ? existingNode : new TodoItemFlatNode();
     flatNode.item = node.item;flatNode.label = node.label;
     flatNode.level = level;
+    flatNode.checked = node.checked
     flatNode.expandable = !!node.children?.length;
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
@@ -252,6 +273,8 @@ export class MenuTreeComponent implements OnInit {
 
   /** Whether all the descendants of the node are selected. */
   descendantsAllSelected(node: TodoItemFlatNode): boolean {
+    // console.log('descendantsAllSelected',node)
+    // console.log('descendantsAllSelected',this.checklistSelection)
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected = descendants.length > 0 && descendants.every(child => {
         return this.checklistSelection.isSelected(child);
@@ -261,6 +284,8 @@ export class MenuTreeComponent implements OnInit {
 
   /** Whether part of the descendants are selected */
   descendantsPartiallySelected(node: TodoItemFlatNode): boolean {
+    // console.log('descendantsPartiallySelected',node)
+    // console.log('descendantsPartiallySelected',this.checklistSelection)
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child => this.checklistSelection.isSelected(child));
     return result && !this.descendantsAllSelected(node);
@@ -284,6 +309,8 @@ export class MenuTreeComponent implements OnInit {
 
   /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
   todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
+    console.log('dataSource',this.dataSource )
+    console.log(node)
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
     console.log(this.checklistSelection.selected);

@@ -30,12 +30,12 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   roles = [
     {
       label: 'Member',
-      value: '2',
+      value: 0,
       description: 'Can read, clone, and push to this repository. Can also manage issues and pull requests.'
     },
     {
       label: 'Admin',
-      value: '1',
+      value: 1,
       description: 'Can read, clone, and push to this repository. Can also manage issues, pull requests, and repository settings, including adding collaborators.'
     }
   ];
@@ -116,7 +116,7 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
       departmentId: value.departmentId,
       description: value.description,
       endDate: value.endDate,
-      members: value.members.map(item => ({id: item.id, isManager: item.isManager})),
+      members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
     }
     console.log(teamData)
     this.addOrEdit(teamData)

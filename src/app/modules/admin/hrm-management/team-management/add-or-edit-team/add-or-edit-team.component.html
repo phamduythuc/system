@@ -80,7 +80,7 @@
               matInput
               [formControlName]="'description'"
               cdkTextareaAutosize
-              [cdkAutosizeMinRows]="5"></textarea>
+              [cdkAutosizeMinRows]="3"></textarea>
           </mat-form-field>
 <!--          <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.</div>-->
         </div>
@@ -130,7 +130,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="listMembers?.length>0" class="sm:col-span-4 flex flex-col divide-y border-t border-b pl-4 pr-4">
+        <div *ngIf="listMembers?.length>0" style="max-height: 200px " class="sm:col-span-4 overflow-auto flex flex-col divide-y border-t border-b pl-4 pr-4">
           <ng-container *ngFor="let member of listMembers; index as i">
             <div class="flex flex-col sm:flex-row sm:items-center py-6">
               <div class="flex items-center">

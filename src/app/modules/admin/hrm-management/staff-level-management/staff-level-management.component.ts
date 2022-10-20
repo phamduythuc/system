@@ -42,10 +42,6 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
       header: 'common.createdBy',
     },
     {
-      columnDef: 'status',
-      header: 'common.status',
-    },
-    {
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view','edit', 'delete'],

@@ -42,10 +42,6 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
     },
     {
-      columnDef: 'status',
-      header: 'common.status',
-    },
-    {
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view','edit', 'delete'],
@@ -95,7 +91,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
           id
         },
         width: '60vw',
-        height: '50vh',
+        // height: '50vh',
         disableClose: true
       }
     )
@@ -108,7 +104,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
         departments: this.searchResult.data,
       },
       width: '60vw',
-      height: '45vh',
+      // height: '45vh',
       disableClose: true
     }, (value) => {
       if (value)

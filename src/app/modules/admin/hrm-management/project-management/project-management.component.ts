@@ -115,7 +115,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
           id
         },
         width: '60vw',
-        height: '55vh',
+        // height: '55vh',
         disableClose: true
       }
     )
@@ -128,7 +128,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         projects:this.searchResult.data
       },
       width: '60vw',
-      height: '45vh',
+      // height: '64vh',
       disableClose: true
     }, (value) => {
       if (value)

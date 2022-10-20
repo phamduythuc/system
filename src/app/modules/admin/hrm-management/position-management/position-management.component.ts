@@ -41,10 +41,6 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       header: 'common.createdBy',
     },
     {
-      columnDef: 'status',
-      header: 'common.status',
-    },
-    {
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view', 'edit', 'delete'],
@@ -96,7 +92,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
           id
         },
         width: '60vw',
-        height: '45vh',
+        // height: '45vh',
         disableClose: true
       }
     )
@@ -108,7 +104,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
         id,
       },
       width: '60vw',
-      height: '45vh',
+      // height: '45vh',
       disableClose: true
     }, (value) => {
       if (value)
