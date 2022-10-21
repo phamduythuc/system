@@ -20,6 +20,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePickerFormatDirective } from './directives/date-picker-format.directive';
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
+import {TreeviewModule} from "ngx-treeview";
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -40,6 +41,7 @@ export const MAT_MODULES = [
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
+      TreeviewModule,
         ...MAT_MODULES
     ],
     declarations: [

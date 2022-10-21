@@ -96,6 +96,19 @@
             [position]="'end'"
             #matDrawer>
             <!-- Demo sidebar -->
+            <ng-container *ngIf="itemPermissions&&itemPermissions.length>0" class="flex-auto p-6 sm:p-10 overflow-y-auto" cdkScrollable>
+              <div class="flex-auto p-6 sm:p-10 overflow-y-auto" cdkScrollable>
+                <ul>
+                  <li *ngFor="let permission of itemPermissions" >
+                    <div class="form-check flex inline-flex m-2">
+                      <input type="checkbox" class="form-check-input"  [(ngModel)]="permission.action" />
+                      <label class="form-check-label ml-2" > {{permission.nameAction}} </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <button (click)="show(itemPermissions,matDrawer)">fjaskdhfasd</button>
+            </ng-container>
 <!--            <demo-sidebar></demo-sidebar>-->
           </mat-drawer>
 
@@ -108,8 +121,9 @@
               cdkScrollable>
 
               <!-- CONTENT GOES HERE -->
-              <div class="h-full border-2 border-dashed border-gray-300 rounded-2xl">
-                <app-menu-tree></app-menu-tree>
+<!--              <div class="h-full border-2 border-dashed border-gray-300 rounded-2xl">-->
+              <div class="h-full ">
+                <app-menu-tree (selectMenuItem)="getMenuItemPermissions($event)"></app-menu-tree>
               </div>
 
             </div>

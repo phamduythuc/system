@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, Injector, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Injector,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {BaseComponent} from '../../../../core/base.component';
 import {SettingService} from '../setting.service';
 import {forkJoin, Subject} from 'rxjs';
@@ -11,8 +20,9 @@ import {AddOrEditAuthComponent} from './add-or-edit-auth/add-or-edit-auth.compon
 })
 export class AuthorizationComponent extends BaseComponent implements OnInit, OnDestroy {
 
+  @ViewChild('matDrawer') matDrawer : any
   drawerMode: 'over' | 'side' = 'side';
-  drawerOpened: boolean = true;
+  drawerOpened: boolean = false;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   listRole: any = [];
@@ -33,6 +43,7 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   listModuleChange = [];
   roles: any;
   selectedRoleId: any | boolean;
+  itemPermissions: any;
 
   constructor(injector: Injector, public settingService: SettingService, public cdk: ChangeDetectorRef) {
     super(injector);
@@ -199,5 +210,18 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
 
   emitEvent(edit: string, role: any) {
 
+  }
+
+  getMenuItemPermissions(e) {
+    console.log(e)
+    // this.drawerOpened=true
+    this.matDrawer.open()
+    this.itemPermissions = e.permissions
+  }
+
+  show(permission: any[],sfa) {
+    console.log(permission)
+
+    console.log(sfa)
   }
 }

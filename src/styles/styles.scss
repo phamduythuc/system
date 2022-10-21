@@ -2,6 +2,7 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
 body{
     box-sizing: border-box;
 }
@@ -66,3 +67,19 @@ body{
 .b-radius{
   border-radius: 6px;
 }
+
+.form-inline.row-item.ng-star-inserted{
+  display: inline-flex;
+  padding: 6px;
+  i{
+    display: flex;
+    align-items: center;
+  }
+  .form-check{
+    margin-left: 8px;
+  }
+  .form-check-label{
+    margin-left: 4px;
+  }
+}
+

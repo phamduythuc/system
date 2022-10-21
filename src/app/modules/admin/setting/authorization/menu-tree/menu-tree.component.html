@@ -1,20 +1,19 @@
 
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-    <button mat-icon-button disabled></button>
-    <mat-checkbox class="checklist-leaf-node"
-                  [(ngModel)]="node.checked"
-                  (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
-  </mat-tree-node>
+<ngx-treeview #tree [config]="config" [items]="items" (filterChange)="onFilterChange($event)"
+               [itemTemplate]="itemTemplate">
+</ngx-treeview>
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
 
-  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-    <button mat-icon-button matTreeNodeToggle
-            [attr.aria-label]="'Toggle ' + node.item">
-      <mat-icon class="mat-icon-rtl-mirror" [svgIcon]="treeControl.isExpanded(node) ? 'mat_outline:arrow_drop_down' : 'mat_outline:arrow_right'">
-      </mat-icon>
-    </button>
-    <mat-checkbox [checked]="node.checked"
-                  [indeterminate]="descendantsPartiallySelected(node)"
-                  (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
-  </mat-tree-node>
-</mat-tree>
+  <div class="form-inline row-item">
+
+    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
+
+    <div class="form-check">
+
+      <input type="checkbox" class="form-check-input"  [(ngModel)]="item.checked" (ngModelChange)="onCheckedChangei(tree.items)" [indeterminate]="item.indeterminate" />
+
+      <label class="form-check-label" (click)="selectChildren(item)"> {{item.text}} </label>
+
+    </div>
+
+  </div>
