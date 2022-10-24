@@ -224,4 +224,8 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
 
     console.log(sfa)
   }
+
+  saveMenu() {
+
+  }
 }

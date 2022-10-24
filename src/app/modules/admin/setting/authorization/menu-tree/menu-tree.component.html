@@ -1,19 +1,31 @@
 
-<ngx-treeview #tree [config]="config" [items]="items" (filterChange)="onFilterChange($event)"
-               [itemTemplate]="itemTemplate">
+<ngx-treeview #tree  [items]="items" (filterChange)="onFilterChange($event)" (selectedChange)="onSelectedChange($event,items)"
+              [itemTemplate]="itemTemplate">
 </ngx-treeview>
-<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+<!--<button-->
+<!--  class="mr-2"-->
+<!--  mat-icon-button-->
+<!--  (click)="toggleNavigation(items)">-->
+<!--  <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>-->
+<!--</button>-->
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand"
+             let-onCheckedChange="onCheckedChange">
 
   <div class="form-inline row-item">
-
-    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
+    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa">
+      <mat-icon
+        [svgIcon]="item.collapsed ? 'mat_outline:arrow_right' : 'mat_outline:arrow_drop_down'"></mat-icon>
+    </i>
+    <!--    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>-->
 
     <div class="form-check">
 
-      <input type="checkbox" class="form-check-input"  [(ngModel)]="item.checked" (ngModelChange)="onCheckedChangei(tree.items)" [indeterminate]="item.indeterminate" />
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked"
+              [indeterminate]="item.indeterminate" (ngModelChange)="onCheckedChange()"/>
 
       <label class="form-check-label" (click)="selectChildren(item)"> {{item.text}} </label>
 
     </div>
 
   </div>
+</ng-template>

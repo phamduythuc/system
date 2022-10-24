@@ -79,6 +79,9 @@
           </div>
           <!-- Actions -->
           <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button mat-raised-button color="primary" (click)="saveMenu()">
+            {{'ADD'}}
+          </button>
             <button
               mat-icon-button
               (click)="matDrawer.toggle()">
@@ -107,7 +110,7 @@
                   </li>
                 </ul>
               </div>
-              <button (click)="show(itemPermissions,matDrawer)">fjaskdhfasd</button>
+<!--              <button (click)="show(itemPermissions,matDrawer)">fjaskdhfasd</button>-->
             </ng-container>
 <!--            <demo-sidebar></demo-sidebar>-->
           </mat-drawer>
@@ -131,21 +134,6 @@
           </mat-drawer-content>
 
         </mat-drawer-container>
-        <!--        <div class="title text-3xl font-bold h-18 border-b p-6 py-4 flex items-center justify-between">-->
-        <!--          <span>Menu</span>-->
-        <!--          <div class="tree">-->
-        <!--            <app-module-tree [modules]="modules" [(selectedModule)]="selectedModule"-->
-        <!--                             (selectedModuleChange)="selectNode($event)">-->
-        <!--            </app-module-tree>-->
-        <!--          </div>-->
-        <!--          &lt;!&ndash;                    <mat-checkbox [color]="'primary'" (change)="changeSelectedAll($event)"&ndash;&gt;-->
-        <!--          &lt;!&ndash;                                  [checked]="selectAll"></mat-checkbox>&ndash;&gt;-->
-        <!--        </div>-->
-        <!--        <div class="tree">-->
-        <!--          <app-permission-tree [permission]="selectedPermission"-->
-        <!--                               [(selectedAll)]="selectAll"-->
-        <!--                               (checkPermission)="changeCheck($event)"></app-permission-tree>-->
-        <!--        </div>-->
       </div>
     </div>
   </div>
