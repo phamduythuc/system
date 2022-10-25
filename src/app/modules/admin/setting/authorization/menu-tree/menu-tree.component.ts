@@ -1,16 +1,20 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {TreeviewComponent, TreeviewConfig, TreeviewItem, TreeviewHelper, DownlineTreeviewItem} from "ngx-treeview";
 import {AuthorizationService} from "../authorization.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {isNil, remove, reverse} from "lodash";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-menu-tree',
   templateUrl: './menu-tree.component.html',
   styleUrls: ['./menu-tree.component.scss'],
 })
-export class MenuTreeComponent implements OnInit {
-  @Output() selectMenuItem = new EventEmitter<any>();
+export class MenuTreeComponent implements OnInit, OnChanges {
+  @Input() roleId;
+  @ViewChild('matDrawer') matDrawer: any;
+  drawerMode: 'over' | 'side' = 'side';
+  drawerOpened: boolean = false;
   dropdownEnabled = true;
   values: number[];
   config = TreeviewConfig.create({
@@ -20,8 +24,9 @@ export class MenuTreeComponent implements OnInit {
     decoupleChildFromParent: true,
     maxHeight: 400
   });
-  listPermissions: any
-  targetPermission: any
+  listPermissions: any;
+  targetPermissions: any
+  targetCode: any
 
   buttonClasses = [
     'btn-outline-primary',
@@ -37,90 +42,27 @@ export class MenuTreeComponent implements OnInit {
 
   items: any;
 
-  simpleItems = {
-    text: 'parent-1',
-    value: 'p1',
-    children: [
-      {
-        text: 'child-1',
-        value: 'c1'
-      }, {
-        text: 'child-2',
-        value: 'c2',
-        children: [
-          {
-            text: 'child-1-2',
-            value: 'c12'
-          },
-          {
-            text: 'child-1-2',
-            value: 'c12',
-            // disabled: true,
-            collapsed: true,
-            checked: true,
-            children: [
-              {
-                text: 'child-1-2',
-                value: 'c12'
-              },
-              {
-                text: 'child-1-2',
-                value: 'c12'
-              }
-            ]
-          }
-        ]
-      },
-    ]
-  };
-
-  simpleItems2 = {
-    text: 'parent-2',
-    value: 'p2',
-    collapsed: true,
-    children: [
-      {
-        text: 'child-1',
-        value: 'c1'
-      },
-      {
-        text: 'child-2',
-        value: 'c2',
-        children: [
-          {
-            text: 'child-1-2',
-            value: 'c12'
-          },
-          {
-            text: 'child-1-2',
-            value: 'c12',
-            // disabled: true,
-            collapsed: true,
-            checked: true,
-            children: [
-              {
-                text: 'child-1-2',
-                value: 'c12'
-              },
-              {
-                text: 'child-1-2',
-                value: 'c12'
-              }
-            ]
-          }
-        ]
-      },
-    ]
-  };
   listPermissionsCover: any[];
   rows: any[];
 
   constructor(private service: AuthorizationService, private snackBar: MatSnackBar) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'roleId': {
+            if (this.roleId) {
+              this.getMenu(this.roleId)
+            }
+          }
+        }
+      }
+    }
+    }
+
   ngOnInit(): void {
-    // this.items  = this.getItems([this.simpleItems,this.simpleItems2])
-    this.getMenu()
   }
 
   getItems(parentChildObj) {
@@ -137,7 +79,8 @@ export class MenuTreeComponent implements OnInit {
   }
 
   getMenu(id?) {
-    this.service.getMenus(id).subscribe(res => {
+    const data = {roleId:id}
+    this.service.getMenus(data).subscribe(res => {
       console.log(res);
       if (res.code === '00') {
         const data = res.data.menus
@@ -148,7 +91,6 @@ export class MenuTreeComponent implements OnInit {
       }
     })
   }
-
 
   getListPermissions(arr: any, result?: any[]) {
     let itemsArray = result || [];
@@ -170,11 +112,11 @@ export class MenuTreeComponent implements OnInit {
     const a = []
     if (arr && arr.length > 0) {
       arr.forEach(item => {
-        const nodePermissions = this.listPermissions.find(el=>el.code===item.value)
+        const nodePermissions = this.listPermissions.find(el => el.code === item.value)
         const ele = {
           name: item.text,
           code: item.value,
-          permissions:nodePermissions&&nodePermissions.permissions||[],
+          permissions: nodePermissions && nodePermissions.permissions || [],
           checked: item.internalChecked,
           collapsed: item.internalCollapsed,
           children: this.handleCoverDataTreeToPut(item.internalChildren || [],)
@@ -184,8 +126,6 @@ export class MenuTreeComponent implements OnInit {
     } else {
       return []
     }
-    console.log(a)
-    console.log(this.listPermissions)
     return a
   }
 
@@ -196,44 +136,32 @@ export class MenuTreeComponent implements OnInit {
   }
 
   selectChildren(item: any) {
-    this.targetPermission = this.listPermissions.find(i => i.code === item.value)
-    this.selectMenuItem.emit(this.targetPermission)
+    this.matDrawer.open()
+    this.targetPermissions = this.listPermissions.find(i => i.code === item.value)
+    this.targetCode= this.targetPermissions&&this.targetPermissions.code
+    console.log(this.targetPermissions)
+    // this.selectMenuItem.emit(this.targetPermission)
   }
 
   onCheckedChangei(tree: any, node) {
-    console.log(tree)
-    console.log(node)
     console.log(TreeviewHelper.findParent(this.items, node))
   }
 
   onSelectedChange(downlineItems: DownlineTreeviewItem[], e): void {
-    // this.rows = [];
-    // console.log(downlineItems)
-    // downlineItems.forEach(downlineItem => {
-    //   const item = downlineItem.item;
-    //   const value = item&&item.value;
-    //   const texts = [item&&item.text];
-    //   let parent = downlineItem.parent;
-    //   while (!isNil(parent)) {
-    //     texts.push(parent.item.text);
-    //     parent = parent.parent;
-    //   }
-    //   const reverseTexts = reverse(texts);
-    //   const row = `${reverseTexts.join(' -> ')} : ${value}`;
-    //   this.rows.push(row);
-    // console.log(downlineItems)
-    // console.log(e)
-    // this.handleCoverDataTreeToPut(e)
-    // });
   }
 
 
-  toggleNavigation(items: any) {
-    this.handleCoverDataTreeToPut(items)
-    console.log(items);
+  toggleNavigation() {
+    this.handleCoverDataTreeToPut(this.items)
   }
 
   saveMenu() {
-
+    this.handleCoverDataTreeToPut(this.items)
+    const data= {
+      roleId:+this.roleId,
+      menu:this.handleCoverDataTreeToPut(this.items),
+      // permissions: this.listPermissions
+    }
+    console.log(data);
   }
 }

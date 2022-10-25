@@ -12,6 +12,8 @@ import {BaseComponent} from '../../../../core/base.component';
 import {SettingService} from '../setting.service';
 import {forkJoin, Subject} from 'rxjs';
 import {AddOrEditAuthComponent} from './add-or-edit-auth/add-or-edit-auth.component';
+import {MenuTreeComponent} from "./menu-tree/menu-tree.component";
+import {AuthorizationService} from "./authorization.service";
 
 @Component({
   selector: 'app-authorization',
@@ -19,11 +21,11 @@ import {AddOrEditAuthComponent} from './add-or-edit-auth/add-or-edit-auth.compon
   styleUrls: ['./authorization.component.scss']
 })
 export class AuthorizationComponent extends BaseComponent implements OnInit, OnDestroy {
-
   @ViewChild('matDrawer') matDrawer : any
   drawerMode: 'over' | 'side' = 'side';
   drawerOpened: boolean = false;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
+
 
   listRole: any = [];
   selectedModule = null;
@@ -45,8 +47,13 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   selectedRoleId: any | boolean;
   itemPermissions: any;
 
-  constructor(injector: Injector, public settingService: SettingService, public cdk: ChangeDetectorRef) {
-    super(injector);
+  @ViewChild('menuChild') child: MenuTreeComponent;
+
+  menus: any[] = [];
+
+  constructor(injector: Injector, public settingService: SettingService, public cdk: ChangeDetectorRef, public authorizationService : AuthorizationService) {
+    super(injector,authorizationService);
+    this.searchModel.pageSize = 9999
   }
 
   ngOnInit(): void {
@@ -55,15 +62,7 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   }
 
   initData() {
-    // this.forkJoinSubscription = forkJoin([this.settingService.getModules(), this.settingService.getPermissionByAuthorityId(this.paginate), this.settingService.getAllRoleGroup()])
-    //     .subscribe(([moduleRes, permissionRes, rollGroups]) => {
-    //         this.handleModuleResponse(moduleRes);
-    //         this.handleRoleResponse(rollGroups);
-    //         this.selectedRole = this.listRole[0];
-    //         this.paginate.authorityId = this.selectedRole.id;
-    //         this.handlePermissionResponse(permissionRes);
-    //         this.selectNode(this.selectedModule);
-    //     });
+
   }
 
   getPermissionById() {
@@ -98,29 +97,10 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   }
 
   getListRole() {
-    this.roles = [
-      {
-        id: 0,
-        name: 'admin',
-        description: 'admin',
-      },{
-        id: 1,
-        name: 'admin1',
-        description: 'admin1',
-      },{
-        id: 2,
-        name: 'admin2',
-        description: 'admin2',
-      },{
-        id: 3,
-        name: 'admin3',
-        description: 'admin3',
-      },
-    ]
-    // this.settingService.getAllRoleGroup().subscribe(res => {
-    //     this.handleRoleResponse(res);
-    //     this.selectedRole = this.listRole[0];
-    // });
+    this.processSearch(this.searchModel,()=>{
+      this.roles= this.searchResult.data;
+      this.selectedRoleId = this.roles[0].roleId;
+    })
   }
 
   addPermissionTemp(per: any) {
@@ -206,6 +186,7 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
 
   goToRole(id) {
     this.selectedRoleId = id;
+    console.log(this.selectedRoleId)
   }
 
   emitEvent(edit: string, role: any) {
@@ -226,6 +207,6 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   }
 
   saveMenu() {
-
+    this.child.saveMenu()
   }
 }
