@@ -12,6 +12,7 @@ import {DetailsStaffComponent} from "./details-staff/details-staff.component";
   styleUrls: ['./staff-management.component.scss']
 })
 export class StaffManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName= 'DSNV';
 
   columns: IColumn[] = [
     {

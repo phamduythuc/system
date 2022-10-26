@@ -16,6 +16,8 @@ import {IColumn} from "../../../../layout/common/data-table/data-table.component
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent extends BaseComponent implements OnInit {
+  _permissionCodeName: 'DSNV';
+
     columns: IColumn[] = [
         {
             columnDef: 'stt',

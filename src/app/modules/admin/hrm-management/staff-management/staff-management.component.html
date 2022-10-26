@@ -6,7 +6,8 @@
           {{t('hrm-management.staff.title')}}
         </div>
         <div class="mb-2">
-          <button mat-raised-button color="primary" (click)="addOrEdit()">
+          <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
+                  (click)="addOrEdit()">
             <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
             {{t('add-new')}}
           </button>
@@ -32,7 +33,7 @@
                 <div class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
                   <div class="field flex-col w-full  p-4">
                     <div class="input">
-                      <label >{{t("common.fullName")}}</label>
+                      <label>{{t("common.fullName")}}</label>
                       <mat-form-field
                         class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
                         <input class="w-full"
@@ -58,7 +59,8 @@
 
                 </div>
                 <div class="footer  flex justify-center">
-                  <button mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid" (click)="doSearch()">
+                  <button mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid"
+                          (click)="doSearch()">
                     <!--                                        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>-->
                     <mat-icon
                       matPrefix
@@ -76,6 +78,7 @@
       <div class="content mt-4 w-full">
         <div class="data-table w-full mt-4">
           <app-data-table
+            [roleName]="_permissionCodeName"
             [rows]="searchResult.data||[]"
             [columns]="columns"
             [paginate]="true"

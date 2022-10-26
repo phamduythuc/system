@@ -12,6 +12,7 @@ import {DetailProjectComponent} from "./component/detail-project/detail-project.
   styleUrls: ['./project-management.component.scss']
 })
 export class ProjectManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName = 'DSDA';
 
   columns: IColumn[] = [
     {

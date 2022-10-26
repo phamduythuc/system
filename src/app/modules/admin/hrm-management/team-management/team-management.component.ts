@@ -14,35 +14,34 @@ import {ConfirmDialogComponent} from "@shared/components/confirm-dialog/confirm-
   styleUrls: ['./team-management.component.scss']
 })
 export class TeamManagementComponent extends BaseComponent implements OnInit {
-
-
+  _permissionCodeName = 'DSD';
   @ViewChild('drawer') drawer: MatDrawer;
   drawerMode: 'over' | 'side' = 'side';
   drawerOpened: boolean = true;
   selectedTeamId: any;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-  formSearch =this.fb.group({
-    text : ''
+  formSearch = this.fb.group({
+    text: ''
   });
 
-  constructor(injector:Injector,public teamService: TeamManagementService, fb: FormBuilder) {
+  constructor(injector: Injector, public teamService: TeamManagementService, fb: FormBuilder) {
     super(injector, teamService)
   }
 
   ngOnInit(): void {
     this.searchModel.pageSize = 9999999
     this.formSearch.get('text').valueChanges.pipe(
-      map(event=>{
+      map(event => {
         return event;
       }),
       debounceTime(1000),
       distinctUntilChanged()
     ).subscribe(
-      res=> {
+      res => {
         console.log(res)
       }
     )
-    this.searchModel.status=1
+    this.searchModel.status = 1
     this.processSearch(this.searchModel)
   }
 
@@ -51,21 +50,17 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
 
-
-  ngOnDestroy(): void
-  {
+  ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
   }
 
-  goToTeam(id: any): void
-  {
+  goToTeam(id: any): void {
     this.selectedTeamId = id;
 
     // Close the drawer on 'over' mode
-    if ( this.drawerMode === 'over' )
-    {
+    if (this.drawerMode === 'over') {
       this.drawer.close();
     }
   }
@@ -84,20 +79,18 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     });
   }
 
-  getPanelInfo(id: string): any
-  {
+  getPanelInfo(id: string): any {
     return this.searchResult.data.find(panel => panel.id === id);
   }
 
-  trackByFn(index: number, item: any): any
-  {
+  trackByFn(index: number, item: any): any {
     return item.id || index;
   }
 
   emitEvent(type: string, gr: any) {
-    if(type === 'edit'){
+    if (type === 'edit') {
       this.addOrEdit(gr.id);
-    }else {
+    } else {
       this.deleteConfirmDialog(gr.id)
     }
   }

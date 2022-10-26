@@ -48,7 +48,7 @@ export const MAT_MODULES = [
         HasAnyAuthorityDirective,
         BreadcrumbComponent,
         ConfirmDialogComponent,
-        DatePickerFormatDirective
+        DatePickerFormatDirective,
     ],
   exports: [
     CommonModule,
@@ -59,7 +59,7 @@ export const MAT_MODULES = [
     NgxTrimDirectiveModule,
     ErrorMessageModule,
     ...MAT_MODULES,
-    DatePickerFormatDirective
+    DatePickerFormatDirective,
   ]
 })
 export class SharedModule {

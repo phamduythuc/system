@@ -13,6 +13,8 @@ import {DetailsPartnerComponent} from "./component/details-partner/details-partn
   styleUrls: ['./partner-management.component.scss']
 })
 export class PartnerManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName='DSDT';
+
   columns: IColumn[] = [
     {
       columnDef: 'stt',

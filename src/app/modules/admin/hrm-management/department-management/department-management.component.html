@@ -5,8 +5,8 @@
         <div class="text-xl font-bold card-title mb-3 capitalize">
           {{t('hrm-management.department.title')}}
         </div>
-        <div class="mb-2">
-          <button mat-raised-button color="primary" (click)="addOrEditDepartment()">
+        <div class="mb-2" *hasAnyAuthority="_permissionCodeName+'_CREATE'">
+          <button  mat-raised-button color="primary" (click)="addOrEditDepartment()">
             <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
             {{t('add-new')}}
           </button>
@@ -76,6 +76,7 @@
       <div class="content mt-4 w-full">
         <div class="data-table w-full mt-4">
           <app-data-table
+            [roleName]="_permissionCodeName"
             [rows]="searchResult.data"
             [columns]="columns"
             [paginate]="true"

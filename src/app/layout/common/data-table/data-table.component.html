@@ -15,7 +15,7 @@
                                   [ngTemplateOutletContext]="{$implicit: row}">
                         <ng-template #defaultActions>
                             <ng-container *ngFor="let action of displayedActions">
-                                <button mat-icon-button (click)="emitAction(action.id, row)">
+                                <button *hasAnyAuthority="roleName+'_'+action.role" mat-icon-button (click)="emitAction(action.id, row)">
                                     <ng-container [ngSwitch]="action.id">
                                         <ng-container *ngSwitchDefault>
                                             <mat-icon [svgIcon]="action.icon" [title]="action.label"

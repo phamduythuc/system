@@ -62,7 +62,9 @@
                         </div>
                     </div>
                     <div class="data-table w-full mt-4">
-                        <app-data-table [rows]="users"
+                        <app-data-table
+                          [roleName]="_permissionCodeName"
+                          [rows]="users"
                                         [columns]="columns"
                                         [paginate]="true"
                                         [limit]="paginate.size"

@@ -5,6 +5,7 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {DetailsDepartmentComponent} from "./details-department/details-department.component";
+import {AccountService} from "@core/auth/account.service";
 
 @Component({
   selector: 'app-department-management',
@@ -12,6 +13,8 @@ import {DetailsDepartmentComponent} from "./details-department/details-departmen
   styleUrls: ['./department-management.component.scss']
 })
 export class DepartmentManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName= 'DSPB';
+
   columns: IColumn[] = [
     {
       columnDef: 'stt',
@@ -53,7 +56,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   panelOpenState: false;
   parentIds = []
 
-  constructor(injector: Injector, private departmentService: DepartmentManagementService) {
+  constructor(injector: Injector, private departmentService: DepartmentManagementService ,private ac :AccountService) {
     super(injector, departmentService);
 
   }
@@ -61,6 +64,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.doSearch();
+    console.log(this.ac.hasAnyAuthority('fsdfasd'));
   }
 
   getParentIds(arr: any[]): any[] {

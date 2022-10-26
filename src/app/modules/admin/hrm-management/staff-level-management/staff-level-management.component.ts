@@ -12,6 +12,7 @@ import {DetailsStaffLevelComponent} from "./compoment/details-staff-level/detail
   styleUrls: ['./staff-level-management.component.scss']
 })
 export class StaffLevelManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName = 'DSCD';
 
   columns: IColumn[] = [
     {

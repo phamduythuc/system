@@ -12,6 +12,8 @@ import {DetailPositionComponent} from "./compoment/detail-position/detail-positi
   styleUrls: ['./position-management.component.scss']
 })
 export class PositionManagementComponent extends BaseComponent implements OnInit {
+  _permissionCodeName = 'DSVT';
+
   columns: IColumn[] = [
     {
       columnDef: 'stt',
