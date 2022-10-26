@@ -71,6 +71,9 @@
     "workExperience": "Kinh nghiệm"
   },
   "setting": {
+    "role": "Quyền",
+    "groupRole": "Nhóm quyền",
+    "menu": "Danh mục",
     "user": {
       "group": "Nhóm",
       "userList": "Danh sách người dùng",
@@ -135,5 +138,8 @@
         "addMember": "Thêm thành viên"
       }
     }
+  },
+  "message": {
+    "noData": "Không tìm thấy dữ liêu"
   }
 }

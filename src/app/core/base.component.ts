@@ -82,8 +82,8 @@ export class BaseComponent {
   }
 
 
-  async getDetails(id, callback?): Promise<any> {
-    const res = await this.baseService.getOne(id).toPromise();// .subscribe(res => {
+getDetails(id, callback?) {
+    this.baseService.getOne(id).subscribe(res=>{// .subscribe(res => {
     if (res.code === '00') {
       this.detailsData = res.data;
       this.handleCoverStringToDate(this.detailsData)
@@ -96,14 +96,12 @@ export class BaseComponent {
       this.showSnackBar(res.message,  'error');
       this.dialogService.closeAll()
     }
-
+    })
     // })
 
   }
 
   processSearch(searchModel,callback?): void {
-    // this.searchResult.data = [];
-    // this.searchResult.totalRecords = 0;
     this.baseService.search(searchModel).subscribe(res => {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
@@ -146,10 +144,6 @@ export class BaseComponent {
     });
   }
 
-  // addOrEdit(message?: any, callback?: any): any{
-  //     this.showSnackBar(message, 'success');
-  //     callback();
-  // }
   addOrEdit(data?: any): void {
     if (data.id) {
       this.edit(data);

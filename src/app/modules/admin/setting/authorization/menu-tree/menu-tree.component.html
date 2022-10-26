@@ -12,16 +12,16 @@
     <ng-container *ngIf="targetPermissions&&targetPermissions.permissions.length>0 else nodata"
                   class="flex-auto p-6 sm:p-10 overflow-y-auto" cdkScrollable>
       <div class="flex-auto p-6 sm:p-10 overflow-y-auto" cdkScrollable>
-        <button
-          mat-icon-button
-          (click)="matDrawer.toggle()">
+        <button class="bg-accent-100"
+                mat-icon-button
+                (click)="matDrawer.toggle()">
           <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
         </button>
         <ul>
           <li *ngFor="let permission of targetPermissions.permissions">
             <div class="form-check flex inline-flex m-2">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="permission.action"/>
-              <label class="form-check-label ml-2"> {{permission.nameAction}} </label>
+              <input id="{{permission.permissionId}}" [disabled]="checkDisable" type="checkbox" class="form-check-input" [(ngModel)]="permission.action"/>
+              <label for="{{permission.permissionId}}" [class.disabled]="checkDisable" class="form-check-label ml-2"> {{permission.nameAction}} </label>
             </div>
           </li>
         </ul>
@@ -30,7 +30,7 @@
     </ng-container>
     <ng-template #nodata>
       <div class="flex-auto p-6 sm:p-10 overflow-y-auto" cdkScrollable>
-        <span>Không có dữ liệu</span>
+        <span>{{'message.noData'|transloco}}</span>
       </div>
     </ng-template>
     <!--            <demo-sidebar></demo-sidebar>-->
@@ -43,7 +43,6 @@
     <div
       class="flex-auto p-6 sm:p-10 overflow-y-auto"
       cdkScrollable>
-
       <!-- CONTENT GOES HERE -->
       <!--              <div class="h-full border-2 border-dashed border-gray-300 rounded-2xl">-->
       <div class="h-full ">
@@ -64,22 +63,17 @@
 
             <div class="form-check flex" [ngClass]="item.children?'':'pl-4'">
 
-              <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked"
+              <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (click)="onCheckedChanged($event.target,item.value)"
                      [indeterminate]="item.indeterminate" (ngModelChange)="onCheckedChange()"/>
 
               <label class="form-check-label cursor-pointer px-4"
                      [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !targetCode || targetCode !== item.value,
                                     'bg-primary-50 dark:bg-hover': targetCode && targetCode === item.value}"
                      (click)="selectChildren(item)"> {{item.text}} </label>
-
             </div>
-
           </div>
         </ng-template>
       </div>
-
     </div>
-
   </mat-drawer-content>
-
 </mat-drawer-container>

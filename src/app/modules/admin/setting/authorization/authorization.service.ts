@@ -19,7 +19,7 @@ export class AuthorizationService extends BaseService{
   }
 
   saveMenu(data):Observable<any>{
-    return this.http.post<any>(`${environment.apiUrl}/menu`,data)
+    return this.http.post<any>(`${environment.apiUrl}/role/save-permission`,data)
   }
 
   getRoles():Observable<any>{

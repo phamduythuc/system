@@ -71,6 +71,9 @@
     "workExperience": "Work eExperience"
   },
   "setting": {
+    "role": "Role",
+    "groupRole": "Group role",
+    "menu": "Menu",
     "user": {
       "group": "Group",
       "userList": "User list",
@@ -134,5 +137,8 @@
         "addMember": "Add member"
       }
     }
+  },
+  "message": {
+    "noData": "Data not found"
   }
 }

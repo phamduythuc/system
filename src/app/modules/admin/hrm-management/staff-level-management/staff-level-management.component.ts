@@ -111,7 +111,7 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
         id,
       },
       width: '60vw',
-      height: '45vh',
+      // height: '45vh',
       disableClose: true
     }, (value) => {
       if (value)

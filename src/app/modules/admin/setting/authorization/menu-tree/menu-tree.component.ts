@@ -39,13 +39,14 @@ export class MenuTreeComponent implements OnInit, OnChanges {
     'btn-outline-dark'
   ];
   buttonClass = this.buttonClasses[0];
-
+  resultTreeData:any;
   items: any;
 
   listPermissionsCover: any[];
   rows: any[];
+  private checkDisable: boolean;
 
-  constructor(private service: AuthorizationService, private snackBar: MatSnackBar) {
+  constructor(private authorizationService: AuthorizationService, private snackBar: MatSnackBar) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,6 +55,7 @@ export class MenuTreeComponent implements OnInit, OnChanges {
         switch (propName) {
           case 'roleId': {
             if (this.roleId) {
+              this.matDrawer.close()
               this.getMenu(this.roleId)
             }
           }
@@ -80,12 +82,16 @@ export class MenuTreeComponent implements OnInit, OnChanges {
 
   getMenu(id?) {
     const data = {roleId:id}
-    this.service.getMenus(data).subscribe(res => {
+    this.authorizationService.getMenus(data).subscribe(res => {
       console.log(res);
       if (res.code === '00') {
         const data = res.data.menus
+        this.resultTreeData = data
         this.getListPermissions(data)
+        console.log(this.listPermissions)
+
         this.items = this.getItems(data)
+        console.log(this.items)
       } else {
         this.showSnackBar(res.message, 'error');
       }
@@ -98,9 +104,9 @@ export class MenuTreeComponent implements OnInit, OnChanges {
       item.text = item.name;
       item.value = item.code;
       // item.name=item.name.toString()
-      if (item.permissions) {
-        itemsArray.push({code: item.code, permissions: item.permissions})
-      }
+      // if (item.permissions) {
+        itemsArray.push({code: item.code,menuId:item.menuId,disable:!item.checked, permissions: item.permissions||[]})
+      // }
       if (item.children) {
         this.getListPermissions(item.children, itemsArray)
       }
@@ -112,21 +118,30 @@ export class MenuTreeComponent implements OnInit, OnChanges {
     const a = []
     if (arr && arr.length > 0) {
       arr.forEach(item => {
-        const nodePermissions = this.listPermissions.find(el => el.code === item.value)
-        const ele = {
-          name: item.text,
-          code: item.value,
-          permissions: nodePermissions && nodePermissions.permissions || [],
-          checked: item.internalChecked,
-          collapsed: item.internalCollapsed,
-          children: this.handleCoverDataTreeToPut(item.internalChildren || [],)
+        if(item.internalChecked!==false){
+          const nodePermissions = this.listPermissions.find(el => el.code === item.value)
+          const ele = {
+            name: item.text,
+            code: item.value,
+            permissions: nodePermissions && this.handleFilterPermissionArrToPut(nodePermissions.permissions) || [],
+            menuId: +(nodePermissions && nodePermissions.menuId),
+            checked: item.internalChecked,
+            collapsed: item.internalCollapsed,
+            children: this.handleCoverDataTreeToPut(item.internalChildren || [],)
+          }
+          a.push(ele)
         }
-        a.push(ele)
       })
     } else {
       return []
     }
     return a
+  }
+
+  handleFilterPermissionArrToPut(arr){
+    if(!arr) return
+
+    return arr.filter(item=>item.action)
   }
 
   showSnackBar(messages?: string, type?: string): void {
@@ -137,6 +152,7 @@ export class MenuTreeComponent implements OnInit, OnChanges {
 
   selectChildren(item: any) {
     this.matDrawer.open()
+    this.checkDisable =!item.checked
     this.targetPermissions = this.listPermissions.find(i => i.code === item.value)
     this.targetCode= this.targetPermissions&&this.targetPermissions.code
     console.log(this.targetPermissions)
@@ -159,9 +175,20 @@ export class MenuTreeComponent implements OnInit, OnChanges {
     this.handleCoverDataTreeToPut(this.items)
     const data= {
       roleId:+this.roleId,
-      menu:this.handleCoverDataTreeToPut(this.items),
+      menus:this.handleCoverDataTreeToPut(this.items),
       // permissions: this.listPermissions
     }
+    this.authorizationService.saveMenu(data).subscribe(res=>{
+      if ('00' === res.code) {
+        this.showSnackBar(res.message, 'success');
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+    })
     console.log(data);
+  }
+
+  onCheckedChanged(checkInput: any,code) {
+    if(this.targetCode===code) this.checkDisable= !checkInput.checked
   }
 }

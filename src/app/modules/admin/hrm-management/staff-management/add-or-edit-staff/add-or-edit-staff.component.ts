@@ -128,11 +128,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
     this.getCategories();
     this.dialogId = data?.id;
     if (this.dialogId) {
-      this.getDetails(this.dialogId).then(() => {
-          // this.handleCoverStringToDate(this.detailsData);
-          this.coverBase64(this.detailsData)
-        }
-      );
+      this.getDetails(this.dialogId)
     }
 
   }

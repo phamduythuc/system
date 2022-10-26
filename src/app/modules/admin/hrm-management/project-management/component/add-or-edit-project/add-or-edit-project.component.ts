@@ -7,6 +7,7 @@ import {CategoriesService} from "@core/categories.service";
 import moment from "moment";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {PartnerService} from "../../../partner-management/partner.service";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-add-or-edit-project',
@@ -55,13 +56,21 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
-      this.projectData = res.data;
-      if(this.projectData){
-      this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
-      this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
-      this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
-      this.formGroup.patchValue(this.projectData);
+      if(res.code==='00'){
+        this.projectData = res.data;
+        if(this.projectData){
+          this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
+          this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
+          this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
+          this.formGroup.patchValue(this.projectData);
+        }
+      }else {
+        this.showSnackBar(res.message,  'error');
+        this.dialogService.closeAll()
       }
+    },error => {
+      this.showSnackBar(error.message,  'error');
+      this.dialogService.closeAll()
     });
   }
 
