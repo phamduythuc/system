@@ -101,8 +101,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
         data: {
           id
         },
-        width: '80vw',
-        height: '80vh',
+        width: '60vw',
         disableClose: true
       }
     )

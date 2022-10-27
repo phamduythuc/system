@@ -14,43 +14,45 @@
     </div>
     <!--        content-->
     <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
-      <div class="grid sm:grid-cols-4 gap-6 w-full">
+      <div class="grid sm:grid-cols-5 gap-6 w-full">
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'common.dateOfBirth'|transloco}}</mat-label>
-            <input class=" " matInput [matDatepicker]="startMonth" datePickerFormat="DD/MM/YYYY" [formControlName]="'startMonth'"
+            <mat-label>{{'Từ tháng'}}</mat-label>
+            <input class=" " matInput [matDatepicker]="startMonth" datePickerFormat="MM/YYYY" [formControlName]="'startMonth'"
                    placeholder="Choose a date">
             <mat-datepicker-toggle [for]="startMonth">
             </mat-datepicker-toggle>
-            <mat-datepicker  #startMonth></mat-datepicker>
+            <mat-datepicker  #startMonth
+                             startView="multi-year"
+                             (yearSelected)="chosenYearHandler($event,formGroup.get('startMonth'))"
+                             (monthSelected)="chosenMonthHandler($event, startMonth,formGroup.get('startMonth'))"
+                             panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'common.dateOfBirth'|transloco}}</mat-label>
-            <input class=" " matInput [matDatepicker]="endMonth" datePickerFormat="DD/MM/YYYY" [formControlName]="'endMonth'"
+            <mat-label>{{'Đến tháng'}}</mat-label>
+            <input class=" " matInput [matDatepicker]="endMonth" datePickerFormat="MM/YYYY" [formControlName]="'endMonth'"
                    placeholder="Choose a date">
             <mat-datepicker-toggle [for]="endMonth">
             </mat-datepicker-toggle>
-            <mat-datepicker  #endMonth></mat-datepicker>
+            <mat-datepicker  #endMonth startView="multi-year"
+                             (yearSelected)="chosenYearHandler($event,formGroup.get('endMonth'))"
+                             (monthSelected)="chosenMonthHandler($event, endMonth,formGroup.get('endMonth'))"
+                             panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
         </div>
+        <div class="sm:col-span-1 flex justify-end items-end">
+          <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
+                  (click)="formGroup.valid && draw(formGroup.value)">
+            <span>{{'Draw'}}</span>
+          </button>
+        </div>
       </div>
-      <div class="">
-        <app-chart-line></app-chart-line>
+      <div class="h-full">
+        <app-chart-line style="width: 200px"></app-chart-line>
       </div>
 
-    </div>
-    <div class="footer mt-6 flex justify-end">
-      <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
-              (click)="formGroup.valid && save(formGroup.value)">
-        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
-        <span>{{t('button.save')}}</span>
-      </button>
-      <button mat-raised-button (click)="dialogRef.close()">
-        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
-        <span>{{t('button.cancel')}}</span>
-      </button>
     </div>
   </div>
 </ng-container>
