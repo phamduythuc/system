@@ -5,6 +5,7 @@ import {BaseComponent} from "@core/base.component";
 import {StaffManagementService} from "./staff-management.service";
 import {AddOrEditStaffComponent} from "./add-or-edit-staff/add-or-edit-staff.component";
 import {DetailsStaffComponent} from "./details-staff/details-staff.component";
+import {StaffKpiComponent} from "./staff-kpi/staff-kpi.component";
 
 @Component({
   selector: 'app-staff-management',
@@ -54,7 +55,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'edit', 'delete'],
+      actions: [ 'view','edit', 'delete'],
     }
   ];
   formSearch = this.fb.group({
@@ -96,7 +97,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   }
 
   showDetail(id){
-    this.showDialog(DetailsStaffComponent, {
+    this.showDialog(StaffKpiComponent, {
         data: {
           id
         },
@@ -112,8 +113,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       data: {
         id,
       },
-      width: '80vw',
-      height: '80vh',
+      width: '60vw',
       disableClose: true
     }, (value) => {
       if (value)

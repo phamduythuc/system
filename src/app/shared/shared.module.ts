@@ -21,6 +21,8 @@ import { DatePickerFormatDirective } from './directives/date-picker-format.direc
 import {NgxTrimDirectiveModule} from "ngx-trim-directive";
 import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
 import {TreeviewModule} from "ngx-treeview";
+import { ChartLineComponent } from './charts/chart-line/chart-line.component';
+import {HighchartsChartModule} from "highcharts-angular";
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -32,7 +34,7 @@ export const MAT_MODULES = [
     MatTableModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
 ];
 
 @NgModule({
@@ -42,13 +44,15 @@ export const MAT_MODULES = [
         ReactiveFormsModule,
         MatIconModule,
       TreeviewModule,
-        ...MAT_MODULES
+      HighchartsChartModule,
+      ...MAT_MODULES
     ],
     declarations: [
         HasAnyAuthorityDirective,
         BreadcrumbComponent,
         ConfirmDialogComponent,
         DatePickerFormatDirective,
+        ChartLineComponent,
     ],
   exports: [
     CommonModule,
@@ -60,6 +64,7 @@ export const MAT_MODULES = [
     ErrorMessageModule,
     ...MAT_MODULES,
     DatePickerFormatDirective,
+    ChartLineComponent,
   ]
 })
 export class SharedModule {

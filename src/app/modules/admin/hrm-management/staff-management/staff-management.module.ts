@@ -4,13 +4,15 @@ import { AddOrEditStaffComponent } from './add-or-edit-staff/add-or-edit-staff.c
 import { DetailsStaffComponent } from './details-staff/details-staff.component';
 import {SharedModule} from "@shared/shared.module";
 import {StaffManagementRoutingModule} from "./staff-management-routing.module";
+import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 
 
 
 @NgModule({
   declarations: [
     AddOrEditStaffComponent,
-    DetailsStaffComponent
+    DetailsStaffComponent,
+    StaffKpiComponent
   ],
   imports: [
     CommonModule,
