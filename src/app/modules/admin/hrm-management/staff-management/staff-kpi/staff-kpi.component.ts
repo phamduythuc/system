@@ -1,11 +1,10 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {StaffManagementService} from "../staff-management.service";
-import {BaseComponent} from "@core/base.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import moment, {Moment} from "moment";
-import {FormControl} from "@angular/forms";
-import {MatDatepicker} from "@angular/material/datepicker";
-import {CommonUtilsService} from "@shared/common-utils.service";
+import {Component, Inject, Injector, OnInit, ViewChild} from '@angular/core';
+import {StaffManagementService} from '../staff-management.service';
+import {BaseComponent} from '@core/base.component';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import moment, {Moment} from 'moment';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {ChartLineComponent} from '@shared/charts/chart-line/chart-line.component';
 
 @Component({
   selector: 'app-staff-kpi',
@@ -13,49 +12,81 @@ import {CommonUtilsService} from "@shared/common-utils.service";
   styleUrls: ['./staff-kpi.component.scss']
 })
 export class StaffKpiComponent extends BaseComponent implements OnInit {
-  staffId
-  date = new FormControl(moment());
+  @ViewChild('chartChild')
+  chart: ChartLineComponent;
+
   formGroup = this.fb.group({
-    startMonth: [moment()],
-    endMonth: [moment()]
-  })
+    staffId: [],
+    startMonth: [moment().add(-7, 'month').startOf('month')],
+    endMonth: [moment().add(-1, 'month').endOf('month')]
+  });
+
+  options: any = {
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: this.translocoService.translate('hrm-management.staff.chartKPI.title')
+    },
+    yAxis: {
+      title: {
+        text: 'KPI'
+      }
+    },
+    xAxis: {
+      categories: []
+    },
+    series: [
+      {name: 'Thực hiện', color: 'green', data: []},
+      {name: 'Target', color: 'red', data: []},
+    ],
+  };
 
   constructor(injector: Injector, private staffService: StaffManagementService,
               public dialogRef: MatDialogRef<StaffKpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService);
-    this.staffId = data?.id
+    this.formGroup.patchValue({staffId: data?.id});
   }
 
   ngOnInit(): void {
-
+    this.draw();
   }
 
-  save(value: any) {
-    return false;
-  }
-
-  chosenYearHandler(normalizedYear: Moment, formTarget) {
+  chosenYearHandler(normalizedYear: Moment, formTarget): void {
     const ctrlValue = formTarget.value;
     ctrlValue.year(normalizedYear.year());
     formTarget.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: any, formTarget) {
+  chosenMonthHandler(normalizedMonth: Moment, datepicker: any, formTarget): void {
     const ctrlValue = formTarget.value;
     ctrlValue.month(normalizedMonth.month());
-    ctrlValue.date('1')
+    ctrlValue.date('1');
     formTarget.setValue(ctrlValue);
-    console.log(CommonUtilsService.dateToString(formTarget.value))
     datepicker.close();
   }
 
-  draw(value: any) {
-    const data = {
-      startMonth: value.startMonth,
-      endMonth: value.endMonth,
-      staffId: this.staffId
+  draw(): void {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
     }
-
+    const data = this.formGroup.value;
+    data.startMonth = CommonUtilsService.dateToString(data.startMonth, false);
+    data.endMonth = CommonUtilsService.dateToString(data.endMonth, false);
+    this.staffService.getKpiData(data).subscribe(res => {
+     if (this.isSuccess(res)) {
+       this.options.xAxis.categories = [];
+       this.options.series[0].data = [];
+       this.options.series[1].data = [];
+       res.data.forEach(item => {
+         this.options.xAxis.categories.push(item.kpiMonth);
+         this.options.series[0].data.push(item.kpiActual);
+         this.options.series[1].data.push(item.kpiTarget);
+       });
+       this.chart.drawChart();
+     }
+    });
   }
 }

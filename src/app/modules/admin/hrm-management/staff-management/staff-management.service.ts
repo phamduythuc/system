@@ -1,49 +1,55 @@
-import { Injectable } from '@angular/core';
-import {BaseService} from "@core/base.service";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "@env/environment";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {BaseService} from '@core/base.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '@env/environment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StaffManagementService extends BaseService{
+export class StaffManagementService extends BaseService {
 
-  constructor(public http:HttpClient) {
-    super(http,`${environment.apiUrl}/staff`)
+  constructor(public http: HttpClient) {
+    super(http, `${environment.apiUrl}/staff`);
   }
 
-  createStaff(data):Observable<any>{
+  createStaff(data): Observable<any> {
     const formData = new FormData();
     formData.append('file', null);
-    formData.append('data',  new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    return this.http.post(`${environment.apiUrl}/staff/create`,formData)
+    formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    return this.http.post(`${environment.apiUrl}/staff/create`, formData)
   }
 
-  updateStaff(data):Observable<any>{
+  updateStaff(data): Observable<any> {
     const formData = new FormData();
     formData.append('file', null);
-    formData.append('data',  new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    return this.http.post(`${environment.apiUrl}/staff/update`,formData)
+    formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    return this.http.post(`${environment.apiUrl}/staff/update`, formData)
   }
 
-  getListDepartment(searchData) :Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/department`,{params: searchData});
-  };
-  getListPosition(searchData) :Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/position`,{params: searchData});
-  };
-  getListStaffLevel(searchData) :Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/staff-level`,{params: searchData});
+  getListDepartment(searchData): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/department`, {params: searchData});
   };
 
-  saveMemberTeam(addData):Observable<any>{
-    return this.http.post(`${environment.apiUrl}/team-member/add-member`,addData)
+  getListPosition(searchData): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/position`, {params: searchData});
   };
 
-  getAvatar(linkPath):Observable<any>{
+  getListStaffLevel(searchData): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/staff-level`, {params: searchData});
+  };
+
+  getKpiData(searchData): Observable<any> {
+    return this.http.get<any>(`${this.serviceUrl}/kpi/${searchData.staffId}`, {params: searchData});
+  };
+
+  saveMemberTeam(addData): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/add-member`, addData);
+  };
+
+  getAvatar(linkPath): Observable<any> {
     return this.http.get(`${environment.apiUrl}/achievement/download?filePath=${linkPath}`,
-      {responseType: 'blob', observe: "response"})
+      {responseType: 'blob', observe: 'response'});
   }
 
 }

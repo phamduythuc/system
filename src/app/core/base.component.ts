@@ -1,4 +1,4 @@
-import {Injectable, Injector, Inject} from '@angular/core';
+import {Injectable, Injector, Inject, ChangeDetectorRef} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
 import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
@@ -9,6 +9,7 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from "@core/base.service";
 import {CommonUtilsService} from "@shared/common-utils.service";
+import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
 
 @Injectable()
 export class BaseComponent {
@@ -25,6 +26,7 @@ export class BaseComponent {
   listTimeType=['createdDate','modifiedDate','expectEndTime','actualEndTime','dateOfBirth','leaveDate','staOfficalDate','hireDate','staDate','endDate']
 
   public snackBar: MatSnackBar;
+  public cdr: ChangeDetectorRef;
   public translocoService: TranslocoService;
   public dialogService: MatDialog;
   public fb: FormBuilder;
@@ -36,6 +38,7 @@ export class BaseComponent {
               service?: BaseService,
               dialogRef?: MatDialogRef<any>) {
     this.snackBar = injector.get(MatSnackBar);
+    this.cdr = injector.get(ChangeDetectorRef);
     this.translocoService = injector.get(TranslocoService);
     this.dialogService = injector.get(MatDialog);
     this.fb = injector.get(FormBuilder);
@@ -170,5 +173,9 @@ getDetails(id, callback?) {
         this.showSnackBar(res.message, 'error');
       }
     });
+  }
+
+  isSuccess(res): boolean {
+    return res.code === '00';
   }
 }

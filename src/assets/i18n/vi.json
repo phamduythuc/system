@@ -20,6 +20,11 @@
       "settings": "Cài đặt",
       "logout": "Đăng xuất"
     },
+    "button": {
+      "view": "Xem"
+    },
+    "fromMonth": "Từ tháng",
+    "toMonth": "Đến tháng",
     "search": "Tìm kiếm",
     "stt": "Stt",
     "name": "Tên",
@@ -127,7 +132,10 @@
       }
     },
     "staff": {
-      "title": "Nhân viên"
+      "title": "Nhân viên",
+      "chartKPI": {
+        "title": "KPI theo tháng"
+      }
     },
     "team": {
       "title": "Team",

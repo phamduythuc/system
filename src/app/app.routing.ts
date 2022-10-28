@@ -103,81 +103,18 @@ export const appRoutes: Route[] = [
             }
         },
         children: [
+          {
+            path: 'dashboards',
+            loadChildren: () => import('app/modules/admin/dashboards/dashboards.module').then(m => m.DashboardsModule),
+            data: {breadcrumb: {label: 'Dashboards', url: ''}}
+          },
             {
                 path: 'hrm-management',
               // canActivate: [AuthGuard],
               canActivateChild: [AuthGuard],
                 loadChildren: () => import('app/modules/admin/hrm-management/hrm-management.module').then(m => m.HrmManagementModule),
                 data: {breadcrumb: {label: 'hrm-management.label', url: ''},
-                  // authorities: ['DSNV_CREATE']
                 }
-            },
-            {
-                path: 'example',
-                loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule),
-                data: {breadcrumb: {label: 'example', url: '/'}}
-            },
-            {
-                path: 'dashboards',
-                loadChildren: () => import('app/modules/admin/dashboards/dashboards.module').then(m => m.DashboardsModule),
-                data: {breadcrumb: {label: 'Dashboards', url: ''}}
-            },
-            // datalake-management
-            {
-                path: 'cluster-manager',
-                loadChildren: () => import('app/modules/admin/datalake-management/cluster-manager/cluster-manager.module').then(m => m.ClusterManagerModule),
-                data: {breadcrumb: {label: 'Cluster Manager', url: ''}}
-            },
-            {
-                path: 'lb-manager',
-                loadChildren: () => import('app/modules/admin/datalake-management/lb-manager/lb-manager.module').then(m => m.LbManagerModule),
-                data: {breadcrumb: {label: 'LB Manager', url: ''}}
-            },
-            {
-                path: 'thrift-manager',
-                loadChildren: () => import('app/modules/admin/datalake-management/thrift-manager/thrift-manager.module').then(m => m.ThriftManagerModule),
-                data: {breadcrumb: {label: 'Thrift Manager', url: ''}}
-            },
-            // utility
-            {
-                path: 'support-request',
-                loadChildren: () => import('app/modules/admin/utility/support-request/support-request.module').then(m => m.SupportRequestModule),
-                data: {breadcrumb: {label: 'Support Request', url: ''}}
-            },
-            {
-                path: 'process-manager',
-                loadChildren: () => import('app/modules/admin/utility/process-manager/process-manager.module').then(m => m.ProcessManagerModule),
-                data: {breadcrumb: {label: 'Process Manager', url: ''}}
-            },
-            {
-                path: 'ingestion-and-provisioning',
-                loadChildren: () => import('app/modules/admin/utility/ingestion-and-provisioning/ingestion-and-provisioning.module').then(m => m.IngestionAndProvisioningModule),
-                data: {breadcrumb: {label: 'Ingestion And Provisioning', url: ''}}
-            },
-            {
-                path: 'hdfs-tool',
-                loadChildren: () => import('app/modules/admin/utility/hdfs-tool/hdfs-tool.module').then(m => m.HdfsToolModule),
-                data: {breadcrumb: {label: 'Hdfs Tools', url: ''}}
-            },
-            {
-                path: 'etl-tool',
-                loadChildren: () => import('app/modules/admin/utility/etl-tool/etl-tool.module').then(m => m.EtlToolModule),
-                data: {breadcrumb: {label: 'ETL Tools', url: ''}}
-            },
-            {
-                path: 'encrypt-tool',
-                loadChildren: () => import('app/modules/admin/utility/encrypt-tool/encrypt-tool.module').then(m => m.EncryptToolModule),
-                data: {breadcrumb:{label: 'encrypt-tool', url: 'encrypt-tool'}}
-            },
-            {
-                path: 'upload-file',
-                loadChildren: () => import('app/modules/admin/utility/upload-file/upload-file.module').then(m => m.UploadFileModule),
-                data: {breadcrumb: {label: 'Upload File', url: 'upload-file'}}
-            },
-            {
-                path: 'config-make-file-db',
-                loadChildren: () => import('app/modules/admin/utility/config-make-file-db/config-make-file-db.module').then(m => m.ConfigMakeFileDbModule),
-                data: {breadcrumb: {label: 'Config Make File DB', url: 'config-make-file-db'}}
             },
             // setting
             {

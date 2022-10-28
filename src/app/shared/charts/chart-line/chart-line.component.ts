@@ -1,4 +1,14 @@
-import {Component, ElementRef, Injector, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef, EventEmitter,
+  Injector,
+  Input,
+  OnChanges,
+  OnInit, Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Chart, Options} from "highcharts";
 import * as Highcharts from "highcharts";
 
@@ -8,23 +18,24 @@ import * as Highcharts from "highcharts";
   styleUrls: ['./chart-line.component.scss']
 })
 export class ChartLineComponent implements OnInit, OnChanges {
-  @Input() series :any
+  @Input() options: any;
 
   @ViewChild('charts') public chartEl: ElementRef;
-  myOptions: any = {
+
+  myOptions: Options = {
     chart: {
-      type: 'bar'
+      type: 'line'
     },
     title: {
-      text: 'Stacked bar chart'
+      text: ''
     },
     xAxis: {
-      categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+      categories: []
     },
     yAxis: {
       min: 0,
       title: {
-        text: 'Total fruit consumption'
+        text: 'KPI'
       }
     },
     legend: {
@@ -35,16 +46,10 @@ export class ChartLineComponent implements OnInit, OnChanges {
         stacking: 'normal'
       }
     },
-    series: [{
-      name: 'John',
-      data: [5, 3, 4, 7, 2]
-    }, {
-      name: 'Jane',
-      data: [2, 2, 3, 2, 1]
-    }, {
-      name: 'Joe',
-      data: [3, 4, 4, 2, 5]
-    }]
+    series: [],
+    credits: {
+      enabled: false
+    },
   };
   private chartRef: HTMLElement;
   private ref: Chart;
@@ -54,28 +59,29 @@ export class ChartLineComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    for (const propName in changes) {
-      if (changes.hasOwnProperty(propName)) {
-        switch (propName) {
-          case 'series': {
-            this.ref.destroy()
-            this.myOptions.series=this.series
-            this.drawChart()
-          }
-        }
-      }
-    }
-    }
-
-  ngOnInit() {
-    this.chartRef = document.getElementById('charts')
-    this.drawChart()
+    // for (const propName in changes) {
+    //   if (changes.hasOwnProperty(propName)) {
+    //     switch (propName) {
+    //       case 'series': {
+            if (this.ref) {
+              this.ref.destroy();
+            }
+            this.myOptions = {...this.myOptions, ...this.options};
+            this.drawChart();
+          // }
+        // }
+      // }
+    // }
   }
 
-  drawChart(){
+  ngOnInit(): void {
+    this.chartRef = document.getElementById('charts');
+    this.drawChart();
+  }
+
+  drawChart(): void {
     this.ref = Highcharts.chart(this.chartRef, this.myOptions);
   }
-
 
 
 }

@@ -6,13 +6,15 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
+  serviceUrl: string = '';
 
   constructor(public http?: HttpClient,
               public url?: string, public subUrl?: string) {
+    this.serviceUrl = url;
   }
 
   getOne(id): Observable<any> {
-    return this.http.get<any>(`${this.url}/${id}`)
+    return this.http.get<any>(`${this.url}/${id}`);
   }
 
   search(searchData?: any): Observable<any> {
