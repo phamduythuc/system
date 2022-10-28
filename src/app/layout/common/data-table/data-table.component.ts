@@ -100,7 +100,6 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.displayedActions = this.columns
       ?.find(col => col.columnDef === 'action')
       ?.actions?.map(act => this.actions.find(a => a.id === act));
-    console.log(this.displayedActions)
   }
 
   emitAction(actionType: any, rowData: any): void {

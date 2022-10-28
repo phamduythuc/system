@@ -19,7 +19,6 @@
 
       <!-- Form -->
       <form [formGroup]="formGroup">
-
         <!-- Section -->
 
         <div class="grid sm:grid-cols-6 gap-6 w-full mt-8">
@@ -51,7 +50,7 @@
             <!-- Full name -->
             <div class="sm:col-span-2">
               <mat-form-field class="fuse-mat-no-subscript w-full">
-                <mat-label>Full Name</mat-label>
+                <mat-label>{{'common.fullName'|transloco}}</mat-label>
                 <mat-icon
                   class="icon-size-5"
                   [svgIcon]="'heroicons_solid:user'"
@@ -71,7 +70,7 @@
                   class="icon-size-5"
                   [svgIcon]="'heroicons_solid:user'"
                   matPrefix></mat-icon>
-                <mat-select placeholder="Giới tính" [formControlName]="'gender'">
+                <mat-select [placeholder]="('common.gender' | transloco)+' ...'" [formControlName]="'gender'">
                   <mat-option *ngFor="let item of genderCategories" [value]="item?.code">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -101,7 +100,7 @@
                   class="icon-size-5"
                   [svgIcon]="'heroicons_solid:user'"
                   matPrefix></mat-icon>
-                <mat-select placeholder="Chức vụ" [formControlName]="'positionId'">
+                <mat-select [placeholder]="('common.position' | transloco)+' ...'" [formControlName]="'positionId'">
                   <mat-option *ngFor="let item of listPositions" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -116,7 +115,7 @@
                   class="icon-size-5"
                   [svgIcon]="'heroicons_solid:office-building'"
                   matPrefix></mat-icon>
-                <mat-select placeholder="Phòng ban" [formControlName]="'departmentId'">
+                <mat-select [placeholder]="('common.department' | transloco)+' ...'" [formControlName]="'departmentId'">
                   <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -131,7 +130,7 @@
                   class="icon-size-5"
                   [svgIcon]="'heroicons_solid:user'"
                   matPrefix></mat-icon>
-                <mat-select placeholder="Cấp bậc" [formControlName]="'levelId'">
+                <mat-select [placeholder]="('common.level' | transloco)+' ...'" [formControlName]="'levelId'">
                   <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -177,7 +176,7 @@
             <mat-form-field class="fuse-mat-no-subscript w-full">
                 <mat-label>{{'common.dateOfBirth'|transloco}}</mat-label>
                 <input class=" " matInput [matDatepicker]="dateOfBirth" datePickerFormat="DD/MM/YYYY" [formControlName]="'dateOfBirth'"
-                       placeholder="Choose a date">
+                       [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
                 <mat-datepicker-toggle [for]="dateOfBirth">
                 </mat-datepicker-toggle>
                 <mat-datepicker  #dateOfBirth></mat-datepicker>
@@ -243,7 +242,7 @@
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{'common.hireDate'|transloco}}</mat-label>
               <input class=" " matInput [matDatepicker]="hireDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'hireDate'"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="hireDate">
               </mat-datepicker-toggle>
               <mat-datepicker  #hireDate></mat-datepicker>
@@ -254,7 +253,7 @@
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{'common.staOfficalDate'|transloco}}</mat-label>
               <input class=" " matInput [matDatepicker]="staOfficalDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'staOfficalDate'"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="staOfficalDate">
               </mat-datepicker-toggle>
               <mat-datepicker  #staOfficalDate></mat-datepicker>
@@ -267,7 +266,7 @@
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{'common.leaveDate'|transloco}}</mat-label>
               <input class=" " matInput [matDatepicker]="leaveDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'leaveDate'"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="leaveDate">
               </mat-datepicker-toggle>
               <mat-datepicker  #leaveDate></mat-datepicker>
@@ -281,7 +280,7 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:briefcase'"
                 matPrefix></mat-icon>
-              <mat-select placeholder="Hôn nhân" [formControlName]="'maritalStatus'">
+              <mat-select [placeholder]="('common.marriage' | transloco)+' ...'" [formControlName]="'maritalStatus'">
                 <mat-option *ngFor="let item of maritalCategories" [value]="item?.code">{{item?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -294,7 +293,7 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:briefcase'"
                 matPrefix></mat-icon>
-              <mat-select placeholder="Tôn giáo" [formControlName]="'religion'">
+              <mat-select [placeholder]="('common.religion' | transloco)+' ...'" [formControlName]="'religion'">
                 <mat-option *ngFor="let item of religionCategories" [value]="item?.code">{{item?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -332,7 +331,7 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:phone'"
                 matPrefix></mat-icon>
-              <mat-select placeholder="Hôn nhân" [formControlName]="'staffStatus'">
+              <mat-select [placeholder]="('common.status' | transloco)+' ...'" [formControlName]="'staffStatus'">
                 <mat-option *ngFor="let item of staffStatusCategories" [value]="item?.code">{{item?.name}}</mat-option>
               </mat-select>
             </mat-form-field>

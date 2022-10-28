@@ -16,7 +16,7 @@ export class AddOrEditPositionComponent extends BaseComponent implements OnInit 
     description: [null],
     status: [1, Validators.required],
   });
-
+tes = "common.description"
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditPositionComponent>,
               private positionService: PositionManagementService,

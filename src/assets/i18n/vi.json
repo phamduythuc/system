@@ -28,7 +28,7 @@
     "phone": "Điện thoại",
     "address": "Địa chỉ",
     "description": "Mô tả",
-    "createdBy": "Ngưởi tạo",
+    "createdBy": "Người tạo",
     "createdDate": "Ngày tạo",
     "modifiedBy": "Người chỉnh sửa",
     "modifiedDate": "Ngày chỉnh sửa",
@@ -44,7 +44,6 @@
     "position": "Chức vụ",
     "companyEmail": "Email c.ty",
     "dateOfBirth": "Ngày sinh",
-
     "country": "Quốc gia",
     "cvUrl": "File CV",
     "domicile": "Chỗ ở hiện tại",
@@ -86,7 +85,8 @@
     "save": "Lưu",
     "edit": "Chỉnh sửa",
     "delete": "Xóa",
-    "cancel": "Hủy bỏ"
+    "cancel": "Hủy bỏ",
+    "yes": "Đồng ý"
   },
   "add-new": "Thêm mới",
   "confirm-delete": {
@@ -130,7 +130,7 @@
       "title": "Nhân viên"
     },
     "team": {
-      "title": "Team",
+      "title": "Đội/Nhóm",
       "form": {
         "member": "Thành viên",
         "startDate": "Từ ngày",
@@ -141,5 +141,23 @@
   },
   "message": {
     "noData": "Không tìm thấy dữ liêu"
+  },
+  "placeholder": {
+    "chooseDate": "Chọn ngày" ,
+    "choose": "Chọn"
+  },
+  "specialText": {
+    "delete_1": "Bạn có chắn chắn muốn xóa bản ghi",
+    "delete_2": "Xóa bản ghi",
+    "error_1": "là trường bắt buộc",
+    "error_2": "Độ dài",
+    "error_3": "không được ngắn hơn",
+    "error_4": "không được nhỏ hơn",
+    "error_5": "Giá trị",
+    "error_6": "không thể vượt quá",
+    "error_7": "chỉ nhận giá trị là số",
+    "error_8": "ký tự",
+    "error_9": "Mật khẩu không khớp !"
+
   }
 }

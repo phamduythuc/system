@@ -13,13 +13,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
   },
   {
     id: 'hrmManagement',
-    title: 'Quản lý chung',
+    title: 'hrm-management.label',
     type: 'group',
     role: [AuthoritiesConstant.DSPB_READ,],
     children: [
       {
         id: 'position',
-        title: 'Chức vụ',
+        title: 'hrm-management.position.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/position-management',
@@ -32,7 +32,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'level',
-        title: 'Cấp bậc',
+        title: 'hrm-management.staffLevel.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/staff-level-management',
@@ -45,7 +45,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'department',
-        title: 'Phòng ban',
+        title: 'hrm-management.department.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/department-management',
@@ -58,7 +58,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'partner',
-        title: 'Đối tác',
+        title: 'hrm-management.partner.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/partner-management',
@@ -70,7 +70,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'project',
-        title: 'Dự án',
+        title: 'hrm-management.project.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/project-management',
@@ -81,7 +81,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ]
       }, {
         id: 'staff',
-        title: 'Nhân viên',
+        title: 'hrm-management.staff.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/staff-management',
@@ -92,7 +92,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ]
       }, {
         id: 'team',
-        title: 'Team',
+        title: 'hrm-management.team.title',
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/hrm-management/team-management',

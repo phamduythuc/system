@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {AbstractControl, AbstractControlDirective, Validators} from '@angular/forms';
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-error-message',
@@ -11,16 +12,19 @@ export class ErrorMessageComponent {
   @Input() name = 'Trường này';
   @Input() textPattern = 'Trường này';
 
+  constructor(private tran: TranslocoService) {
+  }
+
   private errorMessages: { [key: string]: any } = {
-    required: (params: any, name: any) => `${name} là trường bắt buộc`,
+    required: (params: any, name: any) => `${name} ${this.tran.translate('specialText.error_1')}`,
     pattern: (params: any, name: any) => `${this.textPattern}`,
-    onlyNumber: (params: any, name: any) => `${name} value must be number`,
-    minlength: (params: any, name: any) => `Length of ${name} can not lower than ${params.requiredLength} characters`,
-    maxlength: (params: any, name: any) => `Length of ${name} can not exceed ${params.requiredLength} characters`,
-    minNumber: (params: any, name: any) => `Value of ${name} can not lower than ${params.message}`,
-    maxNumber: (params: any, name: any) => `Value of ${name} can not exceed ${params.message}`,
+    onlyNumber: (params: any, name: any) => `${name} ${this.tran.translate('specialText.error_7')}`,
+    minlength: (params: any, name: any) => `${this.tran.translate('specialText.error_2')} ${name} ${this.tran.translate('specialText.error_3')} ${params.requiredLength} ${this.tran.translate('specialText.error_8')}`,
+    maxlength: (params: any, name: any) => `${this.tran.translate('specialText.error_2')} ${name} ${this.tran.translate('specialText.error_6')} ${params.requiredLength} ${this.tran.translate('specialText.error_8')}`,
+    minNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_4')} ${params.message}`,
+    maxNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_6')} ${params.message}`,
     uniqueName: (params: any, name: any) => params.message,
-      mustMatch: () => `Mật khẩu không trùng khớp`
+      mustMatch: () => `${this.tran.translate('specialText.error_9')}`
   };
 
   shouldShowErrors(): boolean {

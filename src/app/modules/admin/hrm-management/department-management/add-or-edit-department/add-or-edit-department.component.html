@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
     <div class="header border-b flex justify-between items-center pb-3">
-        <div class="text-xl font-bold card-title capitalize">
-            {{(department ? 'hrm-management.editHeader' : 'hrm-management.addHeader')|transloco}}
+        <div class="text-2xl font-bold card-title capitalize">
+            {{(dialogId ? 'hrm-management.editHeader' : 'hrm-management.addHeader')|transloco}}
         </div>
         <div>
             <button mat-icon-button class="hover:bg-slate-100" (click)="dialogRef.close()">
@@ -13,12 +13,12 @@
     <div class="content mt-6" [formGroup]="formGroup">
         <div class="field flex mb-4">
             <div class="w-1/2 flex">
-                <label class="w-1/3 required" for="department-name">{{"hrm-management.department.form.name"|transloco}}</label>
+                <label class="w-1/3 font-medium required" for="department-name">{{"hrm-management.department.form.name"|transloco}}</label>
                 <div class="input w-2/3">
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                         <input class="w-full" id="department-name"
-                               placeholder="Tên phòng ban"
+                               [placeholder]="('hrm-management.department.form.name' | transloco)+' ...'"
                                formControlName="name"
                                matInput trim='blur'>
                     </mat-form-field>
@@ -26,12 +26,12 @@
                 </div>
             </div>
             <div class="w-1/2 flex">
-                <label class="w-1/3 required ml-4" for="department-code">{{"hrm-management.department.form.code"|transloco}}</label>
+                <label class="w-1/3 font-medium required ml-4" for="department-code">{{"hrm-management.department.form.code"|transloco}}</label>
                 <div class="input w-2/3">
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                         <input class="w-full" id="department-code"
-                               placeholder="Mã phòng ban"
+                               [placeholder]="('hrm-management.department.form.code' | transloco)+' ...'"
                                formControlName="code"
                                matInput>
                     </mat-form-field>
@@ -40,10 +40,10 @@
             </div>
         </div>
       <div class="field flex mb-4">
-          <label class="w-1/6 required">ParentId</label>
+          <label class="w-1/6 font-medium required">ParentId</label>
           <div class="input w-5/6">
             <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
-              <mat-select placeholder="Chọn cha" formControlName="parentId">
+              <mat-select [placeholder]="('common.parent' | transloco)+' ...'" formControlName="parentId">
                 <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -51,12 +51,12 @@
           </div>
       </div>
         <div class="field flex mb-4">
-            <label class="w-1/6" for="description">{{"common.description"|transloco}}</label>
+            <label class="w-1/6 font-medium flex items-center" for="description">{{"common.description"|transloco}}</label>
             <div class="input w-5/6">
                 <mat-form-field
                     class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                     <textarea class="w-full" id="description"
-                              placeholder="Nhập mô tả"
+                              [placeholder]="('common.description' | transloco)+' ...'"
                               formControlName="description"
                               matInput></textarea>
                 </mat-form-field>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="field flex mb-4">
-            <label class="w-1/6">{{"common.status"|transloco}}</label>
+            <label class="w-1/6 font-medium">{{"common.status"|transloco}}</label>
             <div class="input w-5/6">
                 <mat-radio-group formControlName="status">
                     <mat-radio-button [value]="1" class="mr-10 text-lime-500">{{"common.active"|transloco}}</mat-radio-button>

@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-lx font-bold card-title">
+      <div class="text-2lx font-bold card-title">
         {{diaLogId?t("hrm-management.editHeader"):t("hrm-management.addHeader")}}
       </div>
       <div>
@@ -14,12 +14,12 @@
     <!--        content-->
     <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
       <div class="field flex mb-4">
-        <label class="w-1/6 required">{{t("common.name")}}</label>
+        <label class="w-1/6 font-medium required">{{t("common.name")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <input class="w-full"
-                   placeholder="Nhập tên"
+                   [placeholder]="('common.name' | transloco)+' ...'"
                    formControlName="name"
                    matInput trim='blur'>
           </mat-form-field>
@@ -27,12 +27,12 @@
         </div>
       </div>
       <div class="field flex mb-4">
-        <label class="w-1/6 required">{{t("common.phone")}}</label>
+        <label class="w-1/6 font-medium required">{{t("common.phone")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <input class="w-full"
-                   placeholder="number..."
+                   [placeholder]="('common.phone' | transloco)+' ...'"
                    formControlName="phone"
                    matInput trim='blur'>
           </mat-form-field>
@@ -40,24 +40,24 @@
         </div>
       </div>
       <div class="field flex mb-4">
-        <label class="w-1/6 ">{{t("common.address")}}</label>
+        <label class="w-1/6 font-medium ">{{t("common.address")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <input class="w-full"
-                   placeholder="Địa chỉ"
+                   [placeholder]="('common.address' | transloco)+' ...'"
                    formControlName="address"
                    matInput trim='blur'>
           </mat-form-field>
         </div>
       </div>
       <div class="field flex mb-4">
-        <label class="w-1/6 ">{{t("common.note")}}</label>
+        <label class="w-1/6 font-medium ">{{t("common.note")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <textarea class="w-full"
-                   placeholder="Ghi chú"
+                      [placeholder]="('common.note' | transloco)+' ...'"
                    formControlName="note"
                    matInput trim='blur'></textarea>
           </mat-form-field>

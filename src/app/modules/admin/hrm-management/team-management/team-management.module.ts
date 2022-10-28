@@ -6,6 +6,7 @@ import {SharedModule} from "@shared/shared.module";
 import { AddOrEditTeamComponent } from './add-or-edit-team/add-or-edit-team.component';
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -22,7 +23,8 @@ import {MatStepperModule} from "@angular/material/stepper";
         TeamManagementRoutingModule,
         SharedModule,
         NgxMatSelectSearchModule,
-        MatStepperModule
+        MatStepperModule,
+        MatTooltipModule
     ]
 })
 export class TeamManagementModule { }

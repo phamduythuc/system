@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-lx font-bold card-title">
+      <div class="text-2lx font-bold card-title">
         {{dialogId ? t("hrm-management.editHeader") : t("hrm-management.addHeader")}}
       </div>
       <div>
@@ -14,12 +14,12 @@
     <!--        content-->
     <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
       <div class="field flex mb-4">
-        <label class="w-1/6 p-2 required" for="project-name">{{t("common.name")}}</label>
+        <label class="w-1/6 font-medium p-2 required" for="project-name">{{t("common.name")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <input class="w-full" id="project-name"
-                   placeholder="Nhập tên dự án"
+                   [placeholder]="('common.name' | transloco)+' ...'"
                    formControlName="name"
                    matInput trim='blur'>
           </mat-form-field>
@@ -28,12 +28,12 @@
       </div>
       <div class="field flex mb-4">
         <div class="w-1/2 flex">
-          <label class="w-1/3 p-2 required" for="project-code">{{"common.code"|transloco}}</label>
+          <label class="w-1/3 font-medium p-2 required" for="project-code">{{"common.code"|transloco}}</label>
           <div class="input w-2/3">
             <mat-form-field
               class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
               <input class="w-full" id="project-code"
-                     placeholder="Mã dự án"
+                     [placeholder]="('common.code' | transloco)+' ...'"
                      formControlName="code"
                      matInput trim='blur'>
             </mat-form-field>
@@ -41,11 +41,11 @@
           </div>
         </div>
         <div class="w-1/2 flex">
-          <label class="w-1/3 p-2 required ml-4"
+          <label class="w-1/3 font-medium p-2 required ml-4"
                  for="projectType">{{"hrm-management.project.form.projectType"|transloco}}</label>
           <div class="input w-2/3">
             <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
-              <mat-select placeholder="Chọn kiểu dự án" id="projectType" formControlName="projectType">
+              <mat-select [placeholder]="('hrm-management.project.form.projectType' | transloco)+' ...'" id="projectType" formControlName="projectType">
                 <mat-option *ngFor="let type of projectTypes" [value]="type?.code">{{type?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -65,11 +65,11 @@
 <!--          </div>-->
 <!--        </div>-->
 <!--        <div class="w-1/2 flex">-->
-          <label class="w-1/6 p-2 required"
+          <label class="w-1/6 font-medium p-2 required"
                  for="partnerId">{{"hrm-management.project.form.partner"|transloco}}</label>
           <div class="input w-5/6">
             <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
-              <mat-select placeholder="Chọn đối tác dự án" id="partnerId" formControlName="partnerId">
+              <mat-select [placeholder]="('hrm-management.project.form.partner' | transloco)+' ...'" id="partnerId" formControlName="partnerId">
                 <mat-option *ngFor="let partner of listPartner" [value]="partner?.id">{{partner?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -80,12 +80,12 @@
       </div>
       <div class="field flex mb-4">
         <div class="w-1/2 flex">
-          <label class="w-1/3 p-2 required" for="budget">{{"hrm-management.project.form.budget"|transloco}}</label>
+          <label class="w-1/3 font-medium p-2 required" for="budget">{{"hrm-management.project.form.budget"|transloco}}</label>
           <div class="input w-2/3">
             <mat-form-field
               class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
               <input class="w-full" id="budget" type="number"
-                     placeholder="Ngân sách"
+                     [placeholder]="('hrm-management.project.form.budget' | transloco)+' ...'"
                      formControlName="budget"
                      matInput trim='blur'>
             </mat-form-field>
@@ -93,11 +93,11 @@
           </div>
         </div>
         <div class="w-1/2 flex">
-          <label class="w-1/3 ml-4 required p-2">{{"hrm-management.project.form.startTime"|transloco}}</label>
+          <label class="w-1/3 font-medium ml-4 required p-2">{{"hrm-management.project.form.startTime"|transloco}}</label>
           <div class="input w-2/3">
             <div class="w-full pr-0 my-border">
               <input class=" " matInput [matDatepicker]="startTime" datePickerFormat="DD/MM/YYYY" formControlName="startTime"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="startTime">
               </mat-datepicker-toggle>
               <mat-datepicker #startTime></mat-datepicker>
@@ -107,11 +107,11 @@
       </div>
       <div class="field flex mb-4">
         <div class="w-1/2 flex">
-          <label class="w-1/3 p-2 required">{{"hrm-management.project.form.expectEndTime"|transloco}}</label>
+          <label class="w-1/3 font-medium p-2 required">{{"hrm-management.project.form.expectEndTime"|transloco}}</label>
           <div class="input w-2/3">
             <div class="w-full pr-0 my-border">
               <input class=" " matInput [matDatepicker]="expectEndTime" datePickerFormat="DD/MM/YYYY" formControlName="expectEndTime"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="expectEndTime">
               </mat-datepicker-toggle>
               <mat-datepicker #expectEndTime></mat-datepicker>
@@ -120,11 +120,11 @@
           </div>
         </div>
         <div class="w-1/2 flex">
-          <label class="w-1/3 ml-4 p-2">{{"hrm-management.project.form.actualEndTime"|transloco}}</label>
+          <label class="w-1/3 font-medium ml-4 p-2">{{"hrm-management.project.form.actualEndTime"|transloco}}</label>
           <div class="input w-2/3">
             <div class="w-full pr-0 my-border">
               <input class=" " matInput [matDatepicker]="actualEndTime" datePickerFormat="DD/MM/YYYY" formControlName="actualEndTime"
-                     placeholder="Choose a date">
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
               <mat-datepicker-toggle [for]="actualEndTime">
               </mat-datepicker-toggle>
               <mat-datepicker #actualEndTime></mat-datepicker>
@@ -133,12 +133,12 @@
         </div>
       </div>
       <div class="field flex mb-4">
-        <label class="w-1/6 p-2">{{t("common.description")}}</label>
+        <label class="w-1/6 font-medium p-2 flex items-center">{{t("common.description")}}</label>
         <div class="input w-5/6">
           <mat-form-field
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
             <textarea class="w-full"
-                      placeholder="Ghi chú"
+                      [placeholder]="('common.description' | transloco)+' ...'"
                       formControlName="description"
                       matInput trim='blur'></textarea>
           </mat-form-field>

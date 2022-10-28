@@ -165,6 +165,7 @@ getDetails(id, callback?) {
     this.baseService.delete(id).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
+        this.searchModel.page = 0
         this.processSearch(this.searchModel);
       } else {
         this.showSnackBar(res.message, 'error');

@@ -2,7 +2,7 @@
   <div class="w-full h-full px-4">
     <mat-card class="bg-card h-full">
       <div class="header border-b flex justify-between">
-        <div class="text-xl font-bold card-title mb-3 capitalize">
+        <div class="text-2xl font-bold card-title mb-3 capitalize">
           {{t('hrm-management.partner.title')}}
         </div>
         <div class="search-and-filter flex mr-4 items-center">
@@ -29,14 +29,14 @@
                 <!--        header-->
 
                 <!--        content-->
-                <div class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
+                <form class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
                   <div class="field flex-col w-1/2  p-4">
                     <div class="input">
-                      <label>{{t("common.name")}}</label>
+                      <label class="font-medium">{{t("common.name")}}</label>
                       <mat-form-field
                         class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
                         <input class="w-full"
-                               placeholder="Nhập tên"
+                               [placeholder]="('common.name' | transloco)+' ...'"
                                formControlName="name"
                                matInput trim='blur'>
                       </mat-form-field>
@@ -56,28 +56,28 @@
 <!--                    </div>-->
 <!--                  </div>-->
                   <div class="field flex-col w-1/2  p-4">
-                    <label class=>{{t("common.address")}}</label>
+                    <label class='font-medium'>{{t("common.address")}}</label>
                     <div class="input">
                       <mat-form-field
                         class="fuse-mat-no-subscript w-full sm:mt-0 bg-card">
-                        <input type="number" class="w-full"
-                               placeholder="..."
+                        <input class="w-full"
+                               [placeholder]="('common.address' | transloco)+' ...'"
                                formControlName="address"
                                matInput trim='blur'>
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-                <div class="footer  flex justify-center">
-                  <button mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid"
-                          (click)="doSearch()">
-                    <mat-icon
-                      matPrefix
-                      class="icon-size-5"
-                      [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                    <span>{{t("common.search")}}</span>
-                  </button>
-                </div>
+                  <div class="footer w-full flex justify-center">
+                    <button type="submit" mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid"
+                            (click)="doSearch()">
+                      <mat-icon
+                        matPrefix
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                      <span>{{t("common.search")}}</span>
+                    </button>
+                  </div>
+                </form>
               </div>
             </ng-container>
 
@@ -89,7 +89,7 @@
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult.data | slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+            [rows]="searchResult.data //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
             [columns]="columns"
             [paginate]="true"
             [limit]="paginate.size"

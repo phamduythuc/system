@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-lx font-bold card-title">
+      <div class="text-2lx font-bold card-title">
         {{dialogId?t("hrm-management.editHeader"):t("hrm-management.addHeader")}}
       </div>
       <div>
@@ -31,7 +31,9 @@
               [formControlName]="'name'"
               matInput>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('name')" [name]="'common.name'|transloco"></app-error-message>
         </div>
+
         <!-- department -->
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
@@ -40,7 +42,7 @@
               class="icon-size-5"
               [svgIcon]="'heroicons_solid:office-building'"
               matPrefix></mat-icon>
-            <mat-select placeholder="Phòng ban" [formControlName]="'departmentId'">
+            <mat-select [placeholder]="('common.department' | transloco)+' ...'" [formControlName]="'departmentId'">
               <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -52,7 +54,7 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
             <input class=" " matInput [matDatepicker]="startDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'staDate'"
-                   placeholder="Choose a date">
+                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
             <mat-datepicker-toggle [for]="startDate">
             </mat-datepicker-toggle>
             <mat-datepicker  #startDate></mat-datepicker>
@@ -64,7 +66,7 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'hrm-management.team.form.endDate'|transloco}}</mat-label>
             <input class=" " matInput [matDatepicker]="endDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'endDate'"
-                   placeholder="Choose a date">
+                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
             <mat-datepicker-toggle [for]="endDate">
             </mat-datepicker-toggle>
             <mat-datepicker  #endDate></mat-datepicker>
@@ -114,7 +116,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <button
+              <button [matTooltip]="'button.new'|transloco" matTooltipPosition="below" matTooltipClass="custom-tooltip"
                 class="fuse-alert-dismiss-button ml-2 mr-4"
                 mat-icon-button
                 (click)="addMemberToTeam(selectMember.value)">

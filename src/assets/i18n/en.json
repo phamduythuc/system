@@ -41,10 +41,9 @@
     "fullName": "FullName",
     "department": "Department",
     "gender": "Gender",
-    "position" : "Position",
+    "position": "Position",
     "companyEmail": "Company email",
     "dateOfBirth": "Date Of Birth",
-
     "country": "Country",
     "cvUrl": "Cv",
     "domicile": "Domicile",
@@ -86,7 +85,8 @@
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "yes": "Yes"
   },
   "add-new": "Add new",
   "confirm-delete": {
@@ -96,7 +96,7 @@
   "hrm-management": {
     "label": "Category Management",
     "addHeader": "Add new",
-    "editHeader": "edit information",
+    "editHeader": "Edit information",
     "detailsHeader": "Information",
     "department": {
       "title": "Department",
@@ -116,7 +116,7 @@
       "title": "Partner"
     },
     "project": {
-      "title": "Dự án",
+      "title": "Project",
       "form": {
         "partner": "Partner",
         "budget": "Budget",
@@ -125,7 +125,8 @@
         "expectEndTime": "Expect end time",
         "actualEndTime": "Actual end time"
       }
-    },"staff": {
+    },
+    "staff": {
       "title": "Staff"
     },
     "team": {
@@ -140,5 +141,22 @@
   },
   "message": {
     "noData": "Data not found"
+  },
+  "placeholder": {
+    "chooseDate": "Choose a date",
+    "choose": "Choose"
+  },
+  "specialText": {
+    "delete_1": "You definitely want to delete the record",
+    "delete_2": "Delete records",
+    "error_1": "is the mandatory field",
+    "error_2": "Length of",
+    "error_3": "can not lower than",
+    "error_4": "can not lower than",
+    "error_5": "Value of",
+    "error_6": "can not exceed",
+    "error_7": "value must be number",
+    "error_8": "character",
+    "error_9": "Password not macth !"
   }
 }

@@ -3,7 +3,7 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-lx font-bold card-title">
+      <div class="text-2lx font-bold card-title">
         {{'Staff KPI'}}
       </div>
       <div>
@@ -19,7 +19,7 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'Từ tháng'}}</mat-label>
             <input class=" " matInput [matDatepicker]="startMonth" datePickerFormat="MM/YYYY" [formControlName]="'startMonth'"
-                   placeholder="Choose a date">
+                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
             <mat-datepicker-toggle [for]="startMonth">
             </mat-datepicker-toggle>
             <mat-datepicker  #startMonth
@@ -33,7 +33,7 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'Đến tháng'}}</mat-label>
             <input class=" " matInput [matDatepicker]="endMonth" datePickerFormat="MM/YYYY" [formControlName]="'endMonth'"
-                   placeholder="Choose a date">
+                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
             <mat-datepicker-toggle [for]="endMonth">
             </mat-datepicker-toggle>
             <mat-datepicker  #endMonth startView="multi-year"

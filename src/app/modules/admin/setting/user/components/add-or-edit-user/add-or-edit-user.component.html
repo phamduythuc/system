@@ -19,7 +19,7 @@
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                         <input class="w-full"
-                               placeholder="Nhập họ và tên"
+                               [placeholder]="('common.fullName' | transloco)+' ...'"
                                formControlName="firstName"
                                matInput trim='blur'>
                     </mat-form-field>
