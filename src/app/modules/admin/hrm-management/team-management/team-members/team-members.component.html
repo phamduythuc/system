@@ -4,28 +4,30 @@
   <div class="w-full" [formGroup]="addMember">
     <div class="flex flex-row w-full">
       <div class="w-full">
-        <mat-label>Add team members</mat-label>
+        <mat-label>{{'hrm-management.team.form.addMember'|transloco}}</mat-label>
         <div class="flex flex-row w-full">
-        <mat-form-field class="w-full">
-<!--          <mat-icon-->
-<!--            class="icon-size-5"-->
-<!--            [svgIcon]="'heroicons_solid:user'"-->
-<!--            matPrefix></mat-icon>-->
-          <mat-select formControlName='addList' placeholder="choose member" [multiple]="true">
-            <mat-option>
-              <ngx-mat-select-search formControlName='name' [preventHomeEndKeyPropagation]="true">
-                <mat-icon ngxMatSelectSearchClear
-                          class="icon-size-5"
-                          [svgIcon]="'heroicons_solid:x'"
-                          matPrefix></mat-icon>
-              </ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let staff of staffList " [value]="staff">
-              {{staff.fullName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-          <button
+          <mat-form-field class="w-full">
+            <!--          <mat-icon-->
+            <!--            class="icon-size-5"-->
+            <!--            [svgIcon]="'heroicons_solid:user'"-->
+            <!--            matPrefix></mat-icon>-->
+            <mat-select formControlName='addList' [placeholder]="('hrm-management.team.form.choose' | transloco)+' ...'" [multiple]="true">
+              <mat-option>
+                <ngx-mat-select-search formControlName='name' [preventHomeEndKeyPropagation]="true"
+                                       [noEntriesFoundLabel]="'specialText.notFound'|transloco"
+                                       [placeholderLabel]="'common.search'|transloco">
+                  <mat-icon ngxMatSelectSearchClear
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:x'"
+                            matPrefix></mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+              <mat-option *ngFor="let staff of staffList " [value]="staff">
+                {{staff.fullName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button [title]="'hrm-management.team.form.addMember'|transloco"
             class="fuse-alert-dismiss-button ml-2 mr-4"
             mat-icon-button
             (click)="addMemberToTeam()">
@@ -37,7 +39,7 @@
             (click)="saveMemberList()">
             {{'button.save'|transloco}}
           </button>
-<!--        <button (click)="addMemberToTeam()">add</button>-->
+          <!--        <button (click)="addMemberToTeam()">add</button>-->
         </div>
       </div>
 
@@ -77,17 +79,18 @@
                 (selectionChange)="changeManager($event,member) "
                 disableOptionCentering
                 #roleSelect="matSelect">
-<!--                <mat-select-trigger class="text-md">-->
-<!--                  <span>Role:</span>-->
-<!--                  <span class="ml-1 font-medium">{{(roleSelect.value==='1'?'Admin':'Member') | titlecase}}</span>-->
-<!--                </mat-select-trigger>-->
+                <!--                <mat-select-trigger class="text-md">-->
+                <!--                  <span>Role:</span>-->
+                <!--                  <span class="ml-1 font-medium">{{(roleSelect.value==='1'?'Admin':'Member') | titlecase}}</span>-->
+                <!--                </mat-select-trigger>-->
                 <ng-container *ngFor="let role of roles">
                   <mat-option
                     class="h-auto py-4 leading-none"
                     [value]="role.value">
-                    <div class="font-medium mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.label}}</div>
-<!--                    <div-->
-<!--                      class="mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.description}}</div>-->
+                    <div
+                      class="font-medium mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.label}}</div>
+                    <!--                    <div-->
+                    <!--                      class="mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.description}}</div>-->
                   </mat-option>
                 </ng-container>
               </mat-select>

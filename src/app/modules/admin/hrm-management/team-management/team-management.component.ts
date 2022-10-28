@@ -23,6 +23,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   formSearch = this.fb.group({
     text: ''
   });
+   listTeam: any[];
 
   constructor(injector: Injector, public teamService: TeamManagementService, fb: FormBuilder) {
     super(injector, teamService)
@@ -39,10 +40,15 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     ).subscribe(
       res => {
         console.log(res)
+        this.listTeam= this.searchResult.data.filter(item=>{
+          if(item.name.includes(res)) return item
+        })
       }
     )
     this.searchModel.status = 1
-    this.processSearch(this.searchModel)
+    this.processSearch(this.searchModel,()=>{
+      this.listTeam = this.searchResult.data
+    })
   }
 
   doSearch() {

@@ -35,7 +35,7 @@
                  [formControlName]="'text'"
                  matInput>
         </div>
-        <ng-container *ngFor="let panel of searchResult.data; trackBy: trackByFn">
+        <ng-container *ngFor="let panel of listTeam; trackBy: trackByFn">
           <div
             class="flex col-span-5 px-8 py-5 cursor-pointer w-full"
             [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedTeamId || selectedTeamId !== panel.id,
@@ -88,7 +88,7 @@
 
           <!-- Panel title -->
           <div class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none">
-            {{getPanelInfo(selectedTeamId)?.name}}
+            {{getPanelInfo(selectedTeamId)?.name|uppercase}}
           </div>
         </div>
 

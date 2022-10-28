@@ -143,7 +143,8 @@
         "member": "Thành viên",
         "startDate": "Từ ngày",
         "endDate": "Đến ngày",
-        "addMember": "Thêm thành viên"
+        "addMember": "Thêm thành viên",
+        "choose": "Chọn thành viên"
       }
     }
   },
@@ -165,7 +166,7 @@
     "error_6": "không thể vượt quá",
     "error_7": "chỉ nhận giá trị là số",
     "error_8": "ký tự",
-    "error_9": "Mật khẩu không khớp !"
-
+    "error_9": "Mật khẩu không khớp !",
+    "notFound": "Không tìm thấy bản ghi"
   }
 }

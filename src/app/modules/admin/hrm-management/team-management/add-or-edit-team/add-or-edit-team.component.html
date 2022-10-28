@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-2lx font-bold card-title">
+      <div class="text-2xl font-bold card-title">
         {{dialogId?t("hrm-management.editHeader"):t("hrm-management.addHeader")}}
       </div>
       <div>
@@ -55,7 +55,7 @@
             <mat-label>{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
             <input class=" " matInput [matDatepicker]="startDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'staDate'"
                    [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
-            <mat-datepicker-toggle [for]="startDate">
+            <mat-datepicker-toggle #datepicker [for]="startDate">
             </mat-datepicker-toggle>
             <mat-datepicker  #startDate></mat-datepicker>
           </mat-form-field>
@@ -65,7 +65,7 @@
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>{{'hrm-management.team.form.endDate'|transloco}}</mat-label>
-            <input class=" " matInput [matDatepicker]="endDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'endDate'"
+            <input [min]="formGroup.get('staDate').value" matInput [matDatepicker]="endDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'endDate'"
                    [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
             <mat-datepicker-toggle [for]="endDate">
             </mat-datepicker-toggle>
@@ -116,7 +116,8 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <button [matTooltip]="'button.new'|transloco" matTooltipPosition="below" matTooltipClass="custom-tooltip"
+<!--              <button [matTooltip]="'button.new'|transloco" matTooltipPosition="below" matTooltipClass="custom-tooltip"-->
+              <button [title]="'hrm-management.team.form.addMember'|transloco"
                 class="fuse-alert-dismiss-button ml-2 mr-4"
                 mat-icon-button
                 (click)="addMemberToTeam(selectMember.value)">

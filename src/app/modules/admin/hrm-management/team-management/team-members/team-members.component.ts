@@ -34,7 +34,8 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
         switch (propName) {
           case 'teamId': {
             if (this.teamId) {
-              this.addMember.get('name').patchValue('')
+              this.addMember.get('name').patchValue('');
+              this.addMember.get('addList').reset()
               this.getListMember()
             }
             console.log(this.teamId)
@@ -165,6 +166,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     const addList = this.addMember.get('addList').value;
     this.members = [...addList, ...this.members]
     this.getListStaff()
+    this.addMember.get('addList').reset()
     console.log(this.members);
   }
 

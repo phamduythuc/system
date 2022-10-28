@@ -70,7 +70,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'view','edit', 'delete'],
+      actions: [ 'edit', 'delete'],
     }
   ];
   formSearch = this.fb.group({
