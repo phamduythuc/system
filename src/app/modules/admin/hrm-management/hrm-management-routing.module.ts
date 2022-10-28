@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {StaffManagementModule} from "./staff-management/staff-management.module";
-import {AuthGuard} from "@core/auth/guards/auth.guard";
 
 
 const routes: Routes = [

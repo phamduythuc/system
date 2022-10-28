@@ -7,7 +7,7 @@ import { NotificationsService } from 'app/layout/common/notifications/notificati
 import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.service';
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
 import { UserService } from 'app/core/user/user.service';
-import {AccountService} from "./core/auth/account.service";
+import {AccountService} from '@core/auth/account.service';
 
 @Injectable({
     providedIn: 'root'

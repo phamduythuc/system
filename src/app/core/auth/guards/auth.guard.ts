@@ -10,12 +10,10 @@ import {
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import {Observable, of, switchMap, map} from 'rxjs';
+import {map, Observable, of} from 'rxjs';
 import {AuthService} from 'app/core/auth/auth.service';
-import {AccountService} from "../account.service";
-import {environment} from "../../../../environments/environment";
-import {tick} from "@angular/core/testing";
-import {trigger} from "@angular/animations";
+import {AccountService} from '../account.service';
+import {environment} from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +44,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       map(account => {
         if (account) {
           const authorities = route.data['authorities'];
-          console.log(authorities);
           if (!authorities || authorities.length === 0 || this.accountService.hasAnyAuthority(authorities)) {
             return true;
           }

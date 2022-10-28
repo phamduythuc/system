@@ -3,8 +3,8 @@
   <div class="flex flex-col h-full">
     <!--        header-->
     <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-2lx font-bold card-title">
-        {{'Staff KPI'}}
+      <div class="text-lx font-bold card-title">
+        {{'hrm-management.staff.chartKPI.title' | transloco}}
       </div>
       <div>
         <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
@@ -17,9 +17,9 @@
       <div class="grid sm:grid-cols-5 gap-6 w-full">
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'Từ tháng'}}</mat-label>
+            <mat-label>{{'common.fromMonth' | transloco}}</mat-label>
             <input class=" " matInput [matDatepicker]="startMonth" datePickerFormat="MM/YYYY" [formControlName]="'startMonth'"
-                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
+                   placeholder="Choose a date">
             <mat-datepicker-toggle [for]="startMonth">
             </mat-datepicker-toggle>
             <mat-datepicker  #startMonth
@@ -31,9 +31,9 @@
         </div>
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'Đến tháng'}}</mat-label>
+            <mat-label>{{'common.toMonth' | transloco}}</mat-label>
             <input class=" " matInput [matDatepicker]="endMonth" datePickerFormat="MM/YYYY" [formControlName]="'endMonth'"
-                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
+                   placeholder="Choose a date">
             <mat-datepicker-toggle [for]="endMonth">
             </mat-datepicker-toggle>
             <mat-datepicker  #endMonth startView="multi-year"
@@ -44,13 +44,13 @@
         </div>
         <div class="sm:col-span-1 flex justify-end items-end">
           <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
-                  (click)="formGroup.valid && draw(formGroup.value)">
-            <span>{{'Draw'}}</span>
+                  (click)="draw()">
+            <span>{{'common.button.view' | transloco}}</span>
           </button>
         </div>
       </div>
       <div class="h-full">
-        <app-chart-line style="width: 200px"></app-chart-line>
+        <app-chart-line style="width: 200px" [options]="options" #chartChild></app-chart-line>
       </div>
 
     </div>
