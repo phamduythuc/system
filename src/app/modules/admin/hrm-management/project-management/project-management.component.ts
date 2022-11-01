@@ -5,6 +5,7 @@ import {IColumn} from "@layout/common/data-table/data-table.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {AddOrEditProjectComponent} from "./component/add-or-edit-project/add-or-edit-project.component";
 import {DetailProjectComponent} from "./component/detail-project/detail-project.component";
+import {ProjectEffortComponent} from "./component/project-effort/project-effort.component";
 
 @Component({
   selector: 'app-project-management',
@@ -70,7 +71,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'edit', 'delete'],
+      actions: [ 'view','edit', 'delete'],
     }
   ];
   formSearch = this.fb.group({
@@ -111,12 +112,12 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   }
 
   showDetail(id){
-    this.showDialog(DetailProjectComponent, {
+    this.showDialog(ProjectEffortComponent, {
         data: {
           id
         },
         width: '60vw',
-        // height: '55vh',
+        height: '85vh',
         disableClose: true
       }
     )

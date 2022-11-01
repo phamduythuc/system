@@ -64,6 +64,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     }
   ];
   displayedActions = [];
+  displayedInput = [];
 
   get displayedColumns(): any {
     return this.columns.map(c => c.columnDef);
@@ -109,6 +110,10 @@ export class DataTableComponent implements OnInit, OnChanges {
     };
     this.action.emit(data);
   }
+
+  log(row) {
+    console.log(row)
+  }
 }
 
 export interface IColumn {
@@ -117,4 +122,5 @@ export interface IColumn {
   header?: string;
   cellRenderer?: any;
   flex?: number;
+  inputName?: any;
 }
