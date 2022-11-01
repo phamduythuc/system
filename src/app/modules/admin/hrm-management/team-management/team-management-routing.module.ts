@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {TeamManagementComponent} from "./team-management.component";
+import {RouterModule, Routes} from '@angular/router';
+import {TeamManagementComponent} from './team-management.component';
 
 const routes: Routes = [
   {

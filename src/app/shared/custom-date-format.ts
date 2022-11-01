@@ -8,13 +8,13 @@ export type DateDisplay = DateParse & {
 };
 export class CustomDateFormat {
   private _parse: DateParse = {
-    dateInput: "YYYY/MM/DD"
+    dateInput: 'YYYY/MM/DD'
   };
   private _display: DateDisplay = {
-    dateInput: "YYYY/MM/DD",
-    monthYearLabel: "MMM YYYY",
-    dateA11yLabel: "LL",
-    monthYearA11yLabel: "MMM YYYY"
+    dateInput: 'YYYY/MM/DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMM YYYY'
   };
 
   set parse(parse: DateParse) {

@@ -10,13 +10,13 @@ import {DataTableModule} from '@layout/common/data-table/data-table.module';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { StaffLevelManagementComponent } from './staff-level-management/staff-level-management.component';
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
-import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { ProjectManagementComponent } from './project-management/project-management.component';
 import { StaffManagementComponent } from './staff-management/staff-management.component';
 import { TeamManagementComponent } from './team-management/team-management.component';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {UserModule} from "../setting/user/user.module";
-import {TeamManagementModule} from "./team-management/team-management.module";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {UserModule} from '../setting/user/user.module';
+import {TeamManagementModule} from './team-management/team-management.module';
 
 
 @NgModule({

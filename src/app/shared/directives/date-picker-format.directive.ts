@@ -1,8 +1,8 @@
 import {Directive, Inject, Input, Optional} from '@angular/core';
-import {MomentDateAdapter} from "@angular/material-moment-adapter";
-import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
-import {CustomDateFormat, DateDisplay, DateParse} from "@shared/custom-date-format";
-import {NgControl} from "@angular/forms";
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {CustomDateFormat, DateDisplay, DateParse} from '@shared/custom-date-format';
+import {NgControl} from '@angular/forms';
 
 @Directive({
   selector: '[datePickerFormat]',
@@ -22,7 +22,7 @@ export class DatePickerFormatDirective {
   @Input() public configDateParse: DateParse;
   @Input() public configDateDisplay: DateDisplay;
 
-  @Input("datePickerFormat")
+  @Input('datePickerFormat')
   set datePickerFormat(format: string) {
     if (this.configDateParse) {
       this.matDateFormat.updateDateFormat(

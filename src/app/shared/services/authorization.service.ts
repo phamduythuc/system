@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {environment} from "@env/environment";
-import {createRequestOption} from "@shared/request-util";
-import {BaseService} from "@core/base.service";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '@env/environment';
+import {createRequestOption} from '@shared/request-util';
+import {BaseService} from '@core/base.service';
 
 @Injectable({
   providedIn: 'root'

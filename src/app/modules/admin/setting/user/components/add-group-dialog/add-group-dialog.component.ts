@@ -1,9 +1,9 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, Validators} from "@angular/forms";
-import {SettingService} from "../../../setting.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {BaseComponent} from "../../../../../../core/base.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, Validators} from '@angular/forms';
+import {SettingService} from '../../../setting.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseComponent} from '../../../../../../core/base.component';
 
 @Component({
     selector: 'app-add-group-dialog',

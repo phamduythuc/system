@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {EncryptToolComponent} from "./encrypt-tool.component";
+import {EncryptToolComponent} from './encrypt-tool.component';
 
 const routes: Routes = [
     {

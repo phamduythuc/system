@@ -9,8 +9,8 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {Chart, Options} from "highcharts";
-import * as Highcharts from "highcharts";
+import {Chart, Options} from 'highcharts';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-chart-line',

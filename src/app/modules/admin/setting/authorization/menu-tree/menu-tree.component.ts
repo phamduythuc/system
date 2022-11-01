@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {TreeviewComponent, TreeviewConfig, TreeviewItem, TreeviewHelper, DownlineTreeviewItem} from "ngx-treeview";
-import {AuthorizationService} from "@shared/services/authorization.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {isNil, remove, reverse} from "lodash";
-import {data} from "autoprefixer";
+import {TreeviewComponent, TreeviewConfig, TreeviewItem, TreeviewHelper, DownlineTreeviewItem} from 'ngx-treeview';
+import {AuthorizationService} from '@shared/services/authorization.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {isNil, remove, reverse} from 'lodash';
+import {data} from 'autoprefixer';
 
 @Component({
   selector: 'app-menu-tree',

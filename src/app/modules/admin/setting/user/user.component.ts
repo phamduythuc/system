@@ -1,14 +1,14 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {SettingService} from "../setting.service";
-import {forkJoin} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
-import {AddGroupDialogComponent} from "./components/add-group-dialog/add-group-dialog.component";
-import {take} from "rxjs/operators";
-import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {BaseComponent} from "../../../../core/base.component";
-import {AddOrEditUserComponent} from "./components/add-or-edit-user/add-or-edit-user.component";
-import {IColumn} from "../../../../layout/common/data-table/data-table.component";
+import {SettingService} from '../setting.service';
+import {forkJoin} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {AddGroupDialogComponent} from './components/add-group-dialog/add-group-dialog.component';
+import {take} from 'rxjs/operators';
+import {ConfirmDialogComponent} from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseComponent} from '../../../../core/base.component';
+import {AddOrEditUserComponent} from './components/add-or-edit-user/add-or-edit-user.component';
+import {IColumn} from '../../../../layout/common/data-table/data-table.component';
 
 @Component({
     selector: 'app-user',

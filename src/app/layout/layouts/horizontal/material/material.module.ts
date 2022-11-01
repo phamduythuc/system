@@ -16,8 +16,8 @@ import { ShortcutsModule } from 'app/layout/common/shortcuts/shortcuts.module';
 import { UserModule } from 'app/layout/common/user/user.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { MaterialLayoutComponent } from 'app/layout/layouts/horizontal/material/material.component';
-import {MatPaginatorIntl} from "@angular/material/paginator";
-import {PaginatorI18nService} from "@shared/services/paginator-i18n.service";
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {PaginatorI18nService} from '@shared/services/paginator-i18n.service';
 
 @NgModule({
     declarations: [

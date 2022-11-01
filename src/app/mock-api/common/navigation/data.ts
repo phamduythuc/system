@@ -1,6 +1,6 @@
 /* eslint-disable */
 import {FuseNavigationItem} from '@fuse/components/navigation';
-import {AuthoritiesConstant} from "../../../authorities.constant";
+import {AuthoritiesConstant} from '../../../authorities.constant';
 
 export const defaultNavigation: FuseNavigationItem[] = [
   {

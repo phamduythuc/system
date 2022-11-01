@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {AbstractControl, AbstractControlDirective, Validators} from '@angular/forms';
-import {TranslocoService} from "@ngneat/transloco";
+import {TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-error-message',

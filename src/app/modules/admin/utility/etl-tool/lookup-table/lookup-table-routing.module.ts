@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LookupTableComponent} from "./lookup-table.component";
+import {LookupTableComponent} from './lookup-table.component';
 
 const routes: Routes = [
     {

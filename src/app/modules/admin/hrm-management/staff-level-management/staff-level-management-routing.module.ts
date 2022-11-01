@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {StaffLevelManagementComponent} from "./staff-level-management.component";
+import {RouterModule, Routes} from '@angular/router';
+import {StaffLevelManagementComponent} from './staff-level-management.component';
 
 const routes : Routes = [
   {

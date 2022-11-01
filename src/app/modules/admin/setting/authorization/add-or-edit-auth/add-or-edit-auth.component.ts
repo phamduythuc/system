@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, Inject, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from "../../../../../core/base.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {SettingService} from "../../setting.service";
-import {Validators} from "@angular/forms";
-import {AuthorizationService} from "@shared/services/authorization.service";
+import {BaseComponent} from '../../../../../core/base.component';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {SettingService} from '../../setting.service';
+import {Validators} from '@angular/forms';
+import {AuthorizationService} from '@shared/services/authorization.service';
 
 @Component({
   selector: 'app-add-or-edit-auth',

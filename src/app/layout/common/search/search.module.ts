@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'app/shared/shared.module';
 import { SearchComponent } from 'app/layout/common/search/search.component';
-import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 
 @NgModule({
     declarations: [

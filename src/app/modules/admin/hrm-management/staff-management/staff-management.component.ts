@@ -1,11 +1,11 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {IColumn} from "@layout/common/data-table/data-table.component";
-import {CommonUtilsService} from "@shared/common-utils.service";
-import {BaseComponent} from "@core/base.component";
-import {StaffManagementService} from "./staff-management.service";
-import {AddOrEditStaffComponent} from "./add-or-edit-staff/add-or-edit-staff.component";
-import {DetailsStaffComponent} from "./details-staff/details-staff.component";
-import {StaffKpiComponent} from "./staff-kpi/staff-kpi.component";
+import {IColumn} from '@layout/common/data-table/data-table.component';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {BaseComponent} from '@core/base.component';
+import {StaffManagementService} from './staff-management.service';
+import {AddOrEditStaffComponent} from './add-or-edit-staff/add-or-edit-staff.component';
+import {DetailsStaffComponent} from './details-staff/details-staff.component';
+import {StaffKpiComponent} from './staff-kpi/staff-kpi.component';
 
 @Component({
   selector: 'app-staff-management',

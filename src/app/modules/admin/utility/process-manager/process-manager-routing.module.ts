@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ProcessManagerComponent} from "./process-manager.component";
+import {ProcessManagerComponent} from './process-manager.component';
 
 const routes: Routes = [
     {

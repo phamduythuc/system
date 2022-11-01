@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError, flatMap } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
-import {environment} from "../../../environments/environment";
-import {AccountService} from "./account.service";
+import {environment} from '../../../environments/environment';
+import {AccountService} from './account.service';
 @Injectable()
 export class AuthService
 {

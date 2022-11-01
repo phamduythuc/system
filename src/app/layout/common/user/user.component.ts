@@ -12,9 +12,9 @@ import {BooleanInput} from '@angular/cdk/coercion';
 import {Subject, takeUntil} from 'rxjs';
 import {User} from 'app/core/user/user.types';
 import {UserService} from 'app/core/user/user.service';
-import {environment} from "@env/environment";
-import {DOCUMENT} from "@angular/common";
-import {AccountService} from "@core/auth/account.service";
+import {environment} from '@env/environment';
+import {DOCUMENT} from '@angular/common';
+import {AccountService} from '@core/auth/account.service';
 
 @Component({
   selector: 'user',

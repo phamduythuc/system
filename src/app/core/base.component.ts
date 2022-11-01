@@ -7,9 +7,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
-import {BaseService} from "@core/base.service";
-import {CommonUtilsService} from "@shared/common-utils.service";
-import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
+import {BaseService} from '@core/base.service';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {ChangeDetection} from '@angular/cli/lib/config/workspace-schema';
 
 @Injectable()
 export class BaseComponent {

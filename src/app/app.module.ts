@@ -14,7 +14,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import {SharedModule} from '@shared/shared.module';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
-import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 

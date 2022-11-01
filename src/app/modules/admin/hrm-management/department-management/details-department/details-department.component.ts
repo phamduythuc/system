@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DepartmentManagementService} from "@shared/services/department-management.service";
-import {BaseComponent} from "@core/base.component";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DepartmentManagementService} from '@shared/services/department-management.service';
+import {BaseComponent} from '@core/base.component';
 
 @Component({
   selector: 'app-details-department',

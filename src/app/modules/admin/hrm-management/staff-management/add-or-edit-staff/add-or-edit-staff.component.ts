@@ -9,11 +9,11 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {Validators} from "@angular/forms";
-import {CategoriesService} from "@core/categories.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {StaffManagementService} from "../staff-management.service";
+import {BaseComponent} from '@core/base.component';
+import {Validators} from '@angular/forms';
+import {CategoriesService} from '@core/categories.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {StaffManagementService} from '../staff-management.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
@@ -23,7 +23,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 })
 export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
   @ViewChild('fileInput') el: ElementRef;
-  imageUrl: any = "https://i.ibb.co/fDWsn3G/buck.jpg";
+  imageUrl: any = 'https://i.ibb.co/fDWsn3G/buck.jpg';
   editFile: boolean = true;
   removeUpload: boolean = false;
   private readonly dialogId: any;

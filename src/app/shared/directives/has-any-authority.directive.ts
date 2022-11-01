@@ -1,6 +1,6 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {AccountService} from "../../core/auth/account.service";
+import {AccountService} from '../../core/auth/account.service';
 
 
 @Directive({

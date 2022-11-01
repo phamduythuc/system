@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ThriftRuleComponent} from "./thrift-rule.component";
+import {ThriftRuleComponent} from './thrift-rule.component';
 
 const routes: Routes = [
     {

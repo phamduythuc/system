@@ -4,7 +4,7 @@ import {StaffManagementService} from '../../staff-management/staff-management.se
 import {Validators} from '@angular/forms';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
-import {TeamMemberService} from "@shared/services/team-member.service";
+import {TeamMemberService} from '@shared/services/team-member.service';
 
 @Component({
   selector: 'app-team-members',

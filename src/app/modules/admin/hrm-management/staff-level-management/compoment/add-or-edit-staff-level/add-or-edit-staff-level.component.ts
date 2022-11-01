@@ -1,8 +1,8 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {BaseComponent} from "../../../../../../core/base.component";
-import {StaffLevelService} from "@shared/services/staff-level.service";
+import {Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BaseComponent} from '../../../../../../core/base.component';
+import {StaffLevelService} from '@shared/services/staff-level.service';
 
 @Component({
   selector: 'app-add-or-edit-staff-level',

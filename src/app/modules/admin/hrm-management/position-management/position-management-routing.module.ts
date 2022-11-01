@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PositionManagementComponent} from "./position-management.component";
+import {PositionManagementComponent} from './position-management.component';
 
 const routes: Routes = [
     {

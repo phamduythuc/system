@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import {config, map, mergeMap, of, Subject, switchMap, take, takeUntil} from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import {FuseConfigService} from "../../../../@fuse/services/config";
-import {AppConfig} from "../../../core/config/app.config";
+import {FuseConfigService} from '../../../../@fuse/services/config';
+import {AppConfig} from '../../../core/config/app.config';
 
 @Component({
     selector       : 'languages',

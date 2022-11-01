@@ -1,11 +1,11 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {ProjectManagementService} from "../../project-management.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import moment, {Moment} from "moment";
-import {CommonUtilsService} from "@shared/common-utils.service";
-import {FormArray, FormGroup} from "@angular/forms";
-import {IColumn} from "@layout/common/data-table/data-table.component";
+import {BaseComponent} from '@core/base.component';
+import {ProjectManagementService} from '@shared/services/project-management.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import moment, {Moment} from 'moment';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {FormArray, FormGroup} from '@angular/forms';
+import {IColumn} from '@layout/common/data-table/data-table.component';
 
 @Component({
   selector: 'app-project-effort',
@@ -70,7 +70,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   get arr(): FormArray {
-    return this.formGroup.get("arr") as FormArray;
+    return this.formGroup.get('arr') as FormArray;
   }
 
   newArr(): FormGroup {

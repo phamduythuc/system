@@ -1,13 +1,13 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {AbstractControl, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProjectManagementService} from "@shared/services/project-management.service";
-import {CategoriesService} from "@core/categories.service";
-import moment from "moment";
-import {CommonUtilsService} from "@shared/common-utils.service";
-import {PartnerService} from "@shared/services/partner.service";
-import {map} from "rxjs";
+import {BaseComponent} from '@core/base.component';
+import {AbstractControl, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ProjectManagementService} from '@shared/services/project-management.service';
+import {CategoriesService} from '@core/categories.service';
+import moment from 'moment';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {PartnerService} from '@shared/services/partner.service';
+import {map} from 'rxjs';
 
 @Component({
   selector: 'app-add-or-edit-project',

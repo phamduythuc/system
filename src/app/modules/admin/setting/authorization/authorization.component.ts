@@ -11,8 +11,8 @@ import {
 import {BaseComponent} from '../../../../core/base.component';
 import {forkJoin, Subject} from 'rxjs';
 import {AddOrEditAuthComponent} from './add-or-edit-auth/add-or-edit-auth.component';
-import {MenuTreeComponent} from "./menu-tree/menu-tree.component";
-import {AuthorizationService} from "@shared/services/authorization.service";
+import {MenuTreeComponent} from './menu-tree/menu-tree.component';
+import {AuthorizationService} from '@shared/services/authorization.service';
 
 @Component({
   selector: 'app-authorization',

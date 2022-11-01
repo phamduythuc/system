@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ConfigMakeFileDbComponent} from "./config-make-file-db.component";
+import {ConfigMakeFileDbComponent} from './config-make-file-db.component';
 
 const routes: Routes = [
     {

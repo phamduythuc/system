@@ -1,11 +1,11 @@
 import {Component, Inject, Injector, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, Validators} from "@angular/forms";
-import {SettingService} from "../../../setting.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {BaseComponent} from "../../../../../../core/base.component";
-import {CreateIpDialogComponent} from "./create-ip-dialog/create-ip-dialog.component";
-import {FuseValidators} from "../../../../../../../@fuse/validators";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, Validators} from '@angular/forms';
+import {SettingService} from '../../../setting.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseComponent} from '../../../../../../core/base.component';
+import {CreateIpDialogComponent} from './create-ip-dialog/create-ip-dialog.component';
+import {FuseValidators} from '../../../../../../../@fuse/validators';
 
 @Component({
     selector: 'app-add-or-edit-user',
@@ -54,7 +54,7 @@ export class AddOrEditUserComponent extends BaseComponent implements OnInit {
     }
 
     addIp() {
-        this.showDialog(CreateIpDialogComponent, {width: "30vw"}, (value) => {
+        this.showDialog(CreateIpDialogComponent, {width: '30vw'}, (value) => {
             if (value) {
                 const ipList = this.formGroup.value.userIpList ?? [];
                 ipList.push({ipAddress: value});

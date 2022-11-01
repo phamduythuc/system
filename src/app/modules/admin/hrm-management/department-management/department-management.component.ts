@@ -4,8 +4,8 @@ import {DepartmentManagementService} from '@shared/services/department-managemen
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {DetailsDepartmentComponent} from "./details-department/details-department.component";
-import {AccountService} from "@core/auth/account.service";
+import {DetailsDepartmentComponent} from './details-department/details-department.component';
+import {AccountService} from '@core/auth/account.service';
 
 @Component({
   selector: 'app-department-management',

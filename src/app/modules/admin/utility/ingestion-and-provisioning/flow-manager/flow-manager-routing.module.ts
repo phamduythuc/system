@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FlowManagerComponent} from "./flow-manager.component";
+import {FlowManagerComponent} from './flow-manager.component';
 
 const routes: Routes = [
     {

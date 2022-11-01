@@ -1,11 +1,11 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {PartnerService} from "@shared/services/partner.service";
-import {IColumn} from "@layout/common/data-table/data-table.component";
-import {CommonUtilsService} from "@shared/common-utils.service";
-import {AddOrEditPartnerComponent} from "./component/add-or-edit-partner/add-or-edit-partner.component";
-import {DetailsDepartmentComponent} from "../department-management/details-department/details-department.component";
-import {DetailsPartnerComponent} from "./component/details-partner/details-partner.component";
+import {BaseComponent} from '@core/base.component';
+import {PartnerService} from '@shared/services/partner.service';
+import {IColumn} from '@layout/common/data-table/data-table.component';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {AddOrEditPartnerComponent} from './component/add-or-edit-partner/add-or-edit-partner.component';
+import {DetailsDepartmentComponent} from '../department-management/details-department/details-department.component';
+import {DetailsPartnerComponent} from './component/details-partner/details-partner.component';
 
 @Component({
   selector: 'app-partner-management',

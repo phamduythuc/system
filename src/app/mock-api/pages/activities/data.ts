@@ -7,7 +7,7 @@ export const activities = [
         icon        : 'heroicons_solid:star',
         description : 'Your submission has been accepted',
         date        : moment().subtract(25, 'minutes').toISOString(), // 25 minutes ago
-        extraContent: `<div class="font-bold">Congratulations for your acceptance!</div><br>
+        extraContent: `<div class='font-bold'>Congratulations for your acceptance!</div><br>
                         <div>Hi Brian,<br>Your submission has been accepted and you are ready to move into the next phase. Once you are ready, reach out to me and we will ...</div>`
     },
     {
@@ -42,7 +42,7 @@ export const activities = [
         image       : 'assets/images/avatars/male-06.jpg',
         description : '<strong>Roger Murray</strong> accepted your friend request',
         date        : moment().subtract(7, 'hours').toISOString(), // 7 hours ago
-        extraContent: `You have <span class="font-semibold">8</span> mutual friends.`
+        extraContent: `You have <span class='font-semibold'>8</span> mutual friends.`
     },
     {
         id         : 'eb8aa470-635e-461d-88e1-23d9ea2a5665',
@@ -55,10 +55,10 @@ export const activities = [
         icon         : 'heroicons_solid:mail',
         description  : 'You have 3 new mails',
         date         : moment().subtract(1, 'day').toISOString(), // 1 day ago
-        extraContent : `<ol class="list-decimal list-inside space-y-2">
-                            <li class="font-medium">Please review and sign the attached agreement</li>
-                            <li class="font-medium">Delivery address confirmation</li>
-                            <li class="font-medium">Previous clients and their invoices</li>
+        extraContent : `<ol class='list-decimal list-inside space-y-2'>
+                            <li class='font-medium'>Please review and sign the attached agreement</li>
+                            <li class='font-medium'>Delivery address confirmation</li>
+                            <li class='font-medium'>Previous clients and their invoices</li>
                         </ol>`,
         linkedContent: 'Mailbox',
         link         : '/apps/mailbox',

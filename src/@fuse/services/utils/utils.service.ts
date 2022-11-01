@@ -18,7 +18,7 @@ export class FuseUtilsService
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Get the equivalent "IsActiveMatchOptions" options for "exact = true".
+     * Get the equivalent 'IsActiveMatchOptions' options for 'exact = true'.
      */
     get exactMatchOptions(): IsActiveMatchOptions
     {
@@ -31,7 +31,7 @@ export class FuseUtilsService
     }
 
     /**
-     * Get the equivalent "IsActiveMatchOptions" options for "exact = false".
+     * Get the equivalent 'IsActiveMatchOptions' options for 'exact = false'.
      */
     get subsetMatchOptions(): IsActiveMatchOptions
     {

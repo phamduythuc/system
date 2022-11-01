@@ -13,7 +13,7 @@ import { FuturisticLayoutModule } from 'app/layout/layouts/vertical/futuristic/f
 import { ThinLayoutModule } from 'app/layout/layouts/vertical/thin/thin.module';
 import { SettingsModule } from 'app/layout/common/settings/settings.module';
 import { SharedModule } from 'app/shared/shared.module';
-import {NgDynamicBreadcrumbModule} from "ng-dynamic-breadcrumb";
+import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 
 const layoutModules = [

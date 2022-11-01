@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ConnectionManagerComponent} from "./connection-manager.component";
+import {ConnectionManagerComponent} from './connection-manager.component';
 
 const routes: Routes = [
     {

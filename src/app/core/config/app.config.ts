@@ -28,10 +28,10 @@ export interface AppConfig
  * object to set the defaults. To access, update and reset the config, use
  * FuseConfigService and its methods.
  *
- * "Screens" are carried over to the BreakpointObserver for accessing them within
+ * 'Screens' are carried over to the BreakpointObserver for accessing them within
  * components, and they are required.
  *
- * "Themes" are required for Tailwind to generate themes.
+ * 'Themes' are required for Tailwind to generate themes.
  */
 export const appConfig: AppConfig = {
     layout : 'classic',

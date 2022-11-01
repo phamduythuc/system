@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HdfsBrowserComponent} from "./hdfs-browser.component";
+import {HdfsBrowserComponent} from './hdfs-browser.component';
 
 const routes: Routes = [
     {

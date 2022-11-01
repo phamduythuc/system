@@ -1,8 +1,8 @@
 import {Component, Inject, Injector, OnInit,} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PositionManagementService} from "@shared/services/position-management.service";
-import {Validators} from "@angular/forms";
+import {BaseComponent} from '@core/base.component';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {PositionManagementService} from '@shared/services/position-management.service';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-or-edit-position',
@@ -16,7 +16,7 @@ export class AddOrEditPositionComponent extends BaseComponent implements OnInit 
     description: [null],
     status: [1, Validators.required],
   });
-tes = "common.description"
+tes = 'common.description'
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditPositionComponent>,
               private positionService: PositionManagementService,

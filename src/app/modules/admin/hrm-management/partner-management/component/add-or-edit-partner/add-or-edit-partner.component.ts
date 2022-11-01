@@ -1,8 +1,8 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {BaseComponent} from "@core/base.component";
-import {PartnerService} from "@shared/services/partner.service";
+import {Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BaseComponent} from '@core/base.component';
+import {PartnerService} from '@shared/services/partner.service';
 
 @Component({
   selector: 'app-add-or-edit-partner',

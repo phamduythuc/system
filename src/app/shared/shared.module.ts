@@ -18,11 +18,11 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePickerFormatDirective } from './directives/date-picker-format.directive';
-import {NgxTrimDirectiveModule} from "ngx-trim-directive";
-import {ErrorMessageModule} from "@shared/components/error-message/error-message.module";
-import {TreeviewModule} from "ngx-treeview";
+import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
+import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
+import {TreeviewModule} from 'ngx-treeview';
 import { ChartLineComponent } from './charts/chart-line/chart-line.component';
-import {HighchartsChartModule} from "highcharts-angular";
+import {HighchartsChartModule} from 'highcharts-angular';
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,

@@ -6,7 +6,7 @@ import {SharedModule} from '../../../../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorMessageModule} from '../../../../shared/components/error-message/error-message.module';
 import { AddOrEditPositionComponent } from './compoment/add-or-edit-position/add-or-edit-position.component';
-import {NgxTrimDirectiveModule} from "ngx-trim-directive";
+import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { DetailPositionComponent } from './compoment/detail-position/detail-position.component';
 
 
