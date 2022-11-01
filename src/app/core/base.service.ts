@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-  serviceUrl: string = '';
+  public serviceUrl: string = '';
 
   constructor(public http?: HttpClient,
               public url?: string, public subUrl?: string) {

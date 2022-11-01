@@ -44,7 +44,7 @@ export class StaffManagementService extends BaseService {
   };
 
   saveMemberTeam(addData): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/add-member`, addData);
+    return this.http.post(`${environment.apiUrl}/team-member/add-member`, addData);
   };
 
   getAvatar(linkPath): Observable<any> {

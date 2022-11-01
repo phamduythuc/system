@@ -1,9 +1,10 @@
 import {Component, Injector, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {StaffManagementService} from "../../staff-management/staff-management.service";
-import {FormBuilder, FormControl, Validator, Validators} from "@angular/forms";
-import {debounceTime, delay, filter, forkJoin, map, ReplaySubject, Subject, takeUntil, tap} from "rxjs";
-import {distinctUntilChanged} from "rxjs/operators";
+import {BaseComponent} from '@core/base.component';
+import {StaffManagementService} from '../../staff-management/staff-management.service';
+import {Validators} from '@angular/forms';
+import {debounceTime, map} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
+import {TeamMemberService} from "@shared/services/team-member.service";
 
 @Component({
   selector: 'app-team-members',
@@ -12,20 +13,19 @@ import {distinctUntilChanged} from "rxjs/operators";
 })
 export class TeamMembersComponent extends BaseComponent implements OnInit, OnChanges {
 
-  @Input() teamId: any
+  @Input() teamId: any;
 
   roles: any[];
   staffList: any;
   members: any;
   addMember: any;
-  number =0
 
-  constructor(injector: Injector, public staffService: StaffManagementService, fb: FormBuilder) {
-    super(injector, staffService)
-    this.addMember = fb.group({
+  constructor(injector: Injector, public teamMemberService: TeamMemberService) {
+    super(injector, teamMemberService);
+    this.addMember = this.fb.group({
       name: [],
-      addList: [null, Validators.required]
-    })
+      addList: [[]]
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,10 +35,9 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
           case 'teamId': {
             if (this.teamId) {
               this.addMember.get('name').patchValue('');
-              this.addMember.get('addList').reset()
-              this.getListMember()
+              this.addMember.get('addList').reset();
+              this.getListMember();
             }
-            console.log(this.teamId)
           }
         }
       }
@@ -47,59 +46,6 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
 
 
   ngOnInit(): void {
-    // this.getListStaff()
-    // this.members = [
-    //   {
-    //     id:1,
-    //     avatar: 'assets/images/avatars/male-01.jpg',
-    //     fullName: 'Dejesus Michael',
-    //     email: 'dejesusmichael@mail.org',
-    //     isManager: 'admin'
-    //   },
-    //   {
-    //     id:2,
-    //     avatar: 'assets/images/avatars/male-03.jpg',
-    //     fullName: 'Mclaughlin Steele',
-    //     email: 'mclaughlinsteele@mail.me',
-    //     isManager: 'admin'
-    //   },
-    //   {
-    //     id:3,
-    //     avatar: 'assets/images/avatars/female-02.jpg',
-    //     fullName: 'Laverne Dodson',
-    //     email: 'lavernedodson@mail.ca',
-    //     isManager: 'write'
-    //   },
-    //   {
-    //     id:4,
-    //     avatar: 'assets/images/avatars/female-03.jpg',
-    //     fullName: 'Trudy Berg',
-    //     email: 'trudyberg@mail.us',
-    //     isManager: 'read'
-    //   },
-    //   {
-    //     id:5,
-    //     avatar: 'assets/images/avatars/male-07.jpg',
-    //     fullName: 'Lamb Underwood',
-    //     email: 'lambunderwood@mail.me',
-    //     isManager: 'read'
-    //   },
-    //   {
-    //     id:6,
-    //     avatar: 'assets/images/avatars/male-08.jpg',
-    //     fullName: 'Mcleod Wagner',
-    //     email: 'mcleodwagner@mail.biz',
-    //     isManager: 'read'
-    //   },
-    //   {
-    //     id:7,
-    //     avatar: 'assets/images/avatars/female-07.jpg',
-    //     fullName: 'Shannon Kennedy',
-    //     email: 'shannonkennedy@mail.ca',
-    //     isManager: 'read'
-    //   }
-    // ];
-
     // Setup the roles
     this.roles = [
 
@@ -115,86 +61,77 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
       }
     ];
     this.addMember.get('name').valueChanges.pipe(
-      map(event => {
-        return event;
-      }),
+      map(event => event),
       debounceTime(1000),
       distinctUntilChanged()
     ).subscribe(
       res => {
-        this.getListStaff(res)
-        console.log(res)
+        this.getListStaff(res);
       }
-    )
-    this.searchModel.status = 1
+    );
+    this.searchModel.status = 1;
 
   }
 
-  getListMember() {
-    this.searchModel.teamId = this.teamId
+  getListMember(): void {
+    this.searchModel.teamId = this.teamId;
     this.processSearch(this.searchModel, () => {
-      this.members = this.searchResult.data
-      this.getListStaff()
-    })
+      this.members = this.searchResult.data;
+      this.getListStaff();
+    });
   }
 
-  getListStaff(textSearch?) {
-    const dataSearch = {status: 1}
+  getListStaff(textSearch?): void {
+    const dataSearch = {status: 1};
     if (textSearch) {
       dataSearch['fullName'] = textSearch;
     }
-    this.staffService.search(dataSearch).subscribe(res => {
-      this.staffList = res.data
-      if (this.members.length > 0) {
-        this.members.forEach(item => {
-          const index = this.staffList.findIndex(el => el.id === item.id)
-          if (index >= 0) {
-            this.staffList.splice(index, 1)
-          }
-        })
-      }
-
-    })
+    this.teamMemberService.search(dataSearch).subscribe(res => {
+      this.staffList = res.data;
+      // if (this.members.length > 0) {
+      //   this.members.forEach(item => {
+      //     const index = this.staffList.findIndex(el => el.id === item.id);
+      //     if (index >= 0) {
+      //       this.staffList.splice(index, 1);
+      //     }
+      //   });
+      // }
+    });
   }
 
   trackByFn(index: number, item: any): any {
     return item.id || index;
   }
 
-  addMemberToTeam() {
-    this.addMember.get('name').patchValue('')
+  addMemberToTeam(): void {
+    this.addMember.get('name').patchValue('');
     const addList = this.addMember.get('addList').value;
-    this.members = [...addList, ...this.members]
-    this.getListStaff()
-    this.addMember.get('addList').reset()
-    console.log(this.members);
+    this.members = [...addList, ...this.members];
+    this.getListStaff();
+    this.addMember.get('addList').reset();
   }
 
-  changeManager(e, member) {
-    member.isManager = e.value
-    console.log(e, member);
-    console.log(this.members);
-
+  changeManager(e, member): void {
+    member.isManager = e.value;
   }
 
-  saveMemberList() {
+  saveMemberList(): void {
     const sendData = {
       teamId: this.teamId,
       members: this.members.map(res => ({staffId: res.id, isManager: res.isManager}))
-    }
-    this.staffService.saveMemberTeam(sendData).subscribe(res => {
+    };
+    this.teamMemberService.saveMembers(sendData).subscribe(res => {
       if (res.code === '00') {
-        this.getListMember()
+        this.getListMember();
       } else {
         this.showSnackBar(res.message, 'error');
       }
 
-    })
-    console.log(sendData);
+    });
   }
 
-  deleteFromAddForm(index: any) {
-    this.members.splice(index, 1)
-    this.getListStaff()
+  deleteFromAddForm(index: any): void {
+    this.members.splice(index, 1);
+    this.getListStaff();
   }
 }

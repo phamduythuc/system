@@ -23,7 +23,7 @@ export class BaseComponent {
     data: [],
     totalRecords: 0
   };
-  listTimeType=['createdDate','modifiedDate','expectEndTime','actualEndTime','dateOfBirth','leaveDate','staOfficalDate','hireDate','staDate','endDate']
+  listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate'];
 
   public snackBar: MatSnackBar;
   public cdr: ChangeDetectorRef;
@@ -66,51 +66,47 @@ export class BaseComponent {
     this.dialogService.closeAll();
   }
 
-  handleCoverTimeToString(data) {
+  handleCoverTimeToString(data): void {
     this.listTimeType.forEach(item => {
       if (data[item]) {
-        data[item] = CommonUtilsService.dateToString(data[item])
-        console.log(data[item])
+        data[item] = CommonUtilsService.dateToString(data[item]);
       }
     });
   }
 
-  handleCoverStringToDate(data){
+  handleCoverStringToDate(data): void {
     this.listTimeType.forEach(item => {
       if (data[item]) {
-        data[item] = CommonUtilsService.stringToDate(CommonUtilsService.dateToString(data[item]))
-        console.log(data[item])
+        data[item] = CommonUtilsService.stringToDate(CommonUtilsService.dateToString(data[item]));
       }
     });
   }
 
 
-getDetails(id, callback?) {
-    this.baseService.getOne(id).subscribe(res=>{// .subscribe(res => {
-    if (res.code === '00') {
-      this.detailsData = res.data;
-      this.handleCoverStringToDate(this.detailsData)
-      this.formGroup.patchValue(this.detailsData);
-      this.formGroup.markAllAsTouched();
-      if (callback) {
-        callback(this.detailsData);
+  getDetails(id, callback?): void {
+    this.baseService.getOne(id).subscribe(res => {// .subscribe(res => {
+      if (res.code === '00') {
+        this.detailsData = res.data;
+        this.handleCoverStringToDate(this.detailsData);
+        this.formGroup.patchValue(this.detailsData);
+        this.formGroup.markAllAsTouched();
+        if (callback) {
+          callback(this.detailsData);
+        }
+      } else {
+        this.showSnackBar(res.message, 'error');
+        this.dialogService.closeAll();
       }
-    } else {
-      this.showSnackBar(res.message,  'error');
-      this.dialogService.closeAll()
-    }
-    })
-    // })
-
+    });
   }
 
-  processSearch(searchModel,callback?): void {
+  processSearch(searchModel, callback?): void {
     this.baseService.search(searchModel).subscribe(res => {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
         this.searchResult.totalRecords = res.totalRecords;
-        if(callback){
-          callback()
+        if (callback) {
+          callback();
         }
       } else {
         this.showSnackBar(res.message, 'error');
@@ -168,7 +164,7 @@ getDetails(id, callback?) {
     this.baseService.delete(id).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
-        this.searchModel.page = 0
+        this.searchModel.page = 0;
         this.processSearch(this.searchModel);
       } else {
         this.showSnackBar(res.message, 'error');

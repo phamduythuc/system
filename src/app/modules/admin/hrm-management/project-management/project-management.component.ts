@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
-import {ProjectManagementService} from "./project-management.service";
+import {ProjectManagementService} from "@shared/services/project-management.service";
 import {IColumn} from "@layout/common/data-table/data-table.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {AddOrEditProjectComponent} from "./component/add-or-edit-project/add-or-edit-project.component";

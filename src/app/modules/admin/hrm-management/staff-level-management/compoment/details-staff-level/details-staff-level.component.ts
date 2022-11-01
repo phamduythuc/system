@@ -1,8 +1,8 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PartnerService} from "../../../partner-management/partner.service";
+import {PartnerService} from "@shared/services/partner.service";
 import {BaseComponent} from "@core/base.component";
-import {StaffLevelService} from "../../staff-level.service";
+import {StaffLevelService} from "@shared/services/staff-level.service";
 
 @Component({
   selector: 'app-details-staff-level',

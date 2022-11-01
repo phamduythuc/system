@@ -30,6 +30,7 @@
           <button [title]="'hrm-management.team.form.addMember'|transloco"
             class="fuse-alert-dismiss-button ml-2 mr-4"
             mat-icon-button
+                  [disabled]="!this.addMember.get('addList').value"
             (click)="addMemberToTeam()">
             <mat-icon [svgIcon]="'heroicons_solid:user-add'"></mat-icon>
           </button>

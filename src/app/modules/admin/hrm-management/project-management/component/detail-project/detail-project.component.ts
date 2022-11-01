@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DepartmentManagementService} from "../../../department-management/department-management.service";
-import {ProjectManagementService} from "../../project-management.service";
+import {DepartmentManagementService} from "@shared/services/department-management.service";
+import {ProjectManagementService} from "@shared/services/project-management.service";
 import {BaseComponent} from "@core/base.component";
 
 @Component({

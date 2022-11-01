@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'staff-management',
-    loadChildren: () => import('app/modules/admin/hrm-management/staff-management/staff-management.module').then(m => m.StaffManagementModule),
+    loadChildren: () => import('@shared/services/staff-management.module').then(m => m.StaffManagementModule),
     data: {breadcrumb: {label: 'hrm-management.staff.title', url: 'hrm-management/staff-management'}}
   },
   {

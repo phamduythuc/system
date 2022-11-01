@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {BaseComponent} from "@core/base.component";
-import {PositionManagementService} from "../../position-management.service";
+import {PositionManagementService} from "@shared/services/position-management.service";
 
 @Component({
   selector: 'app-detail-position',

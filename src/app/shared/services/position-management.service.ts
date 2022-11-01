@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from '../../../../core/base.service';
-import {environment} from '../../../../../environments/environment';
+import {BaseService} from '@core/base.service';
+import {environment} from '@env/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({

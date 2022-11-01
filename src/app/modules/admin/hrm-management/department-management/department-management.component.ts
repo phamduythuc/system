@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
-import {DepartmentManagementService} from './department-management.service';
+import {DepartmentManagementService} from '@shared/services/department-management.service';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {AddOrEditDepartmentComponent} from './add-or-edit-department/add-or-edit-department.component';
 import {CommonUtilsService} from '@shared/common-utils.service';

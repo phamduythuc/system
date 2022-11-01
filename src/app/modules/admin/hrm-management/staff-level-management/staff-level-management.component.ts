@@ -1,7 +1,7 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {IColumn} from "../../../../layout/common/data-table/data-table.component";
 import {BaseComponent} from "../../../../core/base.component";
-import {StaffLevelService} from "./staff-level.service";
+import {StaffLevelService} from "@shared/services/staff-level.service";
 import {AddOrEditStaffLevelComponent} from "./compoment/add-or-edit-staff-level/add-or-edit-staff-level.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {DetailsStaffLevelComponent} from "./compoment/details-staff-level/details-staff-level.component";

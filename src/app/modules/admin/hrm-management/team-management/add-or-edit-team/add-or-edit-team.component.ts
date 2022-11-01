@@ -1,12 +1,11 @@
-import {AfterContentInit, Component, Inject, inject, Injector, OnInit, ViewChild} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {TeamManagementService} from "../team-management.service";
-import {FormBuilder, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {StaffManagementService} from "../../staff-management/staff-management.service";
-import {debounceTime, map} from "rxjs";
-import {distinctUntilChanged} from "rxjs/operators";
-const _regexDate='/^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)(?:0?2|(?:Feb))\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$/'
+import {AfterContentInit, Component, Inject, Injector, OnInit, ViewChild} from '@angular/core';
+import {BaseComponent} from '@core/base.component';
+import {TeamManagementService} from '@shared/services/team-management.service';
+import {Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {StaffManagementService} from '../../staff-management/staff-management.service';
+import {debounceTime, map} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-or-edit-team',
@@ -15,7 +14,7 @@ const _regexDate='/^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug
 })
 export class AddOrEditTeamComponent extends BaseComponent implements OnInit, AfterContentInit {
 
-  @ViewChild('selectMember') selectMember
+  @ViewChild('selectMember') selectMember;
 
   dialogId: any;
   formGroup = this.fb.group({
@@ -54,21 +53,17 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
     if (this.dialogId) {
       this.getDetails(this.dialogId);
     } else {
-      this.getListStaff()
+      this.getListStaff();
       this.formGroup.get('searchStaff').valueChanges.pipe(
-        map(event => {
-          return event;
-        }),
+        map(event => event),
         debounceTime(1000),
         distinctUntilChanged()
       ).subscribe(
         res => {
-          console.log(res)
-          this.getListStaff(res)
+          this.getListStaff(res);
         }
-      )
+      );
     }
-    ;
     this.getListDepartment();
   }
 
@@ -78,37 +73,36 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   ngOnInit(): void {
   }
 
-  getListDepartment() {
+  getListDepartment(): void {
     this.staffService.getListDepartment(this.searchModel).subscribe(res => {
       this.listDepartment = res.data;
-    })
+    });
   }
 
-  getListStaff(textSearch?) {
-    const dataSearch = {status: 1}
+  getListStaff(textSearch?: any): void {
+    const dataSearch = {status: 1};
     if (textSearch) {
       dataSearch['fullName'] = textSearch;
     }
     this.staffService.search(dataSearch).subscribe(res => {
-      this.listStaff = res.data
+      this.listStaff = res.data;
       if (this.listMembers.length > 0) {
         this.listMembers.forEach(item => {
-          const index = this.listStaff.findIndex(el => el.id === item.id)
+          const index = this.listStaff.findIndex(el => el.id === item.id);
           if (index >= 0) {
-            this.listStaff.splice(index, 1)
+            this.listStaff.splice(index, 1);
           }
-        })
+        });
       }
-
-    })
+    });
   }
 
   trackByFn(index: number, item: any): any {
     return item.id || index;
   }
 
-  save(value: any) {
-    this.handleCoverTimeToString(value)
+  save(value: any): boolean {
+    this.handleCoverTimeToString(value);
     const teamData = {
       id: this.dialogId && this.dialogId,
       name: value.name,
@@ -118,29 +112,26 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
       description: value.description,
       endDate: value.endDate,
       members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
-    }
-    console.log(teamData)
-    this.addOrEdit(teamData)
+    };
+    this.addOrEdit(teamData);
     return false;
   }
 
-  changeManager(e, member, s) {
-    member.isManager = e.value
-    console.log(e, member, s);
+  changeManager(e, member, s): void {
+    member.isManager = e.value;
     // console.log(this.members);
 
   }
 
-  addMemberToTeam(value) {
-    this.listMembers = [...value, ...this.listMembers]
-    this.selectMember.value = []
-    this.listStaff = []
-    this.getListStaff()
-    console.log(this.selectMember.value);
+  addMemberToTeam(value): void {
+    this.listMembers = [...value, ...this.listMembers];
+    this.selectMember.value = [];
+    this.listStaff = [];
+    this.getListStaff();
   }
 
-  deleteFromAddForm(index: any) {
-    this.listMembers.splice(index, 1)
-    this.getListStaff()
+  deleteFromAddForm(index: any): void {
+    this.listMembers.splice(index, 1);
+    this.getListStaff();
   }
 }

@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PartnerService} from "../../partner.service";
+import {PartnerService} from "@shared/services/partner.service";
 
 @Component({
   selector: 'app-details-partner',

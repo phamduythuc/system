@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
-import {PartnerService} from "./partner.service";
+import {PartnerService} from "@shared/services/partner.service";
 import {IColumn} from "@layout/common/data-table/data-table.component";
 import {CommonUtilsService} from "@shared/common-utils.service";
 import {AddOrEditPartnerComponent} from "./component/add-or-edit-partner/add-or-edit-partner.component";

@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit,} from '@angular/core';
 import {BaseComponent} from "@core/base.component";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PositionManagementService} from "../../position-management.service";
+import {PositionManagementService} from "@shared/services/position-management.service";
 import {Validators} from "@angular/forms";
 
 @Component({

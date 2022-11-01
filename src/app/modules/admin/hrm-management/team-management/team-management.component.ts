@@ -1,12 +1,12 @@
 import {Component, Injector, OnInit, ViewChild} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {MatDrawer} from "@angular/material/sidenav";
-import {debounceTime, fromEvent, Subject} from 'rxjs';
+import {BaseComponent} from '@core/base.component';
+import {MatDrawer} from '@angular/material/sidenav';
+import {debounceTime, Subject} from 'rxjs';
 import {distinctUntilChanged, map} from 'rxjs/operators';
-import {TeamManagementService} from "./team-management.service";
-import {AddOrEditTeamComponent} from "./add-or-edit-team/add-or-edit-team.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ConfirmDialogComponent} from "@shared/components/confirm-dialog/confirm-dialog.component";
+import {TeamManagementService} from '@shared/services/team-management.service';
+import {AddOrEditTeamComponent} from './add-or-edit-team/add-or-edit-team.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-team-management',
@@ -20,46 +20,39 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   drawerOpened: boolean = true;
   selectedTeamId: any;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-  formSearch = this.fb.group({
-    text: ''
-  });
-   listTeam: any[];
+
+  formSearch: FormGroup;
+
+  listTeam: any[] = [];
 
   constructor(injector: Injector, public teamService: TeamManagementService, fb: FormBuilder) {
-    super(injector, teamService)
+    super(injector, teamService);
+    this.formSearch  = this.fb.group({
+      text: ''
+    });
   }
 
   ngOnInit(): void {
-    this.searchModel.pageSize = 9999999
+    this.searchModel.pageSize = 9999999;
     this.formSearch.get('text').valueChanges.pipe(
-      map(event => {
-        return event;
-      }),
+      map(event => event),
       debounceTime(1000),
       distinctUntilChanged()
     ).subscribe(
       res => {
-        console.log(res)
-        this.listTeam= this.searchResult.data.filter(item=>{
-          if(item.name.includes(res)) return item
-        })
+        this.listTeam = this.searchResult.data.filter(item => {
+          if (item.name.includes(res)){
+            return item;
+          }
+        });
       }
-    )
-    this.searchModel.status = 1
-    this.processSearch(this.searchModel,()=>{
-      this.listTeam = this.searchResult.data
-    })
+    );
+    this.searchModel.status = 1;
+    this.processSearch(this.searchModel, () => this.callback());
   }
 
-  doSearch() {
-    this.processSearch(this.searchModel)
-  }
-
-
-  ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next(null);
-    this._unsubscribeAll.complete();
+  doSearch(): void {
+    this.processSearch(this.searchModel, () => this.callback());
   }
 
   goToTeam(id: any): void {
@@ -72,7 +65,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
   addOrEdit(id?: any): void {
-    const ref = this.showDialog(AddOrEditTeamComponent, {
+    this.showDialog(AddOrEditTeamComponent, {
       data: {
         id,
       },
@@ -80,8 +73,9 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       // maxHeight: '90vh',
       disableClose: true
     }, (value) => {
-      if (value)
-        this.doSearch()
+      if (value) {
+        this.doSearch();
+      }
     });
   }
 
@@ -93,11 +87,11 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     return item.id || index;
   }
 
-  emitEvent(type: string, gr: any) {
+  emitEvent(type: string, gr: any): void {
     if (type === 'edit') {
       this.addOrEdit(gr.id);
     } else {
-      this.deleteConfirmDialog(gr.id)
+      this.deleteConfirmDialog(gr.id);
     }
   }
 
@@ -107,5 +101,24 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
         this.delete(id);
       }
     });
+  }
+
+  delete(id: any): void {
+    this.teamService.delete(id).subscribe((res) => {
+      if (res.code === '00') {
+        this.showSnackBar('Xóa thành công', 'success');
+        this.searchModel.page = 0;
+        this.processSearch(this.searchModel, () => this.callback());
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+    });
+  }
+
+  callback(): void {
+    this.listTeam = this.searchResult.data;
+    if (this.listTeam.length > 0) {
+      this.goToTeam(this.listTeam[0].id);
+    }
   }
 }
