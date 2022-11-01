@@ -4,6 +4,7 @@ import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {TeamMemberService} from '@shared/services/team-member.service';
 import {AchievementService} from '@shared/services/achievement.service';
+import {StaffManagementService} from "../../staff-management/staff-management.service";
 
 @Component({
   selector: 'app-team-members',
@@ -20,6 +21,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   addMember: any;
 
   constructor(injector: Injector,
+              public staffService: StaffManagementService,
               public teamMemberService: TeamMemberService,
               public achievementService: AchievementService) {
     super(injector, teamMemberService);
@@ -78,13 +80,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     this.searchModel.teamId = this.teamId;
     this.processSearch(this.searchModel, () => {
       this.members = this.searchResult.data;
-      this.members.forEach(member => {
-        if (member.imageUrl) {
-          this.achievementService.downloadFile(member.imageUrl).subscribe(res => {
-            member.avatar = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res.body));
-          });
-        }
-      });
+      this.members.forEach(member => this.loadAvatar(member));
       this.getListStaff();
     });
   }
@@ -94,8 +90,17 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     if (textSearch) {
       dataSearch['fullName'] = textSearch;
     }
-    this.teamMemberService.search(dataSearch).subscribe(res => {
+    this.staffService.search(dataSearch).subscribe(res => {
       this.staffList = res.data;
+      this.staffList.forEach(item => item.staffId = item.id);
+      if (this.members.length > 0) {
+        this.members.forEach(item => {
+          const index = this.staffList.findIndex(el => el.id === item.staffId);
+          if (index >= 0) {
+            this.staffList.splice(index, 1);
+          }
+        });
+      }
     });
   }
 
@@ -106,6 +111,11 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   addMemberToTeam(): void {
     this.addMember.get('name').patchValue('');
     const addList = this.addMember.get('addList').value;
+    addList.forEach(item => {
+      this.loadAvatar(item);
+      item.isManager = 0;
+    });
+    this.loadAvatar(addList);
     this.members = [...addList, ...this.members];
     this.getListStaff();
     this.addMember.get('addList').reset();
@@ -118,7 +128,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   saveMemberList(): void {
     const sendData = {
       teamId: this.teamId,
-      members: this.members.map(res => ({staffId: res.id, isManager: res.isManager}))
+      members: this.members.map(member => ({staffId: member.staffId, isManager: member.isManager}))
     };
     this.teamMemberService.saveMembers(sendData).subscribe(res => {
       if (res.code === '00') {
@@ -133,5 +143,13 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   deleteFromAddForm(index: any): void {
     this.members.splice(index, 1);
     this.getListStaff();
+  }
+
+  loadAvatar(member): void {
+    if (member.imageUrl) {
+      this.achievementService.downloadFile(member.imageUrl).subscribe(res => {
+        member.avatar = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res.body));
+      });
+    }
   }
 }
