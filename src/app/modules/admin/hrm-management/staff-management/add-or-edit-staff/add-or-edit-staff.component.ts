@@ -118,7 +118,6 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
   imagePath: any;
 
   constructor(injector: Injector,
-              private _sanitizer: DomSanitizer,
               private categoriesService: CategoriesService,
               public dialogRef: MatDialogRef<AddOrEditStaffComponent>,
               private staffService: StaffManagementService,

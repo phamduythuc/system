@@ -14,7 +14,7 @@ export class TeamMemberService extends BaseService {
   }
 
   saveMembers(addData): Observable<any> {
-    return this.http.post(`${this.serviceUrl}/team-member/add-member`, addData);
+    return this.http.post(`${this.serviceUrl}/add-member`, addData);
   };
 
 }

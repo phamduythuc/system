@@ -1,10 +1,9 @@
 import {Component, Injector, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
-import {StaffManagementService} from '../../staff-management/staff-management.service';
-import {Validators} from '@angular/forms';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {TeamMemberService} from '@shared/services/team-member.service';
+import {AchievementService} from '@shared/services/achievement.service';
 
 @Component({
   selector: 'app-team-members',
@@ -20,7 +19,9 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   members: any;
   addMember: any;
 
-  constructor(injector: Injector, public teamMemberService: TeamMemberService) {
+  constructor(injector: Injector,
+              public teamMemberService: TeamMemberService,
+              public achievementService: AchievementService) {
     super(injector, teamMemberService);
     this.addMember = this.fb.group({
       name: [],
@@ -77,6 +78,13 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     this.searchModel.teamId = this.teamId;
     this.processSearch(this.searchModel, () => {
       this.members = this.searchResult.data;
+      this.members.forEach(member => {
+        if (member.imageUrl) {
+          this.achievementService.downloadFile(member.imageUrl).subscribe(res => {
+            member.avatar = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res.body));
+          });
+        }
+      });
       this.getListStaff();
     });
   }
@@ -88,14 +96,6 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     }
     this.teamMemberService.search(dataSearch).subscribe(res => {
       this.staffList = res.data;
-      // if (this.members.length > 0) {
-      //   this.members.forEach(item => {
-      //     const index = this.staffList.findIndex(el => el.id === item.id);
-      //     if (index >= 0) {
-      //       this.staffList.splice(index, 1);
-      //     }
-      //   });
-      // }
     });
   }
 

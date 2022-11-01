@@ -10,6 +10,7 @@ import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {ChangeDetection} from '@angular/cli/lib/config/workspace-schema';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable()
 export class BaseComponent {
@@ -29,6 +30,7 @@ export class BaseComponent {
   public cdr: ChangeDetectorRef;
   public translocoService: TranslocoService;
   public dialogService: MatDialog;
+  public _sanitizer: DomSanitizer;
   public fb: FormBuilder;
   private baseService: BaseService;
   public dialogRef: MatDialogRef<any>;
@@ -41,6 +43,7 @@ export class BaseComponent {
     this.cdr = injector.get(ChangeDetectorRef);
     this.translocoService = injector.get(TranslocoService);
     this.dialogService = injector.get(MatDialog);
+    this._sanitizer = injector.get(DomSanitizer);
     this.fb = injector.get(FormBuilder);
     this.baseService = service;
     this.dialogRef = dialogRef;
