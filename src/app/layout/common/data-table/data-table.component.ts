@@ -122,5 +122,4 @@ export interface IColumn {
   header?: string;
   cellRenderer?: any;
   flex?: number;
-  inputName?: any;
 }
