@@ -1,8 +1,8 @@
 <ng-container *transloco="let t">
     <!--    header-->
-    <div class="header border-b flex justify-between items-center border-borderDialog">
-        <div class="text-4xl font-bold card-title capitalize py-8 pl-8 leading-9">
-            {{roleId ? 'Sửa Nhóm Quyền' : 'Thêm Nhóm Quyền Mới'}}
+    <div class="header border-b flex justify-between items-center border-borderDialog pb-2">
+        <div class="text-4xl font-bold card-title capitalize py-2 pl-8 leading-9">
+            {{roleData ? 'Sửa Nhóm Quyền' : 'Thêm Nhóm Quyền Mới'}}
         </div>
         <div class="mr-8">
             <button mat-icon-button (click)="dialogRef.close()">
@@ -11,7 +11,7 @@
         </div>
     </div>
     <!--    content-->
-    <div class="content mt-8 flex-1 px-8 overflow-auto" [formGroup]="formGroup">
+    <form class="content mt-8 flex-1 px-8 overflow-auto" [formGroup]="formGroup">
         <div class="field flex mb-4">
             <label class="w-1/6 font-medium text-base required">{{'common.name'|transloco}}</label>
             <div class="w-5/6 input">
@@ -21,6 +21,7 @@
                            formControlName="name"
                            matInput>
                 </mat-form-field>
+              <app-error-message [control]="formGroup.get('name')" [name]="'common.name'|transloco" [textPattern]="'specialText.textPattern_1'|transloco"></app-error-message>
             </div>
         </div>
 <!--        <div class="field flex mb-4" *ngIf="roleId">-->
@@ -44,7 +45,7 @@
             </div>
         </div>
       <div class="footer mt-6 flex justify-end">
-        <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save(formGroup.value)">
+        <button type="submit" mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save(formGroup.value)">
           <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
           <span>{{t("button.save")}}</span>
         </button>
@@ -53,5 +54,5 @@
           <span>{{t("button.cancel")}}</span>
         </button>
       </div>
-    </div>
+    </form>
 </ng-container>

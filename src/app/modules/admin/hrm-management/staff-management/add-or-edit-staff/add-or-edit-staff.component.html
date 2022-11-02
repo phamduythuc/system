@@ -59,7 +59,7 @@
                   [formControlName]="'fullName'"
                   matInput>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('fullName')" name="Họ tên"></app-error-message>
+              <app-error-message [control]="formGroup.get('fullName')" [name]='"common.fullName"|transloco'></app-error-message>
 
             </div>
             <!-- gender -->
@@ -74,7 +74,7 @@
                   <mat-option *ngFor="let item of genderCategories" [value]="item?.code">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('gender')" name="Giới tính"></app-error-message>
+              <app-error-message [control]="formGroup.get('gender')" [name]='"common.gender"|transloco'></app-error-message>
 
             </div>
             <!-- national -->
@@ -90,8 +90,8 @@
                   matInput>
               </mat-form-field>
               <app-error-message [control]="formGroup.get('nationalId')"
-                                 textPattern="Vui lòng nhập mã căn cước hoặc số CMT"
-                                 name="CMT/CCCD"></app-error-message>
+                                 [textPattern]="'specialText.textPattern_2'|transloco"
+                                 [name]='"common.national"|transloco'></app-error-message>
 
             </div>
             <!-- position -->
@@ -106,7 +106,7 @@
                   <mat-option *ngFor="let item of listPositions" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('positionId')" name="Chức vụ"></app-error-message>
+              <app-error-message [control]="formGroup.get('positionId')" [name]='"common.position"|transloco'></app-error-message>
 
             </div>
             <!-- department -->
@@ -121,7 +121,7 @@
                   <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('departmentId')" name="Phòng ban"></app-error-message>
+              <app-error-message [control]="formGroup.get('departmentId')" [name]='"common.department"|transloco'></app-error-message>
 
             </div>
             <!-- levelId -->
@@ -136,7 +136,7 @@
                   <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">{{item?.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('levelId')" name="Cấp bậc"></app-error-message>
+              <app-error-message [control]="formGroup.get('levelId')" [name]='"common.level"|transloco'></app-error-message>
 
             </div>
             <!-- positionJob -->
@@ -165,7 +165,7 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker #dateOfBirth></mat-datepicker>
               </mat-form-field>
-              <app-error-message [control]="formGroup.get('dateOfBirth')" name="Ngày sinh"></app-error-message>
+              <app-error-message [control]="formGroup.get('dateOfBirth')" [name]='"common.dateOfBirth"|transloco'></app-error-message>
 
             </div>
 
@@ -262,7 +262,7 @@
                 <mat-datepicker #staOfficalDate></mat-datepicker>
               </mat-form-field>
               <app-error-message [control]="formGroup.get('staOfficalDate')"
-                                 name="Ngày bắt đầu đi làm"></app-error-message>
+                                 [name]='"common.staOfficalDate"|transloco'></app-error-message>
 
             </div>
             <!-- leaveDate -Ngày nghỉ -->
@@ -449,7 +449,7 @@
             </mat-form-field>
             <app-error-message [control]="formGroup.get('phone')"
                                textPattern="Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx"
-                               name="Phone"></app-error-message>
+                               [name]='"common.phone"|transloco'></app-error-message>
 
           </div>
           <!-- Country -->

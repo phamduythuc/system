@@ -23,7 +23,7 @@
                    formControlName="name"
                    matInput trim='blur'>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('name')" name="Tên"></app-error-message>
+          <app-error-message [control]="formGroup.get('name')" [name]='"common.name"|transloco'></app-error-message>
         </div>
       </div>
       <div class="field flex mb-4">
@@ -37,7 +37,7 @@
                      formControlName="code"
                      matInput trim='blur'>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('code')" name="Mã"></app-error-message>
+            <app-error-message [control]="formGroup.get('code')" [name]='"common.code"|transloco'></app-error-message>
           </div>
         </div>
         <div class="w-1/2 flex">
@@ -49,7 +49,7 @@
                 <mat-option *ngFor="let type of projectTypes" [value]="type?.code">{{type?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('projectType')" name="Kiểu dự án"></app-error-message>
+            <app-error-message [control]="formGroup.get('projectType')" [name]='"hrm-management.project.form.projectType"|transloco'></app-error-message>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@
                 <mat-option *ngFor="let partner of listPartner" [value]="partner?.id">{{partner?.name}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('partnerId')" name="Đối tác"></app-error-message>
+            <app-error-message [control]="formGroup.get('partnerId')" [name]='"hrm-management.project.form.partner"|transloco'></app-error-message>
 
           </div>
 <!--        </div>-->
@@ -89,7 +89,7 @@
                      formControlName="budget"
                      matInput trim='blur'>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('budget')" name="budget"></app-error-message>
+            <app-error-message [control]="formGroup.get('budget')" [name]='"hrm-management.project.form.budget"|transloco'></app-error-message>
           </div>
         </div>
         <div class="w-1/2 flex">
@@ -116,7 +116,7 @@
               </mat-datepicker-toggle>
               <mat-datepicker #expectEndTime></mat-datepicker>
             </div>
-            <app-error-message [control]="formGroup.get('expectEndTime')" name="Thời gian dự kiến hoàn thành dự án"></app-error-message>
+            <app-error-message [control]="formGroup.get('expectEndTime')" [name]='"hrm-management.project.form.expectEndTime"|transloco'></app-error-message>
           </div>
         </div>
         <div class="w-1/2 flex">

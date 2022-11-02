@@ -46,7 +46,7 @@
               <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('departmentId')" name="Phòng ban"></app-error-message>
+          <app-error-message [control]="formGroup.get('departmentId')" [name]='"common.department"|transloco'></app-error-message>
 
         </div>
         <!-- Start date -->
@@ -71,7 +71,7 @@
             </mat-datepicker-toggle>
             <mat-datepicker  #endDate></mat-datepicker>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('dateOfBirth')" name="Ngày sinh"></app-error-message>
+          <app-error-message [control]="formGroup.get('endDate')" [name]='"hrm-management.team.form.endDate"|transloco'></app-error-message>
 
         </div>
         <!-- description -->

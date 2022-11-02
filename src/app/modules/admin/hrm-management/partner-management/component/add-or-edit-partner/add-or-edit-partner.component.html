@@ -23,7 +23,7 @@
                    formControlName="name"
                    matInput trim='blur'>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('name')" name="Tên"></app-error-message>
+          <app-error-message [control]="formGroup.get('name')" [name]='"common.name"|transloco'></app-error-message>
         </div>
       </div>
       <div class="field flex mb-4">
@@ -36,7 +36,7 @@
                    formControlName="phone"
                    matInput trim='blur'>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('name')" name="Tên"></app-error-message>
+          <app-error-message [control]="formGroup.get('name')" [name]='"common.name"|transloco'></app-error-message>
         </div>
       </div>
       <div class="field flex mb-4">

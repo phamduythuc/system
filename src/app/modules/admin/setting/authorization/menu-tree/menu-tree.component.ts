@@ -55,7 +55,7 @@ export class MenuTreeComponent implements OnInit, OnChanges {
         switch (propName) {
           case 'roleId': {
             if (this.roleId) {
-              this.matDrawer.close()
+              this.matDrawer&&this.matDrawer.close()
               this.getMenu(this.roleId)
             }
           }

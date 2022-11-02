@@ -10,7 +10,7 @@ import {TranslocoService} from '@ngneat/transloco';
 export class ErrorMessageComponent {
   @Input() control!: AbstractControlDirective | AbstractControl | any;
   @Input() name = 'Trường này';
-  @Input() textPattern = 'Trường này';
+  @Input() textPattern = 'Trường này này';
 
   constructor(private tran: TranslocoService) {
   }

@@ -76,7 +76,7 @@
   },
   "setting": {
     "role": "Quyền",
-    "groupRole": "Nhóm quyền",
+    "groupRole": "Phân quyền",
     "menu": "Danh mục",
     "user": {
       "group": "Nhóm",
@@ -167,6 +167,8 @@
     "error_7": "chỉ nhận giá trị là số",
     "error_8": "ký tự",
     "error_9": "Mật khẩu không khớp !",
+    "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
+    "textPattern_2": "Vui lòng nhập ký tự số",
     "notFound": "Không tìm thấy bản ghi"
   }
 }

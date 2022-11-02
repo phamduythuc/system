@@ -4,24 +4,24 @@
       <div class="title xl:text-4xl md:text-3xl font-bold">
         {{'setting.groupRole'|transloco}}
       </div>
-      <div class="flex justify-center items-center">
-        <mat-form-field
-          class="fuse-mat-no-subscript w-full sm:w-64 sm:ml-4 bg-default text-lg rounded-input mr-2">
-          <mat-select [(ngModel)]="selectedRole" (selectionChange)="choseRole()">
-            <mat-option *ngFor="let authority of listRole"
-                        [value]="authority">{{authority.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">
-          <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
-        </button>
-        <button mat-mini-fab class="text-white shadow-none bg-[#F2A104] mr-2" (click)="addOrEditRole(selectedRole)">
-          <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
-        </button>
-        <button mat-raised-button color="primary" class="w-36" (click)="submitPermission()">
-          {{'button.edit'|transloco}}
-        </button>
-      </div>
+<!--      <div class="flex justify-center items-center">-->
+<!--        <mat-form-field-->
+<!--          class="fuse-mat-no-subscript w-full sm:w-64 sm:ml-4 bg-default text-lg rounded-input mr-2">-->
+<!--          <mat-select [(ngModel)]="selectedRole" (selectionChange)="choseRole()">-->
+<!--            <mat-option *ngFor="let authority of listRole"-->
+<!--                        [value]="authority">{{authority.name}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--        <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">-->
+<!--          <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>-->
+<!--        </button>-->
+<!--        <button mat-mini-fab class="text-white shadow-none bg-[#F2A104] mr-2" (click)="addOrEditRole(selectedRole)">-->
+<!--          <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>-->
+<!--        </button>-->
+<!--        <button mat-raised-button color="primary" class="w-36" (click)="submitPermission()">-->
+<!--          {{'button.edit'|transloco}}-->
+<!--        </button>-->
+<!--      </div>-->
     </div>
     <div class="content h-full flex bg-white dark:bg-default">
       <div class="module w-1/4 border-r p-6 py-4">
@@ -54,7 +54,7 @@
                   </div>
                 </div>
                 <div class="actions flex w-2/5">
-                  <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEditRole(role.roleId)">
+                  <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEditRole(role)">
                     <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
                   </button>
                   <button mat-icon-button class="hover:bg-slate-200" (click)="deleteConfirmDialog(role.roleId)">

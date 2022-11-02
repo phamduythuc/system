@@ -13,6 +13,7 @@ import {forkJoin, Subject} from 'rxjs';
 import {AddOrEditAuthComponent} from './add-or-edit-auth/add-or-edit-auth.component';
 import {MenuTreeComponent} from './menu-tree/menu-tree.component';
 import {AuthorizationService} from '@shared/services/authorization.service';
+import {ConfirmDialogComponent} from "@shared/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-authorization',
@@ -32,19 +33,19 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
 
   itemPermissions: any;
 
-  constructor(injector: Injector, public cdk: ChangeDetectorRef, public authorizationService : AuthorizationService) {
-    super(injector,authorizationService);
-    this.searchModel.pageSize = 9999
+  constructor(injector: Injector, public cdk: ChangeDetectorRef, public authorizationService: AuthorizationService) {
+    super(injector, authorizationService);
+    this.searchModel.pageSize = 9999;
   }
 
   ngOnInit(): void {
-    this.getListRole()
+    this.getListRole();
   }
 
 
   getListRole() {
-    this.processSearch(this.searchModel,()=>{
-      this.roles= this.searchResult.data;
+    this.processSearch(this.searchModel, () => {
+      this.roles = this.searchResult.data;
       this.selectedRoleId = this.roles[0].roleId;
     })
   }
@@ -52,10 +53,10 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
   submitPermission() {
   }
 
-  addOrEditRole(roleId?: any) {
+  addOrEditRole(role?: any) {
     this.showDialog(AddOrEditAuthComponent, {
       data: {
-        roleId:+roleId
+        roleData: role
       },
       width: '50vw'
     }, value => {
@@ -69,25 +70,28 @@ export class AuthorizationComponent extends BaseComponent implements OnInit, OnD
 
   goToRole(id) {
     this.selectedRoleId = id;
-    console.log(this.selectedRoleId)
-  }
-
-  emitEvent(edit: string, role: any) {
-
-  }
-
-
-  show(permission: any[],sfa) {
-    console.log(permission)
-
-    console.log(sfa)
   }
 
   saveMenu() {
-    this.child.saveMenu()
+    this.child.saveMenu();
   }
 
-  choseRole() {
+  deleteConfirmDialog(id?: any): any {
+    this.showDialog(ConfirmDialogComponent, {}, (value) => {
+      if (value) {
+        this.delete(id);
+      }
+    });
+  }
 
+  delete(id: any): void {
+    this.authorizationService.delete(id).subscribe((res) => {
+      if (res.code === '00') {
+        this.showSnackBar('Xóa thành công', 'success');
+        this.getListRole();
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+    });
   }
 }
