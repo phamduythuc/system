@@ -3,7 +3,7 @@ import {BaseComponent} from '@core/base.component';
 import {MatDrawer} from '@angular/material/sidenav';
 import {debounceTime, Subject} from 'rxjs';
 import {distinctUntilChanged, map} from 'rxjs/operators';
-import {TeamManagementService} from '@shared/services/team-management.service';
+import {TeamService} from '@shared/services/team.service';
 import {AddOrEditTeamComponent} from './add-or-edit-team/add-or-edit-team.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
@@ -25,7 +25,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
 
   listTeam: any[] = [];
 
-  constructor(injector: Injector, public teamService: TeamManagementService, fb: FormBuilder) {
+  constructor(injector: Injector, public teamService: TeamService, fb: FormBuilder) {
     super(injector, teamService);
     this.formSearch  = this.fb.group({
       text: ''

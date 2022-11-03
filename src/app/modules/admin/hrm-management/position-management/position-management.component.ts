@@ -1,7 +1,7 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {IColumn} from '../../../../layout/common/data-table/data-table.component';
 import {BaseComponent} from '../../../../core/base.component';
-import {PositionManagementService} from '@shared/services/position-management.service';
+import {PositionService} from '@shared/services/position.service';
 import {AddOrEditPositionComponent} from './compoment/add-or-edit-position/add-or-edit-position.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {DetailPositionComponent} from './compoment/detail-position/detail-position.component';
@@ -61,7 +61,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
   panelOpenState: false;
 
   constructor(injector: Injector,
-              private positionService: PositionManagementService) {
+              private positionService: PositionService) {
     super(injector, positionService);
   }
 

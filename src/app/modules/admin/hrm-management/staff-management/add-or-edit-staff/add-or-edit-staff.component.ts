@@ -1,6 +1,4 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -10,11 +8,11 @@ import {
   ViewChild
 } from '@angular/core';
 import {BaseComponent} from '@core/base.component';
-import {Validators} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 import {CategoriesService} from '@core/categories.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {StaffManagementService} from '../staff-management.service';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {StaffService} from '@shared/services/staff.service';
+import {AchievementService} from '@shared/services/achievement.service';
 
 @Component({
   selector: 'app-add-or-edit-staff',
@@ -27,132 +25,130 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
   editFile: boolean = true;
   removeUpload: boolean = false;
   private readonly dialogId: any;
-  formGroup = this.fb.group({
-    //Địa chỉ đầy đủ
-    address: [],
-    //Email của công ty
-    companyEmail: [],
-    //Tên quốc gia
-    country: [],
-    //Người tạo
-    createdBy: [],
-    //Ngày giờ tạo
-    createdDate: [],
-    //Đường dẫn file CV
-    cvUrl: [],
-    //Ngày sinh
-    dateOfBirth: [null, Validators.required],
-    //Mã phòng ban
-    departmentId: [null, Validators.required],
-    //Chỗ ở hiện tại
-    domicile: [],
-    //Cấp bậc giáo dục
-    education: [],
-    //Email cá nhân
-    email: [],
-    //Thông tin liên lạc khẩn cấp
-    emergencyUser: [],
-    //Dân tộc
-    ethnic: [],
-    //Họ và tên
-    fullName: [null, Validators.required],
-    //Giời tính
-    gender: [null, Validators.required],
-    //Ngày tuyển dụng
-    hireDate: [],
-    //Mã chấm công của công ty
-    idNhanVienChamCong: [],
-    //Đường dẫn ảnh của nhân viên
-    imageUrl: [],
-    //Ngày nghỉ
-    leaveDate: [],
-    //Mã cấp bậc
-    levelId: [null, Validators.required],
-    //Tình trạng hôn nhân
-    maritalStatus: [],
-    //Người cập nhâật
-    modifiedBy: [],
-    //Ngày giờ cập nhật
-    modifiedDate: [],
-    //Mã căn cước công dân/Chứng minh nhân dân
-    nationalId: [null, [Validators.required, Validators.pattern('[0-9]*')]],
-    //Quốc gia
-    nationality: [],
-    //Số điện thoại
-    phone: [null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
-    //Mã chức vụ
-    positionId: [null, Validators.required],
-    //Chức vụ hiện tại
-    positionJob: [],
-    //Tôn giáo
-    religion: [],
-    //N/A
-    seniority: [],
-    //Ngày bắt đầu đi làm
-    staOfficalDate: [null, Validators.required],
-    //Mã nhân viên
-    staffCode: [null, Validators.required],
-    //Trạng thái của nhân viên
-    staffStatus: [null, Validators.required],
-    //Trạng thái
-    status: [],
-    //Mô tả tổng quan
-    summary: [],
-    //Tên đăng nhập
-    username: [null, Validators.required],
-    //Kinh nghiệm
-    workExperience: [],
-  });
-  projectData
-  projectTypes: any = [];
-  projects: any = [];
-  listPartner: any = [];
-  genderCategories = []
-  maritalCategories = []
-  religionCategories = []
-  staffStatusCategories = []
-  categoriesList = ['GENDER', 'MARITAL_STAtUS', 'RELIGION', 'STAFF_STATUS']
+  formGroup: FormGroup;
+  projectTypes: any[] = [];
+  projects: any[] = [];
+  listPartner: any[] = [];
+  genderCategories: any[] = [];
+  maritalCategories: any[] = [];
+  religionCategories: any[] = [];
+  staffStatusCategories: any[] = [];
+  categoriesList = ['GENDER', 'MARITAL_STAtUS', 'RELIGION', 'STAFF_STATUS'];
   listPositions: any;
   listStaffLevels: any;
   listDepartment: any;
-  imagePath: any;
 
   constructor(injector: Injector,
               private categoriesService: CategoriesService,
               public dialogRef: MatDialogRef<AddOrEditStaffComponent>,
-              private staffService: StaffManagementService,
+              private staffService: StaffService,
+              private achievementService: AchievementService,
               private cd: ChangeDetectorRef,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService, dialogRef);
+    this.formGroup = this.fb.group({
+      //Địa chỉ đầy đủ
+      address: [],
+      //Email của công ty
+      companyEmail: [],
+      //Tên quốc gia
+      country: [],
+      //Người tạo
+      createdBy: [],
+      //Ngày giờ tạo
+      createdDate: [],
+      //Đường dẫn file CV
+      cvUrl: [],
+      //Ngày sinh
+      dateOfBirth: [null, Validators.required],
+      //Mã phòng ban
+      departmentId: [null, Validators.required],
+      //Chỗ ở hiện tại
+      domicile: [],
+      //Cấp bậc giáo dục
+      education: [],
+      //Email cá nhân
+      email: [],
+      //Thông tin liên lạc khẩn cấp
+      emergencyUser: [],
+      //Dân tộc
+      ethnic: [],
+      //Họ và tên
+      fullName: [null, Validators.required],
+      //Giời tính
+      gender: [null, Validators.required],
+      //Ngày tuyển dụng
+      hireDate: [],
+      //Mã chấm công của công ty
+      idNhanVienChamCong: [],
+      //Đường dẫn ảnh của nhân viên
+      imageUrl: [],
+      //Ngày nghỉ
+      leaveDate: [],
+      //Mã cấp bậc
+      levelId: [null, Validators.required],
+      //Tình trạng hôn nhân
+      maritalStatus: [],
+      //Người cập nhâật
+      modifiedBy: [],
+      //Ngày giờ cập nhật
+      modifiedDate: [],
+      //Mã căn cước công dân/Chứng minh nhân dân
+      nationalId: [null, [Validators.required, Validators.pattern('[0-9]*')]],
+      //Quốc gia
+      nationality: [],
+      //Số điện thoại
+      phone: [null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+      //Mã chức vụ
+      positionId: [null, Validators.required],
+      //Chức vụ hiện tại
+      positionJob: [],
+      //Tôn giáo
+      religion: [],
+      //N/A
+      seniority: [],
+      //Ngày bắt đầu đi làm
+      staOfficalDate: [null, Validators.required],
+      //Mã nhân viên
+      staffCode: [null, Validators.required],
+      //Trạng thái của nhân viên
+      staffStatus: [null, Validators.required],
+      //Trạng thái
+      status: [],
+      //Mô tả tổng quan
+      summary: [],
+      //Tên đăng nhập
+      username: [null, Validators.required],
+      //Kinh nghiệm
+      workExperience: [],
+      file: [],
+    });
     this.getCategories();
     this.dialogId = data?.id;
     if (this.dialogId) {
-      this.getDetails(this.dialogId)
+      this.getDetails(this.dialogId, ({imageUrl}) => {
+        this.convertBase64(imageUrl);
+      });
     }
 
   }
 
   ngOnInit(): void {
     this.searchModel.status = 1;
-    this.getListDepartment()
-    this.getListStaffLevel()
-    this.getListPosition()
+    this.getListDepartment();
+    this.getListStaffLevel();
+    this.getListPosition();
   }
 
-  coverBase64(res) {
-    console.log(res)
-    if (res.imageUrl) {
-      this.staffService.getAvatar(res.imageUrl).subscribe(res => {
-        // this.imageUrl = this._sanitizer.bypassSecurityTrustResourceUrl(res.body);
-        this.imageUrl = URL.createObjectURL(res.body);
-        console.log(this.imageUrl);
+  convertBase64(imageUrl): void {
+    if (imageUrl) {
+      this.achievementService.downloadFile(imageUrl).subscribe(res1 => {
+        this.imageUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
       });
-
     }
-    console.log(this.imagePath)
   }
 
-  getCategories() {
+  getCategories(): void {
     this.categoriesList.forEach(item => {
       this.categoriesService.getCategories(item).subscribe(res => {
         switch (item) {
@@ -171,42 +167,47 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
           default:
             break;
         }
-      })
-    })
+      });
+    });
   }
 
-  getListPosition() {
+  getListPosition(): void {
     this.staffService.getListPosition(this.searchModel).subscribe(res => {
       this.listPositions = res.data;
-    })
+    });
   }
 
   getListStaffLevel() {
     this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
       this.listStaffLevels = res.data;
-    })
+    });
   }
 
   getListDepartment() {
     this.staffService.getListDepartment(this.searchModel).subscribe(res => {
       this.listDepartment = res.data;
-    })
+    });
   }
 
   save(data) {
-    this.handleCoverTimeToString(data)
-    console.log(data);
+    this.handleCoverTimeToString(data);
     if (this.dialogId) {
       data.id = this.dialogId;
-      this.staffService.updateStaff(data).subscribe(res => {
+      const formData = new FormData();
+      formData.append('file', this.formGroup.get('file').value || null);
+      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+      this.staffService.updateStaff(formData).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.dialogRef.close(data);
         } else {
           this.showSnackBar(res.message, 'error');
         }
-      })
+      });
     } else {
+      const formData = new FormData();
+      formData.append('file', this.formGroup.get('file').value || null);
+      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
       this.staffService.createStaff(data).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
@@ -214,42 +215,34 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
         } else {
           this.showSnackBar(res.message, 'error');
         }
-      })
+      });
     }
   }
 
-  uploadFile(event) {
-    let reader = new FileReader(); // HTML5 FileReader API
-    let file = event.target.files[0];
+  uploadFile(event): void {
+    const reader = new FileReader(); // HTML5 FileReader API
+    const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
-
+      this.formGroup.patchValue({file});
       // When file uploads set it to file formcontrol
       reader.onload = () => {
         this.imageUrl = reader.result;
-        this.formGroup.get('imageUrl').patchValue(
-          reader.result
-        );
         this.editFile = false;
         this.removeUpload = true;
-      }
+      };
       // ChangeDetectorRef since file is loading outside the zone
       this.cd.markForCheck();
     }
   }
 
   // Function to remove uploaded file
-  removeUploadedFile() {
-    let newFileList = Array.from(this.el.nativeElement.files);
+  removeUploadedFile(): void {
     this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     this.editFile = true;
     this.removeUpload = false;
     this.formGroup.patchValue({
       file: [null]
     });
-  }
-
-  log() {
-    console.log(this.formGroup)
   }
 }

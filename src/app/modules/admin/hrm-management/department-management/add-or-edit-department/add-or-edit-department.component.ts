@@ -2,7 +2,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../../../core/base.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Validators} from '@angular/forms';
-import {DepartmentManagementService} from '@shared/services/department-management.service';
+import {DepartmentService} from '@shared/services/department.service';
 
 @Component({
   selector: 'app-add-or-edit-department',
@@ -22,7 +22,7 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
 
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
-              private departmentService: DepartmentManagementService,
+              private departmentService: DepartmentService,
               @Inject(MAT_DIALOG_DATA) public dialogData: any) {
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;

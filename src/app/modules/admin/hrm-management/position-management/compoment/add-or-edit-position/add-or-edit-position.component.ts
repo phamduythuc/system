@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit,} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PositionManagementService} from '@shared/services/position-management.service';
+import {PositionService} from '@shared/services/position.service';
 import {Validators} from '@angular/forms';
 
 @Component({
@@ -19,7 +19,7 @@ export class AddOrEditPositionComponent extends BaseComponent implements OnInit 
 tes = 'common.description'
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditPositionComponent>,
-              private positionService: PositionManagementService,
+              private positionService: PositionService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, positionService, dialogRef);
     this.dialogId = data?.id;

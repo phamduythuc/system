@@ -1,9 +1,9 @@
 import {AfterContentInit, Component, Inject, Injector, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
-import {TeamManagementService} from '@shared/services/team-management.service';
+import {TeamService} from '@shared/services/team.service';
 import {Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {StaffManagementService} from '../../staff-management/staff-management.service';
+import {StaffService} from '@shared/services/staff.service';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 
@@ -44,9 +44,9 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   listStaff: any = [];
 
   constructor(injector: Injector,
-              teamService: TeamManagementService,
+              teamService: TeamService,
               dialogRef: MatDialogRef<AddOrEditTeamComponent>,
-              private staffService: StaffManagementService,
+              private staffService: StaffService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, teamService, dialogRef);
     this.dialogId = data?.id;

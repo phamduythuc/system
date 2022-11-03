@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DepartmentManagementService} from '@shared/services/department-management.service';
+import {DepartmentService} from '@shared/services/department.service';
 import {BaseComponent} from '@core/base.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class DetailsDepartmentComponent extends BaseComponent implements OnInit 
 
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<DetailsDepartmentComponent>,
-              private departmentService: DepartmentManagementService,
+              private departmentService: DepartmentService,
               @Inject(MAT_DIALOG_DATA) public dialogData: any) {
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;

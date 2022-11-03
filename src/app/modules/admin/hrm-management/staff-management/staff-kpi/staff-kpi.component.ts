@@ -1,5 +1,5 @@
 import {Component, Inject, Injector, OnInit, ViewChild} from '@angular/core';
-import {StaffManagementService} from '../staff-management.service';
+import {StaffService} from '@shared/services/staff.service';
 import {BaseComponent} from '@core/base.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import moment, {Moment} from 'moment';
@@ -42,7 +42,7 @@ export class StaffKpiComponent extends BaseComponent implements OnInit {
     ],
   };
 
-  constructor(injector: Injector, private staffService: StaffManagementService,
+  constructor(injector: Injector, private staffService: StaffService,
               public dialogRef: MatDialogRef<StaffKpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService);

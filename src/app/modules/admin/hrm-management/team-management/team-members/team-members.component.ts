@@ -4,7 +4,7 @@ import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {TeamMemberService} from '@shared/services/team-member.service';
 import {AchievementService} from '@shared/services/achievement.service';
-import {StaffManagementService} from "../../staff-management/staff-management.service";
+import {StaffService} from "@shared/services/staff.service";
 
 @Component({
   selector: 'app-team-members',
@@ -21,7 +21,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   addMember: any;
 
   constructor(injector: Injector,
-              public staffService: StaffManagementService,
+              public staffService: StaffService,
               public teamMemberService: TeamMemberService,
               public achievementService: AchievementService) {
     super(injector, teamMemberService);

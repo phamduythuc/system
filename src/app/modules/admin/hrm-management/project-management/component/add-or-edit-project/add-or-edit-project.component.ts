@@ -2,7 +2,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {AbstractControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ProjectManagementService} from '@shared/services/project-management.service';
+import {ProjectService} from '@shared/services/project.service';
 import {CategoriesService} from '@core/categories.service';
 import moment from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
@@ -38,7 +38,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector,
               private categories: CategoriesService,
               public dialogRef: MatDialogRef<AddOrEditProjectComponent>,
-              private projectService: ProjectManagementService,
+              private projectService: ProjectService,
               private partnerService: PartnerService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, projectService, dialogRef);

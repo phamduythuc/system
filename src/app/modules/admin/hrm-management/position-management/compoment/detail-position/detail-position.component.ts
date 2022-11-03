@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BaseComponent} from '@core/base.component';
-import {PositionManagementService} from '@shared/services/position-management.service';
+import {PositionService} from '@shared/services/position.service';
 
 @Component({
   selector: 'app-detail-position',
@@ -11,7 +11,7 @@ import {PositionManagementService} from '@shared/services/position-management.se
 export class DetailPositionComponent extends BaseComponent implements OnInit {
   private readonly dialogId: any;
 
-  constructor(injector: Injector,public positionService:PositionManagementService,
+  constructor(injector: Injector,public positionService:PositionService,
      public dialogRef: MatDialogRef<DetailPositionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector,positionService,dialogRef)

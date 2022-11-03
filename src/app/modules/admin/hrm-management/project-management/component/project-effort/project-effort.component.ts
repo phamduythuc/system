@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
-import {ProjectManagementService} from '@shared/services/project-management.service';
+import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
@@ -57,7 +57,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   });
   a = [1, 2, 3, 4];
 
-  constructor(injector: Injector, projectService: ProjectManagementService,
+  constructor(injector: Injector, projectService: ProjectService,
               public dialogRef: MatDialogRef<ProjectEffortComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
     super(injector, projectService);
