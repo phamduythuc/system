@@ -167,6 +167,16 @@
     "textPattern_1": "Please only enter the letters without accents, numbers and signs  \"_\"",
     "textPattern_2": "Please enter the number",
     "notFound": "Data not found"
-
+  },
+  "effort": {
+    "month": "Month",
+    "estimate": "Estimate",
+    "customer_record": "Customer record",
+    "accept_date": "Acceptance date",
+    "effort_accept": "Effort acceptance",
+    "progress": "Progress",
+    "difference_effort": "Difference",
+    "acknowledgment_of_effort": "Acknowledgment of effort",
+    "percent_effort": "% join"
   }
 }

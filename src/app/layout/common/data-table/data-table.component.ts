@@ -33,6 +33,13 @@ export class DataTableComponent implements OnInit, OnChanges {
       id: 'delete',
       label: 'Delete',
       icon: 'heroicons_outline:trash',
+      color: 'success',
+      role: 'DELETE'
+    },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: 'heroicons_outline:trash',
       color: 'red',
       role: 'DELETE'
     },
@@ -112,7 +119,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   log(row) {
-    console.log(row)
+    console.log(row);
   }
 }
 

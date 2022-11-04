@@ -170,5 +170,17 @@
     "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
     "textPattern_2": "Vui lòng nhập ký tự số",
     "notFound": "Không tìm thấy bản ghi"
+  },
+  "effort": {
+    "title": "Thông tin giai đoạn",
+    "month": "Tháng",
+    "estimate": "Ước lượng",
+    "customer_record": "Khách hàng chốt",
+    "accept_date": "Ngày nghiệm thu",
+    "effort_accept": "Nghiệm thu",
+    "progress": "Tiến độ",
+    "difference_effort": "Chênh lệch",
+    "acknowledgment_of_effort": "Ghi nhận nỗ lực",
+    "percent_effort": "% tham gia"
   }
 }
