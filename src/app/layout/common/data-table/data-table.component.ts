@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -6,7 +7,8 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges, TemplateRef,
+  SimpleChanges,
+  TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -17,7 +19,7 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class DataTableComponent implements OnInit, OnChanges {
-  @Input() roleName: string
+  @Input() roleName: string;
   @Input() rows: any = [];
   @Input() columns: IColumn[] | undefined = [];
   @Input() limit: any = 10;
@@ -84,6 +86,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     this.getListActions();
   }
 

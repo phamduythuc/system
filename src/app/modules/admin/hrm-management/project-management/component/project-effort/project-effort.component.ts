@@ -60,7 +60,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data) {
     super(injector, projectService);
     const month = moment().startOf('month');
-    this.formArray = this.fb.array([]);
     this.formGroup = this.fb.group({
       projectId: [data.id],
       startMonth: [month],
@@ -69,7 +68,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       acceptanceDate: [],
       acceptanceEffort: [],
       note: [],
-      arr: this.fb.array([])
+      efforts: this.fb.array([])
     });
   }
 
@@ -79,18 +78,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.loadEffortDetail(this.formGroup.get('startMonth').value);
   }
 
-  get arr(): FormArray {
-    // return this.formGroup.get('arr') as FormArray;
-    return this.formArray;
+  get efforts(): FormArray {
+    return this.formGroup.get('efforts') as FormArray;
   }
 
   loadEffortDetail(month) {
     const searchObj = {projectId: this.data.id, startMonth: CommonUtilsService.dateToString(month, false)};
     this.effortService.getMembers(searchObj).subscribe(res => {
-      const formArray = [];
       if (this.isSuccess(res)) {
-        res.data.forEach(item => formArray.push(this.newItem(item)));
-        this.formArray = this.fb.array(formArray);
+        res.data.forEach(item => this.efforts.push(this.newItem(item)));
       }
     });
   }
@@ -100,20 +96,13 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       id: [data.id],
       fullName: [data.fullName],
       staffCode: [data.staffCode],
-      effort: [data.effort],
+      effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
       percentEffort: [data.percentEffort],
     });
   }
 
-  removeArr(i: number) {
-    this.arr.removeAt(i);
-  }
-
-  addArr(data: any) {
-    this.arr.push(this.newItem(data));
-  }
-
   save(value: any) {
+    console.log(this.formGroup.value);
     return false;
   }
 
@@ -146,6 +135,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id);
+    }
+  }
+
+  changeMonth() {
+    this.formGroup.patchValue({arr: this.fb.array([])});
+    const month = this.formGroup.get('startMonth').value;
+    if (month) {
+      this.loadEffortDetail(month);
     }
   }
 }

@@ -24,8 +24,9 @@
             <div class="sm:col-span-2">
               <mat-form-field class="fuse-mat-no-subscript w-full">
                 <mat-label>{{'effort.month'|transloco}}</mat-label>
-                <input class=" " matInput [matDatepicker]="dateOfBirth" datePickerFormat="MM/YYYY"
+                <input matInput [matDatepicker]="dateOfBirth" datePickerFormat="MM/YYYY"
                        [formControlName]="'startMonth'"
+                       (ngModelChange)="changeMonth()"
                        [placeholder]="'placeholder.chooseDate' | transloco">
                 <mat-datepicker-toggle [for]="dateOfBirth">
                 </mat-datepicker-toggle>
@@ -96,9 +97,18 @@
         </div>
         <!-- Divider -->
         <div class="mt-11 mb-10 border-t"></div>
-        <app-data-table formArrayName="arr"
+        <div formArrayName="arr">
+          <div *ngFor="let effortDetail of efforts.controls; let i = index" [formGroupName]="i">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full pr-4">
+              <input matInput formControlName="effort" placeholder="{{'effort.acknowledgment_of_effort' | transloco}}">
+              <app-error-message [control]="efforts.controls[i].get('effort')"
+                                 [textPattern]="'Ghi nhận nỗ lực phải là số'"></app-error-message>
+            </mat-form-field>
+          </div>
+        </div>
+        <app-data-table formArrayName="efforts"
                         [roleName]="_permissionCodeName"
-                        [rows]="arr.controls //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+                        [rows]="efforts.controls"
                         [columns]="columns"
                         [paginate]="false"
                         [limit]="searchModel.pageSize"
@@ -112,6 +122,8 @@
               <ng-container *ngSwitchCase="'effort'" [formGroupName]="index">
                 <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full pr-4">
                   <input matInput formControlName="effort" placeholder="{{'effort.acknowledgment_of_effort' | transloco}}">
+                  <app-error-message [control]="efforts.controls[index].get('effort')"
+                  [textPattern]="'Ghi nhận nỗ lực phải là số'"></app-error-message>
                 </mat-form-field>
 
               </ng-container>
