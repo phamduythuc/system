@@ -1,8 +1,8 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
-import {BaseComponent} from "@core/base.component";
-import {FormGroup, Validators} from "@angular/forms";
-import {StaffService} from "@shared/services/staff.service";
-import {AchievementService} from "@shared/services/achievement.service";
+import {BaseComponent} from '@core/base.component';
+import {Validators} from '@angular/forms';
+import {StaffService} from '@shared/services/staff.service';
+import {AchievementService} from '@shared/services/achievement.service';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -178,6 +178,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     this.staffService.getRoleStaff(this.option).subscribe(res => {
       if (res.code === '00') {
         this.listRoleStaff = res.data;
+        this.listRoleStaff.forEach(item => item.roleId = Number(item.roleId));
       }
     });
   }

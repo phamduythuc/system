@@ -9,8 +9,7 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {ChangeDetection} from '@angular/cli/lib/config/workspace-schema';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Injectable()
 export class BaseComponent {
@@ -91,7 +90,6 @@ export class BaseComponent {
       if (res.code === '00') {
         this.detailsData = res.data;
         this.handleCoverStringToDate(this.detailsData);
-        console.log(this.detailsData)
         this.formGroup.patchValue(this.detailsData);
         this.formGroup.markAllAsTouched();
         if (callback) {
