@@ -13,6 +13,7 @@
         <ng-container *ngSwitchCase="'action'">
           <ng-container [ngTemplateOutlet]="defaultActions || actionTemplate"
                         [ngTemplateOutletContext]="{$implicit: row}">
+          </ng-container>
             <ng-template #defaultActions>
               <ng-container *ngFor="let action of displayedActions">
                 <button *hasAnyAuthority="roleName+'_'+action.role" mat-icon-button
@@ -26,7 +27,6 @@
                 </button>
               </ng-container>
             </ng-template>
-          </ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="'stt'">
           <div>{{getRowIndex(row) + 1}}</div>

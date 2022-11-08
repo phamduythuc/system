@@ -30,16 +30,18 @@ export class DatePickerFormatDirective {
         this.configDateDisplay
       );
     } else {
-      this.matDateFormat.updateDateFormat({ dateInput: format });
+      this.matDateFormat.updateDateFormat({dateInput: format});
     }
-
-    const value = this.ngControl.value;
-    this.ngControl.valueAccessor?.writeValue(value);
+    if (this.ngControl) {
+      const value = this.ngControl.value;
+      this.ngControl.valueAccessor?.writeValue(value);
+    }
   }
 
   constructor(
     @Inject(MAT_DATE_FORMATS) public matDateFormat: CustomDateFormat,
     @Optional() private ngControl: NgControl
-  ) {}
+  ) {
+  }
 
 }
