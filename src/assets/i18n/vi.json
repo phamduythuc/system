@@ -24,6 +24,7 @@
       "view": "Xem"
     },
     "fromMonth": "Từ tháng",
+    "team": "Nhóm",
     "toMonth": "Đến tháng",
     "search": "Tìm kiếm",
     "stt": "Stt",
@@ -54,10 +55,10 @@
     "domicile": "Chỗ ở hiện tại",
     "education": "Cấp bậc giáo dục",
     "email": "Email",
-    "emergencyUser": "liên lạc khẩn cấp",
+    "emergencyUser": "Liên lạc khẩn cấp",
     "ethnic": "Dân tộc",
     "hireDate": "Ngày tuyển dụng",
-    "idNhanVienChamCong": "Mã chấm công",
+    "fingerPrintCode": "Mã chấm công",
     "imageUrl": "Ảnh đại diện",
     "leaveDate": "Ngày nghỉ",
     "level": "Cấp bậc",
@@ -72,7 +73,9 @@
     "staffStatus": "Trạng thái nhân viên",
     "summary": "Mô tả tổng quan",
     "username": "Tên đăng nhập",
-    "workExperience": "Kinh nghiệm"
+    "workExperience": "Kinh nghiệm",
+    "homeTown": "Nguyên quán",
+    "educationLevel": "Trình độ học vấn"
   },
   "setting": {
     "role": "Quyền",
@@ -170,5 +173,13 @@
     "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
     "textPattern_2": "Vui lòng nhập ký tự số",
     "notFound": "Không tìm thấy bản ghi"
+  },
+  "staff": {
+    "staffInfo": "Thông tin nhân viên",
+    "commonInfo": "Thông tin chung",
+    "contact": "Liên hệ",
+    "address": "Địa chỉ",
+    "staffDescription": "Mô tả nhân viên",
+    "commonDescription": "Mô tả"
   }
 }

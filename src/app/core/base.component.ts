@@ -91,6 +91,7 @@ export class BaseComponent {
       if (res.code === '00') {
         this.detailsData = res.data;
         this.handleCoverStringToDate(this.detailsData);
+        console.log(this.detailsData)
         this.formGroup.patchValue(this.detailsData);
         this.formGroup.markAllAsTouched();
         if (callback) {

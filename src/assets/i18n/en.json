@@ -24,6 +24,7 @@
       "view": "View"
     },
     "fromMonth": "From month",
+    "team": "Team",
     "toMonth": "To month",
     "search": "Search",
     "stt": "No.",
@@ -43,7 +44,7 @@
     "notActive": "Not active",
     "parent": "Parent",
     "partner": "Partner",
-    "fullName": "FullName",
+    "fullName": "Full Name",
     "department": "Department",
     "gender": "Gender",
     "position": "Position",
@@ -57,7 +58,7 @@
     "emergencyUser": "Emergency User",
     "ethnic": "Ethnic",
     "hireDate": "Hire Date",
-    "idNhanVienChamCong": "IdNhanVienChamCong",
+    "fingerPrintCode": "Finger Print Code",
     "imageUrl": "avata",
     "leaveDate": "Leave Date",
     "level": "Level",
@@ -72,7 +73,9 @@
     "staffStatus": "Staff Status",
     "summary": "Summary",
     "username": "Username",
-    "workExperience": "Work eExperience"
+    "workExperience": "Work Experience",
+    "homeTown": "Home town",
+    "educationLevel": "Education Level"
   },
   "setting": {
     "role": "Role",
@@ -168,5 +171,13 @@
     "textPattern_2": "Please enter the number",
     "notFound": "Data not found"
 
+  },
+  "staff": {
+    "staffInfo": "Staff Information",
+    "commonInfo": "Common Information",
+    "contact": "Contact",
+    "address": "Address",
+    "staffDescription": "Staff Description",
+    "commonDescription": "Description"
   }
 }

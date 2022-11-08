@@ -45,5 +45,8 @@ export class StaffService extends BaseService {
     return this.http.get(`${environment.apiUrl}/achievement/download?filePath=${linkPath}`,
       {responseType: 'blob', observe: 'response'});
   }
+  getRoleStaff(option): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/role`, {params: option});
+  }
 
 }
