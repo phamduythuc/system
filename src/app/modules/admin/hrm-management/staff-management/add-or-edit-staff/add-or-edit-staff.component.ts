@@ -112,7 +112,7 @@ export class AddOrEditStaffComponent extends BaseComponent implements OnInit {
       //Mã nhân viên
       staffCode: [null, Validators.required],
       //Trạng thái của nhân viên
-      staffStatus: [null, Validators.required],
+      staffStatus: [null],
       //Trạng thái
       status: [],
       //Mô tả tổng quan

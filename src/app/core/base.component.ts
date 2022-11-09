@@ -9,7 +9,6 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {ChangeDetection} from '@angular/cli/lib/config/workspace-schema';
 import {DomSanitizer} from "@angular/platform-browser";
 import {SUCCESS_CODE} from "@core/config/constant";
 

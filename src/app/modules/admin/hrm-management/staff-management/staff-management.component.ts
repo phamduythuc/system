@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {BaseComponent} from '@core/base.component';
@@ -22,18 +22,18 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       flex: 0.3,
     },
     {
-      columnDef: 'username',
-      header: 'common.username',
-      flex: 0.3,
+      columnDef: 'fullName',
+      header: 'common.fullName',
+      flex: 0.7,
+    },
+    {
+      columnDef: 'staffCode',
+      header: 'common.staffCode',
     },
     {
       columnDef: 'departmentId',
       header: 'common.department',
-      flex: 0.3,
-    },
-    {
-      columnDef: 'gender',
-      header: 'common.gender',
+      flex: 0.5,
     },
     {
       columnDef: 'positionId',
@@ -42,6 +42,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'phone',
       header: 'common.phone',
+      flex: 0.5
     },
     {
       columnDef: 'companyEmail',
@@ -53,9 +54,20 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.dateOfBirth))
     },
     {
+      columnDef: 'createdDate',
+      header: 'common.createdDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+    },
+    {
+      columnDef: 'modifiedDate',
+      header: 'common.modifiedDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+    },
+    {
       columnDef: 'action',
       header: 'common.actions',
       actions: [ 'view','edit', 'delete'],
+      flex: 1.3,
     }
   ];
   formSearch = this.fb.group({
@@ -68,13 +80,15 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     total: 0
   };
   panelOpenState: false;
+  @ViewChild('drawer') drawer: any;
+  staffSelected: any;
 
   constructor(injector: Injector, public staffService: StaffService) {
-    super(injector, staffService)
+    super(injector, staffService);
   }
 
   ngOnInit(): void {
-    this.searchModel.status = 1
+    this.searchModel.status = 1;
     this.doSearch();
   }
 
@@ -84,15 +98,14 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   }
 
   actionClick(e: any): void {
-    console.log(e.type)
     if (e.type === 'view') {
-      this.showDetail(e.data.id)
+      this.showDetail(e.data.id);
     }
     if (e.type === 'edit') {
-      this.addOrEdit(e.data.id)
+      this.addOrEdit(e.data.id);
     }
     if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id)
+      this.deleteConfirmDialog(e.data.id);
     }
   }
 
@@ -108,16 +121,44 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   }
 
   addOrEdit(id?: any): void {
-    const ref = this.showDialog(AddOrEditStaffComponent, {
-      data: {
-        id,
-      },
-      width: '60vw',
-      height:'80vh',
-      disableClose: true
-    }, (value) => {
-      if (value)
-        this.doSearch()
-    });
+    // this.showDialog(AddOrEditStaffComponent, {
+    //   data: {
+    //     id,
+    //   },
+    //   width: '60vw',
+    //   height:'80vh',
+    //   disableClose: true
+    // }, (value) => {
+    //   if (value)
+    //     this.doSearch()
+    // });
+
+    // if(id){
+    //   this.staffSelected = id;
+    //   this.drawer.toggle();
+    // }else{
+    //   this.showDialog(AddOrEditStaffComponent, {
+    //     data: {
+    //       id,
+    //     },
+    //     width: '60vw',
+    //     height:'80vh',
+    //     disableClose: true
+    //   }, (value) => {
+    //     if (value)
+    //       this.doSearch()
+    //   });
+    // }
+
+
+    this.staffSelected = id;
+    this.drawer.toggle();
+  }
+  // Drawer by Phong
+  openDrawerChange($event: boolean) {
+    if (!$event) {
+      this.staffSelected = null;
+      this.doSearch();
+    }
   }
 }

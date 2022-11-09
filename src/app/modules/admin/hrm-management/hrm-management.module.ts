@@ -17,6 +17,8 @@ import { TeamManagementComponent } from './team-management/team-management.compo
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {UserModule} from '../setting/user/user.module';
 import {TeamManagementModule} from './team-management/team-management.module';
+import {FuseDrawerModule} from "../../../../@fuse/components/drawer";
+import {StaffManagementModule} from "./staff-management/staff-management.module";
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import {TeamManagementModule} from './team-management/team-management.module';
     MatSidenavModule,
     UserModule,
     TeamManagementModule,
+    FuseDrawerModule,
+    StaffManagementModule,
   ]
 })
 export class HrmManagementModule { }
