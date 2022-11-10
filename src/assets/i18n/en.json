@@ -23,6 +23,10 @@
     "button": {
       "view": "View"
     },
+    "message": {
+      "number_format": "{{field}} must be number",
+      "required": "{{field}} must not empty"
+    },
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",

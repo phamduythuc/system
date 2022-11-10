@@ -8,6 +8,7 @@ import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
 import {forkJoin} from "rxjs";
+import {MONTH_FORMAT} from "@shared/app.constant";
 
 @Component({
   selector: 'app-project-effort',
@@ -16,6 +17,8 @@ import {forkJoin} from "rxjs";
 })
 export class ProjectEffortComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSDA';
+
+  isLoading: boolean = false;
 
   columns: IColumn[] = [
     {
@@ -49,24 +52,22 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     // }
   ];
 
-  formGroup: FormGroup;
-  formArray: FormArray;
-  a = [1, 2, 3, 4];
-
   constructor(injector: Injector,
               private projectService: ProjectService,
               private effortService: EffortService,
               public dialogRef: MatDialogRef<ProjectEffortComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
-    super(injector, projectService);
+    super(injector, effortService);
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
+      id: [],
+      name: [this.generateName(month)],
       projectId: [data.id],
-      startMonth: [month],
-      estimate: [],
-      effort: [],
+      startDate: [month],
+      estimate: ['', [Validators.required, Validators.pattern('^[0-9][0-9\\.]*$')]],
+      effort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
       acceptanceDate: [],
-      acceptanceEffort: [],
+      acceptanceEffort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
       note: [],
       efforts: this.fb.array([])
     });
@@ -75,7 +76,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadEffortDetail(this.formGroup.get('startMonth').value);
+    this.loadEffortDetail(this.formGroup.get('startDate').value);
   }
 
   get efforts(): FormArray {
@@ -83,12 +84,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   loadEffortDetail(month) {
-    const searchObj = {projectId: this.data.id, startMonth: CommonUtilsService.dateToString(month, false)};
-    this.effortService.getMembers(searchObj).subscribe(res => {
-      if (this.isSuccess(res)) {
-        res.data.forEach(item => this.efforts.push(this.newItem(item)));
-      }
-    });
+    const searchObj = {projectId: this.data.id, startDate: CommonUtilsService.dateToString(month, false)};
+    this.isLoading = true;
+    forkJoin([this.effortService.getStage(searchObj), this.effortService.getMembers(searchObj)])
+      .subscribe(([res, res1]) => {
+        if (this.isSuccess(res1)) {
+          res1.data.forEach(item => this.efforts.push(this.newItem(item)));
+        }
+        this.isLoading = false;
+      });
   }
 
   newItem(data: any): FormGroup {
@@ -101,8 +105,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
   }
 
-  save(value: any) {
-    console.log(this.formGroup.value);
+  save() {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
+    }
+    const body = this.formGroup.value;
+    body.startDate = CommonUtilsService.dateToString(body.startDate, false);
+    body.acceptanceDate = CommonUtilsService.dateToString(body.acceptanceDate, false);
+    this.addOrEdit(body);
     return false;
   }
 
@@ -140,9 +151,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   changeMonth() {
     this.formGroup.patchValue({arr: this.fb.array([])});
-    const month = this.formGroup.get('startMonth').value;
+    const month = this.formGroup.get('startDate').value;
     if (month) {
+      this.formGroup.patchValue({name: this.generateName(month)});
       this.loadEffortDetail(month);
     }
+  }
+
+  generateName(month: Moment): string {
+    return `Sprint tháng ${month.format(MONTH_FORMAT)}`;
   }
 }

@@ -20,6 +20,10 @@
       "settings": "Cài đặt",
       "logout": "Đăng xuất"
     },
+    "message": {
+      "number_format": "{{field}} sai định dạng số",
+      "required": "{{field}} không được để trống"
+    },
     "button": {
       "view": "Xem"
     },
