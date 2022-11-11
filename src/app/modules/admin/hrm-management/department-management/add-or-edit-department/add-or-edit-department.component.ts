@@ -11,14 +11,14 @@ import {DepartmentService} from '@shared/services/department.service';
 })
 export class AddOrEditDepartmentComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
-    name: [null, [Validators.required]],
-    code: [null, [Validators.required]],
+    name: [null, [Validators.required, Validators.maxLength(100)]],
+    code: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
     parentId: [null],
     status: [1]
   });
-  dialogId
-  departments:[]
+  dialogId: any = null;
+  departments: any[] = [];
 
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
@@ -27,9 +27,9 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId)
+      this.getDetails(this.dialogId);
     }
-    this.departments = dialogData?.departments
+    this.departments = dialogData?.departments;
   }
 
   ngOnInit(): void {
@@ -40,8 +40,7 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
   }
 
   save(data) {
-    console.log(this.searchModel)
-    data.id = this.dialogId||null
+    data.id = this.dialogId||null;
     this.addOrEdit(data);
     // this.dialogRef.close(data)
   }

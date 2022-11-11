@@ -11,6 +11,7 @@ import {
   TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-data-table',
@@ -65,6 +66,13 @@ export class DataTableComponent implements OnInit, OnChanges {
       color: 'red',
     },
     {
+      id: 'configEffort',
+      label: this.transloco.translate('Giai đoạn'),
+      icon: 'heroicons_outline:plus-circle',
+      color: 'green',
+      role: 'CREATE'
+    },
+    {
       id: 'view',
       label: 'View',
       icon: 'heroicons_outline:eye',
@@ -79,7 +87,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     return this.columns.map(c => c.columnDef);
   }
 
-  constructor(private cdk: ChangeDetectorRef) {
+  constructor(private cdk: ChangeDetectorRef, private transloco: TranslocoService) {
   }
 
   ngOnInit(): void {

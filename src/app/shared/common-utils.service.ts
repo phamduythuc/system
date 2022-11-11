@@ -24,12 +24,15 @@ export class CommonUtilsService {
     }
   }
 
-  public static dateToString(value: any, isFullDate?: boolean): any {
+  public static dateToString(value: any, isFullDate?: boolean, utc?: boolean): any {
     if (value == null || value.toString().trim() === '') {
       return null;
     }
     let a;
     if (isNaN(value)) {
+      if (value.length === DATE_FORMAT.length || value.length === DATE_TIME_FORMAT.length) {
+        return value;
+      }
       a = moment(value);
     } else {
       a = moment(Number(value));
@@ -39,7 +42,10 @@ export class CommonUtilsService {
       return value;
     }
     if (isFullDate) {
-        return a.format(DATE_TIME_FORMAT);
+      if (utc) {
+        return moment(a).utc().format(DATE_TIME_FORMAT);
+      }
+      return a.format(DATE_TIME_FORMAT);
     }
     return a.format(DATE_FORMAT);
   }

@@ -24,9 +24,15 @@
       "number_format": "{{field}} sai định dạng số",
       "required": "{{field}} không được để trống"
     },
+    "title": {
+      "create": "Thêm mới {{screenName}}",
+      "edit": "Cập nhật {{screenName}}",
+      "detail": "Chi tiết {{screenName}}"
+    },
     "button": {
       "view": "Xem"
     },
+    "keyword": "Từ khóa",
     "fromMonth": "Từ tháng",
     "team": "Nhóm",
     "toMonth": "Đến tháng",
@@ -115,7 +121,7 @@
       "form": {
         "name": "Tên phòng ban",
         "code": "Mã phòng ban",
-        "parent": "Cấp quản lí"
+        "parent": "Phòng ban trực thuộc"
       }
     },
     "staffLevel": {

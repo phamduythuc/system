@@ -1,7 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {BaseComponent} from '../../../../../../core/base.component';
+import {BaseComponent} from '@core/base.component';
 import {StaffLevelService} from '@shared/services/staff-level.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class AddOrEditStaffLevelComponent extends BaseComponent implements OnIni
 
   dialogId: any;
   formGroup = this.fb.group({
-    name: [null, Validators.required],
+    name: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
     status: [1, Validators.required],
   });
@@ -33,9 +33,8 @@ export class AddOrEditStaffLevelComponent extends BaseComponent implements OnIni
   }
 
   save(data) {
-    console.log(this.searchModel)
-    data.id = this.dialogId || null
-    this.addOrEdit(data)
+    data.id = this.dialogId || null;
+    this.addOrEdit(data);
   }
 
 }

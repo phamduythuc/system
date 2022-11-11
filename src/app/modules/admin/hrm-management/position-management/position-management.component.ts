@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {IColumn} from '../../../../layout/common/data-table/data-table.component';
-import {BaseComponent} from '../../../../core/base.component';
+import {IColumn} from '@layout/common/data-table/data-table.component';
+import {BaseComponent} from '@core/base.component';
 import {PositionService} from '@shared/services/position.service';
 import {AddOrEditPositionComponent} from './compoment/add-or-edit-position/add-or-edit-position.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
@@ -30,10 +30,6 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       header: 'common.description',
     },
     {
-      columnDef: 'code',
-      header: 'common.code',
-    },
-    {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
@@ -49,8 +45,8 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     }
   ];
   formSearch = this.fb.group({
-    name: [''],
-  })
+    keyword: [''],
+  });
 
   paginate = {
     page: 0,
@@ -58,7 +54,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     total: 0
   };
   positions = [];
-  panelOpenState: false;
+  panelOpenState: boolean = false;
 
   constructor(injector: Injector,
               private positionService: PositionService) {
@@ -66,29 +62,28 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
-    this.searchModel.status = 1
+    this.searchModel.status = 1;
     this.doSearch();
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel = {...this.searchModel, ...this.formSearch.value};
+    this.processSearch(this.searchModel);
   }
 
   actionClick(e: any): void {
-    console.log(e.type)
     if (e.type === 'view') {
-      this.showDetail(e.data.id)
+      this.showDetail(e.data.id);
     }
     if (e.type === 'edit') {
-      this.addOrEditPosition(e.data.id)
+      this.addOrEditPosition(e.data.id);
     }
     if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id)
+      this.deleteConfirmDialog(e.data.id);
     }
   }
 
-  showDetail(id){
+  showDetail(id) {
     this.showDialog(DetailPositionComponent, {
         data: {
           id
@@ -97,7 +92,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
         // height: '45vh',
         disableClose: true
       }
-    )
+    );
   }
 
   addOrEditPosition(id?: any): void {
@@ -109,8 +104,9 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       // height: '45vh',
       disableClose: true
     }, (value) => {
-      if (value)
-        this.doSearch()
+      if (value) {
+        this.doSearch();
+      }
     });
     // ref.onclose()
   }

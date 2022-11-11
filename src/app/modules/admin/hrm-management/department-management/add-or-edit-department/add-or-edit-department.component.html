@@ -1,87 +1,83 @@
 <ng-container *transloco="let t">
-    <div class="header border-b flex justify-between items-center pb-3">
-        <div class="text-2xl font-bold card-title capitalize">
-            {{(dialogId ? 'hrm-management.editHeader' : 'hrm-management.addHeader')|transloco}}
-        </div>
-        <div>
-            <button mat-icon-button class="hover:bg-slate-100" (click)="dialogRef.close()">
-                <mat-icon svgIcon="heroicons_outline:x" title="Edit"  class="icon-size-5"></mat-icon>
-            </button>
-        </div>
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{(dialogId ? 'common.title.edit' : 'common.title.create') | transloco : {screenName: 'hrm-management.department.title'|transloco} }}
     </div>
-    <!--    content-->
-    <div class="content mt-6" [formGroup]="formGroup">
-        <div class="field flex mb-4">
-            <div class="w-1/2 flex">
-                <label class="w-1/3 font-medium required" for="department-name">{{"hrm-management.department.form.name"|transloco}}</label>
-                <div class="input w-2/3">
-                    <mat-form-field
-                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
-                        <input class="w-full" id="department-name"
-                               [placeholder]="('hrm-management.department.form.name' | transloco)+' ...'"
-                               formControlName="name"
-                               matInput trim='blur'>
-                    </mat-form-field>
-                    <app-error-message [control]="formGroup.get('name')" name='"hrm-management.department.form.name"|transloco'></app-error-message>
-                </div>
-            </div>
-            <div class="w-1/2 flex">
-                <label class="w-1/3 font-medium required ml-4" for="department-code">{{"hrm-management.department.form.code"|transloco}}</label>
-                <div class="input w-2/3">
-                    <mat-form-field
-                        class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
-                        <input class="w-full" id="department-code"
-                               [placeholder]="('hrm-management.department.form.code' | transloco)+' ...'"
-                               formControlName="code"
-                               matInput>
-                    </mat-form-field>
-                    <app-error-message [control]="formGroup.get('code')" [name]='"hrm-management.department.form.code"|transloco'></app-error-message>
-                </div>
-            </div>
+    <div>
+      <button mat-icon-button class="hover:bg-slate-100" (click)="dialogRef.close()">
+        <mat-icon svgIcon="heroicons_outline:x" title="Edit" class="icon-size-5"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <!--    content-->
+  <div class="content mt-6" [formGroup]="formGroup">
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required"
+               for="department-name">{{"hrm-management.department.form.name"|transloco}}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            <input class="w-full" id="department-name"
+                   [placeholder]="('hrm-management.department.form.name' | transloco)"
+                   formControlName="name"
+                   matInput trim='blur'>
+          </mat-form-field>
+          <app-error-message [control]="formGroup.get('name')"
+                             name="{{'hrm-management.department.form.name' | transloco}}"></app-error-message>
         </div>
-      <div class="field flex mb-4">
-          <label class="w-1/6 font-medium required">ParentId</label>
-          <div class="input w-5/6">
-            <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
-              <mat-select [placeholder]="('common.parent' | transloco)+' ...'" formControlName="parentId">
-                <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <app-error-message [control]="formGroup.get('parentId')" name="Parent"></app-error-message>
-          </div>
       </div>
-        <div class="field flex mb-4">
-            <label class="w-1/6 font-medium flex items-center" for="description">{{"common.description"|transloco}}</label>
-            <div class="input w-5/6">
-                <mat-form-field
-                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required ml-4"
+               for="department-code">{{"hrm-management.department.form.code"|transloco}}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            <input class="w-full" id="department-code"
+                   [placeholder]="('hrm-management.department.form.code' | transloco)"
+                   formControlName="code"
+                   matInput>
+          </mat-form-field>
+          <app-error-message [control]="formGroup.get('code')"
+                             [name]='"hrm-management.department.form.code"|transloco'></app-error-message>
+        </div>
+      </div>
+    </div>
+    <div class="field flex mb-4">
+      <label class="w-1/6 font-medium">{{'hrm-management.department.form.parent' | transloco}}</label>
+      <div class="input w-5/6">
+        <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
+          <mat-select [placeholder]="('hrm-management.department.form.parent' | transloco)" formControlName="parentId">
+            <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <app-error-message [control]="formGroup.get('parentId')" name="Parent"></app-error-message>
+      </div>
+    </div>
+    <div class="field flex mb-4">
+      <label class="w-1/6 font-medium flex items-center" for="description">{{"common.description"|transloco}}</label>
+      <div class="input w-5/6">
+        <mat-form-field
+          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                     <textarea class="w-full" id="description"
-                              [placeholder]="('common.description' | transloco)+' ...'"
+                              [placeholder]="('common.description' | transloco)"
                               formControlName="description"
                               matInput></textarea>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="field flex mb-4">
-            <label class="w-1/6 font-medium">{{"common.status"|transloco}}</label>
-            <div class="input w-5/6">
-                <mat-radio-group formControlName="status">
-                    <mat-radio-button [value]="1" class="mr-10 text-lime-500">{{"common.active"|transloco}}</mat-radio-button>
-                    <mat-radio-button [value]="0" class="text-red-500">{{"common.notActive"|transloco}}</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </div>
+        </mat-form-field>
+      </div>
     </div>
-    <!--    footer-->
-    <div class="footer mt-6 flex justify-end">
-        <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save(formGroup.value)">
-            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
-            <span>{{(department ? 'button.edit' : 'button.save')|transloco}}</span>
-        </button>
-        <button mat-raised-button (click)="dialogRef.close()">
-            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
-            <span>{{"button.cancel" | transloco}}</span>
-        </button>
-    </div>
+  </div>
+  <!--    footer-->
+  <div class="footer mt-6 flex justify-end">
+    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+      <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+      <span>{{"button.cancel" | transloco}}</span>
+    </button>
+    <button mat-raised-button color="primary" [disabled]="formGroup.invalid"
+            (click)="formGroup.valid && save(formGroup.value)">
+      <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+      <span>{{(dialogId ? 'button.edit' : 'button.save')|transloco}}</span>
+    </button>
+  </div>
 
 </ng-container>

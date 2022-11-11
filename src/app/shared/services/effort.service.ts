@@ -13,8 +13,12 @@ export class EffortService extends BaseService {
     super(http, `${environment.apiUrl}/effort`);
   }
 
+  update(data: any) {
+    return this.http.put(`${this.serviceUrl}/update`, data);
+  }
+
   getStage(data): Observable<any> {
-    return this.http.get(`${this.serviceUrl}/project/${data.projectId}/stage`, {params: data});
+    return this.http.get(`${this.serviceUrl}/stage`, {params: data});
   }
 
   getMembers(data): Observable<any> {

@@ -30,10 +30,6 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
       header: 'common.description',
     },
     {
-      columnDef: 'code',
-      header: 'common.code',
-    },
-    {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
@@ -49,15 +45,15 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     }
   ];
   formSearch = this.fb.group({
-    name: [''],
-  })
+    keyword: [''],
+  });
 
   paginate = {
     page: 0,
     size: 10,
     total: 0
   };
-  panelOpenState: false;
+  panelOpenState: boolean = false;
 
   constructor(injector: Injector,
               staffLevelService: StaffLevelService) {

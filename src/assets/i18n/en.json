@@ -20,13 +20,19 @@
       "settings": "Settings",
       "logout": "Logout"
     },
-    "button": {
-      "view": "View"
-    },
     "message": {
       "number_format": "{{field}} must be number",
       "required": "{{field}} must not empty"
     },
+    "title": {
+      "create": "Create {{screenName}}",
+      "edit": "Edit {{screenName}}",
+      "detail": "Detail {{screenName}}"
+    },
+    "button": {
+      "view": "View"
+    },
+    "keyword": "Keyword",
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",
@@ -115,7 +121,7 @@
       "form": {
         "name": "Department name",
         "code": "Department code",
-        "parent": "Parent"
+        "parent": "Department embed"
       }
     },
     "staffLevel": {

@@ -10,20 +10,19 @@ import {Validators} from '@angular/forms';
   styleUrls: ['./add-or-edit-position.component.scss']
 })
 export class AddOrEditPositionComponent extends BaseComponent implements OnInit {
-  private readonly dialogId: any;
+  dialogId: any;
   formGroup = this.fb.group({
-    name: [null, Validators.required],
+    name: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
     status: [1, Validators.required],
   });
-tes = 'common.description'
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditPositionComponent>,
               private positionService: PositionService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, positionService, dialogRef);
     this.dialogId = data?.id;
-    if(this.dialogId){
+    if (this.dialogId) {
       this.getDetails(this.dialogId);
     }
   }
@@ -32,8 +31,7 @@ tes = 'common.description'
   }
 
   save(data) {
-    console.log(this.searchModel)
-    data.id = this.dialogId || null
-    this.addOrEdit(data)
+    data.id = this.dialogId || null;
+    this.addOrEdit(data);
   }
 }

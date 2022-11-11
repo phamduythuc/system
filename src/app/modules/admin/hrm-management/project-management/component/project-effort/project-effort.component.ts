@@ -7,8 +7,8 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
-import {forkJoin} from "rxjs";
-import {MONTH_FORMAT} from "@shared/app.constant";
+import {forkJoin} from 'rxjs';
+import {MONTH_FORMAT} from '@shared/app.constant';
 
 @Component({
   selector: 'app-project-effort',
@@ -69,29 +69,41 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       acceptanceDate: [],
       acceptanceEffort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
       note: [],
-      efforts: this.fb.array([])
+      effortDetail: this.fb.array([])
     });
   }
-
-
 
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
   }
 
   get efforts(): FormArray {
-    return this.formGroup.get('efforts') as FormArray;
+    return this.formGroup.get('effortDetail') as FormArray;
   }
 
   loadEffortDetail(month) {
-    const searchObj = {projectId: this.data.id, startDate: CommonUtilsService.dateToString(month, false)};
+    const monthStr = CommonUtilsService.dateToString(month, false);
+    const monthTimeStr = CommonUtilsService.dateToString(month, true, true);
+    const searchObj = {projectId: this.data.id, startDateFilter: monthTimeStr, month: monthStr};
     this.isLoading = true;
     forkJoin([this.effortService.getStage(searchObj), this.effortService.getMembers(searchObj)])
       .subscribe(([res, res1]) => {
+        if (this.isSuccess(res)) {
+          this.formGroup.patchValue({
+            id: res.data.id,
+            name: res.data.name,
+            projectId: res.data.projectId,
+            estimate: res.data.estimate,
+            effort: res.data.effort,
+            acceptanceDate: moment(res.data.acceptanceDate),
+            acceptanceEffort: res.data.acceptanceEffort,
+            note: res.data.note,
+          });
+        }
         if (this.isSuccess(res1)) {
           res1.data.forEach(item => this.efforts.push(this.newItem(item)));
+          this.isLoading = false;
         }
-        this.isLoading = false;
       });
   }
 
@@ -111,6 +123,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       return;
     }
     const body = this.formGroup.value;
+    body.startDateFilter = CommonUtilsService.dateToString(body.startDate, true, true);
     body.startDate = CommonUtilsService.dateToString(body.startDate, false);
     body.acceptanceDate = CommonUtilsService.dateToString(body.acceptanceDate, false);
     this.addOrEdit(body);
@@ -151,14 +164,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   changeMonth() {
     this.formGroup.patchValue({arr: this.fb.array([])});
-    const month = this.formGroup.get('startDate').value;
+    const month = moment(this.formGroup.get('startDate').value);
     if (month) {
       this.formGroup.patchValue({name: this.generateName(month)});
       this.loadEffortDetail(month);
     }
   }
 
-  generateName(month: Moment): string {
+  generateName(month: any): string {
     return `Sprint tháng ${month.format(MONTH_FORMAT)}`;
   }
 }
