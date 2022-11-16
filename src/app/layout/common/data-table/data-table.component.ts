@@ -24,6 +24,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() rows: any = [];
   @Input() columns: IColumn[] | undefined = [];
   @Input() limit: any = 10;
+  @Input() pageIndex: any = 0;
   @Input() count: any = 0;
   @Input() columnWidth: string;
   @Input() paginate: boolean = true;
