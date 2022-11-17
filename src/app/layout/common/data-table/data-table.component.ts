@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -6,9 +7,11 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges, TemplateRef,
+  SimpleChanges,
+  TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
+import {TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-data-table',
@@ -17,10 +20,11 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class DataTableComponent implements OnInit, OnChanges {
-  @Input() roleName: string
+  @Input() roleName: string;
   @Input() rows: any = [];
   @Input() columns: IColumn[] | undefined = [];
   @Input() limit: any = 10;
+  @Input() pageIndex: any = 0;
   @Input() count: any = 0;
   @Input() columnWidth: string;
   @Input() paginate: boolean = true;
@@ -29,6 +33,13 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() pageChange = new EventEmitter<any>();
   @Output() action = new EventEmitter<any>();
   actions = [
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: 'heroicons_outline:trash',
+      color: 'success',
+      role: 'DELETE'
+    },
     {
       id: 'delete',
       label: 'Delete',
@@ -56,6 +67,13 @@ export class DataTableComponent implements OnInit, OnChanges {
       color: 'red',
     },
     {
+      id: 'configEffort',
+      label: this.transloco.translate('Giai đoạn'),
+      icon: 'heroicons_outline:plus-circle',
+      color: 'green',
+      role: 'CREATE'
+    },
+    {
       id: 'view',
       label: 'View',
       icon: 'heroicons_outline:eye',
@@ -70,13 +88,14 @@ export class DataTableComponent implements OnInit, OnChanges {
     return this.columns.map(c => c.columnDef);
   }
 
-  constructor(private cdk: ChangeDetectorRef) {
+  constructor(private cdk: ChangeDetectorRef, private transloco: TranslocoService) {
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     this.getListActions();
   }
 
@@ -112,7 +131,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   log(row) {
-    console.log(row)
+    console.log(row);
   }
 }
 

@@ -1,7 +1,7 @@
 <ng-container *transloco="let t" >
   <div class="header border-b flex justify-between items-center pb-3">
     <div class="text-2xl font-bold card-title capitalize">
-      {{'hrm-management.detailsHeader'|transloco}} {{'hrm-management.partner.title'|transloco}}
+      {{'common.title.detail' | transloco : {screenName: 'hrm-management.partner.title'|transloco} }}
     </div>
     <div>
       <button mat-icon-button class="hover:bg-slate-100" (click)="dialogRef.close()">
@@ -36,6 +36,16 @@
       <div class="flex justify-center items-center border b-radius p-2 w-5/6">
         <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
           {{detailsData?.address}}
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <mat-label class="w-1/6 p-2 font-semibold">{{"common.note"|transloco}}</mat-label>
+      <div class="flex justify-center items-center border b-radius p-2 w-5/6">
+        <div
+          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+          {{detailsData.note ? detailsData.note : ''}}
         </div>
       </div>
     </div>
@@ -80,15 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="field flex mb-4">
-      <mat-label class="w-1/6 p-2 font-semibold">{{"common.note"|transloco}}</mat-label>
-      <div class="flex justify-center items-center border b-radius p-2 w-5/6">
-        <div
-          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-          {{detailsData.note ? detailsData.note : ''}}
-        </div>
-      </div>
-    </div>
+
   </div>
   <!--    footer-->
 

@@ -10,11 +10,11 @@ import {PartnerService} from '@shared/services/partner.service';
   styleUrls: ['./add-or-edit-partner.component.scss']
 })
 export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
+  dialogId;
 
-  diaLogId;
   formGroup = this.fb.group({
-    name: [null,Validators.required],
-    phone:[null,[Validators.required,Validators.pattern('[0-9]{10}')]],
+    name: [null, [Validators.required, Validators.maxLength(100)]],
+    phone:[null, [Validators.required, Validators.pattern('[0-9]{10}')]],
     address:[null],
     note: [null],
   });
@@ -23,9 +23,9 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
               private partnerService: PartnerService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, partnerService, dialogRef);
-    this.diaLogId = data?.id;
-    if(this.diaLogId){
-      this.getDetails(this.diaLogId);
+    this.dialogId = data?.id;
+    if(this.dialogId){
+      this.getDetails(this.dialogId);
     }
   }
 
@@ -33,10 +33,8 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
   }
 
   save(data) {
-    console.log(this.searchModel)
-    data.id = this.diaLogId||null
-    this.addOrEdit(data)
-    // this.dialogRef.close(data)
+    data.id = this.dialogId||null;
+    this.addOrEdit(data);
   }
 
 }

@@ -13,7 +13,7 @@ import {AccountService} from '@core/auth/account.service';
   styleUrls: ['./department-management.component.scss']
 })
 export class DepartmentManagementComponent extends BaseComponent implements OnInit {
-  _permissionCodeName= 'DSPB';
+  _permissionCodeName = 'DSPB';
 
   columns: IColumn[] = [
     {
@@ -47,16 +47,15 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view','edit', 'delete'],
+      actions: ['view', 'edit', 'delete'],
     }
   ];
   formSearch = this.fb.group({
-    name: ['']
-  })
+    keyword: ['']
+  });
   panelOpenState: false;
-  parentIds = []
 
-  constructor(injector: Injector, private departmentService: DepartmentService , private ac :AccountService) {
+  constructor(injector: Injector, private departmentService: DepartmentService) {
     super(injector, departmentService);
 
   }
@@ -64,16 +63,15 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.doSearch();
-    console.log(this.ac.hasAnyAuthority('fsdfasd'));
   }
 
   getParentIds(arr: any[]): any[] {
-    return arr.map(item => item.parentId).filter(item => item)
+    return arr.map(item => item.parentId).filter(item => item);
   }
 
   doSearch() {
-      this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel = {...this.searchModel, ...this.formSearch.value};
+    this.processSearch(this.searchModel);
   }
 
   actionClick(e: any): void {
@@ -89,7 +87,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     }
   }
 
-  showDetail(id){
+  showDetail(id) {
     this.showDialog(DetailsDepartmentComponent, {
         data: {
           id

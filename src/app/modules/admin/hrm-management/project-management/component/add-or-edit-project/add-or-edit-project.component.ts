@@ -16,10 +16,10 @@ import {map} from 'rxjs';
 })
 export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
-  private readonly dialogId: any;
+  dialogId: any;
   formGroup = this.fb.group({
-    name: [null, Validators.required],
-    code: [null, Validators.required],
+    name: [null, [Validators.required, Validators.maxLength(100)]],
+    code: [null, [Validators.required, Validators.maxLength(20)]],
     projectType: [null, Validators.required],
     budget: [null, Validators.required],
     startTime: [null,Validators.required],

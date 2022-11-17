@@ -33,12 +33,12 @@
                 <form class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
                   <div class="field flex-col w-full  p-4">
                     <div class="input">
-                      <label class="font-medium">{{t('common.name')}}</label>
+                      <label class="font-medium">{{t('common.keyword')}}</label>
                       <mat-form-field
                         class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
                         <input class="w-full"
-                               [placeholder]="('common.name' | transloco)+' ...'"
-                               formControlName="name"
+                               [placeholder]="('common.keyword' | transloco)"
+                               formControlName="keyword"
                                matInput trim='blur'>
                       </mat-form-field>
                     </div>
@@ -69,7 +69,8 @@
             [rows]="searchResult.data  //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
             [columns]="columns"
             [paginate]="true"
-            [limit]="searchModel.pageSize"
+            [pageIndex]="searchModel.page"
+            [limit]="paginate.pageSize"
             [count]="searchResult.totalRecords"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"

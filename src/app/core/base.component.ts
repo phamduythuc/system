@@ -9,7 +9,8 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer} from "@angular/platform-browser";
+import {SUCCESS_CODE} from "@core/config/constant";
 
 @Injectable()
 export class BaseComponent {
@@ -175,6 +176,6 @@ export class BaseComponent {
   }
 
   isSuccess(res): boolean {
-    return res.code === '00';
+    return res.code === SUCCESS_CODE;
   }
 }

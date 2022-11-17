@@ -20,15 +20,26 @@
       "settings": "Cài đặt",
       "logout": "Đăng xuất"
     },
+    "message": {
+      "number_format": "{{field}} sai định dạng số",
+      "required": "{{field}} không được để trống"
+    },
+    "title": {
+      "create": "Thêm mới {{screenName}}",
+      "edit": "Cập nhật {{screenName}}",
+      "detail": "Chi tiết {{screenName}}"
+    },
     "button": {
       "view": "Xem"
     },
+    "keyword": "Từ khóa",
     "fromMonth": "Từ tháng",
     "team": "Nhóm",
     "toMonth": "Đến tháng",
     "search": "Tìm kiếm",
     "stt": "Stt",
     "name": "Tên",
+    "name_position": "Tên chức vụ",
     "code": "Mã",
     "note": "Ghi chú",
     "phone": "Điện thoại",
@@ -111,7 +122,7 @@
       "form": {
         "name": "Tên phòng ban",
         "code": "Mã phòng ban",
-        "parent": "Cấp quản lí"
+        "parent": "Phòng ban trực thuộc"
       }
     },
     "staffLevel": {
@@ -173,6 +184,18 @@
     "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
     "textPattern_2": "Vui lòng nhập ký tự số",
     "notFound": "Không tìm thấy bản ghi"
+  },
+  "effort": {
+    "title": "Thông tin giai đoạn",
+    "month": "Tháng",
+    "estimate": "Ước lượng",
+    "customer_record": "Khách hàng chốt",
+    "accept_date": "Ngày nghiệm thu",
+    "effort_accept": "Nghiệm thu",
+    "progress": "Tiến độ",
+    "difference_effort": "Chênh lệch",
+    "acknowledgment_of_effort": "Ghi nhận nỗ lực",
+    "percent_effort": "% tham gia"
   },
   "staff": {
     "staffInfo": "Thông tin nhân viên",

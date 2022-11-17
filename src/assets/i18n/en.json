@@ -20,15 +20,26 @@
       "settings": "Settings",
       "logout": "Logout"
     },
+    "message": {
+      "number_format": "{{field}} must be number",
+      "required": "{{field}} must not empty"
+    },
+    "title": {
+      "create": "Create {{screenName}}",
+      "edit": "Edit {{screenName}}",
+      "detail": "Detail {{screenName}}"
+    },
     "button": {
       "view": "View"
     },
+    "keyword": "Keyword",
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",
     "search": "Search",
     "stt": "No.",
     "name": "Name",
+    "name_position": "Position name",
     "code": "Code",
     "note": "Note",
     "phone": "Phone",
@@ -111,7 +122,7 @@
       "form": {
         "name": "Department name",
         "code": "Department code",
-        "parent": "Parent"
+        "parent": "Department embed"
       }
     },
     "staffLevel": {
@@ -170,7 +181,17 @@
     "textPattern_1": "Please only enter the letters without accents, numbers and signs  \"_\"",
     "textPattern_2": "Please enter the number",
     "notFound": "Data not found"
-
+  },
+  "effort": {
+    "month": "Month",
+    "estimate": "Estimate",
+    "customer_record": "Customer record",
+    "accept_date": "Acceptance date",
+    "effort_accept": "Effort acceptance",
+    "progress": "Progress",
+    "difference_effort": "Difference",
+    "acknowledgment_of_effort": "Acknowledgment of effort",
+    "percent_effort": "% join"
   },
   "staff": {
     "staffInfo": "Staff Information",

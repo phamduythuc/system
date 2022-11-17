@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FuseConfigService} from '../../../@fuse/services/config';
 import {TranslocoService} from '@ngneat/transloco';
+import moment from "moment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -42,7 +43,9 @@ export class AuthInterceptor implements HttpInterceptor
         if ( this._authService.accessToken)
         {
             newReq = req.clone({
-                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken).set('LANG_KEY', language)
+                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken)
+                  .set('LANG_KEY', language)
+                  // .set('TIMEZONE', moment())
             });
         }
 

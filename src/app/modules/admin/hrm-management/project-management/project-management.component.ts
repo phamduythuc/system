@@ -71,47 +71,53 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'view','edit', 'delete'],
+      actions: [ 'configEffort', 'view','edit', 'delete'],
     }
   ];
+
   formSearch = this.fb.group({
     name: [''],
-  })
+  });
 
   paginate = {
     page: 0,
     size: 10,
     total: 0
   };
-  panelOpenState: false;
+  panelOpenState: boolean = false;
 
   constructor(injector: Injector, public projectService: ProjectService) {
-    super(injector, projectService)
+    super(injector, projectService);
   }
 
   ngOnInit(): void {
-    this.searchModel.status = 1
+    this.searchModel.status = 1;
     this.doSearch();
   }
 
   doSearch() {
     this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.processSearch(this.searchModel);
   }
   actionClick(e: any): void {
-    console.log(e.type)
+    if (e.type === 'configEffort') {
+      this.showConfigEffort(e.data.id);
+      return;
+    }
     if (e.type === 'view') {
-      this.showDetail(e.data.id)
+      this.showDetail(e.data.id);
+      return;
     }
     if (e.type === 'edit') {
-      this.addOrEdit(e.data.id)
+      this.addOrEdit(e.data.id);
+      return;
     }
     if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id)
+      this.deleteConfirmDialog(e.data.id);
     }
   }
 
-  showDetail(id){
+  showConfigEffort(id){
     this.showDialog(ProjectEffortComponent, {
         data: {
           id
@@ -120,7 +126,19 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         height: '85vh',
         disableClose: true
       }
-    )
+    );
+  }
+
+  showDetail(id){
+    this.showDialog(DetailProjectComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '85vh',
+        disableClose: true
+      }
+    );
   }
 
   addOrEdit(id?: any): void {
