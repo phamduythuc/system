@@ -8,7 +8,6 @@
     "visible": "Hiển thị",
     "previous": "Trang trước",
     "next": "Trang sau",
-    "first_page": "Trang đầu",
     "last_page": "Trang cuối",
     "range_label": "{{startIndex}} - {{endIndex}} của {{length}}",
     "no_data": "Không có dữ liêu"
@@ -22,7 +21,8 @@
     },
     "message": {
       "number_format": "{{field}} sai định dạng số",
-      "required": "{{field}} không được để trống"
+      "required": "{{field}} không được để trống",
+      "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx"
     },
     "title": {
       "create": "Thêm mới {{screenName}}",
@@ -166,7 +166,7 @@
     "noData": "Không tìm thấy dữ liêu"
   },
   "placeholder": {
-    "chooseDate": "Chọn ngày" ,
+    "chooseDate": "Chọn ngày",
     "choose": "Chọn"
   },
   "specialText": {

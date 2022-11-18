@@ -166,7 +166,7 @@
                          matInput>
                 </mat-form-field>
                 <app-error-message [control]="formGroup.get('phone')"
-                                   textPattern="Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx"
+                                   textPattern="{{'common.message.phone_format' | transloco}}"
                                    [name]='"common.phone"|transloco'></app-error-message>
               </div>
             </div>
