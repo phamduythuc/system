@@ -22,7 +22,8 @@
     },
     "message": {
       "number_format": "{{field}} must be number",
-      "required": "{{field}} must not empty"
+      "required": "{{field}} must not empty",
+      "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx"
     },
     "title": {
       "create": "Create {{screenName}}",

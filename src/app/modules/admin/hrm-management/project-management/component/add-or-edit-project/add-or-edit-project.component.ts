@@ -24,7 +24,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     budget: [null, Validators.required],
     startTime: [null,Validators.required],
     parentId:[],
-    partnerId:[],
+    partnerId:[null,Validators.required],
     description: [null],
     actualEndTime: [null],
     expectEndTime: [null,Validators.required],
