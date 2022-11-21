@@ -35,6 +35,11 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
     },
     {
+      columnDef: 'modifiedDate',
+      header: 'common.modifiedDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+    },
+    {
       columnDef: 'createdBy',
       header: 'common.createdBy',
     },
