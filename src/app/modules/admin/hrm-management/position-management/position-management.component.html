@@ -77,6 +77,7 @@
               <ng-container [ngSwitch]="column.columnDef">
                 <ng-container *ngSwitchDefault>{{row[column.columnDef]}}</ng-container>
                 <ng-container *ngSwitchCase="'createdDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
+                <ng-container *ngSwitchCase="'modifiedDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
               </ng-container>
               <!--                <button mat-raised-button (click)="(row?.description)" class="icon-size-4">-->
               <!--                  <mat-icon svgIcon="heroicons_outline:eye" color="primary"></mat-icon></button>-->
