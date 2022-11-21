@@ -22,7 +22,7 @@
           <!-- tHÁNG -->
           <div class="sm:col-span-2">
             <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label>{{'effort.month'|transloco}}</mat-label>
+              <mat-label class="required">{{'effort.month'|transloco}}</mat-label>
               <input matInput [matDatepicker]="startDate" datePickerFormat="MM/YYYY"
                      [formControlName]="'startDate'"
                      (ngModelChange)="changeMonth()"
@@ -40,7 +40,7 @@
           <!-- ƯỚC LƯỢNG -->
           <div class="sm:col-span-2">
             <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
-              <mat-label>{{'effort.estimate'|transloco}}</mat-label>
+              <mat-label class="required">{{'effort.estimate'|transloco}}</mat-label>
               <input
                 [formControlName]="'estimate'"
                 matInput>

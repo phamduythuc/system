@@ -9,7 +9,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     type: 'basic',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    // role: [AuthoritiesConstant.DASHBOARD]
+    role: [AuthoritiesConstant.DASHBOARD]
   },
   {
     id: 'hrmManagement',
@@ -24,10 +24,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/position-management',
         role: [
-          AuthoritiesConstant.DSTV_READ,
-          AuthoritiesConstant.DSTV_UPDATE,
-          AuthoritiesConstant.DSTV_DELETE,
-          AuthoritiesConstant.DSTV_READ,
+          AuthoritiesConstant.DSTV,
         ]
       },
       {

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardsRoutingModule } from './dashboards-routing.module';
 import {DashboardsComponent} from './dashboards.component';
 import {SharedModule} from '@shared/shared.module';
+import {TranslocoModule} from '@ngneat/transloco';
+import {ProjectStaffEffortModule} from '@shared/components/project-staff-effort/project-staff-effort.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import {SharedModule} from '@shared/shared.module';
   imports: [
     CommonModule,
     DashboardsRoutingModule,
-    SharedModule
+    SharedModule,
+    TranslocoModule,
+    ProjectStaffEffortModule
   ]
 })
 export class DashboardsModule { }

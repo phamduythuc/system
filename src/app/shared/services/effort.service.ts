@@ -21,6 +21,14 @@ export class EffortService extends BaseService {
     return this.http.get(`${this.serviceUrl}/stage`, {params: data});
   }
 
+  getListProject(data): Observable<any> {
+    return this.http.get(`${this.serviceUrl}/project-staff`, {params: data});
+  }
+
+  updatePercentEffort(data): Observable<any> {
+    return this.http.put(`${this.serviceUrl}/update/effort-percent`, data);
+  }
+
   getMembers(data): Observable<any> {
     return this.http.get(`${this.serviceUrl}/project/${data.projectId}/members`, {params: data});
   }
