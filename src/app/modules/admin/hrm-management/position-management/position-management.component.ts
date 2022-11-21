@@ -35,6 +35,11 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
     },
     {
+      columnDef: 'modifiedDate',
+      header: 'common.modifiedDate',
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+    },
+    {
       columnDef: 'createdBy',
       header: 'common.createdBy',
     },
