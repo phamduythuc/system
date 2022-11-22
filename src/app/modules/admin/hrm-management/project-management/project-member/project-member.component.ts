@@ -4,10 +4,12 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {ProjectService} from '@shared/services/project.service';
 import {EffortService} from '@shared/services/effort.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormArray} from '@angular/forms';
+import {FormArray, Validators} from '@angular/forms';
 import {StaffService} from '@shared/services/staff.service';
 import {AchievementService} from '@shared/services/achievement.service';
 import {forkJoin} from 'rxjs';
+import {CommonUtilsService} from "@shared/common-utils.service";
+import moment from "moment";
 
 @Component({
   selector: 'app-project-member',
@@ -72,7 +74,7 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
     });
   }
 
-  get efforts(): FormArray {
+  get formMembers(): FormArray {
     return this.formGroup.get('members') as FormArray;
   }
 
@@ -81,17 +83,19 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
   }
 
   initData() {
-    forkJoin([this.projectService.getMembers(this.data.id),  this.staffService.search({status: 1})])
+    forkJoin([this.projectService.getMembers(this.data.id), this.staffService.search({status: 1})])
       .subscribe(([res, res1]) => {
         this.members = res.data;
         this.mapMembers = {};
         this.members.forEach(item => {
           this.loadAvatar(item);
+          item.date = item.startDate ? moment(Number(item.startDate)) : null;
           this.mapMembers[item.id] = item;
+          this.formMembers.push(this.createFormItem(item));
         });
         this.staffList = res1.data;
         this.staffFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
-    });
+      });
   }
 
   getListStaff(textSearch?): void {
@@ -110,7 +114,10 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
       this.formGroup.markAllAsTouched();
       return;
     }
-    this.members.forEach(item => item.staffId = item.id);
+    this.members.forEach(item => {
+      item.staffId = item.id;
+      item.startDate = CommonUtilsService.dateToString(item.date, false);
+    });
     const body = {
       projectId: this.data.id,
       members: this.members
@@ -135,10 +142,23 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
     this.loadAvatar(addList);
     this.members = [...addList, ...this.members];
     this.mapMembers = {};
-    this.members.forEach(item => this.mapMembers[item.id] = item);
+    this.formMembers.clear();
+    this.members.forEach(item => {
+      this.mapMembers[item.id] = item;
+      this.formMembers.push(this.createFormItem(item));
+    });
     this.staffFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     this.getListStaff();
     this.formGroup.get('selectedMembers').reset();
+  }
+
+  createFormItem(data: any) {
+    return this.fb.group({
+      id: [data.id],
+      fullName: [data.fullName],
+      staffCode: [data.staffCode],
+      date: [data.startDate ? moment(Number(data.startDate)) : null],
+    });
   }
 
   removeMember(index?) {
@@ -154,5 +174,10 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
         member.avatar = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res.body));
       });
     }
+  }
+
+  changeStartDate(i: number, event: any) {
+    this.members[i].date = event.value;
+    this.members[i].startDate = CommonUtilsService.dateToString(event.value, false);
   }
 }
