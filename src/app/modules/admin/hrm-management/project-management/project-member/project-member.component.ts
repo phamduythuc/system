@@ -4,13 +4,10 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {ProjectService} from '@shared/services/project.service';
 import {EffortService} from '@shared/services/effort.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import moment, {Moment} from 'moment/moment';
-import {FormArray, FormGroup, Validators} from '@angular/forms';
-import {CommonUtilsService} from '@shared/common-utils.service';
-import {MONTH_FORMAT} from '@shared/app.constant';
+import {FormArray} from '@angular/forms';
 import {StaffService} from '@shared/services/staff.service';
-import {AchievementService} from "@shared/services/achievement.service";
-import {forkJoin} from "rxjs";
+import {AchievementService} from '@shared/services/achievement.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-project-member',
@@ -21,8 +18,10 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSDA';
 
   staffList: any[] = [];
+  staffFilter: any[] = [];
   members: any[] = [];
   isLoading: boolean = false;
+  mapMembers: any = {};
 
   columns: IColumn[] = [
     {
@@ -85,17 +84,13 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
     forkJoin([this.projectService.getMembers(this.data.id),  this.staffService.search({status: 1})])
       .subscribe(([res, res1]) => {
         this.members = res.data;
-        this.members.forEach(item => this.loadAvatar(item));
+        this.mapMembers = {};
+        this.members.forEach(item => {
+          this.loadAvatar(item);
+          this.mapMembers[item.id] = item;
+        });
         this.staffList = res1.data;
-        this.staffList.forEach(item => item.staffId = item.id);
-        if (this.members.length > 0) {
-          this.members.forEach(item => {
-            const index = this.staffList.findIndex(el => el.id === item.staffId);
-            if (index >= 0) {
-              this.staffList.splice(index, 1);
-            }
-          });
-        }
+        this.staffFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     });
   }
 
@@ -106,15 +101,7 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
     }
     this.staffService.search(dataSearch).subscribe(res => {
       this.staffList = res.data;
-      this.staffList.forEach(item => item.staffId = item.id);
-      if (this.members.length > 0) {
-        this.members.forEach(item => {
-          const index = this.staffList.findIndex(el => el.id === item.staffId);
-          if (index >= 0) {
-            this.staffList.splice(index, 1);
-          }
-        });
-      }
+      this.staffFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     });
   }
 
@@ -147,12 +134,17 @@ export class ProjectMemberComponent extends BaseComponent implements OnInit {
     });
     this.loadAvatar(addList);
     this.members = [...addList, ...this.members];
+    this.mapMembers = {};
+    this.members.forEach(item => this.mapMembers[item.id] = item);
+    this.staffFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     this.getListStaff();
     this.formGroup.get('selectedMembers').reset();
   }
 
   removeMember(index?) {
     this.members.splice(index, 1);
+    this.mapMembers = {};
+    this.members.forEach(item => this.mapMembers[item.id] = item);
     this.getListStaff();
   }
 

@@ -22,7 +22,7 @@
                             matPrefix></mat-icon>
                 </ngx-mat-select-search>
               </mat-option>
-              <mat-option *ngFor="let staff of staffList " [value]="staff">
+              <mat-option *ngFor="let staff of staffListFilter " [value]="staff">
                 {{staff.fullName}}
               </mat-option>
             </mat-select>

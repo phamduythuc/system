@@ -32,7 +32,7 @@
                               matPrefix></mat-icon>
                   </ngx-mat-select-search>
                 </mat-option>
-                <mat-option *ngFor="let staff of staffList " [value]="staff">
+                <mat-option *ngFor="let staff of staffFilter " [value]="staff">
                   {{staff.fullName}}
                   <ng-container *ngIf="staff.username">({{staff.username}})</ng-container>
                 </mat-option>

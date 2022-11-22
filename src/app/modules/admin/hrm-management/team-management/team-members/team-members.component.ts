@@ -4,7 +4,7 @@ import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {TeamMemberService} from '@shared/services/team-member.service';
 import {AchievementService} from '@shared/services/achievement.service';
-import {StaffService} from "@shared/services/staff.service";
+import {StaffService} from '@shared/services/staff.service';
 
 @Component({
   selector: 'app-team-members',
@@ -16,8 +16,10 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
   @Input() teamId: any;
 
   roles: any[];
-  staffList: any;
+  staffList: any[] = [];
+  staffListFilter: any[] = [];
   members: any;
+  mapMembers: any = {};
   addMember: any;
 
   constructor(injector: Injector,
@@ -81,6 +83,8 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     this.processSearch(this.searchModel, () => {
       this.members = this.searchResult.data;
       this.members.forEach(member => this.loadAvatar(member));
+      this.mapMembers = {};
+      this.members.forEach(item => this.mapMembers[item.id] = item);
       this.getListStaff();
     });
   }
@@ -93,14 +97,7 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     this.staffService.search(dataSearch).subscribe(res => {
       this.staffList = res.data;
       this.staffList.forEach(item => item.staffId = item.id);
-      if (this.members.length > 0) {
-        this.members.forEach(item => {
-          const index = this.staffList.findIndex(el => el.id === item.staffId);
-          if (index >= 0) {
-            this.staffList.splice(index, 1);
-          }
-        });
-      }
+      this.staffListFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     });
   }
 
@@ -117,6 +114,9 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
     });
     this.loadAvatar(addList);
     this.members = [...addList, ...this.members];
+    this.members.forEach(item => this.mapMembers[item.id] = item);
+    this.mapMembers = {};
+    this.staffListFilter = this.staffList.filter(item => !this.mapMembers[item.id]);
     this.getListStaff();
     this.addMember.get('addList').reset();
   }
@@ -142,6 +142,8 @@ export class TeamMembersComponent extends BaseComponent implements OnInit, OnCha
 
   deleteFromAddForm(index: any): void {
     this.members.splice(index, 1);
+    this.mapMembers = {};
+    this.members.forEach(item => this.mapMembers[item.id] = item);
     this.getListStaff();
   }
 
