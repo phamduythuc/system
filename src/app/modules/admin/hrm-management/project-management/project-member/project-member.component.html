@@ -1,0 +1,132 @@
+<div class="flex flex-col h-full">
+  <!--        header-->
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{'hrm-management.project.projectMember'|transloco }}
+    </div>
+    <div>
+      <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
+        <mat-icon class="icon-size-5" svgIcon="heroicons_outline:x" title="Close"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="w-full pl-2 pr-2 content overflow-auto">
+
+    <!-- Form -->
+    <form [formGroup]="formGroup">
+      <div class="flex flex-row w-full">
+        <div class="w-full">
+          <mat-label>{{'hrm-management.team.form.addMember'|transloco}}</mat-label>
+          <div class="flex flex-row w-full">
+            <mat-form-field class="w-full">
+              <mat-select formControlName='selectedMembers'
+                          [placeholder]="'hrm-management.team.form.choose' | transloco"
+                          [multiple]="true">
+                <mat-option>
+                  <ngx-mat-select-search formControlName='keyword' [preventHomeEndKeyPropagation]="true"
+                                         [noEntriesFoundLabel]="'specialText.notFound'|transloco"
+                                         [placeholderLabel]="'common.search'|transloco">
+                    <mat-icon ngxMatSelectSearchClear
+                              class="icon-size-5"
+                              [svgIcon]="'heroicons_solid:x'"
+                              matPrefix></mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let staff of staffList " [value]="staff">
+                  {{staff.fullName}}
+                  <ng-container *ngIf="staff.username">({{staff.username}})</ng-container>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button [title]="'hrm-management.team.form.addMember'|transloco"
+                    class="fuse-alert-dismiss-button ml-2 mr-4"
+                    mat-icon-button
+                    [disabled]="!this.formGroup.get('selectedMembers').value"
+                    (click)="addMember()">
+              <mat-icon [svgIcon]="'heroicons_solid:user-add'"></mat-icon>
+            </button>
+            <!--        <button (click)="addMemberToTeam()">add</button>-->
+          </div>
+        </div>
+
+      </div>
+      <!-- Divider -->
+      <div class="flex flex-col mt-8 divide-y border-t border-b">
+        <ng-container *ngFor="let member of members; index as i;">
+          <div class="flex flex-col sm:flex-row sm:items-center py-6">
+            <div class="flex items-center">
+              <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+                <ng-container *ngIf="member.avatar">
+                  <img
+                    class="object-cover w-full h-full"
+                    [src]="member.avatar"
+                    alt="Contact avatar"/>
+                </ng-container>
+                <ng-container *ngIf="!member.avatar">
+                  <div
+                    class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                    {{member.fullName.charAt(0)}}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="ml-4">
+                <div class="font-medium">{{member.fullName}}</div>
+                <ng-container *ngIf="member.username">({{member.username}})</ng-container>
+                <div class="text-secondary">{{member.email}}</div>
+              </div>
+            </div>
+            <div class="flex items-center mt-4 sm:mt-0 sm:ml-auto">
+              <!--<div class="order-2 sm:order-1 ml-4 sm:ml-0">
+                <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-32">
+                  <mat-select
+                    [panelClass]="'w-72 min-w-72 max-w-72 h-auto max-h-none'"
+                    [(value)]="member.isManager"
+                    (selectionChange)="changeManager($event,member) "
+                    disableOptionCentering
+                    #roleSelect="matSelect">
+                    &lt;!&ndash;                <mat-select-trigger class="text-md">&ndash;&gt;
+                    &lt;!&ndash;                  <span>Role:</span>&ndash;&gt;
+                    &lt;!&ndash;                  <span class="ml-1 font-medium">{{(roleSelect.value==='1'?'Admin':'Member') | titlecase}}</span>&ndash;&gt;
+                    &lt;!&ndash;                </mat-select-trigger>&ndash;&gt;
+                    <ng-container *ngFor="let role of roles">
+                      <mat-option
+                        class="h-auto py-4 leading-none"
+                        [value]="role.value">
+                        <div
+                          class="font-medium mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.label}}</div>
+                        &lt;!&ndash;                    <div&ndash;&gt;
+                        &lt;!&ndash;                      class="mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.description}}</div>&ndash;&gt;
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>-->
+              <div class="order-1 sm:order-2 sm:ml-3">
+                <button mat-icon-button (click)="removeMember(i)">
+                  <mat-icon
+                    class="text-hint"
+                    [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+
+  </div>
+  <!-- Actions -->
+  <div class="footer mt-6 flex justify-end">
+    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+      <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+      <span>{{'button.cancel' | transloco}}</span>
+    </button>
+    <button mat-raised-button color="primary"
+            [disabled]="formGroup.invalid"
+            (click)="save()">
+      <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+      <span>{{'button.save' | transloco}}</span>
+    </button>
+  </div>
+
+</div>

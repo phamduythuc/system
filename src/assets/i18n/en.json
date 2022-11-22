@@ -144,7 +144,8 @@
         "startTime": "Start time",
         "expectEndTime": "Expect end time",
         "actualEndTime": "Actual end time"
-      }
+      },
+      "projectMember": "List member"
     },
     "staff": {
       "title": "Staff"

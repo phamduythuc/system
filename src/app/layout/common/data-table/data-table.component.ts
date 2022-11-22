@@ -74,6 +74,13 @@ export class DataTableComponent implements OnInit, OnChanges {
       role: 'CREATE'
     },
     {
+      id: 'add_member',
+      label: this.transloco.translate('Thành viên'),
+      icon: 'heroicons_outline:user-add',
+      color: 'green',
+      role: 'CREATE'
+    },
+    {
       id: 'view',
       label: 'View',
       icon: 'heroicons_outline:eye',

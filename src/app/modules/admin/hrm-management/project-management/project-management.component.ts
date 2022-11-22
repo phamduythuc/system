@@ -3,9 +3,10 @@ import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {AddOrEditProjectComponent} from './component/add-or-edit-project/add-or-edit-project.component';
-import {DetailProjectComponent} from './component/detail-project/detail-project.component';
-import {ProjectEffortComponent} from './component/project-effort/project-effort.component';
+import {AddOrEditProjectComponent} from './add-or-edit-project/add-or-edit-project.component';
+import {DetailProjectComponent} from './detail-project/detail-project.component';
+import {ProjectEffortComponent} from './project-effort/project-effort.component';
+import {ProjectMemberComponent} from "./project-member/project-member.component";
 
 @Component({
   selector: 'app-project-management',
@@ -71,7 +72,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'configEffort', 'view','edit', 'delete'],
+      actions: [ 'configEffort', 'add_member', 'view','edit', 'delete'],
     }
   ];
 
@@ -114,6 +115,11 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     }
     if (e.type === 'delete') {
       this.deleteConfirmDialog(e.data.id);
+      return;
+    }
+
+    if (e.type === 'add_member') {
+      this.openPopupAddMember(e.data.id);
     }
   }
 
@@ -142,7 +148,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   }
 
   addOrEdit(id?: any): void {
-    const ref = this.showDialog(AddOrEditProjectComponent, {
+    this.showDialog(AddOrEditProjectComponent, {
       data: {
         id,
         projects:this.searchResult.data
@@ -151,8 +157,22 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       // height: '64vh',
       disableClose: true
     }, (value) => {
-      if (value)
-        this.doSearch()
+      if (value) {
+        this.doSearch();
+      }
     });
+  }
+
+
+  openPopupAddMember(id){
+    this.showDialog(ProjectMemberComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '85vh',
+        disableClose: true
+      }
+    );
   }
 }
