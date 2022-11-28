@@ -31,6 +31,16 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       value: '3'
     }
   ];
+  religion = [
+    {
+      name: 'Có',
+      value: 1
+    },
+    {
+      name: 'Không',
+      value: 2
+    }
+  ];
   status = [
     {
       name: 'Đang làm việc',
@@ -125,6 +135,8 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     role: [],
     //Kinh nghiệm
     workExperience: [],
+    // lương
+    salary: [],
     file: [],
   });
   // formGroup = this.fb.group({

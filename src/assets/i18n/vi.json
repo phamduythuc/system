@@ -86,7 +86,8 @@
     "username": "Tên đăng nhập",
     "workExperience": "Kinh nghiệm",
     "homeTown": "Nguyên quán",
-    "educationLevel": "Trình độ học vấn"
+    "educationLevel": "Trình độ học vấn",
+    "salary": "Mức lương"
   },
   "setting": {
     "role": "Quyền",

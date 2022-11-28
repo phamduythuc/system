@@ -111,8 +111,11 @@
                       <mat-label>{{t('common.religion')}}
                         <!--                        Tôn giáo / Religion-->
                       </mat-label>
-                      <input formControlName="religion"
-                             matInput>
+                      <mat-select formControlName="religion">
+                        <mat-option *ngFor="let r of religion" [value]="r.value">
+                          {{r.name}}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
                   </div>
                 </div>
@@ -434,6 +437,22 @@
               </div>
             </div>
           </div>
+
+          <div class="w-full flex">
+            <div class="w-full">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{t('common.salary')}}
+                  <!--                    Lương/ salary-->
+                </mat-label>
+                <input required formControlName="salary"
+                       matInput>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('salary')"
+                                 [name]='"common.salary"|transloco'></app-error-message>
+
+            </div>
+          </div>
+
         </div>
 
         <div class="common mb-5">

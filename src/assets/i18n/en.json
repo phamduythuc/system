@@ -87,7 +87,8 @@
     "username": "Username",
     "workExperience": "Work Experience",
     "homeTown": "Home town",
-    "educationLevel": "Education Level"
+    "educationLevel": "Education Level",
+    "salary": "Salary"
   },
   "setting": {
     "role": "Role",
