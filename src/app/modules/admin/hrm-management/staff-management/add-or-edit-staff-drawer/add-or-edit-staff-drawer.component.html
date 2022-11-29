@@ -52,14 +52,8 @@
                         <!--                        Giới tính / Gender-->
                       </mat-label>
                         <mat-select [formControlName]="'gender'">
-                          <mat-option [value]="'1'">
-                            {{t('gender.female')}}
-                          </mat-option>
-                          <mat-option [value]="'2'">
-                            {{t('gender.male')}}
-                          </mat-option>
-                          <mat-option [value]="'3'">
-                            {{t('gender.other')}}
+                          <mat-option *ngFor="let g of genders" [value]="g.value">
+                            {{g.name}}
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -118,11 +112,8 @@
                         <!--                        Tôn giáo / Religion-->
                       </mat-label>
                       <mat-select  formControlName="religion">
-                        <mat-option [value]="'1'">
-                          {{t('religion.yes')}}
-                        </mat-option>
-                        <mat-option [value]="'2'">
-                          {{t('religion.no')}}
+                        <mat-option *ngFor="let r of religions" [value]="r.value">
+                          {{r.name}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -148,14 +139,8 @@
                         <!--                        Trạng thái / Staff Status-->
                       </mat-label>
                       <mat-select  [formControlName]="'staffStatus'">
-                        <mat-option [value]="1">
-                          {{t('staff_status.official')}}
-                        </mat-option>
-                        <mat-option [value]="2">
-                          {{t('staff_status.unofficial')}}
-                        </mat-option>
-                        <mat-option [value]="3">
-                          {{t('staff_status.quit')}}
+                          <mat-option *ngFor="let s of staffStatus" [value]="s.value">
+                            {{s.name}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>

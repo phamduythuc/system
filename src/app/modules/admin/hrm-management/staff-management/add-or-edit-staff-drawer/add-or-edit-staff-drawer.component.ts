@@ -17,6 +17,45 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     page: 0,
     pageSize: 999999,
   };
+  genders = [
+    {
+      name: this.translocoService.translate('gender.female'),
+      value: '1'
+    },
+    {
+      name: this.translocoService.translate('gender.male'),
+      value: '2'
+    },
+    {
+      name: this.translocoService.translate('gender.other'),
+      value: '3'
+    }
+  ];
+  staffStatus = [
+    {
+      name: this.translocoService.translate('staff_status.official'),
+      value: 1
+    },
+    {
+      name: this.translocoService.translate('staff_status.unofficial'),
+      value: 2
+    },
+    {
+      name: this.translocoService.translate('staff_status.quit'),
+      value: 3
+    }
+  ];
+  religions = [
+    {
+      name: this.translocoService.translate('religion.yes'),
+      value: '1'
+    },
+    {
+      name: this.translocoService.translate('religion.no'),
+      value: '2'
+    }
+  ];
+
   listRoleStaff: any;
   listPositions: any;
   listStaffLevels: any;
