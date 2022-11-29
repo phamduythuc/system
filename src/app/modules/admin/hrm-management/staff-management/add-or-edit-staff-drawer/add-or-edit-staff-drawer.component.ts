@@ -17,44 +17,6 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     page: 0,
     pageSize: 999999,
   };
-  genders = [
-    {
-      name: 'Nam',
-      value: '1'
-    },
-    {
-      name: 'Nữ',
-      value: '2'
-    },
-    {
-      name: 'Khác',
-      value: '3'
-    }
-  ];
-  religion = [
-    {
-      name: 'Có',
-      value: 1
-    },
-    {
-      name: 'Không',
-      value: 2
-    }
-  ];
-  status = [
-    {
-      name: 'Đang làm việc',
-      value: 1
-    },
-    {
-      name: 'Hết hạn hợp đông',
-      value: 0
-    },
-    {
-      name: 'Nghỉ việc',
-      value: 2
-    }
-  ];
   listRoleStaff: any;
   listPositions: any;
   listStaffLevels: any;
@@ -125,7 +87,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Mã nhân viên
     staffCode: [null, Validators.required],
     //Trạng thái của nhân viên
-    staffStatus: [null],
+    staffStatus: [null, Validators.required],
     //Trạng thái
     status: [],
     //Mô tả tổng quan
@@ -171,7 +133,9 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   //   file: []
   // });
 
-  constructor(injector: Injector, private staffService: StaffService, private achievementService: AchievementService) {
+  constructor(injector: Injector,
+              private staffService: StaffService,
+              private achievementService: AchievementService,) {
     super(injector, staffService);
   }
 

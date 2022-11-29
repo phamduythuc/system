@@ -206,5 +206,20 @@
     "address": "Địa chỉ",
     "staffDescription": "Mô tả nhân viên",
     "commonDescription": "Mô tả"
+  },
+  "staff_status": {
+      "official": "Nhân viên chính thức",
+      "unofficial": "Nhân viên không chính thức",
+      "quit": "Nhân viên nghỉ việc"
+  },
+  "religion": {
+    "yes": "Có",
+    "no": "Không"
+  },
+  "gender": {
+    "female": "Nữ",
+    "male": "Nam",
+    "other": "Khác"
   }
+
 }

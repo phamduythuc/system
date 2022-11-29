@@ -203,5 +203,19 @@
     "address": "Address",
     "staffDescription": "Staff Description",
     "commonDescription": "Description"
+  },
+  "staff_status": {
+      "official": "Official staff",
+      "unofficial": "UnOfficial staff",
+      "quit": "Quit job"
+  },
+  "religion": {
+    "yes": "yes",
+    "no": "no"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
   }
 }

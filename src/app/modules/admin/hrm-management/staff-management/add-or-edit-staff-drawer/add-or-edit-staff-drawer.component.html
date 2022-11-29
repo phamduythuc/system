@@ -51,11 +51,17 @@
                       <mat-label> {{t('common.gender')}}
                         <!--                        Giới tính / Gender-->
                       </mat-label>
-                      <mat-select formControlName="gender">
-                        <mat-option *ngFor="let g of genders" [value]="g.value">
-                          {{g.name}}
-                        </mat-option>
-                      </mat-select>
+                        <mat-select [formControlName]="'gender'">
+                          <mat-option [value]="'1'">
+                            {{t('gender.female')}}
+                          </mat-option>
+                          <mat-option [value]="'2'">
+                            {{t('gender.male')}}
+                          </mat-option>
+                          <mat-option [value]="'3'">
+                            {{t('gender.other')}}
+                          </mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('gender')"
                                        [name]='"common.gender"|transloco'></app-error-message>
@@ -111,9 +117,12 @@
                       <mat-label>{{t('common.religion')}}
                         <!--                        Tôn giáo / Religion-->
                       </mat-label>
-                      <mat-select formControlName="religion">
-                        <mat-option *ngFor="let r of religion" [value]="r.value">
-                          {{r.name}}
+                      <mat-select  formControlName="religion">
+                        <mat-option [value]="'1'">
+                          {{t('religion.yes')}}
+                        </mat-option>
+                        <mat-option [value]="'2'">
+                          {{t('religion.no')}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -135,17 +144,23 @@
                 <div class="w-1/2 ml-2">
                   <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                      <mat-label>{{t('common.status')}}
-                        <!--                        Trạng thái / Status-->
+                      <mat-label>{{t('common.staffStatus')}}
+                        <!--                        Trạng thái / Staff Status-->
                       </mat-label>
-                      <mat-select formControlName="staffStatus">
-                        <mat-option *ngFor="let s of status" [value]="s.value">
-                          {{s.name}}
+                      <mat-select  [formControlName]="'staffStatus'">
+                        <mat-option [value]="1">
+                          {{t('staff_status.official')}}
+                        </mat-option>
+                        <mat-option [value]="2">
+                          {{t('staff_status.unofficial')}}
+                        </mat-option>
+                        <mat-option [value]="3">
+                          {{t('staff_status.quit')}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('staffStatus')"
-                                       [name]='"common.status"|transloco'></app-error-message>
+                                       [name]='"common.staffStatus"|transloco'></app-error-message>
                   </div>
                 </div>
               </div>
@@ -337,6 +352,7 @@
                   </mat-datepicker-toggle>
                   <mat-datepicker #dateWork></mat-datepicker>
                 </mat-form-field>
+                <app-error-message [control]="formGroup.get('staOfficalDate')" [name]='"common.staOfficalDate"|transloco'></app-error-message>
               </div>
             </div>
             <div class="w-1/3 ml-2">
@@ -479,7 +495,7 @@
             <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
             <span>{{t('button.cancel')}}</span>
           </button>
-          <button mat-raised-button color="primary" (click)="save()">
+          <button mat-raised-button color="primary" [disabled]="formGroup.invalid" (click)="save()">
             <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
             <span>{{t('button.save')}}</span>
           </button>
