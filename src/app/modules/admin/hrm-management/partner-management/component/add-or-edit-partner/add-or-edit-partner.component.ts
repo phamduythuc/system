@@ -14,7 +14,7 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
 
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
-    phone:[null, [Validators.required, Validators.pattern('[0-9]{10}')]],
+    phone:[null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
     address:[null],
     note: [null],
   });

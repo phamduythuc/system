@@ -22,7 +22,7 @@
           <!-- tHÁNG -->
           <div class="sm:col-span-2">
             <mat-form-field class="fuse-mat-no-subscript w-full">
-              <mat-label class="required">{{'effort.month'|transloco}}</mat-label>
+              <mat-label>{{'effort.month'|transloco}}</mat-label>
               <input matInput [matDatepicker]="startDate" datePickerFormat="MM/YYYY"
                      [formControlName]="'startDate'"
                      (ngModelChange)="changeMonth()"
@@ -34,19 +34,22 @@
                               (monthSelected)="chosenMonthHandler($event, startDate, formGroup.get('startDate'))"
                               #startDate></mat-datepicker>
             </mat-form-field>
-            <app-error-message [control]="formGroup.get('startDate')"></app-error-message>
+            <app-error-message [control]="formGroup.get('startDate')"
+                               [name]="'effort.month'|transloco"></app-error-message>
 
           </div>
           <!-- ƯỚC LƯỢNG -->
           <div class="sm:col-span-2">
             <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
-              <mat-label class="required">{{'effort.estimate'|transloco}}</mat-label>
+              <mat-label >{{'effort.estimate'|transloco}}</mat-label>
               <input
                 [formControlName]="'estimate'"
                 matInput>
             </mat-form-field>
             <app-error-message [control]="formGroup.get('estimate')"
+                               [name]="'effort.estimate'|transloco"
                                [textPattern]="'common.message.number_format' | transloco : {filed: 'effort.estimate' | transloco}">
+
             </app-error-message>
           </div>
           <!-- KHÁCH HÀNG CHỐT -->
