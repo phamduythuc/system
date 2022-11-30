@@ -23,7 +23,8 @@
     "message": {
       "number_format": "{{field}} must be number",
       "required": "{{field}} must not empty",
-      "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx"
+      "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
+      "date_format": "Please enter in the format DD/MM/YYYY"
     },
     "title": {
       "create": "Create {{screenName}}",
@@ -87,7 +88,8 @@
     "username": "Username",
     "workExperience": "Work Experience",
     "homeTown": "Home town",
-    "educationLevel": "Education Level"
+    "educationLevel": "Education Level",
+    "salary": "Salary"
   },
   "setting": {
     "role": "Role",
@@ -202,5 +204,19 @@
     "address": "Address",
     "staffDescription": "Staff Description",
     "commonDescription": "Description"
+  },
+  "staff_status": {
+      "official": "Official staff",
+      "unofficial": "UnOfficial staff",
+      "quit": "Quit job"
+  },
+  "religion": {
+    "yes": "yes",
+    "no": "no"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
   }
 }

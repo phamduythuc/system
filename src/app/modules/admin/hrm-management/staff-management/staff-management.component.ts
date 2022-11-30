@@ -49,6 +49,10 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       header: 'common.companyEmail'
     },
     {
+      columnDef: 'salary',
+      header: 'common.salary'
+    },
+    {
       columnDef: 'dateOfBirth',
       header: 'common.dateOfBirth',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.dateOfBirth))

@@ -64,7 +64,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       id: [],
       name: [this.generateName(month)],
       projectId: [data.id],
-      startDate: [month],
+      startDate: [month, Validators.required],
       estimate: ['', [Validators.required, Validators.pattern('^[0-9][0-9\\.]*$')]],
       effort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
       acceptanceDate: [],

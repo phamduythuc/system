@@ -101,7 +101,10 @@
               </mat-datepicker-toggle>
               <mat-datepicker #startTime></mat-datepicker>
             </div>
-            <app-error-message [control]="formGroup.get('startTime')" [name]='"hrm-management.project.form.startTime"|transloco'></app-error-message>
+            <app-error-message [control]="formGroup.get('startTime')"
+                               [name]="'hrm-management.project.form.startTime'|transloco"
+                               [textPattern]="'common.message.date_format' | transloco ">
+            </app-error-message>
           </div>
         </div>
       </div>
@@ -116,7 +119,10 @@
               </mat-datepicker-toggle>
               <mat-datepicker #expectEndTime></mat-datepicker>
             </div>
-            <app-error-message [control]="formGroup.get('expectEndTime')" [name]='"hrm-management.project.form.expectEndTime"|transloco'></app-error-message>
+            <app-error-message [control]="formGroup.get('expectEndTime')"
+                               [name]="'hrm-management.project.form.expectEndTime'|transloco"
+                               [textPattern]="'common.message.date_format' | transloco ">
+            </app-error-message>
           </div>
         </div>
         <div class="w-1/2 flex">

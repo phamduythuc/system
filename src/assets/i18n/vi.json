@@ -22,7 +22,8 @@
     "message": {
       "number_format": "{{field}} sai định dạng số",
       "required": "{{field}} không được để trống",
-      "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx"
+      "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
+      "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY"
     },
     "title": {
       "create": "Thêm mới {{screenName}}",
@@ -86,7 +87,8 @@
     "username": "Tên đăng nhập",
     "workExperience": "Kinh nghiệm",
     "homeTown": "Nguyên quán",
-    "educationLevel": "Trình độ học vấn"
+    "educationLevel": "Trình độ học vấn",
+    "salary": "Mức lương"
   },
   "setting": {
     "role": "Quyền",
@@ -205,5 +207,20 @@
     "address": "Địa chỉ",
     "staffDescription": "Mô tả nhân viên",
     "commonDescription": "Mô tả"
+  },
+  "staff_status": {
+      "official": "Nhân viên chính thức",
+      "unofficial": "Nhân viên không chính thức",
+      "quit": "Nhân viên nghỉ việc"
+  },
+  "religion": {
+    "yes": "Có",
+    "no": "Không"
+  },
+  "gender": {
+    "female": "Nữ",
+    "male": "Nam",
+    "other": "Khác"
   }
+
 }

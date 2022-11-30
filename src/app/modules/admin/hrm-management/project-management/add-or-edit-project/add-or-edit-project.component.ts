@@ -22,12 +22,12 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     code: [null, [Validators.required, Validators.maxLength(20)]],
     projectType: [null, Validators.required],
     budget: [null, Validators.required],
-    startTime: [null,Validators.required],
+    startTime: [null,[Validators.required, Validators.pattern('DD/MM/YYYY')]],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null],
     actualEndTime: [null],
-    expectEndTime: [null,Validators.required],
+    expectEndTime: [null,[Validators.required, Validators.pattern('DD/MM/YYYY')]],
     status: [1, Validators.required],
   });
   projectData

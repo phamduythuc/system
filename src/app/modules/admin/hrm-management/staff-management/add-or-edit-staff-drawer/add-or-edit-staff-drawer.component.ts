@@ -19,32 +19,43 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   };
   genders = [
     {
-      name: 'Nam',
+      name: this.translocoService.translate('gender.female'),
       value: '1'
     },
     {
-      name: 'Nữ',
+      name: this.translocoService.translate('gender.male'),
       value: '2'
     },
     {
-      name: 'Khác',
+      name: this.translocoService.translate('gender.other'),
       value: '3'
     }
   ];
-  status = [
+  staffStatus = [
     {
-      name: 'Đang làm việc',
+      name: this.translocoService.translate('staff_status.official'),
       value: 1
     },
     {
-      name: 'Hết hạn hợp đông',
-      value: 0
+      name: this.translocoService.translate('staff_status.unofficial'),
+      value: 2
     },
     {
-      name: 'Nghỉ việc',
-      value: 2
+      name: this.translocoService.translate('staff_status.quit'),
+      value: 3
     }
   ];
+  religions = [
+    {
+      name: this.translocoService.translate('religion.yes'),
+      value: '1'
+    },
+    {
+      name: this.translocoService.translate('religion.no'),
+      value: '2'
+    }
+  ];
+
   listRoleStaff: any;
   listPositions: any;
   listStaffLevels: any;
@@ -115,7 +126,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Mã nhân viên
     staffCode: [null, Validators.required],
     //Trạng thái của nhân viên
-    staffStatus: [null],
+    staffStatus: [null, Validators.required],
     //Trạng thái
     status: [],
     //Mô tả tổng quan
@@ -125,6 +136,8 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     role: [],
     //Kinh nghiệm
     workExperience: [],
+    // lương
+    salary: [],
     file: [],
   });
   // formGroup = this.fb.group({
@@ -159,7 +172,9 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   //   file: []
   // });
 
-  constructor(injector: Injector, private staffService: StaffService, private achievementService: AchievementService) {
+  constructor(injector: Injector,
+              private staffService: StaffService,
+              private achievementService: AchievementService,) {
     super(injector, staffService);
   }
 
