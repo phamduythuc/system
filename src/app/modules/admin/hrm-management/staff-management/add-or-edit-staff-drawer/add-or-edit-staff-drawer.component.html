@@ -89,7 +89,9 @@
                              matInput>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('nationalId')"
-                                       [name]='"common.national"|transloco'></app-error-message>
+                                       [name]='"common.national"|transloco'
+                                       [textPattern]="'common.message.number_format' | transloco : {filed: 'common.national' | transloco}"
+                    ></app-error-message>
                   </div>
                 </div>
               </div>
