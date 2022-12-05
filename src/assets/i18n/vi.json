@@ -88,7 +88,8 @@
     "workExperience": "Kinh nghiệm",
     "homeTown": "Nguyên quán",
     "educationLevel": "Trình độ học vấn",
-    "salary": "Mức lương"
+    "salary": "Mức lương",
+    "noData":"Không có bản ghi nào"
   },
   "setting": {
     "role": "Quyền",

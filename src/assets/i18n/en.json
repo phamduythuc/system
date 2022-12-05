@@ -89,7 +89,8 @@
     "workExperience": "Work Experience",
     "homeTown": "Home town",
     "educationLevel": "Education Level",
-    "salary": "Salary"
+    "salary": "Salary",
+    "noData":"No data"
   },
   "setting": {
     "role": "Role",
