@@ -188,6 +188,7 @@
     "notFound": "Data not found"
   },
   "effort": {
+    "title": "Stage Information",
     "month": "Month",
     "estimate": "Estimate",
     "customer_record": "Customer record",
@@ -219,5 +220,9 @@
     "female": "Female",
     "male": "Male",
     "other": "Other"
+  },
+  "staff_kpi": {
+    "startMonth": "Start month",
+    "endMonth": "End month"
   }
 }

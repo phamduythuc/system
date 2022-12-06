@@ -222,6 +222,10 @@
     "female": "Nữ",
     "male": "Nam",
     "other": "Khác"
+  },
+  "staff_kpi": {
+    "startMonth": "Tháng bắt đầu",
+    "endMonth": "Tháng kết thúc"
   }
 
 }

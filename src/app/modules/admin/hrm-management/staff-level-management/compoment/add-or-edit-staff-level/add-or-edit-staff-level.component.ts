@@ -14,7 +14,7 @@ export class AddOrEditStaffLevelComponent extends BaseComponent implements OnIni
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(50)]],
-    description: [null],
+    description: [null, Validators.maxLength(500)],
     status: [1, Validators.required],
   });
 
