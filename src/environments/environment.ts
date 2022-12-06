@@ -12,6 +12,7 @@ export const environment = {
   production: false,
   baseUrl: window.location.origin,
   apiUrl: 'http://103.226.248.168:8089/api',
+  // apiUrl: 'http://localhost:8089/api',
   apiSSO: `${envConfig.apiSSO}/api`,
   redirectUrl: `${envConfig.apiSSO}/auth?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
 };

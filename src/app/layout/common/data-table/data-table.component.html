@@ -47,6 +47,13 @@
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <ng-container *transloco="let t">
+      <td class="mat-cell text-center" colspan="15">
+        {{t("common.noData")}} !
+      </td>
+    </ng-container>
+  </tr>
 </table>
 <mat-paginator *ngIf="paginate" [pageSizeOptions]="[5, 10, 20]"
                showFirstLastButtons
