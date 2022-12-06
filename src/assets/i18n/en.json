@@ -59,6 +59,7 @@
     "partner": "Partner",
     "fullName": "Full Name",
     "department": "Department",
+    "parentName": "Affiliated departments",
     "gender": "Gender",
     "position": "Position",
     "companyEmail": "Company email",

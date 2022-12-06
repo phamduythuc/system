@@ -31,6 +31,10 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
       header: 'common.code',
     },
     {
+      columnDef: 'parentName',
+      header: 'common.parentName',
+    },
+    {
       columnDef: 'description',
       header: 'common.description',
     },
@@ -61,6 +65,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
+    console.log(this.searchResult);
     this.searchModel.status = 1;
     this.doSearch();
   }
@@ -83,7 +88,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
         this.addOrEditDepartment(e.data.id);
         break;
       case 'view':
-        this.showDetail(e.data.id)
+        this.showDetail(e.data.id);
     }
   }
 
@@ -96,7 +101,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
         // height: '50vh',
         disableClose: true
       }
-    )
+    );
   }
 
   addOrEditDepartment(id?: any): void {

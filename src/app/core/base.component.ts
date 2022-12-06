@@ -90,6 +90,7 @@ export class BaseComponent {
     this.baseService.getOne(id).subscribe(res => {// .subscribe(res => {
       if (res.code === '00') {
         this.detailsData = res.data;
+        console.log(res);
         this.handleCoverStringToDate(this.detailsData);
         this.formGroup.patchValue(this.detailsData);
         this.formGroup.markAllAsTouched();

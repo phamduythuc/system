@@ -58,6 +58,7 @@
     "partner": "Đối tác",
     "fullName": "Họ tên",
     "department": "Phòng ban",
+    "parentName": "Phòng ban trực thuộc",
     "gender": "Giới tính",
     "position": "Chức vụ",
     "companyEmail": "Email c.ty",

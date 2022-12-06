@@ -36,6 +36,7 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
     // if (this.department) {
     //   this.formGroup.patchValue(this.department);
     // }
+    console.log(this.departments);
 
   }
 

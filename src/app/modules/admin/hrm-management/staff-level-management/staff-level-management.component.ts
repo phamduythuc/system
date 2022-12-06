@@ -66,13 +66,13 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    this.searchModel.status = 1
+    this.searchModel.status = 1;
     this.doSearch();
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel, ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel = {...this.searchModel, ...this.formSearch.value};
+    this.processSearch(this.searchModel);
   }
 
   // changePage(e: any): void {
@@ -85,13 +85,13 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
   actionClick(e: any): void {
     console.log(e);
     if (e.type === 'edit') {
-      this.addOrEditStaffLevel(e.data.id)
+      this.addOrEditStaffLevel(e.data.id);
     }
     if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id)
+      this.deleteConfirmDialog(e.data.id);
     }
     if (e.type === 'view') {
-      this.showDetail(e.data.id)
+      this.showDetail(e.data.id);
     }
   }
 
@@ -104,7 +104,7 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
         height: '50vh',
         disableClose: true
       }
-    )
+    );
   }
 
   addOrEditStaffLevel(id?: any): void {
