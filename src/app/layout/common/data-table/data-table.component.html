@@ -37,7 +37,9 @@
           </ng-container>
           <ng-template #defaultRowTemplate>
             <div [innerHTML]="column.cellRenderer ? column.cellRenderer(row) : row[column.columnDef]"
-                 class="whitespace-nowrap"></div>
+                 class="whitespace-nowrap" *ngIf="column.columnDef !== 'salary' && column.columnDef !== 'budget'"></div>
+
+            <div class="whitespace-nowrap" *ngIf="column.columnDef === 'salary' || column.columnDef === 'budget'"> {{row[column.columnDef] | numberPipe}}</div>
           </ng-template>
         </ng-container>
       </ng-container>

@@ -40,6 +40,7 @@
                                formControlName="keyword"
                                matInput trim='blur'>
                       </mat-form-field>
+                      <app-error-message [control]="formSearch.get('keyword')" [name]='"common.keyword"|transloco'></app-error-message>
                     </div>
                   </div>
                   <div class="footer w-full flex justify-center">
