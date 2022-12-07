@@ -28,6 +28,9 @@
                              (monthSelected)="chosenMonthHandler($event, startMonth,formGroup.get('startMonth'))"
                              panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('startMonth')"
+                             [name]="'staff_kpi.startMonth'|transloco">
+          </app-error-message>
         </div>
         <div class="sm:col-span-2">
           <mat-form-field class="fuse-mat-no-subscript w-full">
@@ -41,6 +44,9 @@
                              (monthSelected)="chosenMonthHandler($event, endMonth,formGroup.get('endMonth'))"
                              panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('endMonth')"
+                             [name]="'staff_kpi.endMonth'|transloco">
+          </app-error-message>
         </div>
         <div class="sm:col-span-1 flex justify-end items-end">
           <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"

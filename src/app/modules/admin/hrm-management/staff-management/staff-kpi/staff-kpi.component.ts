@@ -1,10 +1,11 @@
-import {Component, Inject, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {StaffService} from '@shared/services/staff.service';
 import {BaseComponent} from '@core/base.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {ChartLineComponent} from '@shared/charts/chart-line/chart-line.component';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-staff-kpi',
@@ -12,13 +13,14 @@ import {ChartLineComponent} from '@shared/charts/chart-line/chart-line.component
   styleUrls: ['./staff-kpi.component.scss']
 })
 export class StaffKpiComponent extends BaseComponent implements OnInit {
+  @Input() drawer: any;
   @ViewChild('chartChild')
   chart: ChartLineComponent;
 
   formGroup = this.fb.group({
     staffId: [],
-    startMonth: [moment().add(-7, 'month').startOf('month')],
-    endMonth: [moment().add(-1, 'month').endOf('month')]
+    startMonth: [moment().add(-7, 'month').startOf('month'),Validators.required],
+    endMonth: [moment().add(-1, 'month').endOf('month'),Validators.required]
   });
 
   options: any = {
@@ -50,7 +52,7 @@ export class StaffKpiComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.draw();
+    // this.draw();
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -88,5 +90,16 @@ export class StaffKpiComponent extends BaseComponent implements OnInit {
        this.chart.drawChart();
      }
     });
+    this.staffService.getKpiData(data).subscribe(res => {
+      if ('00' === res.code) {
+        this.showSnackBar(res.message, 'success');
+        this.close();
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+    });
+  }
+  close() {
+    this.drawer?.toggle();
   }
 }
