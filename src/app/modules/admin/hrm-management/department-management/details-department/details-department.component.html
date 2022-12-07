@@ -15,7 +15,7 @@
       <mat-label class="w-1/6 p-2 font-semibold">{{"common.name"|transloco}}</mat-label>
       <div class="flex justify-center items-center border b-radius p-2 w-5/6">
         <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-          {{detailsData.name}}
+          {{detailsData.name ? detailsData.name : ''}}
         </div>
       </div>
     </div>

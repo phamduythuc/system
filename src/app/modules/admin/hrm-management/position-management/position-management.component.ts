@@ -73,6 +73,8 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
 
   doSearch() {
     this.searchModel = {...this.searchModel, ...this.formSearch.value};
+    console.log(this.searchModel);
+
     this.processSearch(this.searchModel);
   }
 

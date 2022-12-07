@@ -1,16 +1,16 @@
-import {Injectable, Injector, Inject, ChangeDetectorRef} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
-import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
-import {take} from 'rxjs/operators';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {IColumn} from '@layout/common/data-table/data-table.component';
-import {TranslocoService} from '@ngneat/transloco';
-import {BaseService} from '@core/base.service';
-import {CommonUtilsService} from '@shared/common-utils.service';
-import {DomSanitizer} from "@angular/platform-browser";
-import {SUCCESS_CODE} from "@core/config/constant";
+import { Injectable, Injector, Inject, ChangeDetectorRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { take } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { IColumn } from '@layout/common/data-table/data-table.component';
+import { TranslocoService } from '@ngneat/transloco';
+import { BaseService } from '@core/base.service';
+import { CommonUtilsService } from '@shared/common-utils.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SUCCESS_CODE } from '@core/config/constant';
 
 @Injectable()
 export class BaseComponent {
@@ -18,13 +18,24 @@ export class BaseComponent {
   columns: IColumn[] = [];
   searchModel: any = {
     page: 0,
-    pageSize: 10
+    pageSize: 10,
   };
   searchResult: any = {
     data: [],
-    totalRecords: 0
+    totalRecords: 0,
   };
-  listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate'];
+  listTimeType = [
+    'createdDate',
+    'modifiedDate',
+    'expectEndTime',
+    'actualEndTime',
+    'dateOfBirth',
+    'leaveDate',
+    'staOfficalDate',
+    'hireDate',
+    'staDate',
+    'endDate',
+  ];
 
   public snackBar: MatSnackBar;
   public cdr: ChangeDetectorRef;
@@ -36,9 +47,11 @@ export class BaseComponent {
   public dialogRef: MatDialogRef<any>;
   public detailsData: any;
 
-  constructor(injector: Injector,
-              service?: BaseService,
-              dialogRef?: MatDialogRef<any>) {
+  constructor(
+    injector: Injector,
+    service?: BaseService,
+    dialogRef?: MatDialogRef<any>
+  ) {
     this.snackBar = injector.get(MatSnackBar);
     this.cdr = injector.get(ChangeDetectorRef);
     this.translocoService = injector.get(TranslocoService);
@@ -51,18 +64,30 @@ export class BaseComponent {
 
   showSnackBar(messages?: string, type?: string): void {
     this.snackBar.open(messages, null, {
-      panelClass: type === 'success' ? 'bg-lime-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
+      panelClass:
+        type === 'success'
+          ? 'bg-lime-500'
+          : type === 'warning'
+          ? 'bg-yellow-500'
+          : 'bg-red-500',
     });
   }
 
-  showDialog(component?: any, options: MatDialogConfig = {}, callback?: any): any {
+  showDialog(
+    component?: any,
+    options: MatDialogConfig = {},
+    callback?: any
+  ): any {
     const ref = this.dialogService.open(component, {
       width: '30vw',
-      ...options
+      ...options,
     });
-    ref.afterClosed().pipe(take(1)).subscribe((value) => {
-      callback && callback(value);
-    });
+    ref
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((value) => {
+        callback && callback(value);
+      });
   }
 
   closeDial0g(): void {
@@ -70,7 +95,7 @@ export class BaseComponent {
   }
 
   handleCoverTimeToString(data): void {
-    this.listTimeType.forEach(item => {
+    this.listTimeType.forEach((item) => {
       if (data[item]) {
         data[item] = CommonUtilsService.dateToString(data[item]);
       }
@@ -78,24 +103,38 @@ export class BaseComponent {
   }
 
   handleCoverStringToDate(data): void {
-    this.listTimeType.forEach(item => {
+    this.listTimeType.forEach((item) => {
       if (data[item]) {
-        data[item] = CommonUtilsService.stringToDate(CommonUtilsService.dateToString(data[item]));
+        data[item] = CommonUtilsService.stringToDate(
+          CommonUtilsService.dateToString(data[item])
+        );
       }
     });
   }
 
+  getDetails(id, callback?, departments?): void {
+    this.baseService.getOne(id).subscribe((res) => {
+      // .subscribe(res => {
 
-  getDetails(id, callback?): void {
-    this.baseService.getOne(id).subscribe(res => {// .subscribe(res => {
       if (res.code === '00') {
         this.detailsData = res.data;
+
+        if (departments) {
+          departments.map((x: any) => {
+            if (x.id == this.detailsData.parentId) {
+              this.detailsData.parentName = x.name;
+            }
+          });
+        }
+
         this.handleCoverStringToDate(this.detailsData);
         this.formGroup.patchValue(this.detailsData);
         this.formGroup.markAllAsTouched();
         if (callback) {
           callback(this.detailsData);
         }
+        
+        
       } else {
         this.showSnackBar(res.message, 'error');
         this.dialogService.closeAll();
@@ -104,7 +143,7 @@ export class BaseComponent {
   }
 
   processSearch(searchModel, callback?): void {
-    this.baseService.search(searchModel).subscribe(res => {
+    this.baseService.search(searchModel).subscribe((res) => {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
         this.searchResult.totalRecords = res.totalRecords;
@@ -124,7 +163,7 @@ export class BaseComponent {
   }
 
   create(data: any, onSuccess?: any, onError?: any): void {
-    this.baseService.save(data).subscribe(res => {
+    this.baseService.save(data).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
         this.dialogRef.close(data);
@@ -133,7 +172,6 @@ export class BaseComponent {
       }
     });
   }
-
 
   edit(data: any, onSuccess?: any, onError?: any): void {
     this.baseService.update(data).subscribe((res) => {
@@ -161,7 +199,6 @@ export class BaseComponent {
       }
     });
   }
-
 
   delete(id: any): void {
     this.baseService.delete(id).subscribe((res) => {

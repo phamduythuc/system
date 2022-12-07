@@ -1,32 +1,37 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {BaseComponent} from '../../../../../core/base.component';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Validators} from '@angular/forms';
-import {DepartmentService} from '@shared/services/department.service';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
+import { BaseComponent } from '../../../../../core/base.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Validators } from '@angular/forms';
+import { DepartmentService } from '@shared/services/department.service';
 
 @Component({
   selector: 'app-add-or-edit-department',
   templateUrl: './add-or-edit-department.component.html',
-  styleUrls: ['./add-or-edit-department.component.scss']
+  styleUrls: ['./add-or-edit-department.component.scss'],
 })
-export class AddOrEditDepartmentComponent extends BaseComponent implements OnInit {
+export class AddOrEditDepartmentComponent
+  extends BaseComponent
+  implements OnInit
+{
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
     parentId: [null],
-    status: [1]
+    status: [1],
   });
   dialogId: any = null;
   departments: any[] = [];
 
-  constructor(injector: Injector,
-              public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
-              private departmentService: DepartmentService,
-              @Inject(MAT_DIALOG_DATA) public dialogData: any) {
+  constructor(
+    injector: Injector,
+    public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
+    private departmentService: DepartmentService,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any
+  ) {
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;
-    if(this.dialogId){
+    if (this.dialogId) {
       this.getDetails(this.dialogId);
     }
     this.departments = dialogData?.departments;
@@ -36,11 +41,10 @@ export class AddOrEditDepartmentComponent extends BaseComponent implements OnIni
     // if (this.department) {
     //   this.formGroup.patchValue(this.department);
     // }
-
   }
 
   save(data) {
-    data.id = this.dialogId||null;
+    data.id = this.dialogId || null;
     this.addOrEdit(data);
     // this.dialogRef.close(data)
   }

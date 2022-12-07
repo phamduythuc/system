@@ -103,6 +103,8 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
 
   save(value: any): boolean {
     this.handleCoverTimeToString(value);
+    console.log(value);
+    
     const teamData = {
       id: this.dialogId && this.dialogId,
       name: value.name,
@@ -124,6 +126,8 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   }
 
   addMemberToTeam(value): void {
+    console.log(value);
+    
     this.listMembers = [...value, ...this.listMembers];
     this.selectMember.value = [];
     this.listStaff = [];
