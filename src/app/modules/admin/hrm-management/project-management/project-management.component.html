@@ -64,10 +64,9 @@
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult.data //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+            [rows]="searchResult.data | slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
             [columns]="columns"
-            [paginate]="true"
-            [pageIndex]="searchModel.page"
+            [(pageIndex)]="pageIndex"
             [limit]="paginate.size"
             [count]="searchResult.totalRecords"
             (action)="actionClick($event)"

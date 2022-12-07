@@ -24,7 +24,9 @@
       "number_format": "{{field}} must be number",
       "required": "{{field}} must not empty",
       "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
-      "date_format": "Please enter in the format DD/MM/YYYY"
+      "date_format": "Please enter in the format DD/MM/YYYY",
+      "date_format_1": "You must specify the date format. Format: dd/MM/yyyy"
+
     },
     "title": {
       "create": "Create {{screenName}}",

@@ -22,7 +22,9 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     code: [null, [Validators.required, Validators.maxLength(20)]],
     projectType: [null, Validators.required],
     budget: [null, Validators.required],
-    startTime: [null, Validators.required],
+    startTime: [null, [Validators.required,
+      //  Validators.pattern('(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)[0-9]{2}')
+      ]],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null],

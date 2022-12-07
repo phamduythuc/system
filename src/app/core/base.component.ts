@@ -1,4 +1,4 @@
-import {Injectable, Injector, Inject, ChangeDetectorRef} from '@angular/core';
+import {Injectable, Injector, Inject, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
 import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
@@ -12,6 +12,9 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {DomSanitizer} from "@angular/platform-browser";
 import {SUCCESS_CODE} from "@core/config/constant";
 
+
+
+
 @Injectable()
 export class BaseComponent {
   formGroup: FormGroup;
@@ -22,8 +25,9 @@ export class BaseComponent {
   };
   searchResult: any = {
     data: [],
-    totalRecords: 0
+    totalRecords: 0,
   };
+  pageIndex: any;
   listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate'];
 
   public snackBar: MatSnackBar;
@@ -109,6 +113,7 @@ export class BaseComponent {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
         this.searchResult.totalRecords = res.totalRecords;
+        this.pageIndex = this.searchModel.page;
         if (callback) {
           callback();
         }
@@ -119,6 +124,7 @@ export class BaseComponent {
   }
 
   changePage(e: any): void {
+
     this.searchModel.pageSize = e.pageSize;
     this.searchModel.page = e.pageIndex;
     this.processSearch(this.searchModel);
