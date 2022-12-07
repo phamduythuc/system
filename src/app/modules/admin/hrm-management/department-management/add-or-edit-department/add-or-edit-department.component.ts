@@ -17,7 +17,7 @@ export class AddOrEditDepartmentComponent
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
-    parentId: [null],
+    parentId: [null, Validators.required],
     status: [1],
   });
   dialogId: any = null;

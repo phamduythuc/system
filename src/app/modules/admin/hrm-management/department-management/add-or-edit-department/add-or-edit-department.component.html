@@ -51,7 +51,7 @@
             <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <app-error-message [control]="formGroup.get('parentId')" name="Parent"></app-error-message>
+        <app-error-message [control]="formGroup.get('parentId')" [name]="('hrm-management.department.form.parent' | transloco)"></app-error-message>
       </div>
     </div>
     <div class="field flex mb-4">
