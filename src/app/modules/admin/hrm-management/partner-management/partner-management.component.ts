@@ -57,7 +57,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     name: [''],
     address: [''],
     // phone: ['']
-  })
+  });
 
   paginate = {
     page: 0,
@@ -78,8 +78,8 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   }
 
   doSearch() {
-    this.searchModel= {...this.searchModel,...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel= {...this.searchModel,...this.formSearch.value};
+    this.processSearch(this.searchModel);
   }
 
   // changePage(e: any): void {
@@ -92,13 +92,13 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   actionClick(e: any): void {
     console.log(e);
     if (e.type === 'edit') {
-      this.addOrEditPartner(e.data.id)
+      this.addOrEditPartner(e.data.id);
     }
     if (e.type === 'delete') {
-      this.deletePartner(e.data.id)
+      this.deleteConfirmDialog(e.data.id);
     }
     if (e.type === 'view') {
-      this.showDetail(e.data.id)
+      this.showDetail(e.data.id);
     }
   }
 
@@ -111,14 +111,12 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
         // height: '50vh',
         disableClose: true
       }
-    )
+    );
   }
 
-  deletePartner(id: any) {
-    console.log(this.searchModel);
-
-    this.deleteConfirmDialog(id)
-  }
+  // deletePartner(id: any) {
+  //   this.deleteConfirmDialog(id);
+  // }
 
   addOrEditPartner(id?: any): void {
     const ref = this.showDialog(AddOrEditPartnerComponent, {

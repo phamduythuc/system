@@ -9,9 +9,11 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {TranslocoService} from "@ngneat/transloco";
+
 
 @Component({
   selector: 'app-data-table',
@@ -20,11 +22,14 @@ import {TranslocoService} from "@ngneat/transloco";
   encapsulation: ViewEncapsulation.None
 })
 export class DataTableComponent implements OnInit, OnChanges {
+
+
   @Input() roleName: string;
   @Input() rows: any = [];
   @Input() columns: IColumn[] | undefined = [];
   @Input() limit: any = 10;
   @Input() pageIndex: any = 0;
+  @Output() pageIndexChange = new EventEmitter<any>();
   @Input() count: any = 0;
   @Input() columnWidth: string;
   @Input() paginate: boolean = true;
@@ -102,7 +107,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    // console.log(changes);
     this.getListActions();
   }
 
@@ -140,6 +145,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   log(row) {
     console.log(row);
   }
+
 }
 
 export interface IColumn {
@@ -149,3 +155,5 @@ export interface IColumn {
   cellRenderer?: any;
   flex?: number;
 }
+
+

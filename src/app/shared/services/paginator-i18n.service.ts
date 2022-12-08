@@ -16,7 +16,7 @@ export class PaginatorI18nService {
     this.paginatorIntl.itemsPerPageLabel = this.translate.translate('paging.visible');
     this.paginatorIntl.previousPageLabel = this.translate.translate('paging.previous');
     this.paginatorIntl.nextPageLabel = this.translate.translate('paging.next');
-    this.paginatorIntl.firstPageLabel = this.translate.translate('paging.first_page');
+    this.paginatorIntl.firstPageLabel = this.translate.translate('paging.previous');
     this.paginatorIntl.lastPageLabel = this.translate.translate('paging.last_page');
     this.paginatorIntl.getRangeLabel = this.getRangeLabel.bind(this);
 

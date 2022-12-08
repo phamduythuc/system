@@ -1,16 +1,19 @@
-import { Injectable, Injector, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
-import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { take } from 'rxjs/operators';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { IColumn } from '@layout/common/data-table/data-table.component';
-import { TranslocoService } from '@ngneat/transloco';
-import { BaseService } from '@core/base.service';
-import { CommonUtilsService } from '@shared/common-utils.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { SUCCESS_CODE } from '@core/config/constant';
+import {Injectable, Injector, Inject, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
+import {ConfirmDialogComponent} from '@shared/components/confirm-dialog/confirm-dialog.component';
+import {take} from 'rxjs/operators';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {IColumn} from '@layout/common/data-table/data-table.component';
+import {TranslocoService} from '@ngneat/transloco';
+import {BaseService} from '@core/base.service';
+import {CommonUtilsService} from '@shared/common-utils.service';
+import {DomSanitizer} from "@angular/platform-browser";
+import {SUCCESS_CODE} from "@core/config/constant";
+
+
+
 
 @Injectable()
 export class BaseComponent {
@@ -24,18 +27,8 @@ export class BaseComponent {
     data: [],
     totalRecords: 0,
   };
-  listTimeType = [
-    'createdDate',
-    'modifiedDate',
-    'expectEndTime',
-    'actualEndTime',
-    'dateOfBirth',
-    'leaveDate',
-    'staOfficalDate',
-    'hireDate',
-    'staDate',
-    'endDate',
-  ];
+  pageIndex: any;
+  listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate'];
 
   public snackBar: MatSnackBar;
   public cdr: ChangeDetectorRef;
@@ -116,6 +109,7 @@ export class BaseComponent {
     this.baseService.getOne(id).subscribe((res) => {
       if (res.code === '00') {
         this.detailsData = res.data;
+        console.log(res);
         this.handleCoverStringToDate(this.detailsData);
         if (this.formGroup) {
           this.formGroup.patchValue(this.detailsData);
@@ -137,6 +131,7 @@ export class BaseComponent {
       if ('00' === res.code) {
         this.searchResult.data = res.data;
         this.searchResult.totalRecords = res.totalRecords;
+        this.pageIndex = this.searchModel.page;
         if (callback) {
           callback();
         }
@@ -147,6 +142,7 @@ export class BaseComponent {
   }
 
   changePage(e: any): void {
+
     this.searchModel.pageSize = e.pageSize;
     this.searchModel.page = e.pageIndex;
     this.processSearch(this.searchModel);
