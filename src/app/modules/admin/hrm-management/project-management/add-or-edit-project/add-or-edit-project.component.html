@@ -88,12 +88,14 @@
                   ('hrm-management.project.form.projectType' | transloco) +
                   ' ...'
                 "
-                id="projectType"
-                formControlName="projectType"
+                id="projectTypeName"
+                formControlName="projectTypeName"
+                (selectionChange)="onChange($event)"
               >
                 <mat-option
                   *ngFor="let type of projectTypes"
-                  [value]="type?.code"
+                  [value]="type?.name"
+                  
                   >{{ type?.name }}</mat-option
                 >
               </mat-select>
