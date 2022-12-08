@@ -112,29 +112,19 @@ export class BaseComponent {
     });
   }
 
-  getDetails(id, callback?, departments?): void {
+  getDetails(id, callback?): void {
     this.baseService.getOne(id).subscribe((res) => {
-      // .subscribe(res => {
-
       if (res.code === '00') {
         this.detailsData = res.data;
-
-        if (departments) {
-          departments.map((x: any) => {
-            if (x.id == this.detailsData.parentId) {
-              this.detailsData.parentName = x.name;
-            }
-          });
-        }
-
         this.handleCoverStringToDate(this.detailsData);
-        this.formGroup.patchValue(this.detailsData);
-        this.formGroup.markAllAsTouched();
+        if (this.formGroup) {
+          this.formGroup.patchValue(this.detailsData);
+          this.formGroup.markAllAsTouched();
+        }
         if (callback) {
           callback(this.detailsData);
         }
-        
-        
+
       } else {
         this.showSnackBar(res.message, 'error');
         this.dialogService.closeAll();

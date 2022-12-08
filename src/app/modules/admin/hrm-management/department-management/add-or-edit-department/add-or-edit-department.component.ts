@@ -17,7 +17,7 @@ export class AddOrEditDepartmentComponent
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(50)]],
     description: [null],
-    parentId: [null, Validators.required],
+    parentId: [null],
     status: [1],
   });
   dialogId: any = null;
@@ -38,9 +38,6 @@ export class AddOrEditDepartmentComponent
   }
 
   ngOnInit(): void {
-    // if (this.department) {
-    //   this.formGroup.patchValue(this.department);
-    // }
   }
 
   save(data) {

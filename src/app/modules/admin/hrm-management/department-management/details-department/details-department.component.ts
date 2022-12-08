@@ -15,7 +15,6 @@ export class DetailsDepartmentComponent
 {
   private readonly dialogId: any;
   departments: any = [];
-  detailsData_1: any;
   constructor(
     injector: Injector,
     public dialogRef: MatDialogRef<AddOrEditDepartmentComponent>,
@@ -24,12 +23,17 @@ export class DetailsDepartmentComponent
   ) {
     super(injector, departmentService, dialogRef);
     this.dialogId = dialogData?.id;
-    if (this.dialogId) {
-      this.getDetails(this.dialogId, null, dialogData?.departments);
-    }
-
-    this.departments = dialogData?.departments;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.dialogId) {
+      this.getDetails(this.dialogId, () => {
+        this.dialogData?.departments.map((x: any) => {
+          if (x.id == this.detailsData.parentId) {
+            this.detailsData.parentName = x.name;
+          }
+        });
+      });
+    }
+  }
 }
