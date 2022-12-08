@@ -22,7 +22,7 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'common.name_staff_level',
       flex: 0.3,
     },
     {
@@ -45,7 +45,7 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     },
     {
       columnDef: 'action',
-      header: 'common.actions',
+      header: 'common.active_staff_level',
       actions: ['view','edit', 'delete'],
     }
   ];

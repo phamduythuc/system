@@ -95,7 +95,8 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   showDetail(id) {
     this.showDialog(DetailsDepartmentComponent, {
         data: {
-          id
+          id,
+          departments: this.searchResult.data,
         },
         width: '60vw',
         // height: '50vh',
