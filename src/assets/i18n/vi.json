@@ -23,7 +23,8 @@
       "number_format": "{{field}} sai định dạng số",
       "required": "{{field}} không được để trống",
       "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
-      "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY"
+      "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY",
+      "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy"
     },
     "title": {
       "create": "Thêm mới {{screenName}}",
@@ -58,6 +59,7 @@
     "partner": "Đối tác",
     "fullName": "Họ tên",
     "department": "Phòng ban",
+    "parentName": "Phòng ban trực thuộc",
     "gender": "Giới tính",
     "position": "Chức vụ",
     "companyEmail": "Email c.ty",
