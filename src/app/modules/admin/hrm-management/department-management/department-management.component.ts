@@ -75,7 +75,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel, ...this.formSearch.value};
+    this.searchModel = {...this.searchModel,page:0, ...this.formSearch.value};
     this.processSearch(this.searchModel);
   }
 

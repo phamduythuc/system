@@ -92,7 +92,7 @@
             [rows]="searchResult.data //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
             [columns]="columns"
             [paginate]="true"
-            [pageIndex]="searchModel.page"
+            [(pageIndex)]="searchModel.page"
             [limit]="paginate.size"
             [count]="searchResult.totalRecords"
             [rowTemplate]="rowTemplate"

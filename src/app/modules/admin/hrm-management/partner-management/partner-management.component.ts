@@ -78,7 +78,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   }
 
   doSearch() {
-    this.searchModel= {...this.searchModel,...this.formSearch.value};
+    this.searchModel= {...this.searchModel,page:0 ,...this.formSearch.value};
     this.processSearch(this.searchModel);
   }
 
