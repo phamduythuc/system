@@ -7,7 +7,7 @@ import {CategoriesService} from '@core/categories.service';
 import moment from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {PartnerService} from '@shared/services/partner.service';
-import {map} from 'rxjs';
+import { datePickerValidator } from '@shared/validation/date-picker.validation';
 
 @Component({
   selector: 'app-add-or-edit-project',
@@ -23,14 +23,12 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     projectType: [null, Validators.required],
     projectTypeName: [null],
     budget: [null, Validators.required],
-    startTime: [null, [Validators.required,
-      //  Validators.pattern('(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)[0-9]{2}')
-      ]],
+    startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null],
     actualEndTime: [null],
-    expectEndTime: [null, Validators.required],
+    expectEndTime: [null, datePickerValidator()],
     status: [1, Validators.required],
   });
   projectData: any;

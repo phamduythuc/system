@@ -182,14 +182,14 @@
           <div class="input w-2/3">
               <mat-form-field class="fuse-mat-no-subscript w-full">
               <input class=" " matInput [matDatepicker]="startTime" datePickerFormat="DD/MM/YYYY"  formControlName="startTime"
-                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" readonly>
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
               <mat-datepicker-toggle [for]="startTime">
               </mat-datepicker-toggle>
               <mat-datepicker #startTime></mat-datepicker>
               </mat-form-field>
             <app-error-message [control]="formGroup.get('startTime')"
-                                textPattern="{{'common.message.date_format_1'| transloco }}"
-                               [name]="'hrm-management.project.form.startTime'|transloco">
+                                textPattern="{{'common.message.date_format'| transloco }}"
+                               [name]="'common.message.date_format'|transloco">
             </app-error-message>
           </div>
         </div>
@@ -202,14 +202,14 @@
           <div class="input w-2/3">
               <mat-form-field class="fuse-mat-no-subscript w-full">
               <input class=" " matInput [matDatepicker]="expectEndTime" datePickerFormat="DD/MM/YYYY" formControlName="expectEndTime"
-                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" readonly>
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
               <mat-datepicker-toggle [for]="expectEndTime">
               </mat-datepicker-toggle>
               <mat-datepicker #expectEndTime></mat-datepicker>
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('expectEndTime')"
-              [name]="'hrm-management.project.form.expectEndTime' | transloco"
+              [name]="'common.message.date_format'|transloco">
             >
             </app-error-message>
           </div>
@@ -222,7 +222,7 @@
           <div class="input w-2/3">
             <div class="w-full pr-0 my-border">
               <input class=" " matInput [matDatepicker]="actualEndTime" datePickerFormat="DD/MM/YYYY" formControlName="actualEndTime"
-                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" readonly>
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
               <mat-datepicker-toggle [for]="actualEndTime">
               </mat-datepicker-toggle>
               <mat-datepicker #actualEndTime></mat-datepicker>
