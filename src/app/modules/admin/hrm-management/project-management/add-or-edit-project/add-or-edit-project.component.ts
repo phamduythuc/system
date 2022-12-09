@@ -10,6 +10,7 @@ import {PartnerService} from '@shared/services/partner.service';
 import {map} from 'rxjs';
 
 
+
 @Component({
   selector: 'app-add-or-edit-project',
   templateUrl: './add-or-edit-project.component.html',
@@ -61,12 +62,14 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
+      console.log(res);
+
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
-          this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
-          this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
-          this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
+          // this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
+          // this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
+          // this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
           this.formGroup.patchValue(this.projectData);
         }
       }else {
