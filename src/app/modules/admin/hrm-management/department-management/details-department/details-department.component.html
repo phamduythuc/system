@@ -15,7 +15,7 @@
       <mat-label class="w-1/6 p-2 font-semibold">{{"common.name"|transloco}}</mat-label>
       <div class="flex justify-center items-center border b-radius p-2 w-5/6">
         <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-          {{detailsData.name}}
+          {{detailsData?.name}}
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="w-2/3 flex justify-center items-center border b-radius p-2">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{detailsData.code ? detailsData.code : ''}}
+            {{detailsData?.code}}
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div class="flex justify-center items-center border b-radius p-2 w-2/3">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{detailsData.parentName || ''}}
+            {{detailsData?.parentName}}
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
       <div class="flex justify-center items-center border b-radius p-2 w-5/6">
         <div
           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-          {{detailsData.description ? detailsData.description : ''}}
+          {{detailsData?.description}}
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
         <div class="w-2/3 flex justify-center items-center border b-radius p-2">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{detailsData.createdBy ? detailsData.createdBy : ''}}
+            {{detailsData?.createdBy}}
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <div class="flex justify-center items-center border b-radius p-2 w-2/3">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{(detailsData.createdDate ? detailsData.createdDate : '')|date:'dd/MM/yyyy'}}
+            {{(detailsData?.createdDate)|date:'dd/MM/yyyy'}}
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
         <div class="w-2/3 flex justify-center items-center border b-radius p-2">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{detailsData.modifiedBy ? detailsData.modifiedBy : ''}}
+            {{detailsData?.modifiedBy}}
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
         <div class="flex justify-center items-center border b-radius p-2 w-2/3">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-            {{(detailsData.modifiedDate ? detailsData.modifiedDate : '')|date:'dd/MM/yyyy'}}
+            {{(detailsData?.modifiedDate)|date:'dd/MM/yyyy'}}
           </div>
         </div>
       </div>
