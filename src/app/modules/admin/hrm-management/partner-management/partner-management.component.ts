@@ -29,14 +29,17 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'phone',
       header: 'common.phone',
+      flex: 0.4,
     },
     {
       columnDef: 'address',
       header: 'common.address',
+      flex: 0.6,
     },
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
+      flex: 0.3,
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
     },
     // {
@@ -78,7 +81,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   }
 
   doSearch() {
-    this.searchModel= {...this.searchModel,...this.formSearch.value};
+    this.searchModel= {...this.searchModel,page:0 ,...this.formSearch.value};
     this.processSearch(this.searchModel);
   }
 

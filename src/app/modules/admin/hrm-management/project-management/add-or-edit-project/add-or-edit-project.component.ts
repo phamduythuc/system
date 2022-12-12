@@ -9,6 +9,8 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {PartnerService} from '@shared/services/partner.service';
 import {map} from 'rxjs';
 
+
+
 @Component({
   selector: 'app-add-or-edit-project',
   templateUrl: './add-or-edit-project.component.html',
@@ -32,6 +34,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     expectEndTime: [null, Validators.required],
     status: [1, Validators.required],
   });
+
+  date : any;
   projectData: any;
   projectTypes: any = [];
   projects: any = [];
@@ -59,7 +63,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
       console.log(res);
-      
+
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
