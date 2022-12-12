@@ -9,6 +9,8 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {PartnerService} from '@shared/services/partner.service';
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
 
+
+
 @Component({
   selector: 'app-add-or-edit-project',
   templateUrl: './add-or-edit-project.component.html',
@@ -31,6 +33,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     expectEndTime: [null, datePickerValidator()],
     status: [1, Validators.required],
   });
+
+  date : any;
   projectData: any;
   projectTypes: any = [];
   projects: any = [];
