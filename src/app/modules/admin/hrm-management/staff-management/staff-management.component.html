@@ -69,7 +69,7 @@
             [rows]="searchResult.data||[]"
             [columns]="columns"
             [paginate]="true"
-            [pageIndex]="searchModel.page"
+            [(pageIndex)]="searchModel.page"
             [limit]="searchModel.pageSize"
             [count]="searchResult.totalRecords"
             (action)="actionClick($event)"
