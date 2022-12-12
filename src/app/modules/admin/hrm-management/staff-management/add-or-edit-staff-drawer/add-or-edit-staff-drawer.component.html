@@ -194,9 +194,11 @@
                   <mat-label>{{t('common.email')}}
                     <!--                    Email cá nhân / Email-->
                   </mat-label>
-                  <input formControlName="email"
+                  <input required formControlName="email"
                          matInput>
                 </mat-form-field>
+                <app-error-message [control]="formGroup.get('email')"
+                                   [name]='"common.email"|transloco'></app-error-message>
               </div>
             </div>
             <div class="w-1/2 ml-2">
@@ -400,7 +402,7 @@
                   <mat-label>{{t('common.fingerPrintCode')}}
                     <!--                    Mã chấm công / Finger Print Code-->
                   </mat-label>
-                  <input  formControlName="idNhanVienChamCong"
+                  <input formControlName="idNhanVienChamCong"
                          matInput>
                 </mat-form-field>
               </div>

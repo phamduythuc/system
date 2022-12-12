@@ -75,7 +75,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     }
   ];
   formSearch = this.fb.group({
-    fullName: [''],
+    keyword: [''],
   })
 
   paginate = {
