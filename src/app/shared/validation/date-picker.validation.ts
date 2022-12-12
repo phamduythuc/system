@@ -1,11 +1,13 @@
-// import {Directive} from '@angular/core';
-// import {AbstractControl, NG_VALIDATORS, ValidationErrors, Validator} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { CommonUtilsService } from '@shared/common-utils.service';
 
-// @Directive({
-//   selector: '[customizeValidationDatePicker]',
-//   providers: [{provide: NG_VALIDATORS,useExisting:'customizeValidationDatePicker',multi: true}]
-// })
-
-// class ValidationDatePickerDirective implements Validator {
-//     validate(control: AbstractControl)
-// }
+export function datePickerValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = CommonUtilsService.dateToString(control.value)
+    if (value) {
+      return null;
+    }else{
+        return { datePickerFormat: true }
+    }
+  };
+}
