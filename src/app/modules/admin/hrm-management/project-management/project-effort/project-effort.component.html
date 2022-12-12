@@ -71,14 +71,13 @@
               <input matInput [matDatepicker]="leaveDate" datePickerFormat="DD/MM/YYYY"
                      [formControlName]="'acceptanceDate'"
                      [placeholder]="'effort.accept_date' | transloco"
-                     customizeValidationDatePicker
                      >
               <mat-datepicker-toggle [for]="leaveDate">
               </mat-datepicker-toggle>
               <mat-datepicker #leaveDate></mat-datepicker>
             </mat-form-field>
             <app-error-message [control]="formGroup.get('acceptanceDate')"
-                               [name]="'effort.accept_date'|transloco">
+                               [name]="'common.message.date_format'|transloco">
             </app-error-message>
           </div>
           <!-- NGHIỆM THU -->

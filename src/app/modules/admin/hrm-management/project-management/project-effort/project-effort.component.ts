@@ -10,6 +10,7 @@ import {EffortService} from '@shared/services/effort.service';
 import {forkJoin} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { datePickerValidator } from '@shared/validation/date-picker.validation';
 
 @Component({
   selector: 'app-project-effort',
@@ -67,7 +68,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       startDate: [month, Validators.required],
       estimate: ['', [Validators.required, Validators.pattern('^\\d+$')]],
       effort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      acceptanceDate: ['',Validators.required],
+      acceptanceDate: ['',  datePickerValidator()],
       acceptanceEffort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
       note: [],
       effortDetail: this.fb.array([])

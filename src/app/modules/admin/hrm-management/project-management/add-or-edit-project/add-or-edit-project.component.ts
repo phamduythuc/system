@@ -7,7 +7,7 @@ import {CategoriesService} from '@core/categories.service';
 import moment from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {PartnerService} from '@shared/services/partner.service';
-import {map} from 'rxjs';
+import { datePickerValidator } from '@shared/validation/date-picker.validation';
 
 
 
@@ -23,15 +23,14 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(20)]],
     projectType: [null, Validators.required],
+    projectTypeName: [null],
     budget: [null, Validators.required],
-    startTime: [null, [Validators.required,
-      //  Validators.pattern('(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)[0-9]{2}')
-      ]],
+    startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null],
     actualEndTime: [null],
-    expectEndTime: [null, Validators.required],
+    expectEndTime: [null, datePickerValidator()],
     status: [1, Validators.required],
   });
 
@@ -60,13 +59,26 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onChange(data){
+    this.projectTypes.map((x:any)=>{
+      if(x.name == data.value){
+        this.formGroup.controls.projectType.setValue(Number(x.code));
+      }
+      return x
+    })
+  }
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
-      console.log(res);
-
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
+          console.log(this.projectTypes);
+          this.projectTypes.map((x:any)=>{
+            if(Number(x.code) == this.projectData.projectType){
+              this.projectData.projectTypeName = x.name
+            }
+            return x
+          })
           // this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
           // this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
           // this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
