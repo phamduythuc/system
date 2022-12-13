@@ -63,6 +63,7 @@
                    formControlName="note"
                    matInput trim='blur'></textarea>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('note')" [name]='"common.note"|transloco'></app-error-message>
         </div>
       </div>
 

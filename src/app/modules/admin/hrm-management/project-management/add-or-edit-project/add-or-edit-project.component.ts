@@ -28,7 +28,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
-    description: [null],
+    description: [null, Validators.maxLength(500)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
     status: [1, Validators.required],

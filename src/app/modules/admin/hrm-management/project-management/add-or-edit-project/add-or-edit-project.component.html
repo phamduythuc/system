@@ -95,7 +95,6 @@
                 <mat-option
                   *ngFor="let type of projectTypes"
                   [value]="type?.name"
-                  
                   >{{ type?.name }}</mat-option
                 >
               </mat-select>
@@ -248,6 +247,7 @@
               trim="blur"
             ></textarea>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
         </div>
       </div>
     </div>

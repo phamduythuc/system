@@ -16,7 +16,7 @@ export class AddOrEditPartnerComponent extends BaseComponent implements OnInit {
     name: [null, [Validators.required, Validators.maxLength(100)]],
     phone:[null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
     address:[null],
-    note: [null],
+    note: [null, Validators.maxLength(500)],
   });
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<AddOrEditPartnerComponent>,
