@@ -70,7 +70,7 @@
             [columns]="columns"
             [paginate]="true"
             [(pageIndex)]="searchModel.page"
-            [limit]="paginate.pageSize"
+            [limit]="paginate.size"
             [count]="searchResult.totalRecords"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
