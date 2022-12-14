@@ -38,7 +38,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     },
     {
       columnDef: 'budget',
-      header: 'hrm-management.project.form.budget',
+      header: 'hrm-management.project.form.estimates',
     },
     {
       columnDef: 'startTime',

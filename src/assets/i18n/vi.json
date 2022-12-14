@@ -42,7 +42,7 @@
     "stt": "Stt",
     "name": "Tên",
     "name_position": "Tên chức vụ",
-    "name_staff_level": "Tên cấp bậc",
+    "name_specialize": "Tên chuyên môn",
     "code": "Mã",
     "note": "Ghi chú",
     "phone": "Điện thoại",
@@ -134,8 +134,8 @@
         "parent": "Phòng ban trực thuộc"
       }
     },
-    "staffLevel": {
-      "title": "Cấp bậc"
+    "specialize": {
+      "title": "Chuyên môn"
     },
     "position": {
       "title": "Chức vụ"
@@ -148,10 +148,17 @@
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
+        "estimates": "Dự toán",
+        "price": "Đơn giá",
         "projectType": "Kiểu dự án",
         "startTime": "Ngày bắt đầu",
         "expectEndTime": "Tiến độ hoàn thành",
-        "actualEndTime": "Ngày hoàn thành"
+        "actualEndTime": "Ngày hoàn thành",
+        "PointOfContact": "Đầu mối liên hệ",
+        "contactPersonName": "Tên người liên hệ",
+        "contactPersonPhone": "Điện thoại người liên hệ",
+        "contactPersonEmail": "Email người liên hệ"
+
       },
       "projectMember": "Danh sách thành viên"
     },

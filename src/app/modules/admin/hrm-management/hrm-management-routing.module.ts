@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'staff-level-management',
     loadChildren: () => import('app/modules/admin/hrm-management/staff-level-management/staff-level-management.module').then(m => m.StaffLevelManagementModule),
-    data: {breadcrumb: {label: 'hrm-management.staffLevel.title', url: 'hrm-management/staff-level-management'}}
+    data: {breadcrumb: {label: 'hrm-management.specialize.title', url: 'hrm-management/staff-level-management'}}
   },
   {
     path: 'position-management',

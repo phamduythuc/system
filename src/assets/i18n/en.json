@@ -44,7 +44,7 @@
     "stt": "No.",
     "name": "Name",
     "name_position": "Position name",
-    "name_staff_level": "Rank name",
+    "name_specialize": "Specialize name",
     "code": "Code",
     "note": "Note",
     "phone": "Phone",
@@ -136,8 +136,8 @@
         "parent": "Department embed"
       }
     },
-    "staffLevel": {
-      "title": "Staff level"
+    "specialize": {
+      "title": "Specialize"
     },
     "position": {
       "title": "Position"
@@ -150,10 +150,16 @@
       "form": {
         "partner": "Partner",
         "budget": "Budget",
+        "estimates": "Estimates",
+        "price": "Price",
         "projectType": "Project type",
         "startTime": "Start time",
         "expectEndTime": "Expect end time",
-        "actualEndTime": "Actual end time"
+        "actualEndTime": "Actual end time",
+        "PointOfContact": "Đầu mối liên hệ",
+        "contactPersonName": "Contact person name",
+        "contactPersonPhone": "Contact person phone",
+        "contactPersonEmail": "Contact person email"
       },
       "projectMember": "List member"
     },

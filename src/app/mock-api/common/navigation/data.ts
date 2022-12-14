@@ -29,7 +29,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'level',
-        title: 'hrm-management.staffLevel.title',
+        title: 'hrm-management.specialize.title',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
         link: '/hrm-management/staff-level-management',
