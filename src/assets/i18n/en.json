@@ -101,6 +101,8 @@
     "role": "Role",
     "groupRole": "Role group",
     "menu": "Menu",
+    "addGroupRole": "Add New Permissions Group",
+    "editGroupRole": "Edit Permissions Group",
     "user": {
       "group": "Group",
       "userList": "User list",

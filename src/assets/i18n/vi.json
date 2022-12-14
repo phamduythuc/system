@@ -99,6 +99,8 @@
     "role": "Quyền",
     "groupRole": "Phân quyền",
     "menu": "Danh mục",
+    "addGroupRole": "Thêm Nhóm Quyền Mới",
+    "editGroupRole": "Sửa Nhóm Quyền",
     "user": {
       "group": "Nhóm",
       "userList": "Danh sách người dùng",
