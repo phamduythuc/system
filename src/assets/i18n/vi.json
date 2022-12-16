@@ -39,7 +39,7 @@
     "team": "Nhóm",
     "toMonth": "Đến tháng",
     "search": "Tìm kiếm",
-    "stt": "Stt",
+    "stt": "STT",
     "name": "Tên",
     "name_position": "Tên chức vụ",
     "name_staff_level": "Tên cấp bậc",
@@ -168,6 +168,9 @@
         "addMember": "Thêm thành viên",
         "choose": "Chọn thành viên"
       }
+    },
+    "role": {
+      "title": "Vai trò"
     }
   },
   "message": {

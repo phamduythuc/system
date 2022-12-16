@@ -88,11 +88,11 @@ export class BaseComponent {
   }
 
   handleCoverTimeToString(data): void {
-    this.listTimeType.forEach((item) => {
-      if (data[item]) {
-        data[item] = CommonUtilsService.dateToString(data[item]);
-      }
-    });
+      this.listTimeType.forEach((item) => {
+        if (data[item]) {
+          data[item] = CommonUtilsService.dateToString(data[item]);
+        }
+      });
   }
 
   handleCoverStringToDate(data): void {

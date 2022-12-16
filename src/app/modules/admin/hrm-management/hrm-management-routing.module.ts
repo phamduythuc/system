@@ -38,6 +38,11 @@ const routes: Routes = [
     loadChildren: () => import('app/modules/admin/hrm-management/team-management/team-management.module').then(m => m.TeamManagementModule),
     data: {breadcrumb: {label: 'hrm-management.team.title', url: 'hrm-management/team-management'}}
   },
+  {
+    path: 'role-management',
+    loadChildren: () => import('app/modules/admin/hrm-management/role-management/role-management.module').then(m => m.RoleManagementModule),
+    data: {breadcrumb: {label: 'hrm-management.role.title', url: 'hrm-management/role-management'}}
+  },
 ];
 
 @NgModule({

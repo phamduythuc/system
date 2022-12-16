@@ -167,6 +167,9 @@
         "addMember": "Add member",
         "choose": "Choose member"
       }
+    },
+    "role": {
+      "title": "Role"
     }
   },
   "message": {
