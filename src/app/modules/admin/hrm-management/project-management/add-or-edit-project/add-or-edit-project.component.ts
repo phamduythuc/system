@@ -72,17 +72,18 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
-          console.log(this.projectTypes);
           this.projectTypes.map((x:any)=>{
             if(Number(x.code) == this.projectData.projectType){
               this.projectData.projectTypeName = x.name
             }
             return x
           })
-          // this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
-          // this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
-          // this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
-          this.formGroup.patchValue(this.projectData);
+          console.log(this.projectData);
+          
+          this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
+          this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
+          this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
+          this.formGroup.patchValue(this.projectData);          
         }
       }else {
         this.showSnackBar(res.message,  'error');

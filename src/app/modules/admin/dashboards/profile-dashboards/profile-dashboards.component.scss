@@ -1,0 +1,32 @@
+.list {
+    padding: 10px;
+  li {
+    border: 1px solid #00000080;
+    border-bottom: none;
+    &:last-child {
+      border: 1px solid #00000080;
+    }
+    p.title {
+      padding: 10px;
+      background: #00000080;
+      color: #fff;
+      font-size: 19px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      .icon {
+        svg{
+            transition: all 0.5s;
+        }
+        &.active{
+            svg{
+                transform: rotate(-180deg);
+            }
+        }
+        path{
+            fill: #fff !important;
+          }
+      }
+    }
+  }
+}
