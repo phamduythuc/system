@@ -21,6 +21,6 @@ export class HandlerViewRoleComponent implements OnInit {
     }
   ;
   ngOnInit(): void {
-
+    console.log(this.data.data);
   }
 }
