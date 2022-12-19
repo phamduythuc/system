@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-handler-view-role',
   templateUrl: './handler-view-role.component.html',
@@ -21,5 +22,6 @@ export class HandlerViewRoleComponent implements OnInit {
     }
   ;
   ngOnInit(): void {
+    console.log(this.data.data);
   }
 }
