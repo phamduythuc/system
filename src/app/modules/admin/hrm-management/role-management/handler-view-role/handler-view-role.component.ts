@@ -2,7 +2,7 @@ import { data } from 'autoprefixer';
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+
 
 @Component({
   selector: 'app-handler-view-role',
@@ -21,6 +21,5 @@ export class HandlerViewRoleComponent implements OnInit {
     }
   ;
   ngOnInit(): void {
-
   }
 }
