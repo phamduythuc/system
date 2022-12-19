@@ -17,7 +17,7 @@ import { datePickerValidator } from '@shared/validation/date-picker.validation';
   styleUrls: ['./add-or-edit-project.component.scss']
 })
 export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
-
+  panelOpenState = false;
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
@@ -25,12 +25,17 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     projectType: [null, Validators.required],
     projectTypeName: [null],
     budget: [null, Validators.required],
+    price: [null, Validators.required],
     startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null, Validators.maxLength(500)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
+    contactPersonName: [null ,[Validators.maxLength(100)]],
+    contactPersonPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+    contactPersonEmail: [null],
+
     status: [1, Validators.required],
   });
 
