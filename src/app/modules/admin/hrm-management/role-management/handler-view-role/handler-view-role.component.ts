@@ -19,8 +19,8 @@ export class HandlerViewRoleComponent implements OnInit {
       this.formUser = fb.group({
         name: ["", Validators.required]
     });
-    }
-  ;
+    };
+    
   ngOnInit(): void {
     console.log(this.data.data);
   }

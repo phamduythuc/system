@@ -75,7 +75,7 @@ export class BaseComponent {
       width: '30vw',
       ...options,
     });
-    ref
+    ref 
       .afterClosed()
       .pipe(take(1))
       .subscribe((value) => {

@@ -9,25 +9,28 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from '@shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 
 
 @NgModule({
   declarations: [
-
-  
     HandlerAddRoleComponent,
-        HandlerEditRoleComponent,
-        HandlerDeleteRoleComponent,
-        HandlerViewRoleComponent
+    HandlerEditRoleComponent,
+    HandlerDeleteRoleComponent,
+    HandlerViewRoleComponent
   ],
   imports: [
     CommonModule,
     RoleManagementRoutingModule,
     MatIconModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    SharedModule,
+    FormsModule,
+
   ]
 })
 export class RoleManagementModule { }

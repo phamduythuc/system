@@ -12,30 +12,21 @@
       <div class="body">
         <div class="content mt-6">
           <div class="field flex mb-4">
-            <mat-label class="w-1/6 p-2 font-semibold">Tên</mat-label>
-            <div class="flex justify-center items-center border b-radius p-2 w-5/6">
-              <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                {{data.data.fullName}}
-              </div>
-            </div>
-          </div>
-
-          <div class="field flex mb-4">
             <div class="w-1/2 flex">
-              <mat-label class="w-1/3 p-2 font-semibold">Mã nhân viên</mat-label>
+              <mat-label class="w-1/3 p-2 font-semibold">Tên</mat-label>
               <div class="w-2/3 flex justify-center items-center border b-radius p-2">
                 <div
                   class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                  {{data.data.staffCode}}
+                  {{data.data.fullName}}
                 </div>
               </div>
             </div>
             <div class="w-1/2 flex">
-              <mat-label class="w-1/3 ml-4 p-2 font-semibold">Phòng ban</mat-label>
+              <mat-label class="w-1/3 ml-4 p-2 font-semibold">ID</mat-label>
               <div class="flex justify-center items-center border b-radius p-2 w-2/3">
                 <div
                   class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                  {{data.data.departmentNames}}
+                  {{data.data.id}}
                 </div>
               </div>
             </div>
@@ -43,38 +34,65 @@
 
           <div class="field flex mb-4">
             <div class="w-1/2 flex">
-              <mat-label class="w-1/3 p-2 font-semibold">Chức vụ</mat-label>
+              <mat-label class="w-1/3 p-2 font-semibold">Mô tả</mat-label>
               <div class="w-2/3 flex justify-center items-center border b-radius p-2">
                 <div
                   class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                  
+                  {{data.data.description}}
                 </div>
               </div>
             </div>
             <div class="w-1/2 flex">
-              <mat-label class="w-1/3 ml-4 p-2 font-semibold">Điện thoại</mat-label>
+              <mat-label class="w-1/3 ml-4 p-2 font-semibold">Trạng thái</mat-label>
               <div class="flex justify-center items-center border b-radius p-2 w-2/3">
                 <div
                   class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                  {{data.data.phone}}
+                  {{data.data.status}}
                 </div>
               </div>
             </div>
           </div>
-      
-          
+
           <div class="field flex mb-4">
-            <mat-label class="w-1/6 p-2 font-semibold">Email</mat-label>
-            <div class="flex justify-center items-center border b-radius p-2 w-5/6">
-              <div
-                class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
-                {{data.data.email}}
+            <div class="w-1/2 flex">
+              <mat-label class="w-1/3 p-2 font-semibold">Người tạo</mat-label>
+              <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+                <div
+                  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                  {{data.data.createdBy}}
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2 flex">
+              <mat-label class="w-1/3 ml-4 p-2 font-semibold">Ngày tạo</mat-label>
+              <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+                <div
+                  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                  {{data.data.createdDate}}
+                </div>
               </div>
             </div>
           </div>
-      
-          
-      
+          <div class="field flex mb-4">
+            <div class="w-1/2 flex">
+              <mat-label class="w-1/3 p-2 font-semibold">Người chỉnh sửa</mat-label>
+              <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+                <div
+                  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                  {{data.data.modifiedBy}}
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2 flex">
+              <mat-label class="w-1/3 ml-4 p-2 font-semibold">Ngày chỉnh sửa</mat-label>
+              <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+                <div
+                  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                  {{data.data.modifiedDate}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 </div>

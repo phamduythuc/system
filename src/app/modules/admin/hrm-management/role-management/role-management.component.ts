@@ -7,6 +7,8 @@ import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { StaffService } from '@shared/services/staff.service';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { HandlerEditRoleComponent } from './handler-edit-role/handler-edit-role.component';
+import { HandlerAddRoleComponent } from './handler-add-role/handler-add-role.component';
 
 
 
@@ -27,39 +29,43 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'fullName',
       header: 'common.fullName',
+      flex: 0.5,
+    },
+    {
+      columnDef: 'description',
+      header: 'common.description',
       flex: 0.7,
     },
     {
-      columnDef: 'staffCode',
-      header: 'common.staffCode',
-      flex: 0.7 ,
-    },
-    {
-      columnDef: 'departmentNames',
-      header: 'common.department',
+      columnDef: 'status',
+      header: 'common.status',
       flex: 0.7,
     },
     {
-      columnDef: 'positionId',
-      header: 'common.position',
-      flex: 0.7,
+      columnDef: 'createdDate',
+      header: 'common.createdDate',
+      flex: 0.5,
     },
     {
-      columnDef: 'phone',
-      header: 'common.phone',
+      columnDef: 'modifiedDate',
+      header: 'common.modifiedDate',
       flex: 0.5
     },
     {
-      columnDef: 'companyEmail',
-      header: 'common.companyEmail',
+      columnDef: 'createdBy',
+      header: 'common.createdBy',
       flex: 0.5,
     },
-  
+    {
+      columnDef: 'modifiedBy',
+      header: 'common.modifiedBy',
+      flex: 0.7,
+    },
     {
       columnDef: 'action',
       header: 'common.actions',
       actions: [ 'view','edit', 'delete'],
-      flex: 1.3,
+      flex: 0.7,
     }
   ];
   formSearch = this.fb.group({
@@ -82,7 +88,7 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
 
   actionClick(e: any): void {
     if (e.type === 'edit') {
-      this.editHandlerclick(e.data.id);
+      this.editHandlerclick(e.data);
     }
     if (e.type === 'delete') {
       
@@ -91,33 +97,30 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     if (e.type === 'view') {
      this.viewHandlerclick(e.data);
     }
-    // if(e.type === 'add') {
-    //   this.addHandlerclick(e.data.id);
-    // }
   }
+
   viewHandlerclick(data): void {
     this.showDialog(HandlerViewRoleComponent, {
       data: {
         data: data,
       },
       width: '60vw',
-      height: '50vh',
+      height: 'auto',
       disableClose: false,
     }
     )
   }
-  // addHandlerclick(e: any):void {
-  //   this.showDialog(DetailsStaffLevelComponent, {
-  //     data: {
-        
-  //     },
-  //     width: '60vw',
-  //     height: '50vh',
-  //     disableClose: true
-  //   }
-  // );
-  // }
-  editHandlerclick(e: any) {}
+
+  editHandlerclick(data) {
+    this.showDialog(HandlerEditRoleComponent, {
+        data: {
+          data: data,
+        },
+        width: '60vw',
+        height: 'auto',
+        disableClose: false,
+    });
+}
   deleteHandlerclick(id?: any) {
     this.showDialog(ConfirmDialogComponent, {}, (value) => {
       if (value) {
@@ -125,4 +128,11 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       }
     });
   }
+  addHandlerclick() {
+    this.showDialog(HandlerAddRoleComponent, {
+      width: '60vw',
+      height: 'auto',
+      disableClose: false,
+});
+}
 }
