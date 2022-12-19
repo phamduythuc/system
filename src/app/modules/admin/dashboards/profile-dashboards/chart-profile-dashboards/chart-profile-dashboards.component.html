@@ -1,11 +1,11 @@
-
-
 <ng-container *transloco="let t">
   <div [formGroup]="formGroup">
     <div class="grid sm:grid-cols-5 gap-6 w-full">
       <div class="sm:col-span-2">
         <mat-form-field class="fuse-mat-no-subscript w-full">
-          <mat-label>{{ "common.fromMonth" | transloco }}</mat-label>
+          <mat-label>{{
+            "dashboard.profile.tab.sprint.from" | transloco
+          }}</mat-label>
           <input
             class=" "
             matInput
@@ -14,8 +14,7 @@
             [formControlName]="'startMonth'"
             placeholder="Choose a date"
           />
-          <mat-datepicker-toggle [for]="startMonth">
-          </mat-datepicker-toggle>
+          <mat-datepicker-toggle [for]="startMonth"> </mat-datepicker-toggle>
           <mat-datepicker
             #startMonth
             startView="multi-year"
@@ -34,24 +33,25 @@
         </mat-form-field>
         <app-error-message
           [control]="formGroup.get('startMonth')"
-          [name]="'staff_kpi.startMonth' | transloco"
+          [name]="'dashboard.profile.tab.sprint.month' | transloco"
         >
         </app-error-message>
       </div>
+
       <div class="sm:col-span-2">
         <mat-form-field class="fuse-mat-no-subscript w-full">
-          <mat-label>{{ "common.toMonth" | transloco }}</mat-label>
+          <mat-label>{{
+            "dashboard.profile.tab.sprint.to" | transloco
+          }}</mat-label>
           <input
             class=" "
             matInput
-            [min]="formGroup.value.endMonth"
             [matDatepicker]="endMonth"
             datePickerFormat="MM/YYYY"
             [formControlName]="'endMonth'"
             placeholder="Choose a date"
           />
-          <mat-datepicker-toggle [for]="endMonth">
-          </mat-datepicker-toggle>
+          <mat-datepicker-toggle [for]="endMonth"> </mat-datepicker-toggle>
           <mat-datepicker
             #endMonth
             startView="multi-year"
@@ -70,28 +70,28 @@
         </mat-form-field>
         <app-error-message
           [control]="formGroup.get('endMonth')"
-          [name]="'staff_kpi.endMonth' | transloco"
+          [name]="'dashboard.profile.tab.sprint.month' | transloco"
         >
         </app-error-message>
       </div>
-      <div class="sm:col-span-1 flex justify-end items-end">
+
+      <div class="sm:col-span-1 flex justify-start items-end">
         <button
           mat-raised-button
           color="primary"
           class="mr-3"
           [disabled]="formGroup.invalid"
-          (click)="draw()"
+          (click)="view()"
         >
           <span>{{ "common.button.view" | transloco }}</span>
         </button>
       </div>
     </div>
-    <div class="h-full">
-      <app-chart-line
-        style="width: 200px"
-        [options]="options"
-        #chartChild
-      ></app-chart-line>
-    </div>
   </div>
 </ng-container>
+
+<app-chart-line
+  style="width: 100%"
+  [options]="options"
+  [random]="random"
+></app-chart-line>

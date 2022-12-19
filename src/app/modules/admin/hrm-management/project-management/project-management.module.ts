@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ProjectManagementRoutingModule} from './project-management-routing.module';
+import { ProjectManagementRoutingModule } from './project-management-routing.module';
 import { AddOrEditProjectComponent } from './add-or-edit-project/add-or-edit-project.component';
 import { DetailProjectComponent } from './detail-project/detail-project.component';
-import {SharedModule} from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ProjectEffortComponent } from './project-effort/project-effort.component';
-import {DataTableModule} from '@layout/common/data-table/data-table.module';
+import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { ProjectMemberComponent } from './project-member/project-member.component';
-import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
-
-
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
     AddOrEditProjectComponent,
     DetailProjectComponent,
     ProjectEffortComponent,
-    ProjectMemberComponent
+    ProjectMemberComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +22,6 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     SharedModule,
     DataTableModule,
     NgxMatSelectSearchModule,
-  ]
+  ],
 })
-export class ProjectManagementModule { }
+export class ProjectManagementModule {}

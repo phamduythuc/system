@@ -2,6 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {BaseComponent} from '@core/base.component';
 import {ProjectStaffEffortComponent} from '@shared/components/project-staff-effort/project-staff-effort.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboards',
@@ -10,7 +11,7 @@ import {ProjectStaffEffortComponent} from '@shared/components/project-staff-effo
 })
 export class DashboardsComponent extends BaseComponent implements OnInit {
 
-  constructor(injector: Injector, private dashboardService: DashboardService) {
+  constructor(injector: Injector, private dashboardService: DashboardService,private router: Router) {
       super(injector,dashboardService);
   }
 
@@ -18,12 +19,13 @@ export class DashboardsComponent extends BaseComponent implements OnInit {
   }
 
   viewProject() {
-      this.showDialog(ProjectStaffEffortComponent, {
-          width: '60vw',
-          height: '85vh',
-          disableClose: true
-        }
-      );
+      // this.showDialog(ProfileUserComponent, {
+      //     width: '60vw',
+      //     height: '85vh',
+      //     disableClose: true
+      //   }
+      // );
+      this.router.navigateByUrl('/dashboards/profile-dashboards');
   }
 
 }
