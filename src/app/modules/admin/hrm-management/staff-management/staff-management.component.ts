@@ -36,7 +36,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       flex: 0.5,
     },
     {
-      columnDef: 'positionId',
+      columnDef: 'positionNames',
       header: 'common.position',
     },
     {

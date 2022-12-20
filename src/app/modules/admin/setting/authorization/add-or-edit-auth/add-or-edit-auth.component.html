@@ -2,7 +2,7 @@
     <!--    header-->
     <div class="header border-b flex justify-between items-center border-borderDialog pb-2">
         <div class="text-4xl font-bold card-title capitalize py-2 pl-8 leading-9">
-            {{roleData ? 'Sửa Nhóm Quyền' : 'Thêm Nhóm Quyền Mới'}}
+            {{(roleData ? 'setting.editGroupRole' : 'setting.addGroupRole') | transloco}}
         </div>
         <div class="mr-8">
             <button mat-icon-button (click)="dialogRef.close()">
