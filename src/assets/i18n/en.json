@@ -203,16 +203,30 @@
   "effort": {
     "title": "Stage Information",
     "month": "Month",
+    "spring": "Spring",
     "estimate": "Estimate",
     "customer_record": "Customer record",
     "accept_date": "Acceptance date",
     "effort_accept": "Effort acceptance",
     "progress": "Progress",
     "difference_effort": "Difference",
-    "acknowledgment_of_effort": "Acknowledgment of effort",
-    "percent_effort": "% join"
+    "acknowledgmentOfEffort": "Acknowledgment of effort",
+    "acknowledgmentOfEffortChange" : "Acknowledgment of effort change",
+    "percent_effort": "% Join",
+    "turnover":"Turnover",
+    "cost": "Cost",
+    "efficiency": "Efficiency",
+    "cumulativeDifference" : "Cumulative difference",
+    "allocate_effort" : "Allocate effort",
+    "conversionEffort": "Conversion effort",
+    "timeAllocation" : "Time allocation",
+    "acknowledgmentOfEffortMM" : "Acknowledgment of effort (MM)",
+    "role": "Role",
+    "add": "Add"
+
   },
   "staff": {
+    "staffName" : "Staff name",
     "staffInfo": "Staff Information",
     "commonInfo": "Common Information",
     "contact": "Contact",

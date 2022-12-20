@@ -157,3 +157,14 @@ export interface IColumn {
 }
 
 
+export interface IData {
+  staffCode?: number;
+  staffName?: string;
+  role?: number;
+  acknowledgmentOfEffortMM?: number;
+  conversionEffort?: number;
+  timeAllocation?: any;
+  id? : any
+
+}
+

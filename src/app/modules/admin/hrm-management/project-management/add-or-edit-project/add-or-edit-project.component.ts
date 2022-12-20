@@ -25,16 +25,16 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     projectType: [null, Validators.required],
     projectTypeName: [null],
     budget: [null, Validators.required],
-    price: [null, Validators.required],
+    unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
     description: [null],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
-    contactPersonName: [null ,[Validators.maxLength(100)]],
-    contactPersonPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
-    contactPersonEmail: [null],
+    contactName: [null ,[Validators.maxLength(100)]],
+    contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+    contactMail: [null],
 
     status: [1, Validators.required],
   });
@@ -112,10 +112,11 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   }
 
   save(data) {
+    console.log(data)
+
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime)
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime)
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime)
-    console.log(this.searchModel)
     data.id = this.dialogId || null
     this.addOrEdit(data)
   }

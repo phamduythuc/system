@@ -8,6 +8,9 @@ import { ProjectEffortComponent } from './project-effort/project-effort.componen
 import {DataTableModule} from '@layout/common/data-table/data-table.module';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ProjectPhaseComponent } from './project-phase/project-phase.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,7 +19,8 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     AddOrEditProjectComponent,
     DetailProjectComponent,
     ProjectEffortComponent,
-    ProjectMemberComponent
+    ProjectMemberComponent,
+    ProjectPhaseComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +28,8 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
     SharedModule,
     DataTableModule,
     NgxMatSelectSearchModule,
+    MatExpansionModule,
+    HttpClientModule,
   ]
 })
 export class ProjectManagementModule { }

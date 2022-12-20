@@ -1,84 +1,168 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Injector, Input, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
-import {IColumn} from '@layout/common/data-table/data-table.component';
+import {IColumn, IData} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
 import {forkJoin} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
+import { AchievementService } from '@shared/services/achievement.service';
 
 @Component({
-  selector: 'app-project-effort',
-  templateUrl: './project-effort.component.html',
-  styleUrls: ['./project-effort.component.scss']
+  selector: 'app-project-phase',
+  templateUrl: './project-phase.component.html',
+  styleUrls: ['./project-phase.component.scss']
 })
-export class ProjectEffortComponent extends BaseComponent implements OnInit {
+export class ProjectPhaseComponent extends BaseComponent implements OnInit {
+
+  @Input() projectSelected: any;
 
   _permissionCodeName = 'DSDA';
+  panelOpenState = false;
+  docUrl: any = '';
 
   isLoading: boolean = false;
+
+  // columns: IColumn[] = [
+  //   {
+  //     columnDef: 'stt',
+  //     header: 'common.stt',
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     columnDef: 'staffCode',
+  //     header: 'common.code',
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     columnDef: 'staffName',
+  //     header: 'common.name',
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     columnDef: 'role',
+  //     header: 'setting.role',
+  //     flex: 0.3,
+  //   },
+  //   {
+  //     columnDef: 'acknowledgmentOfEffort',
+  //     header: 'effort.acknowledgmentOfEffort',
+  //   },
+  //   {
+  //     columnDef: 'acknowledgmentOfEffort',
+  //     header: 'effort.conversionEffort',
+  //   },
+  //   {
+  //     columnDef: 'timeAllocation',
+  //     header: 'timeAllocation',
+  //     cellRenderer: (row) => (row.timeAllocation || 0) + '%'
+  //   },
+  //   {
+  //     columnDef: 'action',
+  //     header: 'common.actions',
+  //     actions: [ 'edit', 'delete'],
+  //   }
+  // ];
 
   columns: IColumn[] = [
     {
       columnDef: 'stt',
       header: 'common.stt',
-      flex: 0.3,
-    },
-    {
-      columnDef: 'fullName',
-      header: 'common.name',
-      flex: 0.3,
+      flex: 0.1,
     },
     {
       columnDef: 'staffCode',
       header: 'common.code',
-      flex: 0.3,
+      flex: 0.1,
+    },
+    {
+      columnDef: 'fullName',
+      header: 'staff.staffName',
+      flex: 0.2,
+    },
+    {
+      columnDef: 'role',
+      header: 'effort.role',
+      flex: 0.1,
     },
     {
       columnDef: 'effort',
-      header: 'effort.acknowledgmentOfEffort',
+      header: 'effort.acknowledgmentOfEffortMM',
+      flex: 0.3,
+    },
+    {
+      columnDef: 'conversionEffort',
+      header: 'effort.conversionEffort',
+      flex: 0.3,
     },
     {
       columnDef: 'percentEffort',
-      header: 'effort.percent_effort',
-      cellRenderer: (row) => (row.percentEffort || 0) + '%'
+      header: 'effort.timeAllocation',
+      cellRenderer: (row) => (row.percentEffort || 0) + '%',
+      flex: 0.3
     },
-    // {
-    //   columnDef: 'action',
-    //   header: 'common.actions',
-    //   actions: [ 'view','edit', 'delete'],
-    // }
+    {
+      columnDef: 'action',
+      header: 'common.actions',
+      actions: [ 'delete'],
+      flex: 0.1,
+    }
   ];
 
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
               private projectService: ProjectService,
               private effortService: EffortService,
-              public dialogRef: MatDialogRef<ProjectEffortComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              public dialogRef: MatDialogRef<ProjectPhaseComponent>,
+              private achievementService: AchievementService,
+              @Inject(MAT_DIALOG_DATA) public data
+  ) {
     super(injector, effortService);
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [],
-      name: [this.generateName(month)],
-      projectId: [data.id],
       startDate: [month, Validators.required],
       estimate: ['', [Validators.required, Validators.pattern('^\\d+$')]],
-      effort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
+      price: [''],
+      percentCompelete: ['', Validators.required],
+      acknowledgmentOfEffort: [''],
+      acknowledgmentOfEffortChange: [''],
+      acceptanceEffort: ['', Validators.required],
       acceptanceDate: ['',  datePickerValidator()],
-      acceptanceEffort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      note: [],
+      differenceEffort : [''],
+      cumulativeDifferenceMM : [''],
+      differenceVnd: [''],
+      cumulativeDifferenceVnd: [''],
+      turnover: [''],
+      cost:[''],
+      efficiency: [''],
+      note: [''],
       effortDetail: this.fb.array([])
     });
   }
 
-  ngOnInit(): void {
-    this.loadEffortDetail(this.formGroup.get('startDate').value);
+  ngOnChange(): void {
+
   }
+
+  ngOnInit(): void {
+    if (this.projectSelected && this.projectSelected !== -1) {
+      this.getDetails(this.projectSelected, ({docUrl}) => {
+        this.convertBase64(docUrl);
+      });
+    }
+
+    this.loadEffortDetail(this.formGroup.get('startDate').value);
+    console.log(this.formGroup);
+
+  }
+
+  onChange(data){}
 
   get efforts(): FormArray {
     return this.formGroup.get('effortDetail') as FormArray;
@@ -123,10 +207,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   newItem(data: any): FormGroup {
     return this.fb.group({
       id: [data.id],
-      fullName: [data.fullName],
       staffCode: [data.staffCode],
-      effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      percentEffort: [data.percentEffort],
+      staffName: [data.staffName],
+      role: [data.role],
+      acknowledgmentOfEffortMM: [data.acknowledgmentOfEffortMM, [Validators.pattern('^[0-9][0-9\\.]*$')]],
+      conversionEffort: [data.conversionEffort],
+      timeAllocation: [data.timeAllocation],
     });
   }
 
@@ -186,5 +272,30 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   generateName(month: any): string {
     return `Sprint tháng ${month.format(MONTH_FORMAT)}`;
+  }
+
+  convertBase64(docUrl): void {
+    if (docUrl) {
+      this.achievementService.downloadFile(docUrl).subscribe(res1 => {
+        this.docUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
+      });
+    }
+  }
+
+  uploadFile(event: any): void {
+    const reader = new FileReader(); // HTML5 FileReader API
+    const file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      this.formGroup.patchValue({file});
+      reader.onload = () => {
+        this.docUrl = reader.result;
+      };
+    }
+  }
+
+  addNewRow(){
+  
+
   }
 }

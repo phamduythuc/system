@@ -231,7 +231,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
     console.log(data);
-    
+
     if(this.staffSelected && this.staffSelected !== -1){
       data.id = this.staffSelected;
       formData.append('file', this.formGroup.get('file').value || null);

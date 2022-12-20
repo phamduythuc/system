@@ -1,0 +1,540 @@
+<div class="flex flex-col h-full">
+  <!--        header-->
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{ "effort.title" | transloco }}
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        class="hover:bg-slate-200"
+        (click)="dialogRef.close()"
+      >
+        <mat-icon
+          class="icon-size-5"
+          svgIcon="heroicons_outline:x"
+          title="Close"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="w-full pl-2 pr-2 content overflow-auto">
+    <!-- Form -->
+    <form [formGroup]="formGroup">
+      <!-- Section -->
+      <div class="grid sm:grid-cols-4 gap-4 w-full mt-8">
+        <div class="sm:col-span-4 grid grid-cols-4 gap-6 w-full">
+          <!-- tHÁNG -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.spring" | transloco }}</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startDate"
+                datePickerFormat="MM/YYYY"
+                [formControlName]="'startDate'"
+                (ngModelChange)="changeMonth()"
+                [placeholder]="'placeholder.chooseDate' | transloco"
+              />
+              <mat-datepicker-toggle [for]="startDate"> </mat-datepicker-toggle>
+              <mat-datepicker
+                startView="multi-year"
+                (yearSelected)="
+                  chosenYearHandler($event, formGroup.get('startDate'))
+                "
+                (monthSelected)="
+                  chosenMonthHandler(
+                    $event,
+                    startDate,
+                    formGroup.get('startDate')
+                  )
+                "
+                #startDate
+              ></mat-datepicker>
+            </mat-form-field>
+            <app-error-message
+              [control]="formGroup.get('startDate')"
+              [name]="'effort.month' | transloco"
+            ></app-error-message>
+          </div>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-4 gap-4 w-full mt-8">
+        <div class="sm:col-span-4 grid grid-cols-4 gap-6 w-full">
+          <!-- ƯỚC LƯỢNG -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label>{{ "effort.estimate" | transloco }} (MM)</mat-label>
+              <input [formControlName]="'estimate'" type="number" matInput />
+            </mat-form-field>
+            <app-error-message
+              [control]="formGroup.get('estimate')"
+              [name]="'effort.estimate' | transloco"
+              [textPattern]="
+                'common.message.number_format'
+                  | transloco : { filed: 'effort.estimate' | transloco }
+              "
+            >
+            </app-error-message>
+          </div>
+          <!-- ĐƠN GIÁ -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label
+                >{{
+                  "hrm-management.project.form.price" | transloco
+                }}
+                (VND)</mat-label
+              >
+              <input [formControlName]="'price'" type="number" matInput />
+            </mat-form-field>
+          </div>
+          <!-- % HOÀN THÀNH -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label>{{ "effort.percent_effort" | transloco }}</mat-label>
+              <input [formControlName]="'percentCompelete'" matInput />
+            </mat-form-field>
+            <app-error-message
+              [control]="formGroup.get('percentCompelete')"
+              [name]="'effort.percent_effort' | transloco"
+            >
+            </app-error-message>
+          </div>
+          <!-- GHI NHẬN NỖ LỰC -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label
+                >{{
+                  "effort.acknowledgmentOfEffort" | transloco
+                }}
+                (MM)</mat-label
+              >
+              <input [formControlName]="'acknowledgmentOfEffort'" matInput />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-4 gap-4 w-full mt-8">
+        <div class="sm:col-span-4 grid grid-cols-4 gap-6 w-full">
+          <!-- GHI NHẬN NỖ LỰC QUY ĐỔI (MM) -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label
+                >{{
+                  "effort.acknowledgmentOfEffortChange" | transloco
+                }}
+                (MM)</mat-label
+              >
+              <input
+                [formControlName]="'acknowledgmentOfEffortChange'"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+          <!-- NGHIỆM THU -->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.effort_accept" | transloco }}</mat-label>
+              <input [formControlName]="'acceptanceEffort'" matInput />
+            </mat-form-field>
+            <app-error-message
+              [control]="formGroup.get('acceptanceEffort')"
+              [name]="'effort.effort_accept' | transloco"
+            >
+            </app-error-message>
+          </div>
+          <!-- NGÀY NGHIỆM THU -->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.accept_date" | transloco }}</mat-label>
+              <input
+                matInput
+                [matDatepicker]="leaveDate"
+                datePickerFormat="DD/MM/YYYY"
+                [formControlName]="'acceptanceDate'"
+                [placeholder]="'effort.accept_date' | transloco"
+              />
+              <mat-datepicker-toggle [for]="leaveDate"> </mat-datepicker-toggle>
+              <mat-datepicker #leaveDate></mat-datepicker>
+            </mat-form-field>
+            <app-error-message
+              [control]="formGroup.get('acceptanceDate')"
+              [name]="'common.message.date_format' | transloco"
+            >
+            </app-error-message>
+          </div>
+          <!-- UPLOAD FILE -->
+          <div class="sm:col-span-1 uploadStyle">
+            <div class="fuse-mat-no-subscript w-full">
+              <input
+                type="file"
+                id="document"
+                name="document"
+                accept=".docx"
+                (change)="uploadFile($event)"
+              />
+              <!-- <label
+                for="document"
+                class="flex justify-center items-center w-full h-full"
+              >
+                {{ imageUrl }}
+              </label> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-4 gap-4 w-full mt-8">
+        <div class="sm:col-span-4 grid grid-cols-4 gap-6 w-full">
+          <!-- CHÊNH LỆCH (MM)-->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label
+                >{{ "effort.difference_effort" | transloco }} (MM)</mat-label
+              >
+              <input
+                [formControlName]="'differenceEffort'"
+                type="number"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+          <!-- CHÊNH LỆCH LŨY KẾ (MM)-->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label
+                >{{ "effort.cumulativeDifference" | transloco }} (MM)</mat-label
+              >
+              <input
+                [formControlName]="'cumulativeDifferenceMM'"
+                type="number"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+          <!-- CHÊNH LỆCH (VND) -->
+          <div class="sm:col-span-1">
+            <mat-form-field
+              class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
+            >
+              <mat-label
+                >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
+              >
+              <input
+                [formControlName]="'differenceVnd'"
+                type="number"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+          <!-- CHÊNH LỆCH LŨY KẾ (VND)-->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <!-- <mat-label>{{ "effort.effort_accept" | transloco }}</mat-label> -->
+              <mat-label
+                >{{
+                  "effort.cumulativeDifference" | transloco
+                }}
+                (VND)</mat-label
+              >
+              <input [formControlName]="'cumulativeDifferenceVnd'" matInput />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-4 gap-4 w-full mt-8 mb-8">
+        <div class="sm:col-span-4 grid grid-cols-4 gap-6 w-full">
+          <!-- PHÂN BỔ NỖ LỰC-->
+          <div class="sm:col-span-4">
+            <div class="header border-b flex justify-between items-center pb-3">
+              <div class="text-2xl font-bold card-title">
+                {{ "effort.allocate_effort" | transloco }}
+              </div>
+              <button mat-raised-button color="primary" (click)="addNewRow()">
+                <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
+                {{ "effort.add"| transloco }}
+              </button>
+            </div>
+          </div>
+          <!-- TABLE PHÂN BỔ NỖ LỰC-->
+          <div class="sm:col-span-4">
+            <!-- <app-data-table
+              *ngIf="!isLoading && formGroup.get('id').value"
+              formArrayName="effortDetail"
+              [roleName]="_permissionCodeName"
+              [rows]="efforts.controls"
+              [columns]="columns"
+              [paginate]="false"
+              [limit]="searchModel.pageSize"
+              [count]="searchResult.totalRecords"
+              (action)="actionClick($event)"
+              (pageChange)="changePage($event)"
+              [rowTemplate]="rowTemplate"
+            >
+              <ng-template
+                #rowTemplate
+                let-row="row"
+                let-column="column"
+                let-index="index"
+              >
+                <ng-container [ngSwitch]="column.columnDef">
+                  <ng-container
+                    *ngSwitchCase="'effort'"
+                    [formGroupName]="index"
+                  >
+                    <div class="field flex mt-2 mb-2">
+                      <div class="input w-5/6">
+                        <mat-form-field
+                          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+                        >
+                          <input
+                            matInput
+                            formControlName="effort"
+                            placeholder="{{
+                              'effort.acknowledgmentOfEffort' | transloco
+                            }}"
+                          />
+                        </mat-form-field>
+                        <app-error-message
+                          [control]="efforts.controls[index].get('effort')"
+                          [textPattern]="
+                            'common.message.number_format'
+                              | transloco
+                                : {
+                                    filed:
+                                      'effort.acknowledgmentOfEffort'
+                                      | transloco
+                                  }
+                          "
+                        >
+                        </app-error-message>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    <div
+                      [innerHTML]="
+                        column.cellRenderer
+                          ? column.cellRenderer(row.value)
+                          : row.value[column.columnDef]
+                      "
+                      class="whitespace-nowrap"
+                    ></div>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </app-data-table> -->
+            <app-data-table
+              *ngIf="!isLoading && formGroup.get('id').value"
+              formArrayName="effortDetail"
+              [roleName]="_permissionCodeName"
+              [rows]="efforts.controls"
+              [columns]="columns"
+              [paginate]="false"
+              [limit]="searchModel.pageSize"
+              [count]="searchResult.totalRecords"
+              (action)="actionClick($event)"
+              (pageChange)="changePage($event)"
+              [rowTemplate]="rowTemplate"
+            >
+              <ng-template
+                #rowTemplate
+                let-row="row"
+                let-column="column"
+                let-index="index"
+              >
+                <ng-container [ngSwitch]="column.columnDef">
+                  <ng-container
+                    *ngSwitchCase="'fullName'"
+                    [formGroupName]="index"
+                  >
+                    <div class="field flex mt-2 mb-2">
+                      <div class="input w-5/6">
+                        <mat-form-field
+                          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+                        >
+                          <mat-select
+                            placeholder="{{ 'staff.staffName' | transloco }}"
+                            formControlName="fullName"
+                            (selectionChange)="onChange($event)"
+                          >
+                            <mat-option> </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <!-- <app-error-message
+                          [control]="efforts.controls[index].get('effort')"
+                          [textPattern]="
+                            'common.message.number_format'
+                              | transloco
+                                : {
+                                    filed:
+                                      'staff.staffName'
+                                      | transloco
+                                  }
+                          "
+                        >
+                        </app-error-message> -->
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container
+                    *ngSwitchCase="'role'"
+                    [formGroupName]="index"
+                  >
+                    <div class="field flex mt-2 mb-2">
+                      <div class="input w-6/6">
+                        <mat-form-field
+                          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+                        >
+                          <mat-select
+                            placeholder="{{ 'effort.role' | transloco }}"
+                            formControlName="role"
+                          >
+                            <mat-option> </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <!-- <app-error-message
+                          [control]="efforts.controls[index].get('effort')"
+                          [textPattern]="
+                            'common.message.number_format'
+                              | transloco
+                                : {
+                                    filed:
+                                      'staff.staffName'
+                                      | transloco
+                                  }
+                          "
+                        >
+                        </app-error-message> -->
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container
+                    *ngSwitchCase="'effort'"
+                    [formGroupName]="index"
+                  >
+                    <div class="field flex mt-2 mb-2">
+                      <div class="input w-5/6">
+                        <mat-form-field
+                          class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+                        >
+                          <input
+                            matInput
+                            formControlName="effort"
+                            placeholder="{{
+                              'effort.acknowledgmentOfEffort' | transloco
+                            }}"
+                          />
+                        </mat-form-field>
+                        <app-error-message
+                          [control]="efforts.controls[index].get('effort')"
+                          [textPattern]="
+                            'common.message.number_format'
+                              | transloco
+                                : {
+                                    filed:
+                                      'effort.acknowledgmentOfEffort'
+                                      | transloco
+                                  }
+                          "
+                        >
+                        </app-error-message>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    <div
+                      [innerHTML]="
+                        column.cellRenderer
+                          ? column.cellRenderer(row.value)
+                          : row.value[column.columnDef]
+                      "
+                      class="whitespace-nowrap"
+                    ></div>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </app-data-table>
+          </div>
+
+          <!-- DOANH THU-->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.turnover" | transloco }}</mat-label>
+              <input [formControlName]="'turnover'" matInput />
+            </mat-form-field>
+          </div>
+          <!-- CHI PHÍ-->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.cost" | transloco }}</mat-label>
+              <input [formControlName]="'cost'" matInput />
+            </mat-form-field>
+          </div>
+          <!-- HIỆU SUẤT-->
+          <div class="sm:col-span-1">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{ "effort.efficiency" | transloco }}</mat-label>
+              <input [formControlName]="'efficiency'" matInput />
+            </mat-form-field>
+          </div>
+          <!-- GHI CHÚ -->
+          <div class="sm:col-span-4">
+            <mat-form-field
+              class="fuse-mat-textarea fuse-mat-no-subscript w-full"
+            >
+              <mat-label>{{ "common.note" | transloco }}</mat-label>
+              <textarea
+                matInput
+                [formControlName]="'note'"
+                cdkTextareaAutosize
+                [cdkAutosizeMinRows]="5"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Divider -->
+      <!-- <div class="mt-11 mb-10 border-t"></div> -->
+    </form>
+  </div>
+  <!-- Actions -->
+  <div class="footer mt-6 flex justify-end">
+    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:x"
+      ></mat-icon>
+      <span>{{ "button.cancel" | transloco }}</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid"
+      (click)="save()"
+    >
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:check"
+      ></mat-icon>
+      <span>{{ "button.save" | transloco }}</span>
+    </button>
+  </div>
+</div>
