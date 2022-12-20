@@ -9,6 +9,7 @@ import { StaffService } from '@shared/services/staff.service';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { HandlerEditRoleComponent } from './handler-edit-role/handler-edit-role.component';
 import { HandlerAddRoleComponent } from './handler-add-role/handler-add-role.component';
+import { CommonUtilsService } from '@shared/common-utils.service';
 
 
 
@@ -45,11 +46,13 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       flex: 0.5,
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      flex: 0.5
+      flex: 0.5,
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
     },
     {
       columnDef: 'createdBy',
@@ -74,11 +77,13 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, public staffService: StaffService, public roleService: RoleManagementService) {
     super(injector, staffService);
+    
   }
 
 
   ngOnInit(): void {
     this.doSearch();
+  
   }
 
   doSearch() {

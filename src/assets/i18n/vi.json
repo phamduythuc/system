@@ -142,7 +142,7 @@
       "title": "Đối tác"
     },
     "project": {
-      "title": "Dự án",
+      "title": "Dự toán",
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
@@ -170,7 +170,17 @@
       }
     },
     "role": {
-      "title": "Vai trò"
+      "title": "Vai trò",
+      "roleInfo": "Thông tin vai trò",
+      "roleEdit": "Cập nhật vai trò",
+      "roleAdd": "Thêm mới vai trò",
+      "roleName":"Họ tên",
+      "roleDescription": "Mô tả",
+      "roleStatus": "Trạng thái",
+      "createdByRole":"Người tạo",
+      "createdDateRole": "Ngày chỉnh sửa",
+      "modifiedByRole":"Người chỉnh sửa",
+      "modifiedDateRole": "Ngày chỉnh sửa"
     }
   },
   "message": {

@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-handler-add-role',
   templateUrl: './handler-add-role.component.html',
-  styleUrls: ['./handler-add-role.component.scss']
+  styleUrls: ['./handler-add-role.component.scss'],
 })
 export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
@@ -24,7 +24,9 @@ export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
   ) {
     super(injector);
   }
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  handerSave() {
+    console.log(this.formGroup.value);
+    this.dialogRef.close();
   }
-
 }

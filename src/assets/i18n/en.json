@@ -169,7 +169,17 @@
       }
     },
     "role": {
-      "title": "Role"
+      "title": "Role",
+      "roleInfo": "Role Information",
+      "roleEdit":"Role Update",
+      "roleAdd": "Add Role",
+      "roleName":"Name",
+      "roleDescription": "Description",
+      "roleStatus": "Status",
+      "createdByRole":"Created By",
+      "createdDateRole": "Created Date",
+      "modifiedByRole":"Modified By ",
+      "modifiedDateRole": "Modified Date"
     }
   },
   "message": {

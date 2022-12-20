@@ -2,7 +2,7 @@
   <div class="header border-b flex justify-between items-center pb-3">
     <div class="w-full">
       <div class="text-2xl font-bold card-title capitalize">
-        Cập nhật vai trò
+        {{"hrm-management.role.roleEdit" | transloco}}
       </div>
     </div>
     <div>
@@ -31,7 +31,7 @@
           >
             <input
               class="w-full"
-              [placeholder]="'common.fullName' | transloco"
+              [placeholder]="('common.fullName' | transloco) +' ...'"
               formControlName="fullName"
               matInput
               trim="blur"
@@ -54,7 +54,7 @@
             >
               <input
                 class="w-full"
-                [placeholder]="'common.description' | transloco"
+                [placeholder]="('common.description' | transloco) +' ...'"
                 formControlName="description"
                 matInput
                 trim="blur"
@@ -73,7 +73,7 @@
             >
               <input
                 class="w-full"
-                [placeholder]="'common.status' | transloco"
+                [placeholder]="('common.status' | transloco) +' ...'"
                 formControlName="status"
                 matInput
                 trim="blur"
@@ -97,7 +97,7 @@
             >
               <input
                 class="w-full"
-                [placeholder]="'common.createdBy' | transloco"
+                [placeholder]="('common.createdBy' | transloco) +' ...'"
                 formControlName="createdBy"
                 matInput
                 trim="blur"
@@ -121,10 +121,10 @@
               </mat-datepicker-toggle>
               <mat-datepicker #startTime></mat-datepicker>
               </mat-form-field>
-            <app-error-message
+            <!-- <app-error-message
               [control]="formGroup.get('description')"
               [name]="'common.description' | transloco"
-            ></app-error-message>
+            ></app-error-message> -->
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@
             >
               <input
                 class="w-full"
-                [placeholder]="'common.modifiedBy' | transloco"
+                [placeholder]="('common.modifiedBy' | transloco)+' ...'"
                 formControlName="modifiedBy"
                 matInput
                 trim="blur"
@@ -157,17 +157,13 @@
           }}</label>
           <div class="input w-5/6">
             <mat-form-field class="fuse-mat-no-subscript w-full">
-              <input class=" " matInput [matDatepicker]="expectEndTime" datePickerFormat="DD/MM/YYYY"
-               formControlName="modifiedDate"
-                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
-              <mat-datepicker-toggle [for]="expectEndTime">
+              <input matInput formControlName="modifiedDate" [matDatepicker]="modifiedDate"
+                     datePickerFormat="DD/MM/YYYY">
+              <mat-datepicker-toggle [for]="modifiedDate">
               </mat-datepicker-toggle>
-              <mat-datepicker #expectEndTime></mat-datepicker>
+              <mat-datepicker #modifiedDate></mat-datepicker>
             </mat-form-field>
-            <app-error-message
-              [control]="formGroup.get('description')"
-              [name]="'common.description' | transloco"
-            ></app-error-message>
+            
           </div>
         </div>
       </div>

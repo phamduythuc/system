@@ -7,10 +7,10 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleManagementService  {
+export class RoleManagementService extends BaseService  {
 
-  constructor(private http: HttpClient) { 
-  
+  constructor(public http: HttpClient) { 
+    super(http, `${environment.apiUrl}/staff`);
   }
 
   
