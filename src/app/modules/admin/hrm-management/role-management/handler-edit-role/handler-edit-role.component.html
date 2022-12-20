@@ -114,17 +114,13 @@
             "common.createdDate" | transloco
           }}</label>
           <div class="input w-5/6">
-            <mat-form-field
-              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-            >
-              <input
-                class="w-full"
-                [placeholder]="'common.createdDate' | transloco"
-                formControlName="createdDate"
-                matInput
-                trim="blur"
-              />
-            </mat-form-field>
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <input class=" " matInput [matDatepicker]="startTime" datePickerFormat="DD/MM/YYYY"  formControlName="createdDate"
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
+              <mat-datepicker-toggle [for]="startTime">
+              </mat-datepicker-toggle>
+              <mat-datepicker #startTime></mat-datepicker>
+              </mat-form-field>
             <app-error-message
               [control]="formGroup.get('description')"
               [name]="'common.description' | transloco"
@@ -160,16 +156,13 @@
             "common.modifiedDate" | transloco
           }}</label>
           <div class="input w-5/6">
-            <mat-form-field
-              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-            >
-              <input
-                class="w-full"
-                [placeholder]="'common.modifiedDate' | transloco"
-                formControlName="modifiedDate"
-                matInput
-                trim="blur"
-              />
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <input class=" " matInput [matDatepicker]="expectEndTime" datePickerFormat="DD/MM/YYYY"
+               formControlName="modifiedDate"
+                     [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" >
+              <mat-datepicker-toggle [for]="expectEndTime">
+              </mat-datepicker-toggle>
+              <mat-datepicker #expectEndTime></mat-datepicker>
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('description')"

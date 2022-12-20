@@ -1,7 +1,8 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
+
 
 @Component({
   selector: 'app-handler-edit-role',
@@ -9,14 +10,16 @@ import { BaseComponent } from '@core/base.component';
   styleUrls: ['./handler-edit-role.component.scss'],
 })
 export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
+  date = '03/06/2026'
   formGroup = this.fb.group({
     fullName: [''],
     description: [''],
     status: [''],
     createdBy: [''],
-    createdDate: [''],
+    createdDate: new FormControl(new Date()),
     modifiedBy: [''],
-    modifiedDate: [''],
+    modifiedDate: new FormControl(new Date()),
+
   });
 
   constructor(
@@ -39,7 +42,7 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
       this.formGroup.controls.createdBy.setValue(this.data.data.createdBy);
       this.formGroup.controls.createdDate.setValue(this.data.data.createdDate);
       this.formGroup.controls.modifiedBy.setValue(this.data.data.modifiedBy);
-      this.formGroup.controls.modifiedDate.setValue(this.data.data.modifiedDate);
+      this.formGroup.controls.modifiedDate.setValue(this.date);
     }
   }
   save() {

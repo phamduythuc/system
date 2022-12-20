@@ -11,6 +11,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     SharedModule,
     FormsModule,
+    MatDatepickerModule
 
   ]
 })
