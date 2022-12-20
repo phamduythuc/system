@@ -1,8 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { CommonUtilsService } from '@shared/common-utils.service';
-import moment, {Moment} from 'moment';
+import { DashboardsProfileService } from '@shared/services/dashboards-profile.service';
+import moment, { Moment } from 'moment';
 
 @Component({
   selector: 'app-chart-profile-dashboards',
@@ -12,7 +20,6 @@ import moment, {Moment} from 'moment';
 export class ChartProfileDashboardsComponent implements OnInit {
   @Input() data: any;
   @Output() changeData = new EventEmitter<any>();
-
 
   options: any = {
     chart: {
@@ -35,23 +42,45 @@ export class ChartProfileDashboardsComponent implements OnInit {
   };
 
   formGroup = this._formBuilder.group({
-    startMonth: [moment().add(-7, 'month').startOf('month'),Validators.required],
-    endMonth: [moment().add(-7, 'month').startOf('month'),Validators.required],
+    startMonth: [
+      moment().add(-7, 'month').startOf('month'),
+      Validators.required,
+    ],
+    endMonth: [moment().add(-7, 'month').startOf('month'), Validators.required],
+    staffId: [503],
   });
 
-  random:any
+  random: any;
 
   constructor(
     private translocoService: TranslocoService,
     private _formBuilder: FormBuilder,
+    private DashboardsProfileService: DashboardsProfileService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.random = (Math.random() + 1).toString(36).substring(7);
-    this.options.series = this.data
+  
   }
 
   ngOnInit(): void {
+    this.data = [
+      {
+        name: 'KPI mục tiêu',
+        data: [],
+        type: 'effortExchange'
+      },
+      {
+        name: 'KPI đảm bảo',
+        data: [],
+        type: 'kpiTarget'
+      },
+      {
+        name: 'KPI thực tế',
+        data: [],
+        type: 'kpiInsure'
+      }
+    ];
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -60,7 +89,11 @@ export class ChartProfileDashboardsComponent implements OnInit {
     formTarget.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: any, formTarget): void {
+  chosenMonthHandler(
+    normalizedMonth: Moment,
+    datepicker: any,
+    formTarget
+  ): void {
     const ctrlValue = formTarget.value;
     ctrlValue.month(normalizedMonth.month());
     ctrlValue.date('1');
@@ -68,26 +101,67 @@ export class ChartProfileDashboardsComponent implements OnInit {
     datepicker.close();
   }
 
-  view(){
-    this.formGroup.value.startMonth=CommonUtilsService.dateToString(this.formGroup.value.startMonth)
-    this.formGroup.value.endMonth=CommonUtilsService.dateToString(this.formGroup.value.endMonth)
-    this.changeData.emit(this.formGroup.value)
+  view() {
+    this.formGroup.value.startMonth = CommonUtilsService.dateToString(
+      this.formGroup.value.startMonth
+    );
+    this.formGroup.value.endMonth = CommonUtilsService.dateToString(
+      this.formGroup.value.endMonth
+    );
+    this.changeData.emit(this.formGroup.value);
 
-    this.options.series = [
-      {
-        name: 'Berlin',
-        data: [
-          -0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,
-        ],
-      },
-      {
-        name: 'London',
-        data: [
-          3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8,
-        ],
-      },
-    ]
-    this.random = (Math.random() + 1).toString(36).substring(7);
+    this.DashboardsProfileService.getKPI(this.formGroup.value).subscribe(
+      (res: any) => {
+        if (res.data.length > 0) {
+          this.data = [
+            {
+              name: 'KPI mục tiêu',
+              data: [],
+              type: 'effortExchange'
+            },
+            {
+              name: 'KPI đảm bảo',
+              data: [],
+              type: 'kpiTarget'
+            },
+            {
+              name: 'KPI thực tế',
+              data: [],
+              type: 'kpiInsure'
+            }
+          ];
 
+          console.log(res.data);
+
+          this.renderKPI(res.data);
+          this.random = (Math.random() + 1).toString(36).substring(7);
+        } else {
+          this.options.series = [];
+        }
+      }
+    );
+  }
+
+  renderKPI(data: any) {
+    for (let i = 0; i < data.length; i++) {
+      this.data.map((x: any) => {
+        if (x.type == 'effortExchange') {
+          x.data.push(data[i].effortExchange);
+        }
+        if (x.type == 'kpiTarget') {
+          x.data.push(data[i].kpiTarget);
+        }
+        if (x.type == 'kpiInsure') {
+          x.data.push(data[i].kpiInsure);
+        }
+        return x;
+      });
+    }
+
+    this.data.map((x: any) => {
+      delete x['type'];
+    });
+    
+    this.options.series = this.data;
   }
 }

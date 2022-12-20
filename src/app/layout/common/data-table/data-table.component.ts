@@ -22,6 +22,7 @@ import {TranslocoService} from "@ngneat/transloco";
   encapsulation: ViewEncapsulation.None
 })
 export class DataTableComponent implements OnInit, OnChanges {
+  @Input() typeView: string | undefined = 'list';
 
 
   @Input() roleName: string;
@@ -109,6 +110,8 @@ export class DataTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
     this.getListActions();
+    console.log(this.typeView);
+    
   }
 
   changePage(e: any): void {

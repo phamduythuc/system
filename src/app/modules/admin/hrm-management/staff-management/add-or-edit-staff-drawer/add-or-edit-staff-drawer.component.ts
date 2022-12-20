@@ -78,7 +78,11 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Mã phòng ban
     departmentId: [null, Validators.required],
     //Chỗ ở hiện tại
-    domicile: [],
+    domicile: [null, Validators.required],
+    //Hộ khẩu thường trú
+    residence: [null, Validators.required],
+    //Hộ khẩu thường trú
+    isProduct: [false],
     //Cấp bậc giáo dục
     education: [],
     //Email cá nhân
@@ -140,37 +144,6 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     salary: [],
     file: [],
   });
-  // formGroup = this.fb.group({
-  //   fullName: [null, [Validators.required]],
-  //   gender: [null, [Validators.required]],
-  //   dateOfBirth: [null, [Validators.required]],
-  //   nationalId: [null, [Validators.required]],
-  //   ethnic: [null],
-  //   religion: [null],
-  //   educationLevel: [null],
-  //   staffStatus: [null, [Validators.required]],
-  //   phone: [null, [Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
-  //   emergencyUser: [null],
-  //   email: [null],
-  //   companyEmail: [null],
-  //   nationality: [null],
-  //   address: [null],
-  //   domicile: [null],
-  //   staffCode: [null],
-  //   idNhanVienChamCong: [],
-  //   imageUrl: [],
-  //   username: [null],
-  //   hireDate: [null],
-  //   staOfficalDate: [null],
-  //   leaveDate: [null],
-  //   seniority: [null],
-  //   workExperience: [null],
-  //   teamId: [null],
-  //   summary: [null],
-  //   createdDate: [null],
-  //   modifiedDate: [null],
-  //   file: []
-  // });
 
   constructor(injector: Injector,
               private staffService: StaffService,
@@ -209,6 +182,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   close() {
     this.drawer?.toggle();
   }
+
   convertBase64(imageUrl): void {
     if (imageUrl) {
       this.achievementService.downloadFile(imageUrl).subscribe(res1 => {
@@ -258,6 +232,16 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       reader.onload = () => {
         this.imageUrl = reader.result;
       };
+    }
+  }
+
+  toggle(){
+    if(!this.formGroup.value.isProduct){
+      this.formGroup.value.role = 0 
+      this.formGroup.patchValue(this.formGroup.value.role);
+    }else{
+      this.formGroup.value.role = null
+      this.formGroup.patchValue(this.formGroup.value.role);
     }
   }
 

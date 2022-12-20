@@ -111,4 +111,6 @@ export class SettingsComponent implements OnInit, OnDestroy
     {
         this._fuseConfigService.config = {theme};
     }
+
+    
 }

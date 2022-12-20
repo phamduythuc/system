@@ -3,6 +3,8 @@
   [dataSource]="rows"
   class="demo-table w-full"
   [class.table-fixed]="columnWidth"
+
+  *ngIf="typeView === 'list'"
 >
   <ng-container
     *ngFor="let column of columns"
@@ -60,8 +62,6 @@
 
         <ng-container *ngSwitchCase="'time_percent'">
           <span>{{ row[column.columnDef] }} %</span>
-          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
-          <!-- <input formControlName="salary" matInput readonly /> -->
 
         </ng-container>
 
@@ -112,6 +112,16 @@
     </ng-container>
   </tr>
 </table>
+<!-- 
+{{rows | json}}
+
+<div class="h-56 grid grid-cols-4 gap-4 content-start ...">
+  <ng-container *ngFor="let item of rows">
+    <div class="shadow-md">01</div>
+  </ng-container>
+
+</div> -->
+
 <mat-paginator
   *ngIf="paginate"
   [pageSizeOptions]="[5, 10, 20]"
