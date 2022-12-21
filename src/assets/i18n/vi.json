@@ -155,6 +155,8 @@
         "expectEndTime": "Tiến độ hoàn thành",
         "actualEndTime": "Ngày hoàn thành",
         "PointOfContact": "Đầu mối liên hệ",
+        "clueName": "Tên đầu mối",
+        "phoneNumber": "Số điện thoại",
         "contactPersonName": "Tên người liên hệ",
         "contactPersonPhone": "Điện thoại người liên hệ",
         "contactPersonEmail": "Email người liên hệ"

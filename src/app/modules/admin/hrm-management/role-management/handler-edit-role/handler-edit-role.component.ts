@@ -2,6 +2,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
+import { RoleManagementService } from '@shared/services/role-management.service';
 
 @Component({
   selector: 'app-handler-edit-role',
@@ -10,7 +11,7 @@ import { BaseComponent } from '@core/base.component';
 })
 export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
-    fullName: [''],
+    name: [''],
     description: [''],
     status: [''],
     createdBy: [''],
@@ -23,7 +24,7 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
 
 
 
-  constructor(
+  constructor( public roleSevice : RoleManagementService,
     public dialogRef: MatDialogRef<HandlerEditRoleComponent>,
     injector: Injector,
     @Inject(MAT_DIALOG_DATA) public formData: { data: any }
@@ -33,6 +34,7 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.formData.data);
     
   }
   updateForm() {
@@ -45,5 +47,10 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
     let valueForm = this.formGroup.getRawValue();
     console.log(valueForm);
     this.dialogRef.close();
+    const params = {
+      id: this.formData.data.id,
+      ...valueForm
+    }
+    this.roleSevice.updateRole(params).subscribe()
   }
 }

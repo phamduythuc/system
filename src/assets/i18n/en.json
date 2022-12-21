@@ -155,7 +155,9 @@
         "startTime": "Start time",
         "expectEndTime": "Expect end time",
         "actualEndTime": "Actual end time",
-        "PointOfContact": "Đầu mối liên hệ",
+        "PointOfContact": "Point of contact",
+        "clueName": "Clue Name",
+        "phoneNumber": "Phone Number",
         "contactPersonName": "Contact person name",
         "contactPersonPhone": "Contact person phone",
         "contactPersonEmail": "Contact person email"

@@ -1,6 +1,7 @@
 import { BaseComponent } from '@core/base.component';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RoleManagementService } from '@shared/services/role-management.service';
 
 @Component({
   selector: 'app-handler-add-role',
@@ -9,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
-    fullName: [''],
+    name: [''],
     description: [''],
     status: [''],
     createdBy: [''],
@@ -17,7 +18,7 @@ export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
     modifiedBy: [''],
     modifiedDate: [''],
   });
-  constructor(
+  constructor( public roleManagementService: RoleManagementService,
     public dialogRef: MatDialogRef<HandlerAddRoleComponent>,
     injector: Injector,
     @Inject(MAT_DIALOG_DATA) public data: { data: any }
@@ -25,8 +26,17 @@ export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
     super(injector);
   }
   ngOnInit(): void {}
+
   handerSave() {
     console.log(this.formGroup.value);
     this.dialogRef.close();
+    this.roleManagementService.createRole(this.formGroup.value).subscribe(
+      res => {
+        if (res.code === "00") {
+          // this.roleManagementService.getListAllRole().subscribe();
+        }
+      }
+    );
+    
   }
 }

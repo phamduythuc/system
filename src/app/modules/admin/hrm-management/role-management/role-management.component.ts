@@ -5,21 +5,19 @@ import { RoleManagementService } from './../../../../shared/services/role-manage
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
-import { StaffService } from '@shared/services/staff.service';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { HandlerEditRoleComponent } from './handler-edit-role/handler-edit-role.component';
 import { HandlerAddRoleComponent } from './handler-add-role/handler-add-role.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
-
-
+import { HandlerDeleteRoleComponent } from './handler-delete-role/handler-delete-role.component';
 
 @Component({
   selector: 'app-role-management',
   templateUrl: './role-management.component.html',
-  styleUrls: ['./role-management.component.scss']
+  styleUrls: ['./role-management.component.scss'],
 })
 export class RoleManagementComponent extends BaseComponent implements OnInit {
-  _permissionCodeName= 'DSNV';
+  _permissionCodeName = 'DSNV';
 
   columns: IColumn[] = [
     {
@@ -28,7 +26,7 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       flex: 0.3,
     },
     {
-      columnDef: 'fullName',
+      columnDef: 'name',
       header: 'common.fullName',
       flex: 0.5,
     },
@@ -46,13 +44,15 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       flex: 0.5,
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.createdDate),
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
       flex: 0.5,
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.modifiedDate),
     },
     {
       columnDef: 'createdBy',
@@ -67,28 +67,32 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'view','edit', 'delete'],
+      actions: ['view', 'edit', 'delete'],
       flex: 0.7,
-    }
+    },
   ];
   formSearch = this.fb.group({
     keyword: [''],
-  })
+  });
 
-  constructor(injector: Injector, public staffService: StaffService, public roleService: RoleManagementService) {
-    super(injector, staffService);
-    
+  constructor(injector: Injector, public roleService: RoleManagementService) {
+    super(injector, roleService);
   }
 
-
   ngOnInit(): void {
+    console.log(this.searchResult);
+    
     this.doSearch();
-  
+    this.roleService.getListAllRole().subscribe((role) => {});
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel,page:0 , ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
+    this.processSearch(this.searchModel);
   }
 
   actionClick(e: any): void {
@@ -96,11 +100,10 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       this.editHandlerclick(e.data);
     }
     if (e.type === 'delete') {
-      
       this.deleteHandlerclick(e.data.id);
     }
     if (e.type === 'view') {
-     this.viewHandlerclick(e.data);
+      this.viewHandlerclick(e.data);
     }
   }
 
@@ -112,24 +115,23 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       width: '60vw',
       height: 'auto',
       disableClose: false,
-    }
-    )
+    });
   }
 
   editHandlerclick(data) {
     this.showDialog(HandlerEditRoleComponent, {
-        data: {
-          data: data,
-        },
-        width: '60vw',
-        height: 'auto',
-        disableClose: false,
+      data: {
+        data: data,
+      },
+      width: '60vw',
+      height: 'auto',
+      disableClose: false,
     });
-}
-  deleteHandlerclick(id?: any) {
-    this.showDialog(ConfirmDialogComponent, {}, (value) => {
+  }
+  deleteHandlerclick(id: any) {
+    this.showDialog(HandlerDeleteRoleComponent, {}, (value) => {
       if (value) {
-        this.delete(id);
+        this.roleService.deleteRole(id).subscribe();
       }
     });
   }
@@ -138,6 +140,6 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       width: '60vw',
       height: 'auto',
       disableClose: false,
-});
-}
+    });
+  }
 }
