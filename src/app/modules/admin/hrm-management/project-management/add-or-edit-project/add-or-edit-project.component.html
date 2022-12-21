@@ -295,6 +295,7 @@
               trim="blur"
             ></textarea>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
         </div>
       </div>
 

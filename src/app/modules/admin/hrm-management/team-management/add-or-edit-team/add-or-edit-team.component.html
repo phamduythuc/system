@@ -84,6 +84,7 @@
               cdkTextareaAutosize
               [cdkAutosizeMinRows]="3"></textarea>
           </mat-form-field>
+          <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
 <!--          <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.</div>-->
         </div>
       </div>

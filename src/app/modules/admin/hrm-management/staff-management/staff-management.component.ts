@@ -6,6 +6,7 @@ import {StaffService} from '@shared/services/staff.service';
 import {AddOrEditStaffComponent} from './add-or-edit-staff/add-or-edit-staff.component';
 import {DetailsStaffComponent} from './details-staff/details-staff.component';
 import {StaffKpiComponent} from './staff-kpi/staff-kpi.component';
+import { ProfileDashboardsComponent } from '../../dashboards/profile-dashboards/profile-dashboards.component';
 
 @Component({
   selector: 'app-staff-management',
@@ -36,7 +37,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       flex: 0.5,
     },
     {
-      columnDef: 'positionId',
+      columnDef: 'positionNames',
       header: 'common.position',
     },
     {
@@ -114,12 +115,13 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   }
 
   showDetail(id){
-    this.showDialog(StaffKpiComponent, {
+    this.showDialog(ProfileDashboardsComponent, {
         data: {
           id
         },
         width: '60vw',
-        disableClose: true
+        height:'80vh',
+        disableClose: false
       }
     )
   }

@@ -13,7 +13,7 @@ export class AddOrEditPositionComponent extends BaseComponent implements OnInit 
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(50)]],
-    description: [null],
+    description: [null, Validators.maxLength(500)],
     status: [1, Validators.required],
   });
   constructor(injector: Injector,

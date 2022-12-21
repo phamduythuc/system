@@ -19,7 +19,8 @@ import * as Highcharts from 'highcharts';
 })
 export class ChartLineComponent implements OnInit, OnChanges {
   @Input() options: any;
-
+  @Input() random:any;
+  
   @ViewChild('charts') public chartEl: ElementRef;
 
   myOptions: Options = {
@@ -59,19 +60,11 @@ export class ChartLineComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // for (const propName in changes) {
-    //   if (changes.hasOwnProperty(propName)) {
-    //     switch (propName) {
-    //       case 'series': {
             if (this.ref) {
               this.ref.destroy();
             }
             this.myOptions = {...this.myOptions, ...this.options};
             this.drawChart();
-          // }
-        // }
-      // }
-    // }
   }
 
   ngOnInit(): void {

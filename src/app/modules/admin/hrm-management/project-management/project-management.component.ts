@@ -7,7 +7,6 @@ import {AddOrEditProjectComponent} from './add-or-edit-project/add-or-edit-proje
 import {DetailProjectComponent} from './detail-project/detail-project.component';
 import {ProjectEffortComponent} from './project-effort/project-effort.component';
 import {ProjectMemberComponent} from "./project-member/project-member.component";
-import { ProjectPhaseComponent } from './project-phase/project-phase.component';
 
 @Component({
   selector: 'app-project-management',
@@ -127,9 +126,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   }
 
   showConfigEffort(id){
-    // this.showDialog(ProjectEffortComponent, {
-    this.showDialog(ProjectPhaseComponent, {
-
+    this.showDialog(ProjectEffortComponent, {
         data: {
           id
         },

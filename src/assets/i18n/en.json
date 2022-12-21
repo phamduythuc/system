@@ -26,7 +26,6 @@
       "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
       "date_format": "Please enter in the format DD/MM/YYYY",
       "date_format_1": "You must specify the date format. Format: dd/MM/yyyy"
-
     },
     "title": {
       "create": "Create {{screenName}}",
@@ -95,7 +94,7 @@
     "homeTown": "Home town",
     "educationLevel": "Education Level",
     "salary": "Salary",
-    "noData":"No data"
+    "noData": "No data"
   },
   "setting": {
     "role": "Role",
@@ -164,7 +163,21 @@
       "projectMember": "List member"
     },
     "staff": {
-      "title": "Staff"
+      "title": "Staff",
+      "detail": {
+        "contract": {
+          "title": "Contract List",
+          "contract_code": "Contract code",
+          "contract": "Type of contract",
+          "duration": "Duration",
+          "startTime": "Effective from",
+          "salary": "Salary",
+          "link": "Link download"
+        }
+      },
+      "chartKPI": {
+        "title": "KPI by month"
+      }
     },
     "team": {
       "title": "Team",
@@ -235,9 +248,9 @@
     "commonDescription": "Description"
   },
   "staff_status": {
-      "official": "Official staff",
-      "unofficial": "UnOfficial staff",
-      "quit": "Quit job"
+    "official": "Official staff",
+    "unofficial": "UnOfficial staff",
+    "quit": "Quit job"
   },
   "religion": {
     "yes": "yes",
@@ -251,5 +264,39 @@
   "staff_kpi": {
     "startMonth": "Start month",
     "endMonth": "End month"
+  },
+  "dashboard": {
+    "profile": {
+      "breadcrumb": "Profile",
+      "tab": {
+        "detail": {
+          "title": "Profile"
+        },
+        "constact": {
+          "title": "Contract list"
+        },
+        "sprint": {
+          "title": "Information by sprint",
+          "month": "From month",
+          "from": "From month",
+          "to": "To month",
+          "salary": "Salary(VNĐ)",
+          "target_kpi": "Target KPI(MM)",
+          "salary_received": "Salary Received(VNĐ)",
+          "guaranteed_kpi": "Guaranteed KPI(MM)",
+          "reality_kpi": "Reality KPI (2,5MM)",
+          "project_code": "Project code",
+          "project_name": "Project name",
+          "recognize":"Recognize the effort(MM)",
+          "recognize_exchange": "Recognize exchange the effort(MM)",
+          "time_percent": "% time allocation",
+          "time_percent_err": "Time allocation is a required",
+          "time_percent_err_1": "Number should be between 0 and 100"
+        },
+        "chart": {
+          "title": "Chart KPI"
+        }
+      }
+    }
   }
 }

@@ -93,7 +93,7 @@
     "homeTown": "Nguyên quán",
     "educationLevel": "Trình độ học vấn",
     "salary": "Mức lương",
-    "noData":"Không có bản ghi nào"
+    "noData": "Không có bản ghi nào"
   },
   "setting": {
     "role": "Quyền",
@@ -164,6 +164,17 @@
     },
     "staff": {
       "title": "Nhân viên",
+      "detail": {
+        "contract": {
+          "title": "Danh sách hợp đồng",
+          "contract_code": "Mã hợp đồng",
+          "contract": "Loại hợp đồng",
+          "duration": "Kỳ hạn",
+          "startTime": "Có hiệu lực từ",
+          "salary": "Mức lương",
+          "link": "Link tải về"
+        }
+      },
       "chartKPI": {
         "title": "KPI theo tháng"
       }
@@ -236,9 +247,9 @@
     "commonDescription": "Mô tả"
   },
   "staff_status": {
-      "official": "Nhân viên chính thức",
-      "unofficial": "Nhân viên không chính thức",
-      "quit": "Nhân viên nghỉ việc"
+    "official": "Nhân viên chính thức",
+    "unofficial": "Nhân viên không chính thức",
+    "quit": "Nhân viên nghỉ việc"
   },
   "religion": {
     "yes": "Có",
@@ -252,6 +263,39 @@
   "staff_kpi": {
     "startMonth": "Tháng bắt đầu",
     "endMonth": "Tháng kết thúc"
+  },
+  "dashboard": {
+    "profile": {
+      "breadcrumb": "Thông tin cá nhân",
+      "tab": {
+        "detail": {
+          "title": "Thông tin cá nhân"
+        },
+        "constact": {
+          "title": "Danh sách hợp đồng"
+        },
+        "sprint": {
+          "title": "Thông tin theo sprint",
+          "month": "Tháng",
+          "from": "Từ tháng",
+          "to": "Đến tháng",
+          "salary": "Mức lương(VNĐ)",
+          "target_kpi": "KPI mục tiêu(MM)",
+          "salary_received": "Mức lương thực nhận(VNĐ)",
+          "guaranteed_kpi": "KPI đảm bảo(MM)",
+          "reality_kpi": "KPI phân bổ thực tế (2,5MM)",
+          "project_code": "Mã dự án",
+          "project_name": "Tên dự án",
+          "recognize":"Ghi nhận nỗ lực(MM)",
+          "recognize_exchange": "Nỗ lực quy đổi(MM)",
+          "time_percent": "% phân bổ thời gian",
+          "time_percent_err": "Phân bổ thời gian là trường bắt buộc",
+          "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100"
+        },
+        "chart": {
+          "title": "Biểu đồ KPI"
+        }
+      }
+    }
   }
-
 }
