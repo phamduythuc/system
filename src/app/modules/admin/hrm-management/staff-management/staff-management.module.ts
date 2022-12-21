@@ -6,6 +6,7 @@ import {SharedModule} from '@shared/shared.module';
 import {StaffManagementRoutingModule} from './staff-management-routing.module';
 import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 import { AddOrEditStaffDrawerComponent } from './add-or-edit-staff-drawer/add-or-edit-staff-drawer.component';
+import { DataTableModule } from '@layout/common/data-table/data-table.module';
 
 
 
@@ -21,6 +22,7 @@ import { AddOrEditStaffDrawerComponent } from './add-or-edit-staff-drawer/add-or
     ],
     imports: [
         CommonModule,
+        DataTableModule,
         StaffManagementRoutingModule,
         SharedModule,
     ]

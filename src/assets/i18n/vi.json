@@ -42,7 +42,7 @@
     "stt": "STT",
     "name": "Tên",
     "name_position": "Tên chức vụ",
-    "name_staff_level": "Tên cấp bậc",
+    "name_specialize": "Tên chuyên môn",
     "code": "Mã",
     "note": "Ghi chú",
     "phone": "Điện thoại",
@@ -93,12 +93,14 @@
     "homeTown": "Nguyên quán",
     "educationLevel": "Trình độ học vấn",
     "salary": "Mức lương",
-    "noData":"Không có bản ghi nào"
+    "noData": "Không có bản ghi nào"
   },
   "setting": {
     "role": "Quyền",
     "groupRole": "Phân quyền",
     "menu": "Danh mục",
+    "addGroupRole": "Thêm Nhóm Quyền Mới",
+    "editGroupRole": "Sửa Nhóm Quyền",
     "user": {
       "group": "Nhóm",
       "userList": "Danh sách người dùng",
@@ -132,8 +134,8 @@
         "parent": "Phòng ban trực thuộc"
       }
     },
-    "staffLevel": {
-      "title": "Cấp bậc"
+    "specialize": {
+      "title": "Chuyên môn"
     },
     "position": {
       "title": "Chức vụ"
@@ -146,15 +148,33 @@
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
+        "estimates": "Dự toán",
+        "price": "Đơn giá",
         "projectType": "Kiểu dự án",
         "startTime": "Ngày bắt đầu",
         "expectEndTime": "Tiến độ hoàn thành",
-        "actualEndTime": "Ngày hoàn thành"
+        "actualEndTime": "Ngày hoàn thành",
+        "PointOfContact": "Đầu mối liên hệ",
+        "contactPersonName": "Tên người liên hệ",
+        "contactPersonPhone": "Điện thoại người liên hệ",
+        "contactPersonEmail": "Email người liên hệ"
+
       },
       "projectMember": "Danh sách thành viên"
     },
     "staff": {
       "title": "Nhân viên",
+      "detail": {
+        "contract": {
+          "title": "Danh sách hợp đồng",
+          "contract_code": "Mã hợp đồng",
+          "contract": "Loại hợp đồng",
+          "duration": "Kỳ hạn",
+          "startTime": "Có hiệu lực từ",
+          "salary": "Mức lương",
+          "link": "Link tải về"
+        }
+      },
       "chartKPI": {
         "title": "KPI theo tháng"
       }
@@ -227,9 +247,9 @@
     "commonDescription": "Mô tả"
   },
   "staff_status": {
-      "official": "Nhân viên chính thức",
-      "unofficial": "Nhân viên không chính thức",
-      "quit": "Nhân viên nghỉ việc"
+    "official": "Nhân viên chính thức",
+    "unofficial": "Nhân viên không chính thức",
+    "quit": "Nhân viên nghỉ việc"
   },
   "religion": {
     "yes": "Có",
@@ -243,6 +263,39 @@
   "staff_kpi": {
     "startMonth": "Tháng bắt đầu",
     "endMonth": "Tháng kết thúc"
+  },
+  "dashboard": {
+    "profile": {
+      "breadcrumb": "Thông tin cá nhân",
+      "tab": {
+        "detail": {
+          "title": "Thông tin cá nhân"
+        },
+        "constact": {
+          "title": "Danh sách hợp đồng"
+        },
+        "sprint": {
+          "title": "Thông tin theo sprint",
+          "month": "Tháng",
+          "from": "Từ tháng",
+          "to": "Đến tháng",
+          "salary": "Mức lương(VNĐ)",
+          "target_kpi": "KPI mục tiêu(MM)",
+          "salary_received": "Mức lương thực nhận(VNĐ)",
+          "guaranteed_kpi": "KPI đảm bảo(MM)",
+          "reality_kpi": "KPI phân bổ thực tế (2,5MM)",
+          "project_code": "Mã dự án",
+          "project_name": "Tên dự án",
+          "recognize":"Ghi nhận nỗ lực(MM)",
+          "recognize_exchange": "Nỗ lực quy đổi(MM)",
+          "time_percent": "% phân bổ thời gian",
+          "time_percent_err": "Phân bổ thời gian là trường bắt buộc",
+          "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100"
+        },
+        "chart": {
+          "title": "Biểu đồ KPI"
+        }
+      }
+    }
   }
-
 }

@@ -1,0 +1,19 @@
+<!--  contract list  -->
+  <div class="content">
+    <!-- <div class="mb-2 text-base font-semibold uppercase">
+      {{ "hrm-management.staff.detail.contract.title" | transloco }}
+    </div> -->
+
+    <div class="data-table w-full mt-4">
+      <app-data-table-kpi
+      [roleName]="_permissionCodeName"
+      [rows]="data?.data"
+      [columns]="columns"
+      [paginate]="true"
+      [limit]="searchModel.pageSize"
+      [count]="data?.totalRecords"
+      (callback)="handleDataKPI($event)"
+    >
+    </app-data-table-kpi>
+    </div>
+  </div>

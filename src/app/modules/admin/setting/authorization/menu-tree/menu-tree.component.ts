@@ -72,7 +72,7 @@ export class MenuTreeComponent implements OnInit, OnChanges {
     parentChildObj.forEach(set => {
       itemsArray.push(new TreeviewItem(set))
     });
-    console.log(itemsArray)
+    // console.log(itemsArray)
     return itemsArray;
   }
 
@@ -83,7 +83,7 @@ export class MenuTreeComponent implements OnInit, OnChanges {
   getMenu(id?) {
     const data = {roleId:id}
     this.authorizationService.getMenus(data).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       if (res.code === '00') {
         const data = res.data.menus
         this.resultTreeData = data

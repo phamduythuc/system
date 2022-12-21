@@ -185,11 +185,9 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       this.getDetails(this.staffSelected, ({imageUrl}) => {
         this.convertBase64(imageUrl);
       });
-    }
+    } 
     this.getListRoleStaff();
-    this.getListStaffLevel();
-    this.getListPosition();
-    this.getListDepartment();
+
   }
   getListRoleStaff(){
     this.staffService.getRoleStaff(this.option).subscribe(res => {
@@ -198,24 +196,17 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
         this.listRoleStaff.forEach(item => item.roleId = Number(item.roleId));
       }
     });
-  }
-  getListPosition(): void {
     this.staffService.getListPosition(this.searchModel).subscribe(res => {
       this.listPositions = res.data;
     });
-  }
-
-  getListStaffLevel() {
     this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
       this.listStaffLevels = res.data;
     });
-  }
-
-  getListDepartment() {
     this.staffService.getListDepartment(this.searchModel).subscribe(res => {
       this.listDepartment = res.data;
     });
   }
+
 
   close() {
     this.drawer?.toggle();
