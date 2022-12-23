@@ -217,7 +217,7 @@
     "title": "Thông tin giai đoạn",
     "month": "Tháng",
     "spring": "Giai đoạn",
-    "estimate": "Ước lượng",
+    "effort_estimate": "Ước lượng nỗ lực",
     "customer_record": "Khách hàng chốt",
     "accept_date": "Ngày nghiệm thu",
     "effort_accept": "Nghiệm thu",

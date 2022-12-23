@@ -5,13 +5,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
-import {IColumn, IData} from '@layout/common/data-table/data-table.component';
+import {IColumn} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
 import {forkJoin} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
 import { AchievementService } from '@shared/services/achievement.service';
+import { StaffService } from '@shared/services/staff.service';
+import { SprintService } from '@shared/services/sprint.service';
 
 @Component({
   selector: 'app-project-effort',
@@ -24,9 +26,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
-  docUrl: any = '';
-
+  recordUrl: any = '';
+  staffNameTypes: any = [];
+  listStaff: any = [];
   isLoading: boolean = false;
+  listStaffLevels: any;
+  username:number;
 
   columns: IColumn[] = [
     {
@@ -40,7 +45,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       flex: 0.1,
     },
     {
-      columnDef: 'fullName',
+      columnDef: 'staffName',
       header: 'staff.staffName',
       flex: 0.2,
     },
@@ -66,43 +71,49 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       flex: 0.3
     },
     {
-      columnDef: 'action',
+      columnDef: 'actionCustom',
       header: 'common.actions',
       actions: [ 'delete'],
       flex: 0.1,
     }
   ];
 
+
   constructor(
     injector: Injector,
               private projectService: ProjectService,
               private effortService: EffortService,
+              private sprintService: SprintService,
+              private staffService: StaffService,
               public dialogRef: MatDialogRef<ProjectEffortComponent>,
               private achievementService: AchievementService,
               @Inject(MAT_DIALOG_DATA) public data
   ) {
-    super(injector, effortService);
+    super(injector, sprintService);
+    this.getListStaff();
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [],
       startDate: [month, Validators.required],
       estimate: ['', [Validators.required, Validators.pattern('^\\d+$')]],
-      price: [''],
-      percentCompelete: ['', Validators.required],
-      acknowledgmentOfEffort: [''],
-      acknowledgmentOfEffortChange: [''],
+      unitPrice: [''],
+      progress: ['', Validators.required],
+      // acceptanceEffort: [''], /* ???? */
+      acknowledgmentOfEffortChange: [''],  /* ???? */
       acceptanceEffort: ['', Validators.required],
       acceptanceDate: ['',  datePickerValidator()],
-      differenceEffort : [''],
-      cumulativeDifferenceMM : [''],
+      recordUrl:[''],
+      effortDifference : [''],
+      cumulativeDifference : [''],
       differenceVnd: [''],
       cumulativeDifferenceVnd: [''],
-      turnover: [''],
+      revenue: [''],
       cost:[''],
       efficiency: [''],
       note: [''],
       effortDetail: this.fb.array([])
     });
+
   }
 
   ngOnChange(): void {
@@ -110,52 +121,50 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.projectSelected && this.projectSelected !== -1) {
-      this.getDetails(this.projectSelected, ({docUrl}) => {
-        this.convertBase64(docUrl);
-      });
-    }
+    // if (this.projectSelected && this.projectSelected !== -1) {
+    //   this.getDetails(this.projectSelected, ({recordUrl}) => {
+    //     this.convertBase64(recordUrl);
+    //   });
+    // }
 
     this.loadEffortDetail(this.formGroup.get('startDate').value);
-    console.log(this.formGroup);
 
   }
-
-  onChange(data){}
 
   get efforts(): FormArray {
     return this.formGroup.get('effortDetail') as FormArray;
   }
 
   loadEffortDetail(month) {
-    const monthStr = CommonUtilsService.dateToString(month, false);
+    // const monthStr = CommonUtilsService.dateToString(month, false);
     const monthTimeStr = CommonUtilsService.dateToString(month, true, true);
-    const searchObj = {projectId: this.data.id, startDateFilter: monthTimeStr, month: monthStr};
+    const searchObj = {projectId: this.data.id, startDateFilter: monthTimeStr};
     this.isLoading = true;
     this.efforts.clear();
-    this.effortService.getStage(searchObj).subscribe(res => {
+    this.sprintService.getStage(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         this.formGroup.patchValue({
           id: res.data.id,
-          name: res.data.name,
-          estimate: res.data.estimate,
+          staffName: res.data.staffName,
+          roleName: res.data.roleName,
           effort: res.data.effort,
-          acceptanceDate: moment(res.data.acceptanceDate),
-          acceptanceEffort: res.data.acceptanceEffort,
-          note: res.data.note,
+          effortExchange: res.data.effortExchange,
+          percentEffort: res.data.percentEffort,
+
         });
+
       } else {
         this.formGroup.patchValue({
-          id: null,
-          estimate: null,
+          // id: null,
+          staffName: null,
+          roleName: null,
           effort: null,
-          acceptanceDate: null,
-          acceptanceEffort: null,
-          note: null,
+          effortExchange: null,
+          percentEffort: null,
         });
       }
     });
-    this.effortService.getMembers(searchObj).subscribe(res => {
+    this.sprintService.getMembers(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         res.data.forEach(item => this.efforts.push(this.newItem(item)));
         this.isLoading = false;
@@ -165,13 +174,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   newItem(data: any): FormGroup {
     return this.fb.group({
-      id: [data.id],
-      staffCode: [data.staffCode],
+      // id: [data.id],
       staffName: [data.staffName],
-      role: [data.role],
-      acknowledgmentOfEffortMM: [data.acknowledgmentOfEffortMM, [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      conversionEffort: [data.conversionEffort],
-      timeAllocation: [data.timeAllocation],
+      roleName: [data.roleName],
+      effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
+      effortExchange: [data.effortExchange],
+      percentEffort: [data.percentEffort]
     });
   }
 
@@ -184,6 +192,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     body.startDateFilter = CommonUtilsService.dateToString(body.startDate, true, true);
     body.startDate = CommonUtilsService.dateToString(body.startDate, false);
     body.acceptanceDate = CommonUtilsService.dateToString(body.acceptanceDate, false);
+    console.log(body);
     this.addOrEdit(body);
     return false;
   }
@@ -233,10 +242,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     return `Sprint tháng ${month.format(MONTH_FORMAT)}`;
   }
 
-  convertBase64(docUrl): void {
-    if (docUrl) {
-      this.achievementService.downloadFile(docUrl).subscribe(res1 => {
-        this.docUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
+  convertBase64(recordUrl): void {
+    if (recordUrl) {
+      this.achievementService.downloadFile(recordUrl).subscribe(res1 => {
+        this.recordUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
       });
     }
   }
@@ -248,11 +257,26 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       reader.readAsDataURL(file);
       this.formGroup.patchValue({file});
       reader.onload = () => {
-        this.docUrl = reader.result;
+        this.recordUrl = reader.result;
       };
     }
   }
 
   addNewRow(){
+    this.isLoading = true;
+    this.efforts.push(this.newItem({}));
+    setTimeout(() => {this.isLoading = false;}, 100);
+  }
+
+
+  getListStaff(){
+    this.staffService.search().subscribe(res=>{
+      this.listStaff = res.data;
+
+    })
+
+    this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
+      this.listStaffLevels = res.data;
+    });
   }
 }

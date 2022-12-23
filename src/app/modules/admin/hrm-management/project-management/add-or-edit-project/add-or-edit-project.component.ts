@@ -84,11 +84,11 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
             return x
           })
           console.log(this.projectData);
-          
+
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
-          this.formGroup.patchValue(this.projectData);          
+          this.formGroup.patchValue(this.projectData);
         }
       }else {
         this.showSnackBar(res.message,  'error');
@@ -113,8 +113,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   }
 
   save(data) {
-    console.log(data)
-
+    // console.log(data)
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime)
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime)
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime)

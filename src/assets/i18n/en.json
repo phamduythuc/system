@@ -217,7 +217,7 @@
     "title": "Stage Information",
     "month": "Month",
     "spring": "Spring",
-    "estimate": "Estimate",
+    "effort_estimate": "Effort estimate",
     "customer_record": "Customer record",
     "accept_date": "Acceptance date",
     "effort_accept": "Effort acceptance",
