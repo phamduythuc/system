@@ -1,0 +1,77 @@
+<ng-container *transloco="let t">
+  <div class="w-full h-full px-4">
+    <mat-card class="bg-card h-full">
+      <div [formGroup]="startDate">
+        <div class="w-80 h-full px-4 flex gap-5">
+          <div class="w-2/3">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{
+                "dashboard.profile.tab.sprint.month" | transloco
+              }}</mat-label>
+              <input
+                class=" "
+                matInput
+                [matDatepicker]="startMonth"
+                datePickerFormat="MM/YYYY"
+                [formControlName]="'startMonth'"
+                placeholder="Choose a date"
+              />
+              <mat-datepicker-toggle [for]="startMonth">
+              </mat-datepicker-toggle>
+              <mat-datepicker
+                #startMonth
+                startView="multi-year"
+                (yearSelected)="
+                  chosenYearHandler($event, startDate.get('startMonth'))
+                "
+                (monthSelected)="
+                  chosenMonthHandler(
+                    $event,
+                    startMonth,
+                    startDate.get('startMonth')
+                  )
+                "
+                panelClass="example-month-picker"
+              ></mat-datepicker>
+            </mat-form-field>
+            <app-error-message
+              [control]="startDate.get('startMonth')"
+              [name]="'dashboard.profile.tab.sprint.month' | transloco"
+            >
+            </app-error-message>
+          </div>
+          <div class="w-1/3 flex justify-end items-end">
+            <button
+              mat-raised-button
+              color="primary"
+              class="mr-3"
+              [disabled]="startDate.invalid"
+              (click)="view()"
+            >
+              <span>{{ "common.button.view" | transloco }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content mt-4 w-full">
+        <div class="data-table w-full mt-4">
+            <app-data-table-kpi
+            [roleName]="_permissionCodeName"
+            [rows]="searchResult?.data"
+            [columns]="columns"
+            [paginate]="true"
+            [limit]="searchModel.pageSize"
+            [count]="searchResult?.totalRecords"
+            [rowTemplate]="rowTemplate"
+            (callback)="handleDataKPI($event)"
+            (action)="actionClick($event)"
+            (pageChange)="changePage($event)"
+          >
+          </app-data-table-kpi>
+        </div>
+      </div>
+
+    </mat-card>
+  </div>
+</ng-container>

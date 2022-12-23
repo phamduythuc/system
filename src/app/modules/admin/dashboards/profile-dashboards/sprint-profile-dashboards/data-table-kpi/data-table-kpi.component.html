@@ -14,7 +14,40 @@
           <a href="{{ emp[column.columnDef] }}" download>Download</a>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'time_percent'">
+        <ng-container *ngSwitchCase="'percentEffort'" >
+          <!-- <span>{{ row[column.columnDef] }} %</span> -->
+          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
+          <div class="box-percent">
+            <input
+            required
+            #rateInput="ngModel"
+            [(ngModel)]="emp[column.columnDef]"
+            type="number"
+            [min]="0"
+            max="100"
+            matInput
+            (ngModelChange)="change()"
+            pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+            [ngClass]="{ err: rateInput.errors }"
+          />
+          %
+          </div>
+          <div
+            class="errors"
+            *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
+          >
+            <div [hidden]="!rateInput.errors.pattern">
+              <span>{{
+                "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+              }}</span>
+            </div>
+            <div [hidden]="!rateInput.errors.required">
+              {{ "dashboard.profile.tab.sprint.time_percent_err" | transloco }}
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'salaryActual'" >
           <!-- <span>{{ row[column.columnDef] }} %</span> -->
           <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
           <div class="box-percent">

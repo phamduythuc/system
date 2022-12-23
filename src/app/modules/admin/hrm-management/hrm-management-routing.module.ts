@@ -38,6 +38,16 @@ const routes: Routes = [
     loadChildren: () => import('app/modules/admin/hrm-management/team-management/team-management.module').then(m => m.TeamManagementModule),
     data: {breadcrumb: {label: 'hrm-management.team.title', url: 'hrm-management/team-management'}}
   },
+  {
+    path: 'contract-management',
+    loadChildren: () => import('app/modules/admin/hrm-management/contract-management/contract-management.module').then(m => m.ContractManagementModule),
+    data: {breadcrumb: {label: 'hrm-management.contract.title', url: 'hrm-management/contract-management'}}
+  },
+  {
+    path: 'salary-management',
+    loadChildren: () => import('app/modules/admin/hrm-management/salary-management/salary-management.module').then(m => m.SalaryManagementModule),
+    data: {breadcrumb: {label: 'hrm-management.contract.title', url: 'hrm-management/salary-management'}}
+  }
 ];
 
 @NgModule({

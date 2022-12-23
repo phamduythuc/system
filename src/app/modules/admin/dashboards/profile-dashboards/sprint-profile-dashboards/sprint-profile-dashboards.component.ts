@@ -1,21 +1,29 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { CommonUtilsService } from '@shared/common-utils.service';
-import moment, {Moment} from 'moment';
+import { DashboardsProfileService } from '@shared/services/dashboards-profile.service';
+import moment, { Moment } from 'moment';
 
 @Component({
   selector: 'app-sprint-profile-dashboards',
   templateUrl: './sprint-profile-dashboards.component.html',
-  styleUrls: ['./sprint-profile-dashboards.component.scss']
+  styleUrls: ['./sprint-profile-dashboards.component.scss'],
 })
 export class SprintProfileDashboardsComponent implements OnInit {
-  @Input() data:any
+  @Input() data: any;
 
   @Output() callback = new EventEmitter<any>();
 
-  searchModel:any
+  searchModel: any;
   _permissionCodeName = 'DSNV';
 
   columns: IColumn[] = [
@@ -24,55 +32,61 @@ export class SprintProfileDashboardsComponent implements OnInit {
       header: 'common.stt',
     },
     {
-      columnDef: 'project_code',
+      columnDef: 'projectId',
       header: 'dashboard.profile.tab.sprint.project_code',
     },
     {
-      columnDef: 'project_name',
+      columnDef: 'projectName',
       header: 'dashboard.profile.tab.sprint.project_name',
     },
     {
-      columnDef: 'recognize',
+      columnDef: 'effort',
       header: 'dashboard.profile.tab.sprint.recognize',
     },
     {
-      columnDef: 'recognize_exchange',
+      columnDef: 'effortExchange',
       header: 'dashboard.profile.tab.sprint.recognize_exchange',
     },
     {
-      columnDef: 'time_percent',
-      header: 'dashboard.profile.tab.sprint.time_percent'
+      columnDef: 'percentEffort',
+      header: 'dashboard.profile.tab.sprint.time_percent',
     },
   ];
 
   startDate = this._formBuilder.group({
-    startMonth: [moment().add(-7, 'month').startOf('month'),Validators.required],
+    startMonth: [
+      moment().add(-7, 'month').startOf('month'),
+      Validators.required,
+    ],
   });
 
   formGroup = this._formBuilder.group({
     salary: [''],
-    target_kpi: [''],
-    salary_received: [''],
-    guaranteed_kpi: [''],
+    kpiTarget: [''],
+    salaryActual: [''],
+    kpiInsure: [''],
   });
 
-  
-  constructor(private _formBuilder: FormBuilder,private translocoService:TranslocoService) { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private translocoService: TranslocoService,
+    private DashboardsProfileService:DashboardsProfileService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     // this.formGroup.patchValue(this.data);
-    this.data = this.data
-    this.formGroup.patchValue(this.data?.salary);
+    this.data = this.data;
+    // this.formGroup.patchValue(this.data?.salary);
   }
 
   ngOnInit(): void {
-    
     this.searchModel = {
       page: 0,
       pageSize: 10,
       status: 1,
       keyword: '',
     };
+    this.getData(new Date())
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -81,7 +95,11 @@ export class SprintProfileDashboardsComponent implements OnInit {
     formTarget.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: any, formTarget): void {
+  chosenMonthHandler(
+    normalizedMonth: Moment,
+    datepicker: any,
+    formTarget
+  ): void {
     const ctrlValue = formTarget.value;
     ctrlValue.month(normalizedMonth.month());
     ctrlValue.date('1');
@@ -89,17 +107,40 @@ export class SprintProfileDashboardsComponent implements OnInit {
     datepicker.close();
   }
 
-  view(){
-    this.startDate.value.startMonth=CommonUtilsService.dateToString(this.startDate.value.startMonth)
-    this.callback.emit(this.startDate.value.startMonth)
+getData(data){
+  this.DashboardsProfileService.getSprint({month: CommonUtilsService.dateToString(data, false)}).subscribe((res:any)=>{
+    this.data = {
+      data: res.data,
+      totalRecords: res.data.length,
+      extraData: res.extraData
+    } 
+    if(res.extraData){
+      this.formGroup.patchValue(res.extraData);
+    }else{
+      this.formGroup.patchValue({
+        salary: 0,
+        kpiTarget: 0,
+        salaryActual: 0,
+        kpiInsure: 0,
+      });
+    }
+  })
+}
+
+  view() {
+    this.startDate.value.startMonth = CommonUtilsService.dateToString(
+      this.startDate.value.startMonth
+    );
+    this.getData(this.startDate.value.startMonth)
+    // this.callback.emit(this.startDate.value.startMonth);
   }
 
-  handleDataKPI(data){
+  handleDataKPI(data) {
     console.log(data);
-    this.data.data = data
+    this.data.data = data;
   }
 
-  saveData(){
+  saveData() {
     console.log(this.data?.data);
   }
 }

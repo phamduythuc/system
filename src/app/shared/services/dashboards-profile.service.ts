@@ -22,4 +22,8 @@ export class DashboardsProfileService extends BaseService {
     return this.http.get(`${environment.apiUrl}/staff/kpi/397`, {params: data});
   }
 
+  getSprint(data): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/sprint/project-staff`, {params: data});
+  }
+
 }

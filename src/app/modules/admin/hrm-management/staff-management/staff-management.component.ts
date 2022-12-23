@@ -73,7 +73,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit', 'delete'],
+      actions: ['view', 'edit'],
       flex: 1.3,
     },
   ];

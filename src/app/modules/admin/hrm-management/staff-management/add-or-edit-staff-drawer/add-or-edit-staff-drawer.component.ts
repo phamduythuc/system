@@ -80,7 +80,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Chỗ ở hiện tại
     domicile: [null, Validators.required],
     //Hộ khẩu thường trú
-    residence: [null, Validators.required],
+    permanentResidence: [null, Validators.required],
     //Hộ khẩu thường trú
     isProduct: [false],
     //Cấp bậc giáo dục

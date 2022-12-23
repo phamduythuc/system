@@ -196,7 +196,7 @@
                       </mat-label>
                       <input disabled matInput>
                     </mat-form-field>
-                    <app-error-message [control]="formGroup.get('residence')"
+                    <app-error-message [control]="formGroup.get('emergencyUser')"
                                        [name]='"common.residence"|transloco'></app-error-message>
                   </div>
                 </div>
@@ -248,10 +248,10 @@
                   <mat-label>{{t('common.residence')}}
                     <!--                    Chỗ ở hiện tại/ residence-->
                   </mat-label>
-                  <input formControlName="residence"
+                  <input formControlName="permanentResidence"
                          matInput>
                 </mat-form-field>
-                <app-error-message [control]="formGroup.get('residence')"
+                <app-error-message [control]="formGroup.get('permanentResidence')"
                                    [name]='"common.residence"|transloco'></app-error-message>
               </div>
             </div>
