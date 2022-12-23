@@ -30,8 +30,13 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   staffNameTypes: any = [];
   listStaff: any = [];
   isLoading: boolean = false;
-  listStaffLevels: any;
+  listStaffLevels: any = [];
   username:number;
+
+  option = {
+    page: 0,
+    pageSize: 100,
+  };
 
   columns: IColumn[] = [
     {
@@ -50,7 +55,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       flex: 0.2,
     },
     {
-      columnDef: 'role',
+      columnDef: 'roleName',
       header: 'effort.role',
       flex: 0.1,
     },
@@ -60,7 +65,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       flex: 0.3,
     },
     {
-      columnDef: 'conversionEffort',
+      columnDef: 'effortExchange',
       header: 'effort.conversionEffort',
       flex: 0.3,
     },
@@ -73,7 +78,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'actionCustom',
       header: 'common.actions',
-      actions: [ 'delete'],
+      // actions: [ 'delete'],
       flex: 0.1,
     }
   ];
@@ -90,7 +95,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data
   ) {
     super(injector, sprintService);
-    this.getListStaff();
+    this.getStaff();
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [],
@@ -144,7 +149,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.sprintService.getStage(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         this.formGroup.patchValue({
-          id: res.data.id,
+          // id: res.data.id,
+          staffCode: res.data.staffCode,
           staffName: res.data.staffName,
           roleName: res.data.roleName,
           effort: res.data.effort,
@@ -156,6 +162,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       } else {
         this.formGroup.patchValue({
           // id: null,
+          staffCode: null,
           staffName: null,
           roleName: null,
           effort: null,
@@ -166,7 +173,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
     this.sprintService.getMembers(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
-        res.data.forEach(item => this.efforts.push(this.newItem(item)));
+        res.data.forEach(item =>{
+         this.efforts.push(this.newItem(item))});
         this.isLoading = false;
       }
     });
@@ -175,6 +183,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   newItem(data: any): FormGroup {
     return this.fb.group({
       // id: [data.id],
+      staffCode: [data.staffCode],
       staffName: [data.staffName],
       roleName: [data.roleName],
       effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
@@ -269,14 +278,16 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
 
-  getListStaff(){
+  getStaff(){
     this.staffService.search().subscribe(res=>{
       this.listStaff = res.data;
 
     })
 
-    this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
+    this.sprintService.getRoleStaff(this.option).subscribe(res => {
       this.listStaffLevels = res.data;
-    });
+      console.log(this.listStaffLevels);
+
+    })
   }
 }

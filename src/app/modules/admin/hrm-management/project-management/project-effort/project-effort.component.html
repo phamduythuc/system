@@ -66,8 +66,10 @@
             <mat-form-field
               class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
             >
-              <mat-label>{{ "effort.effort_estimate" | transloco }} (MM)</mat-label>
-              <input [formControlName]="'estimate'" type="number" matInput  />
+              <mat-label
+                >{{ "effort.effort_estimate" | transloco }} (MM)</mat-label
+              >
+              <input [formControlName]="'estimate'" type="number" matInput />
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('estimate')"
@@ -148,7 +150,11 @@
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.effort_accept" | transloco }}</mat-label>
-              <input [formControlName]="'acceptanceEffort'" type="number" matInput />
+              <input
+                [formControlName]="'acceptanceEffort'"
+                type="number"
+                matInput
+              />
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('acceptanceEffort')"
@@ -253,7 +259,11 @@
                 }}
                 (VND)</mat-label
               >
-              <input [formControlName]="'cumulativeDifferenceVnd'" type="number" matInput />
+              <input
+                [formControlName]="'cumulativeDifferenceVnd'"
+                type="number"
+                matInput
+              />
             </mat-form-field>
           </div>
         </div>
@@ -297,21 +307,24 @@
                 let-column="column"
                 let-index="index"
               >
-                <ng-container [ngSwitch]="column.columnDef" [formGroupName]="index">
+                <ng-container
+                  [ngSwitch]="column.columnDef"
+                  [formGroupName]="index"
+                >
                   <ng-container *ngSwitchCase="'staffName'">
-                    <div class="field flex mt-2 mb-2" >
+                    <div class="field flex mt-2 mb-2">
                       <div class="input w-5/6">
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
                           <mat-select
                             placeholder="{{ 'staff.staffName' | transloco }}"
-                            formControlName="'staffName'"
+                            formControlName="staffName"
                           >
-
                             <mat-option
-                              *ngFor="let staffNameTxt of listStaff " [value]="staffNameTxt.id"
-                              >{{staffNameTxt?.fullName}}
+                              *ngFor="let staffNameTxt of listStaff"
+                              [value]="staffNameTxt.fullName"
+                              >{{ staffNameTxt?.fullName }}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -319,9 +332,9 @@
                     </div>
                   </ng-container>
 
-                  <ng-container *ngSwitchCase="'role'">
+                  <ng-container *ngSwitchCase="'roleName'">
                     <div class="field flex mt-2 mb-2">
-                      <div class="input w-6/6">
+                      <div class="input w-5/6">
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
@@ -329,8 +342,11 @@
                             placeholder="{{ 'effort.role' | transloco }}"
                             formControlName="roleName"
                           >
-                            <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">
-                              {{item?.name}}
+                            <mat-option
+                              *ngFor="let item of listStaffLevels"
+                              [value]="item?.name"
+                            >
+                              {{ item?.name }}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -370,6 +386,13 @@
                     </div>
                   </ng-container>
 
+                  <ng-container *ngSwitchCase="'actionCustom'">
+                    <div class="field flex mt-2 mb-2">
+                      <div class="input w-6/6">
+                        xoa
+                      </div>
+                    </div>
+                  </ng-container>
                   <ng-container *ngSwitchDefault>
                     <div
                       [innerHTML]="
@@ -435,11 +458,7 @@
       ></mat-icon>
       <span>{{ "button.cancel" | transloco }}</span>
     </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="save()"
-    >
+    <button mat-raised-button color="primary" (click)="save()">
       <mat-icon
         class="icon-size-5 mr-2"
         svgIcon="heroicons_outline:check"

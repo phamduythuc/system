@@ -24,4 +24,8 @@ export class SprintService extends BaseService{
   getMembers(data): Observable<any> {
     return this.http.get(`${this.serviceUrl}/project/${data.projectId}/members` , {params: data});
   }
+
+  getRoleStaff(option): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/project-role?page=${option.page}&pageSize=${option.pageSize}`, option);
+  }
 }
