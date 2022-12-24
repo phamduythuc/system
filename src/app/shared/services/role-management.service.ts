@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 export class RoleManagementService extends BaseService  {
 
   constructor(public http: HttpClient) { 
-    super(http, `${environment.apiUrl}/project-role/all`);
+    super(http, `${environment.apiUrl}/project-role`);
   }
 
   createRole(formData: FormData): Observable<any> {
@@ -26,7 +26,7 @@ export class RoleManagementService extends BaseService  {
     return this.http.delete(`http://103.226.248.168:8089/api/project-role/${id}`);
   }
   getListAllRole(): Observable<any> {
-    return this.http.get<any>("http://103.226.248.168:8089/api/project-role/all");
+    return this.http.get<any>("http://103.226.248.168:8089/api/project-role");
   };
 
 }

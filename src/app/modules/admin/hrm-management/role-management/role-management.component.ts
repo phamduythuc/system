@@ -1,3 +1,4 @@
+import { messages } from './../../../../mock-api/common/messages/data';
 import { data } from 'autoprefixer';
 import { HandlerViewRoleComponent } from './handler-view-role/handler-view-role.component';
 
@@ -131,7 +132,16 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
   deleteHandlerclick(id: any) {
     this.showDialog(HandlerDeleteRoleComponent, {}, (value) => {
       if (value) {
-        this.roleService.deleteRole(id).subscribe();
+        this.roleService.delete(id).subscribe(
+          res => {
+            if(res.code == '00') {
+              this.showSnackBar(res.message, 'success');
+            }
+            else {
+              this.showSnackBar(res.message, 'error');
+            }
+          }
+        );
       }
     });
   }

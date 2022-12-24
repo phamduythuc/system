@@ -189,7 +189,7 @@ export class BaseComponent {
   delete(id: any): void {
     this.baseService.delete(id).subscribe((res) => {
       if (res.code === '00') {
-        this.showSnackBar('Xóa thành công', 'success');
+        this.showSnackBar(res.message, 'success');
         this.searchModel.page = 0;
         this.processSearch(this.searchModel);
       } else {
