@@ -1,111 +1,97 @@
+
+
 <ng-container *transloco="let t">
-  <div class="flex flex-col h-full">
-    <!--        header-->
-    <div class="header border-b flex justify-between items-center pb-3">
-      <div class="text-lx font-bold card-title">
-        {{ "hrm-management.staff.chartKPI.title" | transloco }}
-      </div>
-      <div>
-        <button
-          mat-icon-button
-          class="hover:bg-slate-200"
-          (click)="dialogRef.close()"
+  <div [formGroup]="formGroup">
+    <div class="grid sm:grid-cols-5 gap-6 w-full">
+      <div class="sm:col-span-2">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+          <mat-label>{{ "common.fromMonth" | transloco }}</mat-label>
+          <input
+            class=" "
+            matInput
+            [matDatepicker]="startMonth"
+            datePickerFormat="MM/YYYY"
+            [formControlName]="'startMonth'"
+            placeholder="Choose a date"
+          />
+          <mat-datepicker-toggle [for]="startMonth">
+          </mat-datepicker-toggle>
+          <mat-datepicker
+            #startMonth
+            startView="multi-year"
+            (yearSelected)="
+              chosenYearHandler($event, formGroup.get('startMonth'))
+            "
+            (monthSelected)="
+              chosenMonthHandler(
+                $event,
+                startMonth,
+                formGroup.get('startMonth')
+              )
+            "
+            panelClass="example-month-picker"
+          ></mat-datepicker>
+        </mat-form-field>
+        <app-error-message
+          [control]="formGroup.get('startMonth')"
+          [name]="'staff_kpi.startMonth' | transloco"
         >
-          <mat-icon
-            class="icon-size-5"
-            svgIcon="heroicons_outline:x"
-            title="Close"
-          ></mat-icon>
+        </app-error-message>
+      </div>
+      <div class="sm:col-span-2">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+          <mat-label>{{ "common.toMonth" | transloco }}</mat-label>
+          <input
+            class=" "
+            matInput
+            [min]="formGroup.value.endMonth"
+            [matDatepicker]="endMonth"
+            datePickerFormat="MM/YYYY"
+            [formControlName]="'endMonth'"
+            placeholder="Choose a date"
+          />
+          <mat-datepicker-toggle [for]="endMonth">
+          </mat-datepicker-toggle>
+          <mat-datepicker
+            #endMonth
+            startView="multi-year"
+            (yearSelected)="
+              chosenYearHandler($event, formGroup.get('endMonth'))
+            "
+            (monthSelected)="
+              chosenMonthHandler(
+                $event,
+                endMonth,
+                formGroup.get('endMonth')
+              )
+            "
+            panelClass="example-month-picker"
+          ></mat-datepicker>
+        </mat-form-field>
+        <app-error-message
+          [control]="formGroup.get('endMonth')"
+          [name]="'staff_kpi.endMonth' | transloco"
+        >
+        </app-error-message>
+      </div>
+      <div class="sm:col-span-1 flex justify-end items-end">
+        <button
+          mat-raised-button
+          color="primary"
+          class="mr-3"
+          [disabled]="formGroup.invalid"
+          (click)="draw()"
+        >
+          <span>{{ "common.button.view" | transloco }}</span>
         </button>
       </div>
     </div>
-    <!--        content-->
-    <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
-      <div class="grid sm:grid-cols-5 gap-6 w-full">
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{ "common.fromMonth" | transloco }}</mat-label>
-            <input
-              class=" "
-              matInput
-              [matDatepicker]="startMonth"
-              datePickerFormat="MM/YYYY"
-              [formControlName]="'startMonth'"
-              placeholder="Choose a date"
-            />
-            <mat-datepicker-toggle [for]="startMonth"> </mat-datepicker-toggle>
-            <mat-datepicker
-              #startMonth
-              startView="multi-year"
-              (yearSelected)="
-                chosenYearHandler($event, formGroup.get('startMonth'))
-              "
-              (monthSelected)="
-                chosenMonthHandler(
-                  $event,
-                  startMonth,
-                  formGroup.get('startMonth')
-                )
-              "
-              panelClass="example-month-picker"
-            ></mat-datepicker>
-          </mat-form-field>
-          <app-error-message
-            [control]="formGroup.get('startMonth')"
-            [name]="'staff_kpi.startMonth' | transloco"
-          >
-          </app-error-message>
-        </div>
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{ "common.toMonth" | transloco }}</mat-label>
-            <input
-              class=" "
-              matInput
-              [min]="formGroup.value.endMonth"
-              [matDatepicker]="endMonth"
-              datePickerFormat="MM/YYYY"
-              [formControlName]="'endMonth'"
-              placeholder="Choose a date"
-            />
-            <mat-datepicker-toggle [for]="endMonth"> </mat-datepicker-toggle>
-            <mat-datepicker
-              #endMonth
-              startView="multi-year"
-              (yearSelected)="
-                chosenYearHandler($event, formGroup.get('endMonth'))
-              "
-              (monthSelected)="
-                chosenMonthHandler($event, endMonth, formGroup.get('endMonth'))
-              "
-              panelClass="example-month-picker"
-            ></mat-datepicker>
-          </mat-form-field>
-          <app-error-message
-            [control]="formGroup.get('endMonth')"
-            [name]="'staff_kpi.endMonth' | transloco"
-          >
-          </app-error-message>
-        </div>
-        <div class="sm:col-span-1 flex justify-end items-end">
-          <button
-            mat-raised-button
-            color="primary"
-            class="mr-3"
-            [disabled]="formGroup.invalid"
-            (click)="draw()"
-          >
-            <span>{{ "common.button.view" | transloco }}</span>
-          </button>
-        </div>
-      </div>
-      <div class="h-full">
-        <app-chart-line
-          style="width: 200px"
-          [options]="options"
-          #chartChild
-        ></app-chart-line>
-      </div>
+    <div class="h-full">
+      <app-chart-line
+        style="width: 200px"
+        [options]="options"
+        #chartChild
+      ></app-chart-line>
     </div>
   </div>
 </ng-container>

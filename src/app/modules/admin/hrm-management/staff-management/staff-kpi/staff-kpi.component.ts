@@ -44,16 +44,64 @@ export class StaffKpiComponent extends BaseComponent implements OnInit {
     ],
   };
 
+  genders = [
+    {
+      name: this.translocoService.translate('gender.female'),
+      value: '1'
+    },
+    {
+      name: this.translocoService.translate('gender.male'),
+      value: '2'
+    },
+    {
+      name: this.translocoService.translate('gender.other'),
+      value: '3'
+    }
+  ];
+
   constructor(injector: Injector, private staffService: StaffService,
               public dialogRef: MatDialogRef<StaffKpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, staffService);
+
+    let dialogId = data?.id;
+    if (dialogId) {
+      this.getDetails(dialogId,()=>{
+        console.log(this.detailsData);
+        
+      });
+    }
     this.formGroup.patchValue({staffId: data?.id});
   }
 
   ngOnInit(): void {
-    // this.draw();
   }
+
+  // getListRoleStaff(){
+  //   this.staffService.getRoleStaff(this.option).subscribe(res => {
+  //     if (res.code === '00') {
+  //       this.listRoleStaff = res.data;
+  //       this.listRoleStaff.forEach(item => item.roleId = Number(item.roleId));
+  //     }
+  //   });
+  // }
+  // getListPosition(): void {
+  //   this.staffService.getListPosition(this.searchModel).subscribe(res => {
+  //     this.listPositions = res.data;
+  //   });
+  // }
+
+  // getListStaffLevel() {
+  //   this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
+  //     this.listStaffLevels = res.data;
+  //   });
+  // }
+
+  // getListDepartment() {
+  //   this.staffService.getListDepartment(this.searchModel).subscribe(res => {
+  //     this.listDepartment = res.data;
+  //   });
+  // }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
     const ctrlValue = formTarget.value;
