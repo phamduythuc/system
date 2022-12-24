@@ -1,20 +1,20 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
-import {IColumn} from '@layout/common/data-table/data-table.component';
-import {CommonUtilsService} from '@shared/common-utils.service';
-import {BaseComponent} from '@core/base.component';
-import {StaffService} from '@shared/services/staff.service';
-import {AddOrEditStaffComponent} from './add-or-edit-staff/add-or-edit-staff.component';
-import {DetailsStaffComponent} from './details-staff/details-staff.component';
-import {StaffKpiComponent} from './staff-kpi/staff-kpi.component';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { IColumn } from '@layout/common/data-table/data-table.component';
+import { CommonUtilsService } from '@shared/common-utils.service';
+import { BaseComponent } from '@core/base.component';
+import { StaffService } from '@shared/services/staff.service';
+import { AddOrEditStaffComponent } from './add-or-edit-staff/add-or-edit-staff.component';
+import { DetailsStaffComponent } from './details-staff/details-staff.component';
+import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 import { ProfileDashboardsComponent } from '../../dashboards/profile-dashboards/profile-dashboards.component';
 
 @Component({
   selector: 'app-staff-management',
   templateUrl: './staff-management.component.html',
-  styleUrls: ['./staff-management.component.scss']
+  styleUrls: ['./staff-management.component.scss'],
 })
 export class StaffManagementComponent extends BaseComponent implements OnInit {
-  _permissionCodeName= 'DSNV';
+  _permissionCodeName = 'DSNV';
 
   columns: IColumn[] = [
     {
@@ -43,46 +43,49 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'phone',
       header: 'common.phone',
-      flex: 0.5
+      flex: 0.5,
     },
     {
       columnDef: 'companyEmail',
-      header: 'common.companyEmail'
+      header: 'common.companyEmail',
     },
     {
       columnDef: 'salary',
-      header: 'common.salary'
+      header: 'common.salary',
     },
     {
       columnDef: 'dateOfBirth',
       header: 'common.dateOfBirth',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.dateOfBirth))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.dateOfBirth),
     },
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.createdDate),
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.modifiedDate),
     },
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'view','edit', 'delete'],
+      actions: ['view', 'edit', 'delete'],
       flex: 1.3,
-    }
+    },
   ];
   formSearch = this.fb.group({
     keyword: [''],
-  })
+  });
 
   paginate = {
     page: 0,
     size: 10,
-    total: 0
+    total: 0,
   };
   panelOpenState: false;
   @ViewChild('drawer') drawer: any;
@@ -98,8 +101,12 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel,page:0 , ...this.formSearch.value}
-    this.processSearch(this.searchModel)
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
+    this.processSearch(this.searchModel);
   }
 
   actionClick(e: any): void {
@@ -114,16 +121,15 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     }
   }
 
-  showDetail(id){
+  showDetail(id) {
     this.showDialog(ProfileDashboardsComponent, {
-        data: {
-          id
-        },
-        width: '60vw',
-        height:'80vh',
-        disableClose: false
-      }
-    )
+      data: {
+        id,
+      },
+      width: '60vw',
+      height: '80vh',
+      disableClose: false,
+    });
   }
 
   addOrEdit(id?: any): void {
@@ -155,7 +161,6 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     //       this.doSearch()
     //   });
     // }
-
 
     this.staffSelected = id;
     this.drawer.toggle();

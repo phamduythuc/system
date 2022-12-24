@@ -1,83 +1,104 @@
 <ng-container *transloco="let t">
-    <div class="w-full h-full px-4">
-      <mat-card class="bg-card h-full">
-        <div class="header border-b flex justify-between">
-          <div class="text-2xl font-bold card-title mb-3 capitalize">
-            {{t('hrm-management.role.title')}}
-          </div>
-          <div class="mb-2">
-            <button 
+  <div class="w-full h-full px-4">
+    <mat-card class="bg-card h-full">
+      <div class="header border-b flex justify-between">
+        <div class="text-2xl font-bold card-title mb-3 capitalize">
+          {{ t("hrm-management.role.title") }}
+        </div>
+        <div class="mb-2">
+          <button
             (click)="addHandlerclick()"
-            *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
-              >
-              <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-              {{t("button.new")}}
-            </button>
-          </div>
+            *hasAnyAuthority="_permissionCodeName + '_CREATE'"
+            mat-raised-button
+            color="primary"
+          >
+            <mat-icon
+              class="icon-size-6"
+              svgIcon="heroicons_outline:plus"
+            ></mat-icon>
+            {{ t("button.new") }}
+          </button>
         </div>
-        
-        <div class="search-group">
-          <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{t("common.search")}}
-                </mat-panel-title>
-              
-              </mat-expansion-panel-header>
-              <ng-container>
-                <div class="flex flex-col h-full">
-                 
-                  <form class="content overflow-auto flex justify-between flex-wrap" [formGroup]="formSearch">
-                    <div class="field flex-col w-full  p-4">
-                      <div class="input">
-                        <label class=" font-medium">{{t("common.keyword")}}</label>
-                        <mat-form-field
-                          class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
-                          <input class="w-full"
-                                 [placeholder]="('common.keyword' | transloco)+' ...'"
-                                 formControlName="keyword"
-                                 matInput trim='blur'>
-                        </mat-form-field>
-                      </div>
+      </div>
+
+      <div class="search-group">
+        <mat-accordion>
+          <mat-expansion-panel
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ t("common.search") }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container>
+              <div class="flex flex-col h-full">
+                <form
+                  class="content overflow-auto flex justify-between flex-wrap"
+                  [formGroup]="formSearch"
+                >
+                  <div class="field flex-col w-full p-4">
+                    <div class="input">
+                      <label class="font-medium">{{
+                        t("common.keyword")
+                      }}</label>
+                      <mat-form-field
+                        class="fuse-mat-no-subscript w-full sm:mt-0 bg-card"
+                      >
+                        <input
+                          class="w-full"
+                          [placeholder]="
+                            ('common.keyword' | transloco) + ' ...'
+                          "
+                          formControlName="keyword"
+                          matInput
+                          trim="blur"
+                        />
+                      </mat-form-field>
                     </div>
-  
-                    <div class="footer w-full flex justify-center">
-                      <button type="submit" mat-raised-button color="primary" class="mr-3" [disabled]="formSearch.invalid"
-                              (click)="doSearch()">
-        
-                        <mat-icon
-                          matPrefix
-                          class="icon-size-5"
-                          [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                        <span>{{t("common.search")}}</span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </ng-container>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-  
-        <div class="content mt-4 w-full">
-          <div class="data-table w-full mt-4 h-3/5">
-            <app-data-table
+                  </div>
+
+                  <div class="footer w-full flex justify-center">
+                    <button
+                      type="submit"
+                      mat-raised-button
+                      color="primary"
+                      class="mr-3"
+                      [disabled]="formSearch.invalid"
+                      (click)="doSearch()"
+                    >
+                      <mat-icon
+                        matPrefix
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:search'"
+                      ></mat-icon>
+                      <span>{{ t("common.search") }}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </ng-container>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <div class="content mt-4 w-full">
+        <div class="data-table w-full mt-4 h-3/5">
+          <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult.data||[]"
+            [rows]="searchResult.data || []"
             [columns]="columns"
             [paginate]="true"
             [(pageIndex)]="searchModel.page"
             [limit]="searchModel.pageSize"
             [count]="searchResult.totalRecords"
             (action)="actionClick($event)"
-            (pageChange)="changePage($event)">
+            (pageChange)="changePage($event)"
+          >
           </app-data-table>
-          </div>
         </div>
-      </mat-card>
-    </div>
-  </ng-container>
-  
-  
+      </div>
+    </mat-card>
+  </div>
+</ng-container>

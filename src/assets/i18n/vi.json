@@ -144,7 +144,7 @@
       "title": "Đối tác"
     },
     "project": {
-      "title": "Dự án",
+      "title": "Dự toán",
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
@@ -155,6 +155,8 @@
         "expectEndTime": "Tiến độ hoàn thành",
         "actualEndTime": "Ngày hoàn thành",
         "PointOfContact": "Đầu mối liên hệ",
+        "clueName": "Tên đầu mối",
+        "phoneNumber": "Số điện thoại",
         "contactPersonName": "Tên người liên hệ",
         "contactPersonPhone": "Điện thoại người liên hệ",
         "contactPersonEmail": "Email người liên hệ"
@@ -190,7 +192,17 @@
       }
     },
     "role": {
-      "title": "Vai trò"
+      "title": "Vai trò",
+      "roleInfo": "Thông tin vai trò",
+      "roleEdit": "Cập nhật vai trò",
+      "roleAdd": "Thêm mới vai trò",
+      "roleName":"Họ tên",
+      "roleDescription": "Mô tả",
+      "roleStatus": "Trạng thái",
+      "createdByRole":"Người tạo",
+      "createdDateRole": "Ngày chỉnh sửa",
+      "modifiedByRole":"Người chỉnh sửa",
+      "modifiedDateRole": "Ngày chỉnh sửa"
     }
   },
   "message": {

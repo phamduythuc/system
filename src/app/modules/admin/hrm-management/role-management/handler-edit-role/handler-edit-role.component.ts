@@ -2,7 +2,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
-
+import { RoleManagementService } from '@shared/services/role-management.service';
 
 @Component({
   selector: 'app-handler-edit-role',
@@ -10,43 +10,47 @@ import { BaseComponent } from '@core/base.component';
   styleUrls: ['./handler-edit-role.component.scss'],
 })
 export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
-  date = '03/06/2026'
   formGroup = this.fb.group({
-    fullName: [''],
+    name: [''],
     description: [''],
     status: [''],
     createdBy: [''],
-    createdDate: new FormControl(new Date()),
+    createdDate: new Date(),
     modifiedBy: [''],
-    modifiedDate: new FormControl(new Date()),
-
+    modifiedDate: new Date(),
   });
+  
 
-  constructor(
+
+
+
+  constructor( public roleSevice : RoleManagementService,
     public dialogRef: MatDialogRef<HandlerEditRoleComponent>,
     injector: Injector,
-    @Inject(MAT_DIALOG_DATA) public data: { data: any }
+    @Inject(MAT_DIALOG_DATA) public formData: { data: any }
   ) {
     super(injector);
     this.updateForm();
   }
 
   ngOnInit(): void {
+    console.log(this.formData.data);
     
   }
   updateForm() {
-    if (this.data.data) {
-      this.formGroup.controls.fullName.setValue(this.data.data.fullName);
-      this.formGroup.controls.description.setValue(this.data.data.description);
-      this.formGroup.controls.status.setValue(this.data.data.status);
-      this.formGroup.controls.createdBy.setValue(this.data.data.createdBy);
-      this.formGroup.controls.createdDate.setValue(this.data.data.createdDate);
-      this.formGroup.controls.modifiedBy.setValue(this.data.data.modifiedBy);
-      this.formGroup.controls.modifiedDate.setValue(this.date);
+    if (this.formData.data) {
+      this.handleCoverStringToDate(this.formData.data);
+      this.formGroup.patchValue(this.formData.data)
     }
   }
   save() {
     let valueForm = this.formGroup.getRawValue();
     console.log(valueForm);
+    this.dialogRef.close();
+    const params = {
+      id: this.formData.data.id,
+      ...valueForm
+    }
+    this.roleSevice.updateRole(params).subscribe()
   }
 }
