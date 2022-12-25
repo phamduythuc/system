@@ -28,14 +28,16 @@ export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   handerSave() {
-    console.log(this.formGroup.value);
     this.dialogRef.close();
     this.roleManagementService.createRole(this.formGroup.value).subscribe(
-      res => {
-        if (res.code === "00") {
-          // this.roleManagementService.getListAllRole().subscribe();
-        }
-      }
+       res => {
+            if(res.code == '00') {
+              this.showSnackBar(res.message, 'success');
+            }
+            else {
+              this.showSnackBar(res.message, 'error');
+            }
+          }
     );
     
   }

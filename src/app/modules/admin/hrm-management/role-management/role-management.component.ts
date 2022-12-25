@@ -34,7 +34,7 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'description',
       header: 'common.description',
-      flex: 0.7,
+      flex: 0.5,
     },
     {
       columnDef: 'status',
@@ -49,16 +49,16 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
         CommonUtilsService.dateToString(element.createdDate),
     },
     {
+      columnDef: 'createdBy',
+      header: 'common.createdBy',
+      flex: 0.5,
+    },
+    {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
       flex: 0.5,
       cellRenderer: (element: any) =>
         CommonUtilsService.dateToString(element.modifiedDate),
-    },
-    {
-      columnDef: 'createdBy',
-      header: 'common.createdBy',
-      flex: 0.5,
     },
     {
       columnDef: 'modifiedBy',
@@ -81,8 +81,6 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.searchResult);
-    
     this.doSearch();
     this.roleService.getListAllRole().subscribe((role) => {});
   }
@@ -120,36 +118,50 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
   }
 
   editHandlerclick(data) {
-    this.showDialog(HandlerEditRoleComponent, {
+    const dialog = this.showDialog(HandlerEditRoleComponent, {
       data: {
         data: data,
       },
       width: '60vw',
       height: 'auto',
       disableClose: false,
+    },(value) => {
+      this.roleService.getListAllRole().subscribe((res) => {
+        if (res.code == '00') {
+          this.doSearch();
+        }
+      });
     });
   }
   deleteHandlerclick(id: any) {
     this.showDialog(HandlerDeleteRoleComponent, {}, (value) => {
       if (value) {
-        this.roleService.delete(id).subscribe(
-          res => {
-            if(res.code == '00') {
-              this.showSnackBar(res.message, 'success');
-            }
-            else {
-              this.showSnackBar(res.message, 'error');
-            }
+        this.roleService.deleteRole(id).subscribe((res) => {
+          if (res.code == '00') {
+            this.showSnackBar(res.message, 'success');
+            this.doSearch();
+          } else {
+            this.showSnackBar(res.message, 'error');
           }
-        );
+        });
       }
     });
   }
   addHandlerclick() {
-    this.showDialog(HandlerAddRoleComponent, {
-      width: '60vw',
-      height: 'auto',
-      disableClose: false,
-    });
+    this.showDialog(
+      HandlerAddRoleComponent,
+      {
+        width: '60vw',
+        height: 'auto',
+        disableClose: false,
+      },
+      (value) => {
+        this.roleService.getListAllRole().subscribe((res) => {
+          if (res.code == '00') {
+            this.doSearch();
+          }
+        });
+      }
+    );
   }
 }

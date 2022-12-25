@@ -19,12 +19,9 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
     modifiedBy: [''],
     modifiedDate: new Date(),
   });
-  
 
-
-
-
-  constructor( public roleSevice : RoleManagementService,
+  constructor(
+    public roleSevice: RoleManagementService,
     public dialogRef: MatDialogRef<HandlerEditRoleComponent>,
     injector: Injector,
     @Inject(MAT_DIALOG_DATA) public formData: { data: any }
@@ -33,24 +30,26 @@ export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
     this.updateForm();
   }
 
-  ngOnInit(): void {
-    console.log(this.formData.data);
-    
-  }
+  ngOnInit(): void {}
   updateForm() {
     if (this.formData.data) {
       this.handleCoverStringToDate(this.formData.data);
-      this.formGroup.patchValue(this.formData.data)
+      this.formGroup.patchValue(this.formData.data);
     }
   }
   save() {
     let valueForm = this.formGroup.getRawValue();
-    console.log(valueForm);
     this.dialogRef.close();
     const params = {
       id: this.formData.data.id,
-      ...valueForm
-    }
-    this.roleSevice.updateRole(params).subscribe()
+      ...valueForm,
+    };
+    this.roleSevice.updateRole(params).subscribe((res) => {
+      if (res.code == '00') {
+        this.showSnackBar(res.message, 'success');
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+    });
   }
 }
