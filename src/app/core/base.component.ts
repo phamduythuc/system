@@ -75,7 +75,7 @@ export class BaseComponent {
       width: '30vw',
       ...options,
     });
-    ref
+    ref 
       .afterClosed()
       .pipe(take(1))
       .subscribe((value) => {
@@ -88,11 +88,11 @@ export class BaseComponent {
   }
 
   handleCoverTimeToString(data): void {
-    this.listTimeType.forEach((item) => {
-      if (data[item]) {
-        data[item] = CommonUtilsService.dateToString(data[item]);
-      }
-    });
+      this.listTimeType.forEach((item) => {
+        if (data[item]) {
+          data[item] = CommonUtilsService.dateToString(data[item]);
+        }
+      });
   }
 
   handleCoverStringToDate(data): void {
@@ -189,7 +189,7 @@ export class BaseComponent {
   delete(id: any): void {
     this.baseService.delete(id).subscribe((res) => {
       if (res.code === '00') {
-        this.showSnackBar('Xóa thành công', 'success');
+        this.showSnackBar(res.message, 'success');
         this.searchModel.page = 0;
         this.processSearch(this.searchModel);
       } else {

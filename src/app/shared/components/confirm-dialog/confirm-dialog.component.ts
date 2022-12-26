@@ -4,6 +4,7 @@ import {FormBuilder} from '@angular/forms';
 import {SettingService} from '../../../modules/admin/setting/setting.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
@@ -17,5 +18,5 @@ export class ConfirmDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }
