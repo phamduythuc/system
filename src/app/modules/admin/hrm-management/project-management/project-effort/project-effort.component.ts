@@ -30,7 +30,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   staffNameTypes: any = [];
   listStaff: any = [];
   isLoading: boolean = false;
-  listStaffLevels: any = [];
+  listStaffLevels: any ;
   username:number;
 
   option = {
@@ -99,14 +99,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [],
-      startDate: [month, Validators.required],
-      estimate: ['', [Validators.required, Validators.pattern('^\\d+$')]],
+      startDate: [month,Validators.required],
+      estimate: ['', [ Validators.pattern('^\\d+$')]],
       unitPrice: [''],
-      progress: ['', Validators.required],
+      progress: [''],
       // acceptanceEffort: [''], /* ???? */
       acknowledgmentOfEffortChange: [''],  /* ???? */
-      acceptanceEffort: ['', Validators.required],
-      acceptanceDate: ['',  datePickerValidator()],
+      acceptanceEffort: [''],
+      acceptanceDate: [''],
       recordUrl:[''],
       effortDifference : [''],
       cumulativeDifference : [''],
@@ -116,8 +116,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       cost:[''],
       efficiency: [''],
       note: [''],
+      file: [],
       effortDetail: this.fb.array([])
     });
+
 
   }
 
@@ -126,11 +128,11 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.projectSelected && this.projectSelected !== -1) {
-    //   this.getDetails(this.projectSelected, ({recordUrl}) => {
-    //     this.convertBase64(recordUrl);
-    //   });
-    // }
+    if (this.projectSelected && this.projectSelected !== -1) {
+      this.getDetails(this.projectSelected, ({recordUrl}) => {
+        this.convertBase64(recordUrl);
+      });
+    }
 
     this.loadEffortDetail(this.formGroup.get('startDate').value);
 
@@ -142,14 +144,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   loadEffortDetail(month) {
     // const monthStr = CommonUtilsService.dateToString(month, false);
-    const monthTimeStr = CommonUtilsService.dateToString(month, true, true);
-    const searchObj = {projectId: this.data.id, startDateFilter: monthTimeStr};
+    const monthTimeStr = CommonUtilsService.dateToString(month, false);
+    const searchObj = {projectId: this.data.id, startDate: monthTimeStr};
     this.isLoading = true;
     this.efforts.clear();
     this.sprintService.getStage(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         this.formGroup.patchValue({
-          // id: res.data.id,
+          // roleId: res.data.roleId,
           staffCode: res.data.staffCode,
           staffName: res.data.staffName,
           roleName: res.data.roleName,
@@ -161,7 +163,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
       } else {
         this.formGroup.patchValue({
-          // id: null,
+          // roleId: null,
           staffCode: null,
           staffName: null,
           roleName: null,
@@ -182,7 +184,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   newItem(data: any): FormGroup {
     return this.fb.group({
-      // id: [data.id],
+      // roleId: [data.roleId],
       staffCode: [data.staffCode],
       staffName: [data.staffName],
       roleName: [data.roleName],
@@ -193,17 +195,51 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   save() {
-    if (this.formGroup.invalid) {
-      this.formGroup.markAllAsTouched();
-      return;
-    }
-    const body = this.formGroup.value;
-    body.startDateFilter = CommonUtilsService.dateToString(body.startDate, true, true);
-    body.startDate = CommonUtilsService.dateToString(body.startDate, false);
-    body.acceptanceDate = CommonUtilsService.dateToString(body.acceptanceDate, false);
-    console.log(body);
-    this.addOrEdit(body);
-    return false;
+
+    const formData = new FormData();
+    const data = this.formGroup.value;
+    this.handleCoverTimeToString(data);
+    data.startDate = data.startDate && CommonUtilsService.dateToString(data.startDate);
+    data.projectId = this.data.id;
+    formData.append('file', this.formGroup.get('file').value || null);
+    formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    // console.log(data.startDate);
+
+      this.sprintService.create(formData).subscribe(res => {
+        if ('00' === res.code) {
+
+          this.showSnackBar(res.message, 'success');
+          // this.close();
+        } else {
+
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+
+    // if(this.staffSelected && this.staffSelected !== -1){
+    //   data.id = this.staffSelected;
+    //   formData.append('file', this.formGroup.get('file').value || null);
+    //   formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    //   this.staffService.updateStaff(formData).subscribe(res => {
+    //     if ('00' === res.code) {
+    //       this.showSnackBar(res.message, 'success');
+    //       this.close();
+    //     } else {
+    //       this.showSnackBar(res.message, 'error');
+    //     }
+    //   });
+    // }else{
+    //   formData.append('file', this.formGroup.get('file').value || null);
+    //   formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    //   this.sprintService.create(formData).subscribe(res => {
+    //     if ('00' === res.code) {
+    //       this.showSnackBar(res.message, 'success');
+    //       this.close();
+    //     } else {
+    //       this.showSnackBar(res.message, 'error');
+    //     }
+    //   });
+    // }
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -263,10 +299,11 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
       this.formGroup.patchValue({file});
       reader.onload = () => {
-        this.recordUrl = reader.result;
+        // this.recordUrl = reader.result;
+        this.recordUrl = file.name;
       };
     }
   }
@@ -279,15 +316,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
 
   getStaff(){
+    this.sprintService.getRoleStaff(this.option).subscribe(res => {
+      if (res.code === '00') {
+        this.listStaffLevels = res.data;
+        this.listStaffLevels.forEach(item =>
+          {
+            item.id = Number(item.id)
+          });
+      }
+    });
+
     this.staffService.search().subscribe(res=>{
       this.listStaff = res.data;
+    });
 
-    })
 
-    this.sprintService.getRoleStaff(this.option).subscribe(res => {
-      this.listStaffLevels = res.data;
-      console.log(this.listStaffLevels);
-
-    })
   }
 }

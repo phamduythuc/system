@@ -176,6 +176,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
               private staffService: StaffService,
               private achievementService: AchievementService,) {
     super(injector, staffService);
+    console.log(this.formGroup);
   }
 
   ngOnInit(): void {
@@ -183,10 +184,11 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       this.getDetails(this.staffSelected, ({imageUrl}) => {
         this.convertBase64(imageUrl);
       });
-    } 
+    }
     this.getListRoleStaff();
 
   }
+
   getListRoleStaff(){
     this.staffService.getRoleStaff(this.option).subscribe(res => {
       if (res.code === '00') {
@@ -209,6 +211,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   close() {
     this.drawer?.toggle();
   }
+
   convertBase64(imageUrl): void {
     if (imageUrl) {
       this.achievementService.downloadFile(imageUrl).subscribe(res1 => {

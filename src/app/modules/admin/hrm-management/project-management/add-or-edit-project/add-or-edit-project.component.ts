@@ -59,6 +59,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     if(this.dialogId){
       this.getDetails(this.dialogId);
     }
+    
   }
 
   ngOnInit(): void {

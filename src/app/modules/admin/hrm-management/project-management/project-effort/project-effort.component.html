@@ -69,9 +69,9 @@
               <mat-label
                 >{{ "effort.effort_estimate" | transloco }} (MM)</mat-label
               >
-              <input [formControlName]="'estimate'" type="number" matInput />
+              <input [formControlName]="'estimate'" type="text" matInput />
             </mat-form-field>
-            <app-error-message
+            <!-- <app-error-message
               [control]="formGroup.get('estimate')"
               [name]="'effort.effort_estimate' | transloco"
               [textPattern]="
@@ -79,7 +79,7 @@
                   | transloco : { filed: 'effort.estimate' | transloco }
               "
             >
-            </app-error-message>
+            </app-error-message> -->
           </div>
           <!-- ĐƠN GIÁ -->
           <div class="sm:col-span-1">
@@ -92,7 +92,7 @@
                 }}
                 (VND)</mat-label
               >
-              <input [formControlName]="'unitPrice'" type="number" matInput />
+              <input [formControlName]="'unitPrice'" type="text" matInput />
             </mat-form-field>
           </div>
           <!-- % HOÀN THÀNH -->
@@ -101,7 +101,7 @@
               class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
             >
               <mat-label>{{ "effort.percent_effort" | transloco }}</mat-label>
-              <input [formControlName]="'progress'" type="number" matInput />
+              <input [formControlName]="'progress'" type="text" matInput />
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('percentCompelete')"
@@ -120,7 +120,7 @@
                 }}
                 (MM)</mat-label
               >
-              <input [formControlName]="'acceptanceEffort'" type="number" matInput />
+              <input [formControlName]="'acceptanceEffort'" type="text" matInput />
             </mat-form-field>
           </div> -->
         </div>
@@ -140,7 +140,7 @@
                 (MM)</mat-label
               >
               <input
-                type="number"
+                type="text"
                 [formControlName]="'acknowledgmentOfEffortChange'"
                 matInput
               />
@@ -152,7 +152,7 @@
               <mat-label>{{ "effort.effort_accept" | transloco }}</mat-label>
               <input
                 [formControlName]="'acceptanceEffort'"
-                type="number"
+                type="text"
                 matInput
               />
             </mat-form-field>
@@ -168,7 +168,7 @@
               <mat-label>{{ "effort.accept_date" | transloco }}</mat-label>
               <input
                 matInput
-                type="number"
+                type="text"
                 [matDatepicker]="leaveDate"
                 datePickerFormat="DD/MM/YYYY"
                 [formControlName]="'acceptanceDate'"
@@ -177,28 +177,38 @@
               <mat-datepicker-toggle [for]="leaveDate"> </mat-datepicker-toggle>
               <mat-datepicker #leaveDate></mat-datepicker>
             </mat-form-field>
-            <app-error-message
+            <!-- <app-error-message
               [control]="formGroup.get('acceptanceDate')"
               [name]="'common.message.date_format' | transloco"
             >
-            </app-error-message>
+            </app-error-message> -->
           </div>
           <!-- UPLOAD FILE -->
           <div class="sm:col-span-1 uploadStyle">
             <div class="fuse-mat-no-subscript w-full">
+
               <input
                 type="file"
-                id="document"
                 name="document"
-                accept=".docx"
+                class="file-input"
                 (change)="uploadFile($event)"
+                #fileUpload
               />
-              <!-- <label
-                for="document"
-                class="flex justify-center items-center w-full h-full"
-              >
-                {{ imageUrl }}
-              </label> -->
+
+              <div class="file-upload">
+                <button
+                  mat-mini-fab
+                  color="primary"
+                  class="upload-btn"
+                  (click)="fileUpload.click()"
+                >
+                <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                </button>
+
+                {{ recordUrl || "No file uploaded yet." }}
+
+
+              </div>
             </div>
           </div>
         </div>
@@ -216,7 +226,7 @@
               >
               <input
                 [formControlName]="'effortDifference'"
-                type="number"
+                type="text"
                 matInput
               />
             </mat-form-field>
@@ -229,7 +239,7 @@
               >
               <input
                 [formControlName]="'cumulativeDifference'"
-                type="number"
+                type="text"
                 matInput
               />
             </mat-form-field>
@@ -244,7 +254,7 @@
               >
               <input
                 [formControlName]="'differenceVnd'"
-                type="number"
+                type="text"
                 matInput
               />
             </mat-form-field>
@@ -261,7 +271,7 @@
               >
               <input
                 [formControlName]="'cumulativeDifferenceVnd'"
-                type="number"
+                type="text"
                 matInput
               />
             </mat-form-field>
@@ -361,7 +371,7 @@
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
                           <input
-                            type="number"
+                            type="text"
                             matInput
                             formControlName="effort"
                             placeholder="{{
@@ -388,9 +398,7 @@
 
                   <ng-container *ngSwitchCase="'actionCustom'">
                     <div class="field flex mt-2 mb-2">
-                      <div class="input w-6/6">
-                        xoa
-                      </div>
+                      <div class="input w-6/6">xoa</div>
                     </div>
                   </ng-container>
                   <ng-container *ngSwitchDefault>
@@ -412,21 +420,21 @@
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.turnover" | transloco }}</mat-label>
-              <input [formControlName]="'revenue'" type="number" matInput />
+              <input [formControlName]="'revenue'" type="text" matInput />
             </mat-form-field>
           </div>
           <!-- CHI PHÍ-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.cost" | transloco }}</mat-label>
-              <input [formControlName]="'cost'" type="number" matInput />
+              <input [formControlName]="'cost'" type="text" matInput />
             </mat-form-field>
           </div>
           <!-- HIỆU SUẤT-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.efficiency" | transloco }}</mat-label>
-              <input [formControlName]="'efficiency'" type="number" matInput />
+              <input [formControlName]="'efficiency'" type="text" matInput />
             </mat-form-field>
           </div>
           <!-- GHI CHÚ -->
