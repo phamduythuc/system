@@ -53,7 +53,6 @@
           </div>
         </div>
       </div>
-
       <div class="content mt-4 w-full">
         <div class="data-table w-full mt-4">
             <app-data-table-kpi
@@ -71,7 +70,19 @@
           </app-data-table-kpi>
         </div>
       </div>
+      <div class="w-full flex justify-end items-end">
+        <button
+          mat-raised-button
+          color="primary"
+          class="mr-3"
+          [disabled]="startDate.invalid"
+          (click)="saveData()"
+        >
+          <span>{{ "button.save" | transloco }}</span>
+        </button>
+      </div>
 
     </mat-card>
   </div>
+  
 </ng-container>
