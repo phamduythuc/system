@@ -66,7 +66,9 @@
     "position": "Chức vụ",
     "companyEmail": "Email c.ty",
     "dateOfBirth": "Ngày sinh",
-    "country": "Quốc gia",
+    "country": "Quốc tịch",
+    "residence": "Hộ khẩu thường trú",
+    "isProductTeam": "Là nhóm sản phẩm",
     "cvUrl": "File CV",
     "domicile": "Chỗ ở hiện tại",
     "education": "Cấp bậc giáo dục",
@@ -106,6 +108,10 @@
       "userList": "Danh sách người dùng",
       "newGroup": "Nhóm mới",
       "newUser": "Thêm người dùng"
+    },
+    "typeView": {
+      "grid": "Dạng lưới",
+      "list": "Dạng danh sách"
     }
   },
   "button": {
@@ -160,7 +166,6 @@
         "contactPersonName": "Tên người liên hệ",
         "contactPersonPhone": "Điện thoại người liên hệ",
         "contactPersonEmail": "Email người liên hệ"
-
       },
       "projectMember": "Danh sách thành viên"
     },
@@ -190,6 +195,22 @@
         "addMember": "Thêm thành viên",
         "choose": "Chọn thành viên"
       }
+    },
+    "contract": {
+      "title": "Hợp đồng",
+      "label": "Hợp đồng & Lương",
+      "code": "Mã hợp đồng",
+      "type": "Loại hợp đồng",
+      "termPeriod": "Kỳ hạn",
+      "effDate": "Có hiệu lực từ",
+      "expDate": "Ngày hết hạn",
+      "signDate": "Ngày ký",
+      "salary": "Mức lương",
+      "insurance": "Bảo hiểm",
+      "link": "Link tải về"
+    },
+    "salary": {
+      "title": "Lương"
     },
     "role": {
       "title": "Vai trò",
@@ -273,7 +294,7 @@
         "detail": {
           "title": "Thông tin cá nhân"
         },
-        "constact": {
+        "contract": {
           "title": "Danh sách hợp đồng"
         },
         "sprint": {
@@ -288,7 +309,7 @@
           "reality_kpi": "KPI phân bổ thực tế (2,5MM)",
           "project_code": "Mã dự án",
           "project_name": "Tên dự án",
-          "recognize":"Ghi nhận nỗ lực(MM)",
+          "recognize": "Ghi nhận nỗ lực(MM)",
           "recognize_exchange": "Nỗ lực quy đổi(MM)",
           "time_percent": "% phân bổ thời gian",
           "time_percent_err": "Phân bổ thời gian là trường bắt buộc",

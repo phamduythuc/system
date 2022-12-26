@@ -1,0 +1,103 @@
+
+  
+
+  <ng-container *transloco="let t">
+    <div [formGroup]="startDate">
+      <div class=" w-full h-full px-4 ">
+        <div class="sm:col-span-2">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <mat-label>{{
+              "dashboard.profile.tab.sprint.month" | transloco
+            }}</mat-label>
+            <input
+              class=" "
+              matInput
+              [matDatepicker]="startMonth"
+              datePickerFormat="MM/YYYY"
+              [formControlName]="'startMonth'"
+              placeholder="Choose a date"
+            />
+            <mat-datepicker-toggle [for]="startMonth"> </mat-datepicker-toggle>
+            <mat-datepicker
+              #startMonth
+              startView="multi-year"
+              (yearSelected)="
+                chosenYearHandler($event, startDate.get('startMonth'))
+              "
+              (monthSelected)="
+                chosenMonthHandler(
+                  $event,
+                  startMonth,
+                  startDate.get('startMonth')
+                )
+              "
+              panelClass="example-month-picker"
+            ></mat-datepicker>
+          </mat-form-field>
+          <app-error-message
+            [control]="startDate.get('startMonth')"
+            [name]="'dashboard.profile.tab.sprint.month' | transloco"
+          >
+          </app-error-message>
+        </div>
+        <div class="sm:col-span-1 flex justify-end items-end">
+          <button
+            mat-raised-button
+            color="primary"
+            class="mr-3"
+            [disabled]="startDate.invalid"
+            (click)="view()"
+          >
+            <span>{{ "common.button.view" | transloco }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- <div class="data-table w-full mt-4">
+      <div class="mb-2 text-base font-semibold uppercase">
+        {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
+      </div>
+  
+      <div class="content mt-4 w-full">
+        <div class="data-table w-full mt-4">
+          <app-data-table
+            [roleName]="_permissionCodeName"
+            [rows]="searchResult.data || []"
+            [columns]="columns"
+            [paginate]="true"
+            [(pageIndex)]="searchModel.page"
+            [limit]="searchModel.pageSize"
+            [count]="searchResult.totalRecords"
+            [typeView]="typeView"
+            [rowTemplate]="rowTemplate"
+            (action)="actionClick($event)"
+            (pageChange)="changePage($event)"
+          >
+            <ng-template #rowTemplate let-row="row" let-column="column">
+              <ng-container [ngSwitch]="column.columnDef">
+                <ng-container *ngSwitchDefault>{{
+                  row[column.columnDef]
+                }}</ng-container>
+
+                <ng-container *ngSwitchCase="'contractFilePath'">
+                  <span
+                    class="cursor-pointer"
+                    (click)="download(row.contractFilePath)"
+                    >Download</span
+                  >
+                </ng-container>
+              </ng-container>
+            </ng-template>
+          </app-data-table>
+        </div>
+      </div>
+  
+      <div class="sm:col-span-1 flex justify-end items-end">
+        <button mat-raised-button color="primary" class="mr-3" (click)="saveData()">
+          <span>{{ "button.save" | transloco }}</span>
+        </button>
+      </div>
+    </div> -->
+  </ng-container>
+  

@@ -12,52 +12,55 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-import {SharedModule} from '@shared/shared.module';
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
-import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
+import { SharedModule } from '@shared/shared.module';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
+import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { HighchartsChartModule } from 'highcharts-angular';
 
-
 const routerConfig: ExtraOptions = {
-    // preloadingStrategy       : PreloadAllModules,
-    scrollPositionRestoration: 'enabled'
+  // preloadingStrategy       : PreloadAllModules,
+  scrollPositionRestoration: 'enabled',
 };
 
 @NgModule({
-    providers:[
-        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, verticalPosition: 'top', horizontalPosition: 'end'}}
-        ],
-    declarations: [
-        AppComponent,
-    ],
-    imports     : [
-        BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes, routerConfig),
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 2500,
+        verticalPosition: 'top',
+        horizontalPosition: 'end',
+      },
+    },
+  ],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes, routerConfig),
 
-        // Fuse, FuseConfig & FuseMockAPI
-        FuseModule,
-        FuseConfigModule.forRoot(appConfig),
-        FuseMockApiModule.forRoot(mockApiServices),
+    // Fuse, FuseConfig & FuseMockAPI
+    FuseModule,
+    FuseConfigModule.forRoot(appConfig),
+    FuseMockApiModule.forRoot(mockApiServices),
 
-        // Core module of your application
-        CoreModule,
+    // Core module of your application
+    CoreModule,
 
-        // Layout module of your application
-        LayoutModule,
+    // Layout module of your application
+    LayoutModule,
 
-        // 3rd party modules that require global configuration via forRoot
-        MarkdownModule.forRoot({}),
-        SharedModule,
-        MatSnackBarModule,
-      HighchartsChartModule,
-        MatSnackBarModule,
-      NgxTrimDirectiveModule,
-    ],
-    bootstrap   : [
-        AppComponent
-    ]
+    // 3rd party modules that require global configuration via forRoot
+    MarkdownModule.forRoot({}),
+    SharedModule,
+    MatSnackBarModule,
+    HighchartsChartModule,
+    MatSnackBarModule,
+    NgxTrimDirectiveModule,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule
-{
-}
+export class AppModule {}

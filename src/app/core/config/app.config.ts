@@ -5,6 +5,8 @@ export type Scheme = 'auto' | 'dark' | 'light';
 export type Screens = { [key: string]: string };
 export type Theme = 'theme-default' | string;
 export type Themes = { id: string; name: string }[];
+export type ViewType = 'grid' | 'list';
+
 
 /**
  * AppConfig interface. Update this interface to strictly type your config
@@ -18,6 +20,7 @@ export interface AppConfig
     theme: Theme;
     themes: Themes;
     language: string;
+    viewType: string;
 }
 
 /**
@@ -69,5 +72,6 @@ export const appConfig: AppConfig = {
             name: 'Amber'
         }
     ],
-    language: 'vi'
+    language: 'vi',
+    viewType: 'list',
 };

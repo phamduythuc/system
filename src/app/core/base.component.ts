@@ -28,7 +28,7 @@ export class BaseComponent {
     totalRecords: 0,
   };
   pageIndex: any;
-  listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate'];
+  listTimeType = ['createdDate', 'modifiedDate', 'expectEndTime', 'actualEndTime', 'dateOfBirth', 'leaveDate', 'staOfficalDate', 'hireDate', 'staDate', 'endDate','effDate','signDate','expDate'];
 
   public snackBar: MatSnackBar;
   public cdr: ChangeDetectorRef;
@@ -43,7 +43,8 @@ export class BaseComponent {
   constructor(
     injector: Injector,
     service?: BaseService,
-    dialogRef?: MatDialogRef<any>
+    dialogRef?: MatDialogRef<any>,
+    service1?: BaseService,
   ) {
     this.snackBar = injector.get(MatSnackBar);
     this.cdr = injector.get(ChangeDetectorRef);

@@ -94,4 +94,11 @@
   style="width: 100%"
   [options]="options"
   [random]="random"
+  *ngIf="this.options.series.length > 0"
 ></app-chart-line>
+
+<ng-container *transloco="let t" >
+  <div class="text-base font-semibold text-center mt-10 mb-10"  *ngIf="this.options.series.length == 0">
+    {{ t("common.noData") }}
+  </div>
+</ng-container>

@@ -113,7 +113,41 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSTV_DELETE,
           AuthoritiesConstant.DSTV_READ,
         ]
+      }
+    ]
+  },
+  {
+    id: 'hrmManagement',
+    title: 'hrm-management.contract.label',
+    type: 'group',
+    role: [AuthoritiesConstant.CONTRACT,],
+    children: [
+      {
+        id: 'contract',
+        title: 'hrm-management.contract.title',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/hrm-management/contract-management',
+        role: [
+          AuthoritiesConstant.CONTRACT,
+          AuthoritiesConstant.CONTRACT_CREATE,
+          AuthoritiesConstant.CONTRACT_UPDATE,
+          AuthoritiesConstant.CONTRACT_READ,
+        ]
       },
+      {
+        id: 'salary',
+        title: 'hrm-management.salary.title',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/hrm-management/salary-management',
+        role: [
+          AuthoritiesConstant.SALARY,
+          AuthoritiesConstant.SALARY_CREATE,
+          AuthoritiesConstant.SALARY_UPDATE,
+          AuthoritiesConstant.SALARY_READ,
+        ]
+      }
     ]
   },
   {

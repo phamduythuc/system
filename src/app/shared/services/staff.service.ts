@@ -13,6 +13,10 @@ export class StaffService extends BaseService {
     super(http, `${environment.apiUrl}/staff`);
   }
 
+  getListAllUser(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/staff`);
+  };
+
   createStaff(formData: FormData): Observable<any> {
     return this.http.post(`${environment.apiUrl}/staff/create`, formData)
   }

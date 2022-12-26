@@ -3,10 +3,9 @@ import { IColumn } from '@layout/common/data-table/data-table.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
 import { BaseComponent } from '@core/base.component';
 import { StaffService } from '@shared/services/staff.service';
-import { AddOrEditStaffComponent } from './add-or-edit-staff/add-or-edit-staff.component';
-import { DetailsStaffComponent } from './details-staff/details-staff.component';
-import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 import { ProfileDashboardsComponent } from '../../dashboards/profile-dashboards/profile-dashboards.component';
+import { FuseConfigService } from '@fuse/services/config';
+import { Theme, ViewType } from 'app/core/config/app.config';
 
 @Component({
   selector: 'app-staff-management',
@@ -74,7 +73,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit', 'delete'],
+      actions: ['view', 'edit'],
       flex: 1.3,
     },
   ];
@@ -87,12 +86,33 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     size: 10,
     total: 0,
   };
+
   panelOpenState: false;
+
   @ViewChild('drawer') drawer: any;
+
   staffSelected: any;
 
-  constructor(injector: Injector, public staffService: StaffService) {
+  list_type_view: any = [
+    {
+      type: 'list',
+      name: 'setting.typeView.list',
+    },
+    {
+      type: 'grid',
+      name: 'setting.typeView.grid',
+    },
+  ];
+
+  typeView = 'list';
+
+  constructor(
+    injector: Injector,
+    public staffService: StaffService,
+    private _fuseConfigService: FuseConfigService
+  ) {
     super(injector, staffService);
+    this.typeView = JSON.parse(localStorage.getItem('config')).viewType;
   }
 
   ngOnInit(): void {
@@ -171,5 +191,14 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       this.staffSelected = null;
       this.doSearch();
     }
+  }
+
+  /**
+   * Set the theme on the config
+   *
+   * @param viewType
+   */
+  setView(viewType: ViewType): void {
+    this._fuseConfigService.config = { viewType };
   }
 }

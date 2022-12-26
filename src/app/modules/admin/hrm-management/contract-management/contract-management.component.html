@@ -1,0 +1,105 @@
+<ng-container *transloco="let t">
+  <div class="w-full h-full px-4">
+    <mat-card class="bg-card h-full">
+      <div class="header border-b flex justify-between">
+        <div
+          class="text-2xl font-bold card-title mb-3 capitalize flex justify-between gap-5"
+        >
+          {{ t("hrm-management.contract.title") }}
+          <div class="flex justify-between gap-3 items-end">
+            <form
+              class="content overflow-hidden flex justify-between gap-3"
+              [formGroup]="formSearch"
+            >
+              <div class="field flex-col w-full">
+                <div class="input min-w-140">
+                  <!-- <label class=" font-medium">{{t("common.keyword")}}</label> -->
+                  <mat-form-field
+                    class="fuse-mat-no-subscript w-full sm:mt-0 bg-card"
+                  >
+                    <input
+                      class="w-full"
+                      [placeholder]="('common.keyword' | transloco) + ' ...'"
+                      formControlName="keyword"
+                      matInput
+                      trim="blur"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="w-full flex justify-center">
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="formSearch.invalid"
+                  (click)="doSearch()"
+                >
+                  <!--                                        <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>-->
+                  <mat-icon
+                    matPrefix
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:search'"
+                  ></mat-icon>
+                  <span>{{ t("common.search") }}</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- <mat-icon class="cursor-pointer" svgIcon="heroicons_outline:view-grid" (click)="setView('grid')"></mat-icon>
+              <mat-icon class="cursor-pointer" [svgIcon]="'heroicons_outline:view-list'" (click)="setView('list')"></mat-icon> -->
+        </div>
+        <div class="mb-2">
+          <button
+            *hasAnyAuthority="_permissionCodeName + '_CREATE'"
+            mat-raised-button
+            color="primary"
+            (click)="actionClick({type:'add'})"
+          >
+            <mat-icon
+              class="icon-size-6"
+              svgIcon="heroicons_outline:plus"
+            ></mat-icon>
+            {{ t("add-new") }}
+          </button>
+        </div>
+      </div>
+
+      <div class="content mt-4 w-full">
+        <div class="data-table w-full mt-4">
+          <app-data-table
+            [roleName]="_permissionCodeName"
+            [rows]="searchResult.data || []"
+            [columns]="columns"
+            [paginate]="true"
+            [(pageIndex)]="searchModel.page"
+            [limit]="searchModel.pageSize"
+            [count]="searchResult.totalRecords"
+            [typeView]="typeView"
+            [rowTemplate]="rowTemplate"
+            (action)="actionClick($event)"
+            (pageChange)="changePage($event)"
+          >
+            <ng-template #rowTemplate let-row="row" let-column="column">
+              <ng-container [ngSwitch]="column.columnDef">
+                <ng-container *ngSwitchDefault>{{
+                  row[column.columnDef]
+                }}</ng-container>
+
+                <ng-container *ngSwitchCase="'contractFilePath'">
+                  <span
+                    class="cursor-pointer"
+                    (click)="download(row.contractFilePath)"
+                    >Download</span
+                  >
+                </ng-container>
+              </ng-container>
+            </ng-template>
+          </app-data-table>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</ng-container>

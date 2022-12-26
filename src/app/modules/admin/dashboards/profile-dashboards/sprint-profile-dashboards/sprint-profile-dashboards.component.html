@@ -72,7 +72,7 @@
               <!--                        KPI mục tiêu / target_kpi-->
               {{ t("dashboard.profile.tab.sprint.target_kpi") }}
             </mat-label>
-            <input formControlName="target_kpi" matInput readonly />
+            <input formControlName="kpiTarget" matInput readonly />
           </mat-form-field>
         </div>
       </div>
@@ -84,7 +84,7 @@
               <!--                        Mức lương thực nhận / salary_received-->
               {{ t("dashboard.profile.tab.sprint.salary_received") }}
             </mat-label>
-            <input formControlName="salary_received" matInput readonly />
+            <input formControlName="salaryActual" matInput readonly />
           </mat-form-field>
         </div>
       </div>
@@ -96,7 +96,7 @@
               <!--                        KPI đảm bảo / guaranteed_kpi-->
               {{ t("dashboard.profile.tab.sprint.guaranteed_kpi") }}
             </mat-label>
-            <input formControlName="guaranteed_kpi" matInput readonly />
+            <input formControlName="kpiInsure" matInput readonly />
           </mat-form-field>
         </div>
       </div>
@@ -115,10 +115,20 @@
       [paginate]="true"
       [limit]="searchModel.pageSize"
       [count]="data?.totalRecords"
+      [rowTemplate]="rowTemplate"
       (callback)="handleDataKPI($event)"
       (action)="actionClick($event)"
       (pageChange)="changePage($event)"
+      
     >
+    <ng-template #rowTemplate let-row='row' let-column="column">
+      <ng-container [ngSwitch]="column.columnDef">
+        <ng-container *ngSwitchDefault>{{row[column.columnDef]}}</ng-container>
+        <ng-container *ngSwitchCase="'contractFilePath'">
+          <span class="cursor-pointer" (click)="download(row.contractFilePath)">Download</span>
+        </ng-container>
+      </ng-container>
+    </ng-template>
     </app-data-table-kpi>
 
     <div class="sm:col-span-1 flex justify-end items-end">
