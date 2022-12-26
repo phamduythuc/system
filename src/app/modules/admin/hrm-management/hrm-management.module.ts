@@ -19,6 +19,8 @@ import { UserModule } from '../setting/user/user.module';
 import { TeamManagementModule } from './team-management/team-management.module';
 import { FuseDrawerModule } from '../../../../@fuse/components/drawer';
 import { StaffManagementModule } from './staff-management/staff-management.module';
+import { RoleManagementModule } from './role-management/role-management.module';
+import { RoleManagementComponent } from './role-management/role-management.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { StaffManagementModule } from './staff-management/staff-management.modul
     ProjectManagementComponent,
     StaffManagementComponent,
     TeamManagementComponent,
+    RoleManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import { StaffManagementModule } from './staff-management/staff-management.modul
     TeamManagementModule,
     FuseDrawerModule,
     StaffManagementModule,
+    RoleManagementModule,
   ],
 })
 export class HrmManagementModule {}
