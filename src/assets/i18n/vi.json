@@ -217,7 +217,7 @@
       "roleInfo": "Thông tin vai trò",
       "roleEdit": "Cập nhật vai trò",
       "roleAdd": "Thêm mới vai trò",
-      "roleName":"Họ tên",
+      "roleName":"Tên vai trò",
       "roleDescription": "Mô tả",
       "roleStatus": "Trạng thái",
       "createdByRole":"Người tạo",
