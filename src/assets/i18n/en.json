@@ -3,7 +3,7 @@
     "vi": "Vietnamese",
     "en": "English"
   },
-  "sign-in": "Đăng nhập",
+  "sign-in": "Sign-in",
   "paging": {
     "visible": "Visible",
     "previous": "Previous page",
@@ -196,6 +196,22 @@
         "addMember": "Add member",
         "choose": "Choose member"
       }
+    },
+    "contract": {
+      "title": "Contract",
+      "label": "Contract & Salary",
+      "code": "Contract Code",
+      "type": "Type of contract",
+      "termPeriod": "Term",
+      "effDate": "Effective from",
+      "expDate": "Expiration date",
+      "signDate": "Sign day",
+      "salary": "Salary",
+      "insurance": "Insurance",
+      "link": "Link download"
+    },
+    "salary": {
+      "title": "Salary"
     },
     "role": {
       "title": "Role",

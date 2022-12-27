@@ -15,9 +15,7 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'percentEffort'" >
-          <!-- <span>{{ row[column.columnDef] }} %</span> -->
-          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
-          <div class="box-percent">
+          <form class="box-percent">
             <input
             required
             #rateInput="ngModel"
@@ -31,7 +29,7 @@
             [ngClass]="{ err: rateInput.errors }"
           />
           %
-          </div>
+          </form>
           <div
             class="errors"
             *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
@@ -48,22 +46,17 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'salaryActual'" >
-          <!-- <span>{{ row[column.columnDef] }} %</span> -->
-          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
-          <div class="box-percent">
-            <input
-            required
-            #rateInput="ngModel"
-            [(ngModel)]="emp[column.columnDef]"
-            type="number"
-            [min]="0"
-            max="100"
-            matInput
-            (ngModelChange)="change()"
-            pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-            [ngClass]="{ err: (rateInput.errors && (rateInput.dirty || rateInput.touched)) }"
-          />
-          %
+          <div class="input w-5/6">
+            <div  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+              <input
+              matInput
+              type="number"
+              class="w-1/2 input-custom"
+              #rateInput="ngModel"
+              [(ngModel)]="emp[column.columnDef]"
+              
+              (ngModelChange)="change()">
+            </div>
           </div>
           <div
             class="errors"

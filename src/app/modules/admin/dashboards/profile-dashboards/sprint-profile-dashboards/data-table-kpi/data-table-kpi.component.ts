@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,7 +26,16 @@ export class DataTableKpiComponent implements OnInit {
   get displayedColumns(): any {
     return this.columns.map((c) => c.columnDef);
   }
+  integer = '/^\d+$/'
+ 
+  salary = new FormControl('', [Validators.required, Validators.email]);
+  getErrorMessage() {
+    if (this.salary.hasError('required')) {
+      return 'You must enter a value';
+    }
 
+    return this.salary.hasError('email') ? 'Not a valid salary' : '';
+  }
 
   dataSource = new MatTableDataSource(this.rows);
   dataSourceWithPageSize = new MatTableDataSource(this.rows);
@@ -57,15 +67,9 @@ export class DataTableKpiComponent implements OnInit {
     this.dataSourceWithPageSize = new MatTableDataSource(this.rows);
     this.dataSource.paginator = this.paginator;
     this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
-    console.log(this.rows);
-    
   }
 
   change(){
-    this.callback.emit(this.rows)
-  }
-
-  saveData(){
     console.log(this.rows);
   }
 }

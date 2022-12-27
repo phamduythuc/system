@@ -76,7 +76,7 @@
           color="primary"
           class="mr-3"
           [disabled]="startDate.invalid"
-          (click)="saveData()"
+          (click)="saveData(searchResult?.data)"
         >
           <span>{{ "button.save" | transloco }}</span>
         </button>
