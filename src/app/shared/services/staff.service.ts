@@ -55,12 +55,9 @@ export class StaffService extends BaseService {
 
   // Api salary 
   getViewSalarybyMonth(params): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/salary/list`, {params: params});
+    return this.http.get(`${environment.apiUrl}/salary/get-by-month`, {params: params});
   }
   saveSalary(params): Observable<any> {
     return this.http.post(`${environment.apiUrl}/salary`, params);
-  }
-  getAllSalaryApi() {
-    return this.http.get('https://63a9451e100b7737b98d8158.mockapi.io/apifake/salary/salaryfake');
   }
 }

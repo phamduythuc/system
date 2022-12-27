@@ -82,7 +82,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'project',
         title: 'hrm-management.project.title',
         type: 'basic',
-        icon: 'heroicons_outline:clipboard-list',
+        icon: 'heroicons_outline:presentation-chart-line',
         link: '/hrm-management/project-management',
         role: [
           AuthoritiesConstant.DSDA_READ,
@@ -126,7 +126,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'contract',
         title: 'hrm-management.contract.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:clipboard-list',
         link: '/hrm-management/contract-management',
         role: [
           AuthoritiesConstant.CONTRACT,
@@ -139,7 +139,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'salary',
         title: 'hrm-management.salary.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:currency-dollar',
         link: '/hrm-management/salary-management',
         role: [
           AuthoritiesConstant.SALARY,

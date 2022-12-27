@@ -211,7 +211,13 @@
       "link": "Link download"
     },
     "salary": {
-      "title": "Salary"
+      "title": "Salary ",
+      "salaryVND": "Salary (VND)",
+      "salaryReceived": "Salary Received (VND)",
+      "time_percent_err": "Salary Received is required",
+      "time_percent_err_1": "Invalid salary",
+      "name": "Name",
+      "staffID": "Staff ID"
     },
     "role": {
       "title": "Role",

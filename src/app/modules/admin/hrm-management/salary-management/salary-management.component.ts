@@ -21,17 +21,22 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     },
     {
       columnDef: 'staffId',
-      header: 'hrm-management.staff.title',
+      header: 'hrm-management.salary.staffID',
+      flex: 1,
+    },
+    {
+      columnDef: 'fullName',
+      header: 'hrm-management.salary.name',
       flex: 1,
     },
     {
       columnDef: 'salary',
-      header: 'hrm-management.staff.detail.contract.salary',
+      header: 'hrm-management.salary.salaryVND',
       flex: 1,
     },
     {
       columnDef: 'salaryActual',
-      header: 'hrm-management.staff.detail.contract.salary',
+      header: 'hrm-management.salary.salaryReceived',
       flex: 1,
     },
   ];
@@ -44,354 +49,23 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     size: 10,
     total: 0,
   };
-
+ 
   listUser: any = [];
+  basicListUser: any = [];
 
   constructor(injector: Injector, public StaffService: StaffService) {
     super(injector, StaffService);
-    // this.searchResult.data = [
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 5,
-    //     staffId: 355,
-    //     code: 'CT5',
-    //     type: 1,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    //   {
-    //     id: 2,
-    //     staffId: 302,
-    //     code: 'CT2',
-    //     type: 2,
-    //     status: 1,
-    //     effDate: '2022-01-01T00:00:00Z',
-    //     expDate: '2023-01-01T00:00:00Z',
-    //     signDate: '2022-01-01T00:00:00Z',
-    //     salary: 100000000,
-    //     insurance: 500000.0,
-    //     termPeriod: 2,
-    //     contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-    //     createdDate: '2022-12-22T02:33:43Z',
-    //     modifiedDate: '2022-12-22T02:33:43Z',
-    //     createdBy: 'admin',
-    //     modifiedBy: null,
-    //   },
-    // ];
-    // this.searchResult.totalRecords = this.searchResult.data.length;
     this.getListUser();
   }
 
   ngOnInit(): void {
-    // this.searchModel.status = 1;
-    this.StaffService.getAllSalaryApi().subscribe((res) => {
-      if (res) {
-        this.searchResult.data = this.mapData(res);
-      }
-    });
+    this.searchModel.status = 1;
+    this.view();
   }
 
   mapData(data: any) {
     data.map((x) => {
-      x.salary = x.salary.toLocaleString() + ' đ';
-
+      x.salary = x.salary.toLocaleString();
       this.listUser.map((z) => {
         if (z.id == x.staffId) {
           x.staffId = z.fullName;
@@ -416,7 +90,6 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   getListUser() {
     this.StaffService.getListAllUser().subscribe((res: any) => {
       this.listUser = res.data;
-      this.searchResult.data = this.mapData(this.searchResult.data);
     });
   }
 
@@ -442,9 +115,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     datepicker.close();
   }
 
-  handleDataKPI(data) {
-    console.log(data);
-  }
+  handleDataKPI(data) {}
 
   view() {
     const month = CommonUtilsService.dateToString(
@@ -454,17 +125,32 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     const params = {
       month: month,
     };
-    this.StaffService.getViewSalarybyMonth(
-      params
-    ).subscribe((res) => {
+    this.StaffService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
-        this.searchResult.data = this.mapData([...res.data.data]);
-        // this.searchResult.data = [...res.data.data];
+        let convertData = res.data.map(obj => {
+          return  {
+            fullName: obj.fullName,
+            salaryActual: parseInt(obj.salaryActual),
+            salary: parseInt(obj.salary),
+            revenueMonth: obj.revenueMonth,
+            staffCode: obj.staffCode,
+            staffId :obj.staffId
+          }
+        })
+        this.searchResult.data = convertData;
       }
     });
   }
   saveData(e) {
-    console.log(this.startDate.value.startMonth._d);
+    const newObj = e.map((item) => {
+      const obj = {
+        staffId: item.staffId,
+        salaryActual: item.salaryActual,
+      };
+
+      return obj;
+    });
+
     const month = CommonUtilsService.dateToString(
       this.startDate.value.startMonth,
       false
@@ -472,11 +158,16 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
 
     const params = {
       revenueMonth: month,
-      listSalary: e,
+      listSalary: [...newObj],
     };
+    
     this.StaffService.saveSalary(params).subscribe((res) => {
       if (res.code === '00') {
-        console.log(res.data);
+        this.showSnackBar(res.message, 'success');
+        this.view();
+      }
+      else {
+        this.showSnackBar(res.message, 'error');
       }
     });
   }
