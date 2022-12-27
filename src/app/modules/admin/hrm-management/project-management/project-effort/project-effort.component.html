@@ -320,7 +320,7 @@
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
-                          <mat-select
+                          <!-- <mat-select
                             placeholder="{{ 'staff.staffName' | transloco }}"
                             formControlName="staffId"
                           >
@@ -328,6 +328,32 @@
                               *ngFor="let staffNameTxt of listStaff"
                               [value]="staffNameTxt.id"
                               >{{ staffNameTxt?.fullName }}
+                            </mat-option>
+                          </mat-select> -->
+                          <mat-select
+                            formControlName="staffId"
+                            placeholder="{{ 'staff.staffName' | transloco }}"
+                            #singleSelect
+                          >
+                            <mat-option>
+                              <ngx-mat-select-search
+                                [placeholderLabel]="'common.search' | transloco"
+                                (input)="searchStaff($event)"
+                              >
+                                <mat-icon
+                                  ngxMatSelectSearchClear
+                                  class="icon-size-5"
+                                  [svgIcon]="'heroicons_solid:x'"
+                                  matPrefix
+                                ></mat-icon>
+                              </ngx-mat-select-search>
+                            </mat-option>
+
+                            <mat-option
+                              *ngFor="let staffNameTxt of listStaff"
+                              [value]="staffNameTxt.id"
+                            >
+                              {{ staffNameTxt?.fullName }}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -372,7 +398,7 @@
                             }}"
                           />
                         </mat-form-field>
-                        <app-error-message
+                        <!-- <app-error-message
                           [control]="efforts.controls[index].get('effort')"
                           [textPattern]="
                             'common.message.number_format'
@@ -384,7 +410,7 @@
                                   }
                           "
                         >
-                        </app-error-message>
+                        </app-error-message> -->
                       </div>
                     </div>
                   </ng-container>
@@ -395,7 +421,7 @@
                         <button
                           mat-icon-button
                           class="mat-focus-indicator mat-icon-button mat-button-base ng-star-inserted"
-                          
+                          (click)="deleteRow(index)"
                         >
                           <mat-icon
                             class="icon-size-5"

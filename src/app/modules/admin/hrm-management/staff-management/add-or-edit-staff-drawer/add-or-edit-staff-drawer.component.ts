@@ -153,7 +153,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    console.log(this.formGroup);
+    console.log(this.staffSelected);
 
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({imageUrl}) => {
@@ -199,7 +199,7 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
- 
+
     if(this.staffSelected && this.staffSelected !== -1){
       data.id = this.staffSelected;
       formData.append('file', this.formGroup.get('file').value || null);

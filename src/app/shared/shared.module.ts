@@ -25,6 +25,7 @@ import { ChartLineComponent } from './charts/chart-line/chart-line.component';
 import {HighchartsChartModule} from 'highcharts-angular';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -39,6 +40,7 @@ export const MAT_MODULES = [
     MatMomentDateModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatAutocompleteModule
 ];
 
 @NgModule({

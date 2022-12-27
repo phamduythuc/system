@@ -7,7 +7,7 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
-import {forkJoin} from 'rxjs';
+import {forkJoin, map, Observable, startWith} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
@@ -21,9 +21,10 @@ import { SprintService } from '@shared/services/sprint.service';
   styleUrls: ['./project-effort.component.scss']
 })
 export class ProjectEffortComponent extends BaseComponent implements OnInit {
+  // filteredOptions: Observable<string[]>;
 
-  @Input() projectSelected: any;
 
+  projectSelected: any ;
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
   recordUrl: any = '';
@@ -31,7 +32,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   listStaff: any = [];
   isLoading: boolean = false;
   listStaffLevels: any ;
-  username:number;
 
   option = {
     page: 0,
@@ -98,7 +98,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.getStaff();
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
-      id: [],
+      id: [''],
       startDate: [month,Validators.required],
       estimate: ['', [ Validators.pattern('^\\d+$')]],
       unitPrice: [''],
@@ -126,12 +126,27 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   }
 
+
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.listStaff.filter(option => option.toLowerCase().includes(filterValue));
+  // }
+
   ngOnInit(): void {
-    if (this.projectSelected && this.projectSelected !== -1) {
-      this.getDetails(this.projectSelected, ({recordUrl}) => {
-        this.convertBase64(recordUrl);
-      });
-    }
+
+    // this.filteredOptions = this.formGroup.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
+
+    // if (this.projectSelected && this.projectSelected !== -1) {
+    //   this.getDetails(this.projectSelected, ({recordUrl}) => {
+    //     this.convertBase64(recordUrl);
+    //   });
+    // }
+
+    console.log(this.formGroup.value);
 
     this.loadEffortDetail(this.formGroup.get('startDate').value);
 
@@ -150,6 +165,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         this.formGroup.patchValue({
+          id: res.data.id,
           // acceptanceEffort: res.data.acceptanceEffort,
           unitPrice: res.data.unitPrice,
           progress: res.data.progress,
@@ -167,8 +183,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           estimate: res.data.estimate,
           roleId: res.data.roleId,
           staffId: res.data.staffId,
-          staffCode: res.data.staffCode,
-          staffName: res.data.staffName,
+          // staffCode: res.data.staffCode,
+          // staffName: res.data.staffName,
           roleName: res.data.roleName,
           effort: res.data.effort,
           effortExchange: res.data.effortExchange,
@@ -178,6 +194,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
       } else {
         this.formGroup.patchValue({
+          id: null,
           // acceptanceEffort: null,
           unitPrice: null,
           progress: null,
@@ -195,8 +212,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           estimate: null,
           roleId: null,
           staffId: null,
-          staffCode: null,
-          staffName: null,
+          // staffCode: null,
+          // staffName: null,
           roleName: null,
           effort: null,
           effortExchange: null,
@@ -216,12 +233,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   newItem(data: any): FormGroup {
     return this.fb.group({
-      roleId: [data.roleId],
       staffId: [data.staffId],
-      staffCode: [data.staffCode],
-      staffName: [data.staffName],
-      roleName: [data.roleName],
-      effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
+      roleId: [data.roleId],
+      // staffCode: [data.staffCode],
+      // staffName: [data.staffName],
+      // roleName: [data.roleName],
+      effort: [data.effort],
       effortExchange: [data.effortExchange],
       percentEffort: [data.percentEffort]
     });
@@ -230,48 +247,34 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   save() {
 
     const formData = new FormData();
-    const data = this.formGroup.value;
-    this.handleCoverTimeToString(data);
-    data.startDate = data.startDate && CommonUtilsService.dateToString(data.startDate);
-    data.projectId = this.data.id;
-    formData.append('file', this.formGroup.get('file').value || null);
-    formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+    const formValue = this.formGroup.value;
+    this.handleCoverTimeToString(formValue);
+    formValue.startDate = formValue.startDate && CommonUtilsService.dateToString(formValue.startDate);
+    formValue.projectId = this.data.id;
 
-      this.sprintService.create(formData).subscribe(res => {
+    formData.append('file', this.formGroup.get('file').value || null);
+    formData.append('data', new Blob([JSON.stringify(formValue)], {type: 'application/json'}));
+    if(formValue.id) {
+      this.sprintService.update(formData).subscribe(res => {
         if ('00' === res.code) {
 
           this.showSnackBar(res.message, 'success');
-          // this.close();
         } else {
 
           this.showSnackBar(res.message, 'error');
         }
       });
+    }else{
+      this.sprintService.create(formData).subscribe(res => {
+        if ('00' === res.code) {
 
-    // if(this.staffSelected && this.staffSelected !== -1){
-    //   data.id = this.staffSelected;
-    //   formData.append('file', this.formGroup.get('file').value || null);
-    //   formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    //   this.staffService.updateStaff(formData).subscribe(res => {
-    //     if ('00' === res.code) {
-    //       this.showSnackBar(res.message, 'success');
-    //       this.close();
-    //     } else {
-    //       this.showSnackBar(res.message, 'error');
-    //     }
-    //   });
-    // }else{
-    //   formData.append('file', this.formGroup.get('file').value || null);
-    //   formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    //   this.sprintService.create(formData).subscribe(res => {
-    //     if ('00' === res.code) {
-    //       this.showSnackBar(res.message, 'success');
-    //       this.close();
-    //     } else {
-    //       this.showSnackBar(res.message, 'error');
-    //     }
-    //   });
-    // }
+          this.showSnackBar(res.message, 'success');
+        } else {
+
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    }
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -362,6 +365,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       this.listStaff = res.data;
     });
 
+
+  }
+
+  deleteRow(index : number){
+    this.isLoading = true;
+    this.efforts.removeAt(index);
+    setTimeout(() => {this.isLoading = false;}, 100);
+  }
+
+  searchStaff(event:any){
+    // this.
+    console.log(this.listStaff.fullName);
+    this.listStaff.forEach(res => {
+      const v =  res.fullName.includes(event.target.value);
+    console.log(v);
+
+    })
 
   }
 }
