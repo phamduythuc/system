@@ -27,6 +27,6 @@ import { TranslocoModule } from '@ngneat/transloco';
         StaffManagementRoutingModule,
         TranslocoModule,
         SharedModule,
-    ]
+    ],
 })
 export class StaffManagementModule { }

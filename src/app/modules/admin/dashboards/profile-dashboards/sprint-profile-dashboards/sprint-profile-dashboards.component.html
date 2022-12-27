@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <div [formGroup]="startDate">
-    <div class="grid sm:grid-cols-5 gap-6 w-full">
+    <div class="grid sm:grid-cols-5 gap-6 w-full mb-4">
       <div class="sm:col-span-2">
         <mat-form-field class="fuse-mat-no-subscript w-full">
           <mat-label>{{
@@ -107,7 +107,6 @@
     <div class="mb-2 text-base font-semibold uppercase">
       {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
     </div>
-
     <app-data-table-kpi
       [roleName]="_permissionCodeName"
       [rows]="data?.data"

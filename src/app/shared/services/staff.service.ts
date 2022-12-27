@@ -53,4 +53,9 @@ export class StaffService extends BaseService {
     return this.http.get(`${environment.apiUrl}/role`, {params: option});
   }
 
+  getListTeam(searchData): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/team`, {params: searchData});
+  };
+
+
 }

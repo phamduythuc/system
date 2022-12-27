@@ -7,20 +7,7 @@ import { BaseComponent } from './base.component';
 @Injectable()
 export class GetListComponent extends BaseComponent {
 
-  type_contract = [
-    {
-      type: 1,
-      name: 'Hợp đồng lao động chính thức',
-    },
-    {
-      type: 2,
-      name: 'Hợp đồng cộng tác viên',
-    },
-    {
-      type: 3,
-      name: 'Hợp đồng thực tập sinh',
-    },
-  ];
+  type_contract:any = []
 
   constructor(
     injector: Injector,
