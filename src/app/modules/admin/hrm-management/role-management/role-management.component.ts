@@ -37,11 +37,6 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
       flex: 0.5,
     },
     {
-      columnDef: 'status',
-      header: 'common.status',
-      flex: 0.7,
-    },
-    {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       flex: 0.5,

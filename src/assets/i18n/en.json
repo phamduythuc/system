@@ -202,7 +202,7 @@
       "roleInfo": "Role Information",
       "roleEdit":"Role Update",
       "roleAdd": "Add Role",
-      "roleName":"Name",
+      "roleName":"Role Name",
       "roleDescription": "Description",
       "roleStatus": "Status",
       "createdByRole":"Created By",
