@@ -103,8 +103,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       estimate: ['', [ Validators.pattern('^\\d+$')]],
       unitPrice: [''],
       progress: [''],
-      // acceptanceEffort: [''], /* ???? */
-      acknowledgmentOfEffortChange: [''],  /* ???? */
+      // acceptanceEffort: [''], /* ???? Ghi nhan NL (NN) */
+      acknowledgmentOfEffortChange: [''],  /* ???? Ghi nhan NL quy doi (NN) */
       acceptanceEffort: [''],
       acceptanceDate: [''],
       recordUrl:[''],
@@ -119,7 +119,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       file: [],
       effortDetail: this.fb.array([])
     });
-
 
   }
 
@@ -148,10 +147,26 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const searchObj = {projectId: this.data.id, startDate: monthTimeStr};
     this.isLoading = true;
     this.efforts.clear();
-    this.sprintService.getStage(searchObj).subscribe(res => {
+    this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         this.formGroup.patchValue({
-          // roleId: res.data.roleId,
+          // acceptanceEffort: res.data.acceptanceEffort,
+          unitPrice: res.data.unitPrice,
+          progress: res.data.progress,
+          acknowledgmentOfEffortChange: res.data.acknowledgmentOfEffortChange,
+          acceptanceEffort: res.data.acceptanceEffort,
+          acceptanceDate: res.data.acceptanceDate,
+          effortDifference: res.data.effortDifference,
+          cumulativeDifference: res.data.cumulativeDifference,
+          differenceVnd: res.data.differenceVnd,
+          cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
+          revenue: res.data.revenue,
+          cost: res.data.cost,
+          efficiency: res.data.efficiency,
+          note: res.data.note,
+          estimate: res.data.estimate,
+          roleId: res.data.roleId,
+          staffId: res.data.staffId,
           staffCode: res.data.staffCode,
           staffName: res.data.staffName,
           roleName: res.data.roleName,
@@ -163,7 +178,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
       } else {
         this.formGroup.patchValue({
-          // roleId: null,
+          // acceptanceEffort: null,
+          unitPrice: null,
+          progress: null,
+          acknowledgmentOfEffortChange: null,
+          acceptanceEffort: null,
+          acceptanceDate: null,
+          effortDifference: null,
+          cumulativeDifference: null,
+          differenceVnd: null,
+          cumulativeDifferenceVnd: null,
+          revenue: null,
+          cost: null,
+          efficiency: null,
+          note: null,
+          estimate: null,
+          roleId: null,
+          staffId: null,
           staffCode: null,
           staffName: null,
           roleName: null,
@@ -173,6 +204,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         });
       }
     });
+
     this.sprintService.getMembers(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
         res.data.forEach(item =>{
@@ -184,7 +216,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   newItem(data: any): FormGroup {
     return this.fb.group({
-      // roleId: [data.roleId],
+      roleId: [data.roleId],
+      staffId: [data.staffId],
       staffCode: [data.staffCode],
       staffName: [data.staffName],
       roleName: [data.roleName],
@@ -203,7 +236,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     data.projectId = this.data.id;
     formData.append('file', this.formGroup.get('file').value || null);
     formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    // console.log(data.startDate);
 
       this.sprintService.create(formData).subscribe(res => {
         if ('00' === res.code) {
@@ -321,7 +353,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.listStaffLevels = res.data;
         this.listStaffLevels.forEach(item =>
           {
-            item.id = Number(item.id)
+             item.id = Number(item.id)
           });
       }
     });

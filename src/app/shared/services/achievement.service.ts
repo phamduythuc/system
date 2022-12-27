@@ -17,4 +17,8 @@ export class AchievementService extends BaseService {
     return this.http.get(`${environment.apiUrl}/achievement/download?filePath=${filePath}`,
       {responseType: 'blob', observe: 'response'});
   }
+
+  renderFile(data): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/achievement/download`,{params:data});
+  }
 }

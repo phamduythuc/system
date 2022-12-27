@@ -7,6 +7,7 @@ import {StaffManagementRoutingModule} from './staff-management-routing.module';
 import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 import { AddOrEditStaffDrawerComponent } from './add-or-edit-staff-drawer/add-or-edit-staff-drawer.component';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 
@@ -24,6 +25,7 @@ import { DataTableModule } from '@layout/common/data-table/data-table.module';
         CommonModule,
         DataTableModule,
         StaffManagementRoutingModule,
+        TranslocoModule,
         SharedModule,
     ]
 })

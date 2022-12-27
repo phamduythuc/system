@@ -186,7 +186,6 @@
           <!-- UPLOAD FILE -->
           <div class="sm:col-span-1 uploadStyle">
             <div class="fuse-mat-no-subscript w-full">
-
               <input
                 type="file"
                 name="document"
@@ -202,12 +201,10 @@
                   class="upload-btn"
                   (click)="fileUpload.click()"
                 >
-                <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                  <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
                 </button>
-
+                <a href="{{ recordUrl }}"></a>
                 {{ recordUrl || "No file uploaded yet." }}
-
-
               </div>
             </div>
           </div>
@@ -252,11 +249,7 @@
               <mat-label
                 >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
               >
-              <input
-                [formControlName]="'differenceVnd'"
-                type="text"
-                matInput
-              />
+              <input [formControlName]="'differenceVnd'" type="text" matInput />
             </mat-form-field>
           </div>
           <!-- CHÊNH LỆCH LŨY KẾ (VND)-->
@@ -329,11 +322,11 @@
                         >
                           <mat-select
                             placeholder="{{ 'staff.staffName' | transloco }}"
-                            formControlName="staffName"
+                            formControlName="staffId"
                           >
                             <mat-option
                               *ngFor="let staffNameTxt of listStaff"
-                              [value]="staffNameTxt.fullName"
+                              [value]="staffNameTxt.id"
                               >{{ staffNameTxt?.fullName }}
                             </mat-option>
                           </mat-select>
@@ -350,11 +343,11 @@
                         >
                           <mat-select
                             placeholder="{{ 'effort.role' | transloco }}"
-                            formControlName="roleName"
+                            formControlName="roleId"
                           >
                             <mat-option
                               *ngFor="let item of listStaffLevels"
-                              [value]="item?.name"
+                              [value]="item?.id"
                             >
                               {{ item?.name }}
                             </mat-option>
@@ -398,7 +391,19 @@
 
                   <ng-container *ngSwitchCase="'actionCustom'">
                     <div class="field flex mt-2 mb-2">
-                      <div class="input w-6/6">xoa</div>
+                      <div class="input w-6/6">
+                        <button
+                          mat-icon-button
+                          class="mat-focus-indicator mat-icon-button mat-button-base ng-star-inserted"
+                          
+                        >
+                          <mat-icon
+                            class="icon-size-5"
+                            svgIcon="heroicons_outline:trash"
+                            title="Close"
+                          ></mat-icon>
+                        </button>
+                      </div>
                     </div>
                   </ng-container>
                   <ng-container *ngSwitchDefault>

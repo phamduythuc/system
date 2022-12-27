@@ -21,17 +21,30 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'position',
         title: 'hrm-management.position.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:briefcase',
         link: '/hrm-management/position-management',
         role: [
           AuthoritiesConstant.DSTV,
         ]
       },
       {
+        id: 'role',
+        title: 'hrm-management.role.title',
+        type: 'basic',
+        icon: 'heroicons_outline:academic-cap',
+        link: '/hrm-management/role-management',
+        role: [
+          AuthoritiesConstant.DSTV_READ,
+          AuthoritiesConstant.DSTV_UPDATE,
+          AuthoritiesConstant.DSTV_DELETE,
+          AuthoritiesConstant.DSTV_READ,
+        ]
+      },
+      {
         id: 'level',
         title: 'hrm-management.specialize.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:adjustments',
         link: '/hrm-management/staff-level-management',
         role: [
           AuthoritiesConstant.DSCD_READ,
@@ -57,7 +70,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'partner',
         title: 'hrm-management.partner.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:user',
         link: '/hrm-management/partner-management',
         role: [
           AuthoritiesConstant.DSDT_READ,
@@ -69,7 +82,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'project',
         title: 'hrm-management.project.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:clipboard-list',
         link: '/hrm-management/project-management',
         role: [
           AuthoritiesConstant.DSDA_READ,
@@ -80,14 +93,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'staff',
         title: 'hrm-management.staff.title',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
+        icon: 'heroicons_outline:identification',
         link: '/hrm-management/staff-management',
         role: [
           AuthoritiesConstant.DSNV_READ,
           AuthoritiesConstant.DSNV_UPDATE,
           AuthoritiesConstant.DSNV_READ,
         ]
-      }, {
+      }, 
+      {
         id: 'team',
         title: 'hrm-management.team.title',
         type: 'basic',
@@ -99,7 +113,41 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSTV_DELETE,
           AuthoritiesConstant.DSTV_READ,
         ]
+      }
+    ]
+  },
+  {
+    id: 'hrmManagement',
+    title: 'hrm-management.contract.label',
+    type: 'group',
+    role: [AuthoritiesConstant.CONTRACT,],
+    children: [
+      {
+        id: 'contract',
+        title: 'hrm-management.contract.title',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/hrm-management/contract-management',
+        role: [
+          AuthoritiesConstant.CONTRACT,
+          AuthoritiesConstant.CONTRACT_CREATE,
+          AuthoritiesConstant.CONTRACT_UPDATE,
+          AuthoritiesConstant.CONTRACT_READ,
+        ]
       },
+      {
+        id: 'salary',
+        title: 'hrm-management.salary.title',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/hrm-management/salary-management',
+        role: [
+          AuthoritiesConstant.SALARY,
+          AuthoritiesConstant.SALARY_CREATE,
+          AuthoritiesConstant.SALARY_UPDATE,
+          AuthoritiesConstant.SALARY_READ,
+        ]
+      }
     ]
   },
   {

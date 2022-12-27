@@ -39,7 +39,7 @@
     "team": "Nhóm",
     "toMonth": "Đến tháng",
     "search": "Tìm kiếm",
-    "stt": "Stt",
+    "stt": "STT",
     "name": "Tên",
     "name_position": "Tên chức vụ",
     "name_specialize": "Tên chuyên môn",
@@ -66,7 +66,9 @@
     "position": "Chức vụ",
     "companyEmail": "Email c.ty",
     "dateOfBirth": "Ngày sinh",
-    "country": "Quốc gia",
+    "country": "Quốc tịch",
+    "residence": "Hộ khẩu thường trú",
+    "isProductTeam": "Là nhóm sản phẩm",
     "cvUrl": "File CV",
     "domicile": "Chỗ ở hiện tại",
     "education": "Cấp bậc giáo dục",
@@ -106,6 +108,10 @@
       "userList": "Danh sách người dùng",
       "newGroup": "Nhóm mới",
       "newUser": "Thêm người dùng"
+    },
+    "typeView": {
+      "grid": "Dạng lưới",
+      "list": "Dạng danh sách"
     }
   },
   "button": {
@@ -144,7 +150,7 @@
       "title": "Đối tác"
     },
     "project": {
-      "title": "Dự án",
+      "title": "Dự toán",
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
@@ -155,10 +161,11 @@
         "expectEndTime": "Tiến độ hoàn thành",
         "actualEndTime": "Ngày hoàn thành",
         "PointOfContact": "Đầu mối liên hệ",
+        "clueName": "Tên đầu mối",
+        "phoneNumber": "Số điện thoại",
         "contactPersonName": "Tên người liên hệ",
         "contactPersonPhone": "Điện thoại người liên hệ",
         "contactPersonEmail": "Email người liên hệ"
-
       },
       "projectMember": "Danh sách thành viên"
     },
@@ -188,6 +195,35 @@
         "addMember": "Thêm thành viên",
         "choose": "Chọn thành viên"
       }
+    },
+    "contract": {
+      "title": "Hợp đồng",
+      "label": "Hợp đồng & Lương",
+      "code": "Mã hợp đồng",
+      "type": "Loại hợp đồng",
+      "termPeriod": "Kỳ hạn",
+      "effDate": "Có hiệu lực từ",
+      "expDate": "Ngày hết hạn",
+      "signDate": "Ngày ký",
+      "salary": "Mức lương",
+      "insurance": "Bảo hiểm",
+      "link": "Link tải về"
+    },
+    "salary": {
+      "title": "Lương"
+    },
+    "role": {
+      "title": "Vai trò",
+      "roleInfo": "Thông tin vai trò",
+      "roleEdit": "Cập nhật vai trò",
+      "roleAdd": "Thêm mới vai trò",
+      "roleName":"Họ tên",
+      "roleDescription": "Mô tả",
+      "roleStatus": "Trạng thái",
+      "createdByRole":"Người tạo",
+      "createdDateRole": "Ngày chỉnh sửa",
+      "modifiedByRole":"Người chỉnh sửa",
+      "modifiedDateRole": "Ngày chỉnh sửa"
     }
   },
   "message": {
@@ -271,7 +307,7 @@
         "detail": {
           "title": "Thông tin cá nhân"
         },
-        "constact": {
+        "contract": {
           "title": "Danh sách hợp đồng"
         },
         "sprint": {
@@ -286,7 +322,7 @@
           "reality_kpi": "KPI phân bổ thực tế (2,5MM)",
           "project_code": "Mã dự án",
           "project_name": "Tên dự án",
-          "recognize":"Ghi nhận nỗ lực(MM)",
+          "recognize": "Ghi nhận nỗ lực(MM)",
           "recognize_exchange": "Nỗ lực quy đổi(MM)",
           "time_percent": "% phân bổ thời gian",
           "time_percent_err": "Phân bổ thời gian là trường bắt buộc",

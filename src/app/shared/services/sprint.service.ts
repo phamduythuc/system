@@ -17,8 +17,8 @@ export class SprintService extends BaseService{
     return this.http.post(`${this.serviceUrl}/create`, data);
   }
 
-  getStage(data: any): Observable<any>  {
-    return this.http.get(`${this.serviceUrl}/project/${data.projectId}/members?startDateFilter=${data.startDateFilter}`,  data);
+  getSprint(data: any): Observable<any>  {
+    return this.http.get(`${this.serviceUrl}/${data.projectId}/project?month=${data.startDate}`,  data);
   }
 
   getMembers(data): Observable<any> {

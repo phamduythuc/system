@@ -68,6 +68,8 @@
     "companyEmail": "Company email",
     "dateOfBirth": "Date Of Birth",
     "country": "Country",
+    "residence": "permanent residence",
+    "isProductTeam": "Is product team",
     "cvUrl": "Cv",
     "domicile": "Domicile",
     "education": "Education",
@@ -107,6 +109,10 @@
       "userList": "User list",
       "newGroup": "New Group",
       "newUser": "New User"
+    },
+    "typeView": {
+      "grid": "Grid view",
+      "list": "List view"
     }
   },
   "button": {
@@ -155,7 +161,9 @@
         "startTime": "Start time",
         "expectEndTime": "Expect end time",
         "actualEndTime": "Actual end time",
-        "PointOfContact": "Đầu mối liên hệ",
+        "PointOfContact": "Point of contact",
+        "clueName": "Clue Name",
+        "phoneNumber": "Phone Number",
         "contactPersonName": "Contact person name",
         "contactPersonPhone": "Contact person phone",
         "contactPersonEmail": "Contact person email"
@@ -188,7 +196,36 @@
         "addMember": "Add member",
         "choose": "Choose member"
       }
+    },
+    "role": {
+      "title": "Role",
+      "roleInfo": "Role Information",
+      "roleEdit":"Role Update",
+      "roleAdd": "Add Role",
+      "roleName":"Name",
+      "roleDescription": "Description",
+      "roleStatus": "Status",
+      "createdByRole":"Created By",
+      "createdDateRole": "Created Date",
+      "modifiedByRole":"Modified By ",
+      "modifiedDateRole": "Modified Date"
     }
+  },
+  "contract": {
+    "title": "Contract",
+    "label": "Contract & Salary",
+    "code": "Code",
+    "type": "Type of contract",
+    "termPeriod": "Term period",
+    "effDate": "Effective from",
+    "expDate": "Expiration date",
+    "signDate": "Sign day",
+    "salary": "Salary",
+    "insurance": "Insurance",
+    "link": "Download link"
+  },
+  "salary": {
+    "title": "Salary"
   },
   "message": {
     "noData": "Data not found"
@@ -272,7 +309,7 @@
         "detail": {
           "title": "Profile"
         },
-        "constact": {
+        "contract": {
           "title": "Contract list"
         },
         "sprint": {
@@ -287,7 +324,7 @@
           "reality_kpi": "Reality KPI (2,5MM)",
           "project_code": "Project code",
           "project_name": "Project name",
-          "recognize":"Recognize the effort(MM)",
+          "recognize": "Recognize the effort(MM)",
           "recognize_exchange": "Recognize exchange the effort(MM)",
           "time_percent": "% time allocation",
           "time_percent_err": "Time allocation is a required",

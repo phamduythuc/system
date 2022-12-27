@@ -14,7 +14,7 @@
           <a href="{{ emp[column.columnDef] }}" download>Download</a>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'time_percent'">
+        <ng-container *ngSwitchCase="'percentEffort'" >
           <!-- <span>{{ row[column.columnDef] }} %</span> -->
           <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
           <div class="box-percent">
@@ -47,6 +47,39 @@
           </div>
         </ng-container>
 
+        <ng-container *ngSwitchCase="'salaryActual'" >
+          <!-- <span>{{ row[column.columnDef] }} %</span> -->
+          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
+          <div class="box-percent">
+            <input
+            required
+            #rateInput="ngModel"
+            [(ngModel)]="emp[column.columnDef]"
+            type="number"
+            [min]="0"
+            max="100"
+            matInput
+            (ngModelChange)="change()"
+            pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+            [ngClass]="{ err: (rateInput.errors && (rateInput.dirty || rateInput.touched)) }"
+          />
+          %
+          </div>
+          <div
+            class="errors"
+            *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
+          >
+            <div [hidden]="!rateInput.errors.pattern">
+              <span>{{
+                "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+              }}</span>
+            </div>
+            <div [hidden]="!rateInput.errors.required">
+              {{ "dashboard.profile.tab.sprint.time_percent_err" | transloco }}
+            </div>
+          </div>
+        </ng-container>
+
         <ng-container *ngSwitchDefault>
           {{ emp[column.columnDef] }}
         </ng-container>
@@ -56,6 +89,13 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <ng-container *transloco="let t">
+      <td class="mat-cell text-center" colspan="15">
+        {{ t("common.noData") }} !
+      </td>
+    </ng-container>
+  </tr>
 </table>
 <mat-paginator
   #paginator

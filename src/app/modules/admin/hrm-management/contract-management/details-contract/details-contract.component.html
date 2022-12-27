@@ -1,0 +1,208 @@
+<ng-container *transloco="let t">
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{
+        "common.title.detail"
+          | transloco
+            : { screenName: "hrm-management.contract.title" | transloco }
+      }}
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        class="hover:bg-slate-100"
+        (click)="dialogRef.close()"
+      >
+        <mat-icon
+          svgIcon="heroicons_outline:x"
+          title="Edit"
+          class="icon-size-5"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <!--    content-->
+  <div class="content mt-6">
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "hrm-management.staff.title" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.staffId }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "hrm-management.contract.type" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.type }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "common.status" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.status }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "hrm-management.contract.code" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.code }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "hrm-management.contract.termPeriod" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.termPeriod }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "hrm-management.contract.effDate" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.effDate }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "hrm-management.contract.expDate" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.expDate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "hrm-management.contract.signDate" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.signDate }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "hrm-management.contract.salary" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.salary }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "hrm-management.contract.insurance" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.insurance }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "common.createdDate" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.createdDate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "common.modifiedDate" | transloco
+        }}</mat-label>
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.modifiedDate }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "common.createdBy" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.createdBy }}
+          </div>
+        </div>
+      </div>
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{
+          "common.modifiedBy" | transloco
+        }}</mat-label>
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+          <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+            {{ detailsData?.modifiedBy }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <mat-label class="w-1/3 p-2 font-semibold">{{
+          "hrm-management.contract.link" | transloco
+        }}</mat-label>
+        <span
+          class="flex py-2 cursor-pointer inline-block"
+          (click)="download(detailsData?.contractFilePath)"
+        >
+          Download
+        </span>
+      </div>
+    </div>
+  </div>
+  <!--    footer-->
+</ng-container>
