@@ -114,7 +114,7 @@ const routes: Routes = [
       ).then((m) => m.SalaryManagementModule),
     data: {
       breadcrumb: {
-        label: 'hrm-management.contract.title',
+        label: 'hrm-management.salary.title',
         url: 'hrm-management/salary-management',
       },
     },
