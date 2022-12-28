@@ -5,4 +5,11 @@
 
 .file-input {
   display: none;
-}  
+}
+
+.nameFile{
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

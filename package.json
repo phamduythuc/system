@@ -33,6 +33,7 @@
         "highcharts-angular": "^3.0.0",
         "highlight.js": "11.4.0",
         "lodash-es": "4.17.21",
+        "mat-select-filter": "^2.4.1",
         "moment": "2.29.1",
         "ng-apexcharts": "1.7.0",
         "ng-dynamic-breadcrumb": "^6.0.0",

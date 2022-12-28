@@ -110,7 +110,7 @@
             </app-error-message>
           </div>
           <!-- GHI NHẬN NỖ LỰC -->
-          <!-- <div class="sm:col-span-1">
+          <div class="sm:col-span-1">
             <mat-form-field
               class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
             >
@@ -120,9 +120,9 @@
                 }}
                 (MM)</mat-label
               >
-              <input [formControlName]="'acceptanceEffort'" type="text" matInput />
+              <input [formControlName]="'effort'" type="text" matInput />
             </mat-form-field>
-          </div> -->
+          </div>
         </div>
       </div>
 
@@ -141,7 +141,7 @@
               >
               <input
                 type="text"
-                [formControlName]="'acknowledgmentOfEffortChange'"
+                [formControlName]="'effortExchange'"
                 matInput
               />
             </mat-form-field>
@@ -203,8 +203,11 @@
                 >
                   <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
                 </button>
-                <a href="{{ recordUrl }}"></a>
-                {{ recordUrl || "No file uploaded yet." }}
+                <div class="nameFile">
+                  <a (click)="downloadDocument(recordUrl)" title="{{ recordUrl }}">
+                    {{ recordUrl || "No file uploaded yet." }}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -317,40 +320,24 @@
                   <ng-container *ngSwitchCase="'staffName'">
                     <div class="field flex mt-2 mb-2">
                       <div class="input w-5/6">
+
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
-                          <!-- <mat-select
-                            placeholder="{{ 'staff.staffName' | transloco }}"
-                            formControlName="staffId"
-                          >
-                            <mat-option
-                              *ngFor="let staffNameTxt of listStaff"
-                              [value]="staffNameTxt.id"
-                              >{{ staffNameTxt?.fullName }}
-                            </mat-option>
-                          </mat-select> -->
                           <mat-select
-                            formControlName="staffId"
                             placeholder="{{ 'staff.staffName' | transloco }}"
-                            #singleSelect
+                            formControlName="staffId"
+                            (selectionChange)="onStaffChange($event, index)"
                           >
-                            <mat-option>
-                              <ngx-mat-select-search
-                                [placeholderLabel]="'common.search' | transloco"
-                                (input)="searchStaff($event)"
-                              >
-                                <mat-icon
-                                  ngxMatSelectSearchClear
-                                  class="icon-size-5"
-                                  [svgIcon]="'heroicons_solid:x'"
-                                  matPrefix
-                                ></mat-icon>
-                              </ngx-mat-select-search>
-                            </mat-option>
-
+                            <mat-select-filter
+                              [placeholder]="'common.search' | transloco"
+                              [displayMember]="'fullName'"
+                              [array]="listStaff[index]"
+                              (filteredReturn)="filteredList[index] = $event"
+                            >
+                            </mat-select-filter>
                             <mat-option
-                              *ngFor="let staffNameTxt of listStaff"
+                              *ngFor="let staffNameTxt of filteredList[index]"
                               [value]="staffNameTxt.id"
                             >
                               {{ staffNameTxt?.fullName }}

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, Injector, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Injector, Input, OnChanges, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -7,7 +7,6 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
 import {EffortService} from '@shared/services/effort.service';
-import {forkJoin, map, Observable, startWith} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
@@ -20,18 +19,22 @@ import { SprintService } from '@shared/services/sprint.service';
   templateUrl: './project-effort.component.html',
   styleUrls: ['./project-effort.component.scss']
 })
-export class ProjectEffortComponent extends BaseComponent implements OnInit {
-  // filteredOptions: Observable<string[]>;
-
+export class ProjectEffortComponent extends BaseComponent implements OnInit{
 
   projectSelected: any ;
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
   recordUrl: any = '';
   staffNameTypes: any = [];
-  listStaff: any = [];
+
   isLoading: boolean = false;
+  listStaffOrigin: any = [];
+  mapStaff:any = {};
   listStaffLevels: any ;
+  listStaff: any = {};
+  filteredList: any = {};
+
+  newListStaff: any = [];
 
   option = {
     page: 0,
@@ -52,7 +55,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'staffName',
       header: 'staff.staffName',
-      flex: 0.2,
+      flex: 0.3,
     },
     {
       columnDef: 'roleName',
@@ -62,7 +65,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'effort',
       header: 'effort.acknowledgmentOfEffortMM',
-      flex: 0.3,
+      flex: 0.1,
     },
     {
       columnDef: 'effortExchange',
@@ -87,7 +90,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   constructor(
     injector: Injector,
               private projectService: ProjectService,
-              private effortService: EffortService,
               private sprintService: SprintService,
               private staffService: StaffService,
               public dialogRef: MatDialogRef<ProjectEffortComponent>,
@@ -95,7 +97,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data
   ) {
     super(injector, sprintService);
-    this.getStaff();
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [''],
@@ -103,8 +104,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       estimate: ['', [ Validators.pattern('^\\d+$')]],
       unitPrice: [''],
       progress: [''],
-      // acceptanceEffort: [''], /* ???? Ghi nhan NL (NN) */
-      acknowledgmentOfEffortChange: [''],  /* ???? Ghi nhan NL quy doi (NN) */
+      effort: [''], /* ???? Ghi nhan NL (NN) */
+      effortExchange: [''],  /* ???? Ghi nhan NL quy doi (NN) */
       acceptanceEffort: [''],
       acceptanceDate: [''],
       recordUrl:[''],
@@ -120,36 +121,13 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       effortDetail: this.fb.array([])
     });
 
-  }
-
-  ngOnChange(): void {
+    this.loadProjectRole();
 
   }
 
-
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.listStaff.filter(option => option.toLowerCase().includes(filterValue));
-  // }
 
   ngOnInit(): void {
-
-    // this.filteredOptions = this.formGroup.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value || '')),
-    // );
-
-    // if (this.projectSelected && this.projectSelected !== -1) {
-    //   this.getDetails(this.projectSelected, ({recordUrl}) => {
-    //     this.convertBase64(recordUrl);
-    //   });
-    // }
-
-    console.log(this.formGroup.value);
-
     this.loadEffortDetail(this.formGroup.get('startDate').value);
-
   }
 
   get efforts(): FormArray {
@@ -157,6 +135,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   loadEffortDetail(month) {
+
     // const monthStr = CommonUtilsService.dateToString(month, false);
     const monthTimeStr = CommonUtilsService.dateToString(month, false);
     const searchObj = {projectId: this.data.id, startDate: monthTimeStr};
@@ -164,12 +143,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
+        const urlName = res.data.recordUrl;
+        // this.recordUrl = urlName.toString().split("/")[1];
+        this.recordUrl = urlName;
         this.formGroup.patchValue({
           id: res.data.id,
-          // acceptanceEffort: res.data.acceptanceEffort,
           unitPrice: res.data.unitPrice,
           progress: res.data.progress,
-          acknowledgmentOfEffortChange: res.data.acknowledgmentOfEffortChange,
+          recordUrl: res.data.recordUrl,
           acceptanceEffort: res.data.acceptanceEffort,
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
@@ -181,24 +162,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           efficiency: res.data.efficiency,
           note: res.data.note,
           estimate: res.data.estimate,
-          roleId: res.data.roleId,
-          staffId: res.data.staffId,
+          effort: res.data.effort,
+          // roleId: res.data.roleId,
+          // staffId: res.data.staffId,
           // staffCode: res.data.staffCode,
           // staffName: res.data.staffName,
           // roleName: res.data.roleName,
-          effort: res.data.effort,
-          effortExchange: res.data.effortExchange,
-          percentEffort: res.data.percentEffort,
+          // effortExchange: res.data.effortExchange,
+          // percentEffort: res.data.percentEffort,
 
         });
 
       } else {
         this.formGroup.patchValue({
           id: null,
-          // acceptanceEffort: null,
           unitPrice: null,
           progress: null,
-          acknowledgmentOfEffortChange: null,
+          recordUrl: null,
           acceptanceEffort: null,
           acceptanceDate: null,
           effortDifference: null,
@@ -210,14 +190,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           efficiency: null,
           note: null,
           estimate: null,
-          roleId: null,
-          staffId: null,
+          effort: null,
+
+          // roleId: null,
+          // staffId: null,
           // staffCode: null,
           // staffName: null,
           // roleName: null,
-          effort: null,
-          effortExchange: null,
-          percentEffort: null,
+          // effortExchange: null,
+          // percentEffort: null,
         });
       }
     });
@@ -226,21 +207,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       if (this.isSuccess(res)) {
         res.data.forEach(item =>{
          this.efforts.push(this.newItem(item))});
-        this.isLoading = false;
+         this.isLoading = false;
       }
+      this.loadStaffs();
     });
   }
 
   newItem(data: any): FormGroup {
+
     return this.fb.group({
       staffId: [data.staffId],
       roleId: [data.roleId],
       staffCode: [data.staffCode],
-      // staffName: [data.staffName],
-      // roleName: [data.roleName],
       effort: [data.effort],
       effortExchange: [data.effortExchange],
-      percentEffort: [data.percentEffort]
+      percentEffort: [data.percentEffort],
+      // staffName: [data.staffName],
+      // roleName: [data.roleName],
     });
   }
 
@@ -299,15 +282,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       //6 means saturday
     };
 
-  actionClick(e: any): void {
-    if (e.type === 'edit') {
-      this.addOrEdit(e.data.id);
-    }
+  // actionClick(e: any): void {
+  //   if (e.type === 'edit') {
+  //     this.addOrEdit(e.data.id);
+  //   }
 
-    if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id);
-    }
-  }
+  //   if (e.type === 'delete') {
+  //     this.deleteConfirmDialog(e.data.id);
+  //   }
+  // }
 
   changeMonth() {
     this.formGroup.patchValue({arr: this.fb.array([])});
@@ -346,11 +329,13 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   addNewRow(){
     this.isLoading = true;
     this.efforts.push(this.newItem({}));
+    this.listStaff[this.efforts.length - 1] = [...this.listStaffOrigin];
+    this.filteredList[this.efforts.length - 1] = [...this.listStaffOrigin];
     setTimeout(() => {this.isLoading = false;}, 100);
   }
 
 
-  getStaff(){
+  loadProjectRole(){
     this.sprintService.getRoleStaff(this.option).subscribe(res => {
       if (res.code === '00') {
         this.listStaffLevels = res.data;
@@ -360,28 +345,43 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           });
       }
     });
-
-    this.staffService.search().subscribe(res=>{
-      this.listStaff = res.data;
-    });
-
-
   }
 
+  loadStaffs() {
+    this.mapStaff = {};
+    this.staffService.search().subscribe(res=> {
+      this.listStaffOrigin = [...res.data];
+      this.listStaffOrigin.forEach(item => {
+        this.mapStaff[item.id] = item;
+      });
+
+      this.efforts.value.forEach((item, index) => {
+        this.listStaff[index] = [...res.data];
+        this.filteredList[index] = [...res.data];
+      })
+
+    });
+  }
+
+
   deleteRow(index : number){
+    delete this.listStaff[index];
+    delete this.filteredList[index];
     this.isLoading = true;
     this.efforts.removeAt(index);
     setTimeout(() => {this.isLoading = false;}, 100);
   }
 
-  searchStaff(event:any){
-    // this.
-    console.log(this.listStaff.fullName);
-    this.listStaff.forEach(res => {
-      const v =  res.fullName.includes(event.target.value);
-    console.log(v);
-
-    })
-
+  onStaffChange(event: any, index: number) {
+    console.log(event);
+    this.efforts.at(index).patchValue({staffCode: this.mapStaff[event.value].staffCode});
   }
+
+  downloadDocument(recordUrl: any) {
+    this.achievementService.renderFile({filePath: recordUrl, fileType: 2}).subscribe(res => {
+      console.log(res.headers['content-disposition']);
+      console.log(res.headers['content-response']);
+    });
+  }
+
 }
