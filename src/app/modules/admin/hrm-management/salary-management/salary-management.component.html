@@ -48,7 +48,8 @@
               [disabled]="startDate.invalid"
               (click)="view()"
             >
-              <span>{{ "common.button.view" | transloco }}</span>
+              <span>{{ "common.button.view" | transloco }}
+              </span>
             </button>
           </div>
         </div>
@@ -76,8 +77,12 @@
           color="primary"
           class="mr-3"
           [disabled]="startDate.invalid"
-          (click)="saveData()"
+          (click)="saveData(searchResult?.data)"
         >
+        <mat-icon
+          class="icon-size-5 mr-2"
+          svgIcon="heroicons_outline:check"
+        ></mat-icon>
           <span>{{ "button.save" | transloco }}</span>
         </button>
       </div>

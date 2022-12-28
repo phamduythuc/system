@@ -51,23 +51,16 @@
 
         <ng-container *ngSwitchCase="'salaryActual'" >
           <div class="box-percent">
-            <mat-form-field
-              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-            >
-              <input
-                class="w-full"
-                matInput
-                trim="blur"
-                required
-                #rateInput="ngModel"
-                [(ngModel)]="emp[column.columnDef]"
-                [min]="0"
-                max="100"
-                (ngModelChange)="change()"
-                pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-              />
-            </mat-form-field>
-            %
+            <input
+            required
+            #rateInput="ngModel"
+            [(ngModel)]="emp[column.columnDef]"
+            type="number"
+            matInput
+            (ngModelChange)="change()"
+            pattern="[0-9]{0,10}"
+            [ngClass]="{ err: rateInput.errors }"
+          />
           </div>
           <div
             class="errors"
@@ -75,11 +68,11 @@
           >
             <div [hidden]="!rateInput.errors.pattern">
               <span>{{
-                "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+                "hrm-management.salary.time_percent_err_1" | transloco
               }}</span>
             </div>
             <div [hidden]="!rateInput.errors.required">
-              {{ "dashboard.profile.tab.sprint.time_percent_err" | transloco }}
+              {{ "hrm-management.salary.time_percent_err" | transloco }}
             </div>
           </div>
         </ng-container>
