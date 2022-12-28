@@ -1,10 +1,9 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { debounceTime, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { TeamService } from '@shared/services/team.service';
-import { AddOrEditTeamComponent } from './add-or-edit-team/add-or-edit-team.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { ViewType } from '@core/config/app.config';
@@ -13,11 +12,14 @@ import * as Highcharts from 'highcharts';
 
 
 @Component({
-  selector: 'app-team-management',
-  templateUrl: './team-management.component.html',
-  styleUrls: ['./team-management.component.scss']
+  selector: 'app-team-item',
+  templateUrl: './team-item.component.html',
+  styleUrls: ['./team-item.component.scss']
 })
-export class TeamManagementComponent extends BaseComponent implements OnInit {
+
+export class TeamItemComponent extends BaseComponent implements OnInit {
+
+  @Input() team:any;
 
   highcharts = Highcharts;
   chartOptions = {
@@ -69,7 +71,6 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   formSearch: FormGroup;
-  team = 'team';
 
 
   list_type_view: any = [
@@ -90,14 +91,17 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, public teamService: TeamService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
     this.formSearch = this.fb.group({
+      id:'',
       text: '',
-      name: ['Thái'],
+      name: [],
       number: 2,
       sprint: [],
       leader: [],
-      expected: ['12'],
-      cost: ['13'],
-      revenue: ['14']
+      expected: [],
+      cost: [],
+      revenue: [],
+      staDate:[],
+      endDate:[]
     });
   }
 
@@ -118,16 +122,8 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     );
     this.searchModel.status = 1;
     this.processSearch(this.searchModel, () => this.callback());
-    this.formSearch = this.fb.group({
-      text: '',
-      name: ['Thái'],
-      number: 2,
-      sprint: [],
-      leader: [],
-      expected: ['12'],
-      cost: ['13'],
-      revenue: ['14']
-    });
+    this.handleCoverStringToDate(this.team);
+    this.formSearch.patchValue(this.team);
   }
 
   doSearch(): void {
@@ -143,36 +139,6 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     }
   }
 
-  addOrEdit(id?: any): void {
-    this.showDialog(AddOrEditTeamComponent, {
-      data: {
-        id,
-      },
-      width: '70vw',
-      // maxHeight: '90vh',
-      disableClose: true
-    }, (value) => {
-      if (value) {
-        this.doSearch();
-      }
-    });
-  }
-
-  view(id?: any): void {
-    // this.showDialog(ManagerTeamComponent, {
-    //   data: {
-    //     id,
-    //   },
-    //   width: '70vw',
-    //   height:'80vh',
-    //   // maxHeight: '90vh',
-    //   disableClose: false
-    // }, (value) => {
-    //   if (value) {
-    //     this.doSearch();
-    //   }
-    // });
-  }
 
   getPanelInfo(id: string): any {
     return this.searchResult.data.find(panel => panel.id === id);
@@ -187,13 +153,19 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       this.addOrEdit(gr.id);
     }
     else if (type === 'view') {
-      this.view(gr.id);
+   
     }
     else {
       this.deleteConfirmDialog(gr.id);
     }
   }
 
+  actionClick(e: any, id:any): void {
+    debugger
+    if (e === 'delete') {
+      this.deleteConfirmDialog(id);
+    }
+  }
   deleteConfirmDialog(id?: any): any {
     this.showDialog(ConfirmDialogComponent, {}, (value) => {
       if (value) {
@@ -228,6 +200,5 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
  */
   setView(viewType: ViewType): void {
     this._fuseConfigService.config = { viewType };
-    this.team = 'team';
   }
 }

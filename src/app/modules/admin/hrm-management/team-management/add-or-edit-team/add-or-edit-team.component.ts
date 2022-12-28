@@ -22,7 +22,7 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
     staDate: [],
     status: [1],
     departmentId: [null, Validators.required],
-    description: [Validators.maxLength(500)],
+    description: ['',Validators.maxLength(500)],
     endDate: [],
     members: [],
     searchStaff: []

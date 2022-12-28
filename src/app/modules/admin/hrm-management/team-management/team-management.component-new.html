@@ -6,17 +6,11 @@
                 <div class="text-2xl font-bold card-title mb-3 capitalize flex justify-between gap-5">
                     {{t('hrm-management.team.title')}}
                 </div>
-                <div class="mb-2">
-                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary" (click)="addOrEdit()">
-                      <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-                      {{t('button.new')}}
-                    </button>
-                  </div>
             </div>
-            
+
             <!-- content -->
             <div class="flex flex-wrap justify-around w-full mt-2 ">
-                <div class=" w-120 m-2 mb-9 " *ngFor="let value of searchResult.data">
+                <div class=" w-120 m-2 " *ngFor="let value of searchResult.data">
                     <app-team-item [team]="value"></app-team-item>
                 </div>
             </div>

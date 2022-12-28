@@ -61,6 +61,12 @@
     "partner": "Đối tác",
     "fullName": "Họ tên",
     "department": "Phòng ban",
+    "leader":"Trưởng nhóm",
+    "sprint":"Sprint",
+    "expected":"Kỳ vọng",
+    "cost":"Chi phí",
+    "revenue":"Doanh thu",
+    "listMember":"Danh sách thành viên",
     "parentName": "Phòng ban trực thuộc",
     "gender": "Giới tính",
     "position": "Chức vụ",
@@ -187,13 +193,14 @@
       }
     },
     "team": {
-      "title": "Đội/Nhóm",
+      "title": "Đội / Nhóm",
       "form": {
         "member": "Thành viên",
         "startDate": "Từ ngày",
         "endDate": "Đến ngày",
         "addMember": "Thêm thành viên",
-        "choose": "Chọn thành viên"
+        "choose": "Chọn thành viên",
+        "number":"Số lượng"
       }
     },
     "contract": {

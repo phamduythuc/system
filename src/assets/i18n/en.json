@@ -62,6 +62,12 @@
     "partner": "Partner",
     "fullName": "Full Name",
     "department": "Department",
+    "leader":"Leader",
+    "sprint":"Sprint",
+    "expected":"Expected",
+    "cost":"Cost",
+    "revenue":"Revenue",
+    "listMember":"Member",
     "parentName": "Affiliated departments",
     "gender": "Gender",
     "position": "Position",
@@ -194,7 +200,8 @@
         "startDate": "Start date",
         "endDate": "End date",
         "addMember": "Add member",
-        "choose": "Choose member"
+        "choose": "Choose member",
+        "number" : "Number"
       }
     },
     "role": {

@@ -1,8 +1,8 @@
-import {Component, Injector, Input, OnInit} from '@angular/core';
-import {BaseComponent} from '@core/base.component';
-import {Validators} from '@angular/forms';
-import {StaffService} from '@shared/services/staff.service';
-import {AchievementService} from '@shared/services/achievement.service';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { BaseComponent } from '@core/base.component';
+import { Validators } from '@angular/forms';
+import { StaffService } from '@shared/services/staff.service';
+import { AchievementService } from '@shared/services/achievement.service';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -146,23 +146,22 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   });
 
   constructor(injector: Injector,
-              private staffService: StaffService,
-              private achievementService: AchievementService,) {
+    private staffService: StaffService,
+    private achievementService: AchievementService,) {
     super(injector, staffService);
   }
 
   ngOnInit(): void {
     console.log(this.formGroup);
-    
+
     if (this.staffSelected && this.staffSelected !== -1) {
-      this.getDetails(this.staffSelected, ({imageUrl}) => {
+      this.getDetails(this.staffSelected, ({ imageUrl }) => {
         this.convertBase64(imageUrl);
       });
-    } 
+    }
     this.getListRoleStaff();
-
   }
-  getListRoleStaff(){
+  getListRoleStaff() {
     this.staffService.getRoleStaff(this.option).subscribe(res => {
       if (res.code === '00') {
         this.listRoleStaff = res.data;
@@ -197,11 +196,11 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
-    
-    if(this.staffSelected && this.staffSelected !== -1){
+
+    if (this.staffSelected && this.staffSelected !== -1) {
       data.id = this.staffSelected;
       formData.append('file', this.formGroup.get('file').value || null);
-      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+      formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
       this.staffService.updateStaff(formData).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
@@ -210,9 +209,9 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
           this.showSnackBar(res.message, 'error');
         }
       });
-    }else{
+    } else {
       formData.append('file', this.formGroup.get('file').value || null);
-      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+      formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
       this.staffService.createStaff(formData).subscribe(res => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
@@ -229,18 +228,18 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
-      this.formGroup.patchValue({file});
+      this.formGroup.patchValue({ file });
       reader.onload = () => {
         this.imageUrl = reader.result;
       };
     }
   }
 
-  toggle(){
-    if(!this.formGroup.value.isProduct){
-      this.formGroup.value.role = 0 
+  toggle() {
+    if (!this.formGroup.value.isProduct) {
+      this.formGroup.value.role = 0
       this.formGroup.patchValue(this.formGroup.value.role);
-    }else{
+    } else {
       this.formGroup.value.role = null
       this.formGroup.patchValue(this.formGroup.value.role);
     }
