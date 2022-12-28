@@ -28,7 +28,7 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     },
     {
       columnDef: 'name',
-      header: 'common.fullName',
+      header: 'hrm-management.role.roleName',
       flex: 0.5,
     },
     {
