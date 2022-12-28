@@ -18,6 +18,10 @@ export class DashboardsProfileService extends BaseService {
       {responseType: 'blob', observe: 'response'});
   }
 
+  getProfile(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/user-info`);
+  }
+
   getKPI(data): Observable<any> {
     return this.http.get(`${environment.apiUrl}/staff/kpi/397`, {params: data});
   }

@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
@@ -11,7 +11,7 @@ import { RoleManagementService } from '@shared/services/role-management.service'
 })
 export class HandlerEditRoleComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
-    name: [''],
+    name: ['',Validators.required],
     description: [''],
     status: [''],
     createdBy: [''],

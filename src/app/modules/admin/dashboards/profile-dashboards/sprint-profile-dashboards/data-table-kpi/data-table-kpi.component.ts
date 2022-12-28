@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,11 +27,10 @@ export class DataTableKpiComponent implements OnInit {
     return this.columns.map((c) => c.columnDef);
   }
 
-
   dataSource = new MatTableDataSource(this.rows);
   dataSourceWithPageSize = new MatTableDataSource(this.rows);
 
-  constructor() {}
+  constructor(public fb :FormBuilder) {}
 
   @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize: MatPaginator;
@@ -41,6 +41,7 @@ export class DataTableKpiComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
   }
+    
 
   ngOnChanges(changes: SimpleChanges): void {
     this.reLoadData()
@@ -57,15 +58,10 @@ export class DataTableKpiComponent implements OnInit {
     this.dataSourceWithPageSize = new MatTableDataSource(this.rows);
     this.dataSource.paginator = this.paginator;
     this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
-    console.log(this.rows);
-    
   }
 
   change(){
     this.callback.emit(this.rows)
   }
-
-  saveData(){
-    console.log(this.rows);
-  }
+  
 }

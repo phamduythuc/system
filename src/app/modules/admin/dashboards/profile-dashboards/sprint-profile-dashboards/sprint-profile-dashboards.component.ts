@@ -54,10 +54,7 @@ export class SprintProfileDashboardsComponent implements OnInit {
   ];
 
   startDate = this._formBuilder.group({
-    startMonth: [
-      moment().add(-7, 'month').startOf('month'),
-      Validators.required,
-    ],
+    startMonth: [moment().startOf('month')],
   });
 
   formGroup = this._formBuilder.group({

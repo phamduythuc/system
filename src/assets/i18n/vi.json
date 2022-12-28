@@ -150,7 +150,7 @@
       "title": "Đối tác"
     },
     "project": {
-      "title": "Dự toán",
+      "title": "Dự án",
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
@@ -185,7 +185,7 @@
       "chartKPI": {
         "title": "KPI theo tháng"
       }
-    },
+    }, 
     "team": {
       "title": "Đội/Nhóm",
       "form": {
@@ -210,14 +210,21 @@
       "link": "Link tải về"
     },
     "salary": {
-      "title": "Lương"
+      "title": "Lương",
+      "salaryVND": "Lương (VNĐ)",
+      "salaryReceived": "Mức lương thực nhận(VNĐ)",
+      "time_percent_err": "Mức lương thực nhận là trường bắt buộc",
+      "time_percent_err_1": "Mức lương không hợp lệ",
+      "name": "Tên nhân viên",
+      "staffID": "Mã nhân viên"
+
     },
     "role": {
       "title": "Vai trò",
       "roleInfo": "Thông tin vai trò",
       "roleEdit": "Cập nhật vai trò",
       "roleAdd": "Thêm mới vai trò",
-      "roleName":"Họ tên",
+      "roleName":"Tên vai trò",
       "roleDescription": "Mô tả",
       "roleStatus": "Trạng thái",
       "createdByRole":"Người tạo",
