@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseService} from '@core/base.service';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '@env/environment.prod';
+import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -19,6 +19,7 @@ export class AchievementService extends BaseService {
   }
 
   renderFile(data): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/achievement/download`,{params:data});
+    return this.http.get(`${environment.apiUrl}/achievement/download`,
+    {params:data, responseType: 'blob', observe: 'response'});
   }
 }

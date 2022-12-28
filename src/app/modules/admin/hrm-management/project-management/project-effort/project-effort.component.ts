@@ -6,11 +6,11 @@ import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
-import {EffortService} from '@shared/services/effort.service';
-import {forkJoin} from 'rxjs';
 import {MONTH_FORMAT} from '@shared/app.constant';
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import { datePickerValidator } from '@shared/validation/date-picker.validation';
+import {AchievementService} from '@shared/services/achievement.service';
+import {StaffService} from '@shared/services/staff.service';
+import {SprintService} from '@shared/services/sprint.service';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-project-effort',
@@ -18,62 +18,110 @@ import { datePickerValidator } from '@shared/validation/date-picker.validation';
   styleUrls: ['./project-effort.component.scss']
 })
 export class ProjectEffortComponent extends BaseComponent implements OnInit {
+
   _permissionCodeName = 'DSDA';
+  panelOpenState = false;
+  recordUrl: any = '';
+  documentName: any = '';
 
   isLoading: boolean = false;
+  listStaffOrigin: any = [];
+  mapStaff: any = {};
+  listStaffLevels: any;
+  listStaff: any = {};
+  filteredList: any = {};
+
+  newListStaff: any = [];
+
+  option = {
+    page: 0,
+    pageSize: 100,
+  };
 
   columns: IColumn[] = [
     {
       columnDef: 'stt',
       header: 'common.stt',
-      flex: 0.3,
-    },
-    {
-      columnDef: 'fullName',
-      header: 'common.name',
-      flex: 0.3,
+      flex: 0.1,
     },
     {
       columnDef: 'staffCode',
       header: 'common.code',
+      flex: 0.1,
+    },
+    {
+      columnDef: 'staffName',
+      header: 'staff.staffName',
       flex: 0.3,
     },
     {
+      columnDef: 'roleName',
+      header: 'effort.role',
+      flex: 0.1,
+    },
+    {
       columnDef: 'effort',
-      header: 'effort.acknowledgment_of_effort',
+      header: 'effort.acknowledgmentOfEffortMM',
+      flex: 0.1,
+    },
+    {
+      columnDef: 'effortExchange',
+      header: 'effort.conversionEffort',
+      flex: 0.3,
     },
     {
       columnDef: 'percentEffort',
-      header: 'effort.percent_effort',
-      cellRenderer: (row) => (row.percentEffort || 0) + '%'
+      header: 'effort.timeAllocation',
+      cellRenderer: (row) => (row.percentEffort || 0) + '%',
+      flex: 0.3
     },
-    // {
-    //   columnDef: 'action',
-    //   header: 'common.actions',
-    //   actions: [ 'view','edit', 'delete'],
-    // }
+    {
+      columnDef: 'actionCustom',
+      header: 'common.actions',
+      // actions: [ 'delete'],
+      flex: 0.1,
+    }
   ];
 
-  constructor(injector: Injector,
-              private projectService: ProjectService,
-              private effortService: EffortService,
-              public dialogRef: MatDialogRef<ProjectEffortComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
-    super(injector, effortService);
+
+  constructor(
+    injector: Injector,
+    private projectService: ProjectService,
+    private sprintService: SprintService,
+    private staffService: StaffService,
+    public dialogRef: MatDialogRef<ProjectEffortComponent>,
+    private achievementService: AchievementService,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
+    super(injector, sprintService);
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
-      id: [],
-      name: [this.generateName(month)],
-      projectId: [data.id],
+      id: [''],
       startDate: [month, Validators.required],
-      estimate: ['', [Validators.required, Validators.pattern('^\\d+$')]],
-      effort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      acceptanceDate: ['',  datePickerValidator()],
-      acceptanceEffort: ['', [Validators.pattern('^[0-9][0-9\\.]*$')]],
-      note: [],
+      estimate: ['', [Validators.pattern('^\\d+$')]],
+      unitPrice: [''],
+      progress: [''],
+      effort: [''], /* ???? Ghi nhan NL (NN) */
+      effortExchange: [''],  /* ???? Ghi nhan NL quy doi (NN) */
+      acceptanceEffort: [''],
+      acceptanceDate: [''],
+      recordUrl: [''],
+      effortDifference: [''],
+      cumulativeDifference: [''],
+      differenceVnd: [''],
+      cumulativeDifferenceVnd: [''],
+      revenue: [''],
+      cost: [''],
+      efficiency: [''],
+      note: [''],
+      file: [],
       effortDetail: this.fb.array([])
     });
+
+    this.loadProjectRole();
+
   }
+
 
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
@@ -84,62 +132,118 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   loadEffortDetail(month) {
-    const monthStr = CommonUtilsService.dateToString(month, false);
-    const monthTimeStr = CommonUtilsService.dateToString(month, true, true);
-    const searchObj = {projectId: this.data.id, startDateFilter: monthTimeStr, month: monthStr};
+
+    // const monthStr = CommonUtilsService.dateToString(month, false);
+    const monthTimeStr = CommonUtilsService.dateToString(month, false);
+    const searchObj = {projectId: this.data.id, startDate: monthTimeStr};
     this.isLoading = true;
     this.efforts.clear();
-    this.effortService.getStage(searchObj).subscribe(res => {
+    this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
+        const urlName = res.data.recordUrl;
+        // this.recordUrl = urlName.toString().split("/")[1];
+        this.recordUrl = urlName;
+        this.documentName = res.data.documentName || res.data.recordUrl ? res.data.recordUrl.substring(res.data.recordUrl.lastIndexOf('/') + 1) : '';
         this.formGroup.patchValue({
           id: res.data.id,
-          name: res.data.name,
+          unitPrice: res.data.unitPrice,
+          progress: res.data.progress,
+          recordUrl: res.data.recordUrl,
+          acceptanceEffort: res.data.acceptanceEffort,
+          acceptanceDate: res.data.acceptanceDate,
+          effortDifference: res.data.effortDifference,
+          cumulativeDifference: res.data.cumulativeDifference,
+          differenceVnd: res.data.differenceVnd,
+          cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
+          revenue: res.data.revenue,
+          cost: res.data.cost,
+          efficiency: res.data.efficiency,
+          note: res.data.note,
           estimate: res.data.estimate,
           effort: res.data.effort,
-          acceptanceDate: moment(res.data.acceptanceDate),
-          acceptanceEffort: res.data.acceptanceEffort,
-          note: res.data.note,
         });
+
       } else {
+        this.documentName = '';
         this.formGroup.patchValue({
           id: null,
+          unitPrice: null,
+          progress: null,
+          recordUrl: null,
+          acceptanceEffort: null,
+          acceptanceDate: null,
+          effortDifference: null,
+          cumulativeDifference: null,
+          differenceVnd: null,
+          cumulativeDifferenceVnd: null,
+          revenue: null,
+          cost: null,
+          efficiency: null,
+          note: null,
           estimate: null,
           effort: null,
-          acceptanceDate: null,
-          acceptanceEffort: null,
-          note: null,
         });
       }
     });
-    this.effortService.getMembers(searchObj).subscribe(res => {
+
+    this.sprintService.getMembers(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
-        res.data.forEach(item => this.efforts.push(this.newItem(item)));
+        res.data.forEach(item => {
+          this.efforts.push(this.newItem(item));
+        });
         this.isLoading = false;
       }
+      this.loadStaffs();
     });
   }
 
   newItem(data: any): FormGroup {
+
     return this.fb.group({
-      id: [data.id],
-      fullName: [data.fullName],
+      staffId: [data.staffId],
+      roleId: [data.roleId],
       staffCode: [data.staffCode],
-      effort: [data.effort, [Validators.pattern('^[0-9][0-9\\.]*$')]],
+      effort: [data.effort],
+      effortExchange: [data.effortExchange],
       percentEffort: [data.percentEffort],
+      // staffName: [data.staffName],
+      // roleName: [data.roleName],
     });
   }
 
   save() {
-    if (this.formGroup.invalid) {
-      this.formGroup.markAllAsTouched();
-      return;
+
+    const formData = new FormData();
+    const formValue = this.formGroup.value;
+    this.handleCoverTimeToString(formValue);
+    formValue.startDate = formValue.startDate && CommonUtilsService.dateToString(formValue.startDate);
+    formValue.projectId = this.data.id;
+
+    formData.append('file', this.formGroup.get('file').value || null);
+    formData.append('data', new Blob([JSON.stringify(formValue)], {type: 'application/json'}));
+    if (formValue.id) {
+      this.sprintService.update(formData).subscribe(res => {
+        if ('00' === res.code) {
+
+          this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(true);
+        } else {
+
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    } else {
+      this.sprintService.create(formData).subscribe(res => {
+        if ('00' === res.code) {
+
+          this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(true);
+        } else {
+
+          this.showSnackBar(res.message, 'error');
+        }
+      });
     }
-    const body = this.formGroup.value;
-    body.startDateFilter = CommonUtilsService.dateToString(body.startDate, true, true);
-    body.startDate = CommonUtilsService.dateToString(body.startDate, false);
-    body.acceptanceDate = CommonUtilsService.dateToString(body.acceptanceDate, false);
-    this.addOrEdit(body);
-    return false;
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -164,15 +268,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       //6 means saturday
     };
 
-  actionClick(e: any): void {
-    if (e.type === 'edit') {
-      this.addOrEdit(e.data.id);
-    }
+  // actionClick(e: any): void {
+  //   if (e.type === 'edit') {
+  //     this.addOrEdit(e.data.id);
+  //   }
 
-    if (e.type === 'delete') {
-      this.deleteConfirmDialog(e.data.id);
-    }
-  }
+  //   if (e.type === 'delete') {
+  //     this.deleteConfirmDialog(e.data.id);
+  //   }
+  // }
 
   changeMonth() {
     this.formGroup.patchValue({arr: this.fb.array([])});
@@ -186,4 +290,92 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   generateName(month: any): string {
     return `Sprint tháng ${month.format(MONTH_FORMAT)}`;
   }
+
+  convertBase64(recordUrl): void {
+    if (recordUrl) {
+      this.achievementService.downloadFile(recordUrl).subscribe(res1 => {
+        this.documentName = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
+      });
+    }
+  }
+
+  uploadFile(event: any): void {
+    const reader = new FileReader(); // HTML5 FileReader API
+    const file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      this.formGroup.patchValue({file});
+      reader.onload = () => {
+        // this.recordUrl = reader.result;
+        this.documentName = file.name;
+      };
+    }
+  }
+
+  addNewRow() {
+    this.isLoading = true;
+    this.efforts.push(this.newItem({}));
+    this.listStaff[this.efforts.length - 1] = [...this.listStaffOrigin];
+    this.filteredList[this.efforts.length - 1] = [...this.listStaffOrigin];
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
+  }
+
+
+  loadProjectRole() {
+    this.sprintService.getRoleStaff(this.option).subscribe(res => {
+      if (res.code === '00') {
+        this.listStaffLevels = res.data;
+        this.listStaffLevels.forEach(item => {
+          item.id = Number(item.id);
+        });
+      }
+    });
+  }
+
+  loadStaffs() {
+    this.mapStaff = {};
+    this.staffService.search().subscribe(res => {
+      this.listStaffOrigin = [...res.data];
+      this.listStaffOrigin.forEach(item => {
+        this.mapStaff[item.id] = item;
+      });
+
+      this.efforts.value.forEach((item, index) => {
+        this.listStaff[index] = [...res.data];
+        this.filteredList[index] = [...res.data];
+      });
+
+    });
+  }
+
+
+  deleteRow(index: number) {
+    delete this.listStaff[index];
+    delete this.filteredList[index];
+    this.isLoading = true;
+    this.efforts.removeAt(index);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
+  }
+
+  onStaffChange(event: any, index: number) {
+    console.log(event);
+    this.efforts.at(index).patchValue({staffCode: this.mapStaff[event.value].staffCode});
+  }
+
+  downloadDocument(recordUrl: any) {
+    this.achievementService.renderFile({filePath: recordUrl, fileType: 2}).subscribe(res => {
+      const res1 = this.getResponseFromHeader(res.headers);
+      if (this.isSuccess(res1)) {
+        const fileName = this.getFileName(res.headers);
+        FileSaver.saveAs(res.body, fileName || this.documentName);
+      } else {
+        this.showSnackBar(res1.message, 'error');
+      }
+    });
+  }
+
 }

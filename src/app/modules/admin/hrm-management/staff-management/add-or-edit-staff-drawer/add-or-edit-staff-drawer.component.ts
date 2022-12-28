@@ -163,10 +163,10 @@ export class AddOrEditStaffDrawerComponent
     private achievementService: AchievementService
   ) {
     super(injector, staffService);
+    console.log(this.formGroup);
   }
 
   ngOnInit(): void {
-    console.log(this.formGroup);
 
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
@@ -176,6 +176,11 @@ export class AddOrEditStaffDrawerComponent
     this.getListRoleStaff();
     this.getListTeam()
   }
+// <<<<<<< HEAD
+
+//   getListRoleStaff(){
+//     this.staffService.getRoleStaff(this.option).subscribe(res => {
+// =======
   getListRoleStaff() {
     this.staffService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
@@ -213,7 +218,7 @@ export class AddOrEditStaffDrawerComponent
   save() {
     if (!this.formGroup.value.isWork) {
       this.formGroup.value.teamId = null;
-    } 
+    }
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
@@ -269,5 +274,6 @@ export class AddOrEditStaffDrawerComponent
     }).subscribe(res=>{
       this.listTeam = res.data
     });
+
   }
 }

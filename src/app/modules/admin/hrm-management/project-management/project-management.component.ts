@@ -97,7 +97,6 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   }
 
   doSearch() {
-
     this.searchModel = {...this.searchModel, page: 0, ...this.formSearch.value};
     this.processSearch(this.searchModel);
   }

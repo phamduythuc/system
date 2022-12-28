@@ -119,7 +119,7 @@ export class DataTableComponent
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
     if(!this.typeView){
       this.typeView = 'list'
     }
