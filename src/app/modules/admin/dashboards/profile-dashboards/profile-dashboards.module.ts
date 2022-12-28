@@ -10,6 +10,7 @@ import { SprintProfileDashboardsModule } from './sprint-profile-dashboards/sprin
 import { TranslocoModule } from '@ngneat/transloco';
 import { SharedModule } from '@shared/shared.module';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -26,7 +27,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ChartProfileDashboardsModule,
     SprintProfileDashboardsModule,
     SharedModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
+  ],
+  exports: [ProfileDashboardsComponent],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class ProfileDashboardsModule { }

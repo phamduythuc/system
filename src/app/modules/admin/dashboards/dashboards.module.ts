@@ -6,6 +6,7 @@ import {DashboardsComponent} from './dashboards.component';
 import {SharedModule} from '@shared/shared.module';
 import {TranslocoModule} from '@ngneat/transloco';
 import {ProjectStaffEffortModule} from '@shared/components/project-staff-effort/project-staff-effort.module';
+import { ProfileDashboardsModule } from './profile-dashboards/profile-dashboards.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ProjectStaffEffortModule} from '@shared/components/project-staff-effort/
     DashboardsRoutingModule,
     SharedModule,
     TranslocoModule,
-    ProjectStaffEffortModule
+    ProjectStaffEffortModule,
+    ProfileDashboardsModule
   ]
 })
 export class DashboardsModule { }

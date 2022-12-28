@@ -15,22 +15,24 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'percentEffort'" >
-          <!-- <span>{{ row[column.columnDef] }} %</span> -->
-          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
           <div class="box-percent">
-            <input
-            required
-            #rateInput="ngModel"
-            [(ngModel)]="emp[column.columnDef]"
-            type="number"
-            [min]="0"
-            max="100"
-            matInput
-            (ngModelChange)="change()"
-            pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-            [ngClass]="{ err: rateInput.errors }"
-          />
-          %
+            <mat-form-field
+              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+            >
+              <input
+                class="w-full"
+                matInput
+                trim="blur"
+                required
+                #rateInput="ngModel"
+                [(ngModel)]="emp[column.columnDef]"
+                [min]="0"
+                max="100"
+                (ngModelChange)="change()"
+                pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+              />
+            </mat-form-field>
+            %
           </div>
           <div
             class="errors"
@@ -48,22 +50,24 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'salaryActual'" >
-          <!-- <span>{{ row[column.columnDef] }} %</span> -->
-          <!-- <a href="{{ row[column.columnDef] }}" download>Download</a> -->
           <div class="box-percent">
-            <input
-            required
-            #rateInput="ngModel"
-            [(ngModel)]="emp[column.columnDef]"
-            type="number"
-            [min]="0"
-            max="100"
-            matInput
-            (ngModelChange)="change()"
-            pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-            [ngClass]="{ err: (rateInput.errors && (rateInput.dirty || rateInput.touched)) }"
-          />
-          %
+            <mat-form-field
+              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+            >
+              <input
+                class="w-full"
+                matInput
+                trim="blur"
+                required
+                #rateInput="ngModel"
+                [(ngModel)]="emp[column.columnDef]"
+                [min]="0"
+                max="100"
+                (ngModelChange)="change()"
+                pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+              />
+            </mat-form-field>
+            %
           </div>
           <div
             class="errors"

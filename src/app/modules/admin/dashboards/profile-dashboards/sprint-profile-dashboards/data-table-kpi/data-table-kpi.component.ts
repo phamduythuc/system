@@ -57,8 +57,6 @@ export class DataTableKpiComponent implements OnInit {
     this.dataSourceWithPageSize = new MatTableDataSource(this.rows);
     this.dataSource.paginator = this.paginator;
     this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
-    console.log(this.rows);
-    
   }
 
   change(){

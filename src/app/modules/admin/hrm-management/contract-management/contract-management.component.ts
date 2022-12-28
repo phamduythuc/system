@@ -4,6 +4,7 @@ import { GetListComponent } from '@core/getList.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
 import { AchievementService } from '@shared/services/achievement.service';
+import { ContractService } from '@shared/services/contract.service';
 import { StaffService } from '@shared/services/staff.service';
 import { AddOrEditContractComponent } from './add-or-edit-contract/add-or-edit-contract.component';
 import { DetailsContractComponent } from './details-contract/details-contract.component';
@@ -31,7 +32,7 @@ export class ContractManagementComponent
       flex: 0.7,
     },
     {
-      columnDef: 'staffId',
+      columnDef: 'staffName',
       header: 'hrm-management.staff.title',
     },
     {
@@ -79,68 +80,23 @@ export class ContractManagementComponent
   constructor(
     injector: Injector,
     public StaffService: StaffService,
-    public achievementService: AchievementService
+    public achievementService: AchievementService,
+    public ContractService:ContractService,
   ) {
-    super(injector, StaffService, achievementService);
-    this.searchResult.data = [
-      {
-        id: 5,
-        staffId: 355,
-        code: 'CT5',
-        type: 1,
-        status: 1,
-        effDate: '2022-01-01T00:00:00Z',
-        expDate: '2023-01-01T00:00:00Z',
-        signDate: '2022-01-01T00:00:00Z',
-        salary: 100000000,
-        insurance: 500000.0,
-        termPeriod: 2,
-        contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-        createdDate: '2022-12-22T02:33:43Z',
-        modifiedDate: '2022-12-22T02:33:43Z',
-        createdBy: 'admin',
-        modifiedBy: null,
-      },
-      {
-        id: 2,
-        staffId: 302,
-        code: 'CT2',
-        type: 2,
-        status: 1,
-        effDate: '2022-01-01T00:00:00Z',
-        expDate: '2023-01-01T00:00:00Z',
-        signDate: '2022-01-01T00:00:00Z',
-        salary: 100000000,
-        insurance: 500000.0,
-        termPeriod: 2,
-        contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-        createdDate: '2022-12-22T02:33:43Z',
-        modifiedDate: '2022-12-22T02:33:43Z',
-        createdBy: 'admin',
-        modifiedBy: null,
-      },
-    ];
-    this.searchResult.totalRecords = 2;
-    this.getListUser();
+    super(injector, ContractService, achievementService);
+    this.getListUser()
   }
 
   ngOnInit(): void {
     this.searchModel.status = 1;
-    // this.doSearch();
+    this.doSearch();
   }
 
   mapData(data: any) {
     data.map((x) => {
       x.type = this.getTypeContract(x.type);
       x.effDate = CommonUtilsService.dateToString(x.effDate, false);
-      x.salary = x.salary.toLocaleString() + ' đ';
-
-      this.listUser.map((z) => {
-        if (z.id == x.staffId) {
-          x.staffId = z.fullName;
-        }
-      });
-
+      // x.salary = x.salary.toLocaleString() + ' đ';
       return x;
     });
 
@@ -153,7 +109,9 @@ export class ContractManagementComponent
       page: 0,
       ...this.formSearch.value,
     };
-    this.processSearch(this.searchModel, () => {});
+    this.processSearch(this.searchModel, () => {
+      this.searchResult.data = this.mapData(this.searchResult.data);
+    });
   }
 
   actionClick(e: any): void {
@@ -214,14 +172,13 @@ export class ContractManagementComponent
       .subscribe((res1) => {});
   }
 
+  getListCategories() {
+    return JSON.parse(localStorage.getItem('listType'));
+  }
+
   getListUser() {
     this.StaffService.getListAllUser().subscribe((res: any) => {
       this.listUser = res.data;
-      this.searchResult.data = this.mapData(this.searchResult.data);
     });
-  }
-
-  getListCategories() {
-    return JSON.parse(localStorage.getItem('listType'));
   }
 }

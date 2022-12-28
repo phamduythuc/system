@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '@core/auth/auth.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { DashboardsProfileService } from '@shared/services/dashboards-profile.service';
@@ -40,11 +41,33 @@ export class ProfileDashboardsComponent implements OnInit {
     },
   ];
 
+  dialogId:any
+
   panelOpenState = false;
   constructor(
     private authService: AuthService,
     public translocoService: TranslocoService,
-  ) {}
+    private DashboardsProfileService:DashboardsProfileService,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<ProfileDashboardsComponent>
+
+  ) {
+    this.dialogId = dialogData?.id
+  }
+
+
+  // constructor(
+  //   injector: Injector,
+  //   public dialogRef: MatDialogRef<DetailsContractComponent>,
+  //   private achievementService: AchievementService,
+  //   private ContractService:ContractService,
+  //   @Inject(MAT_DIALOG_DATA) public dialogData: any
+  // ) {
+  //   super(injector, ContractService, dialogRef);
+  //   this.dialogId = dialogData?.id;
+  //   this.listUser = dialogData.listUser;
+  //   this.listCaregories = dialogData.listCaregories;
+  // }
 
   ngOnInit(): void {
     this.getProfile();
@@ -52,42 +75,44 @@ export class ProfileDashboardsComponent implements OnInit {
 
 
   getProfile() {
-
-    this.data.profile = {
-      id: 504,
-      address: 'Hà Nội',
-      nationalId: '000313112331',
-      companyEmail: 'emailcty@lifesup.com',
-      dateOfBirth: '1670000400000',
-      domicile: 'Hoàng Quốc Việt, Cầu Giấy, Hà Nội',
-      education: 'Đại học',
-      email: 'emailcanhan@gmail.com',
-      emergencyUser: '0123456789',
-      ethnic: 'Kinh',
-      fullName: 'Nguyễn Văn A',
-      gender: '2',
-      hireDate: '1668445200000',
-      imageUrl: 'file-upload/avatar/7b5a82c2-2769-4398-bcb2-71799777820d.png',
-      leaveDate: '1672333200000',
-      nationality: 'Việt Nam',
-      phone: '0987654321',
-      religion: '2',
-      seniority: '2 năm',
-      staOfficalDate: '1669741200000',
-      staffCode: 'MNV1231',
-      status: 1,
-      summary: 'mô tả cá nhân',
-      username: 'username123',
-      workExperience: '3 năm',
-      idNhanVienChamCong: 'mcc00111',
-      departmentId: 37,
-      positionId: 131,
-      levelId: 47,
-      teamId: 47,
-      staffStatus: 1,
-      role: 15,
-      salary: 5000000,
-    };
+this.DashboardsProfileService.getProfile().subscribe(res=>{
+  this.data.profile = res.data.staffInfo
+})
+    // this.data.profile = {
+    //   id: 504,
+    //   address: 'Hà Nội',
+    //   nationalId: '000313112331',
+    //   companyEmail: 'emailcty@lifesup.com',
+    //   dateOfBirth: '1670000400000',
+    //   domicile: 'Hoàng Quốc Việt, Cầu Giấy, Hà Nội',
+    //   education: 'Đại học',
+    //   email: 'emailcanhan@gmail.com',
+    //   emergencyUser: '0123456789',
+    //   ethnic: 'Kinh',
+    //   fullName: 'Nguyễn Văn A',
+    //   gender: '2',
+    //   hireDate: '1668445200000',
+    //   imageUrl: 'file-upload/avatar/7b5a82c2-2769-4398-bcb2-71799777820d.png',
+    //   leaveDate: '1672333200000',
+    //   nationality: 'Việt Nam',
+    //   phone: '0987654321',
+    //   religion: '2',
+    //   seniority: '2 năm',
+    //   staOfficalDate: '1669741200000',
+    //   staffCode: 'MNV1231',
+    //   status: 1,
+    //   summary: 'mô tả cá nhân',
+    //   username: 'username123',
+    //   workExperience: '3 năm',
+    //   idNhanVienChamCong: 'mcc00111',
+    //   departmentId: 37,
+    //   positionId: 131,
+    //   levelId: 47,
+    //   teamId: 47,
+    //   staffStatus: 1,
+    //   role: 15,
+    //   salary: 5000000,
+    // };
 
     this.data.contract = {
       data: [
