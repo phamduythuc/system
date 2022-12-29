@@ -65,5 +65,6 @@ const routerConfig: ExtraOptions = {
     NgxTrimDirectiveModule,
   ],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

@@ -11,6 +11,8 @@ import {AchievementService} from '@shared/services/achievement.service';
 import {StaffService} from '@shared/services/staff.service';
 import {SprintService} from '@shared/services/sprint.service';
 import FileSaver from 'file-saver';
+import { DecimalPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-project-effort',
@@ -22,6 +24,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
   recordUrl: any = '';
+  unitPrice: any  = '';
   documentName: any = '';
 
   isLoading: boolean = false;
@@ -30,8 +33,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   listStaffLevels: any;
   listStaff: any = {};
   filteredList: any = {};
-
-  newListStaff: any = [];
+  numberChars = new RegExp('[\.,]', 'g');
 
   option = {
     page: 0,
@@ -91,6 +93,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     private staffService: StaffService,
     public dialogRef: MatDialogRef<ProjectEffortComponent>,
     private achievementService: AchievementService,
+    private decimalPipe: DecimalPipe,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     super(injector, sprintService);
@@ -140,13 +143,16 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
+
+        this.unitPrice = this.formatCurrency(res.data.unitPrice);
+
         const urlName = res.data.recordUrl;
-        // this.recordUrl = urlName.toString().split("/")[1];
         this.recordUrl = urlName;
+
         this.documentName = res.data.documentName || res.data.recordUrl ? res.data.recordUrl.substring(res.data.recordUrl.lastIndexOf('/') + 1) : '';
         this.formGroup.patchValue({
           id: res.data.id,
-          unitPrice: res.data.unitPrice,
+          unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
           acceptanceEffort: res.data.acceptanceEffort,
@@ -216,6 +222,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const formData = new FormData();
     const formValue = this.formGroup.value;
     this.handleCoverTimeToString(formValue);
+
+    const valUnitPrice = formValue.unitPrice;
+    formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
     formValue.startDate = formValue.startDate && CommonUtilsService.dateToString(formValue.startDate);
     formValue.projectId = this.data.id;
 
@@ -299,6 +308,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     }
   }
 
+  formatCurrency(val: any) {
+    return this.decimalPipe.transform(val, '1.0', 'en-US');
+  }
+
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
@@ -376,10 +389,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.showSnackBar(res1.message, 'error');
       }
     });
-  }
-
-  formatCurrency(value){
-
   }
 
 }
