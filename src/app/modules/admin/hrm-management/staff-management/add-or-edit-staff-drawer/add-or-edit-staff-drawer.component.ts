@@ -154,7 +154,7 @@ export class AddOrEditStaffDrawerComponent
     salary: [],
     file: [],
     teamId: [],
-    isWork: [false]
+    isWorker: [false]
   });
 
   constructor(
@@ -216,12 +216,13 @@ export class AddOrEditStaffDrawerComponent
   }
 
   save() {
-    if (!this.formGroup.value.isWork) {
+    if (!this.formGroup.value.isWorker) {
       this.formGroup.value.teamId = null;
     }
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
+console.log(data);
 
     if (this.staffSelected && this.staffSelected !== -1) {
       data.id = this.staffSelected;
