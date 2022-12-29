@@ -85,7 +85,19 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ];
 
   listTeam: any[] = [];
-
+  formGroup = this.fb.group({
+    id:'',
+    text: '',
+    name: [],
+    number: 2,
+    sprint: [],
+    leader: [],
+    expected: [],
+    cost: [],
+    revenue: [],
+    staDate:[],
+    endDate:[]
+  });
 
 
   constructor(injector: Injector, public teamService: TeamService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
@@ -123,7 +135,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.searchModel.status = 1;
     this.processSearch(this.searchModel, () => this.callback());
     this.handleCoverStringToDate(this.team);
-    this.formSearch.patchValue(this.team);
+    this.formGroup.patchValue(this.team);
   }
 
   doSearch(): void {
