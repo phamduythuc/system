@@ -209,12 +209,18 @@
                   <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
                 </button>
                 <div class="nameFile">
-                  <a
-                    (click)="downloadDocument(recordUrl)"
-                    title="{{ recordUrl }}"
-                  >
-                    {{ recordUrl || "No file uploaded yet." }}
-                  </a>
+
+                  <ng-container *ngIf="documentName">
+                    <a (click)="downloadDocument(recordUrl)" title="{{ recordUrl }}">
+                      {{ documentName}}
+                    </a>
+                  </ng-container>
+                  <ng-container *ngIf="!documentName">
+                    <a title="{{ recordUrl }}">
+                      No file uploaded yet.
+                    </a>
+                  </ng-container>
+
                 </div>
               </div>
             </div>

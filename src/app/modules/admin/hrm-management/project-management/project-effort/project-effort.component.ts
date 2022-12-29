@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, Injector, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -6,31 +6,28 @@ import moment, {Moment} from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
 import {IColumn} from '@layout/common/data-table/data-table.component';
-import {EffortService} from '@shared/services/effort.service';
 import {MONTH_FORMAT} from '@shared/app.constant';
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import { datePickerValidator } from '@shared/validation/date-picker.validation';
-import { AchievementService } from '@shared/services/achievement.service';
-import { StaffService } from '@shared/services/staff.service';
-import { SprintService } from '@shared/services/sprint.service';
+import {AchievementService} from '@shared/services/achievement.service';
+import {StaffService} from '@shared/services/staff.service';
+import {SprintService} from '@shared/services/sprint.service';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-project-effort',
   templateUrl: './project-effort.component.html',
   styleUrls: ['./project-effort.component.scss']
 })
-export class ProjectEffortComponent extends BaseComponent implements OnInit{
+export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
-  projectSelected: any ;
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
   recordUrl: any = '';
-  staffNameTypes: any = [];
+  documentName: any = '';
 
   isLoading: boolean = false;
   listStaffOrigin: any = [];
-  mapStaff:any = {};
-  listStaffLevels: any ;
+  mapStaff: any = {};
+  listStaffLevels: any;
   listStaff: any = {};
   filteredList: any = {};
 
@@ -89,32 +86,32 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
 
   constructor(
     injector: Injector,
-              private projectService: ProjectService,
-              private sprintService: SprintService,
-              private staffService: StaffService,
-              public dialogRef: MatDialogRef<ProjectEffortComponent>,
-              private achievementService: AchievementService,
-              @Inject(MAT_DIALOG_DATA) public data
+    private projectService: ProjectService,
+    private sprintService: SprintService,
+    private staffService: StaffService,
+    public dialogRef: MatDialogRef<ProjectEffortComponent>,
+    private achievementService: AchievementService,
+    @Inject(MAT_DIALOG_DATA) public data
   ) {
     super(injector, sprintService);
     const month = moment().startOf('month');
     this.formGroup = this.fb.group({
       id: [''],
-      startDate: [month,Validators.required],
-      estimate: ['', [ Validators.pattern('^\\d+$')]],
+      startDate: [month, Validators.required],
+      estimate: ['', [Validators.pattern('^\\d+$')]],
       unitPrice: [''],
       progress: [''],
       effort: [''], /* ???? Ghi nhan NL (NN) */
       effortExchange: [''],  /* ???? Ghi nhan NL quy doi (NN) */
       acceptanceEffort: [''],
       acceptanceDate: [''],
-      recordUrl:[''],
-      effortDifference : [''],
-      cumulativeDifference : [''],
+      recordUrl: [''],
+      effortDifference: [''],
+      cumulativeDifference: [''],
       differenceVnd: [''],
       cumulativeDifferenceVnd: [''],
       revenue: [''],
-      cost:[''],
+      cost: [''],
       efficiency: [''],
       note: [''],
       file: [],
@@ -146,6 +143,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
         const urlName = res.data.recordUrl;
         // this.recordUrl = urlName.toString().split("/")[1];
         this.recordUrl = urlName;
+        this.documentName = res.data.documentName || res.data.recordUrl ? res.data.recordUrl.substring(res.data.recordUrl.lastIndexOf('/') + 1) : '';
         this.formGroup.patchValue({
           id: res.data.id,
           unitPrice: res.data.unitPrice,
@@ -163,17 +161,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
           note: res.data.note,
           estimate: res.data.estimate,
           effort: res.data.effort,
-          // roleId: res.data.roleId,
-          // staffId: res.data.staffId,
-          // staffCode: res.data.staffCode,
-          // staffName: res.data.staffName,
-          // roleName: res.data.roleName,
-          // effortExchange: res.data.effortExchange,
-          // percentEffort: res.data.percentEffort,
-
         });
 
       } else {
+        this.documentName = '';
         this.formGroup.patchValue({
           id: null,
           unitPrice: null,
@@ -191,23 +182,16 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
           note: null,
           estimate: null,
           effort: null,
-
-          // roleId: null,
-          // staffId: null,
-          // staffCode: null,
-          // staffName: null,
-          // roleName: null,
-          // effortExchange: null,
-          // percentEffort: null,
         });
       }
     });
 
     this.sprintService.getMembers(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
-        res.data.forEach(item =>{
-         this.efforts.push(this.newItem(item))});
-         this.isLoading = false;
+        res.data.forEach(item => {
+          this.efforts.push(this.newItem(item));
+        });
+        this.isLoading = false;
       }
       this.loadStaffs();
     });
@@ -237,21 +221,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
 
     formData.append('file', this.formGroup.get('file').value || null);
     formData.append('data', new Blob([JSON.stringify(formValue)], {type: 'application/json'}));
-    if(formValue.id) {
+    if (formValue.id) {
       this.sprintService.update(formData).subscribe(res => {
         if ('00' === res.code) {
 
           this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(true);
         } else {
 
           this.showSnackBar(res.message, 'error');
         }
       });
-    }else{
+    } else {
       this.sprintService.create(formData).subscribe(res => {
         if ('00' === res.code) {
 
           this.showSnackBar(res.message, 'success');
+          this.dialogRef.close(true);
         } else {
 
           this.showSnackBar(res.message, 'error');
@@ -308,7 +294,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
   convertBase64(recordUrl): void {
     if (recordUrl) {
       this.achievementService.downloadFile(recordUrl).subscribe(res1 => {
-        this.recordUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
+        this.documentName = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
       });
     }
   }
@@ -317,39 +303,40 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
       this.formGroup.patchValue({file});
       reader.onload = () => {
         // this.recordUrl = reader.result;
-        this.recordUrl = file.name;
+        this.documentName = file.name;
       };
     }
   }
 
-  addNewRow(){
+  addNewRow() {
     this.isLoading = true;
     this.efforts.push(this.newItem({}));
     this.listStaff[this.efforts.length - 1] = [...this.listStaffOrigin];
     this.filteredList[this.efforts.length - 1] = [...this.listStaffOrigin];
-    setTimeout(() => {this.isLoading = false;}, 100);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
 
 
-  loadProjectRole(){
+  loadProjectRole() {
     this.sprintService.getRoleStaff(this.option).subscribe(res => {
       if (res.code === '00') {
         this.listStaffLevels = res.data;
-        this.listStaffLevels.forEach(item =>
-          {
-             item.id = Number(item.id)
-          });
+        this.listStaffLevels.forEach(item => {
+          item.id = Number(item.id);
+        });
       }
     });
   }
 
   loadStaffs() {
     this.mapStaff = {};
-    this.staffService.search().subscribe(res=> {
+    this.staffService.search().subscribe(res => {
       this.listStaffOrigin = [...res.data];
       this.listStaffOrigin.forEach(item => {
         this.mapStaff[item.id] = item;
@@ -358,18 +345,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
       this.efforts.value.forEach((item, index) => {
         this.listStaff[index] = [...res.data];
         this.filteredList[index] = [...res.data];
-      })
+      });
 
     });
   }
 
 
-  deleteRow(index : number){
+  deleteRow(index: number) {
     delete this.listStaff[index];
     delete this.filteredList[index];
     this.isLoading = true;
     this.efforts.removeAt(index);
-    setTimeout(() => {this.isLoading = false;}, 100);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
 
   onStaffChange(event: any, index: number) {
@@ -379,13 +368,18 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
 
   downloadDocument(recordUrl: any) {
     this.achievementService.renderFile({filePath: recordUrl, fileType: 2}).subscribe(res => {
-      console.log(res.headers['content-disposition']);
-      console.log(res.headers['content-response']);
+      const res1 = this.getResponseFromHeader(res.headers);
+      if (this.isSuccess(res1)) {
+        const fileName = this.getFileName(res.headers);
+        FileSaver.saveAs(res.body, fileName || this.documentName);
+      } else {
+        this.showSnackBar(res1.message, 'error');
+      }
     });
   }
 
   formatCurrency(value){
-    
+
   }
 
 }
