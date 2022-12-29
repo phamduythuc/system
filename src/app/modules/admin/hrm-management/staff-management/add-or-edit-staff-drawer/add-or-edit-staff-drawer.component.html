@@ -600,11 +600,11 @@
                     <input
                       type="checkbox"
                       class="cursor-pointer"
-                      id="iswork"
-                      formControlName="isWork"
-                      [checked]="formGroup.value.isWork"
+                      id="isWorker"
+                      formControlName="isWorker"
+                      [checked]="formGroup.value.isWorker"
                     />
-                    <label for="iswork" class="cursor-pointer">{{
+                    <label for="isWorker" class="cursor-pointer">{{
                       t("common.isProductTeam")
                     }}</label>
                   </div>
@@ -614,7 +614,7 @@
 
             <div
               class="w-1/3"
-              [style.visibility]="formGroup.value.isWork ? 'visible' : 'hidden'"
+              [style.visibility]="formGroup.value.isWorker ? 'visible' : 'hidden'"
             >
               <div class="w-full">
                 <mat-form-field class="fuse-mat-no-subscript w-full">

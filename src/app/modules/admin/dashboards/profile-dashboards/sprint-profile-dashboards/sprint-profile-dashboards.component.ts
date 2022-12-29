@@ -54,7 +54,7 @@ export class SprintProfileDashboardsComponent implements OnInit {
   ];
 
   startDate = this._formBuilder.group({
-    startMonth: [moment().startOf('month')],
+    startMonth: [moment().add(-1, 'month').startOf('month')],
   });
 
   formGroup = this._formBuilder.group({
@@ -67,7 +67,7 @@ export class SprintProfileDashboardsComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private translocoService: TranslocoService,
-    private DashboardsProfileService:DashboardsProfileService
+    private DashboardsProfileService: DashboardsProfileService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -83,7 +83,7 @@ export class SprintProfileDashboardsComponent implements OnInit {
       status: 1,
       keyword: '',
     };
-    this.getData(new Date())
+    this.getData(this.startDate.value.startMonth);
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -104,40 +104,57 @@ export class SprintProfileDashboardsComponent implements OnInit {
     datepicker.close();
   }
 
-getData(data){
-  this.DashboardsProfileService.getSprint({month: CommonUtilsService.dateToString(data, false)}).subscribe((res:any)=>{
-    this.data = {
-      data: res.data,
-      totalRecords: res.data.length,
-      extraData: res.extraData
-    } 
-    if(res.extraData){
-      this.formGroup.patchValue(res.extraData);
-    }else{
-      this.formGroup.patchValue({
-        salary: 0,
-        kpiTarget: 0,
-        salaryActual: 0,
-        kpiInsure: 0,
-      });
-    }
-  })
-}
+  getData(data) {
+    this.DashboardsProfileService.getSprint({
+      month: CommonUtilsService.dateToString(data, false),
+    }).subscribe((res: any) => {
+      this.data = {
+        data: res.data,
+        totalRecords: res.data.length,
+        extraData: res.extraData,
+      };
+      if (res.extraData) {
+        this.formGroup.patchValue(res.extraData);
+      } else {
+        this.formGroup.patchValue({
+          salary: 0,
+          kpiTarget: 0,
+          salaryActual: 0,
+          kpiInsure: 0,
+        });
+      }
+    });
+  }
 
   view() {
     this.startDate.value.startMonth = CommonUtilsService.dateToString(
       this.startDate.value.startMonth
     );
-    this.getData(this.startDate.value.startMonth)
+    this.getData(this.startDate.value.startMonth);
     // this.callback.emit(this.startDate.value.startMonth);
   }
 
   handleDataKPI(data) {
-    console.log(data);
     this.data.data = data;
   }
 
   saveData() {
-    console.log(this.data?.data);
+    this.data?.data.map((x) => {
+      x.acceptanceEffort  = Number(x.percentEffort);
+      
+      return x;
+    });
+
+    let payload = {
+      month: CommonUtilsService.dateToString(
+        this.startDate.value.startMonth
+      ),
+      effortDetail: this.data?.data,
+    };
+    this.DashboardsProfileService.updateEffort(payload).subscribe(res=>{
+      console.log(res);
+      
+    })
   }
+
 }
