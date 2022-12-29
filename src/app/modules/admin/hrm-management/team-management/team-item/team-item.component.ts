@@ -9,6 +9,9 @@ import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confir
 import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
 import * as Highcharts from 'highcharts';
+import { TeamMemberService } from '@shared/services/team-member.service';
+import { nextSortDir } from '@swimlane/ngx-datatable';
+import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
 
 
 @Component({
@@ -71,7 +74,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   formSearch: FormGroup;
-
+  listMember:any;
+  totalMember:number;
 
   list_type_view: any = [
     {
@@ -99,8 +103,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     endDate:[]
   });
 
+  searchModel: any = {
+    page: 0,
+    pageSize: 10,
+  };
 
-  constructor(injector: Injector, public teamService: TeamService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
+
+  constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
     this.formSearch = this.fb.group({
       id:'',
@@ -118,37 +127,58 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchModel.pageSize = 9999999;
-    this.formSearch.get('text').valueChanges.pipe(
-      map(event => event),
-      debounceTime(1000),
-      distinctUntilChanged()
-    ).subscribe(
-      res => {
-        this.listTeam = this.searchResult.data.filter(item => {
-          if (item.name.includes(res)) {
-            return item;
-          }
-        });
-      }
-    );
-    this.searchModel.status = 1;
-    this.processSearch(this.searchModel, () => this.callback());
+    // this.searchModel.pageSize = 9999999;
+    // this.formSearch.get('text').valueChanges.pipe(
+    //   map(event => event),
+    //   debounceTime(1000),
+    //   distinctUntilChanged()
+    // ).subscribe(
+    //   res => {
+    //     this.listTeam = this.searchResult.data.filter(item => {
+    //       if (item.name.includes(res)) {
+    //         return item;
+    //       }
+    //     });
+    //   }
+    // );
+    // this.searchModel.status = 1;
+    // this.processSearch(this.searchModel, () => this.callback());
     this.handleCoverStringToDate(this.team);
     this.formGroup.patchValue(this.team);
+    this.searchModel.teamId = this.team.id;
+    this.teamMemberService.getListMember(this.searchModel).subscribe(res=>{
+     this.listMember=res.data;
+     this.totalMember=this.listMember.length;
+    });
+
   }
 
-  doSearch(): void {
-    this.processSearch(this.searchModel, () => this.callback());
-  }
+  // doSearch(): void {
+  //   this.processSearch(this.searchModel, () => this.callback());
+  // }
 
-  goToTeam(id: any): void {
-    this.selectedTeamId = id;
+  // goToTeam(id: any): void {
+  //   this.selectedTeamId = id;
 
-    // Close the drawer on 'over' mode
-    if (this.drawerMode === 'over') {
-      this.drawer.close();
-    }
+  //   // Close the drawer on 'over' mode
+  //   if (this.drawerMode === 'over') {
+  //     this.drawer.close();
+  //   }
+  // }
+
+  addOrEdit(team: any): void {
+    this.showDialog(AddOrEditTeamComponent, {
+      data: {
+        team,
+      },
+      width: '70vw',
+      // maxHeight: '90vh',
+      disableClose: true
+    }, (value) => {
+      if (value) {
+        // this.doSearch();
+      }
+    });
   }
 
 
@@ -178,6 +208,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       this.deleteConfirmDialog(id);
     }
   }
+
   deleteConfirmDialog(id?: any): any {
     this.showDialog(ConfirmDialogComponent, {}, (value) => {
       if (value) {
@@ -191,19 +222,20 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
         this.searchModel.page = 0;
-        this.processSearch(this.searchModel, () => this.callback());
+        // this.processSearch(this.searchModel, () => this.callback());
+        this.processSearch(this.searchModel);
       } else {
         this.showSnackBar(res.message, 'error');
       }
     });
   }
 
-  callback(): void {
-    this.listTeam = this.searchResult.data;
-    if (this.listTeam.length > 0) {
-      this.goToTeam(this.listTeam[0].id);
-    }
-  }
+  // callback(): void {
+  //   this.listTeam = this.searchResult.data;
+  //   if (this.listTeam.length > 0) {
+  //     this.goToTeam(this.listTeam[0].id);
+  //   }
+  // }
 
   /**
  * Set the theme on the config

@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confir
 import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
 import * as Highcharts from 'highcharts';
+import { TeamMemberService } from '@shared/services/team-member.service';
 
 
 @Component({
@@ -70,8 +71,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
 
   formSearch: FormGroup;
   team = 'team';
-
-
+  selected ='domain'
   list_type_view: any = [
     {
       type: 'list',
@@ -82,15 +82,16 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       name: 'setting.typeView.grid',
     },
   ];
-
   listTeam: any[] = [];
-
-
-
-  constructor(injector: Injector, public teamService: TeamService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
+  constructor(injector: Injector,
+    public teamService: TeamService,
+    public teamMemberService: TeamMemberService,
+    fb: FormBuilder,
+    private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
     this.formSearch = this.fb.group({
       name: '',
+      option:['1']
     });
   }
 
@@ -110,7 +111,6 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       }
     );
     this.searchModel.status = 1;
-    debugger
     this.processSearch(this.searchModel, () => this.callback());
   }
 
@@ -122,14 +122,13 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
         ...this.formSearch.value,
       };
     }
-    else{
-      this.searchModel ={
+    else {
+      this.searchModel = {
         page: 0,
         pageSize: 10,
-        status:1,
+        status: 1,
       }
     }
-    debugger
     this.processSearch(this.searchModel);
   }
 

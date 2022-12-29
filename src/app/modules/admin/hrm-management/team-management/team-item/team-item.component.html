@@ -4,11 +4,19 @@
             <!-- Team Name -->
             <div class="w-full flex justify-between py-2 border-gray-400 border-b-2">
                 <div class="flex">
-                    <mat-label class="font-bold capitalize">{{'common.name'|transloco}}{{'(37tv)'}}</mat-label>
+                    <mat-label class="font-bold capitalize">{{team.name + ' ' + '(' + totalMember + ' ' +
+                        ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label>
                 </div>
-                <div>
-                    <mat-label class="font-bold capitalize">{{'common.active'|transloco}}</mat-label>
+
+                <!-- status -->
+                <div *ngIf="team.status==1; else template1">
+                    <mat-label class="font-bold capitalize">{{'common.activing'|transloco}}</mat-label>
                 </div>
+                <ng-template #template1>
+                    <div>
+                    <mat-label class="font-bold capitalize">{{'common.notActive'|transloco}}</mat-label>
+                    </div>
+                </ng-template>
             </div>
 
             <!-- sprint -->
@@ -30,7 +38,8 @@
                 <div class="flex w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label>{{"common.leader"|transloco}}</mat-label>
-                        <mat-select [placeholder]="('common.leader' | transloco)+' ...'" [formControlName]="'leader'" readonly>
+                        <mat-select [placeholder]="('common.leader' | transloco)+' ...'" [formControlName]="'leader'"
+                            readonly>
                             <mat-option *ngFor="let item of listListder" [value]="item?.id">{{item?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -73,9 +82,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-list role="list">
-                        <mat-list-item role="listitem">Item 1</mat-list-item>
-                        <mat-list-item role="listitem">Item 2</mat-list-item>
-                        <mat-list-item role="listitem">Item 3</mat-list-item>
+                        <div *ngFor="let member of listMember; index as idx; count as total" class="flex items-center">
+                            <div>{{idx+1}}</div>
+                            <div>
+                                <mat-list-item role="listitem">{{member.staffName}}</mat-list-item>
+                            </div>
+                        </div>
                     </mat-list>
                 </mat-expansion-panel>
             </div>
@@ -129,7 +141,7 @@
         <!-- action -->
         <div class="w-full flex justify-end">
             <div class="flex justify-end p-2">
-                <button mat-icon-button class="hover:bg-slate-200" (click)="emitEvent('edit', panel)">
+                <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team)">
                     <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
                 </button>
                 <button mat-icon-button class="hover:bg-slate-200" (click)="actionClick('delete', formSearch.value.id)">
