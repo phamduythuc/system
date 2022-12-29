@@ -13,7 +13,7 @@ import moment, { Moment } from 'moment';
 })
 export class SalaryManagementComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSNV';
-
+  value: any;
   columns: IColumn[] = [
     {
       columnDef: 'stt',
