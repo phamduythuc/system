@@ -69,7 +69,7 @@
               <mat-label
                 >{{ "effort.effort_estimate" | transloco }} (MM)</mat-label
               >
-              <input [formControlName]="'estimate'" type="text" matInput />
+              <input [formControlName]="'estimate'" type="text" matInput onlyNumber />
             </mat-form-field>
             <!-- <app-error-message
               [control]="formGroup.get('estimate')"
@@ -106,7 +106,7 @@
               class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
             >
               <mat-label>{{ "effort.percent_effort" | transloco }}</mat-label>
-              <input [formControlName]="'progress'" type="text" matInput />
+              <input [formControlName]="'progress'" type="text" matInput onlyNumber />
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('percentCompelete')"
@@ -125,7 +125,7 @@
                 }}
                 (MM)</mat-label
               >
-              <input [formControlName]="'effort'" type="text" matInput />
+              <input [formControlName]="'effort'" type="text" matInput onlyNumber />
             </mat-form-field>
           </div>
         </div>
@@ -148,6 +148,7 @@
                 type="text"
                 [formControlName]="'effortExchange'"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -159,6 +160,7 @@
                 [formControlName]="'acceptanceEffort'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
             <app-error-message
@@ -242,6 +244,7 @@
                 [formControlName]="'effortDifference'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -255,6 +258,7 @@
                 [formControlName]="'cumulativeDifference'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -266,7 +270,7 @@
               <mat-label
                 >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
               >
-              <input [formControlName]="'differenceVnd'" type="text" matInput />
+              <input [formControlName]="'differenceVnd'" type="text" matInput onlyNumber />
             </mat-form-field>
           </div>
           <!-- CHÊNH LỆCH LŨY KẾ (VND)-->
@@ -283,6 +287,7 @@
                 [formControlName]="'cumulativeDifferenceVnd'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -392,6 +397,7 @@
                           <input
                             type="text"
                             matInput
+                            onlyNumber
                             formControlName="effort"
                             placeholder="{{
                               'effort.acknowledgmentOfEffort' | transloco
@@ -451,21 +457,21 @@
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.turnover" | transloco }}</mat-label>
-              <input [formControlName]="'revenue'" type="text" matInput />
+              <input [formControlName]="'revenue'" type="text" matInput onlyNumber />
             </mat-form-field>
           </div>
           <!-- CHI PHÍ-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.cost" | transloco }}</mat-label>
-              <input [formControlName]="'cost'" type="text" matInput />
+              <input [formControlName]="'cost'" type="text" matInput onlyNumber />
             </mat-form-field>
           </div>
           <!-- HIỆU SUẤT-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.efficiency" | transloco }}</mat-label>
-              <input [formControlName]="'efficiency'" type="text" matInput />
+              <input [formControlName]="'efficiency'" type="text" matInput onlyNumber />
             </mat-form-field>
           </div>
           <!-- GHI CHÚ -->

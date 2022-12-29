@@ -11,6 +11,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
+import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
     DetailProjectComponent,
     ProjectEffortComponent,
     ProjectMemberComponent,
-    VndOnlyDirective
+    VndOnlyDirective,
+    NumberOnlyDirective
   ],
   imports: [
     CommonModule,
