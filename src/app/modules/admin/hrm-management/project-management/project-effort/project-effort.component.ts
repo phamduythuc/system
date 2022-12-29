@@ -384,4 +384,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit{
     });
   }
 
+  formatCurrency(value){
+    
+  }
+
 }

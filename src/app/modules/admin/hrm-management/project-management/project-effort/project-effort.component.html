@@ -92,7 +92,12 @@
                 }}
                 (VND)</mat-label
               >
-              <input [formControlName]="'unitPrice'" type="text" matInput />
+              <input
+                [formControlName]="'unitPrice'"
+                type="text"
+                (input)="formatCurrency(this.formGroup.get('unitPrice').value)"
+                matInput
+              />
             </mat-form-field>
           </div>
           <!-- % HOÀN THÀNH -->
@@ -204,7 +209,10 @@
                   <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
                 </button>
                 <div class="nameFile">
-                  <a (click)="downloadDocument(recordUrl)" title="{{ recordUrl }}">
+                  <a
+                    (click)="downloadDocument(recordUrl)"
+                    title="{{ recordUrl }}"
+                  >
                     {{ recordUrl || "No file uploaded yet." }}
                   </a>
                 </div>
@@ -320,7 +328,6 @@
                   <ng-container *ngSwitchCase="'staffName'">
                     <div class="field flex mt-2 mb-2">
                       <div class="input w-5/6">
-
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
