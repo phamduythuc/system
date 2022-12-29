@@ -85,9 +85,15 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
         filePath: data,
         fileType: 2,
       })
-      .subscribe((res1) => {
-        const fileName = this.getFileName(res1.headers);
-        FileSaver.saveAs(res1.body, fileName);
+      .subscribe((res) => {
+        const res1 = this.getResponseFromHeader(res.headers);
+        if (this.isSuccess(res1)) {
+        const fileName = this.getFileName(res.headers);
+        FileSaver.saveAs(res.body, fileName)
+        }
+        else {
+          this.showSnackBar(res1.message, 'error');
+        };
       });
   }
 }
