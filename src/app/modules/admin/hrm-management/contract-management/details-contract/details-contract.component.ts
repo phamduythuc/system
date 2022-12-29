@@ -75,10 +75,7 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
             this.detailsData.staffName = z.fullName;
           }
         });
-  
       });
-
-     
     }
   }
 
@@ -89,13 +86,8 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
         fileType: 2,
       })
       .subscribe((res1) => {
-        if(res1.success) {
         const fileName = this.getFileName(res1.headers);
         FileSaver.saveAs(res1.body, fileName);
-        }
-        else {
-          this.showSnackBar(res1.message,'error');
-        }
       });
   }
 }
