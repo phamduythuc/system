@@ -4,6 +4,7 @@
       <div class="header border-b flex justify-between">
         <div class="text-2xl font-bold card-title mb-3 capitalize flex justify-between gap-5">
           {{t('hrm-management.staff.title')}}
+
           <div class="flex justify-between gap-3 items-end">
             <form class="content overflow-hidden flex justify-between gap-3" [formGroup]="formSearch">
               <div class="field flex-col w-full">
@@ -30,7 +31,7 @@
                   <span>{{t("common.search")}}</span>
                 </button>
               </div>
-              
+
             </form>
             <div class="flex w-40 grid-view">
               <mat-form-field class="fuse-mat-no-subscript w-full">
@@ -42,9 +43,10 @@
               </mat-form-field>
             </div>
           </div>
-            
+
             <!-- <mat-icon class="cursor-pointer" svgIcon="heroicons_outline:view-grid" (click)="setView('grid')"></mat-icon>
             <mat-icon class="cursor-pointer" [svgIcon]="'heroicons_outline:view-list'" (click)="setView('list')"></mat-icon> -->
+
 
         </div>
         <div class="mb-2">

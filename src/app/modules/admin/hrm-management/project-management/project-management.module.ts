@@ -7,14 +7,18 @@ import { SharedModule } from '@shared/shared.module';
 import { ProjectEffortComponent } from './project-effort/project-effort.component';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { ProjectMemberComponent } from './project-member/project-member.component';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AddOrEditProjectComponent,
     DetailProjectComponent,
     ProjectEffortComponent,
-    ProjectMemberComponent,
+    ProjectMemberComponent
+
   ],
   imports: [
     CommonModule,
@@ -22,6 +26,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     SharedModule,
     DataTableModule,
     NgxMatSelectSearchModule,
-  ],
+    MatExpansionModule,
+    HttpClientModule,
+  ]
+
 })
 export class ProjectManagementModule {}

@@ -23,6 +23,10 @@ import {ErrorMessageModule} from '@shared/components/error-message/error-message
 import {TreeviewModule} from 'ngx-treeview';
 import { ChartLineComponent } from './charts/chart-line/chart-line.component';
 import {HighchartsChartModule} from 'highcharts-angular';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSelectFilterModule } from 'mat-select-filter';
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -35,6 +39,10 @@ export const MAT_MODULES = [
     MatRadioModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatSelectFilterModule
 ];
 
 @NgModule({

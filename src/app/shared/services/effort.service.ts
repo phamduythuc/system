@@ -13,6 +13,7 @@ export class EffortService extends BaseService {
     super(http, `${environment.apiUrl}/effort`);
   }
 
+
   update(data: any) {
     return this.http.put(`${this.serviceUrl}/update`, data);
   }
