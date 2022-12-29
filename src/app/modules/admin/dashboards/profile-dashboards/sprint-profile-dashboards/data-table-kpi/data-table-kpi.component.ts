@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, Simp
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from '@ngneat/transloco';
+import {MaskCurrencyDirective} from './mask-currency.directive'
 
 @Component({
   selector: 'app-data-table-kpi',
@@ -26,11 +27,16 @@ export class DataTableKpiComponent implements OnInit {
   get displayedColumns(): any {
     return this.columns.map((c) => c.columnDef);
   }
-
+  
   dataSource = new MatTableDataSource(this.rows);
   dataSourceWithPageSize = new MatTableDataSource(this.rows);
-
-  constructor(public fb :FormBuilder) {}
+  form: FormGroup;
+  constructor(public fb :FormBuilder) {
+    // this.form=fb.group({
+    //   currency:['']
+    // });
+    // this.onChanges();
+  }
 
   @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize: MatPaginator;
@@ -63,5 +69,10 @@ export class DataTableKpiComponent implements OnInit {
   change(){
     this.callback.emit(this.rows)
   }
+  onChanges(): void {
+    this.form.valueChanges.subscribe(() => {
+      console.log(this.form.value)
+    });
+ }
   
 }

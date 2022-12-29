@@ -75,6 +75,7 @@ export class ContractManagementComponent
     total: 0,
   };
 
+  dataDocument = []
   listUser: any = [];
 
   constructor(
@@ -90,6 +91,8 @@ export class ContractManagementComponent
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.doSearch();
+   
+    
   }
 
   mapData(data: any) {
@@ -110,7 +113,22 @@ export class ContractManagementComponent
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel, () => {
+      const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
       this.searchResult.data = this.mapData(this.searchResult.data);
+      let convertData = this.searchResult.data.map((obj)=> {
+        let convetSalary = {
+          ...obj,
+          salary: VND.format(parseInt(obj.salary))
+        }
+        return convetSalary
+      })
+      this.searchResult.data = convertData;
+      this.dataDocument = this.searchResult.data.map((item) => {
+        return item.documentName
+      })
     });
   }
 
@@ -164,12 +182,16 @@ export class ContractManagementComponent
   }
 
   download(data: any) {
+    console.log(data);
+    
     this.achievementService
       .renderFile({
         filePath: data,
-        fileType: '1',
+        fileType: '2',
       })
-      .subscribe((res1) => {});
+      .subscribe((response) => {
+        
+      });
   }
 
   getListCategories() {

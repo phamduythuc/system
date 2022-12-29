@@ -7,12 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '@shared/shared.module';
 import { TranslocoModule } from '@ngneat/transloco';
-
-
+import { MaskCurrencyDirective} from './mask-currency.directive'
 
 @NgModule({
   declarations: [
     DataTableKpiComponent,
+    MaskCurrencyDirective
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,8 @@ import { TranslocoModule } from '@ngneat/transloco';
     SharedModule
   ],
   exports: [
-    DataTableKpiComponent
+    DataTableKpiComponent,
+    MaskCurrencyDirective
   ]
 })
 export class DataTableKpiModule { }
