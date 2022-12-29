@@ -6,6 +6,7 @@ import { SharedModule } from '@shared/shared.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { DataTableKpiModule } from '../../dashboards/profile-dashboards/sprint-profile-dashboards/data-table-kpi/data-table-kpi.module';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [SalaryManagementComponent],
@@ -15,6 +16,7 @@ import { DataTableKpiModule } from '../../dashboards/profile-dashboards/sprint-p
     TranslocoModule,
     SharedModule,
     DataTableKpiModule,
+    CurrencyMaskModule,
     RouterModule.forChild([
       {
         path: '',

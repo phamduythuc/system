@@ -8,6 +8,7 @@ import { ContractService } from '@shared/services/contract.service';
 import { StaffService } from '@shared/services/staff.service';
 import { AddOrEditContractComponent } from './add-or-edit-contract/add-or-edit-contract.component';
 import { DetailsContractComponent } from './details-contract/details-contract.component';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-contract-management',
@@ -75,16 +76,17 @@ export class ContractManagementComponent
     total: 0,
   };
 
+  dataDocument = [];
   listUser: any = [];
 
   constructor(
     injector: Injector,
     public StaffService: StaffService,
     public achievementService: AchievementService,
-    public ContractService:ContractService,
+    public ContractService: ContractService
   ) {
     super(injector, ContractService, achievementService);
-    this.getListUser()
+    this.getListUser();
   }
 
   ngOnInit(): void {
@@ -110,7 +112,22 @@ export class ContractManagementComponent
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel, () => {
+      const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
       this.searchResult.data = this.mapData(this.searchResult.data);
+      let convertData = this.searchResult.data.map((obj) => {
+        let convetSalary = {
+          ...obj,
+          salary: VND.format(parseInt(obj.salary)),
+        };
+        return convetSalary;
+      });
+      this.searchResult.data = convertData;
+      this.dataDocument = this.searchResult.data.map((item) => {
+        return item.documentName;
+      });
     });
   }
 
@@ -167,9 +184,16 @@ export class ContractManagementComponent
     this.achievementService
       .renderFile({
         filePath: data,
-        fileType: '1',
+        fileType: 2,
       })
-      .subscribe((res1) => {});
+      .subscribe((res) => {
+        if (res.success) {
+          const fileName = this.getFileName(res.headers);
+          FileSaver.saveAs(res.body, fileName);
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
   }
 
   getListCategories() {
