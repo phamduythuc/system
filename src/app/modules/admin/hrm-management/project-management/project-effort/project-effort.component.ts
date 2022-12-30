@@ -336,6 +336,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   removeFile(){
     this.formGroup.controls['recordUrl'].setValue(null);
+    this.recordUrl = null;
     this.documentName = null;
     this.visibleBtnUpload = !this.visibleBtnUpload;
   }
