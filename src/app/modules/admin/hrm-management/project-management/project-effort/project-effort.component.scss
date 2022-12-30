@@ -10,12 +10,16 @@
 }
 
 .nameFile{
-  display: block;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   a:hover{
     cursor: pointer;
+    color: #4f46e5;
+    transition: 0.5s;
   }
 
 }

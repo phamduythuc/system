@@ -294,7 +294,8 @@
     "timeAllocation" : "Time allocation",
     "acknowledgmentOfEffortMM" : "Acknowledgment of effort (MM)",
     "role": "Role",
-    "add": "Add"
+    "add": "Add",
+    "chooseFile":"choose file"
 
   },
   "staff": {

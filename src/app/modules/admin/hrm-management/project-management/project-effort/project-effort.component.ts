@@ -1,4 +1,4 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -20,6 +20,9 @@ import { DecimalPipe } from '@angular/common';
   styleUrls: ['./project-effort.component.scss']
 })
 export class ProjectEffortComponent extends BaseComponent implements OnInit {
+
+  visibleBtnUpload: boolean = true;
+
 
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
@@ -150,6 +153,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.recordUrl = urlName;
 
         this.documentName = res.data.documentName || res.data.recordUrl ? res.data.recordUrl.substring(res.data.recordUrl.lastIndexOf('/') + 1) : '';
+        if(this.documentName !== ''){
+          this.visibleBtnUpload = !this.visibleBtnUpload;
+
+        }
         this.formGroup.patchValue({
           id: res.data.id,
           unitPrice: this.unitPrice,
@@ -315,14 +322,22 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
+
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       this.formGroup.patchValue({file});
       reader.onload = () => {
         // this.recordUrl = reader.result;
         this.documentName = file.name;
+        this.visibleBtnUpload = !this.visibleBtnUpload;
       };
-    }
+    };
+  }
+
+  removeFile(){
+    this.formGroup.controls['recordUrl'].setValue(null);
+    this.documentName = null;
+    this.visibleBtnUpload = !this.visibleBtnUpload;
   }
 
   addNewRow() {
@@ -382,6 +397,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   downloadDocument(recordUrl: any) {
     this.achievementService.renderFile({filePath: recordUrl, fileType: 2}).subscribe(res => {
       const res1 = this.getResponseFromHeader(res.headers);
+
       if (this.isSuccess(res1)) {
         const fileName = this.getFileName(res.headers);
         FileSaver.saveAs(res.body, fileName || this.documentName);

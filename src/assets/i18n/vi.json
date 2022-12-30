@@ -185,7 +185,7 @@
       "chartKPI": {
         "title": "KPI theo tháng"
       }
-    }, 
+    },
     "team": {
       "title": "Đội/Nhóm",
       "form": {
@@ -278,7 +278,8 @@
     "timeAllocation" : "Phân bổ thời gian",
     "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
     "role": "Vai trò",
-    "add": "Thêm"
+    "add": "Thêm",
+    "chooseFile":"Chọn file"
   },
   "staff": {
     "staffName" : "Tên nhân viên",
