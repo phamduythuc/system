@@ -13,6 +13,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { TeamItemComponent } from './team-item/team-item.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
+import { TeamKpiComponent } from './team-kpi/team-kpi.component';
+import { ChartLineTeamKpiComponent } from './chart-line-team-kpi/chart-line-team-kpi.component';
 
 
 
@@ -21,11 +23,14 @@ import {MatListModule} from '@angular/material/list';
     TeamMembersComponent,
     AddOrEditTeamComponent,
     TeamItemComponent,
+
+    TeamKpiComponent,
+      ChartLineTeamKpiComponent,
   ],
   exports: [
     TeamMembersComponent,
     HighchartsChartComponent,
-    TeamItemComponent
+    TeamItemComponent,
   ],
   imports: [
     CommonModule,

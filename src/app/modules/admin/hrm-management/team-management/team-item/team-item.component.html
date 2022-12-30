@@ -14,17 +14,21 @@
                 </div>
                 <ng-template #template1>
                     <div>
-                    <mat-label class="font-bold capitalize">{{'common.notActive'|transloco}}</mat-label>
+                        <mat-label class="font-bold capitalize">{{'common.notActive'|transloco}}</mat-label>
                     </div>
                 </ng-template>
             </div>
 
+            <div class="w-full">
+                {{formGroup.value['sprint']|json}}
+            </div>
+
             <!-- sprint -->
-            <div class="w-full flex justify-start py-4">
+            <div class="w-full flex justify-start py-4 mt-5">
                 <div class="flex w-2/4 justify-between">
                     <mat-label class="mr-1 font-bold capitalize">{{'common.sprint'|transloco}}</mat-label>
                     <mat-form-field class="fuse-mat-no-subscript w-full -mt-2">
-                        <input class=" " matInput [matDatepicker]="sprint" datePickerFormat="MM/YYYY"
+                        <input class=" " matInput [matDatepicker]="sprint" datePickerFormat="MM/YYYY" (dateChange)="onDateChange(formGroup.value['sprint'])"
                             [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
@@ -33,13 +37,14 @@
                 </div>
             </div>
 
+
+
             <!-- Leader -->
             <div class="w-full flex justify-between py-2">
                 <div class="flex w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>{{"common.leader"|transloco}}</mat-label>
-                        <mat-select [placeholder]="('common.leader' | transloco)+' ...'" [formControlName]="'leader'"
-                            readonly>
+                        <mat-label class="font-bold capitalize">{{"common.leader"|transloco}}</mat-label>
+                        <mat-select [formControlName]="'leader'" readonly>
                             <mat-option *ngFor="let item of listListder" [value]="item?.id">{{item?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -48,25 +53,26 @@
 
             <!-- Ecpected -->
             <div class="w-full flex-col justify-between py-2">
-                <!-- expected -->
+                <!-- target -->
                 <div class="w-full mb-4">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>{{'common.expected'|transloco}}</mat-label>
-                        <input class=" " matInput [formControlName]="'expected'" readonly>
+                        <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
+                        <input class=" " matInput [formControlName]="'target'" readonly>
                     </mat-form-field>
                 </div>
                 <div class="w-full flex justify-between">
                     <!-- cost -->
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>{{'common.cost'|transloco}}</mat-label>
+                            <mat-label class="font-bold capitalize">{{'common.cost'|transloco}}</mat-label>
                             <input class=" " matInput [formControlName]="'cost'" readonly>
                         </mat-form-field>
                     </div>
+
                     <!-- revenue -->
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>{{'common.revenue'|transloco}}</mat-label>
+                            <mat-label class="font-bold capitalize">{{'common.revenue'|transloco}}</mat-label>
                             <input class=" " matInput [formControlName]="'revenue'" readonly>
                         </mat-form-field>
                     </div>
@@ -74,7 +80,7 @@
             </div>
 
             <!-- List member -->
-            <div class="w-full mt-2  border-gray-400 border-b-2 py-2">
+            <div class="w-full mt-2  border-gray-400 border-b-2 pt-2 pb-8">
                 <mat-expansion-panel class="w-full">
                     <mat-expansion-panel-header>
                         <mat-panel-title class="font-bold capitalize">
@@ -83,7 +89,7 @@
                     </mat-expansion-panel-header>
                     <mat-list role="list">
                         <div *ngFor="let member of listMember; index as idx; count as total" class="flex items-center">
-                            <div>{{idx+1}}</div>
+                            <div>{{idx+1+'.'}}</div>
                             <div>
                                 <mat-list-item role="listitem">{{member.staffName}}</mat-list-item>
                             </div>
@@ -92,56 +98,58 @@
                 </mat-expansion-panel>
             </div>
 
-            <!-- Date -->
-            <div class="flex justify-between w-full py-2">
-
-                <!-- start date -->
-                <div class="w-2/5">
-                    <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
-                        <input class=" " formControlName="staDate" matInput [matDatepicker]="startDate"
-                            datePickerFormat="MM/YYYY" [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
-                        <mat-datepicker-toggle #datepicker [for]="startDate">
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #startDate></mat-datepicker>
-                    </mat-form-field>
-                </div>
-
-
-                <!-- end date -->
-                <div class="w-2/5">
-                    <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>{{'hrm-management.team.form.endDate'|transloco}}</mat-label>
-                        <input class=" " formControlName="endDate" matInput [matDatepicker]="endDate"
-                            datePickerFormat="MM/YYYY" [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
-                        <mat-datepicker-toggle #datepicker [for]="endDate">
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #endDate></mat-datepicker>
-                    </mat-form-field>
-                </div>
-            </div>
-
         </form>
 
-        <!-- Zoom Icon -->
-        <div class="w-full flex justify-end py-2">
-            <button mat-icon-button class="hover:bg-slate-200">
-                <mat-icon svgIcon="heroicons_outline:eye" title="View" class="icon-size-5"></mat-icon>
-            </button>
-        </div>
-        <!-- Hight-Chart -->
-        <div>
-            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
-                style="width: 100%; height: 400px; display: block;">
-            </highcharts-chart>
-        </div>
+        <!-- Team Kpi -->
+        <div class="w-full">
+            <!-- <div class="w-full flex justify-end py-2">
+                <div class="flex justify-between w-full py-2">
 
+               
+                    <div class="w-2/5">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label
+                                class="font-bold capitalize">{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
+                            <input class=" " matInput [matDatepicker]="startDate" datePickerFormat="MM/YYYY"
+                                [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
+                            <mat-datepicker-toggle #datepicker [for]="startDate">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #startDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
 
+               
+                    <div class="w-2/5">
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label
+                                class="font-bold capitalize">{{'hrm-management.team.form.endDate'|transloco}}</mat-label>
+                            <input class=" " matInput [matDatepicker]="endDate" datePickerFormat="MM/YYYY"
+                                [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
+                            <mat-datepicker-toggle #datepicker [for]="endDate">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #endDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Zoom Icon -->
+            <!-- <div class="w-full flex justify-end py-2">
+                <button mat-icon-button class="hover:bg-slate-200">
+                    <mat-icon svgIcon="heroicons_outline:eye" title="View" class="icon-size-5"></mat-icon>
+                </button>
+            </div> -->
+
+            <!-- Hight-Chart -->
+            <div >
+                <app-team-kpi [data]="team.id" [random]="random"></app-team-kpi>
+            </div>
+        </div>
 
         <!-- action -->
         <div class="w-full flex justify-end">
             <div class="flex justify-end p-2">
-                <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team)">
+                <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team.id)">
                     <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
                 </button>
                 <button mat-icon-button class="hover:bg-slate-200" (click)="actionClick('delete', formSearch.value.id)">

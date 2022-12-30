@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { debounceTime, Subject } from 'rxjs';
@@ -10,8 +10,8 @@ import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
 import * as Highcharts from 'highcharts';
 import { TeamMemberService } from '@shared/services/team-member.service';
-import { nextSortDir } from '@swimlane/ngx-datatable';
 import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
+import moment from 'moment';
 
 
 @Component({
@@ -21,51 +21,9 @@ import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.com
 })
 
 export class TeamItemComponent extends BaseComponent implements OnInit {
+  @Input() team: any;
+  @Input() random: any;
 
-  @Input() team:any;
-
-  highcharts = Highcharts;
-  chartOptions = {
-    chart: {
-      type: "spline"
-    },
-    title: {
-      text: "Monthly Average Temperature"
-    },
-    subtitle: {
-      text: "Source: WorldClimate.com"
-    },
-    xAxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    },
-    yAxis: {
-      title: {
-        text: "Temperature °C"
-      }
-    },
-    tooltip: {
-      valueSuffix: " °C"
-    },
-    series: [
-      {
-        name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-      },
-      {
-        name: 'New York',
-        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-      },
-      {
-        name: 'Berlin',
-        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-      },
-      {
-        name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-      }
-    ]
-  };
   _permissionCodeName = 'DSD';
   @ViewChild('drawer') drawer: MatDrawer;
   drawerMode: 'over' | 'side' = 'side';
@@ -73,9 +31,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   selectedTeamId: any;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+
   formSearch: FormGroup;
-  listMember:any;
-  totalMember:number;
+  listMember: any;
+  totalMember: number;
 
   list_type_view: any = [
     {
@@ -90,86 +49,100 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   listTeam: any[] = [];
   formGroup = this.fb.group({
-    id:'',
+    id: '',
     text: '',
     name: [],
     number: 2,
-    sprint: [],
+    sprint: ['2022-12-14T17:00:00.000Z'],
     leader: [],
-    expected: [],
+    target: [],
     cost: [],
     revenue: [],
-    staDate:[],
-    endDate:[]
+    staDate: [],
+    endDate: []
   });
+
+
 
   searchModel: any = {
     page: 0,
     pageSize: 10,
   };
-
+  searchKpi: any = {
+    teamId: 5,
+    startMonth: '01/01/2021',
+    endMonth: '01/01/2021'
+  }
 
   constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
     this.formSearch = this.fb.group({
-      id:'',
+      id: '',
       text: '',
       name: [],
       number: 2,
       sprint: [],
       leader: [],
-      expected: [],
+      target: [],
       cost: [],
-      revenue: [],
-      staDate:[],
-      endDate:[]
+      revenue: ['1'],
+      staDate: [],
+      endDate: []
     });
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.random = (Math.random() + 1).toString(36).substring(7);
   }
 
   ngOnInit(): void {
-    // this.searchModel.pageSize = 9999999;
-    // this.formSearch.get('text').valueChanges.pipe(
-    //   map(event => event),
-    //   debounceTime(1000),
-    //   distinctUntilChanged()
-    // ).subscribe(
-    //   res => {
-    //     this.listTeam = this.searchResult.data.filter(item => {
-    //       if (item.name.includes(res)) {
-    //         return item;
-    //       }
-    //     });
-    //   }
-    // );
-    // this.searchModel.status = 1;
-    // this.processSearch(this.searchModel, () => this.callback());
+    var currentMonth = new Date(Date.now()).toLocaleDateString()
+    // console.log(currentMonth)
     this.handleCoverStringToDate(this.team);
     this.formGroup.patchValue(this.team);
     this.searchModel.teamId = this.team.id;
-    this.teamMemberService.getListMember(this.searchModel).subscribe(res=>{
-     this.listMember=res.data;
-     this.totalMember=this.listMember.length;
+    this.teamMemberService.getListMember(this.searchModel).subscribe(res => {
+      this.listMember = res.data;
+      this.totalMember = this.listMember.length;
     });
-
+    this.searchKpi.teamId = this.team.id;
+    this.getTeamKpiSprint(this.searchKpi);
+  }
+  onDateChange(e: any){
+   const x= moment(new Date(e)).format("DD/MM/YYYY").toString();
+   this.searchKpi = {
+    teamId: 5,
+    startMonth: x,
+    endMonth: x
+  }
+  this.getTeamKpiSprint(this.searchKpi);
   }
 
-  // doSearch(): void {
-  //   this.processSearch(this.searchModel, () => this.callback());
-  // }
+  getTeamKpiSprint(searchKpi: any) {
+    this.teamService.getTeamKpi(searchKpi).subscribe(res => {
+      console.log(res.data[0]);
+    debugger
+      this.formGroup.setValue({
+        id: '',
+        text: '',
+        name: [],
+        number: 2,
+        sprint: [],
+        leader: [],
+        target: [res.data[0].target],
+        cost: [res.data[0].cost],
+        revenue: [res.data[0].revenue],
+        staDate: [],
+        endDate: []
+      })
+    });
+  }
 
-  // goToTeam(id: any): void {
-  //   this.selectedTeamId = id;
-
-  //   // Close the drawer on 'over' mode
-  //   if (this.drawerMode === 'over') {
-  //     this.drawer.close();
-  //   }
-  // }
-
-  addOrEdit(team: any): void {
+  addOrEdit(id: any): void {
     this.showDialog(AddOrEditTeamComponent, {
       data: {
-        team,
+        id,
       },
       width: '70vw',
       // maxHeight: '90vh',
@@ -195,14 +168,14 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       this.addOrEdit(gr.id);
     }
     else if (type === 'view') {
-   
+
     }
     else {
       this.deleteConfirmDialog(gr.id);
     }
   }
 
-  actionClick(e: any, id:any): void {
+  actionClick(e: any, id: any): void {
     debugger
     if (e === 'delete') {
       this.deleteConfirmDialog(id);
