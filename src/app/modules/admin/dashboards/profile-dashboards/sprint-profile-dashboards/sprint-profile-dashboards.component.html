@@ -107,7 +107,7 @@
     <div class="mb-2 text-base font-semibold uppercase">
       {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
     </div>
-    <app-data-table-kpi
+    <app-data-table
       [roleName]="_permissionCodeName"
       [rows]="data?.data"
       [columns]="columns"
@@ -118,20 +118,61 @@
       (callback)="handleDataKPI($event)"
       (action)="actionClick($event)"
       (pageChange)="changePage($event)"
-      
     >
-    <ng-template #rowTemplate let-row='row' let-column="column">
-      <ng-container [ngSwitch]="column.columnDef">
-        <ng-container *ngSwitchDefault>{{row[column.columnDef]}}</ng-container>
-        <ng-container *ngSwitchCase="'contractFilePath'">
-          <span class="cursor-pointer" (click)="download(row.contractFilePath)">Download</span>
+    
+      <ng-template #rowTemplate let-row="row" let-column="column">
+        <ng-container [ngSwitch]="column.columnDef">
+          <ng-container *ngSwitchDefault>{{
+            row[column.columnDef]
+          }}</ng-container>
+          <ng-container *ngSwitchCase="'percentEffort'">
+            <div class="box-percent">
+              <mat-form-field
+                class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+              >
+                <input
+                  class="w-full"
+                  matInput
+                  trim="blur"
+                  required
+                  #rateInput="ngModel"
+                  [(ngModel)]="row[column.columnDef]"
+                  [min]="0"
+                  max="100"
+                  pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+                />
+              </mat-form-field>
+              %
+            </div>
+            <div
+              class="errors"
+              *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
+            >
+              <div [hidden]="!rateInput.errors.pattern">
+                <span>{{
+                  "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+                }}</span>
+              </div>
+              <div [hidden]="!rateInput.errors.required">
+                {{
+                  "dashboard.profile.tab.sprint.time_percent_err" | transloco
+                }}
+              </div>
+            </div>
+          </ng-container>
+         
+
         </ng-container>
-      </ng-container>
-    </ng-template>
-    </app-data-table-kpi>
+      </ng-template>
+    </app-data-table>
 
     <div class="sm:col-span-1 flex justify-end items-end">
-      <button mat-raised-button color="primary" class="mr-3" (click)="saveData()">
+      <button
+        mat-raised-button
+        color="primary"
+        class="mr-3"
+        (click)="saveData()"
+      >
         <span>{{ "button.save" | transloco }}</span>
       </button>
     </div>

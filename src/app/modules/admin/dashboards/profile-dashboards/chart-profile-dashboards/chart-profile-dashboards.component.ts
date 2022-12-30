@@ -45,10 +45,10 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
   formGroup = this._formBuilder.group({
     startMonth: [
-      moment().add(-7, 'month').startOf('month'),
+      moment().subtract(7, 'months'),
       Validators.required,
     ],
-    endMonth: [moment().add(-7, 'month').startOf('month'), Validators.required],
+    endMonth: [moment().subtract(1, 'months'), Validators.required],
     staffId: [503],
   });
 
@@ -86,9 +86,11 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
     let payload = {
       startMonth: CommonUtilsService.dateToString(
-        moment().subtract(6, 'months')
+        moment().add(-7, 'month').startOf('month')
       ),
-      endMonth: CommonUtilsService.dateToString(moment()),
+      endMonth: CommonUtilsService.dateToString(
+        moment().add(-1, 'month').startOf('month')
+      ),
       staffId: 503,
     };
     this.view(payload);

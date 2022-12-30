@@ -5,15 +5,30 @@
     </div> -->
 
     <div class="data-table w-full mt-4">
-      <app-data-table-kpi
+      <app-data-table
       [roleName]="_permissionCodeName"
-      [rows]="data?.data"
+      [rows]="searchResult?.data"
       [columns]="columns"
       [paginate]="true"
       [limit]="searchModel.pageSize"
-      [count]="data?.totalRecords"
+      [count]="searchResult?.totalRecords"
+      [rowTemplate]="rowTemplate"
       (callback)="handleDataKPI($event)"
     >
-    </app-data-table-kpi>
+    <ng-template #rowTemplate let-row="row" let-column="column">
+      <ng-container [ngSwitch]="column.columnDef">
+        <ng-container *ngSwitchDefault>{{
+          row[column.columnDef]
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'contractFilePath'">
+          <span
+            class="cursor-pointer"
+            (click)="download(row.contractFilePath)"
+            >Download</span
+          >
+        </ng-container>
+      </ng-container>
+    </ng-template>
+    </app-data-table>
     </div>
   </div>

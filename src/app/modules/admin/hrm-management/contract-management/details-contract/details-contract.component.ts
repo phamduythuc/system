@@ -1,3 +1,5 @@
+import { messages } from './../../../../../mock-api/common/messages/data';
+import FileSaver from 'file-saver';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
@@ -73,10 +75,7 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
             this.detailsData.staffName = z.fullName;
           }
         });
-  
       });
-
-     
     }
   }
 
@@ -84,8 +83,17 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
     this.achievementService
       .renderFile({
         filePath: data,
-        fileType: '1',
+        fileType: 2,
       })
-      .subscribe((res1) => {});
+      .subscribe((res) => {
+        const res1 = this.getResponseFromHeader(res.headers);
+        if (this.isSuccess(res1)) {
+        const fileName = this.getFileName(res.headers);
+        FileSaver.saveAs(res.body, fileName)
+        }
+        else {
+          this.showSnackBar(res1.message, 'error');
+        };
+      });
   }
 }

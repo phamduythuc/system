@@ -13,7 +13,7 @@ import moment, { Moment } from 'moment';
 })
 export class SalaryManagementComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSNV';
-
+  value: any;
   columns: IColumn[] = [
     {
       columnDef: 'stt',
@@ -127,11 +127,15 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     };
     this.StaffService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
+        const VND = new Intl.NumberFormat('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        });
         let convertData = res.data.map(obj => {
           return  {
             fullName: obj.fullName,
             salaryActual: parseInt(obj.salaryActual),
-            salary: parseInt(obj.salary),
+            salary: VND.format(parseInt(obj.salary)) ,
             revenueMonth: obj.revenueMonth,
             staffCode: obj.staffCode,
             staffId :obj.staffId
