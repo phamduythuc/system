@@ -368,6 +368,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   loadStaffs() {
     this.mapStaff = {};
     this.staffService.search().subscribe(res => {
+      console.log(res);
+
       this.listStaffOrigin = [...res.data];
       this.listStaffOrigin.forEach(item => {
         this.mapStaff[item.id] = item;
