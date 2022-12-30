@@ -231,7 +231,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.handleCoverTimeToString(formValue);
 
     const valUnitPrice = formValue.unitPrice;
-    formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
+    if(valUnitPrice != null){
+      formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
+    }
     formValue.startDate = formValue.startDate && CommonUtilsService.dateToString(formValue.startDate);
     formValue.projectId = this.data.id;
 
