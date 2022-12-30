@@ -1,14 +1,12 @@
 import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
-import { debounceTime, Subject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { TeamService } from '@shared/services/team.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
-import * as Highcharts from 'highcharts';
 import { TeamMemberService } from '@shared/services/team-member.service';
 import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
 import moment from 'moment';
@@ -54,15 +52,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     name: [],
     number: 2,
     sprint: ['2022-12-14T17:00:00.000Z'],
-    leader: [],
+    leadName: [],
     target: [],
     cost: [],
     revenue: [],
     staDate: [],
     endDate: []
   });
-
-
 
   searchModel: any = {
     page: 0,
@@ -72,6 +68,25 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     teamId: 5,
     startMonth: '01/01/2021',
     endMonth: '01/01/2021'
+  };
+
+  searchDetail: any = {
+    teamId: null,
+    month: '01/01/2021'
+  };
+
+  data = {
+    teamId: null,
+    teamName: "",
+    targetMonth: "",
+    revenue: "",
+    target: "",
+    cost: "",
+    effortExchange: null,
+    staffId: "",
+    staffName: "",
+    leadId: null,
+    leadName: ""
   }
 
   constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
@@ -82,7 +97,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       name: [],
       number: 2,
       sprint: [],
-      leader: [],
+      leadName: [],
       target: [],
       cost: [],
       revenue: ['1'],
@@ -97,47 +112,28 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var currentMonth = new Date(Date.now()).toLocaleDateString()
-    // console.log(currentMonth)
-    this.handleCoverStringToDate(this.team);
-    this.formGroup.patchValue(this.team);
-    this.searchModel.teamId = this.team.id;
-    this.teamMemberService.getListMember(this.searchModel).subscribe(res => {
-      this.listMember = res.data;
-      this.totalMember = this.listMember.length;
-    });
-    this.searchKpi.teamId = this.team.id;
-    this.getTeamKpiSprint(this.searchKpi);
+    this.searchDetail.teamId = this.team.id;
+    this.getDetailTeamBySprint(this.searchDetail)
   }
-  onDateChange(e: any){
-   const x= moment(new Date(e)).format("DD/MM/YYYY").toString();
-   this.searchKpi = {
-    teamId: 5,
-    startMonth: x,
-    endMonth: x
-  }
-  this.getTeamKpiSprint(this.searchKpi);
+  onDateChange(e: any) {
+    const x = moment(new Date(e)).format("01/MM/YYYY").toString();
+    this.searchDetail = {
+      teamId: 5,
+      month: x
+    }
+    // this.formGroup.reset();
+    this.getDetailTeamBySprint(this.searchDetail);
+
   }
 
-  getTeamKpiSprint(searchKpi: any) {
-    this.teamService.getTeamKpi(searchKpi).subscribe(res => {
-      console.log(res.data[0]);
-    debugger
-      this.formGroup.setValue({
-        id: '',
-        text: '',
-        name: [],
-        number: 2,
-        sprint: [],
-        leader: [],
-        target: [res.data[0].target],
-        cost: [res.data[0].cost],
-        revenue: [res.data[0].revenue],
-        staDate: [],
-        endDate: []
-      })
+  getDetailTeamBySprint(searchDetail: any) {
+    this.teamService.getTeamDetaiBySprint(searchDetail).subscribe(res => {
+      this.data = res.data[0];
+      this.formGroup.patchValue(this.data)
+      this.listMember = this.data.staffName.split(',');
     });
   }
+
 
   addOrEdit(id: any): void {
     this.showDialog(AddOrEditTeamComponent, {

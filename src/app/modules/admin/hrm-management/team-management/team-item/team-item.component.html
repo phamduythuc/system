@@ -19,9 +19,9 @@
                 </ng-template>
             </div>
 
-            <div class="w-full">
+            <!-- <div class="w-full">
                 {{formGroup.value['sprint']|json}}
-            </div>
+            </div> -->
 
             <!-- sprint -->
             <div class="w-full flex justify-start py-4 mt-5">
@@ -44,9 +44,10 @@
                 <div class="flex w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{"common.leader"|transloco}}</mat-label>
-                        <mat-select [formControlName]="'leader'" readonly>
+                        <!-- <mat-select [formControlName]="'leadName'" readonly>
                             <mat-option *ngFor="let item of listListder" [value]="item?.id">{{item?.name}}</mat-option>
-                        </mat-select>
+                        </mat-select> -->
+                        <input class=" " matInput [formControlName]="'leadName'" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -91,7 +92,7 @@
                         <div *ngFor="let member of listMember; index as idx; count as total" class="flex items-center">
                             <div>{{idx+1+'.'}}</div>
                             <div>
-                                <mat-list-item role="listitem">{{member.staffName}}</mat-list-item>
+                                <mat-list-item role="listitem">{{member}}</mat-list-item>
                             </div>
                         </div>
                     </mat-list>

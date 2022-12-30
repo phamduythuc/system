@@ -1,9 +1,7 @@
 import { Component, Inject, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
-import * as Highcharts from 'highcharts';
 import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
 @Component({
   selector: 'app-team-kpi',
@@ -23,53 +21,6 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     endMonth: '01/12/2021'
   }
 
-
-  // hight chart
-  highcharts = Highcharts;
-  chartKpiTeam: any = {
-    chart: {
-      type: "line"
-    },
-    title: {
-      text: ""
-    },
-    subtitle: {
-      text: ""
-    },
-    xAxis: {
-      categories: []
-    },
-    yAxis: {
-      title: {
-        text: ""
-      }
-    },
-    tooltip: {
-      valueSuffix: "$"
-    },
-    series: [
-      {
-        name: 'Kỳ vọng',
-        color: 'green',
-        data: [1, 2, 3]
-      },
-      {
-        name: 'Chi phí',
-        color: 'red',
-        data: [4, 5, 6]
-      },
-      {
-        name: 'Doanh thu',
-        color: 'orange',
-        data: [1, 2, 7]
-      },
-    ]
-  };
-
-  options: any;
-  months  = [];
-  monthss=[1,2,3]
-
   expected: any[] = [];
 
   constructor(injector: Injector, public teamService: TeamService,
@@ -81,14 +32,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchKpi['teamId'] = this.data;
-    this.teamService.getTeamKpi(this.searchKpi).subscribe(res => {
-      const a = res.data.map(item => {
-        return item.targetMonth
-      }
-      );
-      this.chartKpiTeam.xAxis.categories = [...a]
-    });
+
   }
 
   zoomChart() {

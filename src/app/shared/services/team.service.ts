@@ -17,4 +17,8 @@ export class TeamService extends BaseService{
   getTeamKpi(searchModel:any) :Observable<any> {
     return this.http.get<any>(`${this.serviceUrl}/list-team-target`, { params: searchModel });
   }
+
+  getTeamDetaiBySprint(searchModel:any) :Observable<any> {
+    return this.http.get<any>(`${this.serviceUrl}/team-target`, { params: searchModel });
+  }
 }

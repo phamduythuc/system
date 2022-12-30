@@ -18,7 +18,7 @@ export class ChartLineTeamKpiComponent implements OnInit, OnChanges {
 
   searchKpi: any = {
     teamId: 5,
-    startMonth: '01/01/2021',
+    startMonth: '01/08/2021',
     endMonth: '01/12/2021'
   }
 
