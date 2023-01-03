@@ -200,6 +200,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
 
     this.sprintService.getMembers(searchObj).subscribe(res => {
+      console.log(res);
+
       if (this.isSuccess(res)) {
         res.data.forEach(item => {
           this.efforts.push(this.newItem(item));
@@ -215,7 +217,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     return this.fb.group({
       staffId: [data.staffId],
       roleId: [data.roleId],
-      staffCode: [data.staffCode],
+      // staffCode: [data.staffCode],
       effort: [data.effort],
       effortExchange: [data.effortExchange],
       percentEffort: [data.percentEffort],
@@ -368,8 +370,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   loadStaffs() {
     this.mapStaff = {};
     this.staffService.search().subscribe(res => {
-      console.log(res);
-
       this.listStaffOrigin = [...res.data];
       this.listStaffOrigin.forEach(item => {
         this.mapStaff[item.id] = item;

@@ -29,7 +29,7 @@ export class SprintService extends BaseService{
     return this.http.get(`${environment.apiUrl}/project-role?page=${data.page}&pageSize=${data.pageSize}`, {params: data});
   }
 
-  update(formData: FormData):Observable<any> {
-    return this.http.put(`${this.serviceUrl}/update`, formData)
+  update(formData: any): Observable<any> {
+    return this.http.put(`${this.serviceUrl}/update`, formData);
   }
 }
