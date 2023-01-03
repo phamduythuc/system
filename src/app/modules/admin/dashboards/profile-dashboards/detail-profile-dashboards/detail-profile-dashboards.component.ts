@@ -96,7 +96,7 @@ export class DetailProfileDashboardsComponent
     idNhanVienChamCong: [],
     imageUrl: [],
     leaveDate: [],
-    levelId: [null],
+    levelName: [null],
     maritalStatus: [],
     modifiedBy: [],
     modifiedDate: [],

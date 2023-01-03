@@ -163,7 +163,6 @@ export class AddOrEditStaffDrawerComponent
     private achievementService: AchievementService
   ) {
     super(injector, staffService);
-    console.log(this.formGroup);
   }
 
   ngOnInit(): void {
@@ -222,7 +221,6 @@ export class AddOrEditStaffDrawerComponent
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
-console.log(data);
 
     if (this.staffSelected && this.staffSelected !== -1) {
       data.id = this.staffSelected;
@@ -274,6 +272,8 @@ console.log(data);
       pageSize: 9999999,
     }).subscribe(res=>{
       this.listTeam = res.data
+      this.formGroup.value.teamId = this.listTeam[0].id
+      this.formGroup.patchValue(this.formGroup.value);
     });
 
   }
