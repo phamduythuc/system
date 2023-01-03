@@ -93,7 +93,6 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   // }
 
   actionClick(e: any): void {
-    console.log(e);
     if (e.type === 'edit') {
       this.addOrEditPartner(e.data.id);
     }

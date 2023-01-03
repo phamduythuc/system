@@ -187,11 +187,12 @@ export class ContractManagementComponent
         fileType: 2,
       })
       .subscribe((res) => {
-        if (res.success) {
+        const res1 = this.getResponseFromHeader(res.headers);
+        if (this.isSuccess(res1)) {
           const fileName = this.getFileName(res.headers);
           FileSaver.saveAs(res.body, fileName);
         } else {
-          this.showSnackBar(res.message, 'error');
+          this.showSnackBar(res1.message, 'error');
         }
       });
   }
