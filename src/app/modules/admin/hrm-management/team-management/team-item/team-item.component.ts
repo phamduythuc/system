@@ -28,7 +28,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   drawerOpened: boolean = true;
   selectedTeamId: any;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+  performance:any='';
 
   formSearch: FormGroup;
   listMember: any;
@@ -82,9 +82,9 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     teamId: null,
     teamName: "",
     targetMonth: "",
-    revenue: "",
+    revenue: 0,
     target: "",
-    cost: "",
+    cost: 0,
     effortExchange: null,
     staffId: "",
     staffName: "",
@@ -140,6 +140,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.formGroup.patchValue(this.data);
         this.listMember = this.data.staffName.split(',');
         this.totalMember = this.listMember.length;
+        this.performance = (this.data.cost/this.data.revenue*100).toFixed(2);
       }
       else {
         this.totalMember = 0;
