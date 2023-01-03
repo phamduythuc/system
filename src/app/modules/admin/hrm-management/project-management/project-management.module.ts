@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { ProjectManagementRoutingModule } from './project-management-routing.module';
 import { AddOrEditProjectComponent } from './add-or-edit-project/add-or-edit-project.component';
 import { DetailProjectComponent } from './detail-project/detail-project.component';
@@ -7,7 +7,12 @@ import { SharedModule } from '@shared/shared.module';
 import { ProjectEffortComponent } from './project-effort/project-effort.component';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { ProjectMemberComponent } from './project-member/project-member.component';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
+import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +20,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     DetailProjectComponent,
     ProjectEffortComponent,
     ProjectMemberComponent,
+    VndOnlyDirective,
+    NumberOnlyDirective
   ],
   imports: [
     CommonModule,
@@ -22,6 +29,10 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     SharedModule,
     DataTableModule,
     NgxMatSelectSearchModule,
+    MatExpansionModule,
+    HttpClientModule,
   ],
+  providers: [ CurrencyPipe, DecimalPipe ]
+
 })
 export class ProjectManagementModule {}

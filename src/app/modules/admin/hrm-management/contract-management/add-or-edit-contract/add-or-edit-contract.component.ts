@@ -4,6 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
 import { ContractService } from '@shared/services/contract.service';
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
+import { StaffService } from '@shared/services/staff.service';
+import {debounceTime, map} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
 
 
 @Component({
@@ -23,13 +26,13 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     signDate: [null,datePickerValidator()],
     salary: [null, Validators.required],
     insurance: [null, Validators.required],
-    contractFilePath: [null],
-
+    contractFilePath: [''],
+    searchStaff: [null]
   });
 
   dialogId: any = null;
 
-  listUser: any = [];
+  listStaff: any = [];
   listCaregories: any = [];
 
   fileURL:any
@@ -38,71 +41,117 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     injector: Injector,
     public dialogRef: MatDialogRef<AddOrEditContractComponent>,
     private ContractService:ContractService,
+    private staffService:StaffService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
     super(injector, ContractService, dialogRef);
     this.dialogId = dialogData?.id;
     
-    this.listUser = dialogData.listUser;
+    this.listStaff = dialogData.listUser;
+    
     this.listCaregories = dialogData.listCaregories;
     // listCaregories.CONTACT_TYPE
     // listCaregories.CONTRACT_STATUS
 
     if (this.dialogId) {
-      let arr = {
-        id: 2,
-        staffId: 302,
-        code: 'CT2',
-        type: 2,
-        status: 1,
-        effDate: '2022-01-01T00:00:00Z',
-        expDate: '2023-01-01T00:00:00Z',
-        signDate: '2022-01-01T00:00:00Z',
-        salary: 100000000,
-        insurance: 500000.0,
-        termPeriod: 2,
-        contractFilePath: 'contract/0e391dea-a695-40bc-bc52-d619ea580882.docx',
-        createdDate: '2022-12-22T02:33:43Z',
-        modifiedDate: '2022-12-22T02:33:43Z',
-        createdBy: 'admin',
-        modifiedBy: null,
-      }
-      this.formGroup.patchValue(arr);
-
-      // this.getDetails(12, () => {
-      // });
+      this.getDetails(this.dialogId, () => {
+        console.log(this.detailsData);
+        
+        if(this.detailsData.contractFilePath){
+          console.log(this.detailsData.contractFilePath.split("contract/"));
+          this.detailsData.contractFilePath= this.detailsData.contractFilePath.split("contract/")[1]
+        }
+      });
     }
+
+    this.listStaff = this.listStaff.map(x=>{
+      x.status = true
+      return x
+    });
+
+      this.formGroup.get('searchStaff').valueChanges.pipe(
+        map(event => event),
+        distinctUntilChanged()
+      ).subscribe(
+        res => {
+          this.listStaff.map(x=>{
+            if(x.fullName.trim().toLowerCase().includes(res)){
+              x.status = true
+            }else{
+              x.status = false
+            }
+            return x 
+          })
+        }
+      );
+
   }
 
   ngOnInit(): void {
+    console.log(this.detailsData);
     
   }
 
-  save(data) {
+  save() {
     const formData = new FormData();
-    const dataForm = this.formGroup.value;
-    
+    const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
-    data.id = this.dialogId || null;
-
-    dataForm.append('file', this.formGroup.get('file').value || null);
-    dataForm.append('data', new Blob([JSON.stringify(data)], {type: 'application/pdf'}));
-
-    // this.addOrEdit(data);
-    console.log(data);
     
-    // this.dialogRef.close(data)
+    if(this.dialogId){
+      data.id = this.dialogId;
+      formData.append('file', this.fileUpload.file || null);
+      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+      this.ContractService.updateContract(formData).subscribe(res => {
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.close();
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    }else{
+      formData.append('file', this.fileUpload.file );
+      formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+      this.ContractService.createContract(formData).subscribe(res => {
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.close();
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    }
   }
+
+  fileUpload:any = {
+    name: '',
+    type: '',
+    file: ''
+  }
+
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       this.formGroup.value.file = file;
-      console.log(this.formGroup.value);
+      this.fileUpload.file = file
+      this.fileUpload.name = file.name
+      if(file.type === 'application/pdf'){
+        this.fileUpload.type = 'assets/icons/icon_pdf.png'
+      }else{
+        this.fileUpload.type = 'assets/icons/icon_docx.png'
+      }
+
       reader.onload = () => {
         this.fileURL = reader.result;
       };
     }
   }
+
+  close() {
+    // this.drawer?.toggle();
+    this.dialogRef.close(this.formGroup.value);
+  }
+
 }

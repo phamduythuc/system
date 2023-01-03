@@ -23,6 +23,8 @@
   </div>
   <!--    content-->
   <div class="content mt-6" [formGroup]="formGroup">
+
+
     <div class="field flex mb-4">
       <div class="w-1/2 flex">
         <label class="w-1/3 font-medium required">{{
@@ -33,13 +35,24 @@
             appearance="fill"
             class="fuse-mat-no-subscript w-full bg-card"
           >
-            <mat-select
+            <mat-select #selectMember
               [placeholder]="'hrm-management.staff.title' | transloco"
               formControlName="staffId"
             >
-              <mat-option *ngFor="let item of listUser" [value]="item?.id">{{
-                item?.fullName
-              }}</mat-option>
+            <mat-option>
+              <ngx-mat-select-search [placeholderLabel]="'hrm-management.staff.title' | transloco" [formControlName]="'searchStaff'">
+                <mat-icon ngxMatSelectSearchClear
+                          class="icon-size-5"
+                          [svgIcon]="'heroicons_solid:x'"
+                          matPrefix></mat-icon>
+              </ngx-mat-select-search>
+            </mat-option>
+
+              <ng-container *ngFor="let staff of listStaff">
+                <mat-option [value]="staff.id" *ngIf="staff.status == true">
+                  {{staff.fullName}}
+                </mat-option>
+              </ng-container>
             </mat-select>
           </mat-form-field>
           <app-error-message
@@ -278,27 +291,42 @@
     </div>
 
     <div class="field flex mb-4">
-      <div class="w-1/2 flex">
-        <label class="w-1/3 font-medium required" for="contractFilePath">{{
+      <div class=" w-full flex">
+        <label class="w-1/7 font-medium required" for="file">{{
           "hrm-management.contract.link" | transloco
         }}</label>
-        <div class="input w-5/6">
-          <input type="file" id="contractFilePath" name="contractFilePath" class="hidden" accept=".png, .jpg, .jpeg, .jfif"
-                     (change)="uploadFile($event)"/>
-              <label for="contractFilePath" class="flex justify-start items-center w-full h-full">
-                    Upload file
-              </label>
+        <div class="input w-5/6 ml-6">
+          <input
+            type="file"
+            id="file"
+            name="file"
+            class="hidden"
+            accept=".pdf, .doc, .docx"
+            (change)="uploadFile($event)"
+          />
+          <label
+            for="file"
+            class="flex justify-start items-center w-full h-full"
+          >
+            <span *ngIf="!this.detailsData" class="cursor-pointer">Upload file</span>
+            <span *ngIf="this.detailsData?.documentName" class="cursor-pointer">{{this.detailsData?.documentName}}</span>
+
+            
+            <!-- <span
+              class="flex justify-start items-center gap-3"
+              *ngIf="fileUpload.type"
+              ><img [src]="fileUpload.type" class="w-6" />{{
+                fileUpload.name
+              }}</span
+            > -->
+          </label>
           <app-error-message
-            [control]="formGroup.get('contractFilePath')"
+            [control]="formGroup.get('file')"
             [name]="'hrm-management.contract.link' | transloco"
           ></app-error-message>
         </div>
       </div>
     </div>
-
-
-    
-
   </div>
   <!--    footer-->
   <div class="footer mt-6 flex justify-end">
@@ -312,7 +340,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid"
+      [disabled]="formGroup.invalid || !this.fileUpload.file"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon

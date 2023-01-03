@@ -97,7 +97,6 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   }
 
   doSearch() {
-
     this.searchModel = {...this.searchModel, page: 0, ...this.formSearch.value};
     this.processSearch(this.searchModel);
   }
@@ -156,7 +155,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         projects:this.searchResult.data
       },
       width: '60vw',
-      // height: '64vh',
+      maxHeight: '90vh',
       disableClose: true
     }, (value) => {
       if (value) {

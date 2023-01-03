@@ -30,7 +30,7 @@
         }}</mat-label>
         <div class="flex justify-center items-center border b-radius p-2 w-2/3">
           <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
-            {{ detailsData?.staffId }}
+            {{ detailsData?.staffName }}
           </div>
         </div>
       </div>
@@ -199,7 +199,7 @@
           class="flex py-2 cursor-pointer inline-block"
           (click)="download(detailsData?.contractFilePath)"
         >
-          Download
+        {{this.detailsData?.documentName}}
         </span>
       </div>
     </div>

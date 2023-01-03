@@ -16,7 +16,8 @@ import { DataTableKpiModule } from './data-table-kpi/data-table-kpi.module';
     CommonModule,
     SharedModule,
     DataTableKpiModule,
-    TranslocoModule
+    TranslocoModule,
+    DataTableModule
   ],
   exports: [SprintProfileDashboardsComponent]
 })

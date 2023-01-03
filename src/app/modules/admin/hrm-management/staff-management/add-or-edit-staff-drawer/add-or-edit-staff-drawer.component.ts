@@ -7,9 +7,12 @@ import { AchievementService } from '@shared/services/achievement.service';
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
   templateUrl: './add-or-edit-staff-drawer.component.html',
-  styleUrls: ['./add-or-edit-staff-drawer.component.scss']
+  styleUrls: ['./add-or-edit-staff-drawer.component.scss'],
 })
-export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnInit {
+export class AddOrEditStaffDrawerComponent
+  extends BaseComponent
+  implements OnInit
+{
   @Input() staffSelected: any;
   @Input() drawer: any;
   imageUrl: any = '';
@@ -20,46 +23,48 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
   genders = [
     {
       name: this.translocoService.translate('gender.female'),
-      value: '1'
+      value: '1',
     },
     {
       name: this.translocoService.translate('gender.male'),
-      value: '2'
+      value: '2',
     },
     {
       name: this.translocoService.translate('gender.other'),
-      value: '3'
-    }
+      value: '3',
+    },
   ];
   staffStatus = [
     {
       name: this.translocoService.translate('staff_status.official'),
-      value: 1
+      value: 1,
     },
     {
       name: this.translocoService.translate('staff_status.unofficial'),
-      value: 2
+      value: 2,
     },
     {
       name: this.translocoService.translate('staff_status.quit'),
-      value: 3
-    }
+      value: 3,
+    },
   ];
   religions = [
     {
       name: this.translocoService.translate('religion.yes'),
-      value: '1'
+      value: '1',
     },
     {
       name: this.translocoService.translate('religion.no'),
-      value: '2'
-    }
+      value: '2',
+    },
   ];
 
   listRoleStaff: any;
   listPositions: any;
   listStaffLevels: any;
   listDepartment: any;
+  listTeam:any
+
   formGroup = this.fb.group({
     //Địa chỉ đầy đủ
     address: [],
@@ -82,11 +87,10 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Hộ khẩu thường trú
     permanentResidence: [null, Validators.required],
     //Hộ khẩu thường trú
-    isProduct: [false],
     //Cấp bậc giáo dục
     education: [],
     //Email cá nhân
-    email: [],
+    email: [null, Validators.pattern('^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$')],
     //Thông tin liên lạc khẩn cấp
     emergencyUser: [],
     //Dân tộc
@@ -112,11 +116,17 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     //Ngày giờ cập nhật
     modifiedDate: [],
     //Mã căn cước công dân/Chứng minh nhân dân
-    nationalId: [null, [Validators.required, Validators.pattern('[0-9]*')]],
+    nationalId: [null, [Validators.required,Validators.maxLength(12), Validators.pattern('[0-9]*')]],
     //Quốc gia
     nationality: [],
     //Số điện thoại
-    phone: [null, [Validators.required, Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+    phone: [
+      null,
+      [
+        Validators.required,
+        Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b'),
+      ],
+    ],
     //Mã chức vụ
     positionId: [null, Validators.required],
     //Chức vụ hiện tại
@@ -143,16 +153,19 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     // lương
     salary: [],
     file: [],
+    teamId: [],
+    isWorker: [false]
   });
 
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     private staffService: StaffService,
-    private achievementService: AchievementService,) {
+    private achievementService: AchievementService
+  ) {
     super(injector, staffService);
   }
 
   ngOnInit(): void {
-    console.log(this.formGroup);
 
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
@@ -160,25 +173,32 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       });
     }
     this.getListRoleStaff();
+    this.getListTeam()
   }
+// <<<<<<< HEAD
+
+//   getListRoleStaff(){
+//     this.staffService.getRoleStaff(this.option).subscribe(res => {
+// =======
   getListRoleStaff() {
-    this.staffService.getRoleStaff(this.option).subscribe(res => {
+    this.staffService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
         this.listRoleStaff = res.data;
-        this.listRoleStaff.forEach(item => item.roleId = Number(item.roleId));
+        this.listRoleStaff.forEach(
+          (item) => (item.roleId = Number(item.roleId))
+        );
       }
     });
-    this.staffService.getListPosition(this.searchModel).subscribe(res => {
+    this.staffService.getListPosition(this.searchModel).subscribe((res) => {
       this.listPositions = res.data;
     });
-    this.staffService.getListStaffLevel(this.searchModel).subscribe(res => {
+    this.staffService.getListStaffLevel(this.searchModel).subscribe((res) => {
       this.listStaffLevels = res.data;
     });
-    this.staffService.getListDepartment(this.searchModel).subscribe(res => {
+    this.staffService.getListDepartment(this.searchModel).subscribe((res) => {
       this.listDepartment = res.data;
     });
   }
-
 
   close() {
     this.drawer?.toggle();
@@ -186,13 +206,18 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
 
   convertBase64(imageUrl): void {
     if (imageUrl) {
-      this.achievementService.downloadFile(imageUrl).subscribe(res1 => {
-        this.imageUrl = this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(res1.body));
+      this.achievementService.downloadFile(imageUrl).subscribe((res1) => {
+        this.imageUrl = this._sanitizer.bypassSecurityTrustUrl(
+          URL.createObjectURL(res1.body)
+        );
       });
     }
   }
 
   save() {
+    if (!this.formGroup.value.isWorker) {
+      this.formGroup.value.teamId = null;
+    }
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
@@ -200,8 +225,11 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     if (this.staffSelected && this.staffSelected !== -1) {
       data.id = this.staffSelected;
       formData.append('file', this.formGroup.get('file').value || null);
-      formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-      this.staffService.updateStaff(formData).subscribe(res => {
+      formData.append(
+        'data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+      this.staffService.updateStaff(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.close();
@@ -211,8 +239,11 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
       });
     } else {
       formData.append('file', this.formGroup.get('file').value || null);
-      formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-      this.staffService.createStaff(formData).subscribe(res => {
+      formData.append(
+        'data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+      this.staffService.createStaff(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.close();
@@ -235,14 +266,15 @@ export class AddOrEditStaffDrawerComponent extends BaseComponent implements OnIn
     }
   }
 
-  toggle() {
-    if (!this.formGroup.value.isProduct) {
-      this.formGroup.value.role = 0
-      this.formGroup.patchValue(this.formGroup.value.role);
-    } else {
-      this.formGroup.value.role = null
-      this.formGroup.patchValue(this.formGroup.value.role);
-    }
-  }
+  getListTeam() {
+    this.staffService.getListTeam({
+      page: 0,
+      pageSize: 9999999,
+    }).subscribe(res=>{
+      this.listTeam = res.data
+      this.formGroup.value.teamId = this.listTeam[0].id
+      this.formGroup.patchValue(this.formGroup.value);
+    });
 
+  }
 }

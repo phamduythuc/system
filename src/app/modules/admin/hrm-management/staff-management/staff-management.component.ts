@@ -93,6 +93,24 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
 
   staffSelected: any;
 
+  list_status: any = [
+    {
+      type: '1',
+      name: 'setting.listStatus.active',
+    },
+    {
+      type: '2',
+      name: 'setting.listStatus.notActive',
+    },
+    {
+      type: '',
+      name: 'setting.listStatus.all',
+    }
+  ];
+
+  typeStatus = '1';
+
+
   list_type_view: any = [
     {
       type: 'list',
@@ -101,7 +119,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       type: 'grid',
       name: 'setting.typeView.grid',
-    },
+    }
   ];
 
   typeView = 'list';
@@ -181,7 +199,6 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     //       this.doSearch()
     //   });
     // }
-
     this.staffSelected = id;
     this.drawer.toggle();
   }
@@ -200,5 +217,15 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
    */
   setView(viewType: ViewType): void {
     this._fuseConfigService.config = { viewType };
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
+    this.doSearch();
+    
   }
 }

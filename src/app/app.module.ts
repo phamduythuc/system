@@ -19,6 +19,7 @@ import {
 } from '@angular/material/snack-bar';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { SearchSelectBoxPipe } from './shared/search-select-box.pipe';
 
 const routerConfig: ExtraOptions = {
   // preloadingStrategy       : PreloadAllModules,
@@ -26,6 +27,7 @@ const routerConfig: ExtraOptions = {
 };
 
 @NgModule({
+
   providers: [
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -41,6 +43,7 @@ const routerConfig: ExtraOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, routerConfig),
+
 
     // Fuse, FuseConfig & FuseMockAPI
     FuseModule,
@@ -62,5 +65,6 @@ const routerConfig: ExtraOptions = {
     NgxTrimDirectiveModule,
   ],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

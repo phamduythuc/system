@@ -20,9 +20,10 @@
       "logout": "Đăng xuất"
     },
     "message": {
-      "number_format": "{{field}} sai định dạng số",
+      "number_format": "{{field}} Sai định dạng số",
       "required": "{{field}} không được để trống",
       "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
+      "email_format": "Không đúng định dạng Email",
       "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY",
       "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy"
     },
@@ -77,7 +78,7 @@
     "dateOfBirth": "Ngày sinh",
     "country": "Quốc tịch",
     "residence": "Hộ khẩu thường trú",
-    "isProductTeam": "Là nhóm sản phẩm",
+    "isProductTeam": "Thuộc nhóm phát triển",
     "cvUrl": "File CV",
     "domicile": "Chỗ ở hiện tại",
     "education": "Cấp bậc giáo dục",
@@ -89,6 +90,7 @@
     "imageUrl": "Ảnh đại diện",
     "leaveDate": "Ngày nghỉ",
     "level": "Cấp bậc",
+    "specialize": "Chuyên môn",
     "marriage": "Tình trạng hôn nhân",
     "national": "CCCD/CMT",
     "nationality": "Quốc tịch",
@@ -121,6 +123,11 @@
     "typeView": {
       "grid": "Dạng lưới",
       "list": "Dạng danh sách"
+    },
+    "listStatus": {
+      "active": "Đang hoạt động",
+      "notActive": "Không hoạt động",
+      "all": "Tất cả"
     }
   },
   "button": {
@@ -160,7 +167,7 @@
       "title": "Đối tác"
     },
     "project": {
-      "title": "Dự toán",
+      "title": "Dự án",
       "form": {
         "partner": "Đối tác",
         "budget": "Ngân sách",
@@ -218,17 +225,24 @@
       "signDate": "Ngày ký",
       "salary": "Mức lương",
       "insurance": "Bảo hiểm",
-      "link": "Link tải về"
+      "link": "Tải file"
     },
     "salary": {
-      "title": "Lương"
+      "title": "Lương",
+      "salaryVND": "Lương (VNĐ)",
+      "salaryReceived": "Mức lương thực nhận(VNĐ)",
+      "time_percent_err": "Mức lương thực nhận là trường bắt buộc",
+      "time_percent_err_1": "Mức lương không hợp lệ",
+      "name": "Tên nhân viên",
+      "staffID": "Mã nhân viên"
+
     },
     "role": {
       "title": "Vai trò",
       "roleInfo": "Thông tin vai trò",
       "roleEdit": "Cập nhật vai trò",
       "roleAdd": "Thêm mới vai trò",
-      "roleName":"Họ tên",
+      "roleName":"Tên vai trò",
       "roleDescription": "Mô tả",
       "roleStatus": "Trạng thái",
       "createdByRole":"Người tạo",
@@ -263,16 +277,30 @@
   "effort": {
     "title": "Thông tin giai đoạn",
     "month": "Tháng",
-    "estimate": "Ước lượng",
+    "spring": "Giai đoạn",
+    "effort_estimate": "Ước lượng nỗ lực",
     "customer_record": "Khách hàng chốt",
     "accept_date": "Ngày nghiệm thu",
     "effort_accept": "Nghiệm thu",
     "progress": "Tiến độ",
     "difference_effort": "Chênh lệch",
-    "acknowledgment_of_effort": "Ghi nhận nỗ lực",
-    "percent_effort": "% tham gia"
+    "acknowledgmentOfEffort": "Ghi nhận nỗ lực",
+    "acknowledgmentOfEffortChange" : "Ghi nhận nỗ lực quy đổi",
+    "percent_effort": "% hoàn thành",
+    "turnover":"Doanh thu",
+    "cost": "Chi phí",
+    "efficiency": "Hiệu suất",
+    "cumulativeDifference" : "Chênh lệch lũy kế",
+    "allocate_effort" : "Phân bổ nỗ lực",
+    "conversionEffort": "Quy đổi nỗ lực",
+    "timeAllocation" : "Phân bổ thời gian",
+    "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
+    "role": "Vai trò",
+    "add": "Thêm",
+    "chooseFile":"Chọn file"
   },
   "staff": {
+    "staffName" : "Tên nhân viên",
     "staffInfo": "Thông tin nhân viên",
     "commonInfo": "Thông tin chung",
     "contact": "Liên hệ",

@@ -11,6 +11,7 @@ import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {DomSanitizer} from "@angular/platform-browser";
 import {SUCCESS_CODE} from "@core/config/constant";
+import {HttpHeaders} from "@angular/common/http";
 
 
 
@@ -76,7 +77,7 @@ export class BaseComponent {
       width: '30vw',
       ...options,
     });
-    ref 
+    ref
       .afterClosed()
       .pipe(take(1))
       .subscribe((value) => {
@@ -110,7 +111,6 @@ export class BaseComponent {
     this.baseService.getOne(id).subscribe((res) => {
       if (res.code === '00') {
         this.detailsData = res.data;
-        console.log(res);
         this.handleCoverStringToDate(this.detailsData);
         if (this.formGroup) {
           this.formGroup.patchValue(this.detailsData);
@@ -201,5 +201,13 @@ export class BaseComponent {
 
   isSuccess(res): boolean {
     return res.code === SUCCESS_CODE;
+  }
+
+  getResponseFromHeader(headers: HttpHeaders): any {
+    return JSON.parse(decodeURIComponent(headers.get('Content-Response')));
+  }
+
+  getFileName(headers: HttpHeaders): any {
+    return headers.get('Content-Disposition').split('=')[1];
   }
 }

@@ -96,7 +96,7 @@ export class DetailProfileDashboardsComponent
     idNhanVienChamCong: [],
     imageUrl: [],
     leaveDate: [],
-    levelId: [null],
+    levelName: [null],
     maritalStatus: [],
     modifiedBy: [],
     modifiedDate: [],
@@ -183,13 +183,22 @@ export class DetailProfileDashboardsComponent
           this.data.levelId = x.name;
         }
         return x;
-      })
+      });
     });
 
     this.staffService.getListDepartment(this.searchModel).subscribe((res) => {
       res.data.map((x: any) => {
         if (x.id === this.data.departmentId) {
           this.data.departmentId = x.name;
+        }
+        return x;
+      });
+    });
+
+    this.staffService.getListTeam(this.searchModel).subscribe((res) => {
+      res.data.map((x: any) => {
+        if (x.id === this.data.teamId) {
+          this.data.teamId = x.name;
         }
         return x;
       });
@@ -215,8 +224,23 @@ export class DetailProfileDashboardsComponent
         return x;
       }
     });
-    this.data.dateOfBirth = CommonUtilsService.dateToString(this.data.dateOfBirth, false);
-    this.data.staOfficalDate = CommonUtilsService.dateToString(this.data.staOfficalDate, false);
+    this.data.dateOfBirth = CommonUtilsService.dateToString(
+      this.data.dateOfBirth,
+      false
+    );
+    this.data.staOfficalDate = CommonUtilsService.dateToString(
+      this.data.staOfficalDate,
+      false
+    );
+    this.data.leaveDate = CommonUtilsService.dateToString(
+      this.data.leaveDate,
+      false
+    );
+    this.data.hireDate = CommonUtilsService.dateToString(
+      this.data.hireDate,
+      false
+    );
+
     this.formGroup.patchValue(this.data);
   }
 

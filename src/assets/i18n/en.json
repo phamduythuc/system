@@ -3,7 +3,7 @@
     "vi": "Vietnamese",
     "en": "English"
   },
-  "sign-in": "Đăng nhập",
+  "sign-in": "Sign-in",
   "paging": {
     "visible": "Visible",
     "previous": "Previous page",
@@ -24,6 +24,7 @@
       "number_format": "{{field}} must be number",
       "required": "{{field}} must not empty",
       "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
+      "email_format": "Incorrect email format",
       "date_format": "Please enter in the format DD/MM/YYYY",
       "date_format_1": "You must specify the date format. Format: dd/MM/yyyy"
     },
@@ -90,6 +91,7 @@
     "imageUrl": "avata",
     "leaveDate": "Leave Date",
     "level": "Level",
+    "specialize": "Specialize",
     "marriage": "Marriage",
     "national": "National",
     "nationality": "Nationality",
@@ -122,6 +124,11 @@
     "typeView": {
       "grid": "Grid view",
       "list": "List view"
+    },
+    "listStatus": {
+      "active": "Active",
+      "notActive": "Not active",
+      "all": "All"
     }
   },
   "button": {
@@ -208,12 +215,34 @@
         "number" : "Number"
       }
     },
+    "contract": {
+      "title": "Contract",
+      "label": "Contract & Salary",
+      "code": "Contract Code",
+      "type": "Type of contract",
+      "termPeriod": "Term",
+      "effDate": "Effective from",
+      "expDate": "Expiration date",
+      "signDate": "Sign day",
+      "salary": "Salary",
+      "insurance": "Insurance",
+      "link": "Download"
+    },
+    "salary": {
+      "title": "Salary ",
+      "salaryVND": "Salary (VND)",
+      "salaryReceived": "Salary Received (VND)",
+      "time_percent_err": "Salary Received is required",
+      "time_percent_err_1": "Invalid salary",
+      "name": "Name",
+      "staffID": "Staff ID"
+    },
     "role": {
       "title": "Role",
       "roleInfo": "Role Information",
       "roleEdit":"Role Update",
       "roleAdd": "Add Role",
-      "roleName":"Name",
+      "roleName":"Role Name",
       "roleDescription": "Description",
       "roleStatus": "Status",
       "createdByRole":"Created By",
@@ -264,16 +293,31 @@
   "effort": {
     "title": "Stage Information",
     "month": "Month",
-    "estimate": "Estimate",
+    "spring": "Spring",
+    "effort_estimate": "Effort estimate",
     "customer_record": "Customer record",
     "accept_date": "Acceptance date",
     "effort_accept": "Effort acceptance",
     "progress": "Progress",
     "difference_effort": "Difference",
-    "acknowledgment_of_effort": "Acknowledgment of effort",
-    "percent_effort": "% join"
+    "acknowledgmentOfEffort": "Acknowledgment of effort",
+    "acknowledgmentOfEffortChange" : "Acknowledgment of effort change",
+    "percent_effort": "% Join",
+    "turnover":"Turnover",
+    "cost": "Cost",
+    "efficiency": "Efficiency",
+    "cumulativeDifference" : "Cumulative difference",
+    "allocate_effort" : "Allocate effort",
+    "conversionEffort": "Conversion effort",
+    "timeAllocation" : "Time allocation",
+    "acknowledgmentOfEffortMM" : "Acknowledgment of effort (MM)",
+    "role": "Role",
+    "add": "Add",
+    "chooseFile":"choose file"
+
   },
   "staff": {
+    "staffName" : "Staff name",
     "staffInfo": "Staff Information",
     "commonInfo": "Common Information",
     "contact": "Contact",

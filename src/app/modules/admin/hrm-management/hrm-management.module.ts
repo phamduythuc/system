@@ -32,6 +32,7 @@ import { RoleManagementComponent } from './role-management/role-management.compo
     StaffManagementComponent,
     TeamManagementComponent,
     RoleManagementComponent,
+
   ],
   imports: [
     CommonModule,

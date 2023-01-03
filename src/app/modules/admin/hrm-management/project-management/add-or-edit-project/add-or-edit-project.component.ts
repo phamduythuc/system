@@ -23,18 +23,18 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(20)]],
     projectType: [null, Validators.required],
-    projectTypeName: [null],
+    projectTypeName: [null,Validators.required],
     budget: [null, Validators.required],
-    price: [null, Validators.required],
+    unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
     parentId:[],
     partnerId:[null,Validators.required],
-    description: [null, Validators.maxLength(500)],
+    description: [null, Validators.maxLength(255)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
-    contactPersonName: [null ,[Validators.maxLength(100)]],
-    contactPersonPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
-    contactPersonEmail: [null],
+    contactName: [null ,[Validators.maxLength(100)]],
+    contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
+    contactMail: [null],
 
     status: [1, Validators.required],
   });
@@ -59,6 +59,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     if(this.dialogId){
       this.getDetails(this.dialogId);
     }
+    
   }
 
   ngOnInit(): void {
@@ -84,11 +85,11 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
             return x
           })
           console.log(this.projectData);
-          
+
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
-          this.formGroup.patchValue(this.projectData);          
+          this.formGroup.patchValue(this.projectData);
         }
       }else {
         this.showSnackBar(res.message,  'error');
@@ -113,10 +114,10 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   }
 
   save(data) {
+    // console.log(data)
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime)
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime)
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime)
-    console.log(this.searchModel)
     data.id = this.dialogId || null
     this.addOrEdit(data)
   }
