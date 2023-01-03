@@ -186,14 +186,15 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   actionClick(e: any, id: any): void {
-    debugger
     if (e === 'delete') {
       this.deleteConfirmDialog(id);
     }
   }
 
   deleteConfirmDialog(id?: any): any {
-    this.showDialog(ConfirmDialogComponent, {}, (value) => {
+    this.showDialog(ConfirmDialogComponent, {
+      data:id
+    }, (value) => {
       if (value) {
         this.delete(id);
       }

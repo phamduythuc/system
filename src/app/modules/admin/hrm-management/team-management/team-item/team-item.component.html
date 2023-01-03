@@ -18,7 +18,7 @@
                     </div>
                 </ng-template>
             </div>
-            
+
             <div class="w-full flex justify-start py-4 mt-5">
                 <div class="flex w-2/4 justify-between">
                     <mat-label class="mr-1 font-bold capitalize">{{'common.sprint'|transloco}}</mat-label>
@@ -166,7 +166,7 @@
                 <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team.id)">
                     <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
                 </button>
-                <button mat-icon-button class="hover:bg-slate-200" (click)="actionClick('delete', formSearch.value.id)">
+                <button mat-icon-button class="hover:bg-slate-200" (click)="deleteConfirmDialog(team.id)">
                     <mat-icon svgIcon="heroicons_outline:trash" title="Delete" class="icon-size-5"></mat-icon>
                 </button>
             </div>

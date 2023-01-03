@@ -33,13 +33,12 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
 
   highcharts = Highcharts;
   chartOptions: any;
-  now: any = moment(new Date(Date.now())).format("01/MM/YYYY");
-  start: any = moment(this.now).subtract(5, 'month');
+
 
   searchKpi: any = {
     teamId: '',
-    startMonth: this.start,
-    endMonth: this.now
+    startMonth: '',
+    endMonth: ''
   }
 
   chart = {
@@ -52,15 +51,17 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
     injector: Injector,
     public teamService: TeamService,
   ) {
-    super(injector, teamService, null)
+    super(injector, teamService, null);
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.searchStartDate) {
+    debugger
+    if (changes.searchStartDate && changes.searchStartDate.currentValue != undefined) {
       this.searchKpi.startMonth = changes['searchStartDate'].currentValue;
       this.getDataChart(this.searchKpi);
     }
-    if (changes.searchEndDate) {
+    if (changes.searchEndDate && changes.searchEndDate.currentValue != undefined) {
       this.searchKpi.endMonth = changes['searchEndDate'].currentValue;
       this.getDataChart(this.searchKpi);
     }
@@ -72,6 +73,7 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
   }
 
   getDataChart(searchKpi: any) {
+    debugger
     this.teamService.getTeamKpi(searchKpi).subscribe(
       res => {
         if (res.data != null) {
@@ -90,6 +92,7 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
             var b = parseInt(x.revenue)
             return b;
           })
+          debugger
           this.initChart(this.chart);
         }
       }

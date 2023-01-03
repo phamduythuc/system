@@ -25,9 +25,8 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     startMonth: [],
     endMonth: []
   });
-  searchStartDate: any;
-  searchEndDate: any;
-
+  searchEndDate: any = moment(new Date(Date.now())).format("01/MM/YYYY");
+  searchStartDate: any= moment(new Date(Date.now())).subtract(5,'month').format("01/MM/YYYY");
   constructor(injector: Injector, public teamService: TeamService,) {
     super(injector, teamService);
   }
