@@ -20,9 +20,10 @@
       "logout": "Đăng xuất"
     },
     "message": {
-      "number_format": "{{field}} sai định dạng số",
+      "number_format": "{{field}} Sai định dạng số",
       "required": "{{field}} không được để trống",
       "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
+      "email_format": "Không đúng định dạng Email",
       "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY",
       "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy"
     },
@@ -80,6 +81,7 @@
     "imageUrl": "Ảnh đại diện",
     "leaveDate": "Ngày nghỉ",
     "level": "Cấp bậc",
+    "specialize": "Chuyên môn",
     "marriage": "Tình trạng hôn nhân",
     "national": "CCCD/CMT",
     "nationality": "Quốc tịch",
