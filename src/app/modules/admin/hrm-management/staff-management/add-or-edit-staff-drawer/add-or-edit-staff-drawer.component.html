@@ -396,6 +396,8 @@
                   </mat-label>
                   <input
                     matInput
+                    [min]="formGroup.value.hireDate"
+                    [max]="formGroup.value.leaveDate"
                     formControlName="staOfficalDate"
                     [matDatepicker]="dateWork"
                     datePickerFormat="DD/MM/YYYY"
@@ -419,6 +421,7 @@
                   </mat-label>
                   <input
                     matInput
+                    [min]="formGroup.value.hireDate"
                     formControlName="leaveDate"
                     [matDatepicker]="dateOut"
                     datePickerFormat="DD/MM/YYYY"
@@ -656,7 +659,6 @@
             </mat-form-field>
           </div>
         </div>
-
         <!--    footer-->
         <div class="footer my-7 flex justify-end">
           <button mat-raised-button class="mr-3" (click)="close()">

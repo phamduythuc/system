@@ -13,7 +13,6 @@
       [limit]="searchModel.pageSize"
       [count]="searchResult?.totalRecords"
       [rowTemplate]="rowTemplate"
-      (callback)="handleDataKPI($event)"
     >
     <ng-template #rowTemplate let-row="row" let-column="column">
       <ng-container [ngSwitch]="column.columnDef">

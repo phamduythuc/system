@@ -61,7 +61,7 @@ export class ContractProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    this.searchModel = { staffId: 121 };
+    this.searchModel = { staffId: this.data };
     this.doSearch();
   }
 

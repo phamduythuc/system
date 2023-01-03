@@ -96,6 +96,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
+    console.log(data);
     
     if(this.dialogId){
       data.id = this.dialogId;

@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '@core/auth/auth.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -41,43 +41,31 @@ export class ProfileDashboardsComponent implements OnInit {
     },
   ];
 
-  dialogId:any
+  dialogId: any;
 
   panelOpenState = false;
   constructor(
     private authService: AuthService,
     public translocoService: TranslocoService,
-    private DashboardsProfileService:DashboardsProfileService,
+    private DashboardsProfileService: DashboardsProfileService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public dialogRef: MatDialogRef<ProfileDashboardsComponent>
-
   ) {
-    this.dialogId = dialogData?.id
-  }
-
-
-  // constructor(
-  //   injector: Injector,
-  //   public dialogRef: MatDialogRef<DetailsContractComponent>,
-  //   private achievementService: AchievementService,
-  //   private ContractService:ContractService,
-  //   @Inject(MAT_DIALOG_DATA) public dialogData: any
-  // ) {
-  //   super(injector, ContractService, dialogRef);
-  //   this.dialogId = dialogData?.id;
-  //   this.listUser = dialogData.listUser;
-  //   this.listCaregories = dialogData.listCaregories;
-  // }
-
-  ngOnInit(): void {
     this.getProfile();
+    this.dialogId = dialogData?.id;
+    
   }
 
+  ngOnInit(): void {}
 
   getProfile() {
-this.DashboardsProfileService.getProfile().subscribe(res=>{
-  this.data.profile = res.data.staffInfo
-})
+    this.DashboardsProfileService.getProfile().subscribe((res) => {
+      this.data.profile = res.data.staffInfo;
+      if (!this.dialogId) {
+        this.dialogId = this.data.profile.id;
+      }
+      console.log(this.data.profile.id);
+    });
     // this.data.profile = {
     //   id: 504,
     //   address: 'Hà Nội',
@@ -487,9 +475,8 @@ this.DashboardsProfileService.getProfile().subscribe(res=>{
     //   }
     // ];
     // this.authService.getUserInfoSSO().subscribe((res: any) => {
-      
 
-      // this.renderKPI()
+    // this.renderKPI()
     // });
   }
 
@@ -520,6 +507,4 @@ this.DashboardsProfileService.getProfile().subscribe(res=>{
     if (type == 4) {
     }
   }
-
-
 }
