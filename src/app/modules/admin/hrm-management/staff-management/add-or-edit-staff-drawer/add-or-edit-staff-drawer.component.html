@@ -157,6 +157,9 @@
                       <input required formControlName="email" matInput />
                     </mat-form-field>
                     <app-error-message
+                    textPattern="{{
+                      'common.message.email_format' | transloco
+                    }}"
                       [control]="formGroup.get('email')"
                       [name]="'common.email' | transloco"
                     ></app-error-message>
@@ -474,7 +477,7 @@
               <div class="w-full">
                 <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
-                    >{{ t("common.level") }}
+                    >{{ t("common.specialize") }}
                     <!--                    Cấp bậc/ Level-->
                   </mat-label>
                   <mat-select formControlName="levelId">

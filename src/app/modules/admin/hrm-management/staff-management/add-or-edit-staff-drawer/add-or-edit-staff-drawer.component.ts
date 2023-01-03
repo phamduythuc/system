@@ -90,7 +90,7 @@ export class AddOrEditStaffDrawerComponent
     //Cấp bậc giáo dục
     education: [],
     //Email cá nhân
-    email: [],
+    email: [null, Validators.pattern('^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$')],
     //Thông tin liên lạc khẩn cấp
     emergencyUser: [],
     //Dân tộc
@@ -116,7 +116,7 @@ export class AddOrEditStaffDrawerComponent
     //Ngày giờ cập nhật
     modifiedDate: [],
     //Mã căn cước công dân/Chứng minh nhân dân
-    nationalId: [null, [Validators.required, Validators.pattern('[0-9]*')]],
+    nationalId: [null, [Validators.required,Validators.maxLength(12), Validators.pattern('[0-9]*')]],
     //Quốc gia
     nationality: [],
     //Số điện thoại
@@ -156,7 +156,7 @@ export class AddOrEditStaffDrawerComponent
     teamId: [],
     isWorker: [false]
   });
-
+  
   constructor(
     injector: Injector,
     private staffService: StaffService,

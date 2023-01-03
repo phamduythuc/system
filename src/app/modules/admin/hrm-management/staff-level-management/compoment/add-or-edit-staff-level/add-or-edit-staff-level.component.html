@@ -14,12 +14,12 @@
         <!--        content-->
         <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
             <div class="field flex mb-4">
-                <label class="w-1/6 font-medium required">{{t("common.name")}}</label>
+                <label class="w-1/6 font-medium required">{{t("common.name_specialize")}}</label>
                 <div class="input w-5/6">
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                         <input class="w-full"
-                               [placeholder]="('common.name' | transloco)"
+                               [placeholder]="('common.name_specialize' | transloco)"
                                formControlName="name"
                                matInput trim='blur'>
                     </mat-form-field>
