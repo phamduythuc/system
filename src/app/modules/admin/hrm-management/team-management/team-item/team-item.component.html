@@ -28,12 +28,18 @@
                 <div class="flex w-2/4 justify-between">
                     <mat-label class="mr-1 font-bold capitalize">{{'common.sprint'|transloco}}</mat-label>
                     <mat-form-field class="fuse-mat-no-subscript w-full -mt-2">
-                        <input class=" " matInput [matDatepicker]="sprint" datePickerFormat="MM/YYYY" (dateChange)="onDateChange(formGroup.value['sprint'])"
-                            [formControlName]="'sprint'">
+                        <input class=" " matInput [matDatepicker]="sprint" datePickerFormat="MM/YYYY"
+                            (dateChange)="onDateChange(formGroup.value['sprint'])" [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
                         <mat-datepicker #sprint></mat-datepicker>
                     </mat-form-field>
+                </div>
+                <div class="flex w-2/5 justify-center">
+                    <div class="">
+                        <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}</mat-label>
+                        <div>{{formGroup}}</div>
+                    </div>
                 </div>
             </div>
 
@@ -41,7 +47,7 @@
 
             <!-- Leader -->
             <div class="w-full flex justify-between py-2">
-                <div class="flex w-full">
+                <div class="flex w-2/4">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{"common.leader"|transloco}}</mat-label>
                         <!-- <mat-select [formControlName]="'leadName'" readonly>
@@ -50,17 +56,24 @@
                         <input class=" " matInput [formControlName]="'leadName'" readonly>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <!-- Ecpected -->
-            <div class="w-full flex-col justify-between py-2">
                 <!-- target -->
-                <div class="w-full mb-4">
+                <div class=" flex w-2/5">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
                         <input class=" " matInput [formControlName]="'target'" readonly>
                     </mat-form-field>
                 </div>
+            </div>
+
+            <!-- Ecpected -->
+            <div class="w-full flex-col justify-between py-2">
+                <!-- target -->
+                <!-- <div class="w-full mb-4">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
+                        <input class=" " matInput [formControlName]="'target'" readonly>
+                    </mat-form-field>
+                </div> -->
                 <div class="w-full flex justify-between">
                     <!-- cost -->
                     <div class="w-2/5">
@@ -142,7 +155,7 @@
             </div> -->
 
             <!-- Hight-Chart -->
-            <div >
+            <div>
                 <app-team-kpi [data]="team.id" [random]="random"></app-team-kpi>
             </div>
         </div>

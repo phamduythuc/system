@@ -15,6 +15,23 @@
                         <form [formGroup]="formSearch">
                             <div class="flex w-full ">
 
+                                <!-- search box -->
+                                <div class="w-full">
+                                    <mat-form-field appearance="fill" class="w-full px-3">
+                                        <input matInput [formControlName]="'name'">
+                                    </mat-form-field>
+                                </div>
+
+
+                                <!-- button search -->
+                                <div class="px-3">
+                                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button
+                                        color="primary" (click)="doSearch()">
+                                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:search"></mat-icon>
+                                        {{t('button.search')}}
+                                    </button>
+                                </div>
+
                                 <!-- view option seaarch -->
                                 <div class="w-2/6">
                                     <mat-form-field class="w-full">
@@ -26,26 +43,13 @@
                                     </mat-form-field>
                                 </div>
 
-                                <!-- search box -->
-                                <div class="w-full">
-                                    <mat-form-field appearance="fill" class="w-full px-3">
-                                        <input matInput [formControlName]="'name'">
-                                    </mat-form-field>
-                                </div>
-
                             </div>
+
+
 
                         </form>
                     </div>
 
-                    <!-- button search -->
-                    <div class="px-3">
-                        <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
-                            (click)="doSearch()">
-                            <mat-icon class="icon-size-6" svgIcon="heroicons_outline:search"></mat-icon>
-                            {{t('button.search')}}
-                        </button>
-                    </div>
                 </div>
 
                 <!-- button -->

@@ -65,6 +65,7 @@
     "fullName": "Full Name",
     "department": "Department",
     "leader":"Leader",
+    "performance":"Performance",
     "sprint":"Sprint",
     "expected":"Expected",
     "cost":"Cost",

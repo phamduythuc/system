@@ -1,9 +1,21 @@
 
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { BaseComponent } from '@core/base.component';
 import { TeamService } from '@shared/services/team.service';
 import Highcharts from 'highcharts';
-import highcharts3D from 'highcharts/highcharts-3d.src';
 import moment from 'moment';
+
+import HC_Exporting from 'highcharts/modules/exporting';
+import HC_ExportingOffline from 'highcharts/modules/offline-exporting';
+import HC_ExportData from 'highcharts/modules/export-data';
+import HC_More from 'highcharts/highcharts-more';
+
+HC_Exporting(Highcharts);
+HC_ExportingOffline(Highcharts);
+HC_ExportData(Highcharts);
+HC_More(Highcharts);
+
 
 
 
@@ -12,22 +24,22 @@ import moment from 'moment';
   templateUrl: './chart-line-team-kpi.component.html',
   styleUrls: ['./chart-line-team-kpi.component.scss']
 })
-export class ChartLineTeamKpiComponent implements OnInit, OnChanges {
+export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() id: any;
-  @Input() searchStartDate: any ;
+  @Input() searchStartDate: any;
   @Input() searchEndDate: any;
 
   // hight chart
 
   highcharts = Highcharts;
   chartOptions: any;
-  now : any = moment(new Date(Date.now())).format("01/MM/YYYY");
-  start : any =  moment(this.now).subtract(5, 'month');
+  now: any = moment(new Date(Date.now())).format("01/MM/YYYY");
+  start: any = moment(this.now).subtract(5, 'month');
 
   searchKpi: any = {
     teamId: '',
     startMonth: this.start,
-    endMonth:this.now
+    endMonth: this.now
   }
 
   chart = {
@@ -36,23 +48,21 @@ export class ChartLineTeamKpiComponent implements OnInit, OnChanges {
     target: [],
     revenue: []
   }
-  constructor(private cdk: ChangeDetectorRef, public teamService: TeamService,) {
-
+  constructor(
+    injector: Injector,
+    public teamService: TeamService,
+  ) {
+    super(injector, teamService, null)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
     if (changes.searchStartDate) {
       this.searchKpi.startMonth = changes['searchStartDate'].currentValue;
       this.getDataChart(this.searchKpi);
-      debugger
-
     }
     if (changes.searchEndDate) {
       this.searchKpi.endMonth = changes['searchEndDate'].currentValue;
       this.getDataChart(this.searchKpi);
-      debugger
-
     }
   }
 
@@ -64,7 +74,7 @@ export class ChartLineTeamKpiComponent implements OnInit, OnChanges {
   getDataChart(searchKpi: any) {
     this.teamService.getTeamKpi(searchKpi).subscribe(
       res => {
-        if(res.data!=null){
+        if (res.data != null) {
           this.chart.xAxits = res.data.map(x => {
             return x.targetMonth
           });
@@ -81,13 +91,19 @@ export class ChartLineTeamKpiComponent implements OnInit, OnChanges {
             return b;
           })
           this.initChart(this.chart);
-        }   
+        }
       }
     );
   }
 
-  initChart(chart: any) {
+  initChart(chart?: any) {
     this.chartOptions = {
+      plotOptions: {
+
+      },
+      exporting: {
+        enabled: true
+      },
       chart: {
         type: "line"
       },

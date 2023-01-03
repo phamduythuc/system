@@ -9,12 +9,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { HighchartsChartComponent } from 'highcharts-angular';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { TeamItemComponent } from './team-item/team-item.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatListModule} from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 import { TeamKpiComponent } from './team-kpi/team-kpi.component';
 import { ChartLineTeamKpiComponent } from './chart-line-team-kpi/chart-line-team-kpi.component';
+
 
 
 
@@ -23,9 +24,8 @@ import { ChartLineTeamKpiComponent } from './chart-line-team-kpi/chart-line-team
     TeamMembersComponent,
     AddOrEditTeamComponent,
     TeamItemComponent,
-
     TeamKpiComponent,
-      ChartLineTeamKpiComponent,
+    ChartLineTeamKpiComponent,
   ],
   exports: [
     TeamMembersComponent,
@@ -42,7 +42,8 @@ import { ChartLineTeamKpiComponent } from './chart-line-team-kpi/chart-line-team
     HighchartsChartModule,
     MatPaginatorModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+ 
 
   ]
 })

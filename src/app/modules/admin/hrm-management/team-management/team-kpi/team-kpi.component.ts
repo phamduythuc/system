@@ -3,6 +3,7 @@ import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
 import moment from 'moment';
+import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
 
 @Component({
   selector: 'app-team-kpi',
@@ -24,11 +25,11 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     startMonth: [],
     endMonth: []
   });
-  searchStartDate:any;
-  searchEndDate:any;
+  searchStartDate: any;
+  searchEndDate: any;
 
   constructor(injector: Injector, public teamService: TeamService,) {
-    super(injector);
+    super(injector, teamService);
   }
   ngOnChanges(changes: SimpleChanges): void {
   }
@@ -43,17 +44,19 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     });
   }
 
-  onDateChange(type:string,date: any) {
-    if(type==='startDate'){
-      this.searchStartDate = moment(date).format("01/MM/YYYY");    
+  onDateChange(type: string, date: any) {
+    if (type === 'startDate') {
+      this.searchStartDate = moment(date).format("01/MM/YYYY");
     }
-    else{
-      this.searchEndDate = moment(date).format("01/MM/YYYY");    
+    else {
+      this.searchEndDate = moment(date).format("01/MM/YYYY");
     }
   }
 
   zoomChart() {
-
+    this.showDialog(ChartLineTeamKpiComponent, {
+      data: this.formSearchKpi
+    })
   }
 
 }
