@@ -46,18 +46,21 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ];
 
   listTeam: any[] = [];
+  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDTHH:MM:SSZ");
+  currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
   formGroup = this.fb.group({
     id: '',
     text: '',
     name: [],
     number: 2,
-    sprint: ['2022-12-14T17:00:00.000Z'],
+    sprint: [],
     leadName: [],
     target: [],
     cost: [],
     revenue: [],
     staDate: [],
-    endDate: []
+    endDate: [],
+    staffName: []
   });
 
   searchModel: any = {
@@ -66,13 +69,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   };
   searchKpi: any = {
     teamId: 5,
-    startMonth: '01/01/2021',
-    endMonth: '01/01/2021'
+    startMonth: this.currentTimeFormat,
+    endMonth: this.currentTimeFormat
   };
 
   searchDetail: any = {
     teamId: null,
-    month: '01/01/2021'
+    month: '01/01/2023'
   };
 
   data = {
@@ -91,29 +94,21 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
-    this.formSearch = this.fb.group({
-      id: '',
-      text: '',
-      name: [],
-      number: 2,
-      sprint: [],
-      leadName: [],
-      target: [],
-      cost: [],
-      revenue: ['1'],
-      staDate: [],
-      endDate: []
-    });
+
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.random = (Math.random() + 1).toString(36).substring(7);
+
   }
 
   ngOnInit(): void {
     this.searchDetail.teamId = this.team.id;
-    this.getDetailTeamBySprint(this.searchDetail)
+    this.getDetailTeamBySprint(this.searchDetail);
+    this.formGroup.patchValue({
+      sprint: this.currentTime,
+    })
+    console.log('-------------------------')
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
@@ -121,16 +116,35 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       teamId: 5,
       month: x
     }
-    // this.formGroup.reset();
+    this.formGroup = this.fb.group({
+      id: '',
+      text: '',
+      name: [],
+      number: 2,
+      sprint: e,
+      leadName: [],
+      target: [],
+      cost: [],
+      revenue: [],
+      staDate: [],
+      endDate: [],
+      staffName: []
+    });
     this.getDetailTeamBySprint(this.searchDetail);
 
   }
 
   getDetailTeamBySprint(searchDetail: any) {
     this.teamService.getTeamDetaiBySprint(searchDetail).subscribe(res => {
-      this.data = res.data[0];
-      this.formGroup.patchValue(this.data)
-      this.listMember = this.data.staffName.split(',');
+      if (res.data[0] != null) {
+        this.data = res.data[0];
+        this.formGroup.patchValue(this.data);
+        this.listMember = this.data.staffName.split(',');
+        this.totalMember = this.listMember.length;
+      }
+      else {
+        this.totalMember = 0;
+      }
     });
   }
 

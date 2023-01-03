@@ -2,7 +2,8 @@ import { Component, Inject, Injector, Input, OnInit, ViewChild, SimpleChanges } 
 import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
-import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
+import moment from 'moment';
+
 @Component({
   selector: 'app-team-kpi',
   templateUrl: './team-kpi.component.html',
@@ -15,38 +16,44 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
 
   @ViewChild('chartChild')
   chart: ChartLineComponent;
-  searchKpi: any = {
-    teamId: 5,
-    startMonth: '01/01/2021',
-    endMonth: '01/12/2021'
-  }
-
+  EndTimeFormat: any;
+  StartTimeFormat: any;
   expected: any[] = [];
+  formSearchKpi = this.fb.group({
+    teamId: [],
+    startMonth: [],
+    endMonth: []
+  });
+  searchStartDate:any;
+  searchEndDate:any;
 
-  constructor(injector: Injector, public teamService: TeamService,
-  ) {
-    super(injector)
+  constructor(injector: Injector, public teamService: TeamService,) {
+    super(injector);
   }
   ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   ngOnInit(): void {
+    this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDTHH:MM:SSZ");
+    this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
+    this.formSearchKpi.setValue({
+      teamId: [this.data],
+      startMonth: this.StartTimeFormat,
+      endMonth: this.EndTimeFormat
+    });
+  }
 
+  onDateChange(type:string,date: any) {
+    if(type==='startDate'){
+      this.searchStartDate = moment(date).format("01/MM/YYYY");    
+    }
+    else{
+      this.searchEndDate = moment(date).format("01/MM/YYYY");    
+    }
   }
 
   zoomChart() {
-    this.showDialog(ChartLineTeamKpiComponent, {
-      data: {
-      },
-      width: '70vw',
-      maxHeight: '90vh',
-      disableClose: false
-    }, (value) => {
-      if (value) {
-        // this.doSearch();
-      }
-    });
+
   }
 
 }
