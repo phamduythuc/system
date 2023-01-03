@@ -1,4 +1,4 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -11,6 +11,8 @@ import {AchievementService} from '@shared/services/achievement.service';
 import {StaffService} from '@shared/services/staff.service';
 import {SprintService} from '@shared/services/sprint.service';
 import FileSaver from 'file-saver';
+import { DecimalPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-project-effort',
@@ -19,9 +21,13 @@ import FileSaver from 'file-saver';
 })
 export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
+  visibleBtnUpload: boolean = true;
+
+
   _permissionCodeName = 'DSDA';
   panelOpenState = false;
   recordUrl: any = '';
+  unitPrice: any  = '';
   documentName: any = '';
 
   isLoading: boolean = false;
@@ -30,8 +36,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   listStaffLevels: any;
   listStaff: any = {};
   filteredList: any = {};
-
-  newListStaff: any = [];
+  numberChars = new RegExp('[\.,]', 'g');
 
   option = {
     page: 0,
@@ -91,6 +96,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     private staffService: StaffService,
     public dialogRef: MatDialogRef<ProjectEffortComponent>,
     private achievementService: AchievementService,
+    private decimalPipe: DecimalPipe,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     super(injector, sprintService);
@@ -140,13 +146,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
+
+        this.unitPrice = this.formatCurrency(res.data.unitPrice);
+
         const urlName = res.data.recordUrl;
-        // this.recordUrl = urlName.toString().split("/")[1];
         this.recordUrl = urlName;
+
         this.documentName = res.data.documentName || res.data.recordUrl ? res.data.recordUrl.substring(res.data.recordUrl.lastIndexOf('/') + 1) : '';
+        if(this.documentName !== ''){
+          this.visibleBtnUpload = !this.visibleBtnUpload;
+
+        }
         this.formGroup.patchValue({
           id: res.data.id,
-          unitPrice: res.data.unitPrice,
+          unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
           acceptanceEffort: res.data.acceptanceEffort,
@@ -216,6 +229,11 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const formData = new FormData();
     const formValue = this.formGroup.value;
     this.handleCoverTimeToString(formValue);
+
+    const valUnitPrice = formValue.unitPrice;
+    if(valUnitPrice != null){
+      formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
+    }
     formValue.startDate = formValue.startDate && CommonUtilsService.dateToString(formValue.startDate);
     formValue.projectId = this.data.id;
 
@@ -299,17 +317,30 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     }
   }
 
+  formatCurrency(val: any) {
+    return this.decimalPipe.transform(val, '1.0', 'en-US');
+  }
+
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
+
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       this.formGroup.patchValue({file});
       reader.onload = () => {
         // this.recordUrl = reader.result;
         this.documentName = file.name;
+        this.visibleBtnUpload = !this.visibleBtnUpload;
       };
-    }
+    };
+  }
+
+  removeFile(){
+    this.formGroup.controls['recordUrl'].setValue(null);
+    this.recordUrl = null;
+    this.documentName = null;
+    this.visibleBtnUpload = !this.visibleBtnUpload;
   }
 
   addNewRow() {
@@ -369,6 +400,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   downloadDocument(recordUrl: any) {
     this.achievementService.renderFile({filePath: recordUrl, fileType: 2}).subscribe(res => {
       const res1 = this.getResponseFromHeader(res.headers);
+
       if (this.isSuccess(res1)) {
         const fileName = this.getFileName(res.headers);
         FileSaver.saveAs(res.body, fileName || this.documentName);

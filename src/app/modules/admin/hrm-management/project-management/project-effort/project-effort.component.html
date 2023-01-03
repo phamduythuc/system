@@ -69,7 +69,12 @@
               <mat-label
                 >{{ "effort.effort_estimate" | transloco }} (MM)</mat-label
               >
-              <input [formControlName]="'estimate'" type="text" matInput />
+              <input
+                [formControlName]="'estimate'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
             <!-- <app-error-message
               [control]="formGroup.get('estimate')"
@@ -92,7 +97,12 @@
                 }}
                 (VND)</mat-label
               >
-              <input [formControlName]="'unitPrice'" type="text" matInput />
+              <input
+                [formControlName]="'unitPrice'"
+                type="text"
+                matInput
+                vnd-currency
+              />
             </mat-form-field>
           </div>
           <!-- % HOÀN THÀNH -->
@@ -101,7 +111,12 @@
               class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full"
             >
               <mat-label>{{ "effort.percent_effort" | transloco }}</mat-label>
-              <input [formControlName]="'progress'" type="text" matInput />
+              <input
+                [formControlName]="'progress'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
             <app-error-message
               [control]="formGroup.get('percentCompelete')"
@@ -120,7 +135,12 @@
                 }}
                 (MM)</mat-label
               >
-              <input [formControlName]="'effort'" type="text" matInput />
+              <input
+                [formControlName]="'effort'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
           </div>
         </div>
@@ -143,6 +163,7 @@
                 type="text"
                 [formControlName]="'effortExchange'"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -154,6 +175,7 @@
                 [formControlName]="'acceptanceEffort'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
             <app-error-message
@@ -195,27 +217,46 @@
               />
 
               <div class="file-upload">
-                <button
-                  mat-mini-fab
-                  color="primary"
-                  class="upload-btn"
-                  (click)="fileUpload.click()"
-                >
-                  <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
-                </button>
-                <div class="nameFile">
+                <ng-container *ngIf="visibleBtnUpload">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="upload-btn"
+                    (click)="fileUpload.click()"
+                  >
+                    <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                    {{
+                      "effort.chooseFile" | transloco
+                    }}
+                  </button>
+                </ng-container>
+                <div class="flex">
                   <ng-container *ngIf="documentName">
-                    <a (click)="downloadDocument(recordUrl)" title="{{ recordUrl }}">
-                      {{ documentName}}
-                    </a>
+                    <div class="nameFile">
+                      <a
+                        (click)="downloadDocument(recordUrl)"
+                        title="{{ documentName }}"
+                      >
+                        {{ documentName }}
+                      </a>
+                    </div>
+                    <button
+                      class="icon-size-5"
+                      mat-icon-button
+                      color="primary"
+                      (click)="removeFile()"
+                    >
+                      <mat-icon
+                        svgIcon="heroicons_outline:x"
+                        title="Close"
+                      ></mat-icon>
+                    </button>
                   </ng-container>
-                  <ng-container *ngIf="!documentName">
-                    <a title="{{ recordUrl }}">
-                      No file uploaded yet.
-                    </a>
-                  </ng-container>
-
+                  <!-- <ng-container *ngIf="!documentName">
+                    <p> No file uploaded yet. </p>
+                  </ng-container> -->
                 </div>
+
               </div>
             </div>
           </div>
@@ -236,6 +277,7 @@
                 [formControlName]="'effortDifference'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -249,6 +291,7 @@
                 [formControlName]="'cumulativeDifference'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -260,7 +303,12 @@
               <mat-label
                 >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
               >
-              <input [formControlName]="'differenceVnd'" type="text" matInput />
+              <input
+                [formControlName]="'differenceVnd'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
           </div>
           <!-- CHÊNH LỆCH LŨY KẾ (VND)-->
@@ -277,6 +325,7 @@
                 [formControlName]="'cumulativeDifferenceVnd'"
                 type="text"
                 matInput
+                onlyNumber
               />
             </mat-form-field>
           </div>
@@ -328,7 +377,6 @@
                   <ng-container *ngSwitchCase="'staffName'">
                     <div class="field flex mt-2 mb-2">
                       <div class="input w-5/6">
-
                         <mat-form-field
                           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
                         >
@@ -387,6 +435,7 @@
                           <input
                             type="text"
                             matInput
+                            onlyNumber
                             formControlName="effort"
                             placeholder="{{
                               'effort.acknowledgmentOfEffort' | transloco
@@ -446,21 +495,36 @@
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.turnover" | transloco }}</mat-label>
-              <input [formControlName]="'revenue'" type="text" matInput />
+              <input
+                [formControlName]="'revenue'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
           </div>
           <!-- CHI PHÍ-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.cost" | transloco }}</mat-label>
-              <input [formControlName]="'cost'" type="text" matInput />
+              <input
+                [formControlName]="'cost'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
           </div>
           <!-- HIỆU SUẤT-->
           <div class="sm:col-span-1">
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <mat-label>{{ "effort.efficiency" | transloco }}</mat-label>
-              <input [formControlName]="'efficiency'" type="text" matInput />
+              <input
+                [formControlName]="'efficiency'"
+                type="text"
+                matInput
+                onlyNumber
+              />
             </mat-form-field>
           </div>
           <!-- GHI CHÚ -->
