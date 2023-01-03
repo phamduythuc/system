@@ -134,8 +134,9 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
         let convertData = res.data.map(obj => {
           return  {
             fullName: obj.fullName,
-            salaryActual: parseInt(obj.salaryActual),
+            // salaryActual: parseInt(obj.salaryActual),
             salary: VND.format(parseInt(obj.salary)) ,
+            salaryActual: CommonUtilsService.formatCurrency(obj.salaryActual),
             revenueMonth: obj.revenueMonth,
             staffCode: obj.staffCode,
             staffId :obj.staffId
@@ -149,9 +150,8 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     const newObj = e.map((item) => {
       const obj = {
         staffId: item.staffId,
-        salaryActual: item.salaryActual,
+        salaryActual: item.salaryActual.replace(',','').replace(',','').replace(',','').replace(',',''),
       };
-
       return obj;
     });
 
@@ -164,6 +164,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       revenueMonth: month,
       listSalary: [...newObj],
     };
+    console.log(params);
     
     this.StaffService.saveSalary(params).subscribe((res) => {
       if (res.code === '00') {
@@ -175,4 +176,18 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       }
     });
   }
+
+  change(data){
+    this.searchResult.data.map(x=>{
+      if(x.staffId == data){
+        x.salaryActual = CommonUtilsService.formatCurrency(x.salaryActual)
+      }
+      return x
+    })
+  }
 }
+
+
+// startMonth: CommonUtilsService.dateToString(
+//   moment().add(-7, 'month').startOf('month')
+// ),

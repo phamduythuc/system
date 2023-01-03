@@ -152,7 +152,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
           this.options.series = [];
         }
         if (!data) {
-          this.showSnackBar(res.message, 'success');
+          // this.showSnackBar(res.message, 'success');
         }
       } else {
         this.showSnackBar(res.message, 'error');
