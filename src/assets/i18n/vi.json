@@ -331,7 +331,7 @@
       "breadcrumb": "Thông tin cá nhân",
       "tab": {
         "detail": {
-          "title": "Thông tin cá nhân"
+          "title": "Thông tin cơ bản"
         },
         "contract": {
           "title": "Danh sách hợp đồng"
@@ -359,5 +359,8 @@
         }
       }
     }
+  },
+  "profile":{
+    "title": "Thông tin cá nhân"
   }
 }

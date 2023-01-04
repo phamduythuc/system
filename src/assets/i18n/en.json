@@ -376,5 +376,8 @@
         }
       }
     }
+  },
+  "profile":{
+    "title": "Profile"
   }
 }

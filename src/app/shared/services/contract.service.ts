@@ -13,8 +13,8 @@ export class ContractService extends BaseService {
     super(http, `${environment.apiUrl}/contract`);
   }
 
-  getListContractById(data): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/contract`, {params: data});
+  getListContractByToken(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/contract/my-contract`);
   }
 
   createContract(formData: FormData): Observable<any> {

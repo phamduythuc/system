@@ -19,7 +19,7 @@ import moment, { Moment } from 'moment';
   styleUrls: ['./sprint-profile-dashboards.component.scss'],
 })
 export class SprintProfileDashboardsComponent implements OnInit {
-  @Input() data: any;
+  @Input() staffId: any;
 
   @Output() callback = new EventEmitter<any>();
 
@@ -64,6 +64,8 @@ export class SprintProfileDashboardsComponent implements OnInit {
     kpiInsure: [''],
   });
 
+  data:any = []
+
   constructor(
     private _formBuilder: FormBuilder,
     private translocoService: TranslocoService,
@@ -72,7 +74,7 @@ export class SprintProfileDashboardsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     // this.formGroup.patchValue(this.data);
-    this.data = this.data;
+    // this.data = this.data;
     // this.formGroup.patchValue(this.data?.salary);
   }
 
@@ -107,7 +109,9 @@ export class SprintProfileDashboardsComponent implements OnInit {
   getData(data) {
     this.DashboardsProfileService.getSprint({
       month: CommonUtilsService.dateToString(data, false),
+      staffId: this.staffId
     }).subscribe((res: any) => {
+      
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
@@ -135,12 +139,12 @@ export class SprintProfileDashboardsComponent implements OnInit {
   }
 
   handleDataKPI(data) {
-    this.data.data = data;
+    // this.data.data = data;
   }
 
   saveData() {
     this.data?.data.map((x) => {
-      x.acceptanceEffort  = Number(x.percentEffort);
+      x.acceptanceEffort = Number(x.percentEffort);
       
       return x;
     });

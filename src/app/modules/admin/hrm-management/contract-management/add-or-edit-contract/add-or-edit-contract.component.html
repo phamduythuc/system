@@ -105,6 +105,7 @@
             <mat-select
               [placeholder]="'common.status' | transloco"
               formControlName="status"
+              [disabled]="dialogId"
             >
               <mat-option
                 *ngFor="let item of listCaregories.CONTRACT_STATUS"
@@ -294,11 +295,11 @@
     </div>
 
     <div class="field flex mb-4">
-      <div class=" w-full flex">
-        <label class="w-1/7 font-medium required" for="file">{{
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required" for="file">{{
           "hrm-management.contract.link" | transloco
         }}</label>
-        <div class="input w-5/6 ml-11">
+        <div class="input w-5/6">
           <input
             type="file"
             id="file"

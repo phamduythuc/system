@@ -153,6 +153,17 @@ export const appRoutes: Route[] = [
           ),
         data: { breadcrumb: { label: 'Setting', url: '' } },
       },
+
+      {
+        path: 'profile',
+        // canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        loadChildren: () =>
+          import('app/modules/admin/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+        data: { breadcrumb: { label: 'profile.title', url: '' } },
+      },
     ],
   },
 ];
