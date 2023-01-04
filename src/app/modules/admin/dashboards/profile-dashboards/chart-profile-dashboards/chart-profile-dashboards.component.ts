@@ -120,10 +120,10 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
   view(data?) {
     this.formGroup.value.startMonth = CommonUtilsService.dateToString(
-      this.formGroup.value.startMonth
+      this.formGroup.value.startMonth.startOf('month')
     );
     this.formGroup.value.endMonth = CommonUtilsService.dateToString(
-      this.formGroup.value.endMonth
+      this.formGroup.value.endMonth.startOf('month')
     );
     this.changeData.emit(this.formGroup.value);
 
@@ -165,6 +165,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
   }
 
   renderKPI(data: any) {
+    
     for (let i = 0; i < data.length; i++) {
       this.data.map((x: any) => {
         if (x.type == 'effortExchange') {
@@ -185,6 +186,8 @@ export class ChartProfileDashboardsComponent implements OnInit {
     });
 
     this.options.series = this.data;
+    console.log(this.options.series);
+    
   }
 
   showSnackBar(messages?: string, type?: string): void {

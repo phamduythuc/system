@@ -210,4 +210,9 @@ export class BaseComponent {
   getFileName(headers: HttpHeaders): any {
     return headers.get('Content-Disposition').split('=')[1];
   }
+
+  getListCategories() {
+    return JSON.parse(localStorage.getItem('listType'));
+  }
+
 }

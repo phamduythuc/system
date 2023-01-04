@@ -5,6 +5,7 @@ import { CommonUtilsService } from '@shared/common-utils.service';
 import { AchievementService } from '@shared/services/achievement.service';
 import { ContractService } from '@shared/services/contract.service';
 import { StaffService } from '@shared/services/staff.service';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-contract-profile-dashboards',
@@ -66,19 +67,32 @@ export class ContractProfileDashboardsComponent
   }
 
   mapData(data: any) {
+    const VND = new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+        
     data.map((x) => {
       x.type = this.getTypeContract(x.type);
       x.effDate = CommonUtilsService.dateToString(x.effDate, false);
-      x.salary = x.salary.toLocaleString() + ' đ';
+      x.salary = VND.format(parseInt(x.salary));
       return x;
     });
     return data;
   }
 
   doSearch() {
-    this.processSearch(this.searchModel, () => {
-      this.searchResult.data = this.mapData(this.searchResult.data);
-    });
+    if(this.data){
+      this.processSearch(this.searchModel, () => {
+        this.searchResult.data = this.mapData(this.searchResult.data);
+      });
+    }else{
+      this.ContractService.getListContractByToken().subscribe(res=>{
+        console.log(res);
+        this.searchResult.data = this.mapData(res.data);
+      })
+    }
+    
   }
 
   handleDataKPI(data) {
@@ -89,8 +103,16 @@ export class ContractProfileDashboardsComponent
     this.achievementService
       .renderFile({
         filePath: data,
-        fileType: '1',
+        fileType: 2,
       })
-      .subscribe((res1) => {});
+      .subscribe((res) => {
+        const res1 = this.getResponseFromHeader(res.headers);
+        if (this.isSuccess(res1)) {
+          const fileName = this.getFileName(res.headers);
+          FileSaver.saveAs(res.body, fileName);
+        } else {
+          this.showSnackBar(res1.message, 'error');
+        }
+      });
   }
 }

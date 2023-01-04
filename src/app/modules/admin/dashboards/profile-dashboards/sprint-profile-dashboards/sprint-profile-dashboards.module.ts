@@ -4,8 +4,6 @@ import { SprintProfileDashboardsComponent } from './sprint-profile-dashboards.co
 import { TranslocoModule } from '@ngneat/transloco';
 import { SharedModule } from '@shared/shared.module';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
-import { DataTableKpiModule } from './data-table-kpi/data-table-kpi.module';
-
 
 
 @NgModule({
@@ -15,7 +13,6 @@ import { DataTableKpiModule } from './data-table-kpi/data-table-kpi.module';
   imports: [
     CommonModule,
     SharedModule,
-    DataTableKpiModule,
     TranslocoModule,
     DataTableModule
   ],
