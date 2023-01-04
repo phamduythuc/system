@@ -200,6 +200,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
 
     this.sprintService.getMembers(searchObj).subscribe(res => {
+      console.log(res);
+
       if (this.isSuccess(res)) {
         res.data.forEach(item => {
           this.efforts.push(this.newItem(item));

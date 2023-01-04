@@ -46,7 +46,7 @@
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult.data | slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+            [rows]="searchResult.data||[]"
             [columns]="columns"
             [(pageIndex)]="pageIndex"
             [limit]="paginate.size"

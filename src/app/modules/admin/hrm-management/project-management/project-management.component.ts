@@ -6,7 +6,7 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {AddOrEditProjectComponent} from './add-or-edit-project/add-or-edit-project.component';
 import {DetailProjectComponent} from './detail-project/detail-project.component';
 import {ProjectEffortComponent} from './project-effort/project-effort.component';
-import {ProjectMemberComponent} from "./project-member/project-member.component";
+import {ProjectMemberComponent} from './project-member/project-member.component';
 
 @Component({
   selector: 'app-project-management',

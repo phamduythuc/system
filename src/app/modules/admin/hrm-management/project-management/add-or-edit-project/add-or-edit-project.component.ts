@@ -32,14 +32,14 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     description: [null, Validators.maxLength(255)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
-    contactName: [null ,[Validators.maxLength(100)]],
-    contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b')]],
-    contactMail: [null],
+    contactName: [null ,[Validators.maxLength(100) ,Validators.required]],
+    contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b'), Validators.required]],
+    contactMail: [null ,Validators.required],
 
     status: [1, Validators.required],
   });
 
-  date : any;
+  date: any;
   projectData: any;
   projectTypes: any = [];
   projects: any = [];
@@ -59,66 +59,66 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     if(this.dialogId){
       this.getDetails(this.dialogId);
     }
-    
+
   }
 
   ngOnInit(): void {
   }
 
   onChange(data){
-    this.projectTypes.map((x:any)=>{
-      if(x.name == data.value){
+    this.projectTypes.map((x: any)=>{
+      if(x.name === data.value){
         this.formGroup.controls.projectType.setValue(Number(x.code));
       }
-      return x
-    })
+      return x;
+    });
   }
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
-          this.projectTypes.map((x:any)=>{
-            if(Number(x.code) == this.projectData.projectType){
-              this.projectData.projectTypeName = x.name
+          this.projectTypes.map((x: any)=>{
+            if(Number(x.code) === this.projectData.projectType){
+              this.projectData.projectTypeName = x.name;
             }
-            return x
-          })
+            return x;
+          });
           console.log(this.projectData);
 
-          this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime)
-          this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime)
-          this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime)
+          this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime);
+          this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime);
+          this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime);
           this.formGroup.patchValue(this.projectData);
         }
       }else {
         this.showSnackBar(res.message,  'error');
-        this.dialogService.closeAll()
+        this.dialogService.closeAll();
       }
     },error => {
       this.showSnackBar(error.message,  'error');
-      this.dialogService.closeAll()
+      this.dialogService.closeAll();
     });
   }
 
   getListPartner(){
     this.partnerService.search().subscribe(res=>{
-      this.listPartner = res.data
-    })
+      this.listPartner = res.data;
+    });
   }
 
   getCategories() {
     this.categories.getCategories('PROJECT_TYPE').subscribe(res => {
       this.projectTypes = res.data;
-    })
+    });
   }
 
   save(data) {
     // console.log(data)
-    data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime)
-    data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime)
-    data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime)
-    data.id = this.dialogId || null
-    this.addOrEdit(data)
+    data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime);
+    data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime);
+    data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime);
+    data.id = this.dialogId || null;
+    this.addOrEdit(data);
   }
 }
