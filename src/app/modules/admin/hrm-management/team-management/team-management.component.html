@@ -3,7 +3,7 @@
         <mat-card class="bg-card h-full">
             <!-- header -->
             <div class="header border-b flex flex-wrap justify-between w-full">
-                <div class="flex justify-between w-2/4">
+                <div class="flex justify-between w-3/5">
 
                     <div class="w-full">
                         <form [formGroup]="formSearch">
@@ -45,7 +45,7 @@
                 </div>
 
                 <!-- button -->
-                <div class="mb-2 w-2/4 flex justify-end">
+                <div class="mb-2 flex justify-end">
                     <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
                         (click)="addOrEdit()">
                         <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
@@ -56,7 +56,7 @@
 
             <!-- content -->
             <div class="flex flex-wrap justify-around w-full mt-2">
-                <div class=" w-120 m-2 mb-9 " *ngFor="let value of searchResult.data; total as total">
+                <div class=" w-120 m-2 mt-3 " *ngFor="let value of searchResult.data; total as total">
                     <app-team-item [team]="value" [random]="random"></app-team-item>
                 </div>
             </div>

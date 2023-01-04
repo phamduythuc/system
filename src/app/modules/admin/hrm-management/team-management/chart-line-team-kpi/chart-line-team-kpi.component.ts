@@ -58,14 +58,16 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(changes.id && changes.id.firstChange){
+      this.searchKpi['teamId'] = changes.id.currentValue;
+    }
     if (changes.searchStartDate && changes.searchStartDate.currentValue != undefined) {
       this.searchKpi.startMonth = changes['searchStartDate'].currentValue;
-      this.getDataChart(this.searchKpi);
     }
     if (changes.searchEndDate && changes.searchEndDate.currentValue != undefined) {
       this.searchKpi.endMonth = changes['searchEndDate'].currentValue;
-      this.getDataChart(this.searchKpi);
     }
+    this.getDataChart(this.searchKpi);
   }
 
   ngOnInit(): void {
@@ -117,7 +119,7 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
   initChart(chart?: any) {
     this.chartOptions = {
 
-      accessibility:{
+      accessibility: {
         enabled: false
       },
       plotOptions: {
