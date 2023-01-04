@@ -108,7 +108,7 @@ export class AddOrEditStaffDrawerComponent
     //Ngày nghỉ
     leaveDate: [],
     //Mã cấp bậc
-    levelId: [null, Validators.required],
+    levelId: [, Validators.required],
     //Tình trạng hôn nhân
     maritalStatus: [],
     //Người cập nhâật
@@ -128,7 +128,7 @@ export class AddOrEditStaffDrawerComponent
       ],
     ],
     //Mã chức vụ
-    positionId: [null, Validators.required],
+    positionId: [, Validators.required],
     //Chức vụ hiện tại
     positionJob: [],
     //Tôn giáo
@@ -147,7 +147,7 @@ export class AddOrEditStaffDrawerComponent
     summary: [],
     //Tên đăng nhập
     username: [null, Validators.required],
-    role: [],
+    role: [null, Validators.required],
     //Kinh nghiệm
     workExperience: [],
     // lương
@@ -175,11 +175,7 @@ export class AddOrEditStaffDrawerComponent
     this.getListRoleStaff();
     this.getListTeam()
   }
-// <<<<<<< HEAD
 
-//   getListRoleStaff(){
-//     this.staffService.getRoleStaff(this.option).subscribe(res => {
-// =======
   getListRoleStaff() {
     this.staffService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
@@ -189,13 +185,13 @@ export class AddOrEditStaffDrawerComponent
         );
       }
     });
-    this.staffService.getListPosition(this.searchModel).subscribe((res) => {
+    this.staffService.getListPosition(this.option).subscribe((res) => {
       this.listPositions = res.data;
     });
-    this.staffService.getListStaffLevel(this.searchModel).subscribe((res) => {
+    this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       this.listStaffLevels = res.data;
     });
-    this.staffService.getListDepartment(this.searchModel).subscribe((res) => {
+    this.staffService.getListDepartment(this.option).subscribe((res) => {
       this.listDepartment = res.data;
     });
   }

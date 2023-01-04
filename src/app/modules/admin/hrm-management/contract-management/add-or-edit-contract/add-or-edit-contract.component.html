@@ -174,6 +174,8 @@
             <input
               class=" "
               matInput
+              [min]="formGroup.value.signDate"
+              [max]="formGroup.value.expDate"
               [matDatepicker]="effDate"
               datePickerFormat="DD/MM/YYYY"
               [formControlName]="'effDate'"
@@ -201,6 +203,7 @@
             <input
               class=" "
               matInput
+              [min]="formGroup.value.signDate"
               [matDatepicker]="expDate"
               datePickerFormat="DD/MM/YYYY"
               [formControlName]="'expDate'"
@@ -295,7 +298,7 @@
         <label class="w-1/7 font-medium required" for="file">{{
           "hrm-management.contract.link" | transloco
         }}</label>
-        <div class="input w-5/6 ml-6">
+        <div class="input w-5/6 ml-11">
           <input
             type="file"
             id="file"
@@ -340,7 +343,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid || !this.fileUpload.file"
+      [disabled]="formGroup.invalid || !this.detailsData"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon

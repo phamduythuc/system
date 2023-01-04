@@ -19,6 +19,8 @@ import moment, { Moment } from 'moment';
   styleUrls: ['./chart-profile-dashboards.component.scss'],
 })
 export class ChartProfileDashboardsComponent implements OnInit {
+  @Input() staffId:any
+
   @Output() changeData = new EventEmitter<any>();
 
   options: any = {
@@ -49,7 +51,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
       Validators.required,
     ],
     endMonth: [moment().subtract(1, 'months'), Validators.required],
-    staffId: [503],
+    staffId: [],
   });
 
   random: any;
@@ -63,6 +65,8 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.random = (Math.random() + 1).toString(36).substring(7);
+    this.formGroup.value.staffId = this.staffId
+    this.formGroup.patchValue(this.formGroup.value);
   }
 
   ngOnInit(): void {
@@ -91,7 +95,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
       endMonth: CommonUtilsService.dateToString(
         moment().add(-1, 'month').startOf('month')
       ),
-      staffId: 503,
+      staffId: this.staffId,
     };
     this.view(payload);
   }
