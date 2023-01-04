@@ -56,7 +56,6 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    debugger
     if (changes.searchStartDate && changes.searchStartDate.currentValue != undefined) {
       this.searchKpi.startMonth = changes['searchStartDate'].currentValue;
       this.getDataChart(this.searchKpi);
@@ -73,7 +72,6 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
   }
 
   getDataChart(searchKpi: any) {
-    debugger
     this.teamService.getTeamKpi(searchKpi).subscribe(
       res => {
         if (res.data != null) {
@@ -92,7 +90,6 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
             var b = parseInt(x.revenue)
             return b;
           })
-          debugger
           this.initChart(this.chart);
         }
       }

@@ -154,8 +154,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       data: {
         id,
       },
-      width: '70vw',
-      // maxHeight: '90vh',
+      width: '30vw',
       disableClose: true
     }, (value) => {
       if (value) {
