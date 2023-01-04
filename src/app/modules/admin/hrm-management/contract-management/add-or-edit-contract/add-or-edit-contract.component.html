@@ -105,6 +105,7 @@
             <mat-select
               [placeholder]="'common.status' | transloco"
               formControlName="status"
+              [disabled]="dialogId"
             >
               <mat-option
                 *ngFor="let item of listCaregories.CONTRACT_STATUS"
