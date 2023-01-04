@@ -217,7 +217,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     return this.fb.group({
       staffId: [data.staffId],
       roleId: [data.roleId],
-      // staffCode: [data.staffCode],
+      staffCode: [data.staffCode],
       effort: [data.effort],
       effortExchange: [data.effortExchange],
       percentEffort: [data.percentEffort],
