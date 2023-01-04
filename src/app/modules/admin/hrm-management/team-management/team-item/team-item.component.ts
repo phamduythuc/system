@@ -111,7 +111,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.formGroup.patchValue({
       sprint: this.currentTime,
     })
-    console.log(this.formGroup.value['sprint'])
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();

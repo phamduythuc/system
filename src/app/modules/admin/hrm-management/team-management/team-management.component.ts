@@ -79,7 +79,6 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
   handlePageEvent(e?: any) {
-    console.log(e)
     this.searchModel = {
       page: e.pageIndex,
       pageSize: e.pageSize,
@@ -100,7 +99,8 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     else {
       this.searchModel = {
         page: 0,
-        pageSize: 10,
+        pageSize: 3,
+        status : this.formSearch.value['option']
       }
     }
     this.processSearch(this.searchModel);

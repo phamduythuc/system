@@ -116,6 +116,10 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
 
   initChart(chart?: any) {
     this.chartOptions = {
+
+      accessibility:{
+        enabled: false
+      },
       plotOptions: {
         series: {
           marker: {
