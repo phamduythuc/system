@@ -35,9 +35,9 @@
                                 <!-- view option seaarch -->
                                 <div class="w-2/6">
                                     <mat-form-field class="w-full">
-                                        <mat-select [formControlName]="'option'">
+                                        <mat-select [formControlName]="'option'" (selectionChange)="onStatusChange($event)">
                                             <mat-option value="">{{'common.all'|transloco}}</mat-option>
-                                            <mat-option value="0">{{'common.notActive'|transloco}}</mat-option>
+                                            <mat-option value="2">{{'common.notActive'|transloco}}</mat-option>
                                             <mat-option value="1">{{'common.activing'|transloco}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>

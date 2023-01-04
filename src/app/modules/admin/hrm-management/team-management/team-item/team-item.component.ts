@@ -10,6 +10,8 @@ import { FuseConfigService } from '@fuse/services/config';
 import { TeamMemberService } from '@shared/services/team-member.service';
 import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
 import moment from 'moment';
+import { EditLeaderComponent } from '../edit-leader/edit-leader.component';
+import { Member } from '../models/Member';
 
 
 @Component({
@@ -28,10 +30,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   drawerOpened: boolean = true;
   selectedTeamId: any;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-  performance:any='';
+  performance: any = '';
 
   formSearch: FormGroup;
-  listMember: any;
+  member :Member;
+  listMember: Member[]=[];
+  listStaffName:any;
+  listStaffId:any;
   totalMember: number;
 
   list_type_view: any = [
@@ -138,9 +143,17 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       if (res.data[0] != null) {
         this.data = res.data[0];
         this.formGroup.patchValue(this.data);
-        this.listMember = this.data.staffName.split(',');
+        this.listStaffName = this.data.staffName.split(',');
+        this.listStaffId = this.data.staffId.split(',');
+        for (let index = 0; index <= this.listStaffId.length; index++) {
+          this.member ={
+            staffId:this.listStaffId[index],
+            staffName:this.listStaffName[index]
+          }
+          this.listMember.push(this.member);    
+        }
         this.totalMember = this.listMember.length;
-        this.performance = (this.data.cost/this.data.revenue*100).toFixed(2);
+        this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
       else {
         this.totalMember = 0;
@@ -161,6 +174,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         // this.doSearch();
       }
     });
+  }
+
+  editLeader(id?: any) {
+    this.showDialog(EditLeaderComponent, {
+      data: this.listMember,
+      width: '30vw'
+    })
   }
 
 
@@ -192,7 +212,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   deleteConfirmDialog(id?: any): any {
     this.showDialog(ConfirmDialogComponent, {
-      data:id
+      data: id
     }, (value) => {
       if (value) {
         this.delete(id);

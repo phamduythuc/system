@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild,SimpleChanges } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { debounceTime, Subject } from 'rxjs';
@@ -27,7 +27,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
 
   formSearch: FormGroup;
   team = 'team';
-  selected ='domain'
+  selected = 'domain'
   list_type_view: any = [
     {
       type: 'list',
@@ -47,15 +47,15 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     super(injector, teamService);
     this.formSearch = this.fb.group({
       name: '',
-      option:['1']
+      option: ['1']
     });
   }
 
-  random:any
+  random: any
   ngOnChanges(changes: SimpleChanges): void {
     this.random = (Math.random() + 1).toString(36).substring(7);
 
-}
+  }
 
   ngOnInit(): void {
     this.searchModel.pageSize = 9999999;
@@ -75,7 +75,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     // this.searchModel.status = 1;
     this.processSearch(this.searchModel, () => this.callback());
 
-   
+
   }
 
   doSearch(): void {
@@ -133,6 +133,16 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     //   }
     // });
   }
+
+  onStatusChange(e?: any) {
+    this.searchModel = {
+      page: 0,
+      pageSize: 10,
+      status:e.value
+    };
+    this.processSearch(this.searchModel);
+  }
+
 
   getPanelInfo(id: string): any {
     return this.searchResult.data.find(panel => panel.id === id);

@@ -48,7 +48,7 @@
                             {{"common.leader"|transloco}}
                         </mat-label>
                         <div class="-translate-y-9 translate-x-44">
-                            <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team.id)">
+                            <button mat-icon-button class="hover:bg-slate-200" (click)="editLeader(team.id)">
                                 <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit"
                                     class="icon-size-5"></mat-icon>
                             </button>
@@ -102,7 +102,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-list role="list">
-                        <div *ngFor="let member of listMember; index as idx; count as total" class="flex items-center">
+                        <div *ngFor="let member of listStaffName; index as idx; count as total" class="flex items-center">
                             <div>{{idx+1+'.'}}</div>
                             <div>
                                 <mat-list-item role="listitem">{{member}}</mat-list-item>

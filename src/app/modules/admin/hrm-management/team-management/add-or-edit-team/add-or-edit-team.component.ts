@@ -110,7 +110,7 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
       name: value.name,
       staDate: this.currentDate,
       // status: value.status,
-      // departmentId: value.departmentId,
+      departmentId: value.departmentId,
       // description: value.description,
       // endDate: value.endDate,
       // members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
