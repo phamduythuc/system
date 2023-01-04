@@ -58,7 +58,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchModel.pageSize = 9999999;
+    this.searchModel.pageSize = 3;
     this.formSearch.get('name').valueChanges.pipe(
       map(event => event),
       debounceTime(1000),
@@ -75,6 +75,17 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     // this.searchModel.status = 1;
     this.processSearch(this.searchModel, () => this.callback());
 
+
+  }
+
+  handlePageEvent(e?: any) {
+    console.log(e)
+    this.searchModel = {
+      page: e.pageIndex,
+      pageSize: e.pageSize,
+      status: this.formSearch.value['option']
+    }
+    this.processSearch(this.searchModel);
 
   }
 
@@ -137,8 +148,8 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
   onStatusChange(e?: any) {
     this.searchModel = {
       page: 0,
-      pageSize: 10,
-      status:e.value
+      pageSize: 3,
+      status: e.value
     };
     this.processSearch(this.searchModel);
   }

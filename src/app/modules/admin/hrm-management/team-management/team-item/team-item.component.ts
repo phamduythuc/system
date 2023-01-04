@@ -99,9 +99,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
-
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -113,6 +111,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.formGroup.patchValue({
       sprint: this.currentTime,
     })
+    console.log(this.formGroup.value['sprint'])
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();

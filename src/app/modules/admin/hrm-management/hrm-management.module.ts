@@ -21,6 +21,7 @@ import { FuseDrawerModule } from '../../../../@fuse/components/drawer';
 import { StaffManagementModule } from './staff-management/staff-management.module';
 import { RoleManagementModule } from './role-management/role-management.module';
 import { RoleManagementComponent } from './role-management/role-management.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { RoleManagementComponent } from './role-management/role-management.compo
     FuseDrawerModule,
     StaffManagementModule,
     RoleManagementModule,
+    MatPaginatorModule
     
 
   ],

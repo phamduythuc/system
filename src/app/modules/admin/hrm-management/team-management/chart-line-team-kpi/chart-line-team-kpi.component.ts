@@ -11,6 +11,8 @@ import HC_ExportingOffline from 'highcharts/modules/offline-exporting';
 import HC_ExportData from 'highcharts/modules/export-data';
 import HC_More from 'highcharts/highcharts-more';
 
+import highcharts3D from 'highcharts/highcharts-3d.src';
+
 HC_Exporting(Highcharts);
 HC_ExportingOffline(Highcharts);
 HC_ExportData(Highcharts);
@@ -52,7 +54,7 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
     public teamService: TeamService,
   ) {
     super(injector, teamService, null);
-
+    this.initChart(this.chart);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,14 +81,23 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
             return x.targetMonth
           });
           this.chart.cost = res.data.map(x => {
+            if (x.cost == null) {
+              x.cost = 0
+            }
             var b = parseInt(x.cost)
             return b;
           })
           this.chart.target = res.data.map(x => {
+            if (x.target == null) {
+              x.target = 0
+            }
             var b = parseInt(x.target)
             return b;
           })
           this.chart.revenue = res.data.map(x => {
+            if (x.revenue == null) {
+              x.revenue = 0
+            }
             var b = parseInt(x.revenue)
             return b;
           })
@@ -96,10 +107,30 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
     );
   }
 
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart): void {
+    setTimeout(() => {
+      chart.reflow();
+      // chart.redraw();
+    }, 0);
+  };
+
   initChart(chart?: any) {
     this.chartOptions = {
       plotOptions: {
-
+        series: {
+          marker: {
+            enabled: false,
+            symbol: 'circle',
+            radius: 1,
+            lineColor: null
+          },
+          lineWidth: 2,
+          states: {
+            inactive: {
+              enabled: false,
+            },
+          },
+        },
       },
       exporting: {
         enabled: true
