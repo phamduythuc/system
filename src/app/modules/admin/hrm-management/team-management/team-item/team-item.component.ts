@@ -3,15 +3,16 @@ import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
 import { TeamService } from '@shared/services/team.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
 import { TeamMemberService } from '@shared/services/team-member.service';
 import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { EditLeaderComponent } from '../edit-leader/edit-leader.component';
 import { Member } from '../models/Member';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 
 @Component({
@@ -111,6 +112,15 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.formGroup.patchValue({
       sprint: this.currentTime,
     })
+  }
+  date = new FormControl(moment());
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue('01');
+    datepicker.close();
+    // this.onDateChange(e);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
