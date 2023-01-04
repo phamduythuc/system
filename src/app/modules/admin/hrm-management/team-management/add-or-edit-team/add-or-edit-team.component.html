@@ -16,194 +16,39 @@
       <!-- Form -->
       <form [formGroup]="formGroup">
 
-      <!-- Section -->
+        <!-- Section -->
 
-      <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
-        <!-- Name -->
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'common.name'|transloco}}</mat-label>
-            <mat-icon
-              class="icon-size-5"
-              [svgIcon]="'heroicons_solid:user'"
-              matPrefix></mat-icon>
-            <input
-              [formControlName]="'name'"
-              matInput>
-          </mat-form-field>
-          <app-error-message [control]="formGroup.get('name')" [name]="'common.name'|transloco"></app-error-message>
-        </div>
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+          <!-- Name -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{'common.name'|transloco}}</mat-label>
+              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:user'" matPrefix></mat-icon>
+              <input [formControlName]="'name'" matInput>
+            </mat-form-field>
+            <app-error-message [control]="formGroup.get('name')" [name]="'common.name'|transloco"></app-error-message>
+          </div>
 
-        <!-- department -->
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{"common.department"|transloco}}</mat-label>
-            <mat-icon
-              class="icon-size-5"
-              [svgIcon]="'heroicons_solid:office-building'"
-              matPrefix></mat-icon>
-            <mat-select [placeholder]="('common.department' | transloco)+' ...'" [formControlName]="'departmentId'">
-              <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <app-error-message [control]="formGroup.get('departmentId')" [name]='"common.department"|transloco'></app-error-message>
-
-        </div>
-        <!-- Start date -->
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
-            <input class=" " matInput [matDatepicker]="startDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'staDate'"
-                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
-            <mat-datepicker-toggle #datepicker [for]="startDate">
-            </mat-datepicker-toggle>
-            <mat-datepicker  #startDate></mat-datepicker>
-          </mat-form-field>
-
-        </div>
-        <!-- End date -->
-        <div class="sm:col-span-2">
-          <mat-form-field class="fuse-mat-no-subscript w-full">
-            <mat-label>{{'hrm-management.team.form.endDate'|transloco}}</mat-label>
-            <input [min]="formGroup.get('staDate').value" matInput [matDatepicker]="endDate" datePickerFormat="DD/MM/YYYY" [formControlName]="'endDate'"
-                   [placeholder]="('placeholder.chooseDate' | transloco)+' ...'">
-            <mat-datepicker-toggle [for]="endDate">
-            </mat-datepicker-toggle>
-            <mat-datepicker  #endDate></mat-datepicker>
-          </mat-form-field>
-          <app-error-message [control]="formGroup.get('endDate')" [name]='"hrm-management.team.form.endDate"|transloco'></app-error-message>
-
-        </div>
-        <!-- description -->
-        <div class="sm:col-span-4">
-          <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
-            <mat-label>{{'common.description'|transloco}}</mat-label>
-            <textarea
-              matInput
-              [formControlName]="'description'"
-              cdkTextareaAutosize
-              [cdkAutosizeMinRows]="3"></textarea>
-          </mat-form-field>
-          <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
-<!--          <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.</div>-->
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div class="my-10 border-t"></div>
-
-      <div *ngIf="!dialogId" class="grid sm:grid-cols-4 gap-6 w-full mt-8">
-        <!-- members -->
-        <div class="sm:col-span-4">
-          <div class="w-full">
-            <mat-label>{{'hrm-management.team.form.addMember'|transloco}}</mat-label>
-            <div class="flex flex-row w-full">
-              <mat-form-field class="w-full">
-                          <mat-icon
-                            class="icon-size-5"
-                            [svgIcon]="'heroicons_solid:user'"
-                            matPrefix></mat-icon>
-                <mat-select #selectMember [formControlName]="'members'" placeholder="Add member" [multiple]="true">
-                  <mat-option>
-                    <ngx-mat-select-search   placeholderLabel="Choose member" [formControlName]="'searchStaff'">
-                      <mat-icon ngxMatSelectSearchClear
-                                class="icon-size-5"
-                                [svgIcon]="'heroicons_solid:x'"
-                                matPrefix></mat-icon>
-                    </ngx-mat-select-search>
-                  </mat-option>
-                  <mat-option *ngFor="let staff of listStaff" [value]="staff">
-                    {{staff.fullName}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-<!--              <button [matTooltip]="'button.new'|transloco" matTooltipPosition="below" matTooltipClass="custom-tooltip"-->
-              <button [title]="'hrm-management.team.form.addMember'|transloco"
-                class="fuse-alert-dismiss-button ml-2 mr-4"
-                mat-icon-button
-                (click)="addMemberToTeam(selectMember.value)">
-                <mat-icon [svgIcon]="'heroicons_solid:user-add'"></mat-icon>
-              </button>
-<!--              <button-->
-<!--                class="fuse-alert-dismiss-button ml-auto mat-primary bg-primary-200 shadow"-->
-<!--                mat-icon-button-->
-<!--                (click)="saveMemberList()">-->
-<!--                {{'button.save'|transloco}}-->
-<!--              </button>-->
-              <!--        <button (click)="addMemberToTeam()">add</button>-->
-            </div>
+          <!-- department -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label>{{"common.department"|transloco}}</mat-label>
+              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:office-building'" matPrefix></mat-icon>
+              <mat-select [placeholder]="('common.department' | transloco)+' ...'" [formControlName]="'departmentId'">
+                <mat-option *ngFor="let item of listDepartment" [value]="item?.id">{{item?.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <app-error-message [control]="formGroup.get('departmentId')"
+              [name]='"common.department"|transloco'></app-error-message>
           </div>
         </div>
-        <div *ngIf="listMembers?.length>0" style="max-height: 200px " class="sm:col-span-4 overflow-auto flex flex-col divide-y border-t border-b pl-4 pr-4">
-          <ng-container *ngFor="let member of listMembers; index as i">
-            <div class="flex flex-col sm:flex-row sm:items-center py-6">
-              <div class="flex items-center">
-                <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
-                  <ng-container *ngIf="member.avatar">
-                    <img
-                      class="object-cover w-full h-full"
-                      [src]="member.avatar"
-                      alt="Contact avatar"/>
-                  </ng-container>
-                  <ng-container *ngIf="!member.avatar">
-                    <div
-                      class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                      {{member.fullName.charAt(0)}}
-                    </div>
-                  </ng-container>
-                </div>
-                <div class="ml-4">
-                  <div class="font-medium">{{member.fullName}}</div>
-                  <div class="text-secondary">{{member.email}}</div>
-                </div>
-              </div>
-              <div class="flex items-center mt-4 sm:mt-0 sm:ml-auto">
-                <div class="order-2 sm:order-1 ml-4 sm:ml-0">
-                  <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-32">
-                    <mat-select
-                      [panelClass]="'w-72 min-w-72 max-w-72 h-auto max-h-none'"
-                      [value]="member.isManager"
-                      (selectionChange)="changeManager($event,member,roleSelect) "
-                      disableOptionCentering
-                      #roleSelect>
-                      <mat-select-trigger class="text-md">
-<!--                        <span>Role:</span>-->
-                        <span class="ml-1 font-medium">{{(roleSelect.value==='1'?'Admin':'Member') | titlecase}}</span>
-                      </mat-select-trigger>
-                      <ng-container *ngFor="let role of roles">
-                        <mat-option
-                          class="h-auto py-4 leading-none"
-                          [value]="role.value">
-                          <div class="font-medium">{{role.label}}</div>
-                          <div
-                            class="mt-1.5 text-sm whitespace-normal leading-normal text-secondary">{{role.description}}</div>
-                        </mat-option>
-                      </ng-container>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="order-1 sm:order-2 sm:ml-3">
-                  <button mat-icon-button (click)="deleteFromAddForm(i)">
-                    <mat-icon
-                      class="text-hint"
-                      [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-
-      <!-- Divider -->
-<!--      <div class="mt-11 mb-10 border-t"></div>-->
-    </form>
+      </form>
 
     </div>
     <!-- Actions -->
     <div class="footer mt-6 flex justify-end">
       <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
-              (click)="formGroup.valid && save(formGroup.value)">
+        (click)="formGroup.valid && save(formGroup.value)">
         <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
         <span>{{t('button.save')}}</span>
       </button>

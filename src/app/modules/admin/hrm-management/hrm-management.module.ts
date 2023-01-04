@@ -22,6 +22,7 @@ import { StaffManagementModule } from './staff-management/staff-management.modul
 import { RoleManagementModule } from './role-management/role-management.module';
 import { RoleManagementComponent } from './role-management/role-management.component';
 
+
 @NgModule({
   declarations: [
     DepartmentManagementComponent,
@@ -48,6 +49,8 @@ import { RoleManagementComponent } from './role-management/role-management.compo
     FuseDrawerModule,
     StaffManagementModule,
     RoleManagementModule,
+    
+
   ],
 })
 export class HrmManagementModule {}

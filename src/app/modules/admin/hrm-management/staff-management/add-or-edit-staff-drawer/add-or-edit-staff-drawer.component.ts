@@ -156,7 +156,7 @@ export class AddOrEditStaffDrawerComponent
     teamId: [],
     isWorker: [false]
   });
-  
+
   constructor(
     injector: Injector,
     private staffService: StaffService,
