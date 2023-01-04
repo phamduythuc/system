@@ -25,6 +25,7 @@ export class BaseComponent {
   searchModel: any = {
     page: 0,
     pageSize: 10,
+    status:1
   };
   searchResult: any = {
     data: [],

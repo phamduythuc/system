@@ -56,12 +56,21 @@
     "actions": "Hành động",
     "status": "Trạng thái",
     "active": "Hoạt động",
+    "activing":"Đang hoạt động",
     "active_staff_level": "Hoạt động",
     "notActive": "Không hoạt động",
+    "all":"Tất cả",
     "parent": "Cha",
     "partner": "Đối tác",
     "fullName": "Họ tên",
     "department": "Phòng ban",
+    "leader":"Trưởng nhóm",
+    "performance":"Hiệu suất",
+    "sprint":"Sprint",
+    "expected":"Kỳ vọng",
+    "cost":"Chi phí",
+    "revenue":"Doanh thu",
+    "listMember":"Danh sách thành viên",
     "parentName": "Phòng ban trực thuộc",
     "gender": "Giới tính",
     "position": "Chức vụ",
@@ -127,7 +136,8 @@
     "edit": "Chỉnh sửa",
     "delete": "Xóa",
     "cancel": "Hủy bỏ",
-    "yes": "Đồng ý"
+    "yes": "Đồng ý",
+    "search": "Tìm kiếm"
   },
   "add-new": "Thêm mới",
   "confirm-delete": {
@@ -194,13 +204,14 @@
       }
     },
     "team": {
-      "title": "Đội/Nhóm",
+      "title": "Đội / Nhóm",
       "form": {
         "member": "Thành viên",
         "startDate": "Từ ngày",
         "endDate": "Đến ngày",
         "addMember": "Thêm thành viên",
-        "choose": "Chọn thành viên"
+        "choose": "Chọn thành viên",
+        "number":"Số lượng"
       }
     },
     "contract": {

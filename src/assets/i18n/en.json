@@ -57,12 +57,21 @@
     "actions": "Actions",
     "status": "Status",
     "active": "Active",
+    "activing" :"Activing",
     "active_staff_level": "Active",
     "notActive": "Not active",
+    "all":"All",
     "parent": "Parent",
     "partner": "Partner",
     "fullName": "Full Name",
     "department": "Department",
+    "leader":"Leader",
+    "performance":"Performance",
+    "sprint":"Sprint",
+    "expected":"Expected",
+    "cost":"Cost",
+    "revenue":"Revenue",
+    "listMember":"Member",
     "parentName": "Affiliated departments",
     "gender": "Gender",
     "position": "Position",
@@ -128,7 +137,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "yes": "Yes"
+    "yes": "Yes",
+    "search" : "Search"
   },
   "add-new": "Add new",
   "confirm-delete": {
@@ -201,7 +211,8 @@
         "startDate": "Start date",
         "endDate": "End date",
         "addMember": "Add member",
-        "choose": "Choose member"
+        "choose": "Choose member",
+        "number" : "Number"
       }
     },
     "contract": {

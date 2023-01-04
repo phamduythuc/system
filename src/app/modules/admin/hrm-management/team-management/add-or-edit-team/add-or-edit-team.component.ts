@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {StaffService} from '@shared/services/staff.service';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
+import moment from 'moment';
 
 @Component({
   selector: 'app-add-or-edit-team',
@@ -16,13 +17,14 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
 
   @ViewChild('selectMember') selectMember;
 
+  currentDate = moment(new Date(Date.now())).format("DD/MM/YYYY");
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, Validators.required],
     staDate: [],
     status: [1],
     departmentId: [null, Validators.required],
-    description: [Validators.maxLength(500)],
+    description: ['',Validators.maxLength(500)],
     endDate: [],
     members: [],
     searchStaff: []
@@ -102,17 +104,16 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   }
 
   save(value: any): boolean {
-    this.handleCoverTimeToString(value);
-    console.log(value);
+    // this.handleCoverTimeToString(value);
     const teamData = {
-      id: this.dialogId && this.dialogId,
+      // id: this.dialogId && this.dialogId,
       name: value.name,
-      staDate: value.staDate,
-      status: value.status,
+      staDate: this.currentDate,
+      // status: value.status,
       departmentId: value.departmentId,
-      description: value.description,
-      endDate: value.endDate,
-      members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
+      // description: value.description,
+      // endDate: value.endDate,
+      // members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
     };
     this.addOrEdit(teamData);
     return false;
