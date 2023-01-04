@@ -364,5 +364,8 @@
         }
       }
     }
+  },
+  "profile":{
+    "title": "Profile"
   }
 }

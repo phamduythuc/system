@@ -347,5 +347,8 @@
         }
       }
     }
+  },
+  "profile":{
+    "title": "Thông tin cá nhân"
   }
 }

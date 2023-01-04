@@ -1,21 +1,45 @@
 /* eslint-disable */
-import {FuseNavigationItem} from '@fuse/components/navigation';
-import {AuthoritiesConstant} from '../../../authorities.constant';
+import { FuseNavigationItem } from '@fuse/components/navigation';
+import { AuthoritiesConstant } from '../../../authorities.constant';
 
 export const defaultNavigation: FuseNavigationItem[] = [
   {
     id: 'dashboards',
     title: 'Dashboards',
-    type: 'basic',
+    type: 'group',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    role: [AuthoritiesConstant.DASHBOARD]
+    role: [AuthoritiesConstant.DASHBOARD],
+    children: [
+      {
+        id: 'dashboards',
+        title: 'Dashboards',
+        type: 'basic',
+        icon: 'heroicons_outline:home',
+        link: '/dashboards',
+        role: [AuthoritiesConstant.DASHBOARD],
+      },
+      {
+        id: 'profile',
+        title: 'profile.title',
+        type: 'basic',
+        icon: 'heroicons_outline:user',
+        link: '/profile/profile-management',
+        role: [
+          AuthoritiesConstant.CONTRACT,
+          AuthoritiesConstant.CONTRACT_CREATE,
+          AuthoritiesConstant.CONTRACT_UPDATE,
+          AuthoritiesConstant.CONTRACT_READ,
+        ],
+      },
+    ],
   },
+
   {
     id: 'hrmManagement',
     title: 'hrm-management.label',
     type: 'group',
-    role: [AuthoritiesConstant.DSPB_READ,],
+    role: [AuthoritiesConstant.DSPB_READ],
     children: [
       {
         id: 'position',
@@ -23,9 +47,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:briefcase',
         link: '/hrm-management/position-management',
-        role: [
-          AuthoritiesConstant.DSTV,
-        ]
+        role: [AuthoritiesConstant.DSTV],
       },
       {
         id: 'role',
@@ -38,7 +60,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSTV_UPDATE,
           AuthoritiesConstant.DSTV_DELETE,
           AuthoritiesConstant.DSTV_READ,
-        ]
+        ],
       },
       {
         id: 'level',
@@ -51,7 +73,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSCD_UPDATE,
           AuthoritiesConstant.DSCD_DELETE,
           AuthoritiesConstant.DSCD_READ,
-        ]
+        ],
       },
       {
         id: 'department',
@@ -64,7 +86,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSPB_UPDATE,
           AuthoritiesConstant.DSPB_DELETE,
           AuthoritiesConstant.DSPB_READ,
-        ]
+        ],
       },
       {
         id: 'partner',
@@ -76,7 +98,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSDT_READ,
           AuthoritiesConstant.DSDT_UPDATE,
           AuthoritiesConstant.DSDT_READ,
-        ]
+        ],
       },
       {
         id: 'project',
@@ -88,8 +110,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSDA_READ,
           AuthoritiesConstant.DSDA_UPDATE,
           AuthoritiesConstant.DSDA_READ,
-        ]
-      }, {
+        ],
+      },
+      {
         id: 'staff',
         title: 'hrm-management.staff.title',
         type: 'basic',
@@ -99,8 +122,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSNV_READ,
           AuthoritiesConstant.DSNV_UPDATE,
           AuthoritiesConstant.DSNV_READ,
-        ]
-      }, 
+        ],
+      },
       {
         id: 'team',
         title: 'hrm-management.team.title',
@@ -112,15 +135,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSTV_UPDATE,
           AuthoritiesConstant.DSTV_DELETE,
           AuthoritiesConstant.DSTV_READ,
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     id: 'hrmManagement',
     title: 'hrm-management.contract.label',
     type: 'group',
-    role: [AuthoritiesConstant.CONTRACT,],
+    role: [AuthoritiesConstant.CONTRACT],
     children: [
       {
         id: 'contract',
@@ -133,7 +156,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.CONTRACT_CREATE,
           AuthoritiesConstant.CONTRACT_UPDATE,
           AuthoritiesConstant.CONTRACT_READ,
-        ]
+        ],
       },
       {
         id: 'salary',
@@ -146,9 +169,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.SALARY_CREATE,
           AuthoritiesConstant.SALARY_UPDATE,
           AuthoritiesConstant.SALARY_READ,
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     id: 'datalakeManagement',
@@ -219,7 +242,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
               // AuthoritiesConstant.DU_FILE_HDFS.DU_FILE_HDFS_READ
             ],
           },
-        ]
+        ],
       },
       {
         id: 'lbManager',
@@ -250,8 +273,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
             // role: [
             //     AuthoritiesConstant.RP_APP.RP_APP_READ
             // ],
-          }
-        ]
+          },
+        ],
       },
       {
         id: 'thriftManager',
@@ -282,8 +305,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
             // role: [
             //     AuthoritiesConstant.THRIFT_INFO.THRIFT_INFO_READ,
             // ],
-          }
-        ]
+          },
+        ],
       },
       {
         id: 'alertManager',
@@ -294,8 +317,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
         // role: [
         //     AuthoritiesConstant.ALERT_CONFIG.ALERT_CONFIG_READ
         // ]
-      }
-    ]
+      },
+    ],
   },
   {
     id: 'utility',
@@ -311,7 +334,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/support-request',
-        role: []
+        role: [],
       },
       {
         id: 'processManager',
@@ -319,7 +342,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/process-manager',
-        role: []
+        role: [],
       },
       {
         id: 'ingestion&Provisioning',
@@ -369,7 +392,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     AuthoritiesConstant.FLOW_CUSTOMIZED.FLOW_CUSTOMIZED_READ
             // ]
           },
-        ]
+        ],
       },
       {
         id: 'hdfsTool',
@@ -389,7 +412,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             link: '/hdfs-tool/hdfs-browser',
             role: [
               // AuthoritiesConstant.HDFS_BROWSER.HDFS_BROWSER_READ
-            ]
+            ],
           },
           {
             id: 'exportfile',
@@ -399,9 +422,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
             link: '/hdfs-tool/export-file',
             role: [
               // AuthoritiesConstant.DU_FILE_HDFS.DU_FILE_HDFS_READ
-            ]
+            ],
           },
-        ]
+        ],
       },
       {
         id: 'etlTool',
@@ -421,7 +444,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             link: '/etl-tool/lookup-table',
             role: [
               // AuthoritiesConstant.TABLE_LOOKUP.TABLE_LOOKUP_READ
-            ]
+            ],
           },
           {
             id: 'job-management',
@@ -431,9 +454,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
             link: '/etl-tool/job-management',
             role: [
               // AuthoritiesConstant.ETL_JOB_LIB.ETL_JOB_LIB_READ
-            ]
+            ],
           },
-        ]
+        ],
       },
       {
         id: 'encryptTool',
@@ -441,7 +464,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/encrypt-tool',
-        role: []
+        role: [],
       },
       {
         id: 'uploadFile',
@@ -449,7 +472,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/upload-file',
-        role: []
+        role: [],
       },
       {
         id: 'dbMakeFileConfig',
@@ -457,20 +480,21 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/config-make-file-db',
-        role: []
+        role: [],
       },
-
-    ]
+    ],
   },
   {
     id: 'setting',
     title: 'Setting',
     type: 'group',
     icon: 'heroicons_outline:home',
-    role: [AuthoritiesConstant.DSTV_READ,
+    role: [
+      AuthoritiesConstant.DSTV_READ,
       AuthoritiesConstant.DSTV_UPDATE,
       AuthoritiesConstant.DSTV_DELETE,
-      AuthoritiesConstant.DSTV_READ,],
+      AuthoritiesConstant.DSTV_READ,
+    ],
     children: [
       {
         id: 'user',
@@ -478,7 +502,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/setting/user',
-        role: []
+        role: [],
       },
       {
         id: 'authorization',
@@ -486,10 +510,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/setting/authorization',
-        role: [AuthoritiesConstant.DSTV_READ,
+        role: [
+          AuthoritiesConstant.DSTV_READ,
           AuthoritiesConstant.DSTV_UPDATE,
           AuthoritiesConstant.DSTV_DELETE,
-          AuthoritiesConstant.DSTV_READ,]
+          AuthoritiesConstant.DSTV_READ,
+        ],
       },
       {
         id: 'module',
@@ -497,9 +523,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/setting/module',
-        role: []
+        role: [],
       },
-    ]
+    ],
   },
 ];
 export const compactNavigation: FuseNavigationItem[] = [
@@ -510,7 +536,7 @@ export const compactNavigation: FuseNavigationItem[] = [
     type: 'basic',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'datalakeManagement',
@@ -539,31 +565,28 @@ export const futuristicNavigation: FuseNavigationItem[] = [
     type: 'basic',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'datalakeManagement',
     title: 'Datalake Management',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'utility',
     title: 'Utility',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'setting',
     title: 'Setting',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
 ];
 export const horizontalNavigation: FuseNavigationItem[] = [
@@ -574,30 +597,27 @@ export const horizontalNavigation: FuseNavigationItem[] = [
     type: 'basic',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'datalakeManagement',
     title: 'Datalake Management',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'utility',
     title: 'Utility',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
   {
     id: 'setting',
     title: 'Setting',
     type: 'aside',
     icon: 'heroicons_outline:home',
-    children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-
+    children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
   },
 ];
