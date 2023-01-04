@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '@core/auth/auth.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -41,43 +41,31 @@ export class ProfileDashboardsComponent implements OnInit {
     },
   ];
 
-  dialogId:any
+  dialogId: any;
 
   panelOpenState = false;
   constructor(
     private authService: AuthService,
     public translocoService: TranslocoService,
-    private DashboardsProfileService:DashboardsProfileService,
+    private DashboardsProfileService: DashboardsProfileService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     public dialogRef: MatDialogRef<ProfileDashboardsComponent>
-
   ) {
-    this.dialogId = dialogData?.id
-  }
-
-
-  // constructor(
-  //   injector: Injector,
-  //   public dialogRef: MatDialogRef<DetailsContractComponent>,
-  //   private achievementService: AchievementService,
-  //   private ContractService:ContractService,
-  //   @Inject(MAT_DIALOG_DATA) public dialogData: any
-  // ) {
-  //   super(injector, ContractService, dialogRef);
-  //   this.dialogId = dialogData?.id;
-  //   this.listUser = dialogData.listUser;
-  //   this.listCaregories = dialogData.listCaregories;
-  // }
-
-  ngOnInit(): void {
     this.getProfile();
+    this.dialogId = dialogData?.id;
+    
   }
 
+  ngOnInit(): void {}
 
   getProfile() {
-this.DashboardsProfileService.getProfile().subscribe(res=>{
-  this.data.profile = res.data.staffInfo
-})
+    this.DashboardsProfileService.getProfile().subscribe((res) => {
+      this.data.profile = res.data.staffInfo;
+      if (!this.dialogId) {
+        this.dialogId = this.data.profile.id;
+      }
+      console.log(this.data.profile.id);
+    });
     // this.data.profile = {
     //   id: 504,
     //   address: 'Hà Nội',
@@ -114,382 +102,381 @@ this.DashboardsProfileService.getProfile().subscribe(res=>{
     //   salary: 5000000,
     // };
 
-    this.data.contract = {
-      data: [
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 12,
-          contract_code: 'LU1',
-          contract: 'Hợp đồng chính thức',
-          duration: '1 năm',
-          startTime: '1670484167000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 142,
-          contract_code: 'LU2',
-          contract: 'Hợp đồng chính thức',
-          duration: '2 năm',
-          startTime: '1670424667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 172,
-          contract_code: 'LU3',
-          contract: 'Hợp đồng chính thức',
-          duration: '3 năm',
-          startTime: '1670481667000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-        {
-          id: 17,
-          contract_code: 'LU4',
-          contract: 'Hợp đồng chính thức',
-          duration: '6 năm',
-          startTime: '1670484267000',
-          salary: 50000000,
-          link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
-        },
-      ],
-      totalRecords: 24,
-    };
+    // this.data.contract = {
+    //   data: [
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 12,
+    //       contract_code: 'LU1',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '1 năm',
+    //       startTime: '1670484167000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 142,
+    //       contract_code: 'LU2',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '2 năm',
+    //       startTime: '1670424667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 172,
+    //       contract_code: 'LU3',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '3 năm',
+    //       startTime: '1670481667000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //     {
+    //       id: 17,
+    //       contract_code: 'LU4',
+    //       contract: 'Hợp đồng chính thức',
+    //       duration: '6 năm',
+    //       startTime: '1670484267000',
+    //       salary: 50000000,
+    //       link: 'https://file-examples.com/storage/fee589dbcc6394c129ba7e9/2017/10/file-sample_150kB.pdf',
+    //     },
+    //   ],
+    //   totalRecords: 24,
+    // };
 
-    this.data.sprint = {
-      data: [
-        {
-          id: 12,
-          project_code: 'vSDS',
-          project_name: 'Dự án vSDS',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 10,
-        },
-        {
-          id: 122,
-          project_code: 'vSDS 2',
-          project_name: 'Dự án vSDS 2',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 20,
-        },
-        {
-          id: 124,
-          project_code: 'vSDS 3',
-          project_name: 'Dự án vSDS 3',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 30,
-        },
-        {
-          id: 12,
-          project_code: 'vSDS',
-          project_name: 'Dự án vSDS',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 10,
-        },
-        {
-          id: 122,
-          project_code: 'vSDS 2',
-          project_name: 'Dự án vSDS 2',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 20,
-        },
-        {
-          id: 124,
-          project_code: 'vSDS 3',
-          project_name: 'Dự án vSDS 3',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 30,
-        },
-        {
-          id: 12,
-          project_code: 'vSDS',
-          project_name: 'Dự án vSDS',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 10,
-        },
-        {
-          id: 122,
-          project_code: 'vSDS 2',
-          project_name: 'Dự án vSDS 2',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 20,
-        },
-        {
-          id: 124,
-          project_code: 'vSDS 3',
-          project_name: 'Dự án vSDS 3',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 30,
-        },
-        {
-          id: 12,
-          project_code: 'vSDS',
-          project_name: 'Dự án vSDS',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 10,
-        },
-        {
-          id: 122,
-          project_code: 'vSDS 2',
-          project_name: 'Dự án vSDS 2',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 20,
-        },
-        {
-          id: 124,
-          project_code: 'vSDS 3',
-          project_name: 'Dự án vSDS 3',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 30,
-        },
-        {
-          id: 12,
-          project_code: 'vSDS',
-          project_name: 'Dự án vSDS',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 10,
-        },
-        {
-          id: 122,
-          project_code: 'vSDS 2',
-          project_name: 'Dự án vSDS 2',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 20,
-        },
-        {
-          id: 124,
-          project_code: 'vSDS 3',
-          project_name: 'Dự án vSDS 3',
-          recognize: 1,
-          recognize_exchange: 1.5,
-          time_percent: 30,
-        },
-      ],
-      totalRecords: 15,
-    };
+    // this.data.sprint = {
+    //   data: [
+    //     {
+    //       id: 12,
+    //       project_code: 'vSDS',
+    //       project_name: 'Dự án vSDS',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 10,
+    //     },
+    //     {
+    //       id: 122,
+    //       project_code: 'vSDS 2',
+    //       project_name: 'Dự án vSDS 2',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 20,
+    //     },
+    //     {
+    //       id: 124,
+    //       project_code: 'vSDS 3',
+    //       project_name: 'Dự án vSDS 3',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 30,
+    //     },
+    //     {
+    //       id: 12,
+    //       project_code: 'vSDS',
+    //       project_name: 'Dự án vSDS',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 10,
+    //     },
+    //     {
+    //       id: 122,
+    //       project_code: 'vSDS 2',
+    //       project_name: 'Dự án vSDS 2',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 20,
+    //     },
+    //     {
+    //       id: 124,
+    //       project_code: 'vSDS 3',
+    //       project_name: 'Dự án vSDS 3',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 30,
+    //     },
+    //     {
+    //       id: 12,
+    //       project_code: 'vSDS',
+    //       project_name: 'Dự án vSDS',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 10,
+    //     },
+    //     {
+    //       id: 122,
+    //       project_code: 'vSDS 2',
+    //       project_name: 'Dự án vSDS 2',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 20,
+    //     },
+    //     {
+    //       id: 124,
+    //       project_code: 'vSDS 3',
+    //       project_name: 'Dự án vSDS 3',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 30,
+    //     },
+    //     {
+    //       id: 12,
+    //       project_code: 'vSDS',
+    //       project_name: 'Dự án vSDS',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 10,
+    //     },
+    //     {
+    //       id: 122,
+    //       project_code: 'vSDS 2',
+    //       project_name: 'Dự án vSDS 2',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 20,
+    //     },
+    //     {
+    //       id: 124,
+    //       project_code: 'vSDS 3',
+    //       project_name: 'Dự án vSDS 3',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 30,
+    //     },
+    //     {
+    //       id: 12,
+    //       project_code: 'vSDS',
+    //       project_name: 'Dự án vSDS',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 10,
+    //     },
+    //     {
+    //       id: 122,
+    //       project_code: 'vSDS 2',
+    //       project_name: 'Dự án vSDS 2',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 20,
+    //     },
+    //     {
+    //       id: 124,
+    //       project_code: 'vSDS 3',
+    //       project_name: 'Dự án vSDS 3',
+    //       recognize: 1,
+    //       recognize_exchange: 1.5,
+    //       time_percent: 30,
+    //     },
+    //   ],
+    //   totalRecords: 15,
+    // };
 
-    this.data.sprint.salary = {
-      salary: 11000000,
-      target_kpi: 2,
-      salary_received: 10000000,
-      guaranteed_kpi: 1.7,
-    };
+    // this.data.sprint.salary = {
+    //   salary: 11000000,
+    //   target_kpi: 2,
+    //   salary_received: 10000000,
+    //   guaranteed_kpi: 1.7,
+    // };
 
-    this.data.chart = [
-      {
-        name: 'KPI mục tiêu',
-        data: [],
-        type: 'effortExchange'
-      },
-      {
-        name: 'KPI đảm bảo',
-        data: [],
-        type: 'kpiTarget'
-      },
-      {
-        name: 'KPI thực tế',
-        data: [],
-        type: 'kpiInsure'
-      }
-    ];
+    // this.data.chart = [
+    //   {
+    //     name: 'KPI mục tiêu',
+    //     data: [],
+    //     type: 'effortExchange'
+    //   },
+    //   {
+    //     name: 'KPI đảm bảo',
+    //     data: [],
+    //     type: 'kpiTarget'
+    //   },
+    //   {
+    //     name: 'KPI thực tế',
+    //     data: [],
+    //     type: 'kpiInsure'
+    //   }
+    // ];
     // this.authService.getUserInfoSSO().subscribe((res: any) => {
-      
 
-      // this.renderKPI()
+    // this.renderKPI()
     // });
   }
 
@@ -520,6 +507,4 @@ this.DashboardsProfileService.getProfile().subscribe(res=>{
     if (type == 4) {
     }
   }
-
-
 }

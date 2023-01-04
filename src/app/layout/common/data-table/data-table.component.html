@@ -102,73 +102,82 @@
   </tr>
 </table>
 
-<div class="grid grid-cols-5 gap-10 content-start" *ngIf="typeView === 'grid'">
-  <ng-container *ngFor="let item of rows">
-    <div class="shadow-xl p-2">
-      <div class="box-img mb-4">
-        <img
-          [src]="item.avatar"
-          class="object-cover h-60"
-          *ngIf="item.avatar"
-        />
-        <img
-          src="assets/images/image_default.jpg"
-          class="object-cover h-60"
-          *ngIf="!item.avatar"
-        />
-      </div>
-      <div class="box-text">
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.fullName" | transloco }}</span>
-          <span>{{ item.fullName }}</span>
+<ng-container  *ngIf="typeView === 'grid'">
+  <div class="grid grid-cols-5 gap-10 content-start">
+    <ng-container *ngFor="let item of rows">
+      <div class="shadow-xl p-2">
+        <div class="box-img mb-4">
+          <img
+            [src]="item.avatar"
+            class="object-cover h-60"
+            *ngIf="item.avatar"
+          />
+          <img
+            src="assets/images/image_default.jpg"
+            class="object-cover h-60"
+            *ngIf="!item.avatar"
+          />
         </div>
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.staffCode" | transloco }}</span>
-          <span>{{item.staffCode}}</span>
+        <div class="box-text">
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.fullName" | transloco }}</span>
+            <span>{{ item.fullName }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.staffCode" | transloco }}</span>
+            <span>{{item.staffCode}}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.phone" | transloco }}</span>
+            <span>{{item.phone}}</span>
+          </div>
+          
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.domicile" | transloco }}</span>
+            <span>{{ item.domicile }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.department" | transloco }}</span>
+            <span>{{ item.departmentNames }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-semibold">{{ "common.position" | transloco }}</span>
+            <span>{{ item.positionNames }}</span>
+          </div>  
         </div>
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.phone" | transloco }}</span>
-          <span>{{item.phone}}</span>
-        </div>
-        
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.domicile" | transloco }}</span>
-          <span>{{ item.domicile }}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.department" | transloco }}</span>
-          <span>{{ item.departmentNames }}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="font-semibold">{{ "common.position" | transloco }}</span>
-          <span>{{ item.positionNames }}</span>
-        </div>  
-      </div>
-
-      <div class="text-right">
-        <ng-container *ngFor="let action of displayedActions">
-          <button
-            *hasAnyAuthority="roleName + '_' + action.role"
-            mat-icon-button
-            (click)="emitAction(action.id, item)"
-          >
-            <ng-container [ngSwitch]="action.id">
-              <ng-container *ngSwitchDefault>
-                <mat-icon
-                  [svgIcon]="action.icon"
-                  [title]="action.label"
-                  [style.color]="action.color"
-                  class="icon-size-6"
-                ></mat-icon>
+  
+        <div class="text-right">
+          <ng-container *ngFor="let action of displayedActions">
+            <button
+              *hasAnyAuthority="roleName + '_' + action.role"
+              mat-icon-button
+              (click)="emitAction(action.id, item)"
+            >
+              <ng-container [ngSwitch]="action.id">
+                <ng-container *ngSwitchDefault>
+                  <mat-icon
+                    [svgIcon]="action.icon"
+                    [title]="action.label"
+                    [style.color]="action.color"
+                    class="icon-size-6"
+                  ></mat-icon>
+                </ng-container>
               </ng-container>
-            </ng-container>
-          </button>
-        </ng-container>
+            </button>
+          </ng-container>
+        </div>
+  
       </div>
-
+    </ng-container>
+  </div>
+  
+  <ng-container *transloco="let t">
+    <div class="mat-cell text-center" *ngIf="rows.length == 0">
+      {{ t("common.noData") }} !
     </div>
   </ng-container>
-</div>
+</ng-container>
+
 
 <mat-paginator
   *ngIf="paginate"

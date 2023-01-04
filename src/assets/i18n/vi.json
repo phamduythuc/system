@@ -69,7 +69,7 @@
     "dateOfBirth": "Ngày sinh",
     "country": "Quốc tịch",
     "residence": "Hộ khẩu thường trú",
-    "isProductTeam": "Là nhóm sản phẩm",
+    "isProductTeam": "Thuộc nhóm phát triển",
     "cvUrl": "File CV",
     "domicile": "Chỗ ở hiện tại",
     "education": "Cấp bậc giáo dục",
@@ -114,6 +114,11 @@
     "typeView": {
       "grid": "Dạng lưới",
       "list": "Dạng danh sách"
+    },
+    "listStatus": {
+      "active": "Đang hoạt động",
+      "notActive": "Không hoạt động",
+      "all": "Tất cả"
     }
   },
   "button": {

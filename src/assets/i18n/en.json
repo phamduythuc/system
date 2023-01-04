@@ -115,6 +115,11 @@
     "typeView": {
       "grid": "Grid view",
       "list": "List view"
+    },
+    "listStatus": {
+      "active": "Active",
+      "notActive": "Not active",
+      "all": "All"
     }
   },
   "button": {
