@@ -40,6 +40,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   listStaffId: any;
   totalMember: number;
   leadId: any;
+  foodCtrl: FormControl;
 
   list_type_view: any = [
     {
@@ -112,7 +113,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.getDetailTeamBySprint(this.searchDetail);
     this.formGroup.patchValue({
       sprint: this.currentTime,
-    })
+    });
+    this.foodCtrl = new FormControl({value: '', disabled: true})
   }
   date = new FormControl(moment());
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
@@ -169,6 +171,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.totalMember = 0;
       }
     });
+  }
+
+  change(e:any){
+    console.log(e);
   }
 
 

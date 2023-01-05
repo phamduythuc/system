@@ -162,6 +162,7 @@ export class BaseComponent {
   }
 
   edit(data: any, onSuccess?: any, onError?: any): void {
+    debugger
     this.baseService.update(data).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
