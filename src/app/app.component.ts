@@ -63,7 +63,7 @@ value:any
      
       })
 
-      data.genders =[
+      data.genders = [
           {
             name: this.translocoService.translate('gender.female'),
             code: 1,
@@ -75,6 +75,21 @@ value:any
           {
             name: this.translocoService.translate('gender.other'),
             code: 3,
+          }
+        ];
+
+        data.LIST_STATUS = [
+          {
+            type: '1',
+            name: 'setting.listStatus.active',
+          },
+          {
+            type: '2',
+            name: 'setting.listStatus.notActive',
+          },
+          {
+            type: '',
+            name: 'setting.listStatus.all',
           }
         ];
 
