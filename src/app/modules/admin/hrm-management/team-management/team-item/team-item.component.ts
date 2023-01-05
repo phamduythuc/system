@@ -56,14 +56,14 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ];
 
   listTeam: any[] = [];
-  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDTHH:MM:SSZ");
+  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
   currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
   formGroup = this.fb.group({
     id: '',
     text: '',
     name: [],
     number: 2,
-    sprint: [],
+    sprint: [this.currentTime],
     leadName: [],
     target: [],
     cost: [],
@@ -107,7 +107,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   ngOnInit(): void {
@@ -117,6 +116,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       sprint: this.currentTime,
     });
     this.foodCtrl = new FormControl({ value: '', disabled: true })
+
   }
   date = new FormControl(moment());
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
