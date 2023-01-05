@@ -77,6 +77,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       flex: 1.3,
     },
   ];
+  
   formSearch = this.fb.group({
     keyword: [''],
   });

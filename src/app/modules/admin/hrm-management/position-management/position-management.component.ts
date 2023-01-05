@@ -62,13 +62,30 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
   positions = [];
   panelOpenState: boolean = false;
 
+  list_status = []
+
+  typeStatus = '1';
+
+
   constructor(injector: Injector,
               private positionService: PositionService) {
     super(injector, positionService);
+
+    this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
+
   }
 
   ngOnInit(): void {
     this.searchModel.status = 1;
+    this.doSearch();
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
     this.doSearch();
   }
 

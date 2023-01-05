@@ -70,13 +70,28 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   partners = [];
   panelOpenState: false;
 
+  list_status = []
+
+  typeStatus = '1';
+
   constructor(injector: Injector,
               partnerService: PartnerService) {
     super(injector, partnerService);
+    this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
+
   }
 
   ngOnInit(): void {
     this.searchModel.status = 1
+    this.doSearch();
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
     this.doSearch();
   }
 
