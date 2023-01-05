@@ -75,7 +75,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       actions: [ 'configEffort', 'add_member', 'view','edit', 'delete'],
     }
   ];
-  dataDocument = [];
+ 
   formSearch = this.fb.group({
     name: [''],
   });
@@ -123,7 +123,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       this.searchResult.data = convertData;
       console.log(this.searchResult.data);
       
-      this.dataDocument = this.searchResult.data.map((item) => {
+      this.searchResult.data.map((item) => {
         return item.documentName;
       });
     });
