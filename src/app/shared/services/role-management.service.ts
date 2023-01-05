@@ -21,8 +21,6 @@ export class RoleManagementService extends BaseService  {
     return this.http.put(`${environment.apiUrl}/project-role`, formData);
   }
   deleteRole(id: any): Observable<any> {
-    console.log(id);
-    
     return this.http.delete(`http://103.226.248.168:8089/api/project-role/${id}`);
   }
   getListAllRole(): Observable<any> {

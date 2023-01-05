@@ -5,7 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class NumberCustomPipe implements PipeTransform {
   transform(value: any) {
     if(value){
-      return (value.toLocaleString() + ' đ');
+      return (value.toLocaleString());
 
     }
   }

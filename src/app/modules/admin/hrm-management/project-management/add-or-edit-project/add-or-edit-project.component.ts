@@ -63,6 +63,13 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formGroup.valueChanges.subscribe(form =>{
+      if(form.unitPrice){
+        this.formGroup.patchValue({
+          unitPrice: CommonUtilsService.formatCurrency(form.unitPrice)
+        }, {emitEvent: false});
+      }
+    })
   }
 
   onChange(data){
@@ -114,7 +121,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   }
 
   save(data) {
-    // console.log(data)
+    data.unitPrice = data.unitPrice.replace(/,/g, '');
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime);
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime);
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime);
