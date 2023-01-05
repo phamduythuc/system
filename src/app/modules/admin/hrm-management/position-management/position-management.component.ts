@@ -5,7 +5,7 @@ import {PositionService} from '@shared/services/position.service';
 import {AddOrEditPositionComponent} from './compoment/add-or-edit-position/add-or-edit-position.component';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {DetailPositionComponent} from './compoment/detail-position/detail-position.component';
-import {Validators} from "@angular/forms";
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-position-management',

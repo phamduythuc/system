@@ -94,6 +94,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
 
   staffSelected: any;
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   list_status: any = [
     {
       type: '1',
@@ -112,6 +113,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   typeStatus = '1';
 
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   list_type_view: any = [
     {
       type: 'list',
@@ -227,6 +229,6 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     this.searchModel.status = '';
     }
     this.doSearch();
-    
+
   }
 }

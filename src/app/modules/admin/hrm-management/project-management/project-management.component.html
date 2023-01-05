@@ -43,16 +43,24 @@
             </div>
             
           </div>
+          <div class="flex w-40 grid-view">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-select [(ngModel)]="typeStatus" (ngModelChange)="filterStatus($event)" class=" h-7">
+                <mat-option *ngFor="let item of list_status" [value]="item.type">
+                  {{ item.name | transloco }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
         <div class="mb-2">
-          <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
-                  (click)="addOrEdit()">
+          <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary" (click)="addOrEdit()">
             <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-            {{t('add-new')}}
+            {{t('button.new')}}
           </button>
         </div>
       </div>
-      
+
       <div class="content mt-4 w-full">
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table

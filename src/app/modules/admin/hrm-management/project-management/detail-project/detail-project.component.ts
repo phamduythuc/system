@@ -19,7 +19,7 @@ export class DetailProjectComponent extends BaseComponent implements OnInit {
     super(injector, projectService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId, this.handleCoverTimeToString)
+      this.getDetails(this.dialogId, this.handleCoverTimeToString);
     }
   }
   ngOnInit(): void {

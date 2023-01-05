@@ -27,8 +27,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     budget: [null, Validators.required],
     unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
-    parentId:[],
-    partnerId:[null,Validators.required],
+    parentId:[null,Validators.required],
+    // partnerId:[null,Validators.required],
     description: [null, Validators.maxLength(255)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
@@ -84,8 +84,6 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
             }
             return x;
           });
-          console.log(this.projectData);
-
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime);
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime);
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime);

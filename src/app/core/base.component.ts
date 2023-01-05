@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable max-len */
 import {Injectable, Injector, Inject, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialogConfig} from '@angular/material/dialog/dialog-config';
@@ -9,9 +11,9 @@ import {IColumn} from '@layout/common/data-table/data-table.component';
 import {TranslocoService} from '@ngneat/transloco';
 import {BaseService} from '@core/base.service';
 import {CommonUtilsService} from '@shared/common-utils.service';
-import {DomSanitizer} from "@angular/platform-browser";
-import {SUCCESS_CODE} from "@core/config/constant";
-import {HttpHeaders} from "@angular/common/http";
+import {DomSanitizer} from '@angular/platform-browser';
+import {SUCCESS_CODE} from '@core/config/constant';
+import {HttpHeaders} from '@angular/common/http';
 
 
 

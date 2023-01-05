@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {Component, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
@@ -102,15 +103,6 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     this.doSearch();
   }
 
-  filterStatus(data){
-    if(data){
-      this.searchModel.status = Number(data);
-    }else{
-    this.searchModel.status = '';
-    }
-    this.doSearch();
-  }
-
   doSearch() {
     this.searchModel = {...this.searchModel, page: 0, ...this.formSearch.value};
     this.processSearch(this.searchModel);
@@ -190,5 +182,15 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         disableClose: true
       }
     );
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
+    this.doSearch();
+
   }
 }

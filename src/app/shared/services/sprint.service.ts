@@ -21,8 +21,11 @@ export class SprintService extends BaseService{
     return this.http.get(`${this.serviceUrl}/${data.projectId}/project?month=${data.startDate}`,  data);
   }
 
+  // getMembers(data): Observable<any> {
+  //   return this.http.get(`${this.serviceUrl}/project/${data.projectId}/members` , {params: data});
+  // }
   getMembers(data): Observable<any> {
-    return this.http.get(`${this.serviceUrl}/project/${data.projectId}/members` , {params: data});
+    return this.http.get(`${environment.apiUrl}/effort-detail?sprintId=${data.id}`,  data);
   }
 
   getRoleStaff(data): Observable<any>{
@@ -31,5 +34,9 @@ export class SprintService extends BaseService{
 
   update(formData: any): Observable<any> {
     return this.http.put(`${this.serviceUrl}/update`, formData);
+  }
+
+  getOne(id): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/project/${id}`);
   }
 }

@@ -131,6 +131,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
+    this.loadStaffs();
+    this.getUnitPrice();
+
   }
 
   get efforts(): FormArray {
@@ -146,9 +149,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
-
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
-
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
 
@@ -162,6 +163,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
+          effortExchange: res.data.effortExchange,
           acceptanceEffort: res.data.acceptanceEffort,
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
@@ -174,6 +176,21 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           note: res.data.note,
           estimate: res.data.estimate,
           effort: res.data.effort,
+        });
+
+        const idS = {id:res.data.id};
+        this.sprintService.getMembers(idS).subscribe(res1 => {
+
+          if (this.isSuccess(res1)) {
+
+            res1.data.forEach(item => {
+              const dataCaulate = {unitPrice: res.data.unitPrice , effort:item.effort};
+              const resultEffortExChange =  this.effortConversionCalculation(dataCaulate);
+              this.efforts.push(this.newItem(item,resultEffortExChange));
+
+            });
+            this.isLoading = false;
+          }
         });
 
       } else {
@@ -195,31 +212,23 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           note: null,
           estimate: null,
           effort: null,
+          effortExchange: null
         });
       }
     });
 
-    this.sprintService.getMembers(searchObj).subscribe(res => {
-      console.log(res);
 
-      if (this.isSuccess(res)) {
-        res.data.forEach(item => {
-          this.efforts.push(this.newItem(item));
-        });
-        this.isLoading = false;
-      }
-      this.loadStaffs();
-    });
   }
 
-  newItem(data: any): FormGroup {
+  newItem(data: any,result): FormGroup {
+    console.log(result);
 
     return this.fb.group({
       staffId: [data.staffId],
       roleId: [data.roleId],
       staffCode: [data.staffCode],
       effort: [data.effort],
-      effortExchange: [data.effortExchange],
+      effortExchange: [result],
       percentEffort: [data.percentEffort],
       // staffName: [data.staffName],
       // roleName: [data.roleName],
@@ -347,7 +356,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   addNewRow() {
     this.isLoading = true;
-    this.efforts.push(this.newItem({}));
+    this.efforts.push(this.newItem({},null));
     this.listStaff[this.efforts.length - 1] = [...this.listStaffOrigin];
     this.filteredList[this.efforts.length - 1] = [...this.listStaffOrigin];
     setTimeout(() => {
@@ -412,4 +421,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
   }
 
+  getUnitPrice(){
+    if(this.data.id){
+      this.sprintService.getOne(this.data.id).subscribe(res=>{
+        if(this.isSuccess(res)){
+          this.formGroup.controls['unitPrice'].setValue(this.formatCurrency(res.data.unitPrice));
+        }
+        else{
+          this.formGroup.controls['unitPrice'].setValue(null);
+        }
+      });
+    }
+  }
+
+  effortConversionCalculation(data: any){
+   return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
+  }
 }
