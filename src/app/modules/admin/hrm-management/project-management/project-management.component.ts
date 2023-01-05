@@ -94,7 +94,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       name: 'setting.listStatus.active',
     },
     {
-      type: '0',
+      type: '2',
       name: 'setting.listStatus.notActive',
     },
     {

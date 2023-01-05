@@ -163,6 +163,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
+          effortExchange: res.data.effortExchange,
           acceptanceEffort: res.data.acceptanceEffort,
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
@@ -211,6 +212,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           note: null,
           estimate: null,
           effort: null,
+          effortExchange: null
         });
       }
     });
