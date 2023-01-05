@@ -108,7 +108,7 @@ export class AddOrEditStaffDrawerComponent
     //Ngày nghỉ
     leaveDate: [],
     //Mã cấp bậc
-    levelId: [, Validators.required],
+    levelId: [null, Validators.required],
     //Tình trạng hôn nhân
     maritalStatus: [],
     //Người cập nhâật
@@ -128,7 +128,7 @@ export class AddOrEditStaffDrawerComponent
       ],
     ],
     //Mã chức vụ
-    positionId: [, Validators.required],
+    positionId: [null, Validators.required],
     //Chức vụ hiện tại
     positionJob: [],
     //Tôn giáo
@@ -163,6 +163,7 @@ export class AddOrEditStaffDrawerComponent
     private achievementService: AchievementService
   ) {
     super(injector, staffService);
+    this.getListRoleStaff();
   }
 
   ngOnInit(): void {
@@ -170,9 +171,11 @@ export class AddOrEditStaffDrawerComponent
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
         this.convertBase64(imageUrl);
+        // alert("aaa")
+        console.log(this.detailsData);
+        this.formGroup.patchValue(this.detailsData);
       });
     }
-    this.getListRoleStaff();
     this.getListTeam()
   }
 
@@ -190,6 +193,9 @@ export class AddOrEditStaffDrawerComponent
     });
     this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       this.listStaffLevels = res.data;
+      console.log(this.listStaffLevels);
+      
+      
     });
     this.staffService.getListDepartment(this.option).subscribe((res) => {
       this.listDepartment = res.data;

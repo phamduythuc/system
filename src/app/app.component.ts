@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.checkLoginSSO();
     // this.getList()
 
-    this.getList();
+    // this.getList();
 
   }
 
