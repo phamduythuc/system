@@ -32,11 +32,11 @@
                             (dateChange)="onDateChange(formGroup.value['sprint'])" [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
-                        <mat-datepicker #sprint startView="multi-year"
+                        <mat-datepicker #sprint startView="multi-year" 
                             panelClass="example-month-picker"></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div class="flex w-2/5 justify-around">
+                <div class="flex w-2/5 justify-around"> 
                     <div class="">
                         <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}{{':'+' '+
                             performance
