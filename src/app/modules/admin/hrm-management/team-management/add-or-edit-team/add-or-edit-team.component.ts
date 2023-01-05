@@ -106,15 +106,17 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   save(value: any): boolean {
     // this.handleCoverTimeToString(value);
     const teamData = {
-     id: this.dialogId && this.dialogId,
+      id: this.dialogId && this.dialogId,
       name: value.name,
       staDate: this.currentDate,
-      // status: value.status,
+      status: this.data.status,
       departmentId: value.departmentId,
+      // staffId:540
       // description: value.description,
       // endDate: value.endDate,
       // members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
     };
+    debugger
     this.addOrEdit(teamData);
     return false;
   }

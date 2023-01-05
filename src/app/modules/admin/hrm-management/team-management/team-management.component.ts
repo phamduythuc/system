@@ -72,10 +72,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
         });
       }
     );
-    // this.searchModel.status = 1;
-    this.processSearch(this.searchModel, () => this.callback());
-
-
+    this.processSearch(this.searchModel);
   }
 
   handlePageEvent(e?: any) {

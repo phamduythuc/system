@@ -127,6 +127,9 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
           }
         },
       },
+      credits: {
+        enabled: false
+      },
       plotOptions: {
         // series: {
         //   marker: {

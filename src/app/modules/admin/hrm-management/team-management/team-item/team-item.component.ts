@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { Member } from '../models/Member';
 import { MatDatepicker } from '@angular/material/datepicker';
 
 
+
 @Component({
   selector: 'app-team-item',
   templateUrl: './team-item.component.html',
@@ -24,6 +25,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 export class TeamItemComponent extends BaseComponent implements OnInit {
   @Input() team: any;
   @Input() random: any;
+  @Output() reSearch = new EventEmitter<any>();
 
   _permissionCodeName = 'DSD';
   @ViewChild('drawer') drawer: MatDrawer;
@@ -114,7 +116,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.formGroup.patchValue({
       sprint: this.currentTime,
     });
-    this.foodCtrl = new FormControl({value: '', disabled: true})
+    this.foodCtrl = new FormControl({ value: '', disabled: true })
   }
   date = new FormControl(moment());
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
@@ -173,24 +175,31 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     });
   }
 
-  change(e:any){
-    console.log(e);
+  change(e: any) {
+    // console.log(e);
   }
 
 
   addOrEdit(id: any): void {
     this.showDialog(AddOrEditTeamComponent, {
       data: {
-        id,
+        id: id,
+        status: this.team.status
       },
       width: '30vw',
       disableClose: true
     }, (value) => {
-      if (value) {
-        // this.doSearch();
+      if (value) {  
+        this.team.name=value.name
       }
     });
   }
+
+  // getTeamById(id:any){
+  //   this.teamService.getTeamById(id).subscribe((res)=>{
+  //     console.log(res);
+  //   });
+  // }
 
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
@@ -243,9 +252,9 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.teamService.delete(id).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
-        this.searchModel.page = 0;
-        // this.processSearch(this.searchModel, () => this.callback());
-        this.processSearch(this.searchModel);
+        // this.searchModel.page = 0;
+        // this.processSearch(this.searchModel);
+        this.reSearch.emit('1');
       } else {
         this.showSnackBar(res.message, 'error');
       }
