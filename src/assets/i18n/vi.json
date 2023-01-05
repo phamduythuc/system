@@ -109,6 +109,8 @@
     "noData": "Không có bản ghi nào"
   },
   "setting": {
+    "title":"Cấu hình",
+    "groupRoleName": "Nhóm quyền",
     "role": "Quyền",
     "groupRole": "Phân quyền",
     "menu": "Danh mục",

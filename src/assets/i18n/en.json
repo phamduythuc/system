@@ -110,7 +110,9 @@
     "noData": "No data"
   },
   "setting": {
+    "title":"Setting",
     "role": "Role",
+    "groupRoleName": "Role group",
     "groupRole": "Role group",
     "menu": "Menu",
     "addGroupRole": "Add New Permissions Group",
