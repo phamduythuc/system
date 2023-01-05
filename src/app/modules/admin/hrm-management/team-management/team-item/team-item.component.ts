@@ -166,6 +166,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
           this.listMember.push(this.member);
         }
         this.totalMember = this.listMember.length;
+        console.log(this.listMember)
         this.leadId = res.data[0].leadId;
         this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
