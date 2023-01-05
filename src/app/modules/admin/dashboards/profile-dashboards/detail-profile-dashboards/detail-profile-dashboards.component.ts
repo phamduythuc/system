@@ -139,7 +139,7 @@ export class DetailProfileDashboardsComponent
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
     console.log(this.data);
-    
+
   }
 
   ngOnInit(): void {
@@ -249,5 +249,5 @@ export class DetailProfileDashboardsComponent
     }
   }
 
-   
+
 }
