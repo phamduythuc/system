@@ -54,17 +54,18 @@
                         <mat-label class="font-bold capitalize">
                             {{"common.leader"|transloco}}
                         </mat-label>
-                        <div class="-translate-y-9 translate-x-44 z-10">
-                            <button mat-icon-button class="hover:bg-slate-200" (click)="editLeader(team.id)">
-                                <mat-icon svgIcon="heroicons_outline:pencil-alt" [style.color]="'orange'" title="Edit"
-                                    class="icon-size-5"></mat-icon>
-                            </button>
-                        </div>
-                        <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'leadName'"
-                            readonly (focus)="change($event)">
+                        <input class="focus:cursor-default  hover:cursor-default" matInput
+                            [formControlName]="'leadName'" readonly (focus)="change($event)">
                     </mat-form-field>
                 </div>
-       
+
+                <div class="-translate-y-3 -translate-x-7 z-10">
+                    <button mat-icon-button class="hover:bg-slate-200" (click)="editLeader(team.id)">
+                        <mat-icon svgIcon="heroicons_outline:pencil-alt" [style.color]="'orange'" title="Edit"
+                            class="icon-size-5"></mat-icon>
+                    </button>
+                </div>
+
                 <!-- target -->
                 <div class=" flex w-2/5">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
