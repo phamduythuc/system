@@ -28,7 +28,6 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
 
   }
   save(){
-    console.log(this.leadId)
     this.dialogRef.close()
   }
 
