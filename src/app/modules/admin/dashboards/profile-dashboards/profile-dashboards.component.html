@@ -23,9 +23,9 @@
       </mat-expansion-panel-header>
 
       <ng-template matExpansionPanelContent>
-        <app-detail-profile-dashboards [data]="data.profile" *ngIf="item.id == '1'"></app-detail-profile-dashboards>
+        <app-detail-profile-dashboards [data]="data" *ngIf="item.id == '1'"></app-detail-profile-dashboards>
         <app-contract-profile-dashboards [data]="this.dialogId" *ngIf="item.id == '2'"></app-contract-profile-dashboards>
-        <app-sprint-profile-dashboards [data]="data.sprint" (callback)="handleData($event, item.id)" *ngIf="item.id == '3'"></app-sprint-profile-dashboards>
+        <app-sprint-profile-dashboards [staffId]="this.dialogId" (callback)="handleData($event, item.id)" *ngIf="item.id == '3'"></app-sprint-profile-dashboards>
         <app-chart-profile-dashboards  [staffId]="this.dialogId" (callback)="handleData($event, item.id)" *ngIf="item.id == '4'"></app-chart-profile-dashboards>
       </ng-template>
       

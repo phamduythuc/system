@@ -137,10 +137,10 @@ export class ContractManagementComponent
         this.deleteConfirmDialog(e.data.id);
         break;
       case 'edit':
-        this.addOrEditDepartment(e.data.id);
+        this.addOrEdit(e.data.id);
         break;
       case 'add':
-        this.addOrEditDepartment();
+        this.addOrEdit();
         break;
       case 'view':
         this.showDetail(e.data.id);
@@ -160,7 +160,7 @@ export class ContractManagementComponent
     });
   }
 
-  addOrEditDepartment(id?: any): void {
+  addOrEdit(id?: any): void {
     const ref = this.showDialog(
       AddOrEditContractComponent,
       {

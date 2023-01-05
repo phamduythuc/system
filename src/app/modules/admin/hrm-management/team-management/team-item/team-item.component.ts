@@ -3,15 +3,16 @@ import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
 import { TeamService } from '@shared/services/team.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { ViewType } from '@core/config/app.config';
 import { FuseConfigService } from '@fuse/services/config';
 import { TeamMemberService } from '@shared/services/team-member.service';
 import { AddOrEditTeamComponent } from '../add-or-edit-team/add-or-edit-team.component';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { EditLeaderComponent } from '../edit-leader/edit-leader.component';
 import { Member } from '../models/Member';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 
 @Component({
@@ -33,11 +34,12 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   performance: any = '';
 
   formSearch: FormGroup;
-  member :Member;
-  listMember: Member[]=[];
-  listStaffName:any;
-  listStaffId:any;
+  member: Member;
+  listMember: Member[] = [];
+  listStaffName: any;
+  listStaffId: any;
   totalMember: number;
+  leadId: any;
 
   list_type_view: any = [
     {
@@ -99,9 +101,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
     super(injector, teamService);
-
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -113,6 +113,15 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.formGroup.patchValue({
       sprint: this.currentTime,
     })
+  }
+  date = new FormControl(moment());
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue('01');
+    datepicker.close();
+    // this.onDateChange(e);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
@@ -146,13 +155,14 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.listStaffName = this.data.staffName.split(',');
         this.listStaffId = this.data.staffId.split(',');
         for (let index = 0; index <= this.listStaffId.length; index++) {
-          this.member ={
-            staffId:this.listStaffId[index],
-            staffName:this.listStaffName[index]
+          this.member = {
+            staffId: this.listStaffId[index],
+            staffName: this.listStaffName[index]
           }
-          this.listMember.push(this.member);    
+          this.listMember.push(this.member);
         }
         this.totalMember = this.listMember.length;
+        this.leadId = res.data[0].leadId;
         this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
       else {
@@ -178,7 +188,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
-      data: this.listMember,
+      data: {
+        listMember: this.listMember,
+        leadId: this.leadId
+      },
       width: '30vw'
     })
   }

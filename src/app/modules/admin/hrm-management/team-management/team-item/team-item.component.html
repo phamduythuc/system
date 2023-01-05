@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-    <mat-card class="bg-slate-100 h-160 overflow-hidden hover:overflow-auto cursor-pointer">
+    <mat-card class="bg-slate-100 h-160 overflow-hidden scroll-smooth hover:overflow-auto cursor-pointer">
         <form [formGroup]="formGroup">
             <!-- Team Name -->
             <div class="w-full flex justify-between py-2 border-gray-400 border-b-2">
@@ -10,15 +10,20 @@
 
                 <!-- status -->
                 <div *ngIf="team.status==1; else template1">
-                    <mat-label class="font-bold capitalize">{{'common.activing'|transloco}}</mat-label>
+                    <div class="flex justify-between items-center">
+                        <mat-label class="font-bold capitalize mr-3">{{'common.activing'|transloco}}</mat-label>
+                        <div class="w-4 h-4 bg-green-600 rounded-lg"></div>
+                    </div>
                 </div>
                 <ng-template #template1>
-                    <div>
-                        <mat-label class="font-bold capitalize">{{'common.notActive'|transloco}}</mat-label>
+                    <div class="flex justify-between items-center">
+                        <mat-label class="font-bold capitalize mr-3">{{'common.notActive'|transloco}}</mat-label>
+                        <div class="w-4 h-4 bg-red-600 rounded-lg"></div>
                     </div>
                 </ng-template>
             </div>
 
+            <!-- sprint -->
             <div class="w-full flex justify-start py-4 mt-5">
                 <div class="flex w-2/4 justify-between">
                     <mat-label class="mr-1 font-bold capitalize">{{'common.sprint'|transloco}}</mat-label>
@@ -27,12 +32,14 @@
                             (dateChange)="onDateChange(formGroup.value['sprint'])" [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
-                        <mat-datepicker #sprint></mat-datepicker>
+                        <mat-datepicker #sprint startView="multi-year"
+                            panelClass="example-month-picker"></mat-datepicker>
                     </mat-form-field>
                 </div>
                 <div class="flex w-2/5 justify-around">
                     <div class="">
-                        <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}{{':'+' '+ performance
+                        <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}{{':'+' '+
+                            performance
                             +'%'}}</mat-label>
                     </div>
                 </div>
@@ -69,11 +76,11 @@
             <div class="w-full flex-col justify-between py-2">
                 <!-- target -->
                 <!-- <div class="w-full mb-4">
-                    <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
-                        <input class=" " matInput [formControlName]="'target'" readonly>
-                    </mat-form-field>
-                </div> -->
+                        <mat-form-field class="fuse-mat-no-subscript w-full">
+                            <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
+                            <input class=" " matInput [formControlName]="'target'" readonly>
+                        </mat-form-field>
+                    </div> -->
                 <div class="w-full flex justify-between">
                     <!-- cost -->
                     <div class="w-2/5">
@@ -102,7 +109,8 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-list role="list">
-                        <div *ngFor="let member of listStaffName; index as idx; count as total" class="flex items-center">
+                        <div *ngFor="let member of listStaffName; index as idx; count as total"
+                            class="flex items-center">
                             <div>{{idx+1+'.'}}</div>
                             <div>
                                 <mat-list-item role="listitem">{{member}}</mat-list-item>

@@ -140,13 +140,14 @@
                   [min]="0"
                   max="100"
                   pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+                  [readonly]="staffId"
                 />
               </mat-form-field>
               %
             </div>
             <div
               class="errors"
-              *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
+              *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched) && !staffId"
             >
               <div [hidden]="!rateInput.errors.pattern">
                 <span>{{
@@ -166,7 +167,7 @@
       </ng-template>
     </app-data-table>
 
-    <div class="sm:col-span-1 flex justify-end items-end">
+    <div class="sm:col-span-1 flex justify-end items-end" *ngIf="!staffId">
       <button
         mat-raised-button
         color="primary"

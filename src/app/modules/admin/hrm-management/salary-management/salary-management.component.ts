@@ -113,6 +113,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     ctrlValue.date('1');
     formTarget.setValue(ctrlValue);
     datepicker.close();
+    this.view()
   }
 
   handleDataKPI(data) {}

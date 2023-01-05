@@ -12,6 +12,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { BaseComponent } from '@core/base.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
 import { AchievementService } from '@shared/services/achievement.service';
+import { DashboardsProfileService } from '@shared/services/dashboards-profile.service';
 import { EffortService } from '@shared/services/effort.service';
 import { StaffService } from '@shared/services/staff.service';
 
@@ -26,20 +27,7 @@ export class DetailProfileDashboardsComponent
 {
   @Input() data: any;
 
-  genders = [
-    {
-      name: this.translocoService.translate('gender.female'),
-      value: '1',
-    },
-    {
-      name: this.translocoService.translate('gender.male'),
-      value: '2',
-    },
-    {
-      name: this.translocoService.translate('gender.other'),
-      value: '3',
-    },
-  ];
+  genders:any = []
 
   staffStatus = [
     {
@@ -118,6 +106,7 @@ export class DetailProfileDashboardsComponent
     workExperience: [],
     salary: [],
     file: [],
+    teamId: []
   });
 
   option = {
@@ -136,24 +125,28 @@ export class DetailProfileDashboardsComponent
     injector: Injector,
     private effortService: EffortService,
     private staffService: StaffService,
-    private achievementService: AchievementService
+    private achievementService: AchievementService,
+    private DashboardsProfileService:DashboardsProfileService
   ) {
-    super(injector, effortService);
+    super(injector, staffService);
+    this.genders = this.getListCategories().genders
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     this.getListRoleStaff();
-
     this.mapData();
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
+    console.log(this.data);
+    
   }
 
   ngOnInit(): void {
     this.getListRoleStaff();
   }
 
-  getListRoleStaff() {
+  getListRoleStaff():void {
     this.staffService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
         this.listRoleStaff = res.data;
@@ -167,26 +160,28 @@ export class DetailProfileDashboardsComponent
       this.formGroup.patchValue(this.data);
     });
 
-    this.staffService.getListPosition(this.searchModel).subscribe((res) => {
+    this.staffService.getListPosition(this.option).subscribe((res) => {
       res.data.map((x: any) => {
         if (x.id === this.data.positionId) {
           this.data.positionId = x.name;
+          this.data.positionJob = x.name
         }
         return x;
       });
     });
 
-    this.staffService.getListStaffLevel(this.searchModel).subscribe((res) => {
+    this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       this.listStaffLevels = res.data;
       res.data.map((x: any) => {
         if (x.id === this.data.levelId) {
           this.data.levelId = x.name;
+          this.data.levelName = x.name
         }
         return x;
       });
     });
 
-    this.staffService.getListDepartment(this.searchModel).subscribe((res) => {
+    this.staffService.getListDepartment(this.option).subscribe((res) => {
       res.data.map((x: any) => {
         if (x.id === this.data.departmentId) {
           this.data.departmentId = x.name;
@@ -195,7 +190,7 @@ export class DetailProfileDashboardsComponent
       });
     });
 
-    this.staffService.getListTeam(this.searchModel).subscribe((res) => {
+    this.staffService.getListTeam(this.option).subscribe((res) => {
       res.data.map((x: any) => {
         if (x.id === this.data.teamId) {
           this.data.teamId = x.name;
@@ -205,9 +200,9 @@ export class DetailProfileDashboardsComponent
     });
   }
 
-  mapData() {
+  mapData() :void {
     this.genders.map((x: any) => {
-      if (x.value === this.data.gender) {
+      if (x.code === Number(this.data.gender)) {
         this.data.gender = x.name;
         return x;
       }
@@ -253,4 +248,6 @@ export class DetailProfileDashboardsComponent
       });
     }
   }
+
+   
 }
