@@ -34,7 +34,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDTHH:MM:SSZ");
+    this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
     this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
     this.formSearchKpi.setValue({
       teamId: [this.data],
