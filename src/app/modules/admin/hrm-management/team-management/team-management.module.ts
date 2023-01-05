@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { TeamKpiComponent } from './team-kpi/team-kpi.component';
 import { ChartLineTeamKpiComponent } from './chart-line-team-kpi/chart-line-team-kpi.component';
 import { EditLeaderComponent } from './edit-leader/edit-leader.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -43,8 +44,7 @@ import { EditLeaderComponent } from './edit-leader/edit-leader.component';
     MatPaginatorModule,
     MatExpansionModule,
     MatListModule,
- 
-
+    FormsModule
   ]
 })
 export class TeamManagementModule { }

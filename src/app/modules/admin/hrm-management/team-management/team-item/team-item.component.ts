@@ -34,11 +34,12 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   performance: any = '';
 
   formSearch: FormGroup;
-  member :Member;
-  listMember: Member[]=[];
-  listStaffName:any;
-  listStaffId:any;
+  member: Member;
+  listMember: Member[] = [];
+  listStaffName: any;
+  listStaffId: any;
   totalMember: number;
+  leadId: any;
 
   list_type_view: any = [
     {
@@ -154,13 +155,14 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.listStaffName = this.data.staffName.split(',');
         this.listStaffId = this.data.staffId.split(',');
         for (let index = 0; index <= this.listStaffId.length; index++) {
-          this.member ={
-            staffId:this.listStaffId[index],
-            staffName:this.listStaffName[index]
+          this.member = {
+            staffId: this.listStaffId[index],
+            staffName: this.listStaffName[index]
           }
-          this.listMember.push(this.member);    
+          this.listMember.push(this.member);
         }
         this.totalMember = this.listMember.length;
+        this.leadId = res.data[0].leadId;
         this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
       else {
@@ -186,7 +188,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
-      data: this.listMember,
+      data: {
+        listMember: this.listMember,
+        leadId: this.leadId
+      },
       width: '30vw'
     })
   }

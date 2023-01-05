@@ -22,6 +22,7 @@ import { StaffManagementModule } from './staff-management/staff-management.modul
 import { RoleManagementModule } from './role-management/role-management.module';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -51,7 +52,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     StaffManagementModule,
     RoleManagementModule,
     MatPaginatorModule
-    
 
   ],
 })
