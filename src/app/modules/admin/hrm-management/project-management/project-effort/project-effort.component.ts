@@ -131,6 +131,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
+    this.loadStaffs();
+
   }
 
   get efforts(): FormArray {
@@ -146,6 +148,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
+        console.log(res);
 
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
 
@@ -185,7 +188,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
             });
             this.isLoading = false;
           }
-          this.loadStaffs();
         });
 
       } else {
