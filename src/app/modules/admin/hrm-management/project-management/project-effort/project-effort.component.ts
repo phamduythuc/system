@@ -176,6 +176,18 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           effort: res.data.effort,
         });
 
+        const idS = {id:res.data.id};
+        this.sprintService.getMembers(idS).subscribe(res1 => {
+
+          if (this.isSuccess(res1)) {
+            res1.data.forEach(item => {
+              this.efforts.push(this.newItem(item));
+            });
+            this.isLoading = false;
+          }
+          this.loadStaffs();
+        });
+
       } else {
         this.documentName = '';
         this.formGroup.patchValue({
@@ -199,17 +211,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.sprintService.getMembers(searchObj).subscribe(res => {
-      console.log(res);
 
-      if (this.isSuccess(res)) {
-        res.data.forEach(item => {
-          this.efforts.push(this.newItem(item));
-        });
-        this.isLoading = false;
-      }
-      this.loadStaffs();
-    });
   }
 
   newItem(data: any): FormGroup {

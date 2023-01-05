@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {Component, Injector, OnInit} from '@angular/core';
 import {BaseComponent} from '@core/base.component';
 import {ProjectService} from '@shared/services/project.service';
@@ -87,6 +88,23 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   };
   panelOpenState: boolean = false;
 
+  list_status: any = [
+    {
+      type: '1',
+      name: 'setting.listStatus.active',
+    },
+    {
+      type: '0',
+      name: 'setting.listStatus.notActive',
+    },
+    {
+      type: '',
+      name: 'setting.listStatus.all',
+    }
+  ];
+
+  typeStatus = '1';
+
   constructor(injector: Injector, public projectService: ProjectService) {
     super(injector, projectService);
   }
@@ -175,5 +193,15 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         disableClose: true
       }
     );
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
+    this.doSearch();
+
   }
 }
