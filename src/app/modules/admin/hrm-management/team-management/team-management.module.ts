@@ -44,7 +44,6 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatExpansionModule,
     MatListModule,
-    FormsModule
   ]
 })
 export class TeamManagementModule { }

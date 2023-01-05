@@ -11,12 +11,11 @@ import HC_ExportingOffline from 'highcharts/modules/offline-exporting';
 import HC_ExportData from 'highcharts/modules/export-data';
 import HC_More from 'highcharts/highcharts-more';
 
-import highcharts3D from 'highcharts/highcharts-3d.src';
 
 HC_Exporting(Highcharts);
-HC_ExportingOffline(Highcharts);
-HC_ExportData(Highcharts);
-HC_More(Highcharts);
+// HC_ExportingOffline(Highcharts);
+// HC_ExportData(Highcharts);
+// HC_More(Highcharts);
 
 
 
@@ -118,28 +117,31 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
 
   initChart(chart?: any) {
     this.chartOptions = {
-
       accessibility: {
         enabled: false
       },
-      plotOptions: {
-        series: {
-          marker: {
-            enabled: false,
-            symbol: 'circle',
-            radius: 1,
-            lineColor: null
-          },
-          lineWidth: 2,
-          states: {
-            inactive: {
-              enabled: false,
-            },
-          },
+      exporting:{
+        buttons:{
+          contextButton:{
+            
+          }
         },
       },
-      exporting: {
-        enabled: true
+      plotOptions: {
+        // series: {
+        //   marker: {
+        //     enabled: false,
+        //     symbol: 'circle',
+        //     radius: 1,
+        //     lineColor: null
+        //   },
+        //   lineWidth: 2,
+        //   states: {
+        //     inactive: {
+        //       enabled: false,
+        //     },
+        //   },
+        // },
       },
       chart: {
         type: "line"
