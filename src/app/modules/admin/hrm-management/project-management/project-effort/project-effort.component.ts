@@ -132,6 +132,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
     this.loadStaffs();
+    this.getUnitPrice();
 
   }
 
@@ -148,10 +149,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts.clear();
     this.sprintService.getSprint(searchObj).subscribe(res => {
       if (this.isSuccess(res)) {
-        console.log(res);
-
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
-
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
 
@@ -183,8 +181,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.sprintService.getMembers(idS).subscribe(res1 => {
 
           if (this.isSuccess(res1)) {
+
             res1.data.forEach(item => {
-              this.efforts.push(this.newItem(item));
+              const dataCaulate = {unitPrice: res.data.unitPrice , effort:item.effort};
+              const resultEffortExChange =  this.effortConversionCalculation(dataCaulate);
+              this.efforts.push(this.newItem(item,resultEffortExChange));
+
             });
             this.isLoading = false;
           }
@@ -216,14 +218,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   }
 
-  newItem(data: any): FormGroup {
+  newItem(data: any,result): FormGroup {
+    console.log(result);
 
     return this.fb.group({
       staffId: [data.staffId],
       roleId: [data.roleId],
       staffCode: [data.staffCode],
       effort: [data.effort],
-      effortExchange: [data.effortExchange],
+      effortExchange: [result],
       percentEffort: [data.percentEffort],
       // staffName: [data.staffName],
       // roleName: [data.roleName],
@@ -351,7 +354,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   addNewRow() {
     this.isLoading = true;
-    this.efforts.push(this.newItem({}));
+    this.efforts.push(this.newItem({},null));
     this.listStaff[this.efforts.length - 1] = [...this.listStaffOrigin];
     this.filteredList[this.efforts.length - 1] = [...this.listStaffOrigin];
     setTimeout(() => {
@@ -416,4 +419,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
   }
 
+  getUnitPrice(){
+    if(this.data.id){
+      this.sprintService.getOne(this.data.id).subscribe(res=>{
+        if(this.isSuccess(res)){
+          this.formGroup.controls['unitPrice'].setValue(this.formatCurrency(res.data.unitPrice));
+        }
+        else{
+          this.formGroup.controls['unitPrice'].setValue(null);
+        }
+      });
+    }
+  }
+
+  effortConversionCalculation(data: any){
+   return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
+  }
 }

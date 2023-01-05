@@ -35,4 +35,8 @@ export class SprintService extends BaseService{
   update(formData: any): Observable<any> {
     return this.http.put(`${this.serviceUrl}/update`, formData);
   }
+
+  getOne(id): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/project/${id}`);
+  }
 }

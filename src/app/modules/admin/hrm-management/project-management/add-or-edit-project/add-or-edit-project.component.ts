@@ -84,8 +84,6 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
             }
             return x;
           });
-          console.log(this.projectData);
-
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime);
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime);
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime);
