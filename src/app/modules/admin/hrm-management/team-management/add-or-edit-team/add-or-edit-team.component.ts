@@ -116,7 +116,6 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
       // endDate: value.endDate,
       // members: value.members.map(item => ({staffId: item.id, isManager: item.isManager})),
     };
-    debugger
     this.addOrEdit(teamData);
     return false;
   }
@@ -128,7 +127,6 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   }
 
   addMemberToTeam(value): void {
-    console.log(value);
     this.listMembers = [...value, ...this.listMembers];
     this.selectMember.value = [];
     this.listStaff = [];
