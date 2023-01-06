@@ -132,6 +132,20 @@ const routes: Routes = [
       },
     },
   },
+  {
+    path: 'reports-management',
+    loadChildren: () =>
+      import(
+        'app/modules/admin/hrm-management/reports-management/reports-management.module'
+      ).then((m) => m.ReportsManagementModule),
+    data: {
+      breadcrumb: {
+        label: 'hrm-management.reports.title',
+        url: 'hrm-management/reports-management',
+      },
+    },
+  }
+  
 ];
 
 @NgModule({

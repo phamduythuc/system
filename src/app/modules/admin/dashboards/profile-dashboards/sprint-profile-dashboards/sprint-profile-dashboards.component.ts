@@ -7,6 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { CommonUtilsService } from '@shared/common-utils.service';
@@ -69,7 +70,8 @@ export class SprintProfileDashboardsComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private translocoService: TranslocoService,
-    private DashboardsProfileService: DashboardsProfileService
+    private DashboardsProfileService: DashboardsProfileService,
+    private _adapter: DateAdapter<any>
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,6 +88,11 @@ export class SprintProfileDashboardsComponent implements OnInit {
       keyword: '',
     };
     this.getData(this.startDate.value.startMonth);
+
+    this.translocoService.langChanges$.subscribe((activeLang) => {
+      this._adapter.setLocale(activeLang);
+    });
+
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {

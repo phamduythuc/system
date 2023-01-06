@@ -6,6 +6,7 @@ import { SharedModule } from '@shared/shared.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [SalaryManagementComponent],
@@ -39,5 +40,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     ]),
   ],
   exports: [SalaryManagementComponent],
+  providers: [
+
+    {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
+  ],
 })
 export class SalaryManagementModule {}
