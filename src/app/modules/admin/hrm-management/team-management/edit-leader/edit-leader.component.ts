@@ -1,7 +1,9 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
+import { TeamService } from '@shared/services/team.service';
 import moment from 'moment';
+import { throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-edit-leader',
@@ -19,6 +21,7 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
     teamId: 0
   }
   constructor(injector: Injector,
+    private teamService: TeamService,
     dialogRef: MatDialogRef<EditLeaderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, null, dialogRef);
@@ -43,8 +46,16 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
       staffId: parseInt(this.leadId),
       teamId: parseInt(this.teamId),
     }
-    console.log(this.updateLeaderModel)
-    this.dialogRef.close()
+    this.teamService.upDateTeamLeader(this.updateLeaderModel).subscribe((res)=>{
+      debugger
+      if ('00' === res.body.code) {
+        this.showSnackBar(res.body.message, 'success');
+        this.dialogRef.close(this.updateLeaderModel.staffId);
+      } else {
+        this.showSnackBar(res.body.message, 'error');
+      }
+     
+    })
   }
 
 }

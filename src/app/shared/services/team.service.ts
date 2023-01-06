@@ -26,7 +26,7 @@ export class TeamService extends BaseService{
     return this.http.get<any>(`${this.serviceUrl}/${id}`);
   }
 
-  upDateTeamLeader(body:any){
+  upDateTeamLeader(body:any):Observable<any>{
     return this.http.post<any>(`${this.serviceUrl}/sprint-team-lead`, body, {observe: 'response'});
   }
 }

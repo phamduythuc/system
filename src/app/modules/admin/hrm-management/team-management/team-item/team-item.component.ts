@@ -119,12 +119,12 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
 
   }
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-     const ctrlValue = this.date.value!;
-     ctrlValue.month(normalizedMonthAndYear.month());
-     ctrlValue.year(normalizedMonthAndYear.year());
-     this.date.setValue(ctrlValue);
-     datepicker.close();
-     this.onDateChange(ctrlValue);
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
+    this.onDateChange(ctrlValue);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
@@ -188,8 +188,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       width: '30vw',
       disableClose: true
     }, (value) => {
-      if (value) {  
-        this.team.name=value.name
+      if (value) {
+        this.team.name = value.name
       }
     });
   }
@@ -203,12 +203,17 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
       data: {
-        id:this.team.id,
+        id: this.team.id,
         listMember: this.listMember,
         leadId: this.leadId,
         sprint: this.formGroup.value['sprint']
       },
       width: '30vw'
+    }, (value) => {
+      const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
+      this.formGroup.patchValue({
+        leadName: leaderName
+      })
     })
   }
 
