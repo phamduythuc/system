@@ -44,6 +44,7 @@
     "name": "Tên",
     "name_position": "Tên chức vụ",
     "name_specialize": "Tên chuyên môn",
+    "name_partner": "Tên đối tác",
     "code": "Mã",
     "note": "Ghi chú",
     "phone": "Điện thoại",
@@ -153,6 +154,7 @@
     "detailsHeader": "Thông tin",
     "department": {
       "title": "Phòng ban",
+      "title_none": "-- Trống --",
       "form": {
         "name": "Tên phòng ban",
         "code": "Mã phòng ban",

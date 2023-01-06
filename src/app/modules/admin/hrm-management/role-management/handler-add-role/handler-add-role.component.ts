@@ -11,13 +11,8 @@ import { RoleManagementService } from '@shared/services/role-management.service'
 })
 export class HandlerAddRoleComponent extends BaseComponent implements OnInit {
   formGroup = this.fb.group({
-    name: ['', Validators.required],
-    description: [''],
-    status: [''],
-    createdBy: [''],
-    createdDate: [''],
-    modifiedBy: [''],
-    modifiedDate: [''],
+    name: [null, [Validators.required, Validators.maxLength(50)]],
+    description: [null, Validators.maxLength(500)],
   });
   constructor( public roleManagementService: RoleManagementService,
     public dialogRef: MatDialogRef<HandlerAddRoleComponent>,

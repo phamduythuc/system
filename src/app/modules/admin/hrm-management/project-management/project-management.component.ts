@@ -76,7 +76,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       actions: [ 'configEffort', 'view','edit', 'delete'],
     }
   ];
-
+ 
   formSearch = this.fb.group({
     name: [''],
   });
@@ -103,9 +103,37 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     this.doSearch();
   }
 
+  // doSearch() {
+  //   this.searchModel = {...this.searchModel, page: 0, ...this.formSearch.value};
+  //   this.processSearch(this.searchModel);
+  // }
   doSearch() {
-    this.searchModel = {...this.searchModel, page: 0, ...this.formSearch.value};
-    this.processSearch(this.searchModel);
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
+    this.processSearch(this.searchModel, () => {
+      const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      });
+      console.log(this.searchResult.data);
+      
+      let convertData = this.searchResult.data.map((obj) => {
+        let convetSalary = {
+          ...obj,
+          budget: VND.format(parseInt(obj.budget)),
+        };
+        return convetSalary;
+      });
+      this.searchResult.data = convertData;
+      console.log(this.searchResult.data);
+      
+      this.searchResult.data.map((item) => {
+        return item.documentName;
+      });
+    });
   }
 
   actionClick(e: any): void {

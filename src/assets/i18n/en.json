@@ -45,6 +45,7 @@
     "name": "Name",
     "name_position": "Position name",
     "name_specialize": "Specialize name",
+    "name_partner": "Partner name",
     "code": "Code",
     "note": "Note",
     "phone": "Phone",
@@ -154,6 +155,7 @@
     "detailsHeader": "Information",
     "department": {
       "title": "Department",
+      "title_none": "-- None --",
       "form": {
         "name": "Department name",
         "code": "Department code",

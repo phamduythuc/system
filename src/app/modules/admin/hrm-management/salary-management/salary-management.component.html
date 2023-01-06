@@ -86,8 +86,7 @@
                       required
                       #rateInput="ngModel"
                       [(ngModel)]="row[column.columnDef]"
-                      (ngModelChange)="change(row['staffId'])"
-                      pattern="[+]?[0-9]++++"
+                      (ngModelChange)="change(row['staffId'])"                 
                     />
                   </mat-form-field>
                 </div>
@@ -95,13 +94,13 @@
                   class="errors"
                   *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
                 >
-                  <div [hidden]="!rateInput.errors.pattern">
+                  <!-- <div [hidden]="!rateInput.errors.pattern">
                     <span>{{
-                      "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+                      "hrm-management.salary.time_percent_err_1" | transloco
                     }}</span>
-                  </div>
+                  </div> -->
                   <div [hidden]="!rateInput.errors.required">
-                    {{ "dashboard.profile.tab.sprint.time_percent_err" | transloco }}
+                    {{ "hrm-management.salary.time_percent_err" | transloco }}
                   </div>
                 </div>
               </ng-container>

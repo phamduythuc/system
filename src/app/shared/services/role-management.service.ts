@@ -21,12 +21,10 @@ export class RoleManagementService extends BaseService  {
     return this.http.put(`${environment.apiUrl}/project-role`, formData);
   }
   deleteRole(id: any): Observable<any> {
-    console.log(id);
-    
-    return this.http.delete(`http://103.226.248.168:8089/api/project-role/${id}`);
+    return this.http.delete(`${environment.apiUrl}/project-role/${id}`);
   }
   getListAllRole(): Observable<any> {
-    return this.http.get<any>("http://103.226.248.168:8089/api/project-role");
+    return this.http.get<any>(`${environment.apiUrl}/project-role`);
   };
 
 }
