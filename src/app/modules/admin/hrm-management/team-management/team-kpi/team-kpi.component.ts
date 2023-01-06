@@ -1,8 +1,10 @@
 import { Component, Inject, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
 
 @Component({
@@ -25,6 +27,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     startMonth: [],
     endMonth: []
   });
+  date = new FormControl(moment());
   searchEndDate: any = moment(new Date(Date.now())).format("01/MM/YYYY");
   searchStartDate: any= moment(new Date(Date.now())).subtract(5,'month').format("01/MM/YYYY");
   constructor(injector: Injector, public teamService: TeamService,) {
@@ -35,6 +38,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
+    // this.EndTimeFormat=this.date
     this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
     this.formSearchKpi.setValue({
       teamId: [this.data],
@@ -42,8 +46,27 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
       endMonth: this.EndTimeFormat
     });
   }
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, type?:string) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    if (type === 'startDate') {
+      this.formSearchKpi.patchValue({
+        startMonth: ctrlValue,
+      });
+      this.searchStartDate = moment(ctrlValue).format("01/MM/YYYY");
+    }
+    else {
+      this.formSearchKpi.patchValue({
+        endMonth: ctrlValue,
+      });
+      this.searchEndDate = moment(ctrlValue).format("01/MM/YYYY");
+    }
+    datepicker.close();
+ }
 
-  onDateChange(type: string, date: any) {
+  onDateChange( type: string ,date: any) {
     if (type === 'startDate') {
       this.searchStartDate = moment(date).format("01/MM/YYYY");
     }

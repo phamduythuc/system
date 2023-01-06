@@ -54,7 +54,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       name: 'setting.typeView.grid',
     },
   ];
-
+  date = new FormControl(moment());
   listTeam: any[] = [];
   currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
   currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
@@ -63,7 +63,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     text: '',
     name: [],
     number: 2,
-    sprint: [this.currentTime],
+    sprint: [this.date],
     leadName: [],
     target: [],
     cost: [],
@@ -118,14 +118,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.foodCtrl = new FormControl({ value: '', disabled: true })
 
   }
-  date = new FormControl(moment());
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue('01');
+    this.date.setValue(ctrlValue);
     datepicker.close();
-    // this.onDateChange(e);
+    this.onDateChange(ctrlValue);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
@@ -158,7 +157,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.formGroup.patchValue(this.data);
         this.listStaffName = this.data.staffName.split(',');
         this.listStaffId = this.data.staffId.split(',');
-        for (let index = 0; index <= this.listStaffId.length; index++) {
+        for (let index = 0; index < this.listStaffId.length; index++) {
           this.member = {
             staffId: this.listStaffId[index],
             staffName: this.listStaffName[index]
@@ -166,12 +165,12 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
           this.listMember.push(this.member);
         }
         this.totalMember = this.listMember.length;
-        console.log(this.listMember)
         this.leadId = res.data[0].leadId;
         this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
       else {
         this.totalMember = 0;
+        this.performance='';
       }
     });
   }
@@ -190,8 +189,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       width: '30vw',
       disableClose: true
     }, (value) => {
-      if (value) {  
-        this.team.name=value.name
+      if (value) {
+        this.team.name = value.name
       }
     });
   }
@@ -205,10 +204,17 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
       data: {
+        id: this.team.id,
         listMember: this.listMember,
-        leadId: this.leadId
+        leadId: this.leadId,
+        sprint: this.formGroup.value['sprint']
       },
       width: '30vw'
+    }, (value) => {
+      const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
+      this.formGroup.patchValue({
+        leadName: leaderName
+      })
     })
   }
 
