@@ -84,7 +84,7 @@
                 column.columnDef === 'salary' || column.columnDef === 'budget'
               "
             >
-              {{ row[column.columnDef] | numberPipe }}
+              {{ row[column.columnDef] | numberToStringPipe }}
             </div>
           </ng-template>
         </ng-container>

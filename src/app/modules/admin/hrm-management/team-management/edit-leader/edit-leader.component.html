@@ -11,16 +11,19 @@
                 </button>
             </div>
         </div>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label class="capitalize font-bold">{{"common.leader"|transloco}}</mat-label>
-            <mat-select [value]="leadId" (selectionChange)="changeLeader($event.value)">
-                <mat-option *ngFor="let member of listMembers" [value]="member.staffId">{{member.staffName}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="w-full mt-6">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label class="capitalize font-bold">{{"common.leader"|transloco}}</mat-label>
+                <mat-select [(value)]="leadId" (selectionChange)="changeLeader($event.value)">
+                    <mat-option *ngFor="let member of listMembers" [value]="member.staffId">{{member.staffName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
     </div>
 
     <div class="footer mt-6 flex justify-end">
-        <button mat-raised-button color="primary" class="mr-3" (click)="save(formGroup.value)">
+        <button mat-raised-button color="primary" class="mr-3" (click)="save()">
             <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
             <span>{{t('button.save')}}</span>
         </button>

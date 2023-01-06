@@ -23,6 +23,7 @@ import { RoleManagementModule } from './role-management/role-management.module';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { FormsModule } from '@angular/forms';
     FuseDrawerModule,
     StaffManagementModule,
     RoleManagementModule,
-    MatPaginatorModule
+    MatPaginatorModule,
 
   ],
 })

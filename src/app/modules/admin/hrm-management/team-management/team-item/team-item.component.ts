@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { Member } from '../models/Member';
 import { MatDatepicker } from '@angular/material/datepicker';
 
 
+
 @Component({
   selector: 'app-team-item',
   templateUrl: './team-item.component.html',
@@ -24,6 +25,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 export class TeamItemComponent extends BaseComponent implements OnInit {
   @Input() team: any;
   @Input() random: any;
+  @Output() reSearch = new EventEmitter<any>();
 
   _permissionCodeName = 'DSD';
   @ViewChild('drawer') drawer: MatDrawer;
@@ -40,6 +42,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   listStaffId: any;
   totalMember: number;
   leadId: any;
+  foodCtrl: FormControl;
 
   list_type_view: any = [
     {
@@ -51,16 +54,16 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       name: 'setting.typeView.grid',
     },
   ];
-
+  date = new FormControl(moment());
   listTeam: any[] = [];
-  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDTHH:MM:SSZ");
+  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
   currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
   formGroup = this.fb.group({
     id: '',
     text: '',
     name: [],
     number: 2,
-    sprint: [],
+    sprint: [this.date],
     leadName: [],
     target: [],
     cost: [],
@@ -104,7 +107,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   ngOnInit(): void {
@@ -112,16 +114,17 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.getDetailTeamBySprint(this.searchDetail);
     this.formGroup.patchValue({
       sprint: this.currentTime,
-    })
+    });
+    this.foodCtrl = new FormControl({ value: '', disabled: true })
+
   }
-  date = new FormControl(moment());
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue('01');
+    this.date.setValue(ctrlValue);
     datepicker.close();
-    // this.onDateChange(e);
+    this.onDateChange(ctrlValue);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
@@ -154,7 +157,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.formGroup.patchValue(this.data);
         this.listStaffName = this.data.staffName.split(',');
         this.listStaffId = this.data.staffId.split(',');
-        for (let index = 0; index <= this.listStaffId.length; index++) {
+        for (let index = 0; index < this.listStaffId.length; index++) {
           this.member = {
             staffId: this.listStaffId[index],
             staffName: this.listStaffName[index]
@@ -167,32 +170,51 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       }
       else {
         this.totalMember = 0;
+        this.performance='';
       }
     });
+  }
+
+  change(e: any) {
+    // console.log(e);
   }
 
 
   addOrEdit(id: any): void {
     this.showDialog(AddOrEditTeamComponent, {
       data: {
-        id,
+        id: id,
+        status: this.team.status
       },
       width: '30vw',
       disableClose: true
     }, (value) => {
       if (value) {
-        // this.doSearch();
+        this.team.name = value.name
       }
     });
   }
 
+  // getTeamById(id:any){
+  //   this.teamService.getTeamById(id).subscribe((res)=>{
+  //     console.log(res);
+  //   });
+  // }
+
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
       data: {
+        id: this.team.id,
         listMember: this.listMember,
-        leadId: this.leadId
+        leadId: this.leadId,
+        sprint: this.formGroup.value['sprint']
       },
       width: '30vw'
+    }, (value) => {
+      const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
+      this.formGroup.patchValue({
+        leadName: leaderName
+      })
     })
   }
 
@@ -237,9 +259,9 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.teamService.delete(id).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar('Xóa thành công', 'success');
-        this.searchModel.page = 0;
-        // this.processSearch(this.searchModel, () => this.callback());
-        this.processSearch(this.searchModel);
+        // this.searchModel.page = 0;
+        // this.processSearch(this.searchModel);
+        this.reSearch.emit('1');
       } else {
         this.showSnackBar(res.message, 'error');
       }

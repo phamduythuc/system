@@ -1,12 +1,9 @@
-import { messages } from './../../../../mock-api/common/messages/data';
-import { data } from 'autoprefixer';
 import { HandlerViewRoleComponent } from './handler-view-role/handler-view-role.component';
-
 import { RoleManagementService } from './../../../../shared/services/role-management.service';
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
-import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+
 import { HandlerEditRoleComponent } from './handler-edit-role/handler-edit-role.component';
 import { HandlerAddRoleComponent } from './handler-add-role/handler-add-role.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
@@ -29,42 +26,36 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'name',
       header: 'hrm-management.role.roleName',
-      flex: 0.5,
+      flex: 0.3,
     },
     {
       columnDef: 'description',
       header: 'common.description',
-      flex: 0.5,
     },
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
-      flex: 0.5,
       cellRenderer: (element: any) =>
         CommonUtilsService.dateToString(element.createdDate),
     },
     {
       columnDef: 'createdBy',
       header: 'common.createdBy',
-      flex: 0.5,
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      flex: 0.5,
       cellRenderer: (element: any) =>
         CommonUtilsService.dateToString(element.modifiedDate),
     },
     {
       columnDef: 'modifiedBy',
       header: 'common.modifiedBy',
-      flex: 0.7,
     },
     {
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view', 'edit', 'delete'],
-      flex: 0.7,
     },
   ];
   formSearch = this.fb.group({
@@ -81,6 +72,7 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchModel.status = 1;
     this.doSearch();
     this.roleService.getListAllRole().subscribe((role) => {});
   }

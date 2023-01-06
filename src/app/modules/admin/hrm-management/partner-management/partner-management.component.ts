@@ -70,7 +70,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
   partners = [];
   panelOpenState: false;
 
-  list_status = []
+  list_status = [];
 
   typeStatus = '1';
 
@@ -145,7 +145,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
       disableClose: true
     }, (value) => {
       if (value)
-        this.doSearch()
+        this.doSearch();
     });
     // ref.onclose()
   }

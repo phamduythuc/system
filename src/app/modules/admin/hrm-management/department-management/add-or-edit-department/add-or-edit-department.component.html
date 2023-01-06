@@ -48,6 +48,7 @@
       <div class="input w-5/6">
         <mat-form-field appearance="fill" class="fuse-mat-no-subscript w-full bg-card">
           <mat-select [placeholder]="('hrm-management.department.form.parent' | transloco)" formControlName="parentId">
+            <mat-option>{{'hrm-management.department.title_none' | transloco}}</mat-option>
             <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option>
           </mat-select>
         </mat-form-field>

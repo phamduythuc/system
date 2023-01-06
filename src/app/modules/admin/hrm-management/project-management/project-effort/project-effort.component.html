@@ -140,6 +140,7 @@
                 [formControlName]="'effort'"
                 type="text"
                 matInput
+                readonly="true"
                 onlyNumber
               />
             </mat-form-field>
@@ -164,6 +165,7 @@
                 type="text"
                 [formControlName]="'effortExchange'"
                 matInput
+                readonly="true"
                 onlyNumber
               />
             </mat-form-field>
@@ -226,9 +228,7 @@
                     (click)="fileUpload.click()"
                   >
                     <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
-                    {{
-                      "effort.chooseFile" | transloco
-                    }}
+                    {{ "effort.chooseFile" | transloco }}
                   </button>
                 </ng-container>
                 <div class="flex">
@@ -257,7 +257,6 @@
                     <p> No file uploaded yet. </p>
                   </ng-container> -->
                 </div>
-
               </div>
             </div>
           </div>
@@ -401,6 +400,12 @@
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
+                        <app-error-message
+                          [control]="efforts.controls[index].get('staffId')"
+                          [name]="'common.name' | transloco"
+                        >
+                        </app-error-message>
+
                       </div>
                     </div>
                   </ng-container>
@@ -423,6 +428,11 @@
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
+                        <app-error-message
+                          [control]="efforts.controls[index].get('roleId')"
+                          [name]="'effort.role' | transloco"
+                        >
+                        </app-error-message>
                       </div>
                     </div>
                   </ng-container>
@@ -437,25 +447,13 @@
                             type="text"
                             matInput
                             onlyNumber
+                            (ngModelChange)="caculateExchange($event, index)"
                             formControlName="effort"
                             placeholder="{{
                               'effort.acknowledgmentOfEffort' | transloco
                             }}"
                           />
                         </mat-form-field>
-                        <!-- <app-error-message
-                          [control]="efforts.controls[index].get('effort')"
-                          [textPattern]="
-                            'common.message.number_format'
-                              | transloco
-                                : {
-                                    filed:
-                                      'effort.acknowledgmentOfEffort'
-                                      | transloco
-                                  }
-                          "
-                        >
-                        </app-error-message> -->
                       </div>
                     </div>
                   </ng-container>
