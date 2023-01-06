@@ -157,7 +157,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.formGroup.patchValue(this.data);
         this.listStaffName = this.data.staffName.split(',');
         this.listStaffId = this.data.staffId.split(',');
-        for (let index = 0; index <= this.listStaffId.length; index++) {
+        for (let index = 0; index < this.listStaffId.length; index++) {
           this.member = {
             staffId: this.listStaffId[index],
             staffName: this.listStaffName[index]
@@ -170,6 +170,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       }
       else {
         this.totalMember = 0;
+        this.performance='';
       }
     });
   }

@@ -51,15 +51,19 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
-    this.EndTimeFormat=this.date
-    this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
-    this.formSearchKpi.setValue({
-      teamId: [this.data],
-      startMonth: this.StartTimeFormat,
-      endMonth: this.EndTimeFormat
-    });
+    if (type === 'startDate') {
+      this.formSearchKpi.patchValue({
+        startMonth: ctrlValue,
+      });
+      this.searchStartDate = moment(ctrlValue).format("01/MM/YYYY");
+    }
+    else {
+      this.formSearchKpi.patchValue({
+        endMonth: ctrlValue,
+      });
+      this.searchEndDate = moment(ctrlValue).format("01/MM/YYYY");
+    }
     datepicker.close();
-    // this.onDateChange(ctrlValue,type);
  }
 
   onDateChange( type: string ,date: any) {
