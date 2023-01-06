@@ -32,11 +32,11 @@
                             (dateChange)="onDateChange(formGroup.value['sprint'])" [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
-                        <mat-datepicker #sprint startView="multi-year"
+                        <mat-datepicker #sprint startView="multi-year" 
                             panelClass="example-month-picker"></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div class="flex w-2/5 justify-around">
+                <div class="flex w-2/5 justify-around"> 
                     <div class="">
                         <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}{{':'+' '+
                             performance
@@ -54,20 +54,23 @@
                         <mat-label class="font-bold capitalize">
                             {{"common.leader"|transloco}}
                         </mat-label>
-                        <div class="-translate-y-9 translate-x-44">
-                            <button mat-icon-button class="hover:bg-slate-200" (click)="editLeader(team.id)">
-                                <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit"
-                                    class="icon-size-5"></mat-icon>
-                            </button>
-                        </div>
-                        <input class=" " matInput [formControlName]="'leadName'" readonly>
+                        <input class="focus:cursor-default  hover:cursor-default" matInput
+                            [formControlName]="'leadName'" readonly (focus)="change($event)">
                     </mat-form-field>
                 </div>
+
+                <div class="-translate-y-3 -translate-x-7 z-10">
+                    <button mat-icon-button class="hover:bg-slate-200" (click)="editLeader(team.id)">
+                        <mat-icon svgIcon="heroicons_outline:pencil-alt" [style.color]="'orange'" title="Edit"
+                            class="icon-size-5"></mat-icon>
+                    </button>
+                </div>
+
                 <!-- target -->
                 <div class=" flex w-2/5">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
-                        <input class=" " matInput [formControlName]="'target'" readonly>
+                        <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'target'" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -86,7 +89,7 @@
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.cost'|transloco}}</mat-label>
-                            <input class=" " matInput [formControlName]="'cost'" readonly>
+                            <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'cost'" readonly>
                         </mat-form-field>
                     </div>
 
@@ -94,7 +97,7 @@
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.revenue'|transloco}}</mat-label>
-                            <input class=" " matInput [formControlName]="'revenue'" readonly>
+                            <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'revenue'" readonly>
                         </mat-form-field>
                     </div>
                 </div>
@@ -172,7 +175,8 @@
         <div class="w-full flex justify-end">
             <div class="flex justify-end p-2">
                 <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEdit(team.id)">
-                    <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
+                    <mat-icon svgIcon="heroicons_outline:pencil-alt" [style.color]="'orange'" title="Edit"
+                        class="icon-size-5"></mat-icon>
                 </button>
                 <button mat-icon-button class="hover:bg-slate-200" (click)="deleteConfirmDialog(team.id)">
                     <mat-icon svgIcon="heroicons_outline:trash" title="Delete" class="icon-size-5"></mat-icon>

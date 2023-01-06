@@ -27,5 +27,8 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
   changeLeader(event: any) {
 
   }
+  save(){
+    this.dialogRef.close()
+  }
 
 }

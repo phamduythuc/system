@@ -88,25 +88,14 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   };
   panelOpenState: boolean = false;
 
-  list_status: any = [
-    {
-      type: '1',
-      name: 'setting.listStatus.active',
-    },
-    {
-      type: '2',
-      name: 'setting.listStatus.notActive',
-    },
-    {
-      type: '',
-      name: 'setting.listStatus.all',
-    }
-  ];
+  list_status = []
 
   typeStatus = '1';
 
   constructor(injector: Injector, public projectService: ProjectService) {
     super(injector, projectService);
+    this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
+
   }
 
   ngOnInit(): void {

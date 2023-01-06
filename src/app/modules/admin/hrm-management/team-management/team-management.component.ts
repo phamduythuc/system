@@ -72,10 +72,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
         });
       }
     );
-    // this.searchModel.status = 1;
-    this.processSearch(this.searchModel, () => this.callback());
-
-
+    this.processSearch(this.searchModel);
   }
 
   handlePageEvent(e?: any) {
@@ -100,7 +97,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
       this.searchModel = {
         page: 0,
         pageSize: 3,
-        status : this.formSearch.value['option']
+        status: this.formSearch.value['option']
       }
     }
     this.processSearch(this.searchModel);

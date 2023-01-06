@@ -71,13 +71,27 @@ export class RoleManagementComponent extends BaseComponent implements OnInit {
     keyword: [''],
   });
 
+  list_status = []
+
+  typeStatus = '1';
+
   constructor(injector: Injector, public roleService: RoleManagementService) {
     super(injector, roleService);
+    this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
   }
 
   ngOnInit(): void {
     this.doSearch();
     this.roleService.getListAllRole().subscribe((role) => {});
+  }
+
+  filterStatus(data){
+    if(data){
+      this.searchModel.status = Number(data);
+    }else{
+    this.searchModel.status = '';
+    }
+    this.doSearch();
   }
 
   doSearch() {
