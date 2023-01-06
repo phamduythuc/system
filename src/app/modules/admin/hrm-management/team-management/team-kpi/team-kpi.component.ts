@@ -1,8 +1,10 @@
 import { Component, Inject, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
 
 @Component({
@@ -42,8 +44,17 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
       endMonth: this.EndTimeFormat
     });
   }
+  date = new FormControl(moment());
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, type?:string) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
+    this.onDateChange(ctrlValue,type);
+ }
 
-  onDateChange(type: string, date: any) {
+  onDateChange( date: any,type: string) {
     if (type === 'startDate') {
       this.searchStartDate = moment(date).format("01/MM/YYYY");
     }
