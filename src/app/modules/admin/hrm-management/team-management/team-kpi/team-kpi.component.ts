@@ -27,6 +27,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     startMonth: [],
     endMonth: []
   });
+  date = new FormControl(moment());
   searchEndDate: any = moment(new Date(Date.now())).format("01/MM/YYYY");
   searchStartDate: any= moment(new Date(Date.now())).subtract(5,'month').format("01/MM/YYYY");
   constructor(injector: Injector, public teamService: TeamService,) {
@@ -37,6 +38,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
+    // this.EndTimeFormat=this.date
     this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
     this.formSearchKpi.setValue({
       teamId: [this.data],
@@ -44,17 +46,23 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
       endMonth: this.EndTimeFormat
     });
   }
-  date = new FormControl(moment());
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, type?:string) {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
+    this.EndTimeFormat=this.date
+    this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
+    this.formSearchKpi.setValue({
+      teamId: [this.data],
+      startMonth: this.StartTimeFormat,
+      endMonth: this.EndTimeFormat
+    });
     datepicker.close();
-    this.onDateChange(ctrlValue,type);
+    // this.onDateChange(ctrlValue,type);
  }
 
-  onDateChange( date: any,type: string) {
+  onDateChange( type: string ,date: any) {
     if (type === 'startDate') {
       this.searchStartDate = moment(date).format("01/MM/YYYY");
     }

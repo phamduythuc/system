@@ -165,7 +165,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
           this.listMember.push(this.member);
         }
         this.totalMember = this.listMember.length;
-        console.log(this.listMember)
         this.leadId = res.data[0].leadId;
         this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
       }
@@ -204,8 +203,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   editLeader(id?: any) {
     this.showDialog(EditLeaderComponent, {
       data: {
+        id:this.team.id,
         listMember: this.listMember,
-        leadId: this.leadId
+        leadId: this.leadId,
+        sprint: this.formGroup.value['sprint']
       },
       width: '30vw'
     })
