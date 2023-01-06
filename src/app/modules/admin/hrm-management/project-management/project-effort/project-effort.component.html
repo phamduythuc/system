@@ -276,6 +276,7 @@
               <input
                 [formControlName]="'effortDifference'"
                 type="text"
+                readonly="true"
                 matInput
                 onlyNumber
               />
@@ -290,8 +291,9 @@
               <input
                 [formControlName]="'cumulativeDifference'"
                 type="text"
+                readonly="true"
                 matInput
-                onlyNumber
+                vnd-currency
               />
             </mat-form-field>
           </div>
@@ -306,6 +308,7 @@
               <input
                 [formControlName]="'differenceVnd'"
                 type="text"
+                readonly="true"
                 matInput
                 onlyNumber
               />
@@ -324,6 +327,7 @@
               <input
                 [formControlName]="'cumulativeDifferenceVnd'"
                 type="text"
+                readonly="true"
                 matInput
                 onlyNumber
               />
@@ -497,8 +501,9 @@
               <input
                 [formControlName]="'revenue'"
                 type="text"
+                readonly="true"
                 matInput
-                onlyNumber
+                vnd-currency
               />
             </mat-form-field>
           </div>
@@ -509,8 +514,9 @@
               <input
                 [formControlName]="'cost'"
                 type="text"
+                readonly="true"
                 matInput
-                onlyNumber
+                vnd-currency
               />
             </mat-form-field>
           </div>
