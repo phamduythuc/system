@@ -7,6 +7,7 @@ import { datePickerValidator } from '@shared/validation/date-picker.validation';
 import { StaffService } from '@shared/services/staff.service';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
+import { DateAdapter } from '@angular/material/core';
 
 
 @Component({
@@ -42,7 +43,9 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     public dialogRef: MatDialogRef<AddOrEditContractComponent>,
     private ContractService:ContractService,
     private staffService:StaffService,
-    @Inject(MAT_DIALOG_DATA) public dialogData: any
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    private _adapter: DateAdapter<any>
+
   ) {
     super(injector, ContractService, dialogRef);
     this.dialogId = dialogData?.id;
@@ -88,8 +91,9 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit(): void {
-    console.log(this.detailsData);
-    
+    this.translocoService.langChanges$.subscribe((activeLang) => {
+      this._adapter.setLocale(activeLang);
+    });
   }
 
   save() {
