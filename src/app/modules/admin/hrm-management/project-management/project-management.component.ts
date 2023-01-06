@@ -73,7 +73,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: [ 'configEffort', 'add_member', 'view','edit', 'delete'],
+      actions: [ 'configEffort', 'view','edit', 'delete'],
     }
   ];
 
