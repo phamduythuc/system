@@ -34,6 +34,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   panelOpenState = false;
   recordUrl: any = '';
   unitPrice: any = '';
+  cumulativeDifference: any = '';
+  revenue: any = '';
+  cost: any = '';
   documentName: any = '';
 
   isLoading: boolean = false;
@@ -155,7 +158,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     ]).subscribe(([resStaff, res]) => {
       this.loadStaffs(resStaff);
       if (this.isSuccess(res)) {
+
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
+        this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
+        this.revenue = this.formatCurrency(res.data.revenue);
+        this.cost = this.formatCurrency(res.data.cost);
+
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
 
@@ -178,11 +186,11 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           acceptanceEffort: res.data.acceptanceEffort,
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
-          cumulativeDifference: res.data.cumulativeDifference,
+          cumulativeDifference: this.cumulativeDifference,
           differenceVnd: res.data.differenceVnd,
           cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
-          revenue: res.data.revenue,
-          cost: res.data.cost,
+          revenue: this.revenue,
+          cost: this.cost,
           efficiency: res.data.efficiency,
           note: res.data.note,
           estimate: res.data.estimate,
@@ -200,12 +208,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
               this.listStaff[index] = [...this.listStaffOrigin];
               this.filteredList[index] = [...this.listStaffOrigin];
 
-              const objStaff = this.listStaffOrigin.find(
-                (x) => x.id === item.staffId
-              );
-              const indexStaff = this.listStaffOrigin.indexOf(objStaff);
-              this.listStaffOrigin.splice(indexStaff, 1);
+              // const objStaff = this.listStaffOrigin.find(
+              //   (x) => x.id === item.staffId
+              // );
+              // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
+              //  this.listStaffOrigin.splice(indexStaff, 1);
+
             });
+
             this.isLoading = false;
           }
         });
@@ -255,6 +265,18 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     const valUnitPrice = formValue.unitPrice;
     if (valUnitPrice != null) {
       formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
+    }
+    const valCumulativeDifference = formValue.cumulativeDifference;
+    if (valCumulativeDifference != null) {
+      formValue.cumulativeDifference = Number(valCumulativeDifference.replace(this.numberChars, ''));
+    }
+    const valRevenue= formValue.revenue;
+    if (valRevenue != null) {
+      formValue.revenue = Number(valRevenue.replace(this.numberChars, ''));
+    }
+    const valCost = formValue.cost;
+    if (valCost != null) {
+      formValue.cost = Number(valCost.replace(this.numberChars, ''));
     }
     // formValue.effortDetail.forEach(item=>{
     //   console.log(item.effortExchange);
@@ -404,13 +426,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   loadStaffs(res) {
     this.mapStaff = {};
     this.listStaffOrigin = [...res.data];
-
     this.listStaffOrigin.forEach((item) => {
       this.mapStaff[item.id] = item;
     });
   }
 
   deleteRow(index: number) {
+    // console.log(this.listStaff[index]);
+    // console.log(this.listStaffOrigin);
+
     delete this.listStaff[index];
     delete this.filteredList[index];
     this.isLoading = true;
@@ -421,15 +445,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   onStaffChange(event: any, index: number) {
-    console.log(event);
-    const objStaff = this.listStaffOrigin.find(
-      (x) => x.id === event.value
-    );
-    const indexStaff = this.listStaffOrigin.indexOf(objStaff);
-    this.listStaffOrigin.splice(indexStaff, 1);
+    // console.log(event);
+    // const objStaff = this.filteredList[index].find(
+    //   (x) => x.id === event.value
+    // );
+    // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
+    // this.listStaffOrigin.splice(indexStaff, 1);
+
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
+    const lstStaffIds = this.efforts.value.map(item => item.staffId);
+    this.efforts.value.forEach((item, idx) => {
+      this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
+    });
   }
 
   downloadDocument(recordUrl: any) {

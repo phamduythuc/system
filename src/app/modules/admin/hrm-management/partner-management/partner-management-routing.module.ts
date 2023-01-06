@@ -12,7 +12,7 @@ const routes: Routes =[
     path:'',
     component: PartnerManagementComponent
   },
-]
+];
 
 @NgModule({
   declarations: [PartnerManagementComponent],

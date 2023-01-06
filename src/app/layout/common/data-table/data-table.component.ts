@@ -110,7 +110,7 @@ export class DataTableComponent
     private cdk: ChangeDetectorRef,
     private transloco: TranslocoService,
     private achievementService: AchievementService,
-    private staffService:StaffService,
+    private staffService: StaffService,
     injector: Injector,
   ) {
     super(injector, staffService);
@@ -121,15 +121,15 @@ export class DataTableComponent
   ngOnChanges(changes: SimpleChanges): void {
 
     if(!this.typeView){
-      this.typeView = 'list'
+      this.typeView = 'list';
     }
 
     this.getListActions();
     if(this.typeView === 'grid'){
-      this.rows.map((x:any,index:any)=>{
-        x.avatar = this.convertBase64(x.imageUrl,index)
-        return x
-      })
+      this.rows.map((x: any,index: any)=>{
+        x.avatar = this.convertBase64(x.imageUrl,index);
+        return x;
+      });
     }
   }
 
