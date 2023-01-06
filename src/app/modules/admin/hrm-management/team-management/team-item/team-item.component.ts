@@ -54,7 +54,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       name: 'setting.typeView.grid',
     },
   ];
-
+  date = new FormControl(moment());
   listTeam: any[] = [];
   currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
   currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
@@ -63,7 +63,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     text: '',
     name: [],
     number: 2,
-    sprint: [this.currentTime],
+    sprint: [this.date],
     leadName: [],
     target: [],
     cost: [],
@@ -118,14 +118,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.foodCtrl = new FormControl({ value: '', disabled: true })
 
   }
-  date = new FormControl(moment());
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, e?: any) {
-    const ctrlValue = this.date.value!;
-    ctrlValue.month(normalizedMonthAndYear.month());
-    ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue('01');
-    datepicker.close();
-    // this.onDateChange(e);
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
+     const ctrlValue = this.date.value!;
+     ctrlValue.month(normalizedMonthAndYear.month());
+     ctrlValue.year(normalizedMonthAndYear.year());
+     this.date.setValue(ctrlValue);
+     datepicker.close();
+     this.onDateChange(ctrlValue);
   }
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();

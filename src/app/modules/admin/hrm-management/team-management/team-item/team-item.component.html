@@ -27,16 +27,25 @@
             <div class="w-full flex justify-start py-4 mt-5">
                 <div class="flex w-2/4 justify-between">
                     <mat-label class="mr-1 font-bold capitalize">{{'common.sprint'|transloco}}</mat-label>
-                    <mat-form-field class="fuse-mat-no-subscript w-full -mt-2">
+                    <!-- <mat-form-field class="fuse-mat-no-subscript w-full -mt-2">
                         <input class=" " matInput [matDatepicker]="sprint" datePickerFormat="MM/YYYY"
                             (dateChange)="onDateChange(formGroup.value['sprint'])" [formControlName]="'sprint'">
                         <mat-datepicker-toggle #datepicker [for]="sprint">
                         </mat-datepicker-toggle>
                         <mat-datepicker #sprint startView="multi-year" 
                             panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="fuse-mat-no-subscript w-full -mt-2" appearance="fill">
+                        <input matInput [matDatepicker]="sprint" [formControlName]="'sprint'" datePickerFormat="MM/YYYY">
+                        <mat-datepicker-toggle matIconSuffix [for]="sprint"></mat-datepicker-toggle>
+                        <mat-datepicker #sprint startView="multi-year" (monthSelected)="setMonthAndYear($event, sprint)"
+                            panelClass="example-month-picker">
+                        </mat-datepicker>
                     </mat-form-field>
+
                 </div>
-                <div class="flex w-2/5 justify-around"> 
+                <div class="flex w-2/5 justify-around">
                     <div class="">
                         <mat-label class="font-bold capitalize">{{"common.performance"|transloco}}{{':'+' '+
                             performance
@@ -70,7 +79,8 @@
                 <div class=" flex w-2/5">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
-                        <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'target'" readonly>
+                        <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'target'"
+                            readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -89,7 +99,8 @@
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.cost'|transloco}}</mat-label>
-                            <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'cost'" readonly>
+                            <input class="focus:cursor-default  hover:cursor-default" matInput
+                                [formControlName]="'cost'" readonly>
                         </mat-form-field>
                     </div>
 
@@ -97,7 +108,8 @@
                     <div class="w-2/5">
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.revenue'|transloco}}</mat-label>
-                            <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'revenue'" readonly>
+                            <input class="focus:cursor-default  hover:cursor-default" matInput
+                                [formControlName]="'revenue'" readonly>
                         </mat-form-field>
                     </div>
                 </div>
