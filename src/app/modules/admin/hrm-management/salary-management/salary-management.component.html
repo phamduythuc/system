@@ -83,26 +83,25 @@
                       class="w-full"
                       matInput
                       trim="blur"
-                      required
                       #rateInput="ngModel"
                       [(ngModel)]="row[column.columnDef]"
                       (ngModelChange)="change(row['staffId'])"                 
                     />
                   </mat-form-field>
                 </div>
-                <div
+                <!-- <div
                   class="errors"
                   *ngIf="rateInput.errors && (rateInput.dirty || rateInput.touched)"
                 >
-                  <!-- <div [hidden]="!rateInput.errors.pattern">
+                  <div [hidden]="!rateInput.errors.pattern">
                     <span>{{
                       "hrm-management.salary.time_percent_err_1" | transloco
                     }}</span>
-                  </div> -->
+                  </div>
                   <div [hidden]="!rateInput.errors.required">
                     {{ "hrm-management.salary.time_percent_err" | transloco }}
                   </div>
-                </div>
+                </div> -->
               </ng-container>
 
             </ng-container>
