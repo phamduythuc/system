@@ -43,10 +43,12 @@
     "search": "Tìm kiếm",
     "stt": "STT",
     "name": "Tên",
+    "name_project": "Tên dự án",
     "name_position": "Tên chức vụ",
     "name_specialize": "Tên chuyên môn",
     "name_partner": "Tên đối tác",
     "code": "Mã",
+    "code_project": "Mã dự án",
     "note": "Ghi chú",
     "phone": "Điện thoại",
     "address": "Địa chỉ",
@@ -231,6 +233,21 @@
       "salary": "Mức lương",
       "insurance": "Bảo hiểm",
       "link": "Tải file"
+    },
+    "document": {
+      "title": "Văn bản",
+      "label": "Văn bản",
+      "form": {
+        "name": "Tên văn bản",
+        "code": "Mã văn bản",
+        "status": "Trạng thái",
+        "doc_type": "Loại văn bản",
+        "sub_date": "Ngày đăng ký",
+        "effective_date": "Ngày có hiệu lực",
+        "expiration_date": "Ngày hết hạn",
+        "upload_file": "Tải file",
+        "title_none": "-- Trống --"
+      }
     },
     "salary": {
       "title": "Lương",

@@ -187,6 +187,27 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
     ],
   },
+  {
+    id: 'hrmManagement',
+    title: 'hrm-management.document.label',
+    type: 'group',
+    role: [AuthoritiesConstant.CONTRACT],
+    children: [
+      {
+        id: 'document',
+        title: 'hrm-management.document.title',
+        type: 'basic',
+        icon: 'heroicons_outline:clipboard-list',
+        link: '/hrm-management/document-management',
+        role: [
+          AuthoritiesConstant.CONTRACT,
+          AuthoritiesConstant.CONTRACT_CREATE,
+          AuthoritiesConstant.CONTRACT_UPDATE,
+          AuthoritiesConstant.CONTRACT_READ,
+        ],
+      },
+    ],
+  },
   // {
   //   id: 'datalakeManagement',
   //   title: 'Datalake Management',
@@ -500,7 +521,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
   // },
   {
     id: 'setting',
-    title: 'setting.title', 
+    title: 'setting.title',
     type: 'group',
     icon: 'heroicons_outline:home',
     role: [
@@ -520,7 +541,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
       },
       {
         id: 'authorization',
-        title: 'setting.groupRoleName', 
+        title: 'setting.groupRoleName',
         type: 'basic',
         icon: 'heroicons_outline:clipboard-check',
         link: '/setting/authorization',

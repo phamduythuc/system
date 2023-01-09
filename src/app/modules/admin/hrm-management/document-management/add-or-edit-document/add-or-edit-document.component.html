@@ -1,0 +1,274 @@
+<ng-container *transloco="let t">
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{
+        (dialogId ? "common.title.edit" : "common.title.create")
+          | transloco
+            : { screenName: "hrm-management.document.title" | transloco }
+      }}
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        class="hover:bg-slate-100"
+        (click)="dialogRef.close()"
+      >
+        <mat-icon
+          svgIcon="heroicons_outline:x"
+          title="Edit"
+          class="icon-size-5"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <!--    content-->
+  <div class="content mt-6" [formGroup]="formGroup">
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required" for="document-name">{{
+          "hrm-management.document.form.name" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+          >
+            <input
+              class="w-full"
+              id="document-name"
+              [placeholder]="'hrm-management.document.form.name' | transloco"
+              formControlName="name"
+              matInput
+              trim="blur"
+            />
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('name')"
+            name="{{ 'hrm-management.document.form.name' | transloco }}"
+          ></app-error-message>
+        </div>
+      </div>
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required ml-4" for="document-code">{{
+          "hrm-management.document.form.code" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+          >
+            <input
+              class="w-full"
+              id="document-code"
+              [placeholder]="'hrm-management.document.form.code' | transloco"
+              formControlName="code"
+              matInput
+            />
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('code')"
+            [name]="'hrm-management.document.form.code' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+    </div>
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required">{{
+          "hrm-management.document.form.status" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            appearance="fill"
+            class="fuse-mat-no-subscript w-full bg-card"
+          >
+            <mat-select
+              [placeholder]="'hrm-management.document.form.status' | transloco"
+              formControlName="status"
+            >
+              <mat-option>{{
+                "hrm-management.document.form.title_none" | transloco
+              }}</mat-option>
+              <!-- <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          <!-- <app-error-message [control]="formGroup.get('parentId')" [name]="('hrm-management.department.form.parent' | transloco)"></app-error-message> -->
+        </div>
+      </div>
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required ml-4">{{
+          "hrm-management.document.form.doc_type" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field
+            appearance="fill"
+            class="fuse-mat-no-subscript w-full bg-card"
+          >
+            <mat-select
+              [placeholder]="'hrm-management.document.form.doc_type' | transloco"
+              formControlName="typeDoc"
+            >
+              <mat-option>{{
+                "hrm-management.document.form.title_none" | transloco
+              }}</mat-option>
+              <!-- <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          <!-- <app-error-message [control]="formGroup.get('typeDoc')" [name]="('hrm-management.department.form.parent' | transloco)"></app-error-message> -->
+        </div>
+      </div>
+    </div>
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required">{{
+          "hrm-management.document.form.sub_date" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <input
+              class=" "
+              matInput
+              [matDatepicker]="signDate"
+              datePickerFormat="DD/MM/YYYY"
+              [formControlName]="'signDate'"
+              [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
+            />
+            <mat-datepicker-toggle #datepicker [for]="signDate">
+            </mat-datepicker-toggle>
+            <mat-datepicker #signDate></mat-datepicker>
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('signDate')"
+            [name]="'common.message.date_format' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required ml-4">{{
+          "hrm-management.document.form.effective_date" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <input
+              class=" "
+              matInput
+              [matDatepicker]="effDate"
+              datePickerFormat="DD/MM/YYYY"
+              [formControlName]="'effDate'"
+              [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
+            />
+            <mat-datepicker-toggle #datepicker [for]="effDate">
+            </mat-datepicker-toggle>
+            <mat-datepicker #effDate></mat-datepicker>
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('effDate')"
+            [name]="'common.message.date_format' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+    </div>
+    <div class="field flex mb-4">
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium">{{
+          "hrm-management.document.form.expiration_date" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <input
+              class=" "
+              matInput
+              [matDatepicker]="expDate"
+              datePickerFormat="DD/MM/YYYY"
+              [formControlName]="'expDate'"
+              [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
+            />
+            <mat-datepicker-toggle #datepicker [for]="expDate">
+            </mat-datepicker-toggle>
+            <mat-datepicker #expDate></mat-datepicker>
+          </mat-form-field>
+          <!-- <app-error-message
+            [control]="formGroup.get('expiDate')"
+            [name]="'common.message.date_format' | transloco"
+          ></app-error-message> -->
+        </div>
+      </div>
+      <div class="w-1/2 flex">
+        <label class="w-1/3 font-medium required ml-4">{{
+          "hrm-management.document.form.upload_file" | transloco
+        }}</label>
+        <div class="input w-2/3">
+          <div class="sm:col-span-1 uploadStyle">
+            <div class="fuse-mat-no-subscript w-full">
+              <input
+                type="file"
+                name="document"
+                class="file-input"
+                (change)="uploadFile($event)"
+                #fileUpload
+              />
+
+              <div class="file-upload">
+                <ng-container *ngIf="visibleBtnUpload">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="upload-btn"
+                    (click)="fileUpload.click()"
+                  >
+                    <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                    {{ "effort.chooseFile" | transloco }}
+                  </button>
+                </ng-container>
+                <div class="flex">
+                  <ng-container *ngIf="documentName">
+                    <div class="nameFile">
+                      <a
+                        (click)="downloadDocument(recordUrl)"
+                        title="{{ documentName }}"
+                      >
+                        {{ documentName }}
+                      </a>
+                    </div>
+                    <button
+                      class="icon-size-5"
+                      mat-icon-button
+                      color="primary"
+                      (click)="removeFile()"
+                    >
+                      <mat-icon
+                        svgIcon="heroicons_outline:x"
+                        title="Close"
+                      ></mat-icon>
+                    </button>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--    footer-->
+  <div class="footer mt-6 flex justify-end">
+    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:x"
+      ></mat-icon>
+      <span>{{ "button.cancel" | transloco }}</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formGroup.invalid"
+      (click)="formGroup.valid && save(formGroup.value)"
+    >
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:check"
+      ></mat-icon>
+      <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span>
+    </button>
+  </div>
+</ng-container>

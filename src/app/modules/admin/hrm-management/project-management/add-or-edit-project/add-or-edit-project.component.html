@@ -27,7 +27,7 @@
     <div class="content mt-6 flex-1 overflow-auto" [formGroup]="formGroup">
       <div class="field flex mb-4">
         <label class="w-1/6 font-medium p-2 required" for="project-name">{{
-          t("common.name")
+          t("common.name_project")
         }}</label>
         <div class="input w-5/6">
           <mat-form-field
@@ -51,7 +51,7 @@
       <div class="field flex mb-4">
         <div class="w-1/2 flex">
           <label class="w-1/3 font-medium p-2 required" for="project-code">{{
-            "common.code" | transloco
+            "common.code_project" | transloco
           }}</label>
           <div class="input w-2/3">
             <mat-form-field
@@ -212,6 +212,7 @@
               <input
                 class=" "
                 matInput
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="startTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="startTime"
@@ -239,6 +240,8 @@
               <input
                 class=" "
                 matInput
+                [min]="formGroup.value.startTime"
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="expectEndTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="expectEndTime"
@@ -267,6 +270,8 @@
               <input
                 class=" "
                 matInput
+                [min]="formGroup.value.startTime"
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="actualEndTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="actualEndTime"
@@ -295,7 +300,10 @@
               trim="blur"
             ></textarea>
           </mat-form-field>
-          <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
+          <app-error-message
+            [control]="formGroup.get('description')"
+            [name]="'common.description' | transloco"
+          ></app-error-message>
         </div>
       </div>
 
@@ -307,7 +315,7 @@
       <div class="content mt-6 flex-1 overflow-auto p-2">
         <div class="field flex mb-4">
           <div class="w-1/2 flex">
-            <label class="w-1/3 font-medium p-2 required" for="contactName" >{{
+            <label class="w-1/3 font-medium p-2 required" for="contactName">{{
               "hrm-management.project.form.contactPersonName" | transloco
             }}</label>
             <div class="input w-2/3">
@@ -333,13 +341,9 @@
             </div>
           </div>
           <div class="w-1/2 flex">
-            <label
-              class="w-1/3 font-medium ml-4 required"
-              for="contactPhone"
-              >{{
-                "hrm-management.project.form.contactPersonPhone" | transloco
-              }}</label
-            >
+            <label class="w-1/3 font-medium ml-4 required" for="contactPhone">{{
+              "hrm-management.project.form.contactPersonPhone" | transloco
+            }}</label>
             <div class="input w-2/3">
               <mat-form-field
                 class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
@@ -386,9 +390,12 @@
                 />
               </mat-form-field>
               <app-error-message
-              [control]="formGroup.get('contactMail')"
-              [name]="'common.email' | transloco"
-            ></app-error-message>
+              textPattern="{{
+                'common.message.email_format' | transloco
+              }}"
+                [control]="formGroup.get('contactMail')"
+                [name]="'common.email' | transloco"
+              ></app-error-message>
             </div>
           </div>
         </div>
