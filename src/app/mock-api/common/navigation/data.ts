@@ -137,6 +137,20 @@ export const defaultNavigation: FuseNavigationItem[] = [
           AuthoritiesConstant.DSTV_READ,
         ],
       },
+      {
+        id: 'reports',
+        title: 'hrm-management.reports.title',
+        type: 'basic',
+        icon: 'heroicons_outline:document-report',
+        link: '/hrm-management/reports-management',
+        role: [
+          AuthoritiesConstant.DSTV_READ,
+          AuthoritiesConstant.DSBC_READ,
+          AuthoritiesConstant.DSBC_CREATE,
+          AuthoritiesConstant.DSBC_UPDATE,
+          AuthoritiesConstant.DSBC_DELETE,
+        ]
+      }
     ],
   },
   {

@@ -1,7 +1,8 @@
 {
   "lang": {
     "vi": "Vietnamese",
-    "en": "English"
+    "en": "English",
+    "code": "en"
   },
   "sign-in": "Sign-in",
   "paging": {
@@ -253,6 +254,14 @@
       "createdDateRole": "Created Date",
       "modifiedByRole":"Modified By ",
       "modifiedDateRole": "Modified Date"
+    },
+    "reports":{
+      "title": "Reports",
+      "form": {
+        "name": "Reports name",
+        "code": "Reports code",
+        "description": "Reports description"
+      }
     }
   },
   "contract": {

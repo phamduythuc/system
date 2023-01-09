@@ -76,7 +76,6 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       actions: [ 'configEffort', 'view','edit', 'delete'],
     }
   ];
- 
   formSearch = this.fb.group({
     name: [''],
   });
@@ -88,7 +87,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
   };
   panelOpenState: boolean = false;
 
-  list_status = []
+  list_status = [];
 
   typeStatus = '1';
 
@@ -118,8 +117,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         style: 'currency',
         currency: 'VND',
       });
-      console.log(this.searchResult.data);
-      
+
       let convertData = this.searchResult.data.map((obj) => {
         let convetSalary = {
           ...obj,
@@ -128,8 +126,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
         return convetSalary;
       });
       this.searchResult.data = convertData;
-      console.log(this.searchResult.data);
-      
+
       this.searchResult.data.map((item) => {
         return item.documentName;
       });

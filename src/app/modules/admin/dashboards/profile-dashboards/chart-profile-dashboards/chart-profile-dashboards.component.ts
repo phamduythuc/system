@@ -129,39 +129,77 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
     let payload = data ? data : this.formGroup.value;
 
-    this.DashboardsProfileService.getKPI(payload).subscribe((res: any) => {
-      if ('00' === res.code) {
-        if (res.data.length > 0) {
-          this.data = [
-            {
-              name: 'KPI mục tiêu',
-              data: [],
-              type: 'effortExchange',
-            },
-            {
-              name: 'KPI đảm bảo',
-              data: [],
-              type: 'kpiTarget',
-            },
-            {
-              name: 'KPI thực tế',
-              data: [],
-              type: 'kpiInsure',
-            },
-          ];
-
-          this.renderKPI(res.data);
-          this.random = (Math.random() + 1).toString(36).substring(7);
-        } else {
-          this.options.series = [];
-        }
-        if (!data) {
-          // this.showSnackBar(res.message, 'success');
-        }
-      } else {
-        this.showSnackBar(res.message, 'error');
+      if(this.staffId){
+        this.DashboardsProfileService.getKPI(payload).subscribe((res: any) => {
+          if ('00' === res.code) {
+            if (res.data.length > 0) {
+              this.data = [
+                {
+                  name: 'KPI mục tiêu',
+                  data: [],
+                  type: 'effortExchange',
+                },
+                {
+                  name: 'KPI đảm bảo',
+                  data: [],
+                  type: 'kpiTarget',
+                },
+                {
+                  name: 'KPI thực tế',
+                  data: [],
+                  type: 'kpiInsure',
+                },
+              ];
+    
+              this.renderKPI(res.data);
+              this.random = (Math.random() + 1).toString(36).substring(7);
+            } else {
+              this.options.series = [];
+            }
+            if (!data) {
+              // this.showSnackBar(res.message, 'success');
+            }
+          } else {
+            this.showSnackBar(res.message, 'error');
+          }
+        });
+      }else{
+        this.DashboardsProfileService.getKPIByToken(payload).subscribe((res: any) => {
+          if ('00' === res.code) {
+            if (res.data.length > 0) {
+              this.data = [
+                {
+                  name: 'KPI mục tiêu',
+                  data: [],
+                  type: 'effortExchange',
+                },
+                {
+                  name: 'KPI đảm bảo',
+                  data: [],
+                  type: 'kpiTarget',
+                },
+                {
+                  name: 'KPI thực tế',
+                  data: [],
+                  type: 'kpiInsure',
+                },
+              ];
+    
+              this.renderKPI(res.data);
+              this.random = (Math.random() + 1).toString(36).substring(7);
+            } else {
+              this.options.series = [];
+            }
+            if (!data) {
+              // this.showSnackBar(res.message, 'success');
+            }
+          } else {
+            this.showSnackBar(res.message, 'error');
+          }
+        });
       }
-    });
+
+   
   }
 
   renderKPI(data: any) {
