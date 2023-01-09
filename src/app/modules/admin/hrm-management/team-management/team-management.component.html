@@ -61,7 +61,7 @@
             </div>
             <div class=" flex w-full justify-start">
                 <mat-paginator [length]="searchResult.totalRecords" [pageSize]="3" [pageSizeOptions]="[3, 6, 9, 12]" [showFirstLastButtons]="true"
-                    aria-label="Select page" (page)="handlePageEvent($event)">
+                    aria-label="Select page" (page)="handlePageEvent($event)" [hidePageSize]="false">
                 </mat-paginator>
             </div>
         </mat-card>

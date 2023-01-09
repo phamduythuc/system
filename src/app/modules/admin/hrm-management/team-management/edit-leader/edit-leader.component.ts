@@ -1,4 +1,4 @@
-import { Component, Inject, Injector, OnInit } from '@angular/core';
+import { Component, Inject, Injector, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
 import { TeamService } from '@shared/services/team.service';
@@ -10,7 +10,7 @@ import { throttleTime } from 'rxjs';
   templateUrl: './edit-leader.component.html',
   styleUrls: ['./edit-leader.component.scss']
 })
-export class EditLeaderComponent extends BaseComponent implements OnInit {
+export class EditLeaderComponent extends BaseComponent implements OnInit, OnChanges {
   listMembers: any;
   leadId: any;
   teamId: any;
@@ -25,16 +25,18 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
     dialogRef: MatDialogRef<EditLeaderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super(injector, null, dialogRef);
+    this.listMembers = this.data.listMember;
+    this.leadId = this.data.leadId?.toString();
+    this.teamId = this.data.id;
+    this.sprint = moment(this.data.sprint).format("01/MM/YYYY");
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
 
   ngOnInit(): void {
-    this.listMembers = this.data.listMember;
-    if (this.data.leadId) {
-      this.leadId = this.data.leadId.toString();
-      this.teamId = this.data.id;
-      this.sprint = moment(this.data.sprint).format("01/MM/YYYY");
-    }
+
   }
 
   changeLeader(event: any) {
@@ -46,15 +48,14 @@ export class EditLeaderComponent extends BaseComponent implements OnInit {
       staffId: parseInt(this.leadId),
       teamId: parseInt(this.teamId),
     }
-    this.teamService.upDateTeamLeader(this.updateLeaderModel).subscribe((res)=>{
-      debugger
+    this.teamService.upDateTeamLeader(this.updateLeaderModel).subscribe((res) => {
       if ('00' === res.body.code) {
         this.showSnackBar(res.body.message, 'success');
         this.dialogRef.close(this.updateLeaderModel.staffId);
       } else {
         this.showSnackBar(res.body.message, 'error');
       }
-     
+
     })
   }
 
