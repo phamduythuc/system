@@ -33,7 +33,6 @@ export class ErrorMessageComponent {
   }
 
   listOfErrors(): string[] {
-    console.log(this.control.errors)
     return Object.keys(this.control.errors).map(field => this.getMessage(field, this.control.errors[field]));
   }
 

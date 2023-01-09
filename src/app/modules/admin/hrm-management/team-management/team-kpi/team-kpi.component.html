@@ -15,7 +15,7 @@
             <mat-form-field class="fuse-mat-no-subscript w-full">
                 <mat-label class="font-bold capitalize">{{'hrm-management.team.form.startDate'|transloco}}</mat-label>
                 <input class=" " matInput [matDatepicker]="startMonth" datePickerFormat="MM/YYYY"
-                    [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" [formControlName]="'startMonth'" (dateChange)="onDateChange('startDate',formSearchKpi.value['startMonth'])" >
+                    [placeholder]="('placeholder.chooseDate' | transloco)+' ...'" [formControlName]="'startMonth'">
                 <mat-datepicker-toggle #datepicker [for]="startMonth">
                 </mat-datepicker-toggle>
                 <mat-datepicker #startMonth startView="multi-year" (monthSelected)="setMonthAndYear($event, startMonth,'startDate')" panelClass="example-month-picker"></mat-datepicker>
