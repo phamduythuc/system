@@ -37,7 +37,7 @@
                     </mat-form-field> -->
 
                     <mat-form-field class="fuse-mat-no-subscript w-full -mt-2" appearance="fill">
-                        <input matInput [matDatepicker]="sprint" [formControlName]="'sprint'" datePickerFormat="MM/YYYY">
+                        <input matInput [matDatepicker]="sprint" [formControlName]="'sprint'" datePickerFormat="MM/YYYY" readonly>
                         <mat-datepicker-toggle matIconSuffix [for]="sprint"></mat-datepicker-toggle>
                         <mat-datepicker #sprint startView="multi-year" (monthSelected)="setMonthAndYear($event, sprint)"
                             panelClass="example-month-picker">
@@ -45,7 +45,7 @@
                     </mat-form-field>
 
                 </div>
-                
+
                 <!-- performance -->
                 <div class="flex w-2/5 justify-around">
                     <div class="">

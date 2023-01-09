@@ -211,10 +211,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       },
       width: '30vw'
     }, (value) => {
-      const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
-      this.formGroup.patchValue({
-        leadName: leaderName
-      })
+      if(value!=null){
+        const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
+        this.formGroup.patchValue({
+          leadName: leaderName
+        })
+      }
+
     })
   }
 
