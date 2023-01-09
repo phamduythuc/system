@@ -234,6 +234,21 @@
       "insurance": "Bảo hiểm",
       "link": "Tải file"
     },
+    "document": {
+      "title": "Văn bản",
+      "label": "Văn bản",
+      "form": {
+        "name": "Tên văn bản",
+        "code": "Mã văn bản",
+        "status": "Trạng thái",
+        "doc_type": "Loại văn bản",
+        "sub_date": "Ngày đăng ký",
+        "effective_date": "Ngày có hiệu lực",
+        "expiration_date": "Ngày hết hạn",
+        "upload_file": "Tải file",
+        "title_none": "-- Trống --"
+      }
+    },
     "salary": {
       "title": "Lương",
       "salaryVND": "Lương (VNĐ)",

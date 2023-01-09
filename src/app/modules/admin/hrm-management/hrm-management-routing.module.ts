@@ -144,8 +144,21 @@ const routes: Routes = [
         url: 'hrm-management/reports-management',
       },
     },
+  },
+  {
+    path: 'document-management',
+    loadChildren: () =>
+      import(
+        'app/modules/admin/hrm-management/document-management/document-management.module'
+      ).then((m) => m.DocumentManagementModule),
+    data: {
+      breadcrumb: {
+        label: 'hrm-management.document.title',
+        url: 'hrm-management/document-management',
+      },
+    },
   }
-  
+
 ];
 
 @NgModule({

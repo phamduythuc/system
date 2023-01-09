@@ -235,6 +235,21 @@
       "insurance": "Insurance",
       "link": "Download"
     },
+    "document": {
+      "title": "Documents",
+      "label": "Documents",
+      "form": {
+        "name": "Document name",
+        "code": "Document code",
+        "status": "Status",
+        "doc_type": "Document type",
+        "registration_date": "Registration date",
+        "effective_date": "Effective date",
+        "expiration_date": "Expiration date",
+        "upload_file": "Upload file",
+        "title_none": "-- None --"
+      }
+    },
     "salary": {
       "title": "Salary ",
       "salaryVND": "Salary (VND)",

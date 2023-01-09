@@ -212,6 +212,7 @@
               <input
                 class=" "
                 matInput
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="startTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="startTime"
@@ -239,6 +240,8 @@
               <input
                 class=" "
                 matInput
+                [min]="formGroup.value.startTime"
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="expectEndTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="expectEndTime"
@@ -267,6 +270,8 @@
               <input
                 class=" "
                 matInput
+                [min]="formGroup.value.startTime"
+                [max]="formGroup.value.actualEndTime"
                 [matDatepicker]="actualEndTime"
                 datePickerFormat="DD/MM/YYYY"
                 formControlName="actualEndTime"

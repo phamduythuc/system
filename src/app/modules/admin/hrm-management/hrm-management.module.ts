@@ -24,6 +24,7 @@ import { RoleManagementComponent } from './role-management/role-management.compo
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { DocumentManagementComponent } from './document-management/document-management.component';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     StaffManagementComponent,
     TeamManagementComponent,
     RoleManagementComponent,
-
+    DocumentManagementComponent
   ],
   imports: [
     CommonModule,
