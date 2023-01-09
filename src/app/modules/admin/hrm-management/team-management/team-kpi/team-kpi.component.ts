@@ -1,9 +1,10 @@
 import { Component, Inject, Injector, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { BaseComponent } from '@core/base.component';
 import { ChartLineComponent } from '@shared/charts/chart-line/chart-line.component';
 import { TeamService } from '@shared/services/team.service';
+import { creatDateRangeValidator } from '@shared/validation/date-picker.validation';
 import moment, { Moment } from 'moment';
 import { ChartLineTeamKpiComponent } from '../chart-line-team-kpi/chart-line-team-kpi.component';
 
@@ -22,14 +23,15 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
   EndTimeFormat: any;
   StartTimeFormat: any;
   expected: any[] = [];
-  formSearchKpi = this.fb.group({
-    teamId: [],
-    startMonth: [],
-    endMonth: []
-  });
   date = new FormControl(moment());
   searchEndDate: any = moment(new Date(Date.now())).format("01/MM/YYYY");
-  searchStartDate: any= moment(new Date(Date.now())).subtract(5,'month').format("01/MM/YYYY");
+  searchStartDate: any = moment(new Date(Date.now())).subtract(5, 'month').format("01/MM/YYYY");
+  endDates:any = moment;
+  formSearchKpi = this.fb.group({
+    teamId: [],
+    startMonth: [], 
+    endMonth: []
+  },{validators: [creatDateRangeValidator()]});
   constructor(injector: Injector, public teamService: TeamService,) {
     super(injector, teamService);
   }
@@ -37,7 +39,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.EndTimeFormat = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
+    this.EndTimeFormat = moment(new Date(Date.now()));
     // this.EndTimeFormat=this.date
     this.StartTimeFormat = moment(this.EndTimeFormat).subtract(5, 'month');
     this.formSearchKpi.setValue({
@@ -46,16 +48,15 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
       endMonth: this.EndTimeFormat
     });
   }
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, type?:string) {
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, type?: string) {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue(ctrlValue);
     if (type === 'startDate') {
+      this.searchStartDate = moment(ctrlValue).format("01/MM/YYYY");
       this.formSearchKpi.patchValue({
         startMonth: ctrlValue,
-      });
-      this.searchStartDate = moment(ctrlValue).format("01/MM/YYYY");
+      });     
     }
     else {
       this.formSearchKpi.patchValue({
@@ -64,15 +65,15 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
       this.searchEndDate = moment(ctrlValue).format("01/MM/YYYY");
     }
     datepicker.close();
- }
+  }
 
-  onDateChange( type: string ,date: any) {
-    if (type === 'startDate') {
-      this.searchStartDate = moment(date).format("01/MM/YYYY");
-    }
-    else {
-      this.searchEndDate = moment(date).format("01/MM/YYYY");
-    }
+  onDateChange(type: string, date: any) {
+    // if (type === 'startDate') {
+    //   this.searchStartDate = moment(date).format("01/MM/YYYY");
+    // }
+    // else {
+    //   this.searchEndDate = moment(date).format("01/MM/YYYY");
+    // }
   }
 
   zoomChart() {
@@ -82,3 +83,5 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
   }
 
 }
+
+

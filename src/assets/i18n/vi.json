@@ -285,7 +285,8 @@
     "error_9": "Mật khẩu không khớp !",
     "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
     "textPattern_2": "Vui lòng nhập ký tự số",
-    "notFound": "Không tìm thấy bản ghi"
+    "notFound": "Không tìm thấy bản ghi",
+    "error_10":"Ngày bắt đầu phải nhỏ hơn ngày kết thúc"
   },
   "effort": {
     "title": "Thông tin giai đoạn",

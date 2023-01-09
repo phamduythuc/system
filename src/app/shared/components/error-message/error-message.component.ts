@@ -24,7 +24,8 @@ export class ErrorMessageComponent {
     minNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_4')} ${params.message}`,
     maxNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_6')} ${params.message}`,
     uniqueName: (params: any, name: any) => params.message,
-    mustMatch: () => `${this.tran.translate('specialText.error_9')}`
+    mustMatch: () => `${this.tran.translate('specialText.error_9')}`,
+    dateRange:(params: any, name: any) => `${this.tran.translate('specialText.error_10')}`,
   };
 
   shouldShowErrors(): boolean { 
