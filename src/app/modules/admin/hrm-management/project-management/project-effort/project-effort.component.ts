@@ -199,11 +199,19 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
         const idS = { id: res.data.id };
         this.sprintService.getMembers(idS).subscribe((res1) => {
+
           if (this.isSuccess(res1)) {
             res1.data.forEach((item, index) => {
               // const dataCaulate = {unitPrice: res.data.unitPrice , effort:item.effort};
               // const resultEffortExChange =  this.effortConversionCalculation(dataCaulate);
               // item.effortExchange = Number(resultEffortExChange);
+
+              //     const objStaff = this.listStaffOrigin.find(
+              //   (x) => x.id === item.staffId
+              // );
+              // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
+              //  this.listStaffOrigin.splice(indexStaff, 1);
+
               this.efforts.push(this.newItem(item));
               this.listStaff[index] = [...this.listStaffOrigin];
               this.filteredList[index] = [...this.listStaffOrigin];
@@ -455,10 +463,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
-    const lstStaffIds = this.efforts.value.map(item => item.staffId);
-    this.efforts.value.forEach((item, idx) => {
-      this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
-    });
+    // const lstStaffIds = this.efforts.value.map(item => item.staffId);
+    // this.efforts.value.forEach((item, idx) => {
+    //   this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
+    // });
   }
 
   downloadDocument(recordUrl: any) {
