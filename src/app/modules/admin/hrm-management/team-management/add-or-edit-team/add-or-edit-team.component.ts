@@ -20,7 +20,7 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   currentDate = moment(new Date(Date.now())).format("DD/MM/YYYY");
   dialogId: any;
   formGroup = this.fb.group({
-    name: [null, Validators.required],
+    name: [null, [Validators.required, Validators.maxLength(100)]],
     staDate: [],
     status: [1],
     departmentId: [null, Validators.required],
@@ -76,6 +76,10 @@ export class AddOrEditTeamComponent extends BaseComponent implements OnInit, Aft
   }
 
   getListDepartment(): void {
+    this.searchModel = {
+      pageSize: 10,
+      status:1
+    };
     this.staffService.getListDepartment(this.searchModel).subscribe(res => {
       this.listDepartment = res.data;
     });
