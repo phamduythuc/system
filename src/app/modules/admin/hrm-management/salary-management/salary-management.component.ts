@@ -159,15 +159,11 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   }
   saveData(e) {
     const newObj = e.map((item) => {
-      const obj = {
-        staffId: item.staffId,
-        salaryActual: item.salaryActual
-          .replace(',', '')
-          .replace(',', '')
-          .replace(',', '')
-          .replace(',', ''),
-      };
-      return obj;
+        const obj = {
+          staffId: item.staffId,
+          salaryActual: item.salaryActual?.replace(',','').replace(',','').replace(',','').replace(',',''),
+        };
+        return obj;
     });
 
     const month = CommonUtilsService.dateToString(
