@@ -3,6 +3,7 @@ import { BaseComponent } from '@core/base.component';
 import { Validators } from '@angular/forms';
 import { StaffService } from '@shared/services/staff.service';
 import { AchievementService } from '@shared/services/achievement.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -160,7 +161,8 @@ export class AddOrEditStaffDrawerComponent
   constructor(
     injector: Injector,
     private staffService: StaffService,
-    private achievementService: AchievementService
+    private achievementService: AchievementService,
+    private _adapter: DateAdapter<any>
   ) {
     super(injector, staffService);
     this.getListRoleStaff();
@@ -177,6 +179,11 @@ export class AddOrEditStaffDrawerComponent
       });
     }
     this.getListTeam()
+
+    this.translocoService.langChanges$.subscribe((activeLang) => {
+      this._adapter.setLocale(activeLang);
+    });
+
   }
 
   getListRoleStaff() {

@@ -1,7 +1,8 @@
 {
   "lang": {
     "vi": "Tiếng Việt",
-    "en": "Tiếng Anh"
+    "en": "Tiếng Anh",
+    "code": "vi"
   },
   "sign-in": "Đăng nhập",
   "paging": {
@@ -255,6 +256,14 @@
       "createdDateRole": "Ngày chỉnh sửa",
       "modifiedByRole":"Người chỉnh sửa",
       "modifiedDateRole": "Ngày chỉnh sửa"
+    },
+    "reports":{
+      "title": "Báo cáo",
+      "form": {
+        "name": "Tên báo cáo",
+        "code": "Mã báo cáo",
+        "description": "Mô tả"
+      }
     }
   },
   "message": {

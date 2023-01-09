@@ -6,6 +6,8 @@ import { CommonUtilsService } from '@shared/common-utils.service';
 import { StaffService } from '@shared/services/staff.service';
 import moment, { Moment } from 'moment';
 
+import { DateAdapter } from '@angular/material/core';
+
 @Component({
   selector: 'app-salary-management',
   templateUrl: './salary-management.component.html',
@@ -49,11 +51,15 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     size: 10,
     total: 0,
   };
- 
+
   listUser: any = [];
   basicListUser: any = [];
 
-  constructor(injector: Injector, public StaffService: StaffService) {
+  constructor(
+    injector: Injector,
+    public StaffService: StaffService,
+    private _adapter: DateAdapter<any>
+  ) {
     super(injector, StaffService);
     this.getListUser();
   }
@@ -61,6 +67,10 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.view();
+
+    this.translocoService.langChanges$.subscribe((activeLang) => {
+      this._adapter.setLocale(activeLang);
+    });
   }
 
   mapData(data: any) {
@@ -113,7 +123,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     ctrlValue.date('1');
     formTarget.setValue(ctrlValue);
     datepicker.close();
-    this.view()
+    this.view();
   }
 
   handleDataKPI(data) {}
@@ -132,17 +142,17 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
           style: 'currency',
           currency: 'VND',
         });
-        let convertData = res.data.map(obj => {
-          return  {
+        let convertData = res.data.map((obj) => {
+          return {
             fullName: obj.fullName,
             // salaryActual: parseInt(obj.salaryActual),
-            salary: VND.format(parseInt(obj.salary)) ,
+            salary: VND.format(parseInt(obj.salary)),
             salaryActual: CommonUtilsService.formatCurrency(obj.salaryActual),
             revenueMonth: obj.revenueMonth,
             staffCode: obj.staffCode,
-            staffId :obj.staffId
-          }
-        })
+            staffId: obj.staffId,
+          };
+        });
         this.searchResult.data = convertData;
       }
     });
@@ -151,7 +161,11 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     const newObj = e.map((item) => {
       const obj = {
         staffId: item.staffId,
-        salaryActual: item.salaryActual.replace(',','').replace(',','').replace(',','').replace(',',''),
+        salaryActual: item.salaryActual
+          .replace(',', '')
+          .replace(',', '')
+          .replace(',', '')
+          .replace(',', ''),
       };
       return obj;
     });
@@ -166,29 +180,23 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       listSalary: [...newObj],
     };
     console.log(params);
-    
+
     this.StaffService.saveSalary(params).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar(res.message, 'success');
         this.view();
-      }
-      else {
+      } else {
         this.showSnackBar(res.message, 'error');
       }
     });
   }
 
-  change(data){
-    this.searchResult.data.map(x=>{
-      if(x.staffId == data){
-        x.salaryActual = CommonUtilsService.formatCurrency(x.salaryActual)
+  change(data) {
+    this.searchResult.data.map((x) => {
+      if (x.staffId == data) {
+        x.salaryActual = CommonUtilsService.formatCurrency(x.salaryActual);
       }
-      return x
-    })
+      return x;
+    });
   }
 }
-
-
-// startMonth: CommonUtilsService.dateToString(
-//   moment().add(-7, 'month').startOf('month')
-// ),
