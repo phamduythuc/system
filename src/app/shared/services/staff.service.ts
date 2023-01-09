@@ -16,6 +16,7 @@ export class StaffService extends BaseService {
   getListAllUser(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/staff`);
   };
+
   createStaff(formData: FormData): Observable<any> {
     return this.http.post(`${environment.apiUrl}/staff/create`, formData)
   }
@@ -64,7 +65,4 @@ export class StaffService extends BaseService {
   saveSalary(params): Observable<any> {
     return this.http.post(`${environment.apiUrl}/salary`, params);
   }
-  getListAllUserStaff(params): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/salary/get-by-month`, {params: params});
-  };
 }
