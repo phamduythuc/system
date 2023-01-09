@@ -34,7 +34,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     expectEndTime: [null, datePickerValidator()],
     contactName: [null ,[Validators.maxLength(100) ,Validators.required]],
     contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b'), Validators.required]],
-    contactMail: [null ,Validators.required],
+    contactMail: [null ,[Validators.required,Validators.pattern('^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$')]],
 
     status: [1, Validators.required],
   });
@@ -69,7 +69,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
           unitPrice: CommonUtilsService.formatCurrency(form.unitPrice)
         }, {emitEvent: false});
       }
-    })
+    });
   }
 
   onChange(data){
