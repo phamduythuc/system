@@ -62,7 +62,7 @@
             [paginate]="true"
             [(pageIndex)]="searchModel.page"
             [limit]="searchModel.pageSize"
-            [count]="searchResult.totalRecords"
+            [count]="searchResult?.totalRecords"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >

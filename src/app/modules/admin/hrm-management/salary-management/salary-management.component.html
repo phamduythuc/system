@@ -3,7 +3,7 @@
     <mat-card class="bg-card h-full">
       <div [formGroup]="startDate">
         <div class="w-80 h-full px-4 flex gap-5">
-          <div class="w-2/3 flex gap-5">
+          <div class="w-2/3 flex items-center gap-5">
             <mat-label class="font-bold">{{
               "dashboard.profile.tab.sprint.month" | transloco
             }}</mat-label>
@@ -62,6 +62,7 @@
             [columns]="columns"
             [paginate]="true"
             [limit]="searchModel.pageSize"
+            [(pageIndex)]="searchModel.page"
             [count]="searchResult?.totalRecords"
             [rowTemplate]="rowTemplate"
             (callback)="handleDataKPI($event)"
