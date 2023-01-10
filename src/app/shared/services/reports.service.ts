@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from '@core/base.service';
-import {environment} from '@env/environment';
-import {HttpClient} from '@angular/common/http';
+import { BaseService } from '@core/base.service';
+import { environment } from '@env/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportsService extends BaseService {
-
   constructor(public http: HttpClient) {
-      super(http, environment.apiUrl + '/reports');
+    super(http, environment.apiUrl + '/reports');
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ContractProfileDashboardsComponent } from './contract-profile-dashboards.component';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { TranslocoModule } from '@ngneat/transloco';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     CommonModule,
     DataTableModule,
     TranslocoModule,
+    SharedModule
   ],
   exports: [ContractProfileDashboardsComponent]
 })

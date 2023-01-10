@@ -261,7 +261,14 @@
         "name": "Tên báo cáo",
         "code": "Mã báo cáo",
         "description": "Mô tả"
+      },
+      "detail":{
+        "downloadTemplate": "Tải template",
+        "viewReports": "Xem báo cáo",
+        "downloadReports": "Tải báo cáo",
+        "listSheet": "Danh sách các sheet"
       }
+      
     }
   },
   "message": {

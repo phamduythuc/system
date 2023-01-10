@@ -261,7 +261,14 @@
         "name": "Reports name",
         "code": "Reports code",
         "description": "Reports description"
+      },
+      "detail":{
+        "downloadTemplate": "Download template",
+        "viewReports": "View reports",
+        "downloadReports": "Download reports",
+        "listSheet": "List sheet"
       }
+      
     }
   },
   "contract": {
