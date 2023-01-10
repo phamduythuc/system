@@ -307,11 +307,11 @@
                 >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
               >
               <input
-                [formControlName]="'differenceVnd'"
+                [formControlName]="'effortDifferenceVnd'"
                 type="text"
                 readonly="true"
                 matInput
-                onlyNumber
+                vnd-currency
               />
             </mat-form-field>
           </div>

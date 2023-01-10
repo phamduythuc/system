@@ -48,6 +48,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   numberChars = new RegExp('[.,]', 'g');
   caculateEffortExchange: any = '';
   priceDefalt = 30000000;
+  effortDifferenceVnd: any ='';
 
   option = {
     page: 0,
@@ -125,7 +126,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       recordUrl: [''],
       effortDifference: [''],
       cumulativeDifference: [''],
-      differenceVnd: [''],
+      effortDifferenceVnd: [''],
       cumulativeDifferenceVnd: [''],
       revenue: [''],
       cost: [''],
@@ -158,13 +159,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     ]).subscribe(([resStaff, res]) => {
       this.loadStaffs(resStaff);
       if (this.isSuccess(res)) {
-        console.log(res.data);
 
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
-
         this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
         this.revenue = this.formatCurrency(res.data.revenue);
         this.cost = this.formatCurrency(res.data.cost);
+        this.effortDifferenceVnd = this.formatCurrency(res.data.effortDifferenceVnd);
 
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
@@ -189,7 +189,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
           cumulativeDifference: this.cumulativeDifference,
-          differenceVnd: res.data.differenceVnd,
+          effortDifferenceVnd: this.effortDifferenceVnd ,
           cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
           revenue: this.revenue,
           cost: this.cost,
@@ -238,7 +238,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           recordUrl: null,
           acceptanceEffort: null,
           acceptanceDate: null,
-          effortDifference: null,
+          effortDifferenceVnd: null,
           cumulativeDifference: null,
           differenceVnd: null,
           cumulativeDifferenceVnd: null,
@@ -276,6 +276,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (valUnitPrice != null) {
       formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
     }
+    const valEffortDifferenceVnd = formValue.effortDifferenceVnd;
+    if (valEffortDifferenceVnd != null) {
+      formValue.effortDifferenceVnd = Number(valEffortDifferenceVnd.replace(this.numberChars, ''));
+    }
     const valCumulativeDifference = formValue.cumulativeDifference;
     if (valCumulativeDifference != null) {
       formValue.cumulativeDifference = Number(valCumulativeDifference.replace(this.numberChars, ''));
@@ -288,13 +292,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (valCost != null) {
       formValue.cost = Number(valCost.replace(this.numberChars, ''));
     }
-    // formValue.effortDetail.forEach(item=>{
-    //   console.log(item.effortExchange);
-    //   const itemNeweffortDetail = {unitPrice: Number(valUnitPrice.replace(this.numberChars, '')), effort: item.effortExchange};
-    //   // console.log(this.effortConversionCalculation(itemNeweffortDetail));
-    //   formValue.effortExchange = this.effortConversionCalculation(itemNeweffortDetail);
 
-    // });
     formValue.startDate =
       formValue.startDate &&
       CommonUtilsService.dateToString(formValue.startDate);
