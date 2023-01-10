@@ -69,6 +69,11 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
           unitPrice: CommonUtilsService.formatCurrency(form.unitPrice)
         }, {emitEvent: false});
       }
+      if(form.budget){
+        this.formGroup.patchValue({
+          budget: CommonUtilsService.formatCurrency(form.budget)
+        }, {emitEvent: false});
+      }
     });
   }
 
@@ -120,6 +125,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   save(data) {
     data.unitPrice = data.unitPrice.replace(/,/g, '');
+    data.budget = data.budget.replace(/,/g, '');
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime);
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime);
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime);
