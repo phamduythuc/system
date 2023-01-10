@@ -158,8 +158,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     ]).subscribe(([resStaff, res]) => {
       this.loadStaffs(resStaff);
       if (this.isSuccess(res)) {
+        console.log(res.data);
 
         this.unitPrice = this.formatCurrency(res.data.unitPrice);
+
         this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
         this.revenue = this.formatCurrency(res.data.revenue);
         this.cost = this.formatCurrency(res.data.cost);
@@ -179,7 +181,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
         this.formGroup.patchValue({
           id: res.data.id,
-          unitPrice: this.unitPrice,
+          // unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
           effortExchange: res.data.effortExchange,
@@ -454,12 +456,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   onStaffChange(event: any, index: number) {
     // console.log(event);
-    // const objStaff = this.filteredList[index].find(
-    //   (x) => x.id === event.value
-    // );
-    // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
-    // this.listStaffOrigin.splice(indexStaff, 1);
-
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
@@ -488,19 +484,19 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (this.data.id) {
       this.sprintService.getOne(this.data.id).subscribe((res) => {
         if (this.isSuccess(res)) {
-          return this.formGroup.controls['unitPrice'].setValue(
+           this.formGroup.controls['unitPrice'].setValue(
             this.formatCurrency(res.data.unitPrice)
           );
         } else {
-          return this.formGroup.controls['unitPrice'].setValue(null);
+           this.formGroup.controls['unitPrice'].setValue(null);
         }
       });
     }
   }
 
-  // effortConversionCalculation(data: any){
-  //  return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
-  // }
+  effortConversionCalculation(data: any){
+   return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
+  }
 
   caculateExchange(e: any, i: number) {
     const valChangePrice = this.formGroup.value.unitPrice;
