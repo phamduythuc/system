@@ -31,7 +31,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     teamId: [],
     startMonth: [], 
     endMonth: []
-  },{validators: [creatDateRangeValidator()]});
+  },{validators: []});
   constructor(injector: Injector, public teamService: TeamService,) {
     super(injector, teamService);
   }
