@@ -49,8 +49,8 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(50)]],
-    status: [null],
-    documentType: [null],
+    status: [null,Validators.required],
+    documentType: [null,Validators.required],
     approveDate: [null,datePickerValidator()],
     effDate: [null,datePickerValidator()],
     expDate: [null,datePickerValidator()],
