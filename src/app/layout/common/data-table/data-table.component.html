@@ -74,7 +74,7 @@
                   ? column.cellRenderer(row)
                   : row[column.columnDef]
               "
-              class="customColumn"
+              class="whitespace-nowrap cell-ellipsis"
               *ngIf="
                 column.columnDef !== 'salary' && column.columnDef !== 'budget'
               "
@@ -83,7 +83,7 @@
             <div [matTooltip]="column.cellRenderer
             ? column.cellRenderer(row)
             : row[column.columnDef]"
-              class="customColumn"
+              class="whitespace-nowrap cell-ellipsis"
               *ngIf="
                 column.columnDef === 'salary' || column.columnDef === 'budget'
               "
