@@ -10,22 +10,21 @@ import { HrDocumentService } from '@shared/services/hr-document.service';
 import { CategoriesService } from '@core/categories.service';
 import { CommonUtilsService } from '@shared/common-utils.service';
 
-
 @Component({
   selector: 'app-add-or-edit-document',
   templateUrl: './add-or-edit-document.component.html',
-  styleUrls: ['./add-or-edit-document.component.scss']
+  styleUrls: ['./add-or-edit-document.component.scss'],
 })
-export class AddOrEditDocumentComponent extends BaseComponent implements OnInit {
-
+export class AddOrEditDocumentComponent
+  extends BaseComponent
+  implements OnInit
+{
   dialogId: any = null;
   documentName: any = '';
   visibleBtnUpload: boolean = true;
   documentPath: any = '';
   listDocType: any = [];
-  listDocStatus: any;
-  // docTypes: any = [];
-  // docStatus: any = [];
+  listDocStatus: any = [];
   docDetailData: any;
 
   constructor(
@@ -34,9 +33,9 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private documentService: HrDocumentService,
     private achievementService: AchievementService,
-    private categories: CategoriesService,
+    private categories: CategoriesService
   ) {
-    super(injector,documentService,dialogRef);
+    super(injector, documentService, dialogRef);
     this.dialogId = dialogData?.id;
     if (this.dialogId) {
       this.getDetails(this.dialogId);
@@ -48,18 +47,17 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(50)]],
-    status: [null,Validators.required],
-    documentType: [null,Validators.required],
-    approveDate: [null,datePickerValidator()],
-    effDate: [null,datePickerValidator()],
-    expDate: [null,datePickerValidator()],
+    status: [null, Validators.required],
+    documentType: [null, Validators.required],
+    approveDate: [null, datePickerValidator()],
+    effDate: [null, datePickerValidator()],
+    expDate: [null, datePickerValidator()],
     documentName: [''],
     documentPath: [''],
     file: [],
   });
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onChange(data){
     this.listDocType.map((x: any)=>{
@@ -71,17 +69,11 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   }
 
   getDetails(id): any {
-      this.documentService.getOne(id).subscribe(res=>{
-        if(res.code==='00'){
+    this.documentService.getOne(id).subscribe(
+      (res) => {
+        if (res.code === '00') {
           this.docDetailData = res.data;
-          if(this.docDetailData){
-            this.listDocType.map((x: any)=>{
-              console.log(x.code);
-              if(Number(x.code) === this.docDetailData.documentType){
-                this.docDetailData.documentType = x.name;
-              }
-              return x;
-            });
+          if (this.docDetailData) {
             const urlName = res.data.documentName;
             this.documentName = urlName;
             const urlFilePath = res.data.documentPath;
@@ -100,8 +92,22 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
               expDate: res.data.expDate,
 
             });
-          }
+            // console.log(this.listDocType);
 
+            // this.listDocType.map((x: any) => {
+            //   if (Number(x.code) === this.docDetailData.documentType) {
+            //     this.docDetailData.documentType = x.name;
+            //   }
+            //   return x;
+            // });
+
+            // this.listDocStatus.map((x: any) => {
+            //   if (Number(x.code) === this.docDetailData.status) {
+            //     this.docDetailData.status = x.name;
+            //   }
+            //   return x;
+            // });
+          }
         } else {
           this.documentName = '';
           this.formGroup.patchValue({
@@ -115,21 +121,30 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
             documentName: null,
           });
         }
-        });
+      },
+      (error) => {
+        this.showSnackBar(error.message, 'error');
+        this.dialogService.closeAll();
+      }
+    );
   }
 
   save() {
-
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
-    data.approveDate=data.approveDate&&CommonUtilsService.dateToString(data.approveDate);
+    data.approveDate =
+      data.approveDate && CommonUtilsService.dateToString(data.approveDate);
+
+    data.id = this.dialogData.id;
 
     formData.append('file', this.formGroup.get('file').value || null);
-    formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
-    if(this.dialogId){
-      data.id = this.dialogId;
-      this.documentService.updateDocument(formData).subscribe(res => {
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(data)], { type: 'application/json' })
+    );
+    if (this.dialogId) {
+      this.documentService.updateDocument(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.close();
@@ -137,8 +152,8 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
           this.showSnackBar(res.message, 'error');
         }
       });
-    }else{
-      this.documentService.createDocument(formData).subscribe(res => {
+    } else {
+      this.documentService.createDocument(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
           this.close();
@@ -201,13 +216,25 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   }
 
   getDocTypes() {
-    this.categories.getCategories('HR_DOCUMENT_TYPE').subscribe(res => {
-      this.listDocType = res.data;
-    });
-  }
+    this.categories
+      .getCategories('HR_DOCUMENT_TYPE')
+      .subscribe((res) => {
+        this.listDocType = res.data;
+        this.listDocType.map((x: any)=>{
+          if (Number(x.code) === this.formGroup.value.documentType) {
+            this.formGroup.controls['documentType'].setValue(x.code);
+              }
+      });
+  });
+}
   getDocStatus() {
-    this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe(res => {
+    this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe((res) => {
       this.listDocStatus = res.data;
+      this.listDocStatus.map((x: any)=>{
+        if (Number(x.code) === this.formGroup.value.status) {
+          this.formGroup.controls['status'].setValue(x.code);
+            }
+    });
     });
   }
 }
