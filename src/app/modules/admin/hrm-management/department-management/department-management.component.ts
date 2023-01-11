@@ -70,7 +70,6 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    console.log(this.searchResult);
     this.searchModel.status = 1;
     this.doSearch();
   }

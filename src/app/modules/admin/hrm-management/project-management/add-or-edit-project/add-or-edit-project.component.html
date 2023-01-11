@@ -131,7 +131,7 @@
                 ('hrm-management.project.form.partner' | transloco) + ' ...'
               "
               id="parentId"
-              formControlName="parentId"
+              formControlName="partnerId"
             >
               <mat-option
                 *ngFor="let partner of listPartner"
@@ -141,7 +141,7 @@
             </mat-select>
           </mat-form-field>
           <app-error-message
-            [control]="formGroup.get('parentId')"
+            [control]="formGroup.get('partnerId')"
             [name]="'hrm-management.project.form.partner' | transloco"
           ></app-error-message>
         </div>

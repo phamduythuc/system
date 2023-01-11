@@ -6,6 +6,7 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 import {Validators} from '@angular/forms';
 import { AddOrEditDocumentComponent } from './add-or-edit-document/add-or-edit-document.component';
 import { HrDocumentService } from '@shared/services/hr-document.service';
+import { DetailDocumentComponent } from './detail-document/detail-document.component';
 
 @Component({
   selector: 'app-document-management',
@@ -33,33 +34,33 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
       columnDef: 'name',
       header: 'hrm-management.document.form.name',
     },
-    {
-      columnDef: 'documentType',
-      header: 'hrm-management.document.form.doc_type',
-    },
-    {
-      columnDef: 'approveDate',
-      header: 'hrm-management.document.form.sub_date',
-      flex: 0.5,
-    },
-    {
-      columnDef: 'effDate',
-      header: 'hrm-management.document.form.effective_date',
-    },
-    {
-      columnDef: 'expDate',
-      header: 'hrm-management.document.form.expiration_date',
-      flex: 0.5,
-    },
-    {
-      columnDef: 'documentPath',
-      header: 'hrm-management.staff.detail.contract.link',
-      flex: 0.5,
-    },
+    // {
+    //   columnDef: 'documentType',
+    //   header: 'hrm-management.document.form.doc_type',
+    // },
+    // {
+    //   columnDef: 'approveDate',
+    //   header: 'hrm-management.document.form.sub_date',
+    //   flex: 0.5,
+    // },
+    // {
+    //   columnDef: 'effDate',
+    //   header: 'hrm-management.document.form.effective_date',
+    // },
+    // {
+    //   columnDef: 'expDate',
+    //   header: 'hrm-management.document.form.expiration_date',
+    //   flex: 0.5,
+    // },
+    // {
+    //   columnDef: 'documentPath',
+    //   header: 'hrm-management.staff.detail.contract.link',
+    //   flex: 0.5,
+    // },
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit'],
+      actions: ['view', 'edit','delete'],
       flex: 1.3,
     },
   ];
@@ -115,25 +116,25 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
   }
 
   actionClick(e: any): void {
-    switch (e.type) {
-      case 'delete':
-        this.deleteConfirmDialog(e.data.id);
-        break;
-      case 'edit':
-        this.addOrEdit(e.data.id);
-        break;
-      case 'add':
-        this.addOrEdit();
-        break;
-      // case 'view':
-      //   this.showDetail(e.data.id);
+    if (e.type === 'view') {
+      this.showDetail(e.data.id);
+      return;
+    }
+    if (e.type === 'edit') {
+      this.addOrEditDocument(e.data.id);
+      return;
+    }
+    if (e.type === 'delete') {
+      this.deleteConfirmDialog(e.data.id);
+      return;
     }
   }
 
   addOrEditDocument(id?: any): void {
-    const ref = this.showDialog(AddOrEditDocumentComponent, {
+    this.showDialog(AddOrEditDocumentComponent, {
       data: {
         id,
+        projects:this.searchResult.data
       },
       width: '60vw',
       // height: '45vh',
@@ -143,6 +144,17 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
         this.doSearch();
       }
     });
-    // ref.onclose()
+  }
+
+  showDetail(id){
+    this.showDialog(DetailDocumentComponent, {
+        data: {
+          id
+        },
+        width: '60vw',
+        height: '85vh',
+        disableClose: true
+      }
+    );
   }
 }

@@ -18,5 +18,9 @@ export class HrDocumentService extends BaseService {
   createDocument(formData: FormData): Observable<any> {
     return this.http.post(`${environment.apiUrl}/document/create`, formData);
   }
+  updateDocument(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/document/update`, formData);
+  }
+
 
 }

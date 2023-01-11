@@ -63,6 +63,12 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
 
   ngOnInit(): void {
   }
+    getDetails(id): any {
+      this.documentService.getOne(id).subscribe(res=>{
+        if(res.code==='00'){
+           console.log(res.data);}
+        });
+  }
 
   save() {
 
@@ -153,13 +159,9 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   getCategories() {
     this.categories.getCategories('HR_DOCUMENT_TYPE').subscribe(res => {
       this.listDocType = res.data;
-      console.log(this.listDocType);
-
     });
     this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe(res => {
       this.listDocStatus = res.data;
-      console.log(this.listDocStatus);
-
     });
   }
 }
