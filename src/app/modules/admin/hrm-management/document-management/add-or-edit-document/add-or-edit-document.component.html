@@ -105,6 +105,7 @@
             <mat-select
               [placeholder]="'hrm-management.document.form.doc_type' | transloco"
               formControlName="documentType"
+              (selectionChange)="onChange($event)"
             >
               <mat-option>{{
                 "hrm-management.document.form.title_none" | transloco

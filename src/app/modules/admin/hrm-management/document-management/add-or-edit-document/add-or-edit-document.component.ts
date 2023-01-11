@@ -22,13 +22,11 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
   documentName: any = '';
   visibleBtnUpload: boolean = true;
   documentPath: any = '';
-  listDocType: any;
+  listDocType: any = [];
   listDocStatus: any;
-  // file: any;
-
-
-  // statusListCate: any = ['HR_DOCUMENT_TYPE','HR_DOCUMENT_STATUS'];
-
+  // docTypes: any = [];
+  // docStatus: any = [];
+  docDetailData: any;
 
   constructor(
     injector: Injector,
@@ -43,7 +41,8 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
     if (this.dialogId) {
       this.getDetails(this.dialogId);
     }
-    this.getCategories();
+    this.getDocTypes();
+    this.getDocStatus();
   }
 
   formGroup = this.fb.group({
@@ -57,16 +56,65 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
     documentName: [''],
     documentPath: [''],
     file: [],
-    // description: [null],
-    // parentId: [null],
   });
 
   ngOnInit(): void {
   }
-    getDetails(id): any {
+
+  onChange(data){
+    this.listDocType.map((x: any)=>{
+      if(x.name === data.value){
+        this.formGroup.controls.documentType.setValue(Number(x.code));
+      }
+      return x;
+    });
+  }
+
+  getDetails(id): any {
       this.documentService.getOne(id).subscribe(res=>{
         if(res.code==='00'){
-           console.log(res.data);}
+          this.docDetailData = res.data;
+          if(this.docDetailData){
+            this.listDocType.map((x: any)=>{
+              console.log(x.code);
+              if(Number(x.code) === this.docDetailData.documentType){
+                this.docDetailData.documentType = x.name;
+              }
+              return x;
+            });
+            const urlName = res.data.documentName;
+            this.documentName = urlName;
+            const urlFilePath = res.data.documentPath;
+            this.documentPath = urlFilePath;
+
+            if (this.documentName !== '') {
+              this.visibleBtnUpload = !this.visibleBtnUpload;
+            }
+            this.formGroup.patchValue({
+              name: res.data.name,
+              code: res.data.code,
+              status: res.data.status,
+              documentType: res.data.documentType,
+              approveDate: res.data.approveDate,
+              effDate: res.data.effDate,
+              expDate: res.data.expDate,
+
+            });
+          }
+
+        } else {
+          this.documentName = '';
+          this.formGroup.patchValue({
+            name: null,
+            code: null,
+            status: null,
+            documentType: null,
+            approveDate: null,
+            effDate: null,
+            expDate: null,
+            documentName: null,
+          });
+        }
         });
   }
 
@@ -75,24 +123,20 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
     const formData = new FormData();
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
-    console.log(this.formGroup.get('file').value.name);
-
     data.approveDate=data.approveDate&&CommonUtilsService.dateToString(data.approveDate);
 
     formData.append('file', this.formGroup.get('file').value || null);
     formData.append('data', new Blob([JSON.stringify(data)], {type: 'application/json'}));
     if(this.dialogId){
       data.id = this.dialogId;
-
-      // formData.append('file', this.documentPath.file || null);
-      // this.documentService.updateContract(formData).subscribe(res => {
-      //   if ('00' === res.code) {
-      //     this.showSnackBar(res.message, 'success');
-      //     this.close();
-      //   } else {
-      //     this.showSnackBar(res.message, 'error');
-      //   }
-      // });
+      this.documentService.updateDocument(formData).subscribe(res => {
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.close();
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
     }else{
       this.documentService.createDocument(formData).subscribe(res => {
         if ('00' === res.code) {
@@ -156,10 +200,12 @@ export class AddOrEditDocumentComponent extends BaseComponent implements OnInit 
     this.dialogRef.close(this.formGroup.value);
   }
 
-  getCategories() {
+  getDocTypes() {
     this.categories.getCategories('HR_DOCUMENT_TYPE').subscribe(res => {
       this.listDocType = res.data;
     });
+  }
+  getDocStatus() {
     this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe(res => {
       this.listDocStatus = res.data;
     });

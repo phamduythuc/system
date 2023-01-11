@@ -79,6 +79,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   onChange(data){
     this.projectTypes.map((x: any)=>{
+      console.log(x);
+
       if(x.name === data.value){
         this.formGroup.controls.projectType.setValue(Number(x.code));
       }
