@@ -221,6 +221,17 @@
         "number":"Số lượng"
       }
     },
+    "time-keeping": {
+      "title": "Chấm Công",
+      "form": {
+        "member": "Thành viên",
+        "startDate": "Từ ngày",
+        "endDate": "Đến ngày",
+        "addMember": "Thêm thành viên",
+        "choose": "Chọn thành viên",
+        "number":"Số lượng"
+      }
+    },
     "contract": {
       "title": "Hợp đồng",
       "label": "Hợp đồng & Lương",
