@@ -66,20 +66,24 @@
           >
           </ng-container>
           <ng-template #defaultRowTemplate>
-            <div
+            <div [matTooltip]="column.cellRenderer
+            ? column.cellRenderer(row)
+            : row[column.columnDef]"
               [innerHTML]="
                 column.cellRenderer
                   ? column.cellRenderer(row)
                   : row[column.columnDef]
               "
-              class="whitespace-nowrap"
+              class="customColumn"
               *ngIf="
                 column.columnDef !== 'salary' && column.columnDef !== 'budget'
               "
             ></div>
 
-            <div
-              class="whitespace-nowrap"
+            <div [matTooltip]="column.cellRenderer
+            ? column.cellRenderer(row)
+            : row[column.columnDef]"
+              class="customColumn"
               *ngIf="
                 column.columnDef === 'salary' || column.columnDef === 'budget'
               "

@@ -22,7 +22,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       header: 'common.stt',
     },
     {
-      columnDef: 'staffId',
+      columnDef: 'staffCode',
       header: 'hrm-management.salary.staffID',
       flex: 1,
     },
