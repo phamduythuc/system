@@ -9,6 +9,7 @@ import { datePickerValidator } from '@shared/validation/date-picker.validation';
 import { HrDocumentService } from '@shared/services/hr-document.service';
 import { CategoriesService } from '@core/categories.service';
 import { CommonUtilsService } from '@shared/common-utils.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-or-edit-document',
@@ -40,8 +41,9 @@ export class AddOrEditDocumentComponent
     if (this.dialogId) {
       this.getDetails(this.dialogId);
     }
-    this.getDocTypes();
-    this.getDocStatus();
+    // this.getDocTypes();
+    // this.getDocStatus();
+    this.getTypeAndStatus();
   }
 
   formGroup = this.fb.group({
@@ -71,6 +73,7 @@ export class AddOrEditDocumentComponent
   getDetails(id): any {
     this.documentService.getOne(id).subscribe(
       (res) => {
+
         if (res.code === '00') {
           this.docDetailData = res.data;
           if (this.docDetailData) {
@@ -121,12 +124,7 @@ export class AddOrEditDocumentComponent
             documentName: null,
           });
         }
-      },
-      (error) => {
-        this.showSnackBar(error.message, 'error');
-        this.dialogService.closeAll();
-      }
-    );
+      });
   }
 
   save() {
@@ -215,26 +213,44 @@ export class AddOrEditDocumentComponent
     this.dialogRef.close(this.formGroup.value);
   }
 
-  getDocTypes() {
-    this.categories
-      .getCategories('HR_DOCUMENT_TYPE')
-      .subscribe((res) => {
-        this.listDocType = res.data;
-        this.listDocType.map((x: any)=>{
-          if (Number(x.code) === this.formGroup.value.documentType) {
-            this.formGroup.controls['documentType'].setValue(x.code);
-              }
-      });
-  });
-}
-  getDocStatus() {
-    this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe((res) => {
-      this.listDocStatus = res.data;
-      this.listDocStatus.map((x: any)=>{
-        if (Number(x.code) === this.formGroup.value.status) {
-          this.formGroup.controls['status'].setValue(x.code);
+//   getDocTypes() {
+//     this.categories
+//       .getCategories('HR_DOCUMENT_TYPE')
+//       .subscribe((res) => {
+//         this.listDocType = res.data;
+//       //   this.listDocType.map((x: any)=>{
+//       //     if (Number(x.code) === this.formGroup.value.documentType) {
+//       //       this.formGroup.controls['documentType'].setValue(x.code);
+//       //         }
+//       // });
+//   });
+// }
+//   getDocStatus() {
+//     this.categories.getCategories('HR_DOCUMENT_STATUS').subscribe((res) => {
+//       this.listDocStatus = res.data;
+//     //   this.listDocStatus.map((x: any)=>{
+//     //     if (Number(x.code) === this.formGroup.value.status) {
+//     //       this.formGroup.controls['status'].setValue(x.code);
+//     //         }
+//     // });
+//     });
+//   }
+getTypeAndStatus(){
+
+  forkJoin([this.categories.getCategories('HR_DOCUMENT_TYPE'), this.categories.getCategories('HR_DOCUMENT_STATUS'),
+]).subscribe(([docT, docSta]) => {
+  this.listDocType = docT.data;
+  this.listDocType.map((x: any)=>{
+        if (Number(x.code) === this.formGroup.value.documentType) {
+          this.formGroup.controls['documentType'].setValue(x.code);
             }
     });
-    });
-  }
+    this.listDocStatus = docSta.data;
+    this.listDocStatus.map((x: any)=>{
+      if (Number(x.code) === this.formGroup.value.status) {
+        this.formGroup.controls['status'].setValue(x.code);
+          }
+  });
+});
+}
 }
