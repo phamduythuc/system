@@ -31,7 +31,7 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     teamId: [],
     startMonth: [], 
     endMonth: []
-  },{validators: []});
+  },{validators: [creatDateRangeValidator()]});
   constructor(injector: Injector, public teamService: TeamService,) {
     super(injector, teamService);
   }
@@ -55,12 +55,12 @@ export class TeamKpiComponent extends BaseComponent implements OnInit {
     if (type === 'startDate') {
       this.searchStartDate = moment(ctrlValue).format("01/MM/YYYY");
       this.formSearchKpi.patchValue({
-        startMonth: ctrlValue,
+        startMonth: moment(ctrlValue),
       });     
     }
     else {
       this.formSearchKpi.patchValue({
-        endMonth: ctrlValue,
+        endMonth: moment(ctrlValue),
       });
       this.searchEndDate = moment(ctrlValue).format("01/MM/YYYY");
     }
