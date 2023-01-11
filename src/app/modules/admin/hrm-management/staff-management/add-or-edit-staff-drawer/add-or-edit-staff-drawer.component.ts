@@ -174,7 +174,6 @@ export class AddOrEditStaffDrawerComponent
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
         this.convertBase64(imageUrl);
         // alert("aaa")
-        console.log(this.detailsData);
         this.formGroup.patchValue(this.detailsData);
       });
     }
@@ -200,9 +199,6 @@ export class AddOrEditStaffDrawerComponent
     });
     this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       this.listStaffLevels = res.data;
-      console.log(this.listStaffLevels);
-      
-      
     });
     this.staffService.getListDepartment(this.option).subscribe((res) => {
       this.listDepartment = res.data;
@@ -281,7 +277,7 @@ export class AddOrEditStaffDrawerComponent
       pageSize: 9999999,
     }).subscribe(res=>{
       this.listTeam = res.data
-      this.formGroup.value.teamId = this.listTeam[0].id
+
       this.formGroup.patchValue(this.formGroup.value);
     });
 

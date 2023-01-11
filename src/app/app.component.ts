@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     // this.getList()
 
     // this.getList();
-
   }
 
   checkLoginSSO(): void {
@@ -52,50 +51,49 @@ export class AppComponent implements OnInit {
       });
     }
   }
-list = ['CONTACT_TYPE','CONTRACT_STATUS','GENDER']
-value:any
+  list = ['CONTACT_TYPE', 'CONTRACT_STATUS', 'GENDER', 'PARAMETER_TYPE'];
+  value: any;
   getList() {
-    let data:any = {}
-      this.list.map((x:any,i:any,length:any)=>{
-          this.getCategories(x,()=>{
-            data[x] = this.value
-          })
-     
-      })
+    let data: any = {};
+    this.list.map((x: any, i: any, length: any) => {
+      this.getCategories(x, () => {
+        data[x] = this.value;
+      });
+    });
 
-      data.genders = [
-          {
-            name: this.translocoService.translate('gender.female'),
-            code: 1,
-          },
-          {
-            name: this.translocoService.translate('gender.male'),
-            code: 2,
-          },
-          {
-            name: this.translocoService.translate('gender.other'),
-            code: 3,
-          }
-        ];
+    data.genders = [
+      {
+        name: this.translocoService.translate('gender.female'),
+        code: 1,
+      },
+      {
+        name: this.translocoService.translate('gender.male'),
+        code: 2,
+      },
+      {
+        name: this.translocoService.translate('gender.other'),
+        code: 3,
+      },
+    ];
 
-        data.LIST_STATUS = [
-          {
-            type: '1',
-            name: 'setting.listStatus.active',
-          },
-          {
-            type: '2',
-            name: 'setting.listStatus.notActive',
-          },
-          {
-            type: '',
-            name: 'setting.listStatus.all',
-          }
-        ];
+    data.LIST_STATUS = [
+      {
+        type: '1',
+        name: 'setting.listStatus.active',
+      },
+      {
+        type: '2',
+        name: 'setting.listStatus.notActive',
+      },
+      {
+        type: '',
+        name: 'setting.listStatus.all',
+      },
+    ];
 
-      setTimeout(() => {
-        localStorage.setItem('listType', JSON.stringify(data));
-      }, 500);
+    setTimeout(() => {
+      localStorage.setItem('listType', JSON.stringify(data));
+    }, 500);
 
     // this.CategoriesService.getCategories('CONTACT_TYPE').subscribe((res) => {
     //   res.data.map(x=>{
@@ -114,23 +112,21 @@ value:any
     //   data.CONTRACT_STATUS = res.data;
     //   localStorage.setItem('listType', JSON.stringify(data));
     // });
-
   }
 
-  getCategories(data,callback?){
-  
+  getCategories(data, callback?) {
+    console.log(data);
     this.CategoriesService.getCategories(data).subscribe((res) => {
-      res.data.map(x=>{
-        x.code = Number(x.code)
-        return x
-      })
-      this.value = res.data
-      if(callback){
+      res.data.map((x) => {
+        if (data != 'PARAMETER_TYPE') {
+          x.code = Number(x.code);
+        }
+        return x;
+      });
+      this.value = res.data;
+      if (callback) {
         callback(this.value);
       }
-
-      // localStorage.setItem('listType', JSON.stringify(data));
     });
-    
   }
 }

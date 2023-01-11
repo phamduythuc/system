@@ -277,8 +277,23 @@
       "form": {
         "name": "Tên báo cáo",
         "code": "Mã báo cáo",
-        "description": "Mô tả"
+        "description": "Mô tả",
+        "startRow": "Start row",
+        "startCol": "Start col",
+        "sql": "Sql",
+        "comment": "Comment",
+        "listParam": "Danh sách tham số",
+        "paramName": "Tên tham số",
+        "paramType": "Kiểu dữ liệu",
+        "paramValue": "Giá trị"
+      },
+      "detail":{
+        "downloadTemplate": "Tải template",
+        "viewReports": "Xem báo cáo",
+        "downloadReports": "Tải báo cáo",
+        "listSheet": "Danh sách các sheet"
       }
+      
     }
   },
   "message": {
