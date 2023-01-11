@@ -37,6 +37,7 @@
       "view": "Xem"
     },
     "keyword": "Từ khóa",
+    "keySearch" : "Từ khóa theo Tên, Mã",
     "fromMonth": "Từ tháng",
     "team": "Nhóm",
     "toMonth": "Đến tháng",

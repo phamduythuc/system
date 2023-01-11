@@ -23,7 +23,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'hrm-management.department.form.name',
       flex: 0.3,
     },
     {

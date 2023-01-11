@@ -128,9 +128,9 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       false
     );
     const params = {
-      month: month,
+      month: month,   
       page: 0,
-      pageSize: 10,
+      pageSize: 30,
       status: 1,
       
     };

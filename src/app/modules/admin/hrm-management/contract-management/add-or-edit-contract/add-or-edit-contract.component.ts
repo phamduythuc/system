@@ -10,6 +10,7 @@ import {distinctUntilChanged} from 'rxjs/operators';
 import { DateAdapter } from '@angular/material/core';
 
 
+
 @Component({
   selector: 'app-add-or-edit-contract',
   templateUrl: './add-or-edit-contract.component.html',
@@ -158,5 +159,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     // this.drawer?.toggle();
     this.dialogRef.close(this.formGroup.value);
   }
-
+  formatSalary(e) {
+    console.log(e)
+  }
 }
