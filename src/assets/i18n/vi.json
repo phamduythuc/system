@@ -282,6 +282,8 @@
         "startRow": "Start row",
         "startCol": "Start col",
         "sql": "Sql",
+        "sheetOrder": "Vị trí sheet",
+        "addParam": "Thêm tham số",
         "comment": "Comment",
         "listParam": "Danh sách tham số",
         "paramName": "Tên tham số",
