@@ -91,3 +91,24 @@ body{
   font-size:16px;
   white-space: pre-line
 }
+
+// .mat-cell {
+//   padding: 0 10px 0 0 !important;
+// }
+// .text-ellipsis-1{
+//   overflow: hidden;
+//     text-overflow: ellipsis;
+//     line-height: 25px;
+//     -webkit-line-clamp: 1;
+//     height: 25px;
+//     display: -webkit-box;
+// }
+
+.text-ellipsis-2{
+  overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    height: 50px;
+    display: -webkit-box;
+}

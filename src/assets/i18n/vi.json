@@ -37,6 +37,7 @@
       "view": "Xem"
     },
     "keyword": "Từ khóa",
+    "keySearch" : "Từ khóa theo Tên, Mã",
     "fromMonth": "Từ tháng",
     "team": "Nhóm",
     "toMonth": "Đến tháng",
@@ -277,8 +278,23 @@
       "form": {
         "name": "Tên báo cáo",
         "code": "Mã báo cáo",
-        "description": "Mô tả"
+        "description": "Mô tả",
+        "startRow": "Start row",
+        "startCol": "Start col",
+        "sql": "Sql",
+        "comment": "Comment",
+        "listParam": "Danh sách tham số",
+        "paramName": "Tên tham số",
+        "paramType": "Kiểu dữ liệu",
+        "paramValue": "Giá trị"
+      },
+      "detail":{
+        "downloadTemplate": "Tải template",
+        "viewReports": "Xem báo cáo",
+        "downloadReports": "Tải báo cáo",
+        "listSheet": "Danh sách các sheet"
       }
+      
     }
   },
   "message": {
@@ -302,7 +318,8 @@
     "error_9": "Mật khẩu không khớp !",
     "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
     "textPattern_2": "Vui lòng nhập ký tự số",
-    "notFound": "Không tìm thấy bản ghi"
+    "notFound": "Không tìm thấy bản ghi",
+    "error_10":"Ngày bắt đầu phải nhỏ hơn ngày kết thúc"
   },
   "effort": {
     "title": "Thông tin giai đoạn",

@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
-import { StaffService } from '@shared/services/staff.service';
+import  { SalaryService } from '@shared/services/salary.service';
 import moment, { Moment } from 'moment';
 
 import { DateAdapter } from '@angular/material/core';
@@ -22,7 +22,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       header: 'common.stt',
     },
     {
-      columnDef: 'staffId',
+      columnDef: 'staffCode',
       header: 'hrm-management.salary.staffID',
       flex: 1,
     },
@@ -46,28 +46,22 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     startMonth: [moment().startOf('month'), Validators.required],
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0,
-  };
-
+  
   listUser: any = [];
   basicListUser: any = [];
 
   constructor(
     injector: Injector,
-    public StaffService: StaffService,
+    public SalaryService: SalaryService,
     private _adapter: DateAdapter<any>
   ) {
-    super(injector, StaffService);
-    this.getListUser();
+    super(injector, SalaryService);
+    this.view();
   }
 
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.view();
-
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
     });
@@ -97,11 +91,11 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     this.processSearch(this.searchModel, () => {});
   }
 
-  getListUser() {
-    this.StaffService.getListAllUser().subscribe((res: any) => {
-      this.listUser = res.data;
-    });
-  }
+  // getListUser() {
+  //   this.SalaryService.getViewSalarybyMonth().subscribe((res: any) => {
+  //     this.listUser = res.data;
+  //   });
+  // }
 
   getListCategories() {
     return JSON.parse(localStorage.getItem('listType'));
@@ -134,10 +128,15 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       false
     );
     const params = {
-      month: month,
+      month: month,   
+      page: 0,
+      pageSize: 10,
+      status: 1,
+      
     };
-    this.StaffService.getViewSalarybyMonth(params).subscribe((res) => {
+    this.SalaryService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
+        this.searchResult.totalRecords = res.totalRecords;
         const VND = new Intl.NumberFormat('vi-VN', {
           style: 'currency',
           currency: 'VND',
@@ -177,7 +176,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     };
     console.log(params);
 
-    this.StaffService.saveSalary(params).subscribe((res) => {
+    this.SalaryService.saveSalary(params).subscribe((res) => {
       if (res.code === '00') {
         this.showSnackBar(res.message, 'success');
         this.view();

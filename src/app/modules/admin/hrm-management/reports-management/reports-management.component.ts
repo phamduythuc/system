@@ -10,9 +10,12 @@ import { DetailReportsComponent } from './detail-reports/detail-reports.componen
 @Component({
   selector: 'app-reports-management',
   templateUrl: './reports-management.component.html',
-  styleUrls: ['./reports-management.component.scss']
+  styleUrls: ['./reports-management.component.scss'],
 })
-export class ReportsManagementComponent extends BaseComponent implements OnInit {
+export class ReportsManagementComponent
+  extends BaseComponent
+  implements OnInit
+{
   _permissionCodeName = 'DSTV';
 
   columns: IColumn[] = [
@@ -36,43 +39,42 @@ export class ReportsManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.createdDate),
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.modifiedDate),
     },
     {
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view', 'edit', 'delete'],
-    }
+    },
   ];
 
   formSearch = this.fb.group({
-    keyword: ['',Validators.maxLength(100)],
+    keyword: ['', Validators.maxLength(100)],
   });
 
   paginate = {
     page: 0,
     size: 10,
-    total: 0
+    total: 0,
   };
   positions = [];
   panelOpenState: boolean = false;
 
-  list_status = []
+  list_status = [];
 
   typeStatus = '1';
 
-
-  constructor(injector: Injector,
-              private ReportsService: ReportsService) {
+  constructor(injector: Injector, private ReportsService: ReportsService) {
     super(injector, ReportsService);
 
     this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
-
   }
 
   ngOnInit(): void {
@@ -80,53 +82,59 @@ export class ReportsManagementComponent extends BaseComponent implements OnInit 
     this.doSearch();
   }
 
-  filterStatus(data){
-    if(data){
+  filterStatus(data) {
+    if (data) {
       this.searchModel.status = Number(data);
-    }else{
-    this.searchModel.status = '';
+    } else {
+      this.searchModel.status = '';
     }
     this.doSearch();
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel,page: 0, ...this.formSearch.value};
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
     // this.processSearch(this.searchModel);
-    
+
     this.searchResult.data = [
       {
-        name: "Tên báo cáo 1",
-        code: "QĐ_01",
-        description: "Mô tả báo cáo 1",
-        createdDate:"1673000041000",
-        modifiedDate:"1673002041000"
+        id: 1,
+        name: 'Tên báo cáo 1',
+        code: 'QĐ_01',
+        description: 'Mô tả báo cáo 1',
+        createdDate: '1673000041000',
+        modifiedDate: '1673002041000',
       },
       {
-        name: "Tên báo cáo 5",
-        code: "QĐ_02",
-        description: "Mô tả báo cáo 1 222",
-        createdDate:"1673000041000",
-        modifiedDate:"1673002041000"
+        id: 1,
+        name: 'Tên báo cáo 5',
+        code: 'QĐ_02',
+        description: 'Mô tả báo cáo 1 222',
+        createdDate: '1673000041000',
+        modifiedDate: '1673002041000',
       },
       {
-        name: "Tên báo cáo 6",
-        code: "QĐ_04",
-        description: "Mô tả báo cáo 13 33",
-        createdDate:"1673000041000",
-        modifiedDate:"1673002041000"
+        id: 1,
+        name: 'Tên báo cáo 6',
+        code: 'QĐ_04',
+        description: 'Mô tả báo cáo 13 33',
+        createdDate: '1673000041000',
+        modifiedDate: '1673002041000',
       },
       {
-        name: "Tên báo cáo 20",
-        code: "QĐ_07",
-        description: "Mô tả báo cáo 144 ",
-        createdDate:"1673000041000",
-        modifiedDate:"1673002041000"
-      }
+        id: 1,
+        name: 'Tên báo cáo 20',
+        code: 'QĐ_07',
+        description: 'Mô tả báo cáo 144 ',
+        createdDate: '1673000041000',
+        modifiedDate: '1673002041000',
+      },
     ];
-      this.searchResult.totalRecords = this.searchResult.data.length;
-      this.pageIndex = 1;
-
-    
+    this.searchResult.totalRecords = this.searchResult.data.length;
+    this.pageIndex = 1;
   }
 
   actionClick(e: any): void {
@@ -143,29 +151,43 @@ export class ReportsManagementComponent extends BaseComponent implements OnInit 
 
   showDetail(id) {
     this.showDialog(DetailReportsComponent, {
-        data: {
-          id
-        },
-        width: '60vw',
-        // height: '45vh',
-        disableClose: false
-      }
-    );
-  }
-
-  addOrEditPosition(id?: any): void {
-    const ref = this.showDialog(AddOrEditReportsComponent, {
       data: {
         id,
+        data: {
+          name: 'Tên báo cáo 20',
+          code: 'QĐ_07',
+          description: 'Mô tả báo cáo 144 ',
+          createdDate: '1673000041000',
+          modifiedDate: '1673002041000',
+          contractFilePath: 'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
+          contractFilePathDemo: 'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
+          documentName: 'LU. Đánh giá sau ĐT.docx'
+        },
       },
       width: '60vw',
       // height: '45vh',
-      disableClose: false
-    }, (value) => {
-      if (value) {
-        this.doSearch();
-      }
+      disableClose: false,
     });
+  }
+
+  addOrEditPosition(id?: any): void {
+    const ref = this.showDialog(
+      AddOrEditReportsComponent,
+      {
+        data: {
+          id,
+        },
+        width: '60vw',
+        // height: '45vh',
+        disableClose: false,
+        maxHeight: '90vh'
+      },
+      (value) => {
+        if (value) {
+          this.doSearch();
+        }
+      }
+    );
     // ref.onclose()
   }
 }

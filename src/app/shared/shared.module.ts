@@ -27,6 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSelectFilterModule } from 'mat-select-filter';
+import { TextSlicePipe } from './directives/text-slice.pipe';
+
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -61,6 +63,7 @@ export const MAT_MODULES = [
         ConfirmDialogComponent,
         DatePickerFormatDirective,
         ChartLineComponent,
+        TextSlicePipe
     ],
   exports: [
     CommonModule,
@@ -73,6 +76,7 @@ export const MAT_MODULES = [
     ...MAT_MODULES,
     DatePickerFormatDirective,
     ChartLineComponent,
+    TextSlicePipe
   ]
 })
 export class SharedModule {

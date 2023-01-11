@@ -23,7 +23,7 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'common.name_position',
       flex: 0.3,
     },
     {

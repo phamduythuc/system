@@ -5,13 +5,17 @@ import { RouterModule } from '@angular/router';
 import { DetailReportsComponent } from './detail-reports/detail-reports.component';
 import { SharedModule } from '@shared/shared.module';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
+import { AddOrEditReportsComponent } from './add-or-edit-reports/add-or-edit-reports.component';
+import { ListParamReportsComponent } from './add-or-edit-reports/list-param-reports/list-param-reports.component';
 
 
 
 @NgModule({
   declarations: [
     ReportsManagementComponent,
-    DetailReportsComponent
+    DetailReportsComponent,
+    AddOrEditReportsComponent,
+    ListParamReportsComponent
   ],
   imports: [
     CommonModule,

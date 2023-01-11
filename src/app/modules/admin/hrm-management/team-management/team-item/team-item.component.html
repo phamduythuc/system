@@ -3,16 +3,16 @@
         <form [formGroup]="formGroup">
             <!-- Team Name -->
             <div class="w-full flex justify-between py-2 border-gray-400 border-b-2">
-                <div class="flex">
+                <div class="flex w-7/12">
                     <mat-label class="font-bold capitalize">{{team.name + ' ' + '(' + totalMember + ' ' +
                         ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label>
                 </div>
 
                 <!-- status -->
                 <div *ngIf="team.status==1; else template1">
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between flex-nowrap items-center">
                         <mat-label class="font-bold capitalize mr-3">{{'common.activing'|transloco}}</mat-label>
-                        <div class="w-4 h-4 bg-green-600 rounded-lg"></div>
+                        <div class="w-4 min-h-4 bg-green-600 rounded-lg"></div>
                     </div>
                 </div>
                 <ng-template #template1>

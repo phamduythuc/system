@@ -57,12 +57,4 @@ export class StaffService extends BaseService {
   getListTeam(searchData): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/team`, {params: searchData});
   };
-
-  // Api salary 
-  getViewSalarybyMonth(params): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/salary/get-by-month`, {params: params});
-  }
-  saveSalary(params): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/salary`, params);
-  }
 }
