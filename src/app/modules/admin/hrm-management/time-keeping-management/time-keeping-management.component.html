@@ -1,0 +1,65 @@
+<ng-container *transloco="let t">
+    <div class="flex-col w-full h-full px-4">
+        <mat-card class="bg-card h-full">
+            <!-- header -->
+            <div class="header border-b flex flex-wrap justify-between w-full">
+                <div class="flex justify-between w-3/5">
+                    <div class="w-full">
+                        <form [formGroup]="formSearch">
+                            <div class="flex w-full ">
+                                <!-- search box -->
+                                <div class="w-full">
+                                    <mat-form-field appearance="fill" class="w-full">
+                                        <input matInput [formControlName]="'keyword'">
+                                    </mat-form-field>
+                                </div>
+
+
+                                <!-- button search -->
+                                <div class="px-3">
+                                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button
+                                        color="primary" (click)="doSearch()">
+                                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:search"></mat-icon>
+                                        {{t('button.search')}}
+                                    </button>
+                                </div>
+
+
+                                <!-- view option seaarch -->
+                                <div class="w-2/6">
+                                    <mat-form-field class="w-full">
+                                        <mat-select [formControlName]="'option'"
+                                            (selectionChange)="onStatusChange($event)">
+                                            <mat-option value="">{{'common.all'|transloco}}</mat-option>
+                                            <mat-option value="2">{{'common.notActive'|transloco}}</mat-option>
+                                            <mat-option value="1">{{'common.activing'|transloco}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- button -->
+                <div class="mb-2 flex justify-end">
+                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
+                        (click)="importFile()">
+                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
+                        {{t('button.new')}}
+                    </button>
+                </div>
+            </div>
+            <div class="flex w-full h-full pt-7">
+                <div class="w-1/5 bg-gray-500 h-full ">
+                    <app-list-staff></app-list-staff>
+                </div>
+                <div class="w-4/5 h-full">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</ng-container>

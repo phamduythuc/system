@@ -1,0 +1,7 @@
+<ng-container *transloco="let t">
+    <mat-list>
+        <mat-list-item *ngFor="let staff of searchResult.data">
+            <a [routerLink]="['staff', staff.id]">{{staff.fullName}}</a>
+        </mat-list-item>
+    </mat-list>
+</ng-container>

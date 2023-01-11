@@ -25,6 +25,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { DocumentManagementComponent } from './document-management/document-management.component';
+import { TimeKeepingManagementModule } from './time-keeping-management/time-keeping-management.module';
+import { TimeKeepingManagementComponent } from './time-keeping-management/time-keeping-management.component';
 
 
 @NgModule({
@@ -36,7 +38,7 @@ import { DocumentManagementComponent } from './document-management/document-mana
     StaffManagementComponent,
     TeamManagementComponent,
     RoleManagementComponent,
-    DocumentManagementComponent
+    DocumentManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { DocumentManagementComponent } from './document-management/document-mana
     StaffManagementModule,
     RoleManagementModule,
     MatPaginatorModule,
+    TimeKeepingManagementModule
 
   ],
 })

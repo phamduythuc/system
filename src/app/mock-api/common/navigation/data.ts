@@ -138,6 +138,19 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ],
       },
       {
+        id: 'time-keeping',
+        title: 'hrm-management.team.title',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/hrm-management/time-keeping',
+        role: [
+          AuthoritiesConstant.DSTV_READ,
+          AuthoritiesConstant.DSTV_UPDATE,
+          AuthoritiesConstant.DSTV_DELETE,
+          AuthoritiesConstant.DSTV_READ,
+        ],
+      },
+      {
         id: 'reports',
         title: 'hrm-management.reports.title',
         type: 'basic',
