@@ -60,7 +60,7 @@ value:any
           this.getCategories(x,()=>{
             data[x] = this.value
           })
-     
+
       })
 
       data.genders = [
@@ -118,7 +118,7 @@ value:any
   }
 
   getCategories(data,callback?){
-  
+
     this.CategoriesService.getCategories(data).subscribe((res) => {
       res.data.map(x=>{
         x.code = Number(x.code)
@@ -131,6 +131,6 @@ value:any
 
       // localStorage.setItem('listType', JSON.stringify(data));
     });
-    
+
   }
 }

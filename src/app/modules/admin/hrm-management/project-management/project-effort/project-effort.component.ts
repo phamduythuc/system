@@ -270,6 +270,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   save() {
     const formData = new FormData();
     const formValue = this.formGroup.value;
+
     this.handleCoverTimeToString(formValue);
 
     const valUnitPrice = formValue.unitPrice;
