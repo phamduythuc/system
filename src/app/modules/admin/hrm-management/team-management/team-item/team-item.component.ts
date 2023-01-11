@@ -129,7 +129,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   onDateChange(e: any) {
     const x = moment(new Date(e)).format("01/MM/YYYY").toString();
     this.searchDetail = {
-      teamId: 5,
+      teamId: this.team.id,
       month: x
     }
     this.formGroup = this.fb.group({

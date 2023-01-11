@@ -278,8 +278,23 @@
       "form": {
         "name": "Reports name",
         "code": "Reports code",
-        "description": "Reports description"
+        "description": "Reports description",
+        "startRow": "Start row",
+        "startCol": "Start col",
+        "sql": "Sql",
+        "comment": "Comment",
+        "listParam": "List parameters",
+        "paramName": "Param name",
+        "paramType": "Param type",
+        "paramValue": "Value"
+      },
+      "detail":{
+        "downloadTemplate": "Download template",
+        "viewReports": "View reports",
+        "downloadReports": "Download reports",
+        "listSheet": "List sheet"
       }
+      
     }
   },
   "contract": {
