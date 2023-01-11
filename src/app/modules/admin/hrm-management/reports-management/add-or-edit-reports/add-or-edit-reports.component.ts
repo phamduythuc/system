@@ -13,6 +13,7 @@ import FileSaver from 'file-saver';
   styleUrls: ['./add-or-edit-reports.component.scss'],
 })
 export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
+  
   _permissionCodeName = 'DSDA';
 
   columns: IColumn[] = [
@@ -27,16 +28,19 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
     },
     {
       columnDef: 'startRow',
-      header: 'Start row',
+      header: 'hrm-management.reports.form.startRow',
     },
-   
     {
       columnDef: 'startCol',
-      header: 'Start column',
+      header: 'hrm-management.reports.form.startCol',
     },
     {
       columnDef: 'sql',
-      header: 'Sql',
+      header: 'hrm-management.reports.form.sql',
+    },
+    {
+      columnDef: 'comment',
+      header: 'hrm-management.reports.form.comment',
     },
     {
       columnDef: 'actionCustom',
@@ -96,17 +100,47 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
         documentName: 'LU. Đánh giá sau ĐT.docx',
         sheetData: [
           {
-       
-              name: 'Doanh thu thang 1',
-              sql: 'Select * from doanhthu',
-              startRow: 2,
-              startCol: 5,
+            name: 'Doanh thu thang 1',
+            sql: 'Select * from doanhthu',
+            startRow: 2,
+            startCol: 5,
+            comment:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+            listParam: [
+              {
+                id: 11,
+                name: 'name',
+                type: 'STRING',
+                value: 'Doanh thu',
+              },
+              {
+                id: 12,
+                name: 'createdDate',
+                type: 'DATETIME',
+                value: '01/01/2023',
+              },
+            ],
           },
           {
-              name: 'Doanh thu thang 2',
-              sql: 'Select * from doanhthu',
-              startRow: 1,
-              startCol: 8,
+            name: 'Doanh thu thang 2',
+            sql: 'Select * from doanhthu',
+            startRow: 1,
+            startCol: 8,
+            comment: 'Lorem Ipsum is simply dummy text ',
+            listParam: [
+              {
+                id: 11,
+                name: 'Age',
+                type: 'NUMBER',
+                value: '18',
+              },
+              {
+                id: 12,
+                name: 'createdDate',
+                type: 'DATETIME',
+                value: '01/01/2023',
+              },
+            ],
           },
         ],
       };
@@ -116,21 +150,17 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
       this.detailsData.sheetData.map((x) => {
         this.efforts.push(this.newItem(x));
       });
-      console.log(this.detailsData);
-
+      
       this.formGroup.patchValue(this.detailsData);
-
       // });
     }
   }
 
   ngOnInit(): void {
-    console.log(this.efforts.value);
   }
 
   save() {
     console.log(this.formGroup.value);
-    
   }
 
   get efforts(): FormArray {
@@ -143,6 +173,8 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
       sql: [data.sql],
       startRow: [data.startRow],
       startCol: [data.startCol],
+      comment: [data.comment],
+      listParam: [data.listParam],
     });
   }
 

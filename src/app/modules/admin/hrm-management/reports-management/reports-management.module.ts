@@ -6,6 +6,7 @@ import { DetailReportsComponent } from './detail-reports/detail-reports.componen
 import { SharedModule } from '@shared/shared.module';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { AddOrEditReportsComponent } from './add-or-edit-reports/add-or-edit-reports.component';
+import { ListParamReportsComponent } from './add-or-edit-reports/list-param-reports/list-param-reports.component';
 
 
 
@@ -13,7 +14,8 @@ import { AddOrEditReportsComponent } from './add-or-edit-reports/add-or-edit-rep
   declarations: [
     ReportsManagementComponent,
     DetailReportsComponent,
-    AddOrEditReportsComponent
+    AddOrEditReportsComponent,
+    ListParamReportsComponent
   ],
   imports: [
     CommonModule,
