@@ -289,7 +289,7 @@
     "textPattern_1": "Please only enter the letters without accents, numbers and signs  \"_\"",
     "textPattern_2": "Please enter the number",
     "notFound": "Data not found",
-    "error_10":"Date start must be less than Date end",
+    "error_10":"Date start must be less than Date end"
   },
   "effort": {
     "title": "Stage Information",
