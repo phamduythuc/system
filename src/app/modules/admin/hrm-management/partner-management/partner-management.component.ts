@@ -23,7 +23,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'common.name_partner',
       flex: 0.3,
     },
     {
@@ -57,7 +57,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     }
   ];
   formSearch = this.fb.group({
-    name: [''],
+    keyword: [''],
     address: [''],
     // phone: ['']
   });

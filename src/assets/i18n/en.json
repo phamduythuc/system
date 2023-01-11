@@ -38,6 +38,7 @@
       "view": "View"
     },
     "keyword": "Keyword",
+    "keySearch" : "Keyword by Name, Code",
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",

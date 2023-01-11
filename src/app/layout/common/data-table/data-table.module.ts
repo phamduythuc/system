@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {SharedModule} from '@shared/shared.module';
 import {NumberCustomPipe} from '@shared/directives/number-pipe.pipe';
 import {NumberToStringPipe} from '@shared/directives/number-to-string.pipe';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import {NumberToStringPipe} from '@shared/directives/number-to-string.pipe';
         MatButtonModule,
         MatIconModule,
         MatPaginatorModule,
-        SharedModule
+        SharedModule,
+        MatTooltipModule
     ]
 })
 export class DataTableModule {
