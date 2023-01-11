@@ -87,10 +87,10 @@
               <mat-option>{{
                 "hrm-management.document.form.title_none" | transloco
               }}</mat-option>
-              <!-- <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option> -->
+              <mat-option *ngFor="let dept of listDocStatus" [value]="dept?.code">{{dept?.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <app-error-message [control]="formGroup.get('parentId')" [name]="('hrm-management.department.form.parent' | transloco)"></app-error-message> -->
+          <app-error-message [control]="formGroup.get('status')" [name]="('hrm-management.document.form.status' | transloco)"></app-error-message>
         </div>
       </div>
       <div class="w-1/2 flex">
@@ -104,15 +104,16 @@
           >
             <mat-select
               [placeholder]="'hrm-management.document.form.doc_type' | transloco"
-              formControlName="typeDoc"
+              formControlName="documentType"
+              (selectionChange)="onChange($event)"
             >
               <mat-option>{{
                 "hrm-management.document.form.title_none" | transloco
               }}</mat-option>
-              <!-- <mat-option *ngFor="let dept of departments" [value]="dept?.id">{{dept?.name}}</mat-option> -->
+              <mat-option *ngFor="let dept of listDocType" [value]="dept?.code">{{dept?.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <app-error-message [control]="formGroup.get('typeDoc')" [name]="('hrm-management.department.form.parent' | transloco)"></app-error-message> -->
+          <app-error-message [control]="formGroup.get('documentType')" [name]="('hrm-management.document.form.doc_type' | transloco)"></app-error-message>
         </div>
       </div>
     </div>
@@ -126,17 +127,17 @@
             <input
               class=" "
               matInput
-              [matDatepicker]="signDate"
+              [matDatepicker]="approveDate"
               datePickerFormat="DD/MM/YYYY"
-              [formControlName]="'signDate'"
+              [formControlName]="'approveDate'"
               [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
             />
-            <mat-datepicker-toggle #datepicker [for]="signDate">
+            <mat-datepicker-toggle #datepicker [for]="approveDate">
             </mat-datepicker-toggle>
-            <mat-datepicker #signDate></mat-datepicker>
+            <mat-datepicker #approveDate></mat-datepicker>
           </mat-form-field>
           <app-error-message
-            [control]="formGroup.get('signDate')"
+            [control]="formGroup.get('approveDate')"
             [name]="'common.message.date_format' | transloco"
           ></app-error-message>
         </div>
@@ -222,7 +223,7 @@
                   <ng-container *ngIf="documentName">
                     <div class="nameFile">
                       <a
-                        (click)="downloadDocument(recordUrl)"
+                        (click)="downloadDocument(documentPath)"
                         title="{{ documentName }}"
                       >
                         {{ documentName }}
@@ -261,7 +262,6 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon

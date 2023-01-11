@@ -114,7 +114,6 @@ export class DetailsStaffComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("====");
-    
     this.searchModel = {
       page: 0,
       pageSize: 10,

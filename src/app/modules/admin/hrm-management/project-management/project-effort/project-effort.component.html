@@ -307,11 +307,11 @@
                 >{{ "effort.difference_effort" | transloco }} (VND)</mat-label
               >
               <input
-                [formControlName]="'differenceVnd'"
+                [formControlName]="'effortDifferenceVnd'"
                 type="text"
                 readonly="true"
                 matInput
-                onlyNumber
+                vnd-currency
               />
             </mat-form-field>
           </div>
@@ -451,7 +451,7 @@
                           <input
                             type="text"
                             matInput
-                            onlyNumber
+                            decimalNumber
                             (ngModelChange)="caculateExchange($event, index)"
                             formControlName="effort"
                             placeholder="{{

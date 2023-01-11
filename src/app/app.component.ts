@@ -114,8 +114,7 @@ export class AppComponent implements OnInit {
     // });
   }
 
-  getCategories(data, callback?) {
-    console.log(data);
+  getCategories(data,callback?){
     this.CategoriesService.getCategories(data).subscribe((res) => {
       res.data.map((x) => {
         if (data != 'PARAMETER_TYPE') {

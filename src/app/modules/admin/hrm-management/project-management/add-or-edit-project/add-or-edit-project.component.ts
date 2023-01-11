@@ -27,8 +27,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     budget: [null, Validators.required],
     unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
-    parentId:[null,Validators.required],
-    // partnerId:[null,Validators.required],
+    // parentId:[null,Validators.required],
+    partnerId:[null,Validators.required],
     description: [null, Validators.maxLength(255)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
@@ -69,11 +69,18 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
           unitPrice: CommonUtilsService.formatCurrency(form.unitPrice)
         }, {emitEvent: false});
       }
+      if(form.budget){
+        this.formGroup.patchValue({
+          budget: CommonUtilsService.formatCurrency(form.budget)
+        }, {emitEvent: false});
+      }
     });
   }
 
   onChange(data){
     this.projectTypes.map((x: any)=>{
+      console.log(x);
+
       if(x.name === data.value){
         this.formGroup.controls.projectType.setValue(Number(x.code));
       }
@@ -120,6 +127,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   save(data) {
     data.unitPrice = data.unitPrice.replace(/,/g, '');
+    data.budget = data.budget.replace(/,/g, '');
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime);
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime);
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime);

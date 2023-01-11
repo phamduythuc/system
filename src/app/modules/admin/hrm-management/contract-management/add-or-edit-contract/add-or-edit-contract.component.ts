@@ -44,24 +44,27 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     injector: Injector,
     public dialogRef: MatDialogRef<AddOrEditContractComponent>,
     private ContractService:ContractService,
-    private staffService:StaffService,
+    private staffService: StaffService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private _adapter: DateAdapter<any>
 
   ) {
     super(injector, ContractService, dialogRef);
+    console.log(dialogData);
+
     this.dialogId = dialogData?.id;
-    
+
     this.listStaff = dialogData.listUser;
-    
+
     this.listCaregories = dialogData.listCaregories;
+
     // listCaregories.CONTACT_TYPE
     // listCaregories.CONTRACT_STATUS
 
     if (this.dialogId) {
       this.getDetails(this.dialogId, () => {
         console.log(this.detailsData);
-        
+
         if(this.detailsData.contractFilePath){
           console.log(this.detailsData.contractFilePath.split("contract/"));
           this.detailsData.contractFilePath= this.detailsData.contractFilePath.split("contract/")[1]
@@ -85,7 +88,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
             }else{
               x.status = false
             }
-            return x 
+            return x
           })
         }
       );

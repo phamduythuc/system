@@ -24,4 +24,8 @@ export class ProjectService extends BaseService {
   getMembers(projectId): Observable<any> {
     return this.http.get(`${this.serviceUrl}/${projectId}/members`);
   }
+
+  getPartner(option): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/partner`, {params: option});
+  }
 }

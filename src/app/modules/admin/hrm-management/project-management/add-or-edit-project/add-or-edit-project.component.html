@@ -131,7 +131,7 @@
                 ('hrm-management.project.form.partner' | transloco) + ' ...'
               "
               id="parentId"
-              formControlName="parentId"
+              formControlName="partnerId"
             >
               <mat-option
                 *ngFor="let partner of listPartner"
@@ -159,7 +159,7 @@
               <input
                 class="w-full"
                 id="budget"
-                type="number"
+                type="text"
                 [placeholder]="
                   ('hrm-management.project.form.estimates' | transloco) + ' ...'
                 "
