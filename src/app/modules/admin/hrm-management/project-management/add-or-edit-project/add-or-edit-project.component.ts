@@ -79,7 +79,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   onChange(data){
     this.projectTypes.map((x: any)=>{
-      console.log(x);
+      console.log(data.value);
 
       if(x.name === data.value){
         this.formGroup.controls.projectType.setValue(Number(x.code));
@@ -87,17 +87,20 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
       return x;
     });
   }
+
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
           this.projectTypes.map((x: any)=>{
-            if(Number(x.code) === this.projectData.projectType){
+            if(Number(x?.code) === this.projectData?.projectType){
+              this.projectData.projectType =x.code;
               this.projectData.projectTypeName = x.name;
             }
             return x;
           });
+
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime);
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime);
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime);

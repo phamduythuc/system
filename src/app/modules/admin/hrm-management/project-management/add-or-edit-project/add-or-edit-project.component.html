@@ -88,19 +88,18 @@
                   ('hrm-management.project.form.projectType' | transloco) +
                   ' ...'
                 "
-                id="projectTypeName"
-                formControlName="projectTypeName"
-                (selectionChange)="onChange($event)"
+                id="projectType"
+                formControlName="projectType"
               >
                 <mat-option
                   *ngFor="let type of projectTypes"
-                  [value]="type?.name"
+                  [value]="type?.code"
                   >{{ type?.name }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
             <app-error-message
-              [control]="formGroup.get('projectTypeName')"
+              [control]="formGroup.get('projectType')"
               [name]="'hrm-management.project.form.projectType' | transloco"
             ></app-error-message>
           </div>
@@ -135,7 +134,7 @@
             >
               <mat-option
                 *ngFor="let partner of listPartner"
-                [value]="partner.name"
+                [value]="partner.id"
                 >{{ partner?.name }}</mat-option
               >
             </mat-select>

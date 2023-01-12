@@ -30,7 +30,7 @@ export class DetailDocumentComponent extends BaseComponent implements OnInit {
     super(injector,documentService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId);
+      this.getDetails(this.dialogId, this.handleCoverTimeToString);
     }
    }
 
@@ -45,6 +45,20 @@ export class DetailDocumentComponent extends BaseComponent implements OnInit {
           x.code = Number(x.code);
           if (Number(x?.code) === this.detailsData?.documentType) {
             this.detailsData.documentType = x.name;
+
+            this.detailsData.effDate = CommonUtilsService.dateToString(
+              this.detailsData.effDate,
+              false
+            );
+            this.detailsData.expDate = CommonUtilsService.dateToString(
+              this.detailsData.expDate,
+              false
+            );
+
+            this.detailsData.approveDate = CommonUtilsService.dateToString(
+              this.detailsData.approveDate,
+              false
+            );
           }
           return x;
         });
@@ -60,22 +74,25 @@ export class DetailDocumentComponent extends BaseComponent implements OnInit {
           x.code = Number(x.code);
           if (Number(x?.code) === this.detailsData?.status) {
             this.detailsData.status = x.name;
+
+            this.detailsData.effDate = CommonUtilsService.dateToString(
+              this.detailsData.effDate,
+              false
+            );
+            this.detailsData.expDate = CommonUtilsService.dateToString(
+              this.detailsData.expDate,
+              false
+            );
+
+            this.detailsData.approveDate = CommonUtilsService.dateToString(
+              this.detailsData.approveDate,
+              false
+            );
           }
           return x;
         });
       });
       });
-
-      // this.detailsData.effDate = CommonUtilsService.dateToString(
-      //   this.detailsData.effDate,
-      //   false
-      // );
-      console.log(this.detailsData.effDate);
-
-      this.detailsData.expDate = CommonUtilsService.dateToString(
-        this.detailsData.expDate,
-        false
-      );
     }
   }
 
