@@ -21,7 +21,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
-    code: [null, [Validators.required, Validators.maxLength(20)]],
+    code: [null, [Validators.required, Validators.maxLength(100)]],
     projectType: [null, Validators.required],
     projectTypeName: [null,Validators.required],
     budget: [null, Validators.required],

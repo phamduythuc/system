@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
 import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
 import { DecimalNumberDirective } from '@shared/directives/decimal-number.directive';
+import { AlphabetOnlyDirective } from '@shared/directives/alphabet-only.directive';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DecimalNumberDirective } from '@shared/directives/decimal-number.direct
     ProjectMemberComponent,
     VndOnlyDirective,
     NumberOnlyDirective,
-    DecimalNumberDirective
+    DecimalNumberDirective,
+    AlphabetOnlyDirective
   ],
   imports: [
     CommonModule,
