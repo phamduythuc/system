@@ -101,7 +101,7 @@ const routes: Routes = [
       ).then((m) => m.TimeKeepingManagementModule),
     data: {
       breadcrumb: {
-        label: 'hrm-management.team.title',
+        label: 'hrm-management.time-keeping.title',
         url: 'hrm-management/time-keeping',
       },
     },

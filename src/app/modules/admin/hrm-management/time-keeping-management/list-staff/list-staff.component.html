@@ -1,7 +1,20 @@
 <ng-container *transloco="let t">
-    <mat-list>
-        <mat-list-item *ngFor="let staff of searchResult.data">
-            <a [routerLink]="['staff', staff.id]">{{staff.fullName}}</a>
-        </mat-list-item>
-    </mat-list>
+    <mat-card class="bg-card h-full flex-col">
+        <!-- header -->
+        <mat-card-header class="flex h-auto justify-center">
+            <mat-card-title>Danh sách nhân viên</mat-card-title>
+        </mat-card-header>
+        <mat-list class="w-full h-full flex flex-col justify-around">
+            <mat-list-item *ngFor="let staff of searchResult.data">
+                <div class="flex items-center">
+                    <div class="w-10">
+                        <img matListItemAvatar [src]="staff.imageUrl" alt="..." class="rounded-full">
+                    </div>
+                    <div class="ml-5">
+                        <a [routerLink]="['staff', staff.id]">{{staff.fullName}}</a>
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
 </ng-container>

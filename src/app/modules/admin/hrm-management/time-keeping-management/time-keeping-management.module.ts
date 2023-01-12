@@ -7,13 +7,15 @@ import { ListStaffComponent } from './list-staff/list-staff.component';
 import { CalendarTimeKeepingComponent } from './calendar-time-keeping/calendar-time-keeping.component';
 import { SharedModule } from '@shared/shared.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/import-file-time-keeping.component';
 
 
 @NgModule({
   declarations: [
     TimeKeepingManagementComponent,
     ListStaffComponent,
-    CalendarTimeKeepingComponent
+    CalendarTimeKeepingComponent,
+    ImportFileTimeKeepingComponent
   ],
   imports: [
     CommonModule,

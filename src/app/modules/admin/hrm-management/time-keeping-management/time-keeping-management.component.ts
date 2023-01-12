@@ -1,5 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
+import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/import-file-time-keeping.component';
 
 @Component({
   selector: 'app-time-keeping-management',
@@ -13,7 +15,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     keyword: [''],
     option: ['1']
   });
-  constructor(injector: Injector,) {
+  constructor(injector: Injector,public dialog: MatDialog) {
     super(injector);
   }
 
@@ -22,7 +24,10 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
   }
 
   importFile(){
-    alert('h')
+    this.dialog.open(ImportFileTimeKeepingComponent,{
+      // height: '400px',
+      width: '600px',
+    });
   }
 
   onStatusChange(e?: any) {

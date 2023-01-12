@@ -53,19 +53,17 @@
                 </div>
             </div>
             <div class="flex w-full h-full pt-7 justify-between">
-                <div class="w-1/5 bg-gray-500 h-full ">
+                <div class="w-1/5 h-5/6 ">
                     <app-list-staff></app-list-staff>
                 </div>
                 <div class="w-3/5 h-full">
                     <router-outlet></router-outlet>
                 </div>
-                <div class="w-1/5 h-full flex-col justify-center items-center">  
-                    <div>chưa chọn nhân sự</div>                
+                <div class="w-1/5 h-full flex-col justify-center items-center">                 
                     <div class="w-full bg-green-700 h-12 mt-10 ">ngày công</div>
                     <div class="w-full bg-red-500 h-12 mt-10 ">chưa chấm công</div>
                     <div class="w-full bg-orange-400 h-12 mt-10 ">chấm công muộn</div>
                     <div class="w-full bg-blue-500 h-12 mt-10 ">ngày phép</div>
-
                 </div>
             </div>
         </mat-card>

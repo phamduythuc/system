@@ -30,6 +30,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
 import { TextSlicePipe } from './directives/text-slice.pipe';
 import {MatListModule} from '@angular/material/list';
 
+
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
