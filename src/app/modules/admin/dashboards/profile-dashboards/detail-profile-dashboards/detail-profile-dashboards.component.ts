@@ -106,7 +106,8 @@ export class DetailProfileDashboardsComponent
     workExperience: [],
     salary: [],
     file: [],
-    teamId: []
+    teamId: [],
+    permanentResidence: []
   });
 
   option = {

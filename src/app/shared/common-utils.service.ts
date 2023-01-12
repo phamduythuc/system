@@ -2,7 +2,7 @@ import moment from 'moment';
 import {DATE_FORMAT, DATE_TIME_FORMAT} from '@shared/app.constant';
 
 export class CommonUtilsService {
-  public static formatCurrency(value: any): string {
+  public static formatCurrency(value: any): any {
     if (value == null || value.toString().trim() === ''
       || isNaN(value = value.toString().replace(/,/g, ''))) {
       return null;

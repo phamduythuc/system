@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Injector,
   Input,
   OnInit,
   Output,
@@ -8,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { CommonUtilsService } from '@shared/common-utils.service';
@@ -19,7 +21,7 @@ import moment, { Moment } from 'moment';
   templateUrl: './sprint-profile-dashboards.component.html',
   styleUrls: ['./sprint-profile-dashboards.component.scss'],
 })
-export class SprintProfileDashboardsComponent implements OnInit {
+export class SprintProfileDashboardsComponent extends BaseComponent implements OnInit {
   @Input() staffId: any;
 
   @Output() callback = new EventEmitter<any>();
@@ -68,11 +70,14 @@ export class SprintProfileDashboardsComponent implements OnInit {
   data:any = []
 
   constructor(
+    injector: Injector,
     private _formBuilder: FormBuilder,
-    private translocoService: TranslocoService,
-    private DashboardsProfileService: DashboardsProfileService,
+    public DashboardsProfileService: DashboardsProfileService,
     private _adapter: DateAdapter<any>
-  ) {}
+  ) {
+    super(injector, DashboardsProfileService);
+
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     // this.formGroup.patchValue(this.data);
@@ -163,8 +168,12 @@ export class SprintProfileDashboardsComponent implements OnInit {
       effortDetail: this.data?.data,
     };
     this.DashboardsProfileService.updateEffort(payload).subscribe(res=>{
-      console.log(res);
-      
+      if ('00' === res.code) {
+        this.showSnackBar(res.message, 'success');
+      } else {
+        this.showSnackBar(res.message, 'error');
+      }
+
     })
   }
 
