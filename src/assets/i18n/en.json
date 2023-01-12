@@ -282,6 +282,8 @@
         "startRow": "Start row",
         "startCol": "Start col",
         "sql": "Sql",
+        "addParam": "Add param",
+        "sheetOrder": "Sheet order",
         "comment": "Comment",
         "listParam": "List parameters",
         "paramName": "Param name",

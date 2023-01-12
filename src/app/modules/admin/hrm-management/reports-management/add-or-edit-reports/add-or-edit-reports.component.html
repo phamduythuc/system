@@ -160,7 +160,7 @@
         </div>
       </div>
 
-      <app-list-param-reports [data]="detailsData.sheetData"></app-list-param-reports>
+      <app-list-param-reports [data]="detailsData?.sheetData" (callback)="handleDataListParam($event)"></app-list-param-reports>
       
       <!-- <ng-container>
         <div
@@ -352,7 +352,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid"
+      [disabled]="formGroup.invalid || !sheetData.validate"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon

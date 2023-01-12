@@ -73,24 +73,16 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="formGroup.valid && save(formGroup.value)"
-        for="file"
       >
         <mat-icon
           class="icon-size-5 mr-2"
           svgIcon="heroicons_outline:folder-open"
         ></mat-icon>
         <!-- <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span> -->
-        <label for="file">Template</label>
+        <label>Template</label>
       </button>
-      <input
-        type="file"
-        id="file"
-        name="file"
-        class="hidden"
-        (change)="uploadFile($event)"
-      />
-      <label for="file">{{
+
+      <label>{{
         (this.detailsData?.documentName
           ? this.detailsData?.documentName
           : "Upload file"
@@ -126,7 +118,7 @@
         }}</label>
         <div class="input w-full">
           <mat-form-field class="fuse-mat-no-subscript w-full">
-            <input
+            <textarea
               class="w-full"
               id="description"
               [placeholder]="
@@ -135,7 +127,7 @@
               formControlName="description"
               matInput
               [readonly]="readonly"
-            />
+            ></textarea>
           </mat-form-field>
           <app-error-message
             [control]="formGroup.get('description')"
@@ -150,172 +142,21 @@
           <div class="text-2xl font-bold card-title">
             {{ "hrm-management.reports.detail.listSheet" | transloco }}
           </div>
-          <!-- <button mat-raised-button color="primary" (click)="addNewRow()">
+          <button mat-raised-button color="primary" (click)="addNewRow()">
             <mat-icon
               class="icon-size-6"
               svgIcon="heroicons_outline:plus"
             ></mat-icon>
             {{ "effort.add" | transloco }}
-          </button> -->
+          </button>
         </div>
       </div>
 
-      <app-data-table
-        *ngIf="!isLoading"
-        formArrayName="sheetData"
-        [roleName]="_permissionCodeName"
-        [rows]="efforts.controls || []"
-        [columns]="columns"
-        [paginate]="false"
-        [limit]="searchModel.pageSize"
-        [count]="searchResult.totalRecords"
-        (action)="actionClick($event)"
-        (pageChange)="changePage($event)"
-        [rowTemplate]="rowTemplate"
-      >
-        <ng-template
-          #rowTemplate
-          let-row="row"
-          let-column="column"
-          let-index="index"
-        >
-          <ng-container [ngSwitch]="column.columnDef">
-            <ng-container *ngSwitchCase="'name'" [formGroupName]="index">
-              <div class="field flex mt-2 mb-2">
-                <div class="input w-5/6">
-                  <mat-form-field
-                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-                  >
-                    <input
-                      matInput
-                      formControlName="name"
-                      required
-                      placeholder="{{ 'common.name' | transloco }}"
-                      class="min-h-[46px]"
-                      [readonly]="readonly"
-                    />
-                  </mat-form-field>
-                  <!-- <app-error-message [control]="efforts.controls[index].get('name')"
-                    [name]="'common.name' | transloco">
-                    </app-error-message> -->
-                </div>
-              </div>
-            </ng-container>
+      <app-list-param-reports [data]="detailsData?.sheetData" [readonly]="readonly" (callback)="handleDataListParam($event)"></app-list-param-reports>
+      
 
-            <ng-container *ngSwitchCase="'sql'" [formGroupName]="index">
-              <div class="field flex mt-2 mb-2">
-                <div class="input w-5/6">
-                  <mat-form-field
-                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-                  >
-                    <textarea
-                      matInput
-                      formControlName="sql"
-                      required
-                      placeholder="{{ 'Sql' | transloco }}"
-                      class="max-h-[46px]"
-                      [readonly]="readonly"
-                    >
-                    </textarea>
-                  </mat-form-field>
-                  <!-- <app-error-message [control]="efforts.controls[index].get('sql')"
-                    [name]="'Sql' | transloco">
-
-                    </app-error-message> -->
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="'startRow'" [formGroupName]="index">
-              <div class="field flex mt-2 mb-2">
-                <div class="input w-5/6">
-                  <mat-form-field
-                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-                  >
-                    <input
-                      matInput
-                      formControlName="startRow"
-                      required
-                      type="number"
-                      placeholder="{{ 'Start row' | transloco }}"
-                      class="min-h-[46px]"
-                      [readonly]="readonly"
-                    />
-                  </mat-form-field>
-                  <!-- <app-error-message [control]="efforts.controls[index].get('startRow')"
-                    [name]="'Start row' | transloco">
-                    </app-error-message> -->
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="'startCol'" [formGroupName]="index">
-              <div class="field flex mt-2 mb-2">
-                <div class="input w-5/6">
-                  <mat-form-field
-                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
-                  >
-                    <input
-                      matInput
-                      formControlName="startCol"
-                      required
-                      type="number"
-                      placeholder="{{ 'Start column' | transloco }}"
-                      class="min-h-[46px]"
-                      [readonly]="readonly"
-                    />
-                  </mat-form-field>
-                  <!-- <app-error-message [control]="efforts.controls[index].get('startCol')"
-                    [name]="'Start column' | transloco">
-                    </app-error-message> -->
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="'actionCustom'">
-              <div class="field flex mt-2 mb-2">
-                <div class="input w-6/6">
-                  <button
-                    mat-icon-button
-                    class="mat-focus-indicator mat-icon-button mat-button-base ng-star-inserted"
-                    (click)="deleteRow(index)"
-                  >
-                    <mat-icon
-                      class="icon-size-5"
-                      svgIcon="heroicons_outline:trash"
-                      title="Close"
-                    ></mat-icon>
-                  </button>
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-        </ng-template>
-      </app-data-table>
     </div>
   </div>
 
-  <!--    footer-->
 
-  <div class="footer mt-6 flex justify-end">
-    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
-      <mat-icon
-        class="icon-size-5 mr-2"
-        svgIcon="heroicons_outline:x"
-      ></mat-icon>
-      <span>{{ t("button.cancel") }}</span>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="formGroup.invalid"
-      (click)="formGroup.valid && save(formGroup.value)"
-    >
-      <mat-icon
-        class="icon-size-5 mr-2"
-        svgIcon="heroicons_outline:check"
-      ></mat-icon>
-      <span>{{ t("button.save") }}</span>
-    </button>
-  </div>
 </ng-container>

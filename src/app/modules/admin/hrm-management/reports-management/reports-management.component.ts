@@ -153,20 +153,11 @@ export class ReportsManagementComponent
     this.showDialog(DetailReportsComponent, {
       data: {
         id,
-        data: {
-          name: 'Tên báo cáo 20',
-          code: 'QĐ_07',
-          description: 'Mô tả báo cáo 144 ',
-          createdDate: '1673000041000',
-          modifiedDate: '1673002041000',
-          contractFilePath: 'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
-          contractFilePathDemo: 'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
-          documentName: 'LU. Đánh giá sau ĐT.docx'
-        },
       },
       width: '60vw',
       // height: '45vh',
       disableClose: false,
+      maxHeight: '90vh'
     });
   }
 
