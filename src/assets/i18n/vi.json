@@ -357,7 +357,7 @@
     "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
     "role": "Vai trò",
     "add": "Thêm",
-    "chooseFile":"Chọn file"
+    "chooseFile":"Chọn file" 
   },
   "staff": {
     "staffName" : "Tên nhân viên",
