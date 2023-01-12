@@ -73,12 +73,10 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="formGroup.valid && save(formGroup.value)"
-        for="file"
       >
         <mat-icon
           class="icon-size-5 mr-2"
-          svgIcon="heroicons_outline:folder-open"
+          svgIcon="heroicons_outline:paper-clip"
         ></mat-icon>
         <!-- <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span> -->
         <label for="file">Template</label>
@@ -91,8 +89,8 @@
         (change)="uploadFile($event)"
       />
       <label for="file">{{
-        (this.detailsData?.documentName
-          ? this.detailsData?.documentName
+        (this.detailsData?.templateName
+          ? this.detailsData?.templateName
           : "Upload file"
         ) | transloco
       }}</label>
@@ -101,7 +99,7 @@
       <div class="w-1/2 flex flex-wrap gap-5">
         <span
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.contractFilePathDemo)"
+          (click)="download(formGroup.value.templateName)"
           >{{
             "hrm-management.reports.detail.downloadTemplate" | transloco
           }}</span
@@ -111,7 +109,7 @@
         }}</span> -->
         <span
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.contractFilePath)"
+          (click)="download(formGroup.value.templatePath)"
           >{{
             "hrm-management.reports.detail.downloadReports" | transloco
           }}</span
@@ -160,16 +158,16 @@
         </div>
       </div>
 
-      <app-list-param-reports [data]="detailsData?.sheetData" (callback)="handleDataListParam($event)"></app-list-param-reports>
+      <app-list-param-reports [data]="detailsData?.listSheet" [addRow]="random" (callback)="handleDataListParam($event)"></app-list-param-reports>
       
       <!-- <ng-container>
         <div
           class="border mb-8"
-          *ngFor="let item of detailsData.sheetData; let index = index"
+          *ngFor="let item of detailsData.listSheet; let index = index"
         >
           <div
             class="border-2 relative pt-5 pb-2 px-5 flex-wrap flex gap-y-4"
-            formArrayName="sheetData"
+            formArrayName="listSheet"
           >
             <p
               class="absolute -top-5 left-5 text-[21px] font-bold z-[100] bg-[#ffffff] px-5"
@@ -352,7 +350,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid || !sheetData.validate"
+      [disabled]="formGroup.invalid || !listSheet.validate"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon

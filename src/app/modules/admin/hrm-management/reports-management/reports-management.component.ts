@@ -71,7 +71,7 @@ export class ReportsManagementComponent
 
   typeStatus = '1';
 
-  constructor(injector: Injector, private ReportsService: ReportsService) {
+  constructor(injector: Injector, public ReportsService: ReportsService) {
     super(injector, ReportsService);
 
     this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
@@ -97,44 +97,53 @@ export class ReportsManagementComponent
       page: 0,
       ...this.formSearch.value,
     };
-    // this.processSearch(this.searchModel);
+    console.log(this.searchModel);
+    
+    this.processSearch(this.searchModel,()=>{
+      let ar = this.searchResult.data
+      
+      this.searchResult.data = ar.data
 
-    this.searchResult.data = [
-      {
-        id: 1,
-        name: 'Tên báo cáo 1',
-        code: 'QĐ_01',
-        description: 'Mô tả báo cáo 1',
-        createdDate: '1673000041000',
-        modifiedDate: '1673002041000',
-      },
-      {
-        id: 1,
-        name: 'Tên báo cáo 5',
-        code: 'QĐ_02',
-        description: 'Mô tả báo cáo 1 222',
-        createdDate: '1673000041000',
-        modifiedDate: '1673002041000',
-      },
-      {
-        id: 1,
-        name: 'Tên báo cáo 6',
-        code: 'QĐ_04',
-        description: 'Mô tả báo cáo 13 33',
-        createdDate: '1673000041000',
-        modifiedDate: '1673002041000',
-      },
-      {
-        id: 1,
-        name: 'Tên báo cáo 20',
-        code: 'QĐ_07',
-        description: 'Mô tả báo cáo 144 ',
-        createdDate: '1673000041000',
-        modifiedDate: '1673002041000',
-      },
-    ];
-    this.searchResult.totalRecords = this.searchResult.data.length;
-    this.pageIndex = 1;
+      this.searchResult.totalRecords = this.searchResult.data.length;
+      this.pageIndex = 1;
+    });
+    
+    // this.searchResult.data = [
+    //   {
+    //     id: 1,
+    //     name: 'Tên báo cáo 1',
+    //     code: 'QĐ_01',
+    //     description: 'Mô tả báo cáo 1',
+    //     createdDate: '1673000041000',
+    //     modifiedDate: '1673002041000',
+    //   },
+    //   {
+    //     id: 1,
+    //     name: 'Tên báo cáo 5',
+    //     code: 'QĐ_02',
+    //     description: 'Mô tả báo cáo 1 222',
+    //     createdDate: '1673000041000',
+    //     modifiedDate: '1673002041000',
+    //   },
+    //   {
+    //     id: 1,
+    //     name: 'Tên báo cáo 6',
+    //     code: 'QĐ_04',
+    //     description: 'Mô tả báo cáo 13 33',
+    //     createdDate: '1673000041000',
+    //     modifiedDate: '1673002041000',
+    //   },
+    //   {
+    //     id: 1,
+    //     name: 'Tên báo cáo 20',
+    //     code: 'QĐ_07',
+    //     description: 'Mô tả báo cáo 144 ',
+    //     createdDate: '1673000041000',
+    //     modifiedDate: '1673002041000',
+    //   },
+    // ];
+
+   
   }
 
   actionClick(e: any): void {

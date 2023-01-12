@@ -17,6 +17,9 @@ export class ListParamReportsComponent implements OnInit {
   @Input() data: any;
   @Input() readonly: any;
 
+  @Input() addRow: any;
+
+
   @Output() callback = new EventEmitter();
 
   columns: IColumn[] = [
@@ -26,15 +29,15 @@ export class ListParamReportsComponent implements OnInit {
       flex: 0.3,
     },
     {
-      columnDef: 'name',
+      columnDef: 'paramKey',
       header: 'hrm-management.reports.form.paramName',
     },
     {
-      columnDef: 'paramType',
+      columnDef: 'typeCode',
       header: 'hrm-management.reports.form.paramType',
     },
     {
-      columnDef: 'value',
+      columnDef: 'paramValue',
       header: 'hrm-management.reports.form.paramValue',
     },
     {
@@ -53,7 +56,6 @@ export class ListParamReportsComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.data);
 
     if (this.readonly == true) {
       this.columns = [
@@ -63,38 +65,40 @@ export class ListParamReportsComponent implements OnInit {
           flex: 0.3,
         },
         {
-          columnDef: 'name',
+          columnDef: 'paramKey',
           header: 'hrm-management.reports.form.paramName',
         },
         {
-          columnDef: 'paramType',
+          columnDef: 'typeCode',
           header: 'hrm-management.reports.form.paramType',
         },
         {
-          columnDef: 'value',
+          columnDef: 'paramValue',
           header: 'hrm-management.reports.form.paramValue',
         }
       ];
     }
+
+    this.callbackData()
   }
 
   ngOnInit(): void {}
 
   changeParamType(index_list_param, index_sheet) {
     if (
-      this.data[index_sheet].listParam[index_list_param].paramType == 'NUMBER'
+      this.data[index_sheet].listParam[index_list_param].typeCode == 'NUMBER'
     ) {
       this.data[index_sheet].listParam[index_list_param].typeInput = 'number';
     } else if (
-      this.data[index_sheet].listParam[index_list_param].paramType == 'DATE'
+      this.data[index_sheet].listParam[index_list_param].typeCode == 'DATE'
     ) {
       this.data[index_sheet].listParam[index_list_param].typeInput = 'date';
     } else if (
-      this.data[index_sheet].listParam[index_list_param].paramType == 'DATETIME'
+      this.data[index_sheet].listParam[index_list_param].typeCode == 'DATETIME'
     ) {
       this.data[index_sheet].listParam[index_list_param].typeInput = 'date';
     } else if (
-      this.data[index_sheet].listParam[index_list_param].paramType == 'STRING'
+      this.data[index_sheet].listParam[index_list_param].typeCode == 'STRING'
     ) {
       this.data[index_sheet].listParam[index_list_param].typeInput = 'text';
     } else {
@@ -102,6 +106,7 @@ export class ListParamReportsComponent implements OnInit {
     }
 
     this.callbackData();
+    
   }
 
   deleteParam(index_list_param, index_sheet) {
@@ -120,7 +125,7 @@ export class ListParamReportsComponent implements OnInit {
     });
   }
 
-  validate(index_delete?, index_create?) {
+  validate(index_delete?) {
     if (index_delete) {
       let arr = [...this.data];
       arr.splice(index_delete, 1);
@@ -132,9 +137,9 @@ export class ListParamReportsComponent implements OnInit {
     this.data.map((x) => {
       if (
         !x.name ||
-        !x.sql ||
+        !x.scriptSql ||
         !x.startRow ||
-        !x.startCol ||
+        !x.startColumn ||
         !x.sheetOrder ||
         x.listParam.length == 0
       ) {
@@ -143,7 +148,7 @@ export class ListParamReportsComponent implements OnInit {
 
       if (x.listParam.length > 0) {
         x.listParam.map((z) => {
-          if (!z.name || !z.type || !z.value) {
+          if (!z.paramKey || !z.typeCode || !z.paramValue) {
             checkValidate = false;
           }
         });
@@ -156,9 +161,9 @@ export class ListParamReportsComponent implements OnInit {
   newItem(data: any) {
     return {
       id: null,
-      name: null,
-      type: null,
-      value: null,
+      paramKey: null,
+      typeCode: null,
+      paramValue: null,
     };
   }
 
@@ -170,7 +175,9 @@ export class ListParamReportsComponent implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
-    this.callbackData();
+    
+    this.callbackData()
+
   }
 
   deleteRow(index_sheet) {
