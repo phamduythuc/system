@@ -23,7 +23,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     name: [null, [Validators.required, Validators.maxLength(100)]],
     code: [null, [Validators.required, Validators.maxLength(100)]],
     projectType: [null, Validators.required],
-    projectTypeName: [null,Validators.required],
+    projectTypeName: [null],
     budget: [null, Validators.required],
     unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
