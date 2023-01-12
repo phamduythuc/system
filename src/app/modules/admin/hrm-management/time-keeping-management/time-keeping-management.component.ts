@@ -10,7 +10,7 @@ import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/impor
 })
 export class TimeKeepingManagementComponent extends BaseComponent implements OnInit {
 
-  _permissionCodeName = 'DSNV';
+  _permissionCodeName = 'TIMEKEEP';
   formSearch = this.fb.group({
     keyword: [''],
     option: ['1']
