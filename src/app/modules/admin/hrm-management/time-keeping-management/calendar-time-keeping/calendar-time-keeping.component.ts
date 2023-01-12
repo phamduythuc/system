@@ -28,7 +28,13 @@ export class CalendarTimeKeepingComponent implements OnInit {
     }
     else{
       this.events = [
-        { title: "", date: "2023-01-13", color: "red", display: "background", }
+        { title: "", date: "2023-01-13", color: "red", display: "background", },
+        { title: "", date: "2023-01-14", color: "#8fdf82", display: "background", },
+        { title: "", date: "2023-01-15", color: "blue", display: "background", },
+        { title: "", date: "2023-01-16", color: "orange", display: "background", },
+
+        { title: "", date: "2023-01-17", color: "red", display: "background", }
+
       ]
     }
     this.initCalendar()
