@@ -127,6 +127,7 @@
             <input
               class=" "
               matInput
+              [max]="formGroup.value.expDate"
               [matDatepicker]="approveDate"
               datePickerFormat="DD/MM/YYYY"
               [formControlName]="'approveDate'"
@@ -151,6 +152,8 @@
             <input
               class=" "
               matInput
+              [min]="formGroup.value.approveDate"
+              [max]="formGroup.value.expDate"
               [matDatepicker]="effDate"
               datePickerFormat="DD/MM/YYYY"
               [formControlName]="'effDate'"
@@ -177,6 +180,7 @@
             <input
               class=" "
               matInput
+              [min]="formGroup.value.approveDate"
               [matDatepicker]="expDate"
               datePickerFormat="DD/MM/YYYY"
               [formControlName]="'expDate'"

@@ -77,6 +77,7 @@ export class AddOrEditDocumentComponent
         if (res.code === '00') {
           this.docDetailData = res.data;
           if (this.docDetailData) {
+
             const urlName = res.data.documentName;
             this.documentName = urlName;
             const urlFilePath = res.data.documentPath;
@@ -95,21 +96,7 @@ export class AddOrEditDocumentComponent
               expDate: res.data.expDate,
 
             });
-            // console.log(this.listDocType);
 
-            // this.listDocType.map((x: any) => {
-            //   if (Number(x.code) === this.docDetailData.documentType) {
-            //     this.docDetailData.documentType = x.name;
-            //   }
-            //   return x;
-            // });
-
-            // this.listDocStatus.map((x: any) => {
-            //   if (Number(x.code) === this.docDetailData.status) {
-            //     this.docDetailData.status = x.name;
-            //   }
-            //   return x;
-            // });
           }
         } else {
           this.documentName = '';
