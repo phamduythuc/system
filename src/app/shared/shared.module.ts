@@ -28,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { TextSlicePipe } from './directives/text-slice.pipe';
-import { AlphabetOnlyDirective } from './directives/alphabet-only.directive';
+import {MatListModule} from '@angular/material/list';
+
 
 export const MAT_MODULES = [
     MatCardModule,
@@ -45,7 +46,8 @@ export const MAT_MODULES = [
     MatCheckboxModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatSelectFilterModule
+    MatSelectFilterModule,
+    MatListModule
 ];
 
 @NgModule({
@@ -64,7 +66,7 @@ export const MAT_MODULES = [
         ConfirmDialogComponent,
         DatePickerFormatDirective,
         ChartLineComponent,
-        TextSlicePipe,
+        TextSlicePipe
     ],
   exports: [
     CommonModule,

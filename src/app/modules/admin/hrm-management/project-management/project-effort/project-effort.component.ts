@@ -300,6 +300,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     formValue.projectId = this.data.id;
 
     formData.append('file', this.formGroup.get('file').value || null);
+
     formData.append(
       'data',
       new Blob([JSON.stringify(formValue)], { type: 'application/json' })
@@ -392,7 +393,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
-
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       this.formGroup.patchValue({ file });
