@@ -111,7 +111,7 @@
             <input
               type="text"
               matInput
-              [(ngModel)]="item.startCol"
+              [(ngModel)]="item.startColumn"
               required
               [readonly]="readonly"
               placeholder="{{
@@ -142,7 +142,7 @@
         >
           <textarea
             matInput
-            [(ngModel)]="item.sql"
+            [(ngModel)]="item.scriptSql"
             required
             placeholder="{{ 'hrm-management.reports.form.sql' | transloco }}"
             class="py-2 m-0 min-h-[100px]"
@@ -171,7 +171,7 @@
         >
           <textarea
             matInput
-            [(ngModel)]="item.comment"
+            [(ngModel)]="item.description"
             required
             placeholder="{{
               'hrm-management.reports.form.comment' | transloco
@@ -223,14 +223,14 @@
           let-index="index"
         >
           <ng-container [ngSwitch]="column.columnDef">
-            <ng-container *ngSwitchCase="'name'">
+            <ng-container *ngSwitchCase="'paramKey'">
               <mat-form-field
                 class="fuse-mat-no-subscript w-full bg-card my-3 w-[70%]"
               >
                 <input
                   type="text"
                   matInput
-                  [(ngModel)]="row['name']"
+                  [(ngModel)]="row['paramKey']"
                   required
                   [readonly]="readonly"
                   placeholder="{{
@@ -242,10 +242,10 @@
               </mat-form-field>
             </ng-container>
 
-            <ng-container *ngSwitchCase="'paramType'">
+            <ng-container *ngSwitchCase="'typeCode'">
               <mat-form-field class="fuse-mat-no-subscript w-full my-3 w-[70%]">
                 <mat-select
-                  [(ngModel)]="row['type']"
+                  [(ngModel)]="row['typeCode']"
                   (ngModelChange)="changeParamType(index, i)"
                   [disabled]="readonly"
                 >
@@ -256,14 +256,14 @@
               </mat-form-field>
             </ng-container>
 
-            <ng-container *ngSwitchCase="'value'">
+            <ng-container *ngSwitchCase="'paramValue'">
               <mat-form-field
                 class="fuse-mat-no-subscript w-full bg-card my-3 w-[70%]"
               >
                 <input
                   [type]="row['type']"
                   matInput
-                  [(ngModel)]="row['value']"
+                  [(ngModel)]="row['paramValue']"
                   required
                   [readonly]="readonly"
                   placeholder="{{
@@ -295,7 +295,7 @@
 
     <!-- Delete  -->
 
-    <!-- <div class="field flex w-full justify-end">
+    <div class="field flex w-full justify-end">
       <div class="input w-6/6">
         <button
           mat-icon-button
@@ -309,6 +309,6 @@
           ></mat-icon>
         </button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

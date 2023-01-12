@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
 import { CommonUtilsService } from '@shared/common-utils.service';
-import  { SalaryService } from '@shared/services/salary.service';
+import { SalaryService } from '@shared/services/salary.service';
 import moment, { Moment } from 'moment';
 
 import { DateAdapter } from '@angular/material/core';
@@ -44,9 +44,9 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   ];
   startDate = this.fb.group({
     startMonth: [moment().startOf('month'), Validators.required],
+    keyword: ['']
   });
 
-  
   listUser: any = [];
   basicListUser: any = [];
 
@@ -75,27 +75,40 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
           x.staffId = z.fullName;
         }
       });
-
       return x;
     });
-
     return data;
+  }
+
+  paginate: any = {
+    keyword: '',
+    month: '',
+    page: 0,
+    pageSize: 10,
+    status: 1,
+  };
+
+  changePage(e: any) {
+    this.paginate.month = CommonUtilsService.dateToString(
+      this.startDate.value.startMonth,
+      false
+    );
+    this.paginate.pageSize = e.pageSize;
+    this.paginate.page = e.pageIndex;
+    this.paginate.keyword = this.startDate.value.keyword,
+    this.view(this.paginate);
   }
 
   doSearch() {
     this.searchModel = {
+      keyword: this.startDate.value.keyword,
       ...this.searchModel,
       page: 0,
       ...this.startDate.value,
     };
+
     this.processSearch(this.searchModel, () => {});
   }
-
-  // getListUser() {
-  //   this.SalaryService.getViewSalarybyMonth().subscribe((res: any) => {
-  //     this.listUser = res.data;
-  //   });
-  // }
 
   getListCategories() {
     return JSON.parse(localStorage.getItem('listType'));
@@ -122,18 +135,25 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
 
   handleDataKPI(data) {}
 
-  view() {
-    const month = CommonUtilsService.dateToString(
-      this.startDate.value.startMonth,
-      false
-    );
-    const params = {
-      month: month,   
-      page: 0,
-      pageSize: 10,
-      status: 1,
-      
-    };
+  view(paginate?) {
+    let params: any = {};
+    
+    if (paginate) {
+      params = paginate;
+    } else {
+      const month = CommonUtilsService.dateToString(
+        this.startDate.value.startMonth,
+        false
+      );
+      params = {
+        keyword: this.startDate.value.keyword,
+        month: month,
+        page: 0,
+        pageSize: 10,
+        status: 1,
+      };
+    }
+
     this.SalaryService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
         this.searchResult.totalRecords = res.totalRecords;
@@ -156,13 +176,30 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       }
     });
   }
+
+  validateNumber(event) {
+    const keyCode = event.keyCode;
+
+    const excludedKeys = [8, 37, 39, 46];
+
+    if (!((keyCode >= 48 && keyCode <= 57) ||
+      (keyCode >= 96 && keyCode <= 105) ||
+      (excludedKeys.includes(keyCode)))) {
+      event.preventDefault();
+    }
+  }
+
   saveData(e) {
     const newObj = e.map((item) => {
-        const obj = {
-          staffId: item.staffId,
-          salaryActual: item.salaryActual?.replace(',','').replace(',','').replace(',','').replace(',',''),
-        };
-        return obj;
+      const obj = {
+        staffId: item.staffId,
+        salaryActual: item.salaryActual
+          ?.replace(',', '')
+          .replace(',', '')
+          .replace(',', '')
+          .replace(',', ''),
+      };
+      return obj;
     });
 
     const month = CommonUtilsService.dateToString(
@@ -174,7 +211,6 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       revenueMonth: month,
       listSalary: [...newObj],
     };
-    console.log(params);
 
     this.SalaryService.saveSalary(params).subscribe((res) => {
       if (res.code === '00') {
@@ -189,6 +225,8 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   change(data) {
     this.searchResult.data.map((x) => {
       if (x.staffId == data) {
+        console.log(x);
+        
         x.salaryActual = CommonUtilsService.formatCurrency(x.salaryActual);
       }
       return x;

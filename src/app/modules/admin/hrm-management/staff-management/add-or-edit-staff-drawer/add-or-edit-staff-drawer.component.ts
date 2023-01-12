@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { StaffService } from '@shared/services/staff.service';
 import { AchievementService } from '@shared/services/achievement.service';
 import { DateAdapter } from '@angular/material/core';
+import { datePickerValidator } from '@shared/validation/date-picker.validation';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -80,7 +81,7 @@ export class AddOrEditStaffDrawerComponent
     //Đường dẫn file CV
     cvUrl: [],
     //Ngày sinh
-    dateOfBirth: [null, Validators.required],
+    dateOfBirth: [null, datePickerValidator()],
     //Mã phòng ban
     departmentId: [null, Validators.required],
     //Chỗ ở hiện tại
@@ -137,7 +138,7 @@ export class AddOrEditStaffDrawerComponent
     //N/A
     seniority: [],
     //Ngày bắt đầu đi làm
-    staOfficalDate: [null, Validators.required],
+    staOfficalDate: [null, datePickerValidator()],
     //Mã nhân viên
     staffCode: [null, Validators.required],
     //Trạng thái của nhân viên
@@ -147,7 +148,7 @@ export class AddOrEditStaffDrawerComponent
     //Mô tả tổng quan
     summary: [],
     //Tên đăng nhập
-    username: [null, Validators.required],
+    username: [null, [Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
     role: [null, Validators.required],
     //Kinh nghiệm
     workExperience: [],
@@ -274,6 +275,7 @@ export class AddOrEditStaffDrawerComponent
   getListTeam() {
     this.staffService.getListTeam({
       page: 0,
+      status: 1,
       pageSize: 9999999,
     }).subscribe(res=>{
       this.listTeam = res.data
