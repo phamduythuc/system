@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '@core/base.component';
 import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/import-file-time-keeping.component';
 
@@ -15,12 +16,12 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     keyword: [''],
     option: ['1']
   });
-  constructor(injector: Injector,public dialog: MatDialog) {
+  constructor(injector: Injector,public dialog: MatDialog, private router : Router) {
     super(injector);
   }
 
   ngOnInit(): void {
-    
+    //  this.router.navigate(['/hrm-management/time-keeping/staff/580'])
   }
 
   importFile(){

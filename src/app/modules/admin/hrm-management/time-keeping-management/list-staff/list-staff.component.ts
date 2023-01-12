@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base.component';
 import { AchievementService } from '@shared/services/achievement.service';
 import { StaffService } from '@shared/services/staff.service';
@@ -12,14 +13,16 @@ export class ListStaffComponent extends BaseComponent implements OnInit {
 
   listStaff: any;
   imageUrl: any;
+  firstStaff:any;
   constructor(injector: Injector,
     public staffService: StaffService,
-    private achievementService: AchievementService,) {
+    private achievementService: AchievementService,
+    private router : Router) {
     super(injector, staffService);
   }
 
   ngOnInit(): void {
-    this.doSearch()
+    this.doSearch();
   }
 
   doSearch() {
@@ -32,6 +35,8 @@ export class ListStaffComponent extends BaseComponent implements OnInit {
   }
 
   callback(): void {
+    this.firstStaff= this.searchResult.data[0].id;
+    this.router.navigate([ `/hrm-management/time-keeping/staff/${this.firstStaff}`]);
     this.searchResult.data.forEach((item) => {
       if (item.imageUrl) {
         this.convertBase64(item.imageUrl, item);
