@@ -38,6 +38,7 @@
       "view": "View"
     },
     "keyword": "Keyword",
+    "keySearch" : "Keyword by Name, Code",
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",
@@ -292,6 +293,8 @@
         "startRow": "Start row",
         "startCol": "Start col",
         "sql": "Sql",
+        "addParam": "Add param",
+        "sheetOrder": "Sheet order",
         "comment": "Comment",
         "listParam": "List parameters",
         "paramName": "Param name",

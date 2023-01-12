@@ -64,6 +64,7 @@
                 formControlName="code"
                 matInput
                 trim="blur"
+                alphabetOnly
               />
             </mat-form-field>
             <app-error-message
@@ -88,19 +89,18 @@
                   ('hrm-management.project.form.projectType' | transloco) +
                   ' ...'
                 "
-                id="projectTypeName"
-                formControlName="projectTypeName"
-                (selectionChange)="onChange($event)"
+                id="projectType"
+                formControlName="projectType"
               >
                 <mat-option
                   *ngFor="let type of projectTypes"
-                  [value]="type?.name"
+                  [value]="type?.code"
                   >{{ type?.name }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
             <app-error-message
-              [control]="formGroup.get('projectTypeName')"
+              [control]="formGroup.get('projectType')"
               [name]="'hrm-management.project.form.projectType' | transloco"
             ></app-error-message>
           </div>
@@ -131,11 +131,11 @@
                 ('hrm-management.project.form.partner' | transloco) + ' ...'
               "
               id="parentId"
-              formControlName="parentId"
+              formControlName="partnerId"
             >
               <mat-option
                 *ngFor="let partner of listPartner"
-                [value]="partner?.id"
+                [value]="partner.id"
                 >{{ partner?.name }}</mat-option
               >
             </mat-select>
@@ -159,7 +159,7 @@
               <input
                 class="w-full"
                 id="budget"
-                type="number"
+                type="text"
                 [placeholder]="
                   ('hrm-management.project.form.estimates' | transloco) + ' ...'
                 "

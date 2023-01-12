@@ -11,6 +11,12 @@ import {BaseComponent} from '@core/base.component';
 })
 export class DetailProjectComponent extends BaseComponent implements OnInit {
   private readonly dialogId: any;
+  listPartners: any = [];
+
+  option = {
+    page: 0,
+    pageSize: 999999,
+  };
 
   constructor(injector: Injector,
               public dialogRef: MatDialogRef<DetailProjectComponent>,
@@ -19,10 +25,31 @@ export class DetailProjectComponent extends BaseComponent implements OnInit {
     super(injector, projectService, dialogRef);
     this.dialogId = dialogData?.id;
     if(this.dialogId){
-      this.getDetails(this.dialogId, this.handleCoverTimeToString);
+      this.getDetails(this.dialogId);
     }
   }
   ngOnInit(): void {
+    this.getListPartnerName();
   }
 
+
+  getListPartnerName() {
+    this.projectService.getPartner(this.option).subscribe((res) => {
+      if (res.code === '00') {
+        this.listPartners = res.data;
+        console.log(this.listPartners);
+
+        this.listPartners.map((x: any) => {
+          x.id = Number(x.id);
+          if (Number(x?.id) === this.detailsData?.partnerId) {
+            this.detailsData.partnerName = x.name;
+          }
+          return x;
+        });
+        this.listPartners.forEach(
+          (item) => (item.id = Number(item.id))
+        );
+      }
+    });
+  }
 }

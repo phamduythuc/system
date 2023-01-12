@@ -67,6 +67,12 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
 
   fileURL: any;
 
+  sheetData:any = {
+    data: [],
+    validate: false
+  };
+
+
   constructor(
     injector: Injector,
     public dialogRef: MatDialogRef<AddOrEditReportsComponent>,
@@ -101,9 +107,10 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
         sheetData: [
           {
             name: 'Doanh thu thang 1',
-            sql: 'Select * from doanhthu',
+            sql: 'Select * from doanhthu where name=:name and totalRevenue=:totalRevenue and createdDate=:createdDate',
             startRow: 2,
             startCol: 5,
+            sheetOrder: 1,
             comment:
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
             listParam: [
@@ -112,6 +119,12 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
                 name: 'name',
                 type: 'STRING',
                 value: 'Doanh thu',
+              },
+              {
+                id: 13,
+                name: 'totalRevenue',
+                type: 'NUMBER',
+                value: '10000000',
               },
               {
                 id: 12,
@@ -123,9 +136,10 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
           },
           {
             name: 'Doanh thu thang 2',
-            sql: 'Select * from doanhthu',
+            sql: '',
             startRow: 1,
             startCol: 8,
+            sheetOrder: 2,
             comment: 'Lorem Ipsum is simply dummy text ',
             listParam: [
               {
@@ -147,12 +161,15 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
 
       this.detailsData = data;
 
-      this.detailsData.sheetData.map((x) => {
-        this.efforts.push(this.newItem(x));
-      });
+      // this.detailsData.sheetData.map((x) => {
+      //   this.efforts.push(this.newItem(x));
+      // });
       
       this.formGroup.patchValue(this.detailsData);
       // });
+    }else{
+      this.detailsData = this.formGroup.value
+
     }
   }
 
@@ -161,36 +178,43 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
 
   save() {
     console.log(this.formGroup.value);
+    this.formGroup.value.sheetData = this.sheetData.data
   }
 
-  get efforts(): FormArray {
-    return this.formGroup.get('sheetData') as FormArray;
-  }
+  // get efforts(): FormArray {
+  //   return this.formGroup.get('sheetData') as FormArray;
+  // }
 
-  newItem(data: any): FormGroup {
-    return this.fb.group({
-      name: [data.name],
-      sql: [data.sql],
-      startRow: [data.startRow],
-      startCol: [data.startCol],
-      comment: [data.comment],
-      listParam: [data.listParam],
-    });
+  newItem(data: any) {
+    return {
+      name: null,
+      sql: null,
+      startRow: null,
+      startCol: null,
+      comment: null,
+      listParam: [],
+      sheetOrder: null
+    };
   }
 
   addNewRow() {
+    console.log(this.detailsData);
+    
     this.isLoading = true;
-    this.efforts.push(this.newItem({}));
+    this.detailsData.sheetData.push(this.newItem({}));
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
+
+    console.log(this.detailsData);
+
   }
 
   deleteRow(index: number) {
     // delete this.listStaff[index];
     // delete this.filteredList[index];
     this.isLoading = true;
-    this.efforts.removeAt(index);
+    // this.efforts.removeAt(index);
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
@@ -230,5 +254,15 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
   close() {
     // this.drawer?.toggle();
     this.dialogRef.close(this.formGroup.value);
+  }
+
+
+  handleDataListParam(data){
+    if(data.type === 'delete'){
+      let arr = [...this.detailsData.sheetData];
+      arr.splice(data.data, 1);
+      this.detailsData.sheetData = arr
+    }
+    this.sheetData = data
   }
 }

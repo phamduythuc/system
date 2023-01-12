@@ -48,6 +48,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   numberChars = new RegExp('[.,]', 'g');
   caculateEffortExchange: any = '';
   priceDefalt = 30000000;
+  effortDifferenceVnd: any ='';
 
   option = {
     page: 0,
@@ -125,7 +126,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       recordUrl: [''],
       effortDifference: [''],
       cumulativeDifference: [''],
-      differenceVnd: [''],
+      effortDifferenceVnd: [''],
       cumulativeDifferenceVnd: [''],
       revenue: [''],
       cost: [''],
@@ -163,6 +164,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
         this.revenue = this.formatCurrency(res.data.revenue);
         this.cost = this.formatCurrency(res.data.cost);
+        this.effortDifferenceVnd = this.formatCurrency(res.data.effortDifferenceVnd);
 
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
@@ -179,7 +181,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
         this.formGroup.patchValue({
           id: res.data.id,
-          unitPrice: this.unitPrice,
+          // unitPrice: this.unitPrice,
           progress: res.data.progress,
           recordUrl: res.data.recordUrl,
           effortExchange: res.data.effortExchange,
@@ -187,7 +189,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           acceptanceDate: res.data.acceptanceDate,
           effortDifference: res.data.effortDifference,
           cumulativeDifference: this.cumulativeDifference,
-          differenceVnd: res.data.differenceVnd,
+          effortDifferenceVnd: this.effortDifferenceVnd ,
           cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
           revenue: this.revenue,
           cost: this.cost,
@@ -236,7 +238,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           recordUrl: null,
           acceptanceEffort: null,
           acceptanceDate: null,
-          effortDifference: null,
+          effortDifferenceVnd: null,
           cumulativeDifference: null,
           differenceVnd: null,
           cumulativeDifferenceVnd: null,
@@ -268,11 +270,16 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   save() {
     const formData = new FormData();
     const formValue = this.formGroup.value;
+
     this.handleCoverTimeToString(formValue);
 
     const valUnitPrice = formValue.unitPrice;
     if (valUnitPrice != null) {
       formValue.unitPrice = Number(valUnitPrice.replace(this.numberChars, ''));
+    }
+    const valEffortDifferenceVnd = formValue.effortDifferenceVnd;
+    if (valEffortDifferenceVnd != null) {
+      formValue.effortDifferenceVnd = Number(valEffortDifferenceVnd.replace(this.numberChars, ''));
     }
     const valCumulativeDifference = formValue.cumulativeDifference;
     if (valCumulativeDifference != null) {
@@ -286,13 +293,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (valCost != null) {
       formValue.cost = Number(valCost.replace(this.numberChars, ''));
     }
-    // formValue.effortDetail.forEach(item=>{
-    //   console.log(item.effortExchange);
-    //   const itemNeweffortDetail = {unitPrice: Number(valUnitPrice.replace(this.numberChars, '')), effort: item.effortExchange};
-    //   // console.log(this.effortConversionCalculation(itemNeweffortDetail));
-    //   formValue.effortExchange = this.effortConversionCalculation(itemNeweffortDetail);
 
-    // });
     formValue.startDate =
       formValue.startDate &&
       CommonUtilsService.dateToString(formValue.startDate);
@@ -454,12 +455,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   onStaffChange(event: any, index: number) {
     // console.log(event);
-    // const objStaff = this.filteredList[index].find(
-    //   (x) => x.id === event.value
-    // );
-    // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
-    // this.listStaffOrigin.splice(indexStaff, 1);
-
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
@@ -488,19 +483,19 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (this.data.id) {
       this.sprintService.getOne(this.data.id).subscribe((res) => {
         if (this.isSuccess(res)) {
-          return this.formGroup.controls['unitPrice'].setValue(
+           this.formGroup.controls['unitPrice'].setValue(
             this.formatCurrency(res.data.unitPrice)
           );
         } else {
-          return this.formGroup.controls['unitPrice'].setValue(null);
+           this.formGroup.controls['unitPrice'].setValue(null);
         }
       });
     }
   }
 
-  // effortConversionCalculation(data: any){
-  //  return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
-  // }
+  effortConversionCalculation(data: any){
+   return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
+  }
 
   caculateExchange(e: any, i: number) {
     const valChangePrice = this.formGroup.value.unitPrice;

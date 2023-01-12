@@ -21,14 +21,14 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   dialogId: any;
   formGroup = this.fb.group({
     name: [null, [Validators.required, Validators.maxLength(100)]],
-    code: [null, [Validators.required, Validators.maxLength(20)]],
+    code: [null, [Validators.required, Validators.maxLength(100)]],
     projectType: [null, Validators.required],
     projectTypeName: [null,Validators.required],
     budget: [null, Validators.required],
     unitPrice: [null, Validators.required],
     startTime: [null, datePickerValidator()],
-    parentId:[null,Validators.required],
-    // partnerId:[null,Validators.required],
+    // parentId:[null,Validators.required],
+    partnerId:[null,Validators.required],
     description: [null, Validators.maxLength(255)],
     actualEndTime: [null],
     expectEndTime: [null, datePickerValidator()],
@@ -69,28 +69,38 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
           unitPrice: CommonUtilsService.formatCurrency(form.unitPrice)
         }, {emitEvent: false});
       }
+      if(form.budget){
+        this.formGroup.patchValue({
+          budget: CommonUtilsService.formatCurrency(form.budget)
+        }, {emitEvent: false});
+      }
     });
   }
 
   onChange(data){
     this.projectTypes.map((x: any)=>{
+      console.log(data.value);
+
       if(x.name === data.value){
         this.formGroup.controls.projectType.setValue(Number(x.code));
       }
       return x;
     });
   }
+
   getDetails(id): any {
     this.projectService.getOne(id).subscribe(res=>{
       if(res.code==='00'){
         this.projectData = res.data;
         if(this.projectData){
           this.projectTypes.map((x: any)=>{
-            if(Number(x.code) === this.projectData.projectType){
+            if(Number(x?.code) === this.projectData?.projectType){
+              this.projectData.projectType =x.code;
               this.projectData.projectTypeName = x.name;
             }
             return x;
           });
+
           this.projectData.startTime = this.projectData.startTime&&new Date(+this.projectData.startTime);
           this.projectData.actualEndTime = this.projectData.actualEndTime&&new Date(+this.projectData.actualEndTime);
           this.projectData.expectEndTime = this.projectData.expectEndTime&&new Date(+this.projectData.expectEndTime);
@@ -120,6 +130,7 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   save(data) {
     data.unitPrice = data.unitPrice.replace(/,/g, '');
+    data.budget = data.budget.replace(/,/g, '');
     data.startTime=data.startTime&&CommonUtilsService.dateToString(data.startTime);
     data.expectEndTime=data.expectEndTime&&CommonUtilsService.dateToString(data.expectEndTime);
     data.actualEndTime=data.actualEndTime&&CommonUtilsService.dateToString(data.actualEndTime);

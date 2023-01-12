@@ -23,7 +23,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'hrm-management.department.form.name',
       flex: 0.3,
     },
     {
@@ -70,7 +70,6 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    console.log(this.searchResult);
     this.searchModel.status = 1;
     this.doSearch();
   }

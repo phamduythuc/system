@@ -71,7 +71,7 @@ export class ContractProfileDashboardsComponent
       style: 'currency',
       currency: 'VND',
     });
-        
+
     data.map((x) => {
       x.type = this.getTypeContract(x.type);
       x.effDate = CommonUtilsService.dateToString(x.effDate, false);
@@ -92,7 +92,7 @@ export class ContractProfileDashboardsComponent
         this.searchResult.data = this.mapData(res.data);
       })
     }
-    
+
   }
 
   handleDataKPI(data) {

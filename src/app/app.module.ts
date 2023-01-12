@@ -20,7 +20,6 @@ import {
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { SearchSelectBoxPipe } from './shared/search-select-box.pipe';
-import { DecimalNumberDirective } from './shared/directives/decimal-number.directive';
 
 const routerConfig: ExtraOptions = {
   // preloadingStrategy       : PreloadAllModules,
@@ -39,7 +38,7 @@ const routerConfig: ExtraOptions = {
       },
     },
   ],
-  declarations: [AppComponent, DecimalNumberDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

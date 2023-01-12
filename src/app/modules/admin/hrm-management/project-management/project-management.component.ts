@@ -25,7 +25,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     },
     {
       columnDef: 'name',
-      header: 'common.name',
+      header: 'common.name_project',
       flex: 0.3,
     },
     {

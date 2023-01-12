@@ -204,7 +204,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     id: 'hrmManagement',
     title: 'hrm-management.document.label',
     type: 'group',
-    role: [AuthoritiesConstant.CONTRACT],
+    role: [AuthoritiesConstant.HR_DOCUMENT],
     children: [
       {
         id: 'document',
@@ -213,10 +213,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:clipboard-list',
         link: '/hrm-management/document-management',
         role: [
-          AuthoritiesConstant.CONTRACT,
-          AuthoritiesConstant.CONTRACT_CREATE,
-          AuthoritiesConstant.CONTRACT_UPDATE,
-          AuthoritiesConstant.CONTRACT_READ,
+          AuthoritiesConstant.HR_DOCUMENT,
+          AuthoritiesConstant.HR_DOCUMENT_CREATE,
+          AuthoritiesConstant.HR_DOCUMENT_UPDATE,
+          AuthoritiesConstant.HR_DOCUMENT_DELETE,
+          AuthoritiesConstant.HR_DOCUMENT_READ,
+
         ],
       },
     ],

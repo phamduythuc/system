@@ -40,7 +40,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   listMember: Member[] = [];
   listStaffName: any;
   listStaffId: any;
-  totalMember: number;
+  totalMember: number=0;
   leadId: any;
   foodCtrl: FormControl;
 

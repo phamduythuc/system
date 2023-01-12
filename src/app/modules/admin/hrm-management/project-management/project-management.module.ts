@@ -12,6 +12,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
 import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
+import { DecimalNumberDirective } from '@shared/directives/decimal-number.directive';
+import { AlphabetOnlyDirective } from '@shared/directives/alphabet-only.directive';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
     ProjectEffortComponent,
     ProjectMemberComponent,
     VndOnlyDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    DecimalNumberDirective,
+    AlphabetOnlyDirective
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { CommonUtilsService } from './../../../../../shared/common-utils.service';
 import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../../../core/base.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -8,6 +9,7 @@ import { StaffService } from '@shared/services/staff.service';
 import {debounceTime, map} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import { DateAdapter } from '@angular/material/core';
+
 
 
 @Component({
@@ -42,24 +44,27 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     injector: Injector,
     public dialogRef: MatDialogRef<AddOrEditContractComponent>,
     private ContractService:ContractService,
-    private staffService:StaffService,
+    private staffService: StaffService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private _adapter: DateAdapter<any>
 
   ) {
     super(injector, ContractService, dialogRef);
+    console.log(dialogData);
+
     this.dialogId = dialogData?.id;
-    
+
     this.listStaff = dialogData.listUser;
-    
+
     this.listCaregories = dialogData.listCaregories;
+
     // listCaregories.CONTACT_TYPE
     // listCaregories.CONTRACT_STATUS
 
     if (this.dialogId) {
       this.getDetails(this.dialogId, () => {
         console.log(this.detailsData);
-        
+
         if(this.detailsData.contractFilePath){
           console.log(this.detailsData.contractFilePath.split("contract/"));
           this.detailsData.contractFilePath= this.detailsData.contractFilePath.split("contract/")[1]
@@ -83,7 +88,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
             }else{
               x.status = false
             }
-            return x 
+            return x
           })
         }
       );
@@ -94,14 +99,26 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
     });
+    this.formGroup.valueChanges.subscribe(form => {
+      if(form.salary) {
+        this.formGroup.patchValue({
+          salary: CommonUtilsService.formatCurrency(form.salary)
+        },{emitEvent: false})
+      }
+      if(form.insurance) {
+        this.formGroup.patchValue({
+          insurance: CommonUtilsService.formatCurrency(form.insurance)
+        },{emitEvent: false})
+      }
+    });
   }
 
   save() {
     const formData = new FormData();
     const data = this.formGroup.value;
+    data.insurance = data.insurance.replace(/,/g, '');
+    data.salary = data.salary.replace(/,/g, '');
     this.handleCoverTimeToString(data);
-    console.log(data);
-    
     if(this.dialogId){
       data.id = this.dialogId;
       formData.append('file', this.fileUpload.file || null);
@@ -158,5 +175,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     // this.drawer?.toggle();
     this.dialogRef.close(this.formGroup.value);
   }
-
+  formatSalary(e) {
+    console.log(e)
+  }
 }
