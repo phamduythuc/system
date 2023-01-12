@@ -1,23 +1,27 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
-import {IColumn} from '@layout/common/data-table/data-table.component';
-import {CommonUtilsService} from '@shared/common-utils.service';
-import {Validators} from '@angular/forms';
+import { IColumn } from '@layout/common/data-table/data-table.component';
+import { CommonUtilsService } from '@shared/common-utils.service';
+import { Validators } from '@angular/forms';
 import { AddOrEditDocumentComponent } from './add-or-edit-document/add-or-edit-document.component';
 import { HrDocumentService } from '@shared/services/hr-document.service';
 import { DetailDocumentComponent } from './detail-document/detail-document.component';
+import { AchievementService } from '@shared/services/achievement.service';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-document-management',
   templateUrl: './document-management.component.html',
-  styleUrls: ['./document-management.component.scss']
+  styleUrls: ['./document-management.component.scss'],
 })
-export class DocumentManagementComponent extends BaseComponent implements OnInit {
+export class DocumentManagementComponent
+  extends BaseComponent
+  implements OnInit
+{
   _permissionCodeName = 'DSPB';
   list_status = [];
   dataDocument = [];
-
 
   columns: IColumn[] = [
     {
@@ -38,29 +42,35 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
     //   columnDef: 'documentType',
     //   header: 'hrm-management.document.form.doc_type',
     // },
-    // {
-    //   columnDef: 'approveDate',
-    //   header: 'hrm-management.document.form.sub_date',
-    //   flex: 0.5,
-    // },
-    // {
-    //   columnDef: 'effDate',
-    //   header: 'hrm-management.document.form.effective_date',
-    // },
-    // {
-    //   columnDef: 'expDate',
-    //   header: 'hrm-management.document.form.expiration_date',
-    //   flex: 0.5,
-    // },
-    // {
-    //   columnDef: 'documentPath',
-    //   header: 'hrm-management.staff.detail.contract.link',
-    //   flex: 0.5,
-    // },
+    {
+      columnDef: 'approveDate',
+      header: 'hrm-management.document.form.sub_date',
+      flex: 0.5,
+      // cellRenderer: (element: any) =>
+      //   CommonUtilsService.dateToString(element.approveDate),
+    },
+    {
+      columnDef: 'effDate',
+      header: 'hrm-management.document.form.effective_date',
+      // cellRenderer: (element: any) =>
+      //   CommonUtilsService.dateToString(element.effDate),
+    },
+    {
+      columnDef: 'expDate',
+      header: 'hrm-management.document.form.expiration_date',
+      flex: 0.5,
+      // cellRenderer: (element: any) =>
+      //   CommonUtilsService.dateToString(element.expDate),
+    },
+    {
+      columnDef: 'documentPath',
+      header: 'hrm-management.staff.detail.contract.link',
+      flex: 0.5,
+    },
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit','delete'],
+      actions: ['view', 'edit', 'delete'],
       flex: 1.3,
     },
   ];
@@ -71,27 +81,29 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
     total: 0,
   };
 
-
   formSearch = this.fb.group({
-    keyword: ['',Validators.maxLength(100)],
+    keyword: ['', Validators.maxLength(100)],
   });
 
-  constructor(injector: Injector , public documentService: HrDocumentService) {
-    super(injector,documentService);
-    // this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
+  constructor(
+    injector: Injector,
+    public documentService: HrDocumentService,
+    public achievementService: AchievementService
+  ) {
+    super(injector, documentService);
+    this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
   }
-
 
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.doSearch();
   }
 
-  filterStatus(data){
-    if(data){
+  filterStatus(data) {
+    if (data) {
       this.searchModel.status = Number(data);
-    }else{
-    this.searchModel.status = '';
+    } else {
+      this.searchModel.status = '';
     }
     this.doSearch();
   }
@@ -99,7 +111,7 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
   mapData(data: any) {
     data.map((x) => {
       // x.type = this.getTypeContract(x.type);
-      x.effDate = CommonUtilsService.dateToString(x.effDate, false);
+      x.effDate = CommonUtilsService.dateToString(x.effDate, true);
       // x.salary = x.salary.toLocaleString() + ' đ';
       return x;
     });
@@ -107,12 +119,17 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
     return data;
   }
 
-
   doSearch() {
-    this.searchModel = {...this.searchModel,page: 0, ...this.formSearch.value};
-    console.log(this.searchModel);
-
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
     this.processSearch(this.searchModel);
+    this.searchResult.data = this.mapData(this.searchResult.data);
+    // this.dataDocument = this.searchResult.data.map((item) => {
+    //   return item.documentName;
+    // });
   }
 
   actionClick(e: any): void {
@@ -131,30 +148,50 @@ export class DocumentManagementComponent extends BaseComponent implements OnInit
   }
 
   addOrEditDocument(id?: any): void {
-    this.showDialog(AddOrEditDocumentComponent, {
+    this.showDialog(
+      AddOrEditDocumentComponent,
+      {
+        data: {
+          id,
+          projects: this.searchResult.data,
+        },
+        width: '60vw',
+        // height: '45vh',
+        disableClose: false,
+      },
+      (value) => {
+        if (value) {
+          this.doSearch();
+        }
+      }
+    );
+  }
+
+  showDetail(id) {
+    this.showDialog(DetailDocumentComponent, {
       data: {
         id,
-        projects:this.searchResult.data
       },
       width: '60vw',
-      // height: '45vh',
-      disableClose: false
-    }, (value) => {
-      if (value) {
-        this.doSearch();
-      }
+      height: '85vh',
+      disableClose: true,
     });
   }
 
-  showDetail(id){
-    this.showDialog(DetailDocumentComponent, {
-        data: {
-          id
-        },
-        width: '60vw',
-        height: '85vh',
-        disableClose: true
-      }
-    );
+  download(data: any) {
+    this.achievementService
+      .renderFile({
+        filePath: data,
+        fileType: 2,
+      })
+      .subscribe((res) => {
+        const res1 = this.getResponseFromHeader(res.headers);
+        if (this.isSuccess(res1)) {
+          const fileName = this.getFileName(res.headers);
+          FileSaver.saveAs(res.body, fileName);
+        } else {
+          this.showSnackBar(res1.message, 'error');
+        }
+      });
   }
 }
