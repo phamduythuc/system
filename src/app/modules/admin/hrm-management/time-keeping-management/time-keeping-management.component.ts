@@ -34,7 +34,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     else {
       this.searchModel = {
         page: 0,
-        pageSize: 20,
+        pageSize: 10,
         status: this.formSearch.value['option']
       };
     }
