@@ -20,5 +20,9 @@ export class ReportsService extends BaseService {
     return this.http.put(`${environment.apiUrl}/report`, formData);
   }
 
+  downloadReports(data:any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/report/export/${data}`);
+  }
+
 
 }

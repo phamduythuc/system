@@ -405,7 +405,7 @@
           "target_kpi": "KPI mục tiêu(MM)",
           "salary_received": "Mức lương thực nhận(VNĐ)",
           "guaranteed_kpi": "KPI đảm bảo(MM)",
-          "reality_kpi": "KPI phân bổ thực tế (2,5MM)",
+          "reality_kpi": "KPI phân bổ thực tế",
           "project_code": "Mã dự án",
           "project_name": "Tên dự án",
           "recognize": "Ghi nhận nỗ lực(MM)",

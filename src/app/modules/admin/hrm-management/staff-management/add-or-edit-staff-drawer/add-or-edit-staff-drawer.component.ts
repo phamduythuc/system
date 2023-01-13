@@ -71,7 +71,7 @@ export class AddOrEditStaffDrawerComponent
     //Địa chỉ đầy đủ
     address: [],
     //Email của công ty
-    companyEmail: [],
+    companyEmail: ['', [ Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     //Tên quốc gia
     country: [],
     //Người tạo
@@ -92,7 +92,7 @@ export class AddOrEditStaffDrawerComponent
     //Cấp bậc giáo dục
     education: [],
     //Email cá nhân
-    email: [null, Validators.pattern('^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$')],
+    email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     //Thông tin liên lạc khẩn cấp
     emergencyUser: [],
     //Dân tộc

@@ -95,6 +95,7 @@
                       </mat-label>
                       <input
                         matInput
+                        required
                         formControlName="dateOfBirth"
                         [matDatepicker]="dateOfBirth"
                         datePickerFormat="DD/MM/YYYY"
@@ -399,6 +400,7 @@
                   </mat-label>
                   <input
                     matInput
+                    required
                     [min]="formGroup.value.hireDate"
                     [max]="formGroup.value.leaveDate"
                     formControlName="staOfficalDate"
