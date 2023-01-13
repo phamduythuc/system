@@ -4,17 +4,10 @@
         <mat-card-header class="flex h-auto justify-center sticky top-0 bg-card w-full z-10">
             <mat-card-title>Danh sách nhân viên</mat-card-title>
         </mat-card-header>
+        <!-- content -->
         <mat-list class="w-full h-full flex flex-col justify-between">
             <mat-list-item *ngFor="let staff of searchResult.data;" class="mt-4"
                 [ngClass]="{'bg-sky-500':(idChosed===staff.id)}" (click)="idChosed=staff.id">
-                <!-- <div class="flex h-15 items-center ">
-                    <div class=" flex items-center justify-center w-10 h-full">
-                        <img matListItemAvatar [src]="staff.imageUrl" alt="..." class="rounded-full">
-                    </div>
-                    <div class=" h-full flex items-center justify-center ml-5">
-                        <a [routerLink]="['staff', staff.id]">{{staff.fullName}}</a>
-                    </div>
-                </div> -->
                 <a [routerLink]="['staff', staff.id]" class="w-full flex items-center justify-start">
                     <div class=" absolute inline-block w-14 h-full rounded-[10px] z-[2]">
                         <img matListItemAvatar [src]="staff.imageUrl" alt="" class="rounded-[28px] h-full">
