@@ -27,7 +27,12 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   }
 
   private updateView(): void {
+    // const x = ['CONTRACT'];
+    // const hasAnyAuthority = this.accountService.hasAnyAuthority(x);
+
     const hasAnyAuthority = this.accountService.hasAnyAuthority(this.authorities);
+    // console.log(this.authorities);
+
     this.viewContainerRef.clear();
     if (hasAnyAuthority) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
