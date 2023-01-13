@@ -76,15 +76,15 @@
       >
         <mat-icon
           class="icon-size-5 mr-2"
-          svgIcon="heroicons_outline:folder-open"
+          svgIcon="heroicons_outline:paper-clip"
         ></mat-icon>
         <!-- <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span> -->
         <label>Template</label>
       </button>
-
+   
       <label>{{
-        (this.detailsData?.documentName
-          ? this.detailsData?.documentName
+        (this.detailsData?.templateName
+          ? this.detailsData?.templateName
           : "Upload file"
         ) | transloco
       }}</label>
@@ -93,7 +93,7 @@
       <div class="w-1/2 flex flex-wrap gap-5">
         <span
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.contractFilePathDemo)"
+          (click)="download(formGroup.value.templateName)"
           >{{
             "hrm-management.reports.detail.downloadTemplate" | transloco
           }}</span
@@ -103,7 +103,7 @@
         }}</span> -->
         <span
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.contractFilePath)"
+          (click)="download(formGroup.value.templatePath)"
           >{{
             "hrm-management.reports.detail.downloadReports" | transloco
           }}</span
@@ -137,26 +137,13 @@
       </div>
     </div>
     <div class="data-table w-full mt-4 h-3/5">
-      <div class="sm:col-span-4">
-        <div class="header flex justify-between items-center pb-3">
-          <div class="text-2xl font-bold card-title">
-            {{ "hrm-management.reports.detail.listSheet" | transloco }}
-          </div>
-          <button mat-raised-button color="primary" (click)="addNewRow()">
-            <mat-icon
-              class="icon-size-6"
-              svgIcon="heroicons_outline:plus"
-            ></mat-icon>
-            {{ "effort.add" | transloco }}
-          </button>
-        </div>
-      </div>
 
-      <app-list-param-reports [data]="detailsData?.sheetData" [readonly]="readonly" (callback)="handleDataListParam($event)"></app-list-param-reports>
+      <app-list-param-reports [data]="detailsData?.listSheet" [addRow]="random" [readonly]="readonly"></app-list-param-reports>
       
-
+    
     </div>
   </div>
 
+  <!--    footer-->
 
 </ng-container>

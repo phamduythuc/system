@@ -95,7 +95,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     );
     this.paginate.pageSize = e.pageSize;
     this.paginate.page = e.pageIndex;
-    this.paginate.keyword = this.startDate.value.keyword,
+    this.paginate.keyword = this.startDate.value.keyworAd,
     this.view(this.paginate);
   }
 

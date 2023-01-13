@@ -16,11 +16,6 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
   _permissionCodeName = 'DSDA';
 
   columns: IColumn[] = [
-    // {
-    //   columnDef: 'stt',
-    //   header: 'common.stt',
-    //   flex: 0.3,
-    // },
     {
       columnDef: 'name',
       header: 'common.name',
@@ -30,11 +25,11 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
       header: 'hrm-management.reports.form.startRow',
     },
     {
-      columnDef: 'startCol',
+      columnDef: 'startColumn',
       header: 'hrm-management.reports.form.startCol',
     },
     {
-      columnDef: 'sql',
+      columnDef: 'scriptSql',
       header: 'hrm-management.reports.form.sql',
     },
     {
@@ -48,16 +43,6 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
     },
   ];
 
-  // get displayedColumns(): any {
-  //   return this.columns.map((c) => c.columnDef);
-  // }
-
-  // formGroup = this.fb.group({
-  //   name: [null, Validators.required],
-  //   code: [null, Validators.required],
-  //   description: [null],
-  // });
-
   dialogId: any = null;
 
   readonly = true;
@@ -66,16 +51,19 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
 
   fileURL: any;
 
-  sheetData:any = {
+  listSheet: any = {
     data: [],
-    validate: false
+    validate: false,
   };
 
+  fileUpload:any 
+
+  random:any
 
   constructor(
     injector: Injector,
     public dialogRef: MatDialogRef<DetailReportsComponent>,
-    private ReportsService: ReportsService,
+    public ReportsService: ReportsService,
     private achievementService: AchievementService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
@@ -87,133 +75,89 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
       name: [null, Validators.required],
       code: [null, Validators.required],
       description: [null],
-      contractFilePath: [''],
-      contractFilePathDemo: [''],
-      sheetData: this.fb.array([]),
+      templatePath: [''],
+      templateName: [''],
+      listSheet: this.fb.array([]),
     });
-
     if (this.dialogId) {
-      // this.getDetails(this.dialogId, () => {
-      let data = {
-        id: 1,
-        name: 'Tên báo cáo 20',
-        code: 'QĐ_07',
-        description: 'Mô tả báo cáo 144 ',
-        contractFilePath: 'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
-        contractFilePathDemo:
-          'contract/a7dc6743-e3b0-4174-bdd0-576d87834150.docx',
-        documentName: 'LU. Đánh giá sau ĐT.docx',
-        sheetData: [
-          {
-            name: 'Doanh thu thang 1',
-            sql: 'Select * from doanhthu where name=:name and totalRevenue=:totalRevenue and createdDate=:createdDate',
-            startRow: 2,
-            startCol: 5,
-            sheetOrder: 1,
-            comment:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            listParam: [
-              {
-                id: 11,
-                name: 'name',
-                type: 'STRING',
-                value: 'Doanh thu',
-              },
-              {
-                id: 13,
-                name: 'totalRevenue',
-                type: 'NUMBER',
-                value: '10000000',
-              },
-              {
-                id: 12,
-                name: 'createdDate',
-                type: 'DATETIME',
-                value: '01/01/2023',
-              },
-            ],
-          },
-          {
-            name: 'Doanh thu thang 2',
-            sql: '',
-            startRow: 1,
-            startCol: 8,
-            sheetOrder: 2,
-            comment: 'Lorem Ipsum is simply dummy text ',
-            listParam: [
-              {
-                id: 11,
-                name: 'Age',
-                type: 'NUMBER',
-                value: '18',
-              },
-              {
-                id: 12,
-                name: 'createdDate',
-                type: 'DATETIME',
-                value: '01/01/2023',
-              },
-            ],
-          },
-        ],
-      };
-
-      this.detailsData = data;
-
-      // this.detailsData.sheetData.map((x) => {
-      //   this.efforts.push(this.newItem(x));
-      // });
-      
-      this.formGroup.patchValue(this.detailsData);
-      // });
-    }else{
-      this.detailsData = this.formGroup.value
-
+      this.getDetails(this.dialogId, () => {
+        this.formGroup.patchValue(this.detailsData);
+      });
+    } else {
+      this.detailsData = this.formGroup.value;
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   save() {
-    console.log(this.formGroup.value);
-    this.formGroup.value.sheetData = this.sheetData.data
+    // console.log(this.formGroup.value);
+    this.formGroup.value.listSheet = this.listSheet.data;
+
+    const formData = new FormData();
+    const data = this.formGroup.value;
+
+    if (this.dialogId && this.dialogId !== -1) {
+      data.id = this.dialogId;
+      formData.append('file', this.fileUpload || null);
+      formData.append(
+        'data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+      this.ReportsService.updateReports(formData).subscribe((res) => {
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.close();
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    } else {
+      formData.append('file', this.fileUpload || null);
+      formData.append(
+        'data',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+      this.ReportsService.createReports(formData).subscribe((res) => {
+        if ('00' === res.code) {
+          this.showSnackBar(res.message, 'success');
+          this.close();
+        } else {
+          this.showSnackBar(res.message, 'error');
+        }
+      });
+    }
   }
 
   // get efforts(): FormArray {
-  //   return this.formGroup.get('sheetData') as FormArray;
+  //   return this.formGroup.get('listSheet') as FormArray;
   // }
 
   newItem(data: any) {
     return {
       name: null,
-      sql: null,
+      scriptSql: null,
       startRow: null,
-      startCol: null,
+      startColumn: null,
       comment: null,
       listParam: [],
-      sheetOrder: null
+      sheetOrder: null,
     };
   }
 
   addNewRow() {
-    console.log(this.detailsData);
-    
+
     this.isLoading = true;
-    this.detailsData.sheetData.push(this.newItem({}));
+    this.detailsData.listSheet.push(this.newItem({}));
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
 
-    console.log(this.detailsData);
-
+    this.random = (Math.random() + 1).toString(36).substring(7);
   }
 
   deleteRow(index: number) {
-    // delete this.listStaff[index];
-    // delete this.filteredList[index];
     this.isLoading = true;
-    // this.efforts.removeAt(index);
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
@@ -241,9 +185,9 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
-      this.formGroup.value.file = file;
-      this.detailsData.documentName = file.name;
-
+      this.fileUpload = file;
+      this.detailsData.templateName = file.name;
+      
       reader.onload = () => {
         this.fileURL = reader.result;
       };
@@ -255,13 +199,12 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
     this.dialogRef.close(this.formGroup.value);
   }
 
-
-  handleDataListParam(data){
-    if(data.type === 'delete'){
-      let arr = [...this.detailsData.sheetData];
+  handleDataListParam(data) {
+    if (data.type === 'delete') {
+      let arr = [...this.detailsData.listSheet];
       arr.splice(data.data, 1);
-      this.detailsData.sheetData = arr
+      this.detailsData.listSheet = arr;
     }
-    this.sheetData = data
+    this.listSheet = data;
   }
 }

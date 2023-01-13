@@ -139,7 +139,6 @@ export class DetailProfileDashboardsComponent
     this.mapData();
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
-    console.log(this.data);
 
   }
 
@@ -236,6 +235,13 @@ export class DetailProfileDashboardsComponent
       this.data.hireDate,
       false
     );
+
+    const VND = new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+
+    this.data.salary = VND.format(parseInt(this.data.salary)),
 
     this.formGroup.patchValue(this.data);
   }

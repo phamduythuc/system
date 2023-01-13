@@ -100,12 +100,12 @@ export class ReportsManagementComponent
     console.log(this.searchModel);
     
     this.processSearch(this.searchModel,()=>{
-      let ar = this.searchResult.data
+      // let ar = this.searchResult.data
       
-      this.searchResult.data = ar.data
+      // this.searchResult.data = ar.data
 
-      this.searchResult.totalRecords = this.searchResult.data.length;
-      this.pageIndex = 1;
+      // this.searchResult.totalRecords = this.searchResult.data.length;
+      // this.pageIndex = 1;
     });
     
     // this.searchResult.data = [
