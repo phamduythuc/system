@@ -16,16 +16,31 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     keyword: [''],
     option: ['1']
   });
-  constructor(injector: Injector,public dialog: MatDialog, private router : Router) {
+  constructor(injector: Injector, public dialog: MatDialog, private router: Router) {
     super(injector);
   }
 
   ngOnInit(): void {
-    //  this.router.navigate(['/hrm-management/time-keeping/staff/580'])
   }
 
-  importFile(){
-    this.dialog.open(ImportFileTimeKeepingComponent,{
+  doSearch() {
+    if (this.formSearch.value['keyword'] != '') {
+      this.searchModel = {
+        ...this.searchModel,
+        keyword: this.formSearch.value['keyword'],
+      }
+    }
+    else {
+      this.searchModel = {
+        page: 0,
+        pageSize: 10,
+        status: this.formSearch.value['option']
+      };
+    }
+  }
+
+  importFile() {
+    this.dialog.open(ImportFileTimeKeepingComponent, {
       // height: '400px',
       width: '600px',
     });
@@ -34,10 +49,10 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
   onStatusChange(e?: any) {
     this.searchModel = {
       page: 0,
-      pageSize: 3,
+      pageSize: 10,
       status: e.value
     };
-    this.processSearch(this.searchModel);
+    // this.processSearch(this.searchModel);
   }
 
 }
