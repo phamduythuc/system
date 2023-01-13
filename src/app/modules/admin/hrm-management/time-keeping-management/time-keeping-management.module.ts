@@ -8,6 +8,7 @@ import { CalendarTimeKeepingComponent } from './calendar-time-keeping/calendar-t
 import { SharedModule } from '@shared/shared.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/import-file-time-keeping.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ImportFileTimeKeepingComponent } from './import-file-time-keeping/impor
     CommonModule,
     TimeKeepingManagementRoutingModule,
     SharedModule,
-    FullCalendarModule
+    FullCalendarModule,
+    MatPaginatorModule
   ]
 })
 export class TimeKeepingManagementModule { }
