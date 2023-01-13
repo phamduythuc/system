@@ -223,6 +223,17 @@
         "number" : "Number"
       }
     },
+    "time-keeping": {
+      "title": "Time Keeping",
+      "form": {
+        "member": "Member",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "addMember": "Add member",
+        "choose": "Choose member",
+        "number" : "Number"
+      }
+    },
     "contract": {
       "title": "Contract",
       "label": "Contract & Salary",

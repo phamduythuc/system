@@ -126,6 +126,7 @@ export class ContractManagementComponent
         return convetSalary;
       });
       this.searchResult.data = convertData;
+
       this.dataDocument = this.searchResult.data.map((item) => {
         return item.documentName;
       });
