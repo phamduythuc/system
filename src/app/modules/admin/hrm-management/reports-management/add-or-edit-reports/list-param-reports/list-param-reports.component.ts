@@ -77,12 +77,16 @@ export class ListParamReportsComponent implements OnInit {
           header: 'hrm-management.reports.form.paramValue',
         }
       ];
+    }else{
+      this.callbackData()
     }
 
-    this.callbackData()
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+    
+  }
 
   changeParamType(index_list_param, index_sheet) {
     if (
@@ -133,6 +137,7 @@ export class ListParamReportsComponent implements OnInit {
     }
 
     let checkValidate = true;
+console.log(this.data);
 
     this.data.map((x) => {
       if (

@@ -94,6 +94,19 @@ const routes: Routes = [
     },
   },
   {
+    path: 'time-keeping',
+    loadChildren: () =>
+      import(
+        'app/modules/admin/hrm-management/time-keeping-management/time-keeping-management.module'
+      ).then((m) => m.TimeKeepingManagementModule),
+    data: {
+      breadcrumb: {
+        label: 'hrm-management.time-keeping.title',
+        url: 'hrm-management/time-keeping',
+      },
+    },
+  },
+  {
     path: 'contract-management',
     loadChildren: () =>
       import(
