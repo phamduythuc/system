@@ -15,6 +15,7 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
   listStaff: any;
   imageUrl: any;
   firstStaff: any;
+  idChosed:any;
   constructor(injector: Injector,
     public staffService: StaffService,
     private achievementService: AchievementService,
@@ -43,6 +44,7 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
   callback(): void {
     if (this.searchResult.data.length > 0) {
       this.firstStaff = this.searchResult.data[0].id;
+      this.idChosed=this.firstStaff;
       this.router.navigate([`/hrm-management/time-keeping/staff/${this.firstStaff}`]);
       this.searchResult.data.forEach((item) => {
         if (item.imageUrl) {

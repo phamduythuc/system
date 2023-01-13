@@ -21,6 +21,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
+    this.doSearch()
   }
 
   doSearch() {
@@ -33,7 +34,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     else {
       this.searchModel = {
         page: 0,
-        pageSize: 10,
+        pageSize: 20,
         status: this.formSearch.value['option']
       };
     }
@@ -49,7 +50,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
   onStatusChange(e?: any) {
     this.searchModel = {
       page: 0,
-      pageSize: 10,
+      pageSize: 20,
       status: e.value
     };
     // this.processSearch(this.searchModel);
