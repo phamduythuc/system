@@ -93,7 +93,7 @@
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >
-            <ng-template #rowTemplate let-row="row" let-column="column">
+            <!-- <ng-template #rowTemplate let-row="row" let-column="column">
               <ng-container [ngSwitch]="column.columnDef">
                 <ng-container *ngSwitchDefault>{{
                   row[column.columnDef]
@@ -108,7 +108,7 @@
                   >
                 </ng-container>
               </ng-container>
-            </ng-template>
+            </ng-template> -->
           </app-data-table>
         </div>
       </div>

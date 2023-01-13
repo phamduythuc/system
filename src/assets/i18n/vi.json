@@ -296,7 +296,7 @@
         "downloadReports": "Tải báo cáo",
         "listSheet": "Danh sách các sheet"
       }
-      
+
     }
   },
   "message": {
@@ -341,7 +341,7 @@
     "efficiency": "Hiệu suất",
     "cumulativeDifference" : "Chênh lệch lũy kế",
     "allocate_effort" : "Phân bổ nỗ lực",
-    "conversionEffort": "Quy đổi nỗ lực",
+    "conversionEffort": "Nỗ lực quy đổi",
     "timeAllocation" : "Phân bổ thời gian",
     "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
     "role": "Vai trò",
