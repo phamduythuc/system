@@ -49,12 +49,13 @@ export class ImportFileTimeKeepingComponent extends BaseComponent implements OnI
       'timeKeepImport', formValue
     );
     this.timeKeepingService.importTimeKeeping(formData).subscribe((res) => {
-      if ('00' === res.code) {
-        this.showSnackBar(res.message, 'success');
-        // this.close();
-      } else {
-        this.showSnackBar(res.message, 'error');
-      }
+      console.log(res)
+      // if ('00' === res.code) {
+      //   this.showSnackBar(res.message, 'success');
+      //   // this.close();
+      // } else {
+      //   this.showSnackBar(res.message, 'error');
+      // }
     });
     this.close();
   }
