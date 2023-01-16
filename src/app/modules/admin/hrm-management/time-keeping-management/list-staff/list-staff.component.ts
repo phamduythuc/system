@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base.component';
 import { AchievementService } from '@shared/services/achievement.service';
@@ -12,6 +12,7 @@ import { StaffService } from '@shared/services/staff.service';
 })
 export class ListStaffComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() formSearch: any;
+  @Output() totalRecords = new EventEmitter<number>();
   listStaff: any;
   imageUrl: any;
   firstStaff: any;
@@ -43,6 +44,7 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
 
   callback(): void {
     if (this.searchResult.data.length > 0) {
+      this.totalRecords.emit(this.searchResult.totalRecords)
       this.firstStaff = this.searchResult.data[0].id;
       this.idChosed=this.firstStaff;
       this.router.navigate([`/hrm-management/time-keeping/staff/${this.firstStaff}`]);

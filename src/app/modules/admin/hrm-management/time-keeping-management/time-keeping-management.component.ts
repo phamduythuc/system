@@ -16,6 +16,7 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
     keyword: [''],
     option: ['1']
   });
+  totalRecords:number=0;
   constructor(injector: Injector, public dialog: MatDialog, private router: Router) {
     super(injector);
   }
@@ -50,10 +51,22 @@ export class TimeKeepingManagementComponent extends BaseComponent implements OnI
   onStatusChange(e?: any) {
     this.searchModel = {
       page: 0,
-      pageSize: 20,
+      pageSize: 10,
       status: e.value
     };
     // this.processSearch(this.searchModel);
+  }
+
+  totalRecord(event:any){
+    this.totalRecords= event;
+  }
+
+  handlePageEvent(e:any){
+    this.searchModel = {
+      page: e.pageIndex,
+      pageSize: e.pageSize,
+      status: this.formSearch.value['option']
+    }
   }
 
 }
