@@ -25,7 +25,6 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
   ngOnChanges(changes: SimpleChanges): void {
     this.searchModel = changes.formSearch.currentValue;
     this.doSearch();
-    debugger
   }
 
   ngOnInit(): void {
