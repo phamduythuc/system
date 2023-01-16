@@ -42,6 +42,12 @@ export class ContractProfileDashboardsComponent
       flex: 0.5,
     },
     {
+      columnDef: 'effDate',
+      header: 'hrm-management.staff.detail.contract.startTime',
+      flex: 0.5,
+    },
+    
+    {
       columnDef: 'salary',
       header: 'hrm-management.staff.detail.contract.salary',
       flex: 0.5,

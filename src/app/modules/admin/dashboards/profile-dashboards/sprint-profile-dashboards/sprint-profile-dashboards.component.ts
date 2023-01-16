@@ -21,7 +21,10 @@ import moment, { Moment } from 'moment';
   templateUrl: './sprint-profile-dashboards.component.html',
   styleUrls: ['./sprint-profile-dashboards.component.scss'],
 })
-export class SprintProfileDashboardsComponent extends BaseComponent implements OnInit {
+export class SprintProfileDashboardsComponent
+  extends BaseComponent
+  implements OnInit
+{
   @Input() staffId: any;
 
   @Output() callback = new EventEmitter<any>();
@@ -67,7 +70,9 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
     kpiInsure: [''],
   });
 
-  data:any = []
+  data: any = [];
+
+  disabledBtn = false;
 
   constructor(
     injector: Injector,
@@ -76,13 +81,13 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
     private _adapter: DateAdapter<any>
   ) {
     super(injector, DashboardsProfileService);
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // this.formGroup.patchValue(this.data);
     // this.data = this.data;
     // this.formGroup.patchValue(this.data?.salary);
+    this.changePercentEffort();
   }
 
   ngOnInit(): void {
@@ -97,7 +102,6 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
     });
-
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -116,14 +120,16 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
     ctrlValue.date('1');
     formTarget.setValue(ctrlValue);
     datepicker.close();
+    this.getData(this.startDate.value.startMonth)
+    // console.log(CommonUtilsService.dateToString(this.startDate.value.startMonth, false));
+    
   }
 
   getData(data) {
     this.DashboardsProfileService.getSprint({
       month: CommonUtilsService.dateToString(data, false),
-      staffId: this.staffId
+      staffId: this.staffId,
     }).subscribe((res: any) => {
-      
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
@@ -142,6 +148,18 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
     });
   }
 
+  changePercentEffort() {
+    let total = 0;
+    this.data?.data.map((x) => {
+      total += Number(x.percentEffort);
+    });
+    if (total === 100) {
+      this.disabledBtn = false;
+    } else {
+      this.disabledBtn = true;
+    }
+  }
+
   view() {
     this.startDate.value.startMonth = CommonUtilsService.dateToString(
       this.startDate.value.startMonth
@@ -157,24 +175,20 @@ export class SprintProfileDashboardsComponent extends BaseComponent implements O
   saveData() {
     this.data?.data.map((x) => {
       x.acceptanceEffort = Number(x.percentEffort);
-      
+
       return x;
     });
 
     let payload = {
-      month: CommonUtilsService.dateToString(
-        this.startDate.value.startMonth
-      ),
+      month: CommonUtilsService.dateToString(this.startDate.value.startMonth),
       effortDetail: this.data?.data,
     };
-    this.DashboardsProfileService.updateEffort(payload).subscribe(res=>{
+    this.DashboardsProfileService.updateEffort(payload).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
       } else {
         this.showSnackBar(res.message, 'error');
       }
-
-    })
+    });
   }
-
 }

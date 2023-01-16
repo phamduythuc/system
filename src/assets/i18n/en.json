@@ -422,7 +422,7 @@
           "target_kpi": "Target KPI(MM)",
           "salary_received": "Salary Received(VNĐ)",
           "guaranteed_kpi": "Guaranteed KPI(MM)",
-          "reality_kpi": "Reality KPI (2,5MM)",
+          "reality_kpi": "Reality KPI",
           "project_code": "Project code",
           "project_name": "Project name",
           "recognize": "Recognize the effort(MM)",

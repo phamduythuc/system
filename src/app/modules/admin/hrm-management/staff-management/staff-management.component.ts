@@ -48,10 +48,10 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
       columnDef: 'companyEmail',
       header: 'common.companyEmail',
     },
-    {
-      columnDef: 'salary',
-      header: 'common.salary',
-    },
+    // {
+    //   columnDef: 'salary',
+    //   header: 'common.salary',
+    // },
     {
       columnDef: 'dateOfBirth',
       header: 'common.dateOfBirth',
@@ -229,6 +229,23 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     this.searchModel.status = '';
     }
     this.doSearch();
+    
+    // if(data == 2){
+    //   this.columns.map(x=>{
+    //     if(x.columnDef == 'action'){
+    //       x.actions = ['view']
+    //     }
+    //     return x
+    //   })
+    // }else{
+    //   this.columns.map(x=>{
+    //     if(x.columnDef == 'action'){
+    //       x.actions = ['view','edit']
+    //     }
+    //     return x
+    //   })
+    // }
+    
 
   }
 }
