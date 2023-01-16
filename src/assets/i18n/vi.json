@@ -37,7 +37,7 @@
       "view": "Xem"
     },
     "keyword": "Từ khóa",
-    "keySearch" : "Từ khóa theo Tên, Mã",
+    "keySearch" : "Từ khóa theo Tên, Số điện thoại, Địa chỉ",
     "fromMonth": "Từ tháng",
     "team": "Nhóm",
     "toMonth": "Đến tháng",
@@ -244,7 +244,8 @@
       "signDate": "Ngày ký",
       "salary": "Mức lương",
       "insurance": "Bảo hiểm",
-      "link": "Tải file"
+      "link": "Tải file",
+      "notFound": "Không tìm thấy tùy chọn nào!"
     },
     "document": {
       "title": "Văn bản",

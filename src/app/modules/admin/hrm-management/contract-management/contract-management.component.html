@@ -64,11 +64,11 @@
                 }}</ng-container>
 
                 <ng-container *ngSwitchCase="'contractFilePath'">
-                  <span *ngIf="this.dataDocument"
+                  <span *ngIf="row.documentName"
                     class="cursor-pointer"
                     (click)="download(row.contractFilePath)"
-                    >{{'hrm-management.contract.link'| transloco}}</span
-                  >
+                    >{{'hrm-management.contract.link'| transloco}}
+                  </span>
                 </ng-container>
               </ng-container>
             </ng-template>

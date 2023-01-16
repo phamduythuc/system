@@ -190,7 +190,7 @@
       </div>
     </div>
 
-    <div class="field flex mb-4">
+    <div class="field flex mb-4" *ngIf="this.detailsData?.documentName">
       <div class="w-1/2 flex">
         <mat-label class="w-1/3 p-2 font-semibold">{{
           "hrm-management.contract.link" | transloco

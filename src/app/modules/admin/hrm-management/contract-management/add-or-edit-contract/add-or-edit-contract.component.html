@@ -40,7 +40,7 @@
               formControlName="staffId"
             >
             <mat-option>
-              <ngx-mat-select-search [placeholderLabel]="'hrm-management.staff.title' | transloco" [formControlName]="'searchStaff'">
+              <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco" [placeholderLabel]="'hrm-management.staff.title' | transloco" [formControlName]="'searchStaff'">
                 <mat-icon ngxMatSelectSearchClear
                           class="icon-size-5"
                           [svgIcon]="'heroicons_solid:x'"
@@ -157,6 +157,7 @@
               [placeholder]="'hrm-management.contract.termPeriod' | transloco"
               formControlName="termPeriod"
               matInput
+              type="number"
             />
           </mat-form-field>
           <app-error-message
@@ -307,12 +308,13 @@
             class="hidden"
             accept=".pdf, .doc, .docx"
             (change)="uploadFile($event)"
+          
           />
           <label
             for="file"
             class="flex justify-start items-center w-full h-full"
           >
-            <span *ngIf="!this.detailsData" class="cursor-pointer">Upload file</span>
+            <span *ngIf="!this.detailsData || this.detailsData.documentName === null" class="cursor-pointer">Upload file</span>
             <span *ngIf="this.detailsData?.documentName" class="cursor-pointer">{{this.detailsData?.documentName}}</span>
 
 

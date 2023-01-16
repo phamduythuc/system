@@ -92,7 +92,6 @@ export class ContractManagementComponent
   ngOnInit(): void {
     this.searchModel.status = 1;
     this.doSearch();
-
   }
 
   mapData(data: any) {

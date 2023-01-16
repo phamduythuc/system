@@ -38,7 +38,7 @@
       "view": "View"
     },
     "keyword": "Keyword",
-    "keySearch" : "Keyword by Name, Code",
+    "keySearch" : "Keyword by Name, Phone Number, Address",
     "fromMonth": "From month",
     "team": "Team",
     "toMonth": "To month",
@@ -245,7 +245,8 @@
       "signDate": "Sign day",
       "salary": "Salary",
       "insurance": "Insurance",
-      "link": "Download"
+      "link": "Download",
+      "notFound": "No options found!"
     },
     "document": {
       "title": "Documents",
