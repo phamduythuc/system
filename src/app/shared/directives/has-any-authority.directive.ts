@@ -15,7 +15,7 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   @Input()
   set hasAnyAuthority(value: string | string[]) {
     this.authorities = typeof value === 'string' ? [value] : value;
-    console.log(this.authorities);
+    // console.log(this.authorities);
 
     this.updateView();
     // Get notified each time authentication state changes.
