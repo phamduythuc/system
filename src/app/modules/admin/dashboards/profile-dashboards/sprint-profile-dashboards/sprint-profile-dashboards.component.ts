@@ -60,7 +60,7 @@ export class SprintProfileDashboardsComponent
   ];
 
   startDate = this._formBuilder.group({
-    startMonth: [moment().add(-1, 'month').startOf('month')],
+    startMonth: [moment().add(0, 'month').startOf('month')],
   });
 
   formGroup = this._formBuilder.group({
@@ -98,7 +98,6 @@ export class SprintProfileDashboardsComponent
       keyword: '',
     };
     this.getData(this.startDate.value.startMonth);
-
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
     });
@@ -136,6 +135,10 @@ export class SprintProfileDashboardsComponent
         extraData: res.extraData,
       };
       if (res.extraData) {
+
+        console.log(res.extraData);
+        res.extraData.salary = CommonUtilsService.formatVND(res.extraData.salary)
+        res.extraData.salaryActual = CommonUtilsService.formatVND(res.extraData.salaryActual)
         this.formGroup.patchValue(res.extraData);
       } else {
         this.formGroup.patchValue({

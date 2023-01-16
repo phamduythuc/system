@@ -59,4 +59,16 @@ export class CommonUtilsService {
     }
     return moment(value, DATE_FORMAT).toDate();
   }
+
+  public static formatVND(value: any, isFullDate?: boolean) {
+    const VND = new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
+
+    if(value){
+      value = VND.format(parseInt(value));
+    }
+    return value
+  }  
 }

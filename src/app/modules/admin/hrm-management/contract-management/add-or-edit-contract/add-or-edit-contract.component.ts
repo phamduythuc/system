@@ -83,7 +83,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
       ).subscribe(
         res => {
           this.listStaff.map(x=>{
-            if(x.fullName.trim().toLowerCase().includes(res)){
+            if(x.fullName.trim().toLowerCase().includes(res.toLowerCase())){
               x.status = true
             }else{
               x.status = false
