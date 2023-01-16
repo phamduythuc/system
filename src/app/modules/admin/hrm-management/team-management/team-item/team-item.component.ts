@@ -40,7 +40,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   listMember: Member[] = [];
   listStaffName: any;
   listStaffId: any;
-  totalMember: number=0;
+  totalMember: number = 0;
   leadId: any;
   foodCtrl: FormControl;
 
@@ -155,22 +155,25 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       if (res.data[0] != null) {
         this.data = res.data[0];
         this.formGroup.patchValue(this.data);
-        this.listStaffName = this.data.staffName.split(',');
-        this.listStaffId = this.data.staffId.split(',');
-        for (let index = 0; index < this.listStaffId.length; index++) {
-          this.member = {
-            staffId: this.listStaffId[index],
-            staffName: this.listStaffName[index]
+        if (this.data.staffName != null) {
+          this.listStaffName = this.data.staffName.split(',');
+          this.listStaffId = this.data.staffId.split(',');
+          for (let index = 0; index < this.listStaffId.length; index++) {
+            this.member = {
+              staffId: this.listStaffId[index],
+              staffName: this.listStaffName[index]
+            }
+            this.listMember.push(this.member);
           }
-          this.listMember.push(this.member);
+          this.totalMember = this.listMember.length;
+          this.leadId = res.data[0].leadId;
+          this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
         }
-        this.totalMember = this.listMember.length;
-        this.leadId = res.data[0].leadId;
-        this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
+
       }
       else {
         this.totalMember = 0;
-        this.performance='';
+        this.performance = '';
       }
     });
   }
@@ -211,8 +214,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       },
       width: '30vw'
     }, (value) => {
-      if(value!=null){
-        const leaderName= this.listMember.find(x=>x.staffId==value).staffName;
+      if (value != null) {
+        const leaderName = this.listMember.find(x => x.staffId == value).staffName;
         this.formGroup.patchValue({
           leadName: leaderName
         })
