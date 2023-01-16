@@ -139,7 +139,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
-    this.getUnitPrice();
     this.loadProjectRole();
   }
 
@@ -158,9 +157,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       this.sprintService.getSprint(searchObj),
     ]).subscribe(([resStaff, res]) => {
       this.loadStaffs(resStaff);
+      this.getUnitPrice();
       if (this.isSuccess(res)) {
 
-        this.unitPrice = this.formatCurrency(res.data.unitPrice);
+        // this.unitPrice = this.formatCurrency(res.data.unitPrice);
         this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
         this.revenue = this.formatCurrency(res.data.revenue);
         this.cost = this.formatCurrency(res.data.cost);
@@ -494,7 +494,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   effortConversionCalculation(data: any){
-   return  this.formatCurrency(data.unitPrice / 30000000 * data.effort);
+   return  this.formatCurrency(data.unitPrice / this.priceDefalt * data.effort);
   }
 
   caculateExchange(e: any, i: number) {
