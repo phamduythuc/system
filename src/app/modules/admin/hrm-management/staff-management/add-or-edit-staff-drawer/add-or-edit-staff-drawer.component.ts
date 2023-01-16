@@ -155,7 +155,7 @@ export class AddOrEditStaffDrawerComponent
     // lương
     salary: [],
     file: [],
-    teamId: [],
+    teamId: [null, Validators.required],
     isWorker: [false]
   });
 
