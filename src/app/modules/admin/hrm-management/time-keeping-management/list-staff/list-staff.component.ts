@@ -16,6 +16,7 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
   imageUrl: any;
   firstStaff: any;
   idChosed:any;
+  colorValue=''
   constructor(injector: Injector,
     public staffService: StaffService,
     private achievementService: AchievementService,
