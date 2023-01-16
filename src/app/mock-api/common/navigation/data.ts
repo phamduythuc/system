@@ -144,10 +144,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:calendar',
         link: '/hrm-management/time-keeping',
         role: [
-          AuthoritiesConstant.TIMEKEEP,
-          AuthoritiesConstant.TIMEKEEP,
-          AuthoritiesConstant.TIMEKEEP,
-          AuthoritiesConstant.TIMEKEEP,
+          AuthoritiesConstant.TIMEKEEP_READ,
+          AuthoritiesConstant. TIMEKEEP_CREATE,
+          AuthoritiesConstant.TIMEKEEP_UPDATE,
+          AuthoritiesConstant.TIMEKEEP_DELETE,
         ],
       },
       {
