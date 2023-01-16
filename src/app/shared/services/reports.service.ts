@@ -21,7 +21,7 @@ export class ReportsService extends BaseService {
   }
 
   downloadReports(data:any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/report/export/${data}`);
+    return this.http.get(`${environment.apiUrl}/report/export/${data}`,{observe: 'response', responseType: 'blob'});
   }
 
 
