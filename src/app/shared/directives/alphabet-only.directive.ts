@@ -8,8 +8,9 @@ export class AlphabetOnlyDirective {
   @HostListener('input', ['$event'])
   onInputChange(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
-    const sanitized = input.value.replace(/[^a-zA-Z0-9_.-]*/g, '');
+    const sanitized = input.value.replace(/[^a-zA-Z0-9_.-]*$/g, '');
     input.value = sanitized.toUpperCase();
+
   }
 
   @HostListener('paste', ['$event'])

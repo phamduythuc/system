@@ -45,7 +45,7 @@
                   [src]="imageUrl"
                   *ngIf="imageUrl"
                 />
-              
+
                 <span class="btn" *ngIf="!imageUrl">Upload</span>
               </label>
             </div>
@@ -615,7 +615,7 @@
                       formControlName="isWorker"
                       [checked]="formGroup.value.isWorker"
                     />
-                    <label for="isWorker" class="cursor-pointer">{{
+                    <label for="isWorker" class="cursor-pointer flex items-center required">{{
                       t("common.isProductTeam")
                     }}</label>
                   </div>

@@ -46,27 +46,27 @@ export class DocumentManagementComponent
       columnDef: 'approveDate',
       header: 'hrm-management.document.form.sub_date',
       flex: 0.5,
-      // cellRenderer: (element: any) =>
-      //   CommonUtilsService.dateToString(element.approveDate),
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.approveDate),
     },
     {
       columnDef: 'effDate',
       header: 'hrm-management.document.form.effective_date',
-      // cellRenderer: (element: any) =>
-      //   CommonUtilsService.dateToString(element.effDate),
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.effDate),
     },
     {
       columnDef: 'expDate',
       header: 'hrm-management.document.form.expiration_date',
       flex: 0.5,
-      // cellRenderer: (element: any) =>
-      //   CommonUtilsService.dateToString(element.expDate),
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.expDate),
     },
-    {
-      columnDef: 'documentPath',
-      header: 'hrm-management.staff.detail.contract.link',
-      flex: 0.5,
-    },
+    // {
+    //   columnDef: 'documentPath',
+    //   header: 'hrm-management.staff.detail.contract.link',
+    //   flex: 0.5,
+    // },
     {
       columnDef: 'action',
       header: 'common.actions',
@@ -108,16 +108,16 @@ export class DocumentManagementComponent
     this.doSearch();
   }
 
-  mapData(data: any) {
-    data.map((x) => {
-      // x.type = this.getTypeContract(x.type);
-      x.effDate = CommonUtilsService.dateToString(x.effDate, true);
-      // x.salary = x.salary.toLocaleString() + ' đ';
-      return x;
-    });
+  // mapData(data: any) {
+  //   data.map((x) => {
+  //     x.approveDate = CommonUtilsService.dateToString(x.approveDate, false);
+  //     x.effDate = CommonUtilsService.dateToString(x.effDate, false);
+  //     x.expDate = CommonUtilsService.dateToString(x.expDate, false);
+  //     return x;
+  //   });
 
-    return data;
-  }
+  //   return data;
+  // }
 
   doSearch() {
     this.searchModel = {
@@ -126,10 +126,9 @@ export class DocumentManagementComponent
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel);
-    this.searchResult.data = this.mapData(this.searchResult.data);
-    // this.dataDocument = this.searchResult.data.map((item) => {
-    //   return item.documentName;
-    // });
+    // this.searchResult.data = this.mapData(this.searchResult.data);
+    // console.log(this.searchResult.data);
+
   }
 
   actionClick(e: any): void {
