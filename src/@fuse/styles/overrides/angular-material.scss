@@ -522,7 +522,9 @@
             border-radius: 6px;
             padding: 0 16px;
             border-width: 1px;
-            @apply shadow-sm bg-white border-gray-300 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
+            background-color: white;
+            @apply shadow-sm border-gray-300 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
+            // @apply shadow-sm bg-white border-gray-300 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
 
             .mat-form-field-prefix {
 
