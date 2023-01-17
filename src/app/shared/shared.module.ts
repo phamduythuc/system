@@ -31,6 +31,7 @@ import { TextSlicePipe } from './directives/text-slice.pipe';
 import {MatListModule} from '@angular/material/list';
 
 
+
 export const MAT_MODULES = [
     MatCardModule,
     MatIconModule,
@@ -66,7 +67,7 @@ export const MAT_MODULES = [
         ConfirmDialogComponent,
         DatePickerFormatDirective,
         ChartLineComponent,
-        TextSlicePipe
+        TextSlicePipe,
     ],
   exports: [
     CommonModule,

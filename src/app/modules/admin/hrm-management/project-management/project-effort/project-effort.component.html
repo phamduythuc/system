@@ -77,7 +77,7 @@
             </div>
             <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
               <input id="percent_effort" [formControlName]="'progress'" type="text" matInput onlyNumber
-                [placeholder]="'effort.percent_effort' | transloco" />
+                [placeholder]="'effort.percent_effort' | transloco" [min]="1" [max]="100" minMax/>
             </mat-form-field>
             <app-error-message [control]="formGroup.get('percentCompelete')"
               [name]="'effort.percent_effort' | transloco">
@@ -355,7 +355,7 @@
             </div>
             <mat-form-field class="fuse-mat-no-subscript w-full">
               <input id="efficiency" [formControlName]="'efficiency'" type="text" matInput readonly="true" onlyNumber
-                [placeholder]="'effort.efficiency' | transloco" />
+                [placeholder]="'effort.efficiency' | transloco"  />
             </mat-form-field>
           </div>
           <!-- GHI CHÚ -->

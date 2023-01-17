@@ -14,6 +14,7 @@ import { VndOnlyDirective } from '@shared/directives/vnd-only.directive';
 import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
 import { DecimalNumberDirective } from '@shared/directives/decimal-number.directive';
 import { AlphabetOnlyDirective } from '@shared/directives/alphabet-only.directive';
+import { MinMaxDirective } from '@shared/directives/min-max.directive';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AlphabetOnlyDirective } from '@shared/directives/alphabet-only.directiv
     VndOnlyDirective,
     NumberOnlyDirective,
     DecimalNumberDirective,
-    AlphabetOnlyDirective
+    AlphabetOnlyDirective,
+    MinMaxDirective
   ],
   imports: [
     CommonModule,
