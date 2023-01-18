@@ -170,12 +170,12 @@ export class ChartLineTeamKpiComponent extends BaseComponent implements OnInit, 
         {
           name: 'Kỳ vọng',
           color: 'green',
-          data: [...chart.cost]
+          data: [...chart.target]
         },
         {
           name: 'Chi phí',
           color: 'red',
-          data: [...chart.target]
+          data: [...chart.cost]
         },
         {
           name: 'Doanh thu',
