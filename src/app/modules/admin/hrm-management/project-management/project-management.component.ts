@@ -77,7 +77,7 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     }
   ];
   formSearch = this.fb.group({
-    name: [''],
+    keyword: [''],
   });
 
   paginate = {
