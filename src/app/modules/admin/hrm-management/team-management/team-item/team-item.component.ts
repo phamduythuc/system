@@ -179,6 +179,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         this.totalMember = 0;
         this.performance = '';
         this.listStaffName=[];
+        this.listMember=[];
       }
     });
   }
