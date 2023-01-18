@@ -174,11 +174,11 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
             this.performance = '';
           }
         }
-
       }
       else {
         this.totalMember = 0;
         this.performance = '';
+        this.listStaffName=[];
       }
     });
   }
