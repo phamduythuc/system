@@ -29,7 +29,6 @@ export class SprintProfileDashboardsComponent
 
   @Output() callback = new EventEmitter<any>();
 
-  searchModel: any;
   _permissionCodeName = 'DSNV';
 
   columns: IColumn[] = [
@@ -74,6 +73,14 @@ export class SprintProfileDashboardsComponent
 
   disabledBtn = false;
 
+  paginate: any = {
+    month: '',
+    page: 0,
+    pageSize: 10,
+    status: 1,
+    staffId: '',
+  };
+
   constructor(
     injector: Injector,
     private _formBuilder: FormBuilder,
@@ -91,16 +98,34 @@ export class SprintProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    this.searchModel = {
-      page: 0,
-      pageSize: 10,
-      status: 1,
-      keyword: '',
-    };
-    this.getData(this.startDate.value.startMonth);
+    this.paginate.month = CommonUtilsService.dateToString(
+      this.startDate.value.startMonth,
+      false
+    );
+    this.paginate.staffId = this.staffId;
+
+    console.log(this.paginate);
+
+    this.getData(this.paginate);
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
     });
+  }
+
+  changePage(e: any) {
+    this.paginate.month = CommonUtilsService.dateToString(
+      this.startDate.value.startMonth,
+      false
+    );
+    this.paginate.pageSize = e.pageSize;
+    this.paginate.page = e.pageIndex;
+    this.paginate.staffId = this.staffId;
+
+    this.view(this.paginate);
+  }
+
+  doSearch() {
+    this.processSearch(this.paginate);
   }
 
   chosenYearHandler(normalizedYear: Moment, formTarget): void {
@@ -119,26 +144,31 @@ export class SprintProfileDashboardsComponent
     ctrlValue.date('1');
     formTarget.setValue(ctrlValue);
     datepicker.close();
-    this.getData(this.startDate.value.startMonth)
-    // console.log(CommonUtilsService.dateToString(this.startDate.value.startMonth, false));
-    
+
+    this.paginate.month = CommonUtilsService.dateToString(
+      this.startDate.value.startMonth,
+      false
+    );
+
+    this.getData(this.paginate);
   }
 
   getData(data) {
-    this.DashboardsProfileService.getSprint({
-      month: CommonUtilsService.dateToString(data, false),
-      staffId: this.staffId,
-    }).subscribe((res: any) => {
+    console.log(data);
+
+    this.DashboardsProfileService.getSprint(data).subscribe((res: any) => {
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
         extraData: res.extraData,
       };
       if (res.extraData) {
-
-        console.log(res.extraData);
-        res.extraData.salary = CommonUtilsService.formatVND(res.extraData.salary)
-        res.extraData.salaryActual = CommonUtilsService.formatVND(res.extraData.salaryActual)
+        res.extraData.salary = CommonUtilsService.formatVND(
+          res.extraData.salary
+        );
+        res.extraData.salaryActual = CommonUtilsService.formatVND(
+          res.extraData.salaryActual
+        );
         this.formGroup.patchValue(res.extraData);
       } else {
         this.formGroup.patchValue({
@@ -156,18 +186,30 @@ export class SprintProfileDashboardsComponent
     this.data?.data.map((x) => {
       total += Number(x.percentEffort);
     });
-    if (total === 100) {
-      this.disabledBtn = false;
-    } else {
-      this.disabledBtn = true;
-    }
   }
 
-  view() {
+  view(paginate?) {
+    let params: any = {};
+
+    if (paginate) {
+      params = paginate;
+    } else {
+      const month = CommonUtilsService.dateToString(
+        this.startDate.value.startMonth,
+        false
+      );
+      params = {
+        month: month,
+        page: 0,
+        pageSize: 10,
+        status: 1,
+        staffId: this.staffId,
+      };
+    }
     this.startDate.value.startMonth = CommonUtilsService.dateToString(
       this.startDate.value.startMonth
     );
-    this.getData(this.startDate.value.startMonth);
+    this.getData(params);
     // this.callback.emit(this.startDate.value.startMonth);
   }
 
@@ -194,4 +236,15 @@ export class SprintProfileDashboardsComponent
       }
     });
   }
+
+  // changePage(e: any) {
+  //   this.paginate.month = CommonUtilsService.dateToString(
+  //     this.startDate.value.startMonth,
+  //     false
+  //   );
+  //   this.paginate.pageSize = e.pageSize;
+  //   this.paginate.page = e.pageIndex;
+  //   this.paginate.keyword = this.startDate.value.keyword,
+  //   this.view(this.paginate);
+  // }
 }
