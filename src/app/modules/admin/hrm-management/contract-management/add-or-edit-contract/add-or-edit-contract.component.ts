@@ -29,7 +29,7 @@ export class AddOrEditContractComponent extends BaseComponent implements OnInit 
     signDate: [null,datePickerValidator()],
     salary: [null, Validators.required],
     insurance: [null, Validators.required],
-    contractFilePath: [''],
+    contractFilePath: [],
     searchStaff: [null]
   });
 
