@@ -116,7 +116,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       sprint: this.currentTime,
     });
     this.foodCtrl = new FormControl({ value: '', disabled: true })
-
   }
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -154,6 +153,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.teamService.getTeamDetaiBySprint(searchDetail).subscribe(res => {
       if (res.data[0] != null) {
         this.data = res.data[0];
+        console.log((this.data))
         this.formGroup.patchValue(this.data);
         if (this.data.staffName != null) {
           this.listStaffName = this.data.staffName.split(',');
