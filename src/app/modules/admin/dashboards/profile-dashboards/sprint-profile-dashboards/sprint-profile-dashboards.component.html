@@ -112,7 +112,7 @@
       [rows]="data?.data"
       [columns]="columns"
       [paginate]="true"
-      [limit]="searchModel.pageSize"
+      [limit]="paginate.pageSize"
       [count]="data?.totalRecords"
       [rowTemplate]="rowTemplate"
       (callback)="handleDataKPI($event)"

@@ -68,14 +68,13 @@
         <div class="data-table w-full mt-4">
             <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult?.data"
+            [rows]="this.dataTable.dataIndex || []"
             [columns]="columns"
             [paginate]="true"
             [limit]="searchModel.pageSize"
             [(pageIndex)]="searchModel.page"
             [count]="searchResult?.totalRecords"
             [rowTemplate]="rowTemplate"
-            (callback)="handleDataKPI($event)"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >
