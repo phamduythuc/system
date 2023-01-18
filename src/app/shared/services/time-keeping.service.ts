@@ -13,7 +13,7 @@ export class TimeKeepingService extends BaseService {
     super(http, `${environment.apiUrl}/timekeeping`);
   }
 
-  importTimeKeeping(formData: any): Observable< HttpResponse<any>> {
+  importTimeKeeping(formData: any): Observable<HttpResponse<any>> {
     return this.http.post(`${environment.apiUrl}/timekeeping/import`, formData, {  observe: 'response', responseType: 'blob'});
   }
 }

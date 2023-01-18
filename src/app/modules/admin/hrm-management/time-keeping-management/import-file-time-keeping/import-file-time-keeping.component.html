@@ -32,13 +32,19 @@
                 </div>
 
                 <!-- upload file -->
-                <input type="file" name="document" class="file-input" (change)="uploadFile($event)" #fileUpload />
+                <div class="mt-5">
+                    <label for="file-input">
+                        <mat-icon svgIcon="feather:file"></mat-icon>
+                    </label>
+                    <input type="file" name="document" (change)="uploadFile($event)" id="file-input" #fileUpload />
+                </div>
             </form>
 
         </div>
         <!-- Actions -->
         <div class="footer mt-6 flex justify-end">
-            <button mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid"
+            <button mat-raised-button color="primary" class="mr-3"
+                [disabled]="formGroup.invalid||(fileUpload.value=='')"
                 (click)="formGroup.valid && save(formGroup.value)">
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
                 <span>{{t('button.save')}}</span>
