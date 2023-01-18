@@ -7,7 +7,6 @@
                     <mat-label class="font-bold capitalize">{{team.name + ' ' + '(' + totalMember + ' ' +
                         ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label>
                 </div>
-
                 <!-- status -->
                 <div *ngIf="team.status==1; else template1">
                     <div class="flex justify-between flex-nowrap items-center">
@@ -37,7 +36,8 @@
                     </mat-form-field> -->
 
                     <mat-form-field class="fuse-mat-no-subscript w-full -mt-2" appearance="fill">
-                        <input matInput [matDatepicker]="sprint" [formControlName]="'sprint'" datePickerFormat="MM/YYYY" readonly>
+                        <input matInput [matDatepicker]="sprint" [formControlName]="'sprint'" datePickerFormat="MM/YYYY"
+                            readonly>
                         <mat-datepicker-toggle matIconSuffix [for]="sprint"></mat-datepicker-toggle>
                         <mat-datepicker #sprint startView="multi-year" (monthSelected)="setMonthAndYear($event, sprint)"
                             panelClass="example-month-picker">
@@ -81,8 +81,8 @@
                 <div class=" flex w-2/5">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label class="font-bold capitalize">{{'common.expected'|transloco}}</mat-label>
-                        <input class="focus:cursor-default  hover:cursor-default" matInput [formControlName]="'target'"
-                            readonly>
+                        <input class="focus:cursor-default  hover:cursor-default" matInput
+                            [formControlName]="'target'" [value]="formGroup.get('target').value | number:'1.0-5'" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.cost'|transloco}}</mat-label>
                             <input class="focus:cursor-default  hover:cursor-default" matInput
-                                [formControlName]="'cost'" readonly>
+                                [formControlName]="'cost'" [value]="formGroup.get('cost').value | number:'1.0-5'" readonly>
                         </mat-form-field>
                     </div>
 
@@ -111,7 +111,7 @@
                         <mat-form-field class="fuse-mat-no-subscript w-full">
                             <mat-label class="font-bold capitalize">{{'common.revenue'|transloco}}</mat-label>
                             <input class="focus:cursor-default  hover:cursor-default" matInput
-                                [formControlName]="'revenue'" readonly>
+                                [formControlName]="'revenue'" [value]="formGroup.get('revenue').value | number:'1.0-5'" readonly>
                         </mat-form-field>
                     </div>
                 </div>
