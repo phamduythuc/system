@@ -14,7 +14,7 @@ export class ImportFileTimeKeepingComponent extends BaseComponent implements OnI
   visibleBtnUpload: boolean = true;
   documentName: any = '';
   formGroup = this.fb.group({
-    timeKeepImport: ['thai'],
+    timeKeepImport: [],
     file: [],
   });
   constructor(injector: Injector,
@@ -49,18 +49,18 @@ export class ImportFileTimeKeepingComponent extends BaseComponent implements OnI
       'timeKeepImport', formValue
     );
     this.timeKeepingService.importTimeKeeping(formData).subscribe((res) => {
-      console.log(res)
-      // if ('00' === res.code) {
-      //   this.showSnackBar(res.message, 'success');
-      //   // this.close();
-      // } else {
-      //   this.showSnackBar(res.message, 'error');
-      // }
+      const resp = decodeURIComponent(res.headers.get('Content-Response'));
+      const obj = JSON.parse(resp);
+      if ('00' === obj.code) {
+        this.showSnackBar(obj.message, 'success');
+      } else {
+        this.showSnackBar(obj.message, 'error');
+      }
     });
     this.close();
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
 

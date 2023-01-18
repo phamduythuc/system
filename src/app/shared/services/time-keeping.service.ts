@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from '@core/base.service';
 import { environment } from '@env/environment';
@@ -14,6 +14,6 @@ export class TimeKeepingService extends BaseService {
   }
 
   importTimeKeeping(formData: any): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${environment.apiUrl}/timekeeping/import`, formData, { observe: 'response' });
+    return this.http.post(`${environment.apiUrl}/timekeeping/import`, formData, {  observe: 'response', responseType: 'blob'});
   }
 }
