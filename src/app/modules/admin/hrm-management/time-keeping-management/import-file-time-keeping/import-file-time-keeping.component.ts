@@ -14,7 +14,7 @@ export class ImportFileTimeKeepingComponent extends BaseComponent implements OnI
   visibleBtnUpload: boolean = true;
   documentName: any = '';
   formGroup = this.fb.group({
-    timeKeepImport: ['thai'],
+    timeKeepImport: [],
     file: [],
   });
   constructor(injector: Injector,
@@ -51,7 +51,6 @@ export class ImportFileTimeKeepingComponent extends BaseComponent implements OnI
     this.timeKeepingService.importTimeKeeping(formData).subscribe((res) => {
       const resp = decodeURIComponent(res.headers.get('Content-Response'));
       const obj = JSON.parse(resp);
-      debugger
       if ('00' === obj.code) {
         this.showSnackBar(obj.message, 'success');
       } else {
