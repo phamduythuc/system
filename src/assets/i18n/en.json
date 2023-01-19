@@ -27,7 +27,9 @@
       "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
       "email_format": "Incorrect email format",
       "date_format": "Please enter in the format DD/MM/YYYY",
-      "date_format_1": "You must specify the date format. Format: dd/MM/yyyy"
+      "date_format_1": "You must specify the date format. Format: dd/MM/yyyy",
+      "special_characters": "Please do not enter special characters"
+
     },
     "title": {
       "create": "Create {{screenName}}",

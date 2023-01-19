@@ -106,7 +106,7 @@ export class DetailProfileDashboardsComponent
     workExperience: [],
     salary: [],
     file: [],
-    teamId: [],
+    teamNames: [],
     permanentResidence: []
   });
 
@@ -190,14 +190,14 @@ export class DetailProfileDashboardsComponent
       });
     });
 
-    this.staffService.getListTeam(this.option).subscribe((res) => {
-      res.data.map((x: any) => {
-        if (x.id === this.data.teamId) {
-          this.data.teamId = x.name;
-        }
-        return x;
-      });
-    });
+    // this.staffService.getListTeam(this.option).subscribe((res) => {
+    //   res.data.map((x: any) => {
+    //     if (x.id === this.data.teamId) {
+    //       this.data.teamId = x.name;
+    //     }
+    //     return x;
+    //   });
+    // });
   }
 
   mapData() :void {

@@ -26,7 +26,8 @@
       "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
       "email_format": "Không đúng định dạng Email",
       "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY",
-      "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy"
+      "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy",
+      "special_characters": "Vui lòng không nhập ký tự đặc biệt"
     },
     "title": {
       "create": "Thêm mới {{screenName}}",
