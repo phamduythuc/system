@@ -314,10 +314,10 @@
             for="file"
             class="flex justify-start items-center w-full h-full"
           >
-            <span *ngIf="!this.detailsData || this.detailsData.documentName === null" class="cursor-pointer">Upload file</span>
-            <span *ngIf="this.detailsData?.documentName" class="cursor-pointer">{{this.detailsData?.documentName}}</span>
-
-
+            <span *ngIf="!fileUpload.name " class="cursor-pointer">Upload file</span>
+            <!-- <span *ngIf="detailsData?.documentName && dialogId" class="cursor-pointer">{{detailsData?.documentName}}</span> -->
+            <span *ngIf="fileUpload.name" class="cursor-pointer">{{fileUpload.name}}</span>
+            
             <!-- <span
               class="flex justify-start items-center gap-3"
               *ngIf="fileUpload.type"
@@ -346,7 +346,7 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formGroup.invalid"
+      [disabled]="formGroup.invalid || !this.fileUpload.name"
       (click)="formGroup.valid && save(formGroup.value)"
     >
       <mat-icon
