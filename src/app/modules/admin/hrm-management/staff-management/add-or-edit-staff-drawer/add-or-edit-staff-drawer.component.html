@@ -348,6 +348,7 @@
                 <app-error-message
                   [control]="formGroup.get('username')"
                   [name]="'common.username' | transloco"
+                  [textPattern]="'common.message.special_characters' | transloco"
                 ></app-error-message>
               </div>
             </div>
@@ -621,7 +622,7 @@
                       }}</label>
                     </div>
                     <ng-template #elseBlock>
-                      <label for="isWorker" class="cursor-pointer flex items-center required">{{
+                      <label for="isWorker" class="cursor-pointer flex items-center">{{
                         t("common.isProductTeam")
                       }}</label>
                     </ng-template>

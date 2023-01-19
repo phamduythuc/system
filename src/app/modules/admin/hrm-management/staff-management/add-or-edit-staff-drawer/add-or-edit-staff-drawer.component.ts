@@ -148,7 +148,7 @@ export class AddOrEditStaffDrawerComponent
     //Mô tả tổng quan
     summary: [],
     //Tên đăng nhập
-    username: [null, [Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
+    username: [null, [Validators.required,Validators.pattern('^[a-zA-Z0-9]+$'),Validators.minLength(4),Validators.maxLength(20)]],
     role: [null, Validators.required],
     //Kinh nghiệm
     workExperience: [],
