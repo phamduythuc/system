@@ -56,7 +56,7 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
     validate: false,
   };
 
-  fileUpload:any 
+  fileUpload:any
 
   random:any
 
@@ -187,7 +187,7 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
       reader.readAsDataURL(file);
       this.fileUpload = file;
       this.detailsData.templateName = file.name;
-      
+
       reader.onload = () => {
         this.fileURL = reader.result;
       };

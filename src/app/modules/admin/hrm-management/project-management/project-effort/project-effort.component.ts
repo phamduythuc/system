@@ -49,6 +49,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   caculateEffortExchange: any = '';
   priceDefalt = 30000000;
   effortDifferenceVnd: any ='';
+  listStatusStaff: any =[];
 
   option = {
     page: 0,
@@ -298,7 +299,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       formValue.startDate &&
       CommonUtilsService.dateToString(formValue.startDate);
     formValue.projectId = this.data.id;
-
+    formValue.progress = Number(formValue.progress);
     formData.append('file', this.formGroup.get('file').value || null);
 
     formData.append(
@@ -432,9 +433,15 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
   }
 
+
   loadStaffs(res) {
     this.mapStaff = {};
-    this.listStaffOrigin = [...res.data];
+    res.data.forEach((itemStatus)=>{
+      if(itemStatus.staffStatus === 1){
+        this.listStatusStaff.push(itemStatus);
+      }
+    });
+    this.listStaffOrigin = [...this.listStatusStaff];
     this.listStaffOrigin.forEach((item) => {
       this.mapStaff[item.id] = item;
     });
