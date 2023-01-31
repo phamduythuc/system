@@ -21,6 +21,7 @@ import { SprintService } from '@shared/services/sprint.service';
 import FileSaver from 'file-saver';
 import { DecimalPipe } from '@angular/common';
 import { forkJoin } from 'rxjs';
+import { SalaryService } from '@shared/services/salary.service';
 
 @Component({
   selector: 'app-project-effort',
@@ -107,6 +108,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     private projectService: ProjectService,
     private sprintService: SprintService,
     private staffService: StaffService,
+    private staffSalary: SalaryService,
     public dialogRef: MatDialogRef<ProjectEffortComponent>,
     private achievementService: AchievementService,
     private decimalPipe: DecimalPipe,
@@ -141,6 +143,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
     this.loadProjectRole();
+
   }
 
   get efforts(): FormArray {
@@ -513,4 +516,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         .patchValue({ effortExchange: (newUnitPrice / this.priceDefalt) * e });
     }
   }
+
+  // caculateCost(){
+  //   const params = {
+  //     month: CommonUtilsService.dateToString(
+  //       this.formGroup.get('startDate').value,
+  //       false
+  //     ),
+  //     page: 0,
+  //     pageSize: 10000000,
+  //     status: 1,
+  //   };
+
+  //   this.staffSalary.getViewSalarybyMonth(params).subscribe(res=>{
+
+  //   });
+  // }
 }
