@@ -58,7 +58,13 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>
               <!--                        Mức lương / salary-->
-              {{ t("dashboard.profile.tab.sprint.salary") }}
+              <p
+                class="pe"
+                matTooltip="{{ t('dashboard.profile.tab.sprint.salary') }}
+                "
+              >
+              {{ t('dashboard.profile.tab.sprint.salary') }}
+              </p>
             </mat-label>
             <input formControlName="salary" matInput readonly />
           </mat-form-field>
@@ -70,7 +76,12 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>
               <!--                        KPI mục tiêu / target_kpi-->
-              {{ t("dashboard.profile.tab.sprint.target_kpi") }}
+              <p
+                class="pe"
+                matTooltip="{{ t('dashboard.profile.tab.sprint.target_kpi') }}"
+              >
+              {{ t('dashboard.profile.tab.sprint.target_kpi') }}
+              </p>
             </mat-label>
             <input formControlName="kpiTarget" matInput readonly />
           </mat-form-field>
@@ -82,7 +93,14 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>
               <!--                        Mức lương thực nhận / salary_received-->
-              {{ t("dashboard.profile.tab.sprint.salary_received") }}
+              <p
+                class="pe"
+                matTooltip="{{
+                  t('dashboard.profile.tab.sprint.salary_received')
+                }}"
+              >
+                {{ t("dashboard.profile.tab.sprint.salary_received") }}
+              </p>
             </mat-label>
             <input formControlName="salaryActual" matInput readonly />
           </mat-form-field>
@@ -94,7 +112,12 @@
           <mat-form-field class="fuse-mat-no-subscript w-full">
             <mat-label>
               <!--                        KPI đảm bảo / guaranteed_kpi-->
-              {{ t("dashboard.profile.tab.sprint.guaranteed_kpi") }}
+              <p
+                class="pe"
+                matTooltip="{{ t('dashboard.profile.tab.sprint.guaranteed_kpi') }}"
+              >
+              {{ t('dashboard.profile.tab.sprint.guaranteed_kpi') }}
+              </p>
             </mat-label>
             <input formControlName="kpiInsure" matInput readonly />
           </mat-form-field>
@@ -141,7 +164,7 @@
                   pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
                   [readonly]="staffId != ''"
                   (ngModelChange)="changePercentEffort()"
-                  oninput="this.value = 
+                  oninput="this.value =
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
                 />
               </mat-form-field>

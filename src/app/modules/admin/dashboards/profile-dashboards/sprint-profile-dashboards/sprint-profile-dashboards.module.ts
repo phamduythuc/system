@@ -4,6 +4,7 @@ import { SprintProfileDashboardsComponent } from './sprint-profile-dashboards.co
 import { TranslocoModule } from '@ngneat/transloco';
 import { SharedModule } from '@shared/shared.module';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DataTableModule } from '@layout/common/data-table/data-table.module';
     CommonModule,
     SharedModule,
     TranslocoModule,
-    DataTableModule
+    DataTableModule,
+    MatTooltipModule
   ],
   exports: [SprintProfileDashboardsComponent]
 })

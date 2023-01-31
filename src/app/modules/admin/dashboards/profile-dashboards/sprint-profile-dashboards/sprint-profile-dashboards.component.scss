@@ -1,7 +1,7 @@
 table {
     width: 100%;
   }
-  
+
   .full-width {
     font-size: 14px;
     width: 100%;
@@ -26,7 +26,7 @@ table {
       font-weight: bold;
       margin-bottom: 10px;
     }
-    
+
   input[type=number] {
   padding: 5px;
   margin: 10px 0;
@@ -41,10 +41,13 @@ table {
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
+
   .box-percent {
     display: flex;
     align-items: center;
     gap: 15px;
   }
-  
+
+  .pe {
+    pointer-events: auto;
+  }
