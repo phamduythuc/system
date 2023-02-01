@@ -175,6 +175,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         if (this.data.staffName != null) {
           this.listStaffName = this.data.staffName.split(',');
           this.listStaffId = this.data.staffId.split(',');
+          this.totalMember = this.listStaffId.length;
+
           for (let index = 0; index < this.listStaffId.length; index++) {
             this.member = {
               staffId: this.listStaffId[index],
@@ -182,7 +184,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
             };
             this.listMember.push(this.member);
           }
-          this.totalMember = this.listMember.length;
+
+
           this.leadId = res.data[0].leadId;
           if (this.data.cost !== 0 && this.data.revenue !== 0) {
             this.performance = (
@@ -192,6 +195,11 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
           } else {
             this.performance = '';
           }
+        }
+        else{
+          this.totalMember = 0;
+        this.listStaffName = [];
+
         }
       } else {
         this.totalMember = 0;
