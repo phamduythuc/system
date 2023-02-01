@@ -65,15 +65,15 @@
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">
-            <ng-template #rowTemplate let-row='row' let-column="column">
-              <ng-container [ngSwitch]="column.columnDef">
-                <ng-container *ngSwitchDefault>{{row[column.columnDef]}}</ng-container>
+            <!-- <ng-template #rowTemplate let-row='row' let-column="column">
+              <ng-container [ngSwitch]="column.columnDef" 
+              >
+                <ng-container *ngSwitchDefault >{{row[column.columnDef]}}</ng-container>
                 <ng-container *ngSwitchCase="'createdDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
                 <ng-container *ngSwitchCase="'modifiedDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
               </ng-container>
-              <!--                <button mat-raised-button (click)="(row?.description)" class="icon-size-4">-->
-              <!--                  <mat-icon svgIcon="heroicons_outline:eye" color="primary"></mat-icon></button>-->
-            </ng-template>
+              
+            </ng-template> -->
           </app-data-table>
         </div>
       </div>

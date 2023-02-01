@@ -113,15 +113,15 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel, () => {
-      const VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-      });
+      // const VND = new Intl.NumberFormat('vi-VN', {
+      //   style: 'currency',
+      //   currency: 'VND',
+      // });
 
       let convertData = this.searchResult.data.map((obj) => {
         let convetSalary = {
           ...obj,
-          budget: VND.format(parseInt(obj.budget)),
+          budget: CommonUtilsService.formatVND(parseInt(obj.budget)),
         };
         return convetSalary;
       });

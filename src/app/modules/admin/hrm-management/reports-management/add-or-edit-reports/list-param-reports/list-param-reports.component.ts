@@ -145,6 +145,8 @@ console.log(this.data);
         !x.scriptSql ||
         !x.startRow ||
         !x.startColumn ||
+        x.startColumn == 0 || 
+        x.startRow == 0 ||
         !x.sheetOrder ||
         x.listParam.length == 0
       ) {

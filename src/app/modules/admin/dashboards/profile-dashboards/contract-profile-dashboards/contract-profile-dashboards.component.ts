@@ -73,15 +73,15 @@ export class ContractProfileDashboardsComponent
   }
 
   mapData(data: any) {
-    const VND = new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    });
+    // const VND = new Intl.NumberFormat('vi-VN', {
+    //   style: 'currency',
+    //   currency: 'VND',
+    // });
 
     data.map((x) => {
       x.type = this.getTypeContract(x.type);
       x.effDate = CommonUtilsService.dateToString(x.effDate, false);
-      x.salary = VND.format(parseInt(x.salary));
+      x.salary = CommonUtilsService.formatVND(parseInt(x.salary));
       return x;
     });
     return data;
