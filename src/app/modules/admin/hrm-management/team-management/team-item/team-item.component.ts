@@ -167,7 +167,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
           }
           this.totalMember = this.listMember.length;
           this.leadId = res.data[0].leadId;
-          if (this.data.cost != 0 && this.data.revenue!= 0) {
+          if (this.data.cost != 0 && this.data.revenue != 0) {
             this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
           }
           else {
@@ -178,8 +178,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       else {
         this.totalMember = 0;
         this.performance = '';
-        this.listStaffName=[];
-        this.listMember=[];
+        this.listStaffName = [];
+        this.listMember = [];
+        this.formGroup.patchValue({
+          target: 0,
+          cost: 0,
+          revenue: 0,
+        });
       }
     });
   }
