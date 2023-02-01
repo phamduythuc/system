@@ -68,6 +68,7 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
     super(injector, ReportsService, dialogRef);
+    console.log(dialogData, 'view');
 
     this.dialogId = dialogData?.id;
 

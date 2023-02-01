@@ -36,10 +36,14 @@
          
         </mat-form-field>
         <div style="color: red" *ngIf="sheet.errors?.['required']">
-          Sheet is required!
+          {{
+            "hrm-management.reports.detail.requiredSheet" | transloco
+          }}
         </div>
         <div style="color: red" *ngIf="sheet.errors?.['pattern']">
-          Sheet no value exists!
+          {{
+            "hrm-management.reports.detail.notValueSheet" | transloco
+          }}
         </div>
         <!-- <app-error-message
         [control]="efforts.controls[index].get('name')"
@@ -60,6 +64,9 @@
           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
         >
           <input
+            id="name"
+            name="name"
+            #name="ngModel"
             type="text"
             matInput
             [(ngModel)]="item.name"
@@ -75,6 +82,9 @@
           [name]="'common.name' | transloco"
         >
         </app-error-message> -->
+        <div style="color: red;" *ngIf="name.errors?.['required']">
+          {{"hrm-management.reports.detail.requiredName" | transloco}}
+        </div>
       </div>
     </div>
 
@@ -112,10 +122,14 @@
               >
               </app-error-message> -->
               <div style="color: red" *ngIf="startRow.errors?.['required']">
-                StartRow is required!
+                {{
+                  "hrm-management.reports.detail.requiredRow" | transloco
+                }}
               </div>
               <div style="color: red" *ngIf="startRow.errors?.['pattern']">
-                Start Row no value exists!
+                 {{
+            "hrm-management.reports.detail.startRownotValueExists" | transloco
+          }}
               </div>
         </div>
       </div>
@@ -148,10 +162,14 @@
             />
           </mat-form-field>
           <div style="color: red" *ngIf="startCol.errors?.['required']">
-            StartCol is required!
+            {{
+              "hrm-management.reports.detail.requiredColumn" | transloco
+            }}
           </div>
           <div style="color: red" *ngIf="startCol.errors?.['pattern']">
-            Start column no value exists!
+            {{
+              "hrm-management.reports.detail.startColnotValueExists" | transloco
+            }}
           </div>
           <!-- <div style="color: red" *ngIf="startCol.errors?.['required']">
             Name is required.
@@ -176,6 +194,9 @@
           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
         >
           <textarea
+           id="sql"
+           name="sql"
+           #sql="ngModel"
             matInput
             [(ngModel)]="item.scriptSql"
             required
@@ -191,6 +212,11 @@
           [name]="'hrm-management.reports.form.sql' | transloco"
         >
         </app-error-message> -->
+        <div style="color: red" *ngIf="sql.errors?.['required']">
+          {{
+            "hrm-management.reports.detail.sqlRequired" | transloco
+          }}
+        </div>
       </div>
     </div>
 

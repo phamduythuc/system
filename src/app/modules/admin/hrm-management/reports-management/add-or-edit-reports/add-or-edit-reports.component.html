@@ -97,7 +97,7 @@
     </div>
     <div class="field flex mb-4 gap-5" >
       <div class="w-1/2 flex flex-wrap gap-5">
-        <span
+        <span *ngIf="formGroup.value.templatePath"
           class="cursor-pointer italic underline text-[#4f9cad]"
           (click)="download(formGroup.value.templatePath,'1')"
           >{{
@@ -109,7 +109,7 @@
         }}</span> -->
         <span *ngIf="formGroup.value.templateName"
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.templateName)"
+          (click)="download(detailsData.id,'2')"
           >{{
             "hrm-management.reports.detail.downloadReports" | transloco
           }}</span

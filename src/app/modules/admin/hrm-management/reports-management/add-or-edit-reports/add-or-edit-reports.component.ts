@@ -68,7 +68,8 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
     super(injector, ReportsService, dialogRef);
-
+    console.log(dialogData,'add');
+    
     this.dialogId = dialogData?.id;
 
     this.formGroup = this.fb.group({
@@ -163,21 +164,38 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
     }, 1);
   }
 
-  download(data: any) {
-    this.achievementService
-      .renderFile({
-        filePath: data,
-        fileType: 2,
-      })
-      .subscribe((res) => {
-        const res1 = this.getResponseFromHeader(res.headers);
-        if (this.isSuccess(res1)) {
-          const fileName = this.getFileName(res.headers);
-          FileSaver.saveAs(res.body, fileName);
-        } else {
-          this.showSnackBar(res1.message, 'error');
-        }
+  download(data: any, type:any) {
+    if (type == 1) {
+      this.achievementService
+        .renderFile({
+          filePath: data,
+          fileType: 2,
+        })
+        .subscribe((res) => {
+          const res1 = this.getResponseFromHeader(res.headers);
+          if (this.isSuccess(res1)) {
+            const fileName = this.getFileName(res.headers);
+            FileSaver.saveAs(res.body, fileName);
+          } else {
+            this.showSnackBar(res1.message, 'error');
+          }
+        });
+    }
+
+    if (type == 2) {
+      this.ReportsService.downloadReports(data).subscribe((res) => {
+        console.log(res.headers.get('content-disposition'));
+        let fileName = res.headers
+          .get('content-disposition')
+          ?.split(';')[1]
+          .split('=')[1];
+        let blob: Blob = res.body as Blob;
+        let a = document.createElement('a');
+        a.download = fileName;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
       });
+    }
   }
 
   uploadFile(event: any): void {
