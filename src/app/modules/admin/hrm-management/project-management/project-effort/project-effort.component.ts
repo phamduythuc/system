@@ -39,6 +39,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   revenue: any = '';
   cost: any = '';
   documentName: any = '';
+  acceptanceDate: any = '';
 
   isLoading: boolean = false;
   listStaffOrigin: any = [];
@@ -49,8 +50,8 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   numberChars = new RegExp('[.,]', 'g');
   caculateEffortExchange: any = '';
   priceDefalt = 30000000;
-  effortDifferenceVnd: any ='';
-  listStatusStaff: any =[];
+  effortDifferenceVnd: any = '';
+  listStatusStaff: any = [];
 
   option = {
     page: 0,
@@ -143,7 +144,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.loadEffortDetail(this.formGroup.get('startDate').value);
     this.loadProjectRole();
-
   }
 
   get efforts(): FormArray {
@@ -163,12 +163,19 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       this.loadStaffs(resStaff);
       this.getUnitPrice();
       if (this.isSuccess(res)) {
-
         // this.unitPrice = this.formatCurrency(res.data.unitPrice);
-        this.cumulativeDifference = this.formatCurrency(res.data.cumulativeDifference);
+        this.cumulativeDifference = this.formatCurrency(
+          res.data.cumulativeDifference
+        );
         this.revenue = this.formatCurrency(res.data.revenue);
         this.cost = this.formatCurrency(res.data.cost);
-        this.effortDifferenceVnd = this.formatCurrency(res.data.effortDifferenceVnd);
+        this.effortDifferenceVnd = this.formatCurrency(
+          res.data.effortDifferenceVnd
+        );
+        this.acceptanceDate = CommonUtilsService.dateToString(
+          res.data.acceptanceDate,
+          false
+        );
 
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
@@ -190,10 +197,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           recordUrl: res.data.recordUrl,
           effortExchange: res.data.effortExchange,
           acceptanceEffort: res.data.acceptanceEffort,
-          acceptanceDate: res.data.acceptanceDate,
+          acceptanceDate: this.acceptanceDate,
           effortDifference: res.data.effortDifference,
           cumulativeDifference: this.cumulativeDifference,
-          effortDifferenceVnd: this.effortDifferenceVnd ,
+          effortDifferenceVnd: this.effortDifferenceVnd,
           cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
           revenue: this.revenue,
           cost: this.cost,
@@ -205,7 +212,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
         const idS = { id: res.data.id };
         this.sprintService.getMembers(idS).subscribe((res1) => {
-
           if (this.isSuccess(res1)) {
             res1.data.forEach((item, index) => {
               // const dataCaulate = {unitPrice: res.data.unitPrice , effort:item.effort};
@@ -227,7 +233,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
               // );
               // const indexStaff = this.listStaffOrigin.indexOf(objStaff);
               //  this.listStaffOrigin.splice(indexStaff, 1);
-
             });
 
             this.isLoading = false;
@@ -283,13 +288,17 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     }
     const valEffortDifferenceVnd = formValue.effortDifferenceVnd;
     if (valEffortDifferenceVnd != null) {
-      formValue.effortDifferenceVnd = Number(valEffortDifferenceVnd.replace(this.numberChars, ''));
+      formValue.effortDifferenceVnd = Number(
+        valEffortDifferenceVnd.replace(this.numberChars, '')
+      );
     }
     const valCumulativeDifference = formValue.cumulativeDifference;
     if (valCumulativeDifference != null) {
-      formValue.cumulativeDifference = Number(valCumulativeDifference.replace(this.numberChars, ''));
+      formValue.cumulativeDifference = Number(
+        valCumulativeDifference.replace(this.numberChars, '')
+      );
     }
-    const valRevenue= formValue.revenue;
+    const valRevenue = formValue.revenue;
     if (valRevenue != null) {
       formValue.revenue = Number(valRevenue.replace(this.numberChars, ''));
     }
@@ -301,6 +310,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     formValue.startDate =
       formValue.startDate &&
       CommonUtilsService.dateToString(formValue.startDate);
+
+    formValue.acceptanceDate =
+      formValue.acceptanceDate &&
+      CommonUtilsService.dateToString(formValue.acceptanceDate);
     formValue.projectId = this.data.id;
     formValue.progress = Number(formValue.progress);
     formData.append('file', this.formGroup.get('file').value || null);
@@ -436,11 +449,10 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     });
   }
 
-
   loadStaffs(res) {
     this.mapStaff = {};
-    res.data.forEach((itemStatus)=>{
-      if(itemStatus.staffStatus === 1){
+    res.data.forEach((itemStatus) => {
+      if (itemStatus.staffStatus === 1) {
         this.listStatusStaff.push(itemStatus);
       }
     });
@@ -464,7 +476,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   }
 
   onStaffChange(event: any, index: number) {
-    // console.log(event);
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
@@ -493,18 +504,20 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     if (this.data.id) {
       this.sprintService.getOne(this.data.id).subscribe((res) => {
         if (this.isSuccess(res)) {
-           this.formGroup.controls['unitPrice'].setValue(
+          this.formGroup.controls['unitPrice'].setValue(
             this.formatCurrency(res.data.unitPrice)
           );
         } else {
-           this.formGroup.controls['unitPrice'].setValue(null);
+          this.formGroup.controls['unitPrice'].setValue(null);
         }
       });
     }
   }
 
-  effortConversionCalculation(data: any){
-   return  this.formatCurrency(data.unitPrice / this.priceDefalt * data.effort);
+  effortConversionCalculation(data: any) {
+    return this.formatCurrency(
+      (data.unitPrice / this.priceDefalt) * data.effort
+    );
   }
 
   caculateExchange(e: any, i: number) {
