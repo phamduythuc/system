@@ -219,7 +219,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
 
   saveData(e) {
     console.log(e);
-    
+
     const newObj = e.map((item) => {
       const obj = {
         staffId: item.staffId,
