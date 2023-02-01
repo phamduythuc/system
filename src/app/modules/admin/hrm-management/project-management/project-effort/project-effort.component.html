@@ -134,9 +134,9 @@
                 }}</label>
             </div>
             <mat-form-field class="fuse-mat-no-subscript w-full">
-              <input id="acceptanceDate" matInput type="text" [matDatepicker]="acceptanceDate" datePickerFormat="DD/MM/YYYY"
+              <input id="acceptanceDate" matInput type="text" [matDatepicker]="leaveDate" datePickerFormat="DD/MM/YYYY"
                 [formControlName]="'acceptanceDate'" [placeholder]="'effort.accept_date' | transloco" />
-              <mat-datepicker-toggle [for]="acceptanceDate"> </mat-datepicker-toggle>
+              <mat-datepicker-toggle [for]="leaveDate"> </mat-datepicker-toggle>
               <mat-datepicker #leaveDate></mat-datepicker>
             </mat-form-field>
             <!-- <app-error-message
