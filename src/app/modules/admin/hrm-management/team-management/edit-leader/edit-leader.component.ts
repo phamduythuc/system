@@ -40,7 +40,7 @@ export class EditLeaderComponent extends BaseComponent implements OnInit, OnChan
   }
 
   changeLeader(event: any) {
-    this.leadId = event
+    this.leadId = event;
   }
   save() {
     this.updateLeaderModel = {
