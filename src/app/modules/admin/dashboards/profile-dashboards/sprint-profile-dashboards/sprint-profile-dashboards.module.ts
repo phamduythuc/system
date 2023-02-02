@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SharedModule,
     TranslocoModule,
     DataTableModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   exports: [SprintProfileDashboardsComponent]
 })

@@ -63,7 +63,7 @@
                 matTooltip="{{ t('dashboard.profile.tab.sprint.salary') }}
                 "
               >
-              {{ t('dashboard.profile.tab.sprint.salary') }}
+                {{ t("dashboard.profile.tab.sprint.salary") }}
               </p>
             </mat-label>
             <input formControlName="salary" matInput readonly />
@@ -80,7 +80,7 @@
                 class="pe"
                 matTooltip="{{ t('dashboard.profile.tab.sprint.target_kpi') }}"
               >
-              {{ t('dashboard.profile.tab.sprint.target_kpi') }}
+                {{ t("dashboard.profile.tab.sprint.target_kpi") }}
               </p>
             </mat-label>
             <input formControlName="kpiTarget" matInput readonly />
@@ -114,9 +114,11 @@
               <!--                        KPI đảm bảo / guaranteed_kpi-->
               <p
                 class="pe"
-                matTooltip="{{ t('dashboard.profile.tab.sprint.guaranteed_kpi') }}"
+                matTooltip="{{
+                  t('dashboard.profile.tab.sprint.guaranteed_kpi')
+                }}"
               >
-              {{ t('dashboard.profile.tab.sprint.guaranteed_kpi') }}
+                {{ t("dashboard.profile.tab.sprint.guaranteed_kpi") }}
               </p>
             </mat-label>
             <input formControlName="kpiInsure" matInput readonly />
@@ -161,8 +163,9 @@
                   [(ngModel)]="row[column.columnDef]"
                   [min]="0"
                   [max]="100"
+                  minMax
                   pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-                  [readonly]="staffId != ''"
+                  [readonly]="staffId !== ''"
                   (ngModelChange)="changePercentEffort()"
                   oninput="this.value =
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"

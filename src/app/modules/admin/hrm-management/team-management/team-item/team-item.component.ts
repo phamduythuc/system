@@ -1,4 +1,13 @@
-import { Component, Injector, Input, OnInit, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Injector,
+  Input,
+  OnInit,
+  ViewChild,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
@@ -13,15 +22,13 @@ import moment, { Moment } from 'moment';
 import { EditLeaderComponent } from '../edit-leader/edit-leader.component';
 import { Member } from '../models/Member';
 import { MatDatepicker } from '@angular/material/datepicker';
-
-
+import { CommonUtilsService } from '@shared/common-utils.service';
 
 @Component({
   selector: 'app-team-item',
   templateUrl: './team-item.component.html',
-  styleUrls: ['./team-item.component.scss']
+  styleUrls: ['./team-item.component.scss'],
 })
-
 export class TeamItemComponent extends BaseComponent implements OnInit {
   @Input() team: any;
   @Input() random: any;
@@ -56,8 +63,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ];
   date = new FormControl(moment());
   listTeam: any[] = [];
-  currentTime = moment(new Date(Date.now())).format("YYYY-MM-DDT00:00:00Z");
-  currentTimeFormat = moment(new Date(Date.now())).format("DD/MM/YYYY");
+  currentTime = moment(new Date(Date.now())).format('YYYY-MM-DDT00:00:00Z');
+  currentTimeFormat = moment(new Date(Date.now())).format('DD/MM/YYYY');
   formGroup = this.fb.group({
     id: '',
     text: '',
@@ -70,7 +77,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     revenue: [],
     staDate: [],
     endDate: [],
-    staffName: []
+    staffName: [],
   });
 
   searchModel: any = {
@@ -80,44 +87,54 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   searchKpi: any = {
     teamId: 5,
     startMonth: this.currentTimeFormat,
-    endMonth: this.currentTimeFormat
+    endMonth: this.currentTimeFormat,
   };
 
   searchDetail: any = {
     teamId: null,
-    month: '01/01/2023'
+    month: '01/01/2023',
   };
 
   data = {
     teamId: null,
-    teamName: "",
-    targetMonth: "",
+    teamName: '',
+    targetMonth: '01/02/2023',
     revenue: 0,
-    target: "",
+    target: '',
     cost: 0,
     effortExchange: null,
-    staffId: "",
-    staffName: "",
+    staffId: '',
+    staffName: '',
     leadId: null,
-    leadName: ""
-  }
+    leadName: '',
+  };
 
-  constructor(injector: Injector, public teamService: TeamService, public teamMemberService: TeamMemberService, fb: FormBuilder, private _fuseConfigService: FuseConfigService) {
+  constructor(
+    injector: Injector,
+    public teamService: TeamService,
+    public teamMemberService: TeamMemberService,
+    fb: FormBuilder,
+    private _fuseConfigService: FuseConfigService
+  ) {
     super(injector, teamService);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
     this.searchDetail.teamId = this.team.id;
+    this.searchDetail.month = CommonUtilsService.dateToString(this.currentTime,false); //New code
     this.getDetailTeamBySprint(this.searchDetail);
     this.formGroup.patchValue({
       sprint: this.currentTime,
     });
-    this.foodCtrl = new FormControl({ value: '', disabled: true })
+    this.foodCtrl = new FormControl({ value: '', disabled: true });
   }
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
+
+  setMonthAndYear(
+    normalizedMonthAndYear: Moment,
+    datepicker: MatDatepicker<Moment>
+  ) {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
@@ -125,12 +142,13 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     datepicker.close();
     this.onDateChange(ctrlValue);
   }
+
   onDateChange(e: any) {
-    const x = moment(new Date(e)).format("01/MM/YYYY").toString();
+    const x = moment(new Date(e)).format('01/MM/YYYY').toString();
     this.searchDetail = {
       teamId: this.team.id,
-      month: x
-    }
+      month: x,
+    };
     this.formGroup = this.fb.group({
       id: '',
       text: '',
@@ -143,39 +161,47 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       revenue: [],
       staDate: [],
       endDate: [],
-      staffName: []
+      staffName: [],
     });
     this.getDetailTeamBySprint(this.searchDetail);
-
   }
 
   getDetailTeamBySprint(searchDetail: any) {
-    this.teamService.getTeamDetaiBySprint(searchDetail).subscribe(res => {
+    this.teamService.getTeamDetaiBySprint(searchDetail).subscribe((res) => {
       if (res.data[0] != null) {
         this.data = res.data[0];
-        console.log((this.data))
+        console.log(this.data);
         this.formGroup.patchValue(this.data);
         if (this.data.staffName != null) {
           this.listStaffName = this.data.staffName.split(',');
           this.listStaffId = this.data.staffId.split(',');
+          this.totalMember = this.listStaffId.length;
+
           for (let index = 0; index < this.listStaffId.length; index++) {
             this.member = {
               staffId: this.listStaffId[index],
-              staffName: this.listStaffName[index]
-            }
+              staffName: this.listStaffName[index],
+            };
             this.listMember.push(this.member);
           }
-          this.totalMember = this.listMember.length;
+
+
           this.leadId = res.data[0].leadId;
-          if (this.data.cost != 0 && this.data.revenue != 0) {
-            this.performance = (this.data.cost / this.data.revenue * 100).toFixed(2);
-          }
-          else {
+          if (this.data.cost !== 0 && this.data.revenue !== 0) {
+            this.performance = (
+              (this.data.cost / this.data.revenue) *
+              100
+            ).toFixed(2);
+          } else {
             this.performance = '';
           }
         }
-      }
-      else {
+        else{
+          this.totalMember = 0;
+        this.listStaffName = [];
+
+        }
+      } else {
         this.totalMember = 0;
         this.performance = '';
         this.listStaffName = [];
@@ -193,20 +219,23 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     // console.log(e);
   }
 
-
   addOrEdit(id: any): void {
-    this.showDialog(AddOrEditTeamComponent, {
-      data: {
-        id: id,
-        status: this.team.status
+    this.showDialog(
+      AddOrEditTeamComponent,
+      {
+        data: {
+          id: id,
+          status: this.team.status,
+        },
+        width: '30vw',
+        disableClose: true,
       },
-      width: '30vw',
-      disableClose: true
-    }, (value) => {
-      if (value) {
-        this.team.name = value.name
+      (value) => {
+        if (value) {
+          this.team.name = value.name;
+        }
       }
-    });
+    );
   }
 
   // getTeamById(id:any){
@@ -216,28 +245,32 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   // }
 
   editLeader(id?: any) {
-    this.showDialog(EditLeaderComponent, {
-      data: {
-        id: this.team.id,
-        listMember: this.listMember,
-        leadId: this.leadId,
-        sprint: this.formGroup.value['sprint']
+    this.showDialog(
+      EditLeaderComponent,
+      {
+        data: {
+          id: this.team.id,
+          listMember: this.listMember,
+          leadId: this.leadId,
+          sprint: this.formGroup.value['sprint'],
+        },
+        width: '30vw',
       },
-      width: '30vw'
-    }, (value) => {
-      if (value != null) {
-        const leaderName = this.listMember.find(x => x.staffId == value).staffName;
-        this.formGroup.patchValue({
-          leadName: leaderName
-        })
+      (value) => {
+        if (value != null) {
+          const leaderName = this.listMember.find(
+            (x) => x.staffId === value
+          ).staffName;
+          this.formGroup.patchValue({
+            leadName: leaderName,
+          });
+        }
       }
-
-    })
+    );
   }
 
-
   getPanelInfo(id: string): any {
-    return this.searchResult.data.find(panel => panel.id === id);
+    return this.searchResult.data.find((panel) => panel.id === id);
   }
 
   trackByFn(index: number, item: any): any {
@@ -247,11 +280,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   emitEvent(type: string, gr: any): void {
     if (type === 'edit') {
       this.addOrEdit(gr.id);
-    }
-    else if (type === 'view') {
-
-    }
-    else {
+    } else if (type === 'view') {
+    } else {
       this.deleteConfirmDialog(gr.id);
     }
   }
@@ -263,13 +293,17 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   }
 
   deleteConfirmDialog(id?: any): any {
-    this.showDialog(ConfirmDialogComponent, {
-      data: id
-    }, (value) => {
-      if (value) {
-        this.delete(id);
+    this.showDialog(
+      ConfirmDialogComponent,
+      {
+        data: id,
+      },
+      (value) => {
+        if (value) {
+          this.delete(id);
+        }
       }
-    });
+    );
   }
 
   delete(id: any): void {
@@ -293,10 +327,10 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   // }
 
   /**
- * Set the theme on the config
- *
- * @param viewType
- */
+   * Set the theme on the config
+   *
+   * @param viewType
+   */
   setView(viewType: ViewType): void {
     this._fuseConfigService.config = { viewType };
   }
