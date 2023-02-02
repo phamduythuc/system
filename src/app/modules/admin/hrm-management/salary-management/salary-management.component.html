@@ -47,7 +47,8 @@
               <input class="w-full"
                      [placeholder]="('common.keyword' | transloco)+' ...'"
                      formControlName="keyword"
-                     matInput trim='blur'>
+                     matInput trim='blur'
+                    (keyup.enter)="view()">
             </mat-form-field>
           </div>
 
