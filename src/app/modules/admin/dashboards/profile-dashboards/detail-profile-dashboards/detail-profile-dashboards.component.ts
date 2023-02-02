@@ -92,7 +92,7 @@ export class DetailProfileDashboardsComponent
     nationality: [],
     phone: [null],
     positionId: [null],
-    positionJob: [],
+    positionNames: [],
     religion: [],
     seniority: [],
     staOfficalDate: [null],
