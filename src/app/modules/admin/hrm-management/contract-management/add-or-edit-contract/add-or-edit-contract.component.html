@@ -38,6 +38,7 @@
             <mat-select #selectMember
               [placeholder]="'hrm-management.staff.title' | transloco"
               formControlName="staffId"
+              [disabled]="dialogId"
             >
             <mat-option>
               <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco" [placeholderLabel]="'hrm-management.staff.title' | transloco" [formControlName]="'searchStaff'">
