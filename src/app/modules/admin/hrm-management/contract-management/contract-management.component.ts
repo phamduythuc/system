@@ -112,15 +112,15 @@ export class ContractManagementComponent
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel, () => {
-      const VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-      });
+      // const VND = new Intl.NumberFormat('vi-VN', {
+      //   style: 'currency',
+      //   currency: 'VND',
+      // });
       this.searchResult.data = this.mapData(this.searchResult.data);
       let convertData = this.searchResult.data.map((obj) => {
         let convetSalary = {
           ...obj,
-          salary: VND.format(parseInt(obj.salary)),
+          salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
         };
         return convetSalary;
       });

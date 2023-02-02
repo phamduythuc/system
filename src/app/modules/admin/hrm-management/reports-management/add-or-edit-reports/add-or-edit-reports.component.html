@@ -78,7 +78,7 @@
           class="icon-size-5 mr-2"
           svgIcon="heroicons_outline:paper-clip"
         ></mat-icon>
-        <!-- <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span> -->
+        
         <label for="file">Template</label>
       </button>
       <input
@@ -95,11 +95,11 @@
         ) | transloco
       }}</label>
     </div>
-    <div class="field flex mb-4 gap-5">
+    <div class="field flex mb-4 gap-5" >
       <div class="w-1/2 flex flex-wrap gap-5">
-        <span
+        <span *ngIf="formGroup.value.templatePath"
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.templateName)"
+          (click)="download(formGroup.value.templatePath,'1')"
           >{{
             "hrm-management.reports.detail.downloadTemplate" | transloco
           }}</span
@@ -107,9 +107,9 @@
         <!-- <span class="cursor-pointer italic underline text-[#4f9cad]">{{
           "hrm-management.reports.detail.viewReports" | transloco
         }}</span> -->
-        <span
+        <span *ngIf="formGroup.value.templateName"
           class="cursor-pointer italic underline text-[#4f9cad]"
-          (click)="download(formGroup.value.templatePath)"
+          (click)="download(detailsData.id,'2')"
           >{{
             "hrm-management.reports.detail.downloadReports" | transloco
           }}</span

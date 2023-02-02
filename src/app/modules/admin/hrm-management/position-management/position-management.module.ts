@@ -8,6 +8,7 @@ import {ErrorMessageModule} from '../../../../shared/components/error-message/er
 import { AddOrEditPositionComponent } from './compoment/add-or-edit-position/add-or-edit-position.component';
 import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { DetailPositionComponent } from './compoment/detail-position/detail-position.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DetailPositionComponent } from './compoment/detail-position/detail-posi
         FormsModule,
         ErrorMessageModule,
         ReactiveFormsModule,
-        NgxTrimDirectiveModule
+        NgxTrimDirectiveModule,
+        MatTooltipModule
     ],
 })
 export class PositionManagementModule { }

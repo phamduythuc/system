@@ -156,15 +156,15 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     this.SalaryService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
         this.searchResult.totalRecords = res.totalRecords;
-        const VND = new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND',
-        });
+        // const VND = new Intl.NumberFormat('vi-VN', {
+        //   style: 'currency',
+        //   currency: 'VND',
+        // });
         let convertData = res.data.map((obj) => {
           return {
             fullName: obj.fullName,
             // salaryActual: parseInt(obj.salaryActual),
-            salary: VND.format(parseInt(obj.salary)),
+            salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
             salaryActual: CommonUtilsService.formatCurrency(obj.salaryActual),
             revenueMonth: obj.revenueMonth,
             staffCode: obj.staffCode,
