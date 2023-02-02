@@ -22,7 +22,7 @@ export class AddOrEditContractComponent
   formGroup = this.fb.group({
     staffId: [null, Validators.required],
     type: [null, Validators.required],
-    status: [null, Validators.required],
+    // status: [null, Validators.required],
     code: [null, Validators.required],
     termPeriod: [null, Validators.required],
     effDate: [null, datePickerValidator()],
@@ -117,16 +117,26 @@ export class AddOrEditContractComponent
           { emitEvent: false }
         );
       }
+      if (form.termPeriod) {
+        this.formGroup.patchValue(
+          {
+            termPeriod: CommonUtilsService.formatCurrency(form.termPeriod),
+          },
+          { emitEvent: false }
+        );
+      }
     });
   }
 
   save() {
     const formData = new FormData();
     const data = this.formGroup.value;
-    if (data.insurance) {
+    if (data.insurance || data.termPeriod) {
       data.insurance = data.insurance.replace(/,/g, '');
+      data.termPeriod = data.termPeriod.replace(/,/g, '');
     } else {
       data.insurance = data.insurance;
+      data.termPeriod = data.termPeriod;
     }
     data.salary = data.salary.replace(/,/g, '');
     this.handleCoverTimeToString(data);
