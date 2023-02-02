@@ -85,7 +85,7 @@ export class ListParamReportsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-    
+
   }
 
   changeParamType(index_list_param, index_sheet) {
@@ -110,7 +110,7 @@ export class ListParamReportsComponent implements OnInit {
     }
 
     this.callbackData();
-    
+
   }
 
   deleteParam(index_list_param, index_sheet) {
@@ -145,12 +145,12 @@ console.log(this.data);
         !x.scriptSql ||
         !x.startRow ||
         !x.startColumn ||
-        x.startColumn == 0 || 
+        x.startColumn == 0 ||
         x.startRow == 0 ||
         !x.sheetOrder ||
-        x.listParam.length == 0
+        x.listParam.length === 0
       ) {
-        checkValidate = false;
+        checkValidate = true;
       }
 
       if (x.listParam.length > 0) {
@@ -182,7 +182,7 @@ console.log(this.data);
     setTimeout(() => {
       this.isLoading = false;
     }, 1);
-    
+
     this.callbackData()
 
   }
