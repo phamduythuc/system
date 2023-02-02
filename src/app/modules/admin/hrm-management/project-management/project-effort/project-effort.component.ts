@@ -172,10 +172,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.effortDifferenceVnd = this.formatCurrency(
           res.data.effortDifferenceVnd
         );
-        this.acceptanceDate = CommonUtilsService.dateToString(
-          res.data.acceptanceDate,
-          false
-        );
+        this.acceptanceDate = res.data.acceptanceDate ? moment(res.data.acceptanceDate) : null;
 
         const urlName = res.data.recordUrl;
         this.recordUrl = urlName;
