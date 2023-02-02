@@ -46,7 +46,7 @@ export class ContractProfileDashboardsComponent
       header: 'hrm-management.staff.detail.contract.startTime',
       flex: 0.5,
     },
-    
+
     {
       columnDef: 'salary',
       header: 'hrm-management.staff.detail.contract.salary',
@@ -105,7 +105,7 @@ export class ContractProfileDashboardsComponent
     this.data.data = data;
   }
 
-  download(data: any) {
+  download(data: any, documentName: any) {
     this.achievementService
       .renderFile({
         filePath: data,
@@ -114,8 +114,7 @@ export class ContractProfileDashboardsComponent
       .subscribe((res) => {
         const res1 = this.getResponseFromHeader(res.headers);
         if (this.isSuccess(res1)) {
-          const fileName = this.getFileName(res.headers);
-          FileSaver.saveAs(res.body, fileName);
+          FileSaver.saveAs(res.body, documentName);
         } else {
           this.showSnackBar(res1.message, 'error');
         }
