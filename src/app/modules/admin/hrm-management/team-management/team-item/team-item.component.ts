@@ -63,7 +63,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ];
   date = new FormControl(moment());
   listTeam: any[] = [];
-  currentTime = moment(new Date(Date.now())).format('YYYY-MM-DDT00:00:00Z');
+  // currentTime = moment(new Date(Date.now())).format('YYYY-MM-DDT00:00:00Z');
+  currentTime = moment(new Date(Date.now())).format('YYYY-MM-01T00:00:00Z');
   currentTimeFormat = moment(new Date(Date.now())).format('DD/MM/YYYY');
   formGroup = this.fb.group({
     id: '',
@@ -124,6 +125,8 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.searchDetail.teamId = this.team.id;
     this.searchDetail.month = CommonUtilsService.dateToString(this.currentTime,false); //New code
+    console.log(this.searchDetail);
+
     this.getDetailTeamBySprint(this.searchDetail);
     this.formGroup.patchValue({
       sprint: this.currentTime,
