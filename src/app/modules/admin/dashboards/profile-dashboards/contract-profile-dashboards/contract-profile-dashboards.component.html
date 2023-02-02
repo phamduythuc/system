@@ -22,7 +22,7 @@
         <ng-container *ngSwitchCase="'contractFilePath'">
           <span
             class="cursor-pointer"
-            (click)="download(row.contractFilePath)"
+            (click)="download(row.contractFilePath, row.documentName)"
             >{{'hrm-management.contract.link'| transloco}}</span
           >
         </ng-container>
