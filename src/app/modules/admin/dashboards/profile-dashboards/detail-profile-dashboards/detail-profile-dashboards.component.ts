@@ -236,12 +236,12 @@ export class DetailProfileDashboardsComponent
       false
     );
 
-    const VND = new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    });
+    // const VND = new Intl.NumberFormat('vi-VN', {
+    //   style: 'currency',
+    //   currency: 'VND',
+    // });
 
-    this.data.salary = VND.format(parseInt(this.data.salary)),
+    this.data.salary = CommonUtilsService.formatVND(parseInt(this.data.salary)),
 
     this.formGroup.patchValue(this.data);
   }

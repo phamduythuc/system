@@ -307,7 +307,15 @@
         "downloadTemplate": "Tải template",
         "viewReports": "Xem báo cáo",
         "downloadReports": "Tải báo cáo",
-        "listSheet": "Danh sách các sheet"
+        "listSheet": "Danh sách các sheet",
+        "requiredName": "Trường Tên không được để trống",
+        "sqlRequired": "Trường SQL không được để trống!",
+        "requiredRow": "Trường StartRow không được để trống",
+        "requiredColumn": "Trường StartColumn không được để trống",
+        "startRownotValueExists": "Hàng bắt đầu không có giá trị nào tồn tại!",
+        "startColnotValueExists": "Cột bắt đầu không có giá trị nào tồn tại!",
+        "notValueSheet": "Vị trí Sheet không có giá trị nào tồn tại!",
+        "requiredSheet": "Vị trí Sheet không được để trống!"
       }
 
     }

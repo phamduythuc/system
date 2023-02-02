@@ -308,7 +308,15 @@
         "downloadTemplate": "Download template",
         "viewReports": "View reports",
         "downloadReports": "Download reports",
-        "listSheet": "List sheet"
+        "listSheet": "List sheet",
+        "requiredName": "Name is required",
+        "sqlRequired": "SQL is required",
+        "requiredRow": "StartRow is required",
+        "requiredColumn": "StartColumn is required",
+        "startRownotValueExists": "StartRow not value exists",
+        "startColnotValueExists": "StartColumn not value exists",
+        "notValueSheet": "Sheet not exists",
+        "requiredSheet": "Sheet is required!"
       }
       
     }
