@@ -53,7 +53,7 @@ export class AddOrEditReportsComponent extends BaseComponent implements OnInit {
 
   listSheet: any = {
     data: [],
-    validate: false,
+    validate: true,
   };
 
   fileUpload:any
