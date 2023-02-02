@@ -164,7 +164,7 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
   }
 
   download(data: any, type: any) {
-    if (type == 1) {
+    if (type === '1') {
       this.achievementService
         .renderFile({
           filePath: data,
@@ -173,26 +173,17 @@ export class DetailReportsComponent extends BaseComponent implements OnInit {
         .subscribe((res) => {
           const res1 = this.getResponseFromHeader(res.headers);
           if (this.isSuccess(res1)) {
-            const fileName = this.getFileName(res.headers);
-            FileSaver.saveAs(res.body, fileName);
+            FileSaver.saveAs(res.body, this.detailsData?.templateName);
           } else {
             this.showSnackBar(res1.message, 'error');
           }
         });
     }
 
-    if (type == 2) {
+    if (type === '2') {
       this.ReportsService.downloadReports(data).subscribe((res) => {
-        console.log(res.headers.get('content-disposition'));
-        let fileName = res.headers
-          .get('content-disposition')
-          ?.split(';')[1]
-          .split('=')[1];
-        let blob: Blob = res.body as Blob;
-        let a = document.createElement('a');
-        a.download = fileName;
-        a.href = window.URL.createObjectURL(blob);
-        a.click();
+        const fileName = this.getFileName(res.headers);
+        FileSaver.saveAs(res.body, decodeURIComponent(fileName));
       });
     }
   }
