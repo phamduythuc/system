@@ -1,4 +1,4 @@
 export interface Member {
-    staffId?:string,
-    staffName?:string,
+    staffId?: string,
+    staffName?: string,
 }

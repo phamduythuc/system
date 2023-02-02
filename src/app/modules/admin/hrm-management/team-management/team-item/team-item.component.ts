@@ -175,7 +175,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
         if (this.data.staffName != null) {
           this.listStaffName = this.data.staffName.split(',');
           this.listStaffId = this.data.staffId.split(',');
-          this.totalMember = this.listStaffId.length;
+          this.totalMember = this.listStaffId.length; //new code
 
           for (let index = 0; index < this.listStaffId.length; index++) {
             this.member = {
@@ -184,7 +184,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
             };
             this.listMember.push(this.member);
           }
-
+          // this.totalMember = this.listStaffId.length;
 
           this.leadId = res.data[0].leadId;
           if (this.data.cost !== 0 && this.data.revenue !== 0) {
@@ -196,7 +196,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
             this.performance = '';
           }
         }
-        else{
+        else{  // new code
           this.totalMember = 0;
         this.listStaffName = [];
 
@@ -259,7 +259,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
       (value) => {
         if (value != null) {
           const leaderName = this.listMember.find(
-            (x) => x.staffId === value
+            (x) => x.staffId == value
           ).staffName;
           this.formGroup.patchValue({
             leadName: leaderName,
