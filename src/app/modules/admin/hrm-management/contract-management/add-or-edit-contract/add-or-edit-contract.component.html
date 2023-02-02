@@ -50,7 +50,7 @@
             </mat-option>
 
               <ng-container *ngFor="let staff of listStaff">
-                <mat-option [value]="staff.id" *ngIf="staff.status === true && staff.staffStatus === 1">
+                <mat-option [value]="staff.id" *ngIf="staff.status === true">
                   {{staff.fullName}}
                 </mat-option>
               </ng-container>
