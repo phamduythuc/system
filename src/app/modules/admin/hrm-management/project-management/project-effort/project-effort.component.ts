@@ -452,7 +452,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   loadStaffs(res) {
     this.mapStaff = {};
     res.data.forEach((itemStatus) => {
-      if (itemStatus.staffStatus === 1) {
+      if (itemStatus.status === 1) {
         this.listStatusStaff.push(itemStatus);
       }
     });
