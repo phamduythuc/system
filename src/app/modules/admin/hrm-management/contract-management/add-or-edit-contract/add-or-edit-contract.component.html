@@ -26,11 +26,11 @@
 
 
     <div class="field flex mb-4">
-      <div class="w-1/2 flex">
-        <label class="w-1/3 font-medium required">{{
+      <div class="w-full flex">
+        <label class="w-1/6 font-medium required">{{
           "hrm-management.staff.title" | transloco
         }}</label>
-        <div class="input w-5/6">
+        <div class="input w-full">
           <mat-form-field
             appearance="fill"
             class="fuse-mat-no-subscript w-full bg-card"
@@ -50,7 +50,7 @@
             </mat-option>
 
               <ng-container *ngFor="let staff of listStaff">
-                <mat-option [value]="staff.id" *ngIf="staff.status === true && staff.staffStatus === 1">
+                <mat-option [value]="staff.id" *ngIf="staff.status === true">
                   {{staff.fullName}}
                 </mat-option>
               </ng-container>
@@ -62,9 +62,11 @@
           ></app-error-message>
         </div>
       </div>
+    </div>
 
+    <div class="field flex mb-4">
       <div class="w-1/2 flex">
-        <label class="w-1/3 font-medium required ml-4">{{
+        <label class="w-1/3 font-medium required">{{
           "hrm-management.staff.detail.contract.contract" | transloco
         }}</label>
         <div class="input w-5/6">
@@ -91,10 +93,7 @@
           ></app-error-message>
         </div>
       </div>
-    </div>
-
-    <div class="field flex mb-4">
-      <div class="w-1/2 flex">
+      <!-- <div class="w-1/2 flex">
         <label class="w-1/3 font-medium required">{{
           "common.status" | transloco
         }}</label>
@@ -120,7 +119,7 @@
             [name]="'common.status' | transloco"
           ></app-error-message>
         </div>
-      </div>
+      </div> -->
       <div class="w-1/2 flex">
         <label class="w-1/3 font-medium required ml-4" for="code">{{
           "hrm-management.contract.code" | transloco
@@ -158,7 +157,6 @@
               [placeholder]="'hrm-management.contract.termPeriod' | transloco"
               formControlName="termPeriod"
               matInput
-              type="number"
             />
           </mat-form-field>
           <app-error-message
