@@ -62,9 +62,9 @@ export class AddOrEditStaffDrawerComponent
   ];
 
   listRoleStaff: any;
-  listPositions: any;
+  listPositions: any = [];
   listStaffLevels: any = [];
-  listDepartment: any;
+  listDepartment: any = [];
   listTeam:any
 
   formGroup = this.fb.group({
@@ -196,7 +196,12 @@ export class AddOrEditStaffDrawerComponent
       }
     });
     this.staffService.getListPosition(this.option).subscribe((res) => {
-      this.listPositions = res.data;
+      res.data.forEach((itemStatus) => {
+        if (itemStatus.status === 1) {
+          this.listPositions.push(itemStatus);
+        }
+      });
+      // this.listPositions = res.data;
     });
     this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {
@@ -207,7 +212,14 @@ export class AddOrEditStaffDrawerComponent
       // this.listStaffLevels = res.data;
     });
     this.staffService.getListDepartment(this.option).subscribe((res) => {
-      this.listDepartment = res.data;
+      res.data.forEach((itemStatus) => {
+        if (itemStatus.status === 1) {
+          this.listDepartment.push(itemStatus);
+        }
+      });
+      console.log(this.listDepartment);
+
+      // this.listDepartment = res.data;
     });
   }
 
