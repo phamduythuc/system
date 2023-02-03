@@ -202,7 +202,10 @@ export class ContractManagementComponent
   }
 
   getListUser() {
-    this.StaffService.getListAllUser().subscribe((res: any) => {
+    const keyStatus = {
+      status: 1,
+    };
+    this.StaffService.getListStaffOnl(keyStatus).subscribe((res: any) => {
       this.listUser = res.data;
     });
   }
