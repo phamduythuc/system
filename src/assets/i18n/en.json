@@ -223,7 +223,7 @@
         "addMember": "Add member",
         "choose": "Choose member",
         "number" : "Number"
-      } 
+      }
     },
     "time-keeping": {
       "title": "Time Keeping",
@@ -318,7 +318,7 @@
         "notValueSheet": "Sheet not exists",
         "requiredSheet": "Sheet is required!"
       }
-      
+
     }
   },
   "contract": {
@@ -440,7 +440,8 @@
           "recognize_exchange": "Recognize exchange the effort(MM)",
           "time_percent": "% time allocation",
           "time_percent_err": "Time allocation is a required",
-          "time_percent_err_1": "Number should be between 0 and 100"
+          "time_percent_err_1": "Number should be between 0 and 100",
+          "percent_effort_err": "Total % of time allocation must be 100%"
         },
         "chart": {
           "title": "Chart KPI"

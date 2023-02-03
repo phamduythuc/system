@@ -367,7 +367,7 @@
     "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
     "role": "Vai trò",
     "add": "Thêm",
-    "chooseFile":"Chọn file" 
+    "chooseFile":"Chọn file"
   },
   "staff": {
     "staffName" : "Tên nhân viên",
@@ -422,7 +422,8 @@
           "recognize_exchange": "Nỗ lực quy đổi(MM)",
           "time_percent": "% phân bổ thời gian",
           "time_percent_err": "Phân bổ thời gian là trường bắt buộc",
-          "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100"
+          "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100",
+          "percent_effort_err": "Tổng % phân bổ thời gian phải bằng 100%"
         },
         "chart": {
           "title": "Biểu đồ KPI"

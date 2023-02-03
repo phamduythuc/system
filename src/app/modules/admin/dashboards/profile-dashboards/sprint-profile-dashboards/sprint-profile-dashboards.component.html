@@ -128,7 +128,7 @@
     </div>
   </div>
 
-  <form (ngSubmit)="f.form.valid && saveData()" #f="ngForm" novalidate>
+  <!-- <form (ngSubmit)="f.form.valid && saveData()" #f="ngForm" novalidate>
     <div class="data-table w-full mt-4">
       <div class="mb-2 text-base font-semibold uppercase">
         {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
@@ -194,29 +194,32 @@
                   }}
                 </div>
               </div>
+              <div [disabled]="disabledLogErr" class="errors">
+                <span>{{
+                  "dashboard.profile.tab.sprint.percent_effort_err" | transloco
+                }}</span>
+              </div>
             </ng-container>
           </ng-container>
         </ng-template>
       </app-data-table>
       <div class="sm:col-span-1 flex justify-end items-end" *ngIf="!staffId">
-        <div *ngIf="sumPercentEffort === 100">
           <button
           mat-raised-button
           color="primary"
           class="mr-3"
-          [disabled]="f.form.invalid"
+          [disabled]="disabledBtn"
         >
           <span>{{ "button.save" | transloco }}</span>
         </button>
-        </div>
 
 
       </div>
     </div>
-  </form>
+  </form> -->
 
 
-  <!-- <div class="data-table w-full mt-4">
+  <div class="data-table w-full mt-4">
     <div class="mb-2 text-base font-semibold uppercase">
       {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
     </div>
@@ -280,6 +283,11 @@
                 }}
               </div>
             </div>
+            <div [hidden]="disabledLogErr" class="errors">
+              <span>{{
+                "dashboard.profile.tab.sprint.percent_effort_err" | transloco
+              }}</span>
+            </div>
           </ng-container>
         </ng-container>
       </ng-template>
@@ -295,5 +303,5 @@
         <span>{{ "button.save" | transloco }}</span>
       </button>
     </div>
-  </div> -->
+  </div>
 </ng-container>
