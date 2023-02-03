@@ -31,6 +31,10 @@ export class SprintProfileDashboardsComponent
 
   _permissionCodeName = 'DSNV';
 
+  listPercentEffort: any = [];
+
+  sumPercentEffort: number;
+
   columns: IColumn[] = [
     {
       columnDef: 'stt',
@@ -104,8 +108,6 @@ export class SprintProfileDashboardsComponent
     );
     this.paginate.staffId = this.staffId;
 
-    console.log(this.paginate);
-
     this.getData(this.paginate);
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
@@ -154,14 +156,28 @@ export class SprintProfileDashboardsComponent
   }
 
   getData(data) {
-    console.log(data);
-
     this.DashboardsProfileService.getSprint(data).subscribe((res: any) => {
+
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
         extraData: res.extraData,
       };
+
+      res.data.forEach((item) => {
+        this.listPercentEffort.push(item.percentEffort);
+      });
+
+      this.sumPercentEffort = Number(
+        this.listPercentEffort.reduce((acc, cur) => acc + cur, 0)
+      );
+
+      // if (this.sumPercentEffort === 100) {
+      //   this.disabledBtn = false;
+      // } else {
+      //   this.disabledBtn = true;
+      // }
+
       if (res.extraData) {
         res.extraData.salary = CommonUtilsService.formatVND(
           res.extraData.salary
@@ -228,6 +244,7 @@ export class SprintProfileDashboardsComponent
       month: CommonUtilsService.dateToString(this.startDate.value.startMonth),
       effortDetail: this.data?.data,
     };
+
     this.DashboardsProfileService.updateEffort(payload).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
@@ -236,7 +253,6 @@ export class SprintProfileDashboardsComponent
       }
     });
   }
-
   // changePage(e: any) {
   //   this.paginate.month = CommonUtilsService.dateToString(
   //     this.startDate.value.startMonth,
