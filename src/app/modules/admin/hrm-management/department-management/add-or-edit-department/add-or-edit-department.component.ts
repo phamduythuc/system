@@ -38,6 +38,10 @@ export class AddOrEditDepartmentComponent
   }
 
   ngOnInit(): void {
+    this.departmentService.getAllDepartments().subscribe(res =>{
+        this.departments = res.data;
+        console.log(this.departments);
+    }) 
   }
 
   save(data) {
