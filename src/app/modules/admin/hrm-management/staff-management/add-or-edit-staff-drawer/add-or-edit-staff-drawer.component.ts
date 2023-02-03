@@ -63,7 +63,7 @@ export class AddOrEditStaffDrawerComponent
 
   listRoleStaff: any;
   listPositions: any;
-  listStaffLevels: any;
+  listStaffLevels: any = [];
   listDepartment: any;
   listTeam:any
 
@@ -199,7 +199,12 @@ export class AddOrEditStaffDrawerComponent
       this.listPositions = res.data;
     });
     this.staffService.getListStaffLevel(this.option).subscribe((res) => {
-      this.listStaffLevels = res.data;
+      res.data.forEach((itemStatus) => {
+        if (itemStatus.status === 1) {
+          this.listStaffLevels.push(itemStatus);
+        }
+      });
+      // this.listStaffLevels = res.data;
     });
     this.staffService.getListDepartment(this.option).subscribe((res) => {
       this.listDepartment = res.data;
