@@ -57,4 +57,7 @@ export class StaffService extends BaseService {
   getListTeam(searchData): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/team`, {params: searchData});
   };
+  getListStaffOnl(keyStatus): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/staff`, {params: keyStatus});
+  }
 }
