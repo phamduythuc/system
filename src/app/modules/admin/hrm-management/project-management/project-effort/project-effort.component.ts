@@ -44,7 +44,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   isLoading: boolean = false;
   listStaffOrigin: any = [];
   mapStaff: any = {};
-  listStaffLevels: any;
+  listStaffLevels: any = [];
   listStaff: any = {};
   filteredList: any = {};
   numberChars = new RegExp('[.,]', 'g');
@@ -438,7 +438,14 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   loadProjectRole() {
     this.sprintService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
-        this.listStaffLevels = res.data;
+        // this.listStaffLevels = res.data;
+        console.log(res.data);
+        res.data.forEach(itemStatus => {
+          if (itemStatus.status == 1) {
+
+            this.listStaffLevels.push(itemStatus);
+          }
+        });
         this.listStaffLevels.forEach((item) => {
           item.id = Number(item.id);
         });
