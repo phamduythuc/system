@@ -217,7 +217,6 @@ export class AddOrEditStaffDrawerComponent
           this.listDepartment.push(itemStatus);
         }
       });
-      console.log(this.listDepartment);
 
       // this.listDepartment = res.data;
     });
