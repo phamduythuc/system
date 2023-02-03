@@ -128,9 +128,97 @@
     </div>
   </div>
 
-  <!-- <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <!-- <form (ngSubmit)="f.form.valid && saveData()" #f="ngForm" novalidate>
+    <div class="data-table w-full mt-4">
+      <div class="mb-2 text-base font-semibold uppercase">
+        {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
+      </div>
+      <app-data-table
+        [roleName]="_permissionCodeName"
+        [rows]="data?.data"
+        [columns]="columns"
+        [paginate]="true"
+        [limit]="paginate.pageSize"
+        [count]="data?.totalRecords"
+        [rowTemplate]="rowTemplate"
+        (callback)="handleDataKPI($event)"
+        (action)="actionClick($event)"
+        (pageChange)="changePage($event)"
+      >
+        <ng-template #rowTemplate let-row="row" let-column="column">
+          <ng-container [ngSwitch]="column.columnDef">
+            <ng-container *ngSwitchDefault>{{
+              row[column.columnDef]
+            }}</ng-container>
+            <ng-container *ngSwitchCase="'percentEffort'">
+              <div class="box-percent">
+                <mat-form-field
+                  class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+                >
+                  <input
+                    class="w-full"
+                    matInput
+                    trim="blur"
+                    required
+                    #rateInput="ngModel"
+                    [(ngModel)]="row[column.columnDef]"
+                    [name]="row[column.columnDef]"
+                    [min]="0"
+                    [max]="100"
+                    minMax
+                    pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
+                    [readonly]="staffId !== ''"
+                    (ngModelChange)="changePercentEffort()"
+                    oninput="this.value =
+   !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                  />
+                </mat-form-field>
+                %
+              </div>
+              <div
+                class="errors"
+                *ngIf="
+                  rateInput.errors &&
+                  (rateInput.dirty || rateInput.touched) &&
+                  !staffId
+                "
+              >
+                <div [hidden]="!rateInput.errors.pattern">
+                  <span>{{
+                    "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
+                  }}</span>
+                </div>
+                <div [hidden]="!rateInput.errors.required">
+                  {{
+                    "dashboard.profile.tab.sprint.time_percent_err" | transloco
+                  }}
+                </div>
+              </div>
+              <div [disabled]="disabledLogErr" class="errors">
+                <span>{{
+                  "dashboard.profile.tab.sprint.percent_effort_err" | transloco
+                }}</span>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </app-data-table>
+      <div class="sm:col-span-1 flex justify-end items-end" *ngIf="!staffId">
+          <button
+          mat-raised-button
+          color="primary"
+          class="mr-3"
+          [disabled]="disabledBtn"
+        >
+          <span>{{ "button.save" | transloco }}</span>
+        </button>
 
+
+      </div>
+    </div>
   </form> -->
+
+
   <div class="data-table w-full mt-4">
     <div class="mb-2 text-base font-semibold uppercase">
       {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
@@ -194,6 +282,11 @@
                   "dashboard.profile.tab.sprint.time_percent_err" | transloco
                 }}
               </div>
+            </div>
+            <div [hidden]="disabledLogErr" class="errors">
+              <span>{{
+                "dashboard.profile.tab.sprint.percent_effort_err" | transloco
+              }}</span>
             </div>
           </ng-container>
         </ng-container>

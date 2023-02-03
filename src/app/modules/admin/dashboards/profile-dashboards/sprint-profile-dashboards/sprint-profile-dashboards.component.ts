@@ -31,6 +31,10 @@ export class SprintProfileDashboardsComponent
 
   _permissionCodeName = 'DSNV';
 
+  listPercentEffort: any = [];
+
+  sumPercentEffort: number;
+
   columns: IColumn[] = [
     {
       columnDef: 'stt',
@@ -71,7 +75,8 @@ export class SprintProfileDashboardsComponent
 
   data: any = [];
 
-  disabledBtn = false;
+  disabledBtn = true;
+  disabledLogErr = true;
 
   paginate: any = {
     month: '',
@@ -103,8 +108,6 @@ export class SprintProfileDashboardsComponent
       false
     );
     this.paginate.staffId = this.staffId;
-
-    console.log(this.paginate);
 
     this.getData(this.paginate);
     this.translocoService.langChanges$.subscribe((activeLang) => {
@@ -154,14 +157,31 @@ export class SprintProfileDashboardsComponent
   }
 
   getData(data) {
-    console.log(data);
-
     this.DashboardsProfileService.getSprint(data).subscribe((res: any) => {
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
         extraData: res.extraData,
       };
+
+      res.data.forEach((item) => {
+        this.listPercentEffort.push(item.percentEffort);
+      });
+
+      this.sumPercentEffort = Number(
+        this.listPercentEffort.reduce((acc, cur) => acc + cur, 0)
+      );
+
+      if (this.sumPercentEffort == 100) {
+        this.disabledBtn = false;
+        this.disabledLogErr = true;
+
+      } else {
+        // this.disabledBtn = true;
+        // this.disabledLogErr = true;
+
+      }
+
       if (res.extraData) {
         res.extraData.salary = CommonUtilsService.formatVND(
           res.extraData.salary
@@ -185,8 +205,47 @@ export class SprintProfileDashboardsComponent
     let total = 0;
     this.data?.data.map((x) => {
       total += Number(x.percentEffort);
+      // console.log(total);
+
+      if(total == 100){
+        this.disabledBtn = false;
+        this.disabledLogErr = true;
+
+      }else{
+        this.disabledBtn = true;
+        this.disabledLogErr = false;
+
+      }
+
     });
+
+    // this.callback.emit({
+    //   type: '',
+    //   data: this.data,
+    //   validate: this.validate(),
+    // });
   }
+
+  // validate(index_delete?) {
+  //   if (index_delete) {
+  //     let arr = [...this.data];
+  //     arr.splice(index_delete, 1);
+  //     this.data = arr;
+  //   }
+
+  //   let checkValidate = true;
+  //   console.log(this.data);
+
+  //   this.data?.data.map((x) => {
+  //     let total = 0;
+  //     total += Number(x.percentEffort);
+  //     if (!x.percentEffort) {
+  //       checkValidate = true;
+  //     }
+  //   });
+
+  //   return checkValidate;
+  // }
 
   view(paginate?) {
     let params: any = {};
@@ -220,14 +279,13 @@ export class SprintProfileDashboardsComponent
   saveData() {
     this.data?.data.map((x) => {
       x.acceptanceEffort = Number(x.percentEffort);
-
       return x;
     });
-
     let payload = {
       month: CommonUtilsService.dateToString(this.startDate.value.startMonth),
       effortDetail: this.data?.data,
     };
+
     this.DashboardsProfileService.updateEffort(payload).subscribe((res) => {
       if ('00' === res.code) {
         this.showSnackBar(res.message, 'success');
