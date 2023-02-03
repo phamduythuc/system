@@ -384,7 +384,9 @@
     "acknowledgmentOfEffortMM" : "Acknowledgment of effort (MM)",
     "role": "Role",
     "add": "Add",
-    "chooseFile":"choose file"
+    "chooseFile":"choose file",
+    "same_name_err":"Same name"
+
 
   },
   "staff": {

@@ -53,6 +53,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   effortDifferenceVnd: any = '';
   listStatusStaff: any = [];
 
+  disBtn = false;
+  disabledLogErr = true;
+
   option = {
     page: 0,
     pageSize: 100,
@@ -439,7 +442,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.sprintService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
         // this.listStaffLevels = res.data;
-        console.log(res.data);
         res.data.forEach(itemStatus => {
           if (itemStatus.status == 1) {
 
@@ -484,9 +486,17 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
     // const lstStaffIds = this.efforts.value.map(item => item.staffId);
-    // this.efforts.value.forEach((item, idx) => {
-    //   this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
-    // });
+    this.efforts.value.forEach((item, idx) => {
+      // this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
+      if(event.value == item.staffId){
+        this.disBtn = true;
+        this.disabledLogErr = false;
+      }else{
+        this.disBtn = false;
+        this.disabledLogErr = true;
+
+      }
+    });
   }
 
   downloadDocument(recordUrl: any) {

@@ -253,6 +253,7 @@
               [rowTemplate]="rowTemplate">
               <ng-template #rowTemplate let-row="row" let-column="column" let-index="index">
                 <ng-container [ngSwitch]="column.columnDef" [formGroupName]="index">
+
                   <ng-container *ngSwitchCase="'staffName'">
                     <div class="field flex mt-2 mb-2">
                       <div class="input w-5/6">
@@ -270,6 +271,11 @@
                         <app-error-message [control]="efforts.controls[index].get('staffId')"
                           [name]="'common.name' | transloco">
                         </app-error-message>
+                        <div [hidden]="disabledLogErr" class="errors">
+                          <span>{{
+                            "effort.same_name_err" | transloco
+                          }}</span>
+                        </div>
 
                       </div>
                     </div>
@@ -379,7 +385,7 @@
       <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
       <span>{{ "button.cancel" | transloco }}</span>
     </button>
-    <button mat-raised-button color="primary" (click)="save()">
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="disBtn">
       <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
       <span>{{ "button.save" | transloco }}</span>
     </button>
