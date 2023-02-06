@@ -9,6 +9,7 @@
         "ng": "ng",
         "start": "ng serve --open",
         "build": "ng build",
+        "build:staging": "ng build --configuration staging",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "lint": "ng lint"
@@ -63,7 +64,7 @@
         "@angular-eslint/eslint-plugin-template": "13.1.0",
         "@angular-eslint/schematics": "13.1.0",
         "@angular-eslint/template-parser": "13.1.0",
-        "@angular/cli": "13.2.4",
+        "@angular/cli": "^15.1.4",
         "@angular/compiler-cli": "13.2.3",
         "@tailwindcss/aspect-ratio": "0.4.0",
         "@tailwindcss/line-clamp": "0.3.1",
