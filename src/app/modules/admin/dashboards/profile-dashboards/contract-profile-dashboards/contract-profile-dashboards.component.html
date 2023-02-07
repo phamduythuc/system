@@ -1,0 +1,33 @@
+<!--  contract list  -->
+  <div class="content">
+    <!-- <div class="mb-2 text-base font-semibold uppercase">
+      {{ "hrm-management.staff.detail.contract.title" | transloco }}
+    </div> -->
+
+    <div class="data-table w-full mt-4">
+      <app-data-table
+      [roleName]="_permissionCodeName"
+      [rows]="searchResult?.data"
+      [columns]="columns"
+      [paginate]="true"
+      [limit]="searchModel.pageSize"
+      [count]="searchResult?.totalRecords"
+      [rowTemplate]="rowTemplate"
+    >
+    <ng-template #rowTemplate let-row="row" let-column="column">
+      <ng-container [ngSwitch]="column.columnDef">
+        <ng-container *ngSwitchDefault>{{
+          row[column.columnDef]
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'contractFilePath'">
+          <span
+            class="cursor-pointer"
+            (click)="download(row.contractFilePath, row.documentName)"
+            >{{'hrm-management.contract.link'| transloco}}</span
+          >
+        </ng-container>
+      </ng-container>
+    </ng-template>
+    </app-data-table>
+    </div>
+  </div>

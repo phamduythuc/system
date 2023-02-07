@@ -6,7 +6,7 @@
                 {{userData ? 'Thông tin người dùng' : 'Thêm mới người dùng'}}
             </div>
             <div>
-                <button mat-icon-button class="hover:bg-slate-500" (click)="dialogRef.close()">
+                <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
                     <mat-icon svgIcon="heroicons_outline:x" title="Edit"  class="icon-size-5"></mat-icon>
                 </button>
             </div>
@@ -19,9 +19,9 @@
                     <mat-form-field
                         class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                         <input class="w-full"
-                               placeholder="Nhập họ và tên"
+                               [placeholder]="('common.fullName' | transloco)+' ...'"
                                formControlName="firstName"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('firstName')" name="Họ và tên"></app-error-message>
                 </div>
@@ -34,7 +34,7 @@
                         <input class="w-full"
                                placeholder="Nhập tên đăng nhập"
                                formControlName="login"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('login')" name="Tên đăng nhập"></app-error-message>
                 </div>
@@ -48,7 +48,7 @@
                                placeholder="Nhập mật khẩu"
                                formControlName="password"
                                type="password"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('password')" name="Mật khẩu"></app-error-message>
                 </div>
@@ -62,7 +62,7 @@
                                placeholder="Nhập mật khẩu"
                                type="password"
                                formControlName="confirmPassword"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('confirmPassword')" name="Mật khẩu"></app-error-message>
                 </div>
@@ -75,7 +75,7 @@
                         <input class="w-full"
                                placeholder="Nhập email"
                                formControlName="email"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('email')" name="Email"></app-error-message>
                 </div>
@@ -88,7 +88,7 @@
                         <input class="w-full"
                                placeholder="Nhập điện thoại"
                                formControlName="phone"
-                               matInput>
+                               matInput trim='blur'>
                     </mat-form-field>
                     <app-error-message [control]="formGroup.get('phone')" name="Phone"></app-error-message>
                 </div>

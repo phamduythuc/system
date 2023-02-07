@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="w-full">
+      <div class="text-2xl font-bold card-title capitalize">
+        {{ "hrm-management.role.roleAdd" | transloco }}
+      </div>
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        class="hover:bg-slate-200 btnClose"
+        (click)="dialogRef.close()"
+      >
+        <mat-icon
+          class="icon-size-5"
+          svgIcon="heroicons_outline:x"
+          title="Close"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="body mt-6">
+    <form [formGroup]="formGroup">
+      <div class="field flex mb-4 w-full">
+        <label class="w-1/6 font-medium flex items-center">{{
+          "hrm-management.role.roleName" | transloco
+        }} <span style="padding-left: 2px; color: red"> *</span></label>
+        <div class="input w-5/6">
+          <mat-form-field
+            class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+          >
+            <input
+              class="w-full"
+              [placeholder]="('hrm-management.role.roleName' | transloco) + ' ...'"
+              formControlName="name"
+              matInput
+              trim="blur"
+            />
+          </mat-form-field>
+          <app-error-message [control]="formGroup.get('name')" [name]='"hrm-management.role.roleName"|transloco'></app-error-message>
+        </div>
+      </div>
+      <div class="field flex mb-4">
+        <div class="w-full flex">
+          <label class="w-1/6 font-medium flex items-center">{{
+            "common.description" | transloco
+          }}</label>
+          <div class="input w-5/6">
+            <mat-form-field
+              class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card"
+            >
+              <input
+                class="w-full"
+                [placeholder]="('common.description' | transloco) + ' ...'"
+                formControlName="description"
+                matInput
+                trim="blur"
+              />
+            </mat-form-field>
+            <app-error-message [control]="formGroup.get('description')" [name]='"common.description"|transloco'></app-error-message>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="footer mt-6 flex justify-end">
+      <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+        <mat-icon
+          class="icon-size-5 mr-2"
+          svgIcon="heroicons_outline:x"
+        ></mat-icon>
+        <span>{{ "button.cancel" | transloco }}</span>
+      </button>
+      <button
+        (click)="handerSave()"
+        mat-raised-button
+        color="primary"
+        [disabled]="formGroup.invalid"
+      >
+        <mat-icon
+          class="icon-size-5 mr-2"
+          svgIcon="heroicons_outline:check"
+        ></mat-icon>
+        <span>{{ "button.save" | transloco }}</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,11 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+
+body{
+    box-sizing: border-box;
+}
 .sign-in-background {
     background-image: url("~assets/images/ui/login-bg.png");
     background-size: cover;
@@ -47,4 +52,63 @@
 }
 .mat-snack-bar-container{
     color: #fff !important;
+}
+.my-border{
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 40px;
+  border-radius: 6px;
+  padding: 0 16px;
+  border-width: 1px;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity)) !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+.b-radius{
+  border-radius: 6px;
+}
+
+.form-inline.row-item.ng-star-inserted{
+  display: inline-flex;
+  padding: 6px;
+  i{
+    display: flex;
+    align-items: center;
+  }
+  .form-check{
+    margin-left: 8px;
+  }
+  .form-check-label{
+    margin-left: 4px;
+  }
+}
+
+.custom-tooltip {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  font-size:16px;
+  white-space: pre-line
+}
+
+// .mat-cell {
+//   padding: 0 10px 0 0 !important;
+// }
+// .text-ellipsis-1{
+//   overflow: hidden;
+//     text-overflow: ellipsis;
+//     line-height: 25px;
+//     -webkit-line-clamp: 1;
+//     height: 25px;
+//     display: -webkit-box;
+// }
+
+.text-ellipsis-2{
+  overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    height: 50px;
+    display: -webkit-box;
 }

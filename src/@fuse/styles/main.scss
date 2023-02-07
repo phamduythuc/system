@@ -7,3 +7,11 @@
 @import 'overrides/highlightjs';
 @import 'overrides/perfect-scrollbar';
 @import 'overrides/quill';
+
+.bg-cus{
+    .mat-form-field-wrapper {
+      .mat-form-field-flex {
+          background-color: #f3f3f380 !important;
+      }
+  }
+}

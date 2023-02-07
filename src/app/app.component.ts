@@ -1,31 +1,131 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Route, Router} from "@angular/router";
-import {AuthService} from "./core/auth/auth.service";
-import {distinctUntilChanged, filter} from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@core/auth/auth.service';
+import { AccountService } from '@core/auth/account.service';
+import { CategoriesService } from '@core/categories.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
-    selector   : 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls  : ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit
-{
-    /**
-     * Constructor
-     */
-    breadcrumbs: any[] = [];
-    constructor( private activeRoute: ActivatedRoute, private router: Router, private authService: AuthService) {}
-    ngOnInit() {
-        this.checkLoginSSO()
-    }
+export class AppComponent implements OnInit {
+  /**
+   * Constructor
+   */
+  breadcrumbs: any[] = [];
 
-    checkLoginSSO(): void {
-        const ticket = window.location.href.split('ticket=')[1];
-        if (ticket) {
-            localStorage.setItem('ticket', ticket);
-            this.authService.signIn({'ticket': ticket}).subscribe();
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private accountService: AccountService,
+    private CategoriesService: CategoriesService,
+    private translocoService: TranslocoService
+  ) {}
+
+  ngOnInit(): void {
+    this.checkLoginSSO();
+    // this.getList()
+
+    // this.getList();
+  }
+
+  checkLoginSSO(): void {
+    const token =
+      window.location.href.split('access_token=')[1] ||
+      localStorage.getItem('accessToken');
+
+    let listType = localStorage.getItem('listType');
+
+    if (token) {
+      this.authService.accessToken = token;
+      this.accountService.identity(true).subscribe(() => {
+        if (!listType) {
+          this.getList();
         }
+        if (window.location.href.split('access_token=')[1]) {
+          this.router.navigate(['/']);
+        }
+      });
     }
+  }
+  list = ['CONTACT_TYPE', 'CONTRACT_STATUS', 'GENDER', 'PARAMETER_TYPE'];
+  value: any;
+  getList() {
+    let data: any = {};
+    this.list.map((x: any, i: any, length: any) => {
+      this.getCategories(x, () => {
+        data[x] = this.value;
+      });
+    });
 
+    data.genders = [
+      {
+        name: this.translocoService.translate('gender.female'),
+        code: 1,
+      },
+      {
+        name: this.translocoService.translate('gender.male'),
+        code: 2,
+      },
+      {
+        name: this.translocoService.translate('gender.other'),
+        code: 3,
+      },
+    ];
 
+    data.LIST_STATUS = [
+      {
+        type: '1',
+        name: 'setting.listStatus.active',
+      },
+      {
+        type: '2',
+        name: 'setting.listStatus.notActive',
+      },
+      {
+        type: '',
+        name: 'setting.listStatus.all',
+      },
+    ];
+
+    setTimeout(() => {
+      localStorage.setItem('listType', JSON.stringify(data));
+    }, 500);
+
+    // this.CategoriesService.getCategories('CONTACT_TYPE').subscribe((res) => {
+    //   res.data.map(x=>{
+    //     x.code = Number(x.code)
+    //     return x
+    //   })
+    //   data.CONTACT_TYPE = res.data;
+    //   localStorage.setItem('listType', JSON.stringify(data));
+    // });
+
+    // this.CategoriesService.getCategories('CONTRACT_STATUS').subscribe((res) => {
+    //   res.data.map(x=>{
+    //     x.code = Number(x.code)
+    //     return x
+    //   })
+    //   data.CONTRACT_STATUS = res.data;
+    //   localStorage.setItem('listType', JSON.stringify(data));
+    // });
+  }
+
+  getCategories(data,callback?){
+    this.CategoriesService.getCategories(data).subscribe((res) => {
+      res.data.map((x) => {
+        if (data != 'PARAMETER_TYPE') {
+          x.code = Number(x.code);
+        }
+        return x;
+      });
+      this.value = res.data;
+      if (callback) {
+        callback(this.value);
+      }
+    });
+  }
 }

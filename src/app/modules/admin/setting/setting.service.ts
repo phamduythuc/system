@@ -1,9 +1,9 @@
 import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {createRequestOption} from "../../../shared/request-util";
-import {environment} from "../../../../environments/environment";
-import {User} from "../../../core/user/user.types";
+import {createRequestOption} from '../../../shared/request-util';
+import {environment} from '../../../../environments/environment';
+import {User} from '../../../core/user/user.types';
 
 type EntityResponseType = HttpResponse<User>;
 

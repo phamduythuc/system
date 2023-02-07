@@ -31,7 +31,7 @@ export class FuseVerticalNavigationBasicItemComponent implements OnInit, OnDestr
     {
         // Set the equivalent of {exact: false} as default for active match options.
         // We are not assigning the item.isActiveMatchOptions directly to the
-        // [routerLinkActiveOptions] because if it's "undefined" initially, the router
+        // [routerLinkActiveOptions] because if it's 'undefined' initially, the router
         // will throw an error and stop working.
         this.isActiveMatchOptions = this._fuseUtilsService.subsetMatchOptions;
     }
@@ -45,9 +45,9 @@ export class FuseVerticalNavigationBasicItemComponent implements OnInit, OnDestr
      */
     ngOnInit(): void
     {
-        // Set the "isActiveMatchOptions" either from item's
-        // "isActiveMatchOptions" or the equivalent form of
-        // item's "exactMatch" option
+        // Set the 'isActiveMatchOptions' either from item's
+        // 'isActiveMatchOptions' or the equivalent form of
+        // item's 'exactMatch' option
         this.isActiveMatchOptions =
             this.item.isActiveMatchOptions ?? this.item.exactMatch
                 ? this._fuseUtilsService.exactMatchOptions

@@ -1,0 +1,705 @@
+<ng-container *transloco="let t">
+  <div class="flex flex-col h-full bg-default">
+    <!--        header-->
+    <div
+      class="header border-b flex border-borderDialog justify-between items-center"
+    >
+      <div class="text-4xl font-bold card-title capitalize py-6 pl-8">
+        <!--        Thông tin nhân viên / Staff Information-->
+        {{ t("staff.staffInfo") }}
+      </div>
+      <div class="pr-8">
+        <button mat-icon-button (click)="close()">
+          <mat-icon
+            svgIcon="heroicons_outline:x"
+            title="Edit"
+            class="icon-size-5"
+          ></mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="w-full h-full overflow-auto">
+      <!--      Content-->
+      <div class="content mt-5 px-8" [formGroup]="formGroup">
+        <div class="info-common mb-5">
+          <div mat-dialog-title class="mb-2 text-base font-semibold uppercase">
+            <!--            THÔNG TIN CHUNG / Common Information-->
+            {{ t("staff.commonInfo") }}
+          </div>
+          <div class="w-full flex justify-between">
+            <div class="w-1/3">
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                class="hidden"
+                accept=".png, .jpg, .jpeg, .jfif"
+                (change)="uploadFile($event)"
+              />
+              <label
+                for="avatar"
+                class="flex justify-center items-center w-full h-full"
+              >
+                <img
+                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full"
+                  [src]="imageUrl"
+                  *ngIf="imageUrl"
+                />
+
+                <span class="btn" *ngIf="!imageUrl">Upload</span>
+              </label>
+            </div>
+
+            <div class="w-2/3">
+              <div class="w-full flex mb-2 ml-2 gap-2">
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>
+                        <!--                        Họ tên / Full Name-->
+                        {{ t("common.fullName") }}
+                      </mat-label>
+                      <input required formControlName="fullName" matInput />
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('fullName')"
+                      [name]="'common.fullName' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>
+                        {{ t("common.gender") }}
+                        <!--                        Giới tính / Gender-->
+                      </mat-label>
+                      <mat-select [formControlName]="'gender'">
+                        <mat-option *ngFor="let g of genders" [value]="g.value">
+                          {{ g.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('gender')"
+                      [name]="'common.gender' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>
+                        {{ t("common.dateOfBirth") }}
+                        <!--                        Ngày sinh / Date of Birth-->
+                      </mat-label>
+                      <input
+                        matInput
+                        required
+                        formControlName="dateOfBirth"
+                        [matDatepicker]="dateOfBirth"
+                        datePickerFormat="DD/MM/YYYY"
+                      />
+                      <mat-datepicker-toggle [for]="dateOfBirth">
+                      </mat-datepicker-toggle>
+                      <mat-datepicker #dateOfBirth></mat-datepicker>
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('dateOfBirth')"
+                      [name]="'common.message.date_format' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex mb-2 ml-2 gap-2">
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.national") }}
+                        <!--                        CCCD/CMT / National-->
+                      </mat-label>
+                      <input required formControlName="nationalId" matInput />
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('nationalId')"
+                      [name]="'common.national' | transloco"
+                      [textPattern]="
+                        'common.message.number_format'
+                          | transloco : { filed: 'common.national' | transloco }
+                      "
+                    ></app-error-message>
+                  </div>
+                </div>
+
+                <div class="w-1/3 mb-2">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.phone") }}
+                        <!--                    Điện thoại/ Phone-->
+                      </mat-label>
+                      <input required formControlName="phone" matInput />
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('phone')"
+                      textPattern="{{
+                        'common.message.phone_format' | transloco
+                      }}"
+                      [name]="'common.phone' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.email") }}
+                        <!--                    Email cá nhân / Email-->
+                      </mat-label>
+                      <input required formControlName="email" matInput />
+                    </mat-form-field>
+                    <app-error-message
+                    textPattern="{{
+                      'common.message.email_format' | transloco
+                    }}"
+                      [control]="formGroup.get('email')"
+                      [name]="'common.email' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex mb-2 ml-2 gap-2">
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.ethnic") }}
+                        <!--                        Dân tộc / Ethnic-->
+                      </mat-label>
+                      <input formControlName="ethnic" matInput />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.religion") }}
+                        <!--                        Tôn giáo / Religion-->
+                      </mat-label>
+                      <mat-select formControlName="religion">
+                        <mat-option
+                          *ngFor="let r of religions"
+                          [value]="r.value"
+                        >
+                          {{ r.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.country") }}
+                        <!--                    Quốc gia / Country-->
+                      </mat-label>
+                      <input formControlName="nationality" matInput />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex mb-2 ml-2 gap-2">
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.educationLevel") }}
+                        <!--                        Trình độ học vấn/ Education Level-->
+                      </mat-label>
+                      <input formControlName="education" matInput />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="w-1/3">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.emergencyUser") }}
+                        <!--                      Liên hệ khẩn cấp/ Emergency User-->
+                      </mat-label>
+                      <input formControlName="emergencyUser" matInput />
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="w-1/3" style="opacity: 0">
+                  <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label
+                        >{{ t("common.residence") }}
+                        <!--                    Chỗ ở hiện tại/ residence-->
+                      </mat-label>
+                      <input disabled matInput />
+                    </mat-form-field>
+                    <app-error-message
+                      [control]="formGroup.get('emergencyUser')"
+                      [name]="'common.residence' | transloco"
+                    ></app-error-message>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-5 w-full">
+          <!-- <div class="text-base font-semibold uppercase mb-2" mat-dialog-title>
+                       Liên hệ / Contact
+            {{t('staff.contact')}}
+          </div> -->
+
+          <div class="w-full gap-2">
+            <div class="w-full mb-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label
+                  >{{ t("common.homeTown") }}
+                  <!--                    Nguyên quán / Home town-->
+                </mat-label>
+                <input required formControlName="address" matInput />
+              </mat-form-field>
+              <app-error-message
+                [control]="formGroup.get('address')"
+                [name]="'common.homeTown' | transloco"
+              ></app-error-message>
+            </div>
+
+            <div class="w-full mb-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label
+                  >{{ t("common.domicile") }}
+                  <!--                    Chỗ ở hiện tại/ Domicile-->
+                </mat-label>
+                <input required formControlName="domicile" matInput />
+              </mat-form-field>
+              <app-error-message
+                [control]="formGroup.get('domicile')"
+                [name]="'common.domicile' | transloco"
+              ></app-error-message>
+            </div>
+
+            <div class="w-full mb-2">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label
+                  >{{ t("common.residence") }}
+                  <!--                    Chỗ ở hiện tại/ residence-->
+                </mat-label>
+                <input formControlName="permanentResidence" matInput />
+              </mat-form-field>
+              <app-error-message
+                [control]="formGroup.get('permanentResidence')"
+                [name]="'common.residence' | transloco"
+              ></app-error-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="address mb-1">
+          <div class="text-base font-semibold uppercase mb-2" mat-dialog-title>
+            {{ t("staff.staffInfo") }}
+            <!--            Địa chỉ / Address-->
+          </div>
+          <div class="w-full flex"></div>
+        </div>
+
+        <div class="concat mb-5">
+          <!-- <div class="text-base font-semibold uppercase mb-2" mat-dialog-title>
+                       Mô tả nhân viên / Staff Description
+            {{t('staff.staffDescription')}}
+          </div> -->
+          <div class="w-full flex mb-2 gap-2">
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.staffCode") }}
+                    <!--                    Mã nhân viên/ Staff Code-->
+                  </mat-label>
+                  <input required formControlName="staffCode" matInput />
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('staffCode')"
+                  [name]="'common.staffCode' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.username") }}
+                    <!--                    Tên đăng nhập / User name-->
+                  </mat-label>
+                  <input required formControlName="username" matInput />
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('username')"
+                  [name]="'common.username' | transloco"
+                  [textPattern]="'common.message.special_characters' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.staffStatus") }}
+                    <!--                        Trạng thái / Staff Status-->
+                  </mat-label>
+                  <mat-select [formControlName]="'staffStatus'">
+                    <mat-option *ngFor="let s of staffStatus" [value]="s.value">
+                      {{ s.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('staffStatus')"
+                  [name]="'common.staffStatus' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex mb-2 gap-2">
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.hireDate") }}
+                    <!--                    Ngày tuyển dụng / Hire Date-->
+                  </mat-label>
+                  <input
+                    matInput
+                    formControlName="hireDate"
+                    [matDatepicker]="dateApply"
+                    datePickerFormat="DD/MM/YYYY"
+                  />
+                  <mat-datepicker-toggle [for]="dateApply">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #dateApply></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.staOfficalDate") }}
+                    <!--                    Ngày bắt đầu đi làm/ StaOffical Date-->
+                  </mat-label>
+                  <input
+                    matInput
+                    required
+                    [min]="formGroup.value.hireDate"
+                    [max]="formGroup.value.leaveDate"
+                    formControlName="staOfficalDate"
+                    [matDatepicker]="dateWork"
+                    datePickerFormat="DD/MM/YYYY"
+                  />
+                  <mat-datepicker-toggle [for]="dateWork">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #dateWork></mat-datepicker>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('staOfficalDate')"
+              [name]="'common.message.date_format' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.leaveDate") }}
+                    <!--                    Ngày nghỉ/ Leave Date-->
+                  </mat-label>
+                  <input
+                    matInput
+                    [min]="formGroup.value.hireDate"
+                    formControlName="leaveDate"
+                    [matDatepicker]="dateOut"
+                    datePickerFormat="DD/MM/YYYY"
+                  />
+                  <mat-datepicker-toggle [for]="dateOut">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #dateOut></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex mb-2 gap-2">
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.position") }}
+                    <!--                    Chức vụ / Position-->
+                  </mat-label>
+                  <mat-select formControlName="positionId">
+                    <mat-option
+                      *ngFor="let item of listPositions"
+                      [value]="item?.id"
+                      >{{ item?.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('positionId')"
+                  [name]="'common.position' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.department") }}
+                    <!--                    Phòng ban/ Department-->
+                  </mat-label>
+                  <mat-select formControlName="departmentId">
+                    <mat-option
+                      *ngFor="let item of listDepartment"
+                      [value]="item?.id"
+                      >{{ item?.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('departmentId')"
+                  [name]="'common.department' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.specialize") }}
+                    <!--                    Cấp bậc/ Level-->
+                  </mat-label>
+                  <mat-select formControlName="levelId">
+                    <mat-option
+                      *ngFor="let item of listStaffLevels"
+                      [value]="item?.id"
+                      >{{ item?.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('levelId')"
+                  [name]="'common.level' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex mb-2 gap-2">
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.fingerPrintCode") }}
+                    <!--                    Mã chấm công / Finger Print Code-->
+                  </mat-label>
+                  <input formControlName="idNhanVienChamCong" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.seniority") }}
+                    <!--                    Thâm niên / seniority-->
+                  </mat-label>
+                  <input required formControlName="seniority" matInput />
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('seniority')"
+                  [name]="'common.seniority' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.workExperience") }}
+                    <!--                    Kinh nhiệm / Work Experience-->
+                  </mat-label>
+                  <input required formControlName="workExperience" matInput />
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('workExperience')"
+                  [name]="'common.workExperience' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full mb-2 flex gap-2">
+            <!-- <div class="w-full">
+              <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>{{t('common.salary')}}
+                                     Lương/ salary
+                </mat-label>
+                <input required formControlName="salary"
+                       matInput>
+              </mat-form-field>
+              <app-error-message [control]="formGroup.get('salary')"
+                                 [name]='"common.salary"|transloco'></app-error-message>
+
+            </div> -->
+            <div class="w-1/3">
+              <!-- <div class="w-1/3" [style.visibility]="formGroup.value.isProduct ? 'visible' : 'hidden' "> -->
+
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("setting.groupRole") }}
+                    <!--                    Nhóm / Team-->
+                  </mat-label>
+                  <mat-select formControlName="role" required>
+                    <mat-option
+                      *ngFor="let role of listRoleStaff"
+                      [value]="role.roleId"
+                    >
+                      {{ role.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('role')"
+                  [name]="'common.team' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+
+            <div class="w-1/3">
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("common.companyEmail") }}
+                    <!--                      Email công ty / Company Email-->
+                  </mat-label>
+                  <input formControlName="companyEmail" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full mb-2 flex gap-2">
+            <div class="w-1/3">
+              <div class="w-full">
+                <div class="checkbox">
+                  <label style="opacity: 0"
+                    >{{ t("common.isProductTeam") }}
+                  </label>
+                  <div
+                    class="box-checkbox flex justify-start items-center gap-2 mt-2"
+                  >
+                    <input
+                      type="checkbox"
+                      class="cursor-pointer"
+                      id="isWorker"
+                      formControlName="isWorker"
+                      [checked]="formGroup.value.isWorker"
+                    />
+                    <div *ngIf="formGroup.value.isWorker === true; else elseBlock">
+                      <label for="isWorker" class="cursor-pointer flex items-center">{{
+                        t("common.isProductTeam")
+                      }}</label>
+                    </div>
+                    <ng-template #elseBlock>
+                      <label for="isWorker" class="cursor-pointer flex items-center">{{
+                        t("common.isProductTeam")
+                      }}</label>
+                    </ng-template>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="w-1/3"
+              [style.visibility]="formGroup.value.isWorker ? 'visible' : 'hidden'"
+            >
+              <div class="w-full">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                  <mat-label
+                    >{{ t("hrm-management.team.title") }}
+                    <!--                    Nhóm / Team-->
+                  </mat-label>
+                  <mat-select formControlName="teamId">
+                    <mat-option *ngFor="let item of listTeam; let i = index" [selected]="item.id" [value]="item.id">
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <app-error-message
+                  [control]="formGroup.get('teamId')"
+                  [name]="'hrm-management.team.title' | transloco"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="common mb-5">
+          <div class="text-base font-semibold uppercase mb-2" mat-dialog-title>
+            <!--            Mô tả / Description-->
+            {{ t("staff.commonDescription") }}
+          </div>
+          <div class="w-full">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+              <mat-label
+                >{{ t("common.note") }}
+                <!--                Ghi chú/ Note-->
+              </mat-label>
+              <textarea
+                formControlName="summary"
+                matInput
+                cdkTextareaAutosize
+                [cdkAutosizeMinRows]="5"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--    footer-->
+        <div class="footer my-7 flex justify-end">
+          <button mat-raised-button class="mr-3" (click)="close()">
+            <mat-icon
+              class="icon-size-5 mr-2"
+              svgIcon="heroicons_outline:x"
+            ></mat-icon>
+            <span>{{ t("button.cancel") }}</span>
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="formGroup.invalid"
+            (click)="save()"
+          >
+            <mat-icon
+              class="icon-size-5 mr-2"
+              svgIcon="heroicons_outline:check"
+            ></mat-icon>
+            <span>{{ t("button.save") }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -26,6 +26,7 @@
                 "plugin:@angular-eslint/template/process-inline-templates"
             ],
             "rules": {
+                "@typescript-eslint/member-ordering": "off",
                 "@angular-eslint/component-selector": [
                     "error",
                     {
@@ -43,7 +44,7 @@
                     }
                 ],
                 "@typescript-eslint/dot-notation": "off",
-                "@typescript-eslint/explicit-function-return-type": "error",
+                "@typescript-eslint/explicit-function-return-type": "off",
                 "@typescript-eslint/explicit-member-accessibility": [
                     "off",
                     {
@@ -51,13 +52,6 @@
                     }
                 ],
                 "@typescript-eslint/no-inferrable-types": "off",
-                "arrow-parens": [
-                    "error",
-                    "as-needed",
-                    {
-                        "requireForBlockBody": true
-                    }
-                ],
                 "brace-style": [
                     "off",
                     "off"

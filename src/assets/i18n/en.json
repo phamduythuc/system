@@ -1,11 +1,455 @@
 {
-    "sign-in": "Đăng nhập",
-    "setting": {
-        "user": {
-            "group": "Group",
-            "userList": "User list",
-            "newGroup": "New Group",
-            "newUser": "New User"
-        }
+  "lang": {
+    "vi": "Vietnamese",
+    "en": "English",
+    "code": "en"
+  },
+  "sign-in": "Sign-in",
+  "paging": {
+    "visible": "Visible",
+    "previous": "Previous page",
+    "next": "Next page",
+    "first_page": "First page",
+    "last_page": "Last page",
+    "range_label": "{{startIndex}} - {{endIndex}} of {{length}}",
+    "no_data": "No data visible"
+  },
+  "common": {
+    "label": {
+      "hello": "Hello, ",
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "message": {
+      "number_format": "{{field}} must be number",
+      "required": "{{field}} must not empty",
+      "phone_format": "Please enter in the format (+84)xxxxxxxxx or 0xxxxxxxxx",
+      "email_format": "Incorrect email format",
+      "date_format": "Please enter in the format DD/MM/YYYY",
+      "date_format_1": "You must specify the date format. Format: dd/MM/yyyy",
+      "special_characters": "Please do not enter special characters"
+
+    },
+    "title": {
+      "create": "Create {{screenName}}",
+      "edit": "Edit {{screenName}}",
+      "detail": "Detail {{screenName}}"
+    },
+    "button": {
+      "view": "View"
+    },
+    "keyword": "Keyword",
+    "keySearch" : "Keyword by Name, Phone Number, Address",
+    "fromMonth": "From month",
+    "team": "Team",
+    "toMonth": "To month",
+    "search": "Search",
+    "stt": "No.",
+    "name": "Name",
+    "name_project": "Product name",
+    "name_position": "Position name",
+    "name_specialize": "Specialize name",
+    "name_partner": "Partner name",
+    "code_project": "Project code",
+    "code": "Code",
+    "note": "Note",
+    "phone": "Phone",
+    "address": "Address",
+    "description": "Description",
+    "createdBy": "Created by",
+    "createdDate": "Created Date",
+    "modifiedBy": "Modified By",
+    "modifiedDate": "Modified Date",
+    "actions": "Actions",
+    "status": "Status",
+    "active": "Active",
+    "activing" :"Activing",
+    "active_staff_level": "Active",
+    "notActive": "Not active",
+    "all":"All",
+    "parent": "Parent",
+    "partner": "Partner",
+    "fullName": "Full Name",
+    "department": "Department",
+    "leader":"Leader",
+    "performance":"Performance",
+    "sprint":"Sprint",
+    "expected":"Expected",
+    "cost":"Cost",
+    "revenue":"Revenue",
+    "listMember":"Member",
+    "parentName": "Affiliated departments",
+    "gender": "Gender",
+    "position": "Position",
+    "companyEmail": "Company email",
+    "dateOfBirth": "Date Of Birth",
+    "country": "Country",
+    "residence": "permanent residence",
+    "isProductTeam": "Is product team",
+    "cvUrl": "Cv",
+    "domicile": "Domicile",
+    "education": "Education",
+    "email": "Email",
+    "emergencyUser": "Emergency User",
+    "ethnic": "Ethnic",
+    "hireDate": "Hire Date",
+    "fingerPrintCode": "Finger Print Code",
+    "imageUrl": "avata",
+    "leaveDate": "Leave Date",
+    "level": "Level",
+    "specialize": "Specialize",
+    "marriage": "Marriage",
+    "national": "National",
+    "nationality": "Nationality",
+    "positionJob": "Position Job",
+    "religion": "Religion",
+    "seniority": "Seniority",
+    "staOfficalDate": "StaOffical Date",
+    "staffCode": "Staff Code",
+    "staffStatus": "Staff Status",
+    "summary": "Summary",
+    "username": "Username",
+    "workExperience": "Work Experience",
+    "homeTown": "Home town",
+    "educationLevel": "Education Level",
+    "salary": "Salary",
+    "noData": "No data"
+  },
+  "setting": {
+    "title":"Setting",
+    "role": "Role",
+    "groupRoleName": "Role group",
+    "groupRole": "Role group",
+    "menu": "Menu",
+    "addGroupRole": "Add New Permissions Group",
+    "editGroupRole": "Edit Permissions Group",
+    "user": {
+      "group": "Group",
+      "userList": "User list",
+      "newGroup": "New Group",
+      "newUser": "New User"
+    },
+    "typeView": {
+      "grid": "Grid view",
+      "list": "List view"
+    },
+    "listStatus": {
+      "active": "Active",
+      "notActive": "Not active",
+      "all": "All"
     }
+  },
+  "button": {
+    "new": "Add new",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "search" : "Search"
+  },
+  "add-new": "Add new",
+  "confirm-delete": {
+    "title": "Delete item",
+    "content": "Are you sure want to delete the record??"
+  },
+  "hrm-management": {
+    "label": "Category Management",
+    "addHeader": "Add new",
+    "editHeader": "Edit information",
+    "detailsHeader": "Information",
+    "department": {
+      "title": "Department",
+      "title_none": "-- None --",
+      "form": {
+        "name": "Department name",
+        "code": "Department code",
+        "parent": "Department embed"
+      }
+    },
+    "specialize": {
+      "title": "Specialize"
+    },
+    "position": {
+      "title": "Position"
+    },
+    "partner": {
+      "title": "Partner"
+    },
+    "project": {
+      "title": "Project",
+      "form": {
+        "partner": "Partner",
+        "budget": "Budget",
+        "estimates": "Estimates",
+        "price": "Price",
+        "projectType": "Project type",
+        "startTime": "Start time",
+        "expectEndTime": "Expect end time",
+        "actualEndTime": "Actual end time",
+        "PointOfContact": "Point of contact",
+        "clueName": "Clue Name",
+        "phoneNumber": "Phone Number",
+        "contactPersonName": "Contact person name",
+        "contactPersonPhone": "Contact person phone",
+        "contactPersonEmail": "Contact person email"
+      },
+      "projectMember": "List member"
+    },
+    "staff": {
+      "title": "Staff",
+      "detail": {
+        "contract": {
+          "title": "Contract List",
+          "contract_code": "Contract code",
+          "contract": "Type of contract",
+          "duration": "Duration",
+          "startTime": "Effective from",
+          "salary": "Salary",
+          "link": "Link download"
+        }
+      },
+      "chartKPI": {
+        "title": "KPI by month"
+      }
+    },
+    "team": {
+      "title": "Team",
+      "form": {
+        "member": "Member",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "addMember": "Add member",
+        "choose": "Choose member",
+        "number" : "Number"
+      }
+    },
+    "time-keeping": {
+      "title": "Time Keeping",
+      "form": {
+        "member": "Member",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "addMember": "Add member",
+        "choose": "Choose member",
+        "number" : "Number"
+      }
+    },
+    "contract": {
+      "title": "Contract",
+      "label": "Contract & Salary",
+      "code": "Contract Code",
+      "type": "Type of contract",
+      "termPeriod": "Term",
+      "effDate": "Effective from",
+      "expDate": "Expiration date",
+      "signDate": "Sign day",
+      "salary": "Salary",
+      "insurance": "Insurance",
+      "link": "Download",
+      "notFound": "No options found!"
+    },
+    "document": {
+      "title": "Documents",
+      "label": "Documents",
+      "form": {
+        "name": "Document name",
+        "code": "Document code",
+        "status": "Status",
+        "doc_type": "Document type",
+        "registration_date": "Registration date",
+        "effective_date": "Effective date",
+        "expiration_date": "Expiration date",
+        "upload_file": "Upload file",
+        "title_none": "-- None --"
+      }
+    },
+    "salary": {
+      "title": "Salary ",
+      "salaryVND": "Salary (VND)",
+      "salaryReceived": "Salary Received (VND)",
+      "time_percent_err": "Salary Received is required",
+      "time_percent_err_1": "Invalid salary",
+      "name": "Name",
+      "staffID": "Staff ID"
+    },
+    "role": {
+      "title": "Role",
+      "roleInfo": "Role Information",
+      "roleEdit":"Role Update",
+      "roleAdd": "Add Role",
+      "roleName":"Role Name",
+      "roleDescription": "Description",
+      "roleStatus": "Status",
+      "createdByRole":"Created By",
+      "createdDateRole": "Created Date",
+      "modifiedByRole":"Modified By ",
+      "modifiedDateRole": "Modified Date"
+    },
+    "reports":{
+      "title": "Reports",
+      "form": {
+        "name": "Reports name",
+        "code": "Reports code",
+        "description": "Reports description",
+        "startRow": "Start row",
+        "startCol": "Start col",
+        "sql": "Sql",
+        "addParam": "Add param",
+        "sheetOrder": "Sheet order",
+        "comment": "Comment",
+        "listParam": "List parameters",
+        "paramName": "Param name",
+        "paramType": "Param type",
+        "paramValue": "Value"
+      },
+      "detail":{
+        "downloadTemplate": "Download template",
+        "viewReports": "View reports",
+        "downloadReports": "Download reports",
+        "listSheet": "List sheet",
+        "requiredName": "Name is required",
+        "sqlRequired": "SQL is required",
+        "requiredRow": "StartRow is required",
+        "requiredColumn": "StartColumn is required",
+        "startRownotValueExists": "StartRow not value exists",
+        "startColnotValueExists": "StartColumn not value exists",
+        "notValueSheet": "Sheet not exists",
+        "requiredSheet": "Sheet is required!"
+      }
+
+    }
+  },
+  "contract": {
+    "title": "Contract",
+    "label": "Contract & Salary",
+    "code": "Code",
+    "type": "Type of contract",
+    "termPeriod": "Term period",
+    "effDate": "Effective from",
+    "expDate": "Expiration date",
+    "signDate": "Sign day",
+    "salary": "Salary",
+    "insurance": "Insurance",
+    "link": "Download link"
+  },
+  "salary": {
+    "title": "Salary"
+  },
+  "message": {
+    "noData": "Data not found"
+  },
+  "placeholder": {
+    "chooseDate": "Choose a date",
+    "choose": "Choose"
+  },
+  "specialText": {
+    "delete_1": "You definitely want to delete the record",
+    "delete_2": "Delete records",
+    "error_1": "is the mandatory field",
+    "error_2": "Length of",
+    "error_3": "can not lower than",
+    "error_4": "can not lower than",
+    "error_5": "Value of",
+    "error_6": "can not exceed",
+    "error_7": "value must be number",
+    "error_8": "character",
+    "error_9": "Password not macth !",
+    "textPattern_1": "Please only enter the letters without accents, numbers and signs  \"_\"",
+    "textPattern_2": "Please enter the number",
+    "notFound": "Data not found",
+    "error_10":"Date start must be less than Date end"
+  },
+  "effort": {
+    "title": "Stage Information",
+    "month": "Month",
+    "spring": "Spring",
+    "effort_estimate": "Effort estimate",
+    "customer_record": "Customer record",
+    "accept_date": "Acceptance date",
+    "effort_accept": "Effort acceptance",
+    "progress": "Progress",
+    "difference_effort": "Difference",
+    "acknowledgmentOfEffort": "Acknowledgment of effort",
+    "acknowledgmentOfEffortChange" : "Acknowledgment of effort change",
+    "percent_effort": "% Join",
+    "turnover":"Turnover",
+    "cost": "Cost",
+    "efficiency": "Efficiency",
+    "cumulativeDifference" : "Cumulative difference",
+    "allocate_effort" : "Allocate effort",
+    "conversionEffort": "Conversion effort",
+    "timeAllocation" : "Time allocation",
+    "acknowledgmentOfEffortMM" : "Acknowledgment of effort (MM)",
+    "role": "Role",
+    "add": "Add",
+    "chooseFile":"choose file"
+
+  },
+  "staff": {
+    "staffName" : "Staff name",
+    "staffInfo": "Staff Information",
+    "commonInfo": "Common Information",
+    "contact": "Contact",
+    "address": "Address",
+    "staffDescription": "Staff Description",
+    "commonDescription": "Description"
+  },
+  "staff_status": {
+    "official": "Official staff",
+    "unofficial": "UnOfficial staff",
+    "quit": "Quit job"
+  },
+  "religion": {
+    "yes": "yes",
+    "no": "no"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "staff_kpi": {
+    "startMonth": "Start month",
+    "endMonth": "End month"
+  },
+  "dashboard": {
+    "profile": {
+      "breadcrumb": "Profile",
+      "tab": {
+        "detail": {
+          "title": "Profile"
+        },
+        "contract": {
+          "title": "Contract list"
+        },
+        "sprint": {
+          "title": "Information by sprint",
+          "month": "From month",
+          "from": "From month",
+          "to": "To month",
+          "salary": "Salary(VNĐ)",
+          "target_kpi": "Target KPI(MM)",
+          "salary_received": "Salary Received(VNĐ)",
+          "guaranteed_kpi": "Guaranteed KPI(MM)",
+          "reality_kpi": "Reality KPI",
+          "project_code": "Project code",
+          "project_name": "Project name",
+          "recognize": "Recognize the effort(MM)",
+          "recognize_exchange": "Recognize exchange the effort(MM)",
+          "time_percent": "% time allocation",
+          "time_percent_err": "Time allocation is a required",
+          "time_percent_err_1": "Number should be between 0 and 100",
+          "percent_effort_err": "Total % of time allocation must be 100%"
+        },
+        "chart": {
+          "title": "Chart KPI"
+        }
+      }
+    }
+  },
+  "profile":{
+    "title": "Profile"
+  }
 }

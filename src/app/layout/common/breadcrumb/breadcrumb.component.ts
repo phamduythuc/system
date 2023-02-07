@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {distinctUntilChanged, filter, takeUntil} from "rxjs/operators";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {distinctUntilChanged, filter, takeUntil} from 'rxjs/operators';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -23,14 +23,14 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
           takeUntil(this.destroyAll$)
       ).subscribe(() => {
           this.breadcrumbs = this.buildBreadCrumb(this.activeRoute.root);
-      })
+      });
   }
 
     buildBreadCrumb(route: ActivatedRoute, breadcrumbs = []): any[] {
         //If no routeConfig is avalailable we are on the root path
 
         // @ts-ignore
-        let breadcrumbData = route.routeConfig && route.routeConfig.data ? route.routeConfig.data.breadcrumb : '';
+        const breadcrumbData = route.routeConfig && route.routeConfig.data ? route.routeConfig.data.breadcrumb : '';
 
         // Only adding route with non-empty label
         const newBreadcrumbs = breadcrumbData.label ? [ ...breadcrumbs, breadcrumbData ] : [ ...breadcrumbs];
@@ -42,12 +42,12 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
         return newBreadcrumbs;
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
       this.destroyAll$.next(null);
       this.destroyAll$.complete();
     }
 
-    navigateToUrl(url: string) {
+    navigateToUrl(url: string): void {
         if(!url) return;
         this.router.navigateByUrl(url);
     }

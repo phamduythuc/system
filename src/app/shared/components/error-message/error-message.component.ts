@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, AbstractControlDirective } from '@angular/forms';
+import {AbstractControl, AbstractControlDirective, Validators} from '@angular/forms';
+import {TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-error-message',
@@ -9,21 +10,25 @@ import { AbstractControl, AbstractControlDirective } from '@angular/forms';
 export class ErrorMessageComponent {
   @Input() control!: AbstractControlDirective | AbstractControl | any;
   @Input() name = 'Trường này';
-  @Input() textPatterm = 'Trường này';
+  @Input() textPattern = 'Trường này này';
 
+  constructor(private tran: TranslocoService) {
+  }
   private errorMessages: { [key: string]: any } = {
-    required: (params: any, name: any) => `${name} là trường bắt buộc`,
-    pattern: (params: any, name: any) => `${this.textPatterm}`,
-    onlyNumber: (params: any, name: any) => `${name} value must be number`,
-    minlength: (params: any, name: any) => `Length of ${name} can not lower than ${params.requiredLength} characters`,
-    maxlength: (params: any, name: any) => `Length of ${name} can not exceed ${params.requiredLength} characters`,
-    minNumber: (params: any, name: any) => `Value of ${name} can not lower than ${params.message}`,
-    maxNumber: (params: any, name: any) => `Value of ${name} can not exceed ${params.message}`,
+    required: (params: any, name: any) => `${name} ${this.tran.translate('specialText.error_1')}`,
+    datePickerFormat: (params: any, name: any) => `${name}`,
+    pattern: (params: any, name: any) => `${this.textPattern}`,
+    onlyNumber: (params: any, name: any) => `${name} ${this.tran.translate('specialText.error_7')}`,
+    minlength: (params: any, name: any) => `${this.tran.translate('specialText.error_2')} ${name} ${this.tran.translate('specialText.error_3')} ${params.requiredLength} ${this.tran.translate('specialText.error_8')}`,
+    maxlength: (params: any, name: any) => `${this.tran.translate('specialText.error_2')} ${name} ${this.tran.translate('specialText.error_6')} ${params.requiredLength} ${this.tran.translate('specialText.error_8')}`,
+    minNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_4')} ${params.message}`,
+    maxNumber: (params: any, name: any) => `${this.tran.translate('specialText.error_5')} ${name} ${this.tran.translate('specialText.error_6')} ${params.message}`,
     uniqueName: (params: any, name: any) => params.message,
-      mustMatch: () => `Mật khẩu không trùng khớp`
+    mustMatch: () => `${this.tran.translate('specialText.error_9')}`,
+    dateRange:(params: any, name: any) => `${this.tran.translate('specialText.error_10')}`,
   };
 
-  shouldShowErrors(): boolean {
+  shouldShowErrors(): boolean { 
     return this.control?.errors && (this.control.dirty || this.control.touched);
   }
 
@@ -32,6 +37,8 @@ export class ErrorMessageComponent {
   }
 
   private getMessage(type: string, params: any): any {
-    return this.errorMessages[type](params, this.name);
+    if(this.errorMessages[type]){
+      return this.errorMessages[type](params, this.name);
+    }
   }
 }

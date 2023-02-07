@@ -1,11 +1,437 @@
 {
-    "sign-in": "Đăng nhập",
-    "setting": {
-      "user": {
-          "group": "Nhóm",
-          "userList": "Danh sách người dùng",
-          "newGroup": "Nhóm mới",
-          "newUser": "Thêm người dùng"
+  "lang": {
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh",
+    "code": "vi"
+  },
+  "sign-in": "Đăng nhập",
+  "paging": {
+    "visible": "Hiển thị",
+    "previous": "Trang trước",
+    "next": "Trang sau",
+    "last_page": "Trang cuối",
+    "range_label": "{{startIndex}} - {{endIndex}} của {{length}}",
+    "no_data": "Không có dữ liêu"
+  },
+  "common": {
+    "label": {
+      "hello": "Xin chào, ",
+      "profile": "Thông tin cá nhân",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất"
+    },
+    "message": {
+      "number_format": "{{field}} Sai định dạng số",
+      "required": "{{field}} không được để trống",
+      "phone_format": "Vui lòng nhập theo format (+84)xxxxxxxxx hoặc 0xxxxxxxxx",
+      "email_format": "Không đúng định dạng Email",
+      "date_format": "Vui lòng nhập theo định dạng DD/MM/YYYY",
+      "date_format_1": "Bạn phải chỉ định dạng ngày. Định dạng: dd/MM/yyyy",
+      "special_characters": "Vui lòng không nhập ký tự đặc biệt"
+    },
+    "title": {
+      "create": "Thêm mới {{screenName}}",
+      "edit": "Cập nhật {{screenName}}",
+      "detail": "Chi tiết {{screenName}}"
+    },
+    "button": {
+      "view": "Xem"
+    },
+    "keyword": "Từ khóa",
+    "keySearch" : "Từ khóa theo Tên, Số điện thoại, Địa chỉ",
+    "fromMonth": "Từ tháng",
+    "team": "Nhóm",
+    "toMonth": "Đến tháng",
+    "search": "Tìm kiếm",
+    "stt": "STT",
+    "name": "Tên",
+    "name_project": "Tên dự án",
+    "name_position": "Tên chức vụ",
+    "name_specialize": "Tên chuyên môn",
+    "name_partner": "Tên đối tác",
+    "code": "Mã",
+    "code_project": "Mã dự án",
+    "note": "Ghi chú",
+    "phone": "Điện thoại",
+    "address": "Địa chỉ",
+    "description": "Mô tả",
+    "createdBy": "Người tạo",
+    "createdDate": "Ngày tạo",
+    "modifiedBy": "Người chỉnh sửa",
+    "modifiedDate": "Ngày chỉnh sửa",
+    "actions": "Hành động",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "activing":"Đang hoạt động",
+    "active_staff_level": "Hoạt động",
+    "notActive": "Không hoạt động",
+    "all":"Tất cả",
+    "parent": "Cha",
+    "partner": "Đối tác",
+    "fullName": "Họ tên",
+    "department": "Phòng ban",
+    "leader":"Trưởng nhóm",
+    "performance":"Hiệu suất",
+    "sprint":"Sprint",
+    "expected":"Kỳ vọng",
+    "cost":"Chi phí",
+    "revenue":"Doanh thu",
+    "listMember":"Danh sách thành viên",
+    "parentName": "Phòng ban trực thuộc",
+    "gender": "Giới tính",
+    "position": "Chức vụ",
+    "companyEmail": "Email c.ty",
+    "dateOfBirth": "Ngày sinh",
+    "country": "Quốc tịch",
+    "residence": "Hộ khẩu thường trú",
+    "isProductTeam": "Thuộc nhóm phát triển",
+    "cvUrl": "File CV",
+    "domicile": "Chỗ ở hiện tại",
+    "education": "Cấp bậc giáo dục",
+    "email": "Email",
+    "emergencyUser": "Liên lạc khẩn cấp",
+    "ethnic": "Dân tộc",
+    "hireDate": "Ngày tuyển dụng",
+    "fingerPrintCode": "Mã chấm công",
+    "imageUrl": "Ảnh đại diện",
+    "leaveDate": "Ngày nghỉ",
+    "level": "Cấp bậc",
+    "specialize": "Chuyên môn",
+    "marriage": "Tình trạng hôn nhân",
+    "national": "CCCD/CMT",
+    "nationality": "Quốc tịch",
+    "positionJob": "Chức vụ hiện tại",
+    "religion": "Tôn giáo",
+    "seniority": "Thâm niên",
+    "staOfficalDate": "Ngày bắt đầu đi làm",
+    "staffCode": "Mã nhân viên",
+    "staffStatus": "Trạng thái nhân viên",
+    "summary": "Mô tả tổng quan",
+    "username": "Tên đăng nhập",
+    "workExperience": "Kinh nghiệm",
+    "homeTown": "Nguyên quán",
+    "educationLevel": "Trình độ học vấn",
+    "salary": "Mức lương",
+    "noData": "Không có bản ghi nào"
+  },
+  "setting": {
+    "title":"Cấu hình",
+    "groupRoleName": "Nhóm quyền",
+    "role": "Quyền",
+    "groupRole": "Phân quyền",
+    "menu": "Danh mục",
+    "addGroupRole": "Thêm Nhóm Quyền Mới",
+    "editGroupRole": "Sửa Nhóm Quyền",
+    "user": {
+      "group": "Nhóm",
+      "userList": "Danh sách người dùng",
+      "newGroup": "Nhóm mới",
+      "newUser": "Thêm người dùng"
+    },
+    "typeView": {
+      "grid": "Dạng lưới",
+      "list": "Dạng danh sách"
+    },
+    "listStatus": {
+      "active": "Đang hoạt động",
+      "notActive": "Không hoạt động",
+      "all": "Tất cả"
+    }
+  },
+  "button": {
+    "new": "Thêm mới",
+    "save": "Lưu",
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "cancel": "Hủy bỏ",
+    "yes": "Đồng ý",
+    "search": "Tìm kiếm"
+  },
+  "add-new": "Thêm mới",
+  "confirm-delete": {
+    "title": "Xóa bản ghi",
+    "content": "Bạn chắc chắn muốn xóa bản ghi?"
+  },
+  "hrm-management": {
+    "label": "Quản lý chung",
+    "addHeader": "Thêm mới",
+    "editHeader": "Sửa thông tin",
+    "detailsHeader": "Thông tin",
+    "department": {
+      "title": "Phòng ban",
+      "title_none": "-- Trống --",
+      "form": {
+        "name": "Tên phòng ban",
+        "code": "Mã phòng ban",
+        "parent": "Phòng ban trực thuộc"
+      }
+    },
+    "specialize": {
+      "title": "Chuyên môn"
+    },
+    "position": {
+      "title": "Chức vụ"
+    },
+    "partner": {
+      "title": "Đối tác"
+    },
+    "project": {
+      "title": "Dự án",
+      "form": {
+        "partner": "Đối tác",
+        "budget": "Ngân sách",
+        "estimates": "Dự toán",
+        "price": "Đơn giá",
+        "projectType": "Kiểu dự án",
+        "startTime": "Ngày bắt đầu",
+        "expectEndTime": "Tiến độ hoàn thành",
+        "actualEndTime": "Ngày hoàn thành",
+        "PointOfContact": "Đầu mối liên hệ",
+        "clueName": "Tên đầu mối",
+        "phoneNumber": "Số điện thoại",
+        "contactPersonName": "Tên người liên hệ",
+        "contactPersonPhone": "Điện thoại người liên hệ",
+        "contactPersonEmail": "Email người liên hệ"
+      },
+      "projectMember": "Danh sách thành viên"
+    },
+    "staff": {
+      "title": "Nhân viên",
+      "detail": {
+        "contract": {
+          "title": "Danh sách hợp đồng",
+          "contract_code": "Mã hợp đồng",
+          "contract": "Loại hợp đồng",
+          "duration": "Kỳ hạn",
+          "startTime": "Có hiệu lực từ",
+          "salary": "Mức lương",
+          "link": "Link tải về"
+        }
+      },
+      "chartKPI": {
+        "title": "KPI theo tháng"
+      }
+    },
+    "team": {
+      "title": "Đội / Nhóm",
+      "form": {
+        "member": "Thành viên",
+        "startDate": "Từ ngày",
+        "endDate": "Đến ngày",
+        "addMember": "Thêm thành viên",
+        "choose": "Chọn thành viên",
+        "number":"Số lượng"
+      }
+    },
+    "time-keeping": {
+      "title": "Chấm Công",
+      "form": {
+        "member": "Thành viên",
+        "startDate": "Từ ngày",
+        "endDate": "Đến ngày",
+        "addMember": "Thêm thành viên",
+        "choose": "Chọn thành viên",
+        "number":"Số lượng"
+      }
+    },
+    "contract": {
+      "title": "Hợp đồng",
+      "label": "Hợp đồng & Lương",
+      "code": "Mã hợp đồng",
+      "type": "Loại hợp đồng",
+      "termPeriod": "Kỳ hạn",
+      "effDate": "Có hiệu lực từ",
+      "expDate": "Ngày hết hạn",
+      "signDate": "Ngày ký",
+      "salary": "Mức lương",
+      "insurance": "Bảo hiểm",
+      "link": "Tải file",
+      "notFound": "Không tìm thấy tùy chọn nào!"
+    },
+    "document": {
+      "title": "Văn bản",
+      "label": "Văn bản",
+      "form": {
+        "name": "Tên văn bản",
+        "code": "Mã văn bản",
+        "status": "Trạng thái",
+        "doc_type": "Loại văn bản",
+        "sub_date": "Ngày đăng ký",
+        "effective_date": "Ngày có hiệu lực",
+        "expiration_date": "Ngày hết hạn",
+        "upload_file": "Tải file",
+        "title_none": "-- Trống --"
+      }
+    },
+    "salary": {
+      "title": "Lương",
+      "salaryVND": "Lương (VNĐ)",
+      "salaryReceived": "Mức lương thực nhận(VNĐ)",
+      "time_percent_err": "Mức lương thực nhận là trường bắt buộc",
+      "time_percent_err_1": "Mức lương không hợp lệ",
+      "name": "Tên nhân viên",
+      "staffID": "Mã nhân viên"
+
+    },
+    "role": {
+      "title": "Vai trò",
+      "roleInfo": "Thông tin vai trò",
+      "roleEdit": "Cập nhật vai trò",
+      "roleAdd": "Thêm mới vai trò",
+      "roleName":"Tên vai trò",
+      "roleDescription": "Mô tả",
+      "roleStatus": "Trạng thái",
+      "createdByRole":"Người tạo",
+      "createdDateRole": "Ngày chỉnh sửa",
+      "modifiedByRole":"Người chỉnh sửa",
+      "modifiedDateRole": "Ngày chỉnh sửa"
+    },
+    "reports":{
+      "title": "Báo cáo",
+      "form": {
+        "name": "Tên báo cáo",
+        "code": "Mã báo cáo",
+        "description": "Mô tả",
+        "startRow": "Start row",
+        "startCol": "Start col",
+        "sql": "Sql",
+        "sheetOrder": "Vị trí sheet",
+        "addParam": "Thêm tham số",
+        "comment": "Comment",
+        "listParam": "Danh sách tham số",
+        "paramName": "Tên tham số",
+        "paramType": "Kiểu dữ liệu",
+        "paramValue": "Giá trị"
+      },
+      "detail":{
+        "downloadTemplate": "Tải template",
+        "viewReports": "Xem báo cáo",
+        "downloadReports": "Tải báo cáo",
+        "listSheet": "Danh sách các sheet",
+        "requiredName": "Trường Tên không được để trống",
+        "sqlRequired": "Trường SQL không được để trống!",
+        "requiredRow": "Trường StartRow không được để trống",
+        "requiredColumn": "Trường StartColumn không được để trống",
+        "startRownotValueExists": "Hàng bắt đầu không có giá trị nào tồn tại!",
+        "startColnotValueExists": "Cột bắt đầu không có giá trị nào tồn tại!",
+        "notValueSheet": "Vị trí Sheet không có giá trị nào tồn tại!",
+        "requiredSheet": "Vị trí Sheet không được để trống!"
+      }
+
+    }
+  },
+  "message": {
+    "noData": "Không tìm thấy dữ liêu"
+  },
+  "placeholder": {
+    "chooseDate": "Chọn ngày",
+    "choose": "Chọn"
+  },
+  "specialText": {
+    "delete_1": "Bạn có chắn chắn muốn xóa bản ghi",
+    "delete_2": "Xóa bản ghi",
+    "error_1": "là trường bắt buộc",
+    "error_2": "Độ dài",
+    "error_3": "không được ngắn hơn",
+    "error_4": "không được nhỏ hơn",
+    "error_5": "Giá trị",
+    "error_6": "không thể vượt quá",
+    "error_7": "chỉ nhận giá trị là số",
+    "error_8": "ký tự",
+    "error_9": "Mật khẩu không khớp !",
+    "textPattern_1": "Vui lòng chỉ nhập chữ in hoa không dấu, số và dấu \"_\"",
+    "textPattern_2": "Vui lòng nhập ký tự số",
+    "notFound": "Không tìm thấy bản ghi",
+    "error_10":"Ngày bắt đầu phải nhỏ hơn ngày kết thúc"
+  },
+  "effort": {
+    "title": "Thông tin giai đoạn",
+    "month": "Tháng",
+    "spring": "Giai đoạn",
+    "effort_estimate": "Ước lượng nỗ lực",
+    "customer_record": "Khách hàng chốt",
+    "accept_date": "Ngày nghiệm thu",
+    "effort_accept": "Nghiệm thu",
+    "progress": "Tiến độ",
+    "difference_effort": "Chênh lệch",
+    "acknowledgmentOfEffort": "Ghi nhận nỗ lực",
+    "acknowledgmentOfEffortChange" : "Ghi nhận nỗ lực quy đổi",
+    "percent_effort": "% hoàn thành",
+    "turnover":"Doanh thu",
+    "cost": "Chi phí",
+    "efficiency": "Hiệu suất",
+    "cumulativeDifference" : "Chênh lệch lũy kế",
+    "allocate_effort" : "Phân bổ nỗ lực",
+    "conversionEffort": "Nỗ lực quy đổi",
+    "timeAllocation" : "Phân bổ thời gian",
+    "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
+    "role": "Vai trò",
+    "add": "Thêm",
+    "chooseFile":"Chọn file"
+  },
+  "staff": {
+    "staffName" : "Tên nhân viên",
+    "staffInfo": "Thông tin nhân viên",
+    "commonInfo": "Thông tin chung",
+    "contact": "Liên hệ",
+    "address": "Địa chỉ",
+    "staffDescription": "Mô tả nhân viên",
+    "commonDescription": "Mô tả"
+  },
+  "staff_status": {
+    "official": "Nhân viên chính thức",
+    "unofficial": "Nhân viên không chính thức",
+    "quit": "Nhân viên nghỉ việc"
+  },
+  "religion": {
+    "yes": "Có",
+    "no": "Không"
+  },
+  "gender": {
+    "female": "Nữ",
+    "male": "Nam",
+    "other": "Khác"
+  },
+  "staff_kpi": {
+    "startMonth": "Tháng bắt đầu",
+    "endMonth": "Tháng kết thúc"
+  },
+  "dashboard": {
+    "profile": {
+      "breadcrumb": "Thông tin cá nhân",
+      "tab": {
+        "detail": {
+          "title": "Thông tin cơ bản"
+        },
+        "contract": {
+          "title": "Danh sách hợp đồng"
+        },
+        "sprint": {
+          "title": "Thông tin theo sprint",
+          "month": "Tháng",
+          "from": "Từ tháng",
+          "to": "Đến tháng",
+          "salary": "Mức lương(VNĐ)",
+          "target_kpi": "KPI mục tiêu(MM)",
+          "salary_received": "Mức lương thực nhận(VNĐ)",
+          "guaranteed_kpi": "KPI đảm bảo(MM)",
+          "reality_kpi": "KPI phân bổ thực tế",
+          "project_code": "Mã dự án",
+          "project_name": "Tên dự án",
+          "recognize": "Ghi nhận nỗ lực(MM)",
+          "recognize_exchange": "Nỗ lực quy đổi(MM)",
+          "time_percent": "% phân bổ thời gian",
+          "time_percent_err": "Phân bổ thời gian là trường bắt buộc",
+          "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100",
+          "percent_effort_err": "Tổng % phân bổ thời gian phải bằng 100%"
+        },
+        "chart": {
+          "title": "Biểu đồ KPI"
+        }
       }
     }
+  },
+  "profile":{
+    "title": "Thông tin cá nhân"
+  }
 }

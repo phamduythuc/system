@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import {catchError, Observable, takeUntil, throwError} from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
-import { AuthUtils } from 'app/core/auth/auth.utils';
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {FuseConfigService} from '../../../@fuse/services/config';
+import {TranslocoService} from '@ngneat/transloco';
+import moment from "moment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -12,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor
     /**
      * Constructor
      */
-    constructor(private _authService: AuthService, private _router: Router, private matSnackBar: MatSnackBar)
+    constructor(private _authService: AuthService, private _router: Router, private matSnackBar: MatSnackBar,
+                private _translocoService: TranslocoService )
     {
     }
 
@@ -24,6 +27,7 @@ export class AuthInterceptor implements HttpInterceptor
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
+        const language = this._translocoService.getActiveLang();
         // Clone the request object
         let newReq = req.clone();
 
@@ -31,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor
         //
         // If the access token didn't expire, add the Authorization header.
         // We won't add the Authorization header if the access token expired.
-        // This will force the server to return a "401 Unauthorized" response
+        // This will force the server to return a '401 Unauthorized' response
         // for the protected API routes which our response interceptor will
         // catch and delete the access token from the local storage while logging
         // the user out from the app.
@@ -40,14 +44,17 @@ export class AuthInterceptor implements HttpInterceptor
         {
             newReq = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken)
+                  .set('LANG_KEY', language)
+                  // .set('TIMEZONE', moment())
             });
         }
+
 
         // Response
         return next.handle(newReq).pipe(
             catchError((error) => {
 
-                // Catch "401 Unauthorized" responses
+                // Catch '401 Unauthorized' responses
                 if ( error instanceof HttpErrorResponse && (error.status === 401 || (error.url.includes('/account') && error.status === 500 )))
                 {
                     // Sign out
@@ -56,9 +63,9 @@ export class AuthInterceptor implements HttpInterceptor
                     // Reload the app
                     // location.reload();
                 }
-                if ( error instanceof HttpErrorResponse && error.status === 403 && error.url.includes('/account'))
+                if ( error instanceof HttpErrorResponse && error.status === 403)
                 {
-                   this._router.navigateByUrl('unlock-session')
+                   this._router.navigateByUrl('unlock-session');
                 }
 
                 if (error instanceof HttpErrorResponse && error.status === 400 || error.status === 405 || error.status === 500) {

@@ -1,14 +1,14 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {SettingService} from "../setting.service";
-import {forkJoin} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
-import {AddGroupDialogComponent} from "./components/add-group-dialog/add-group-dialog.component";
-import {take} from "rxjs/operators";
-import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {BaseComponent} from "../../../../core/base.component";
-import {AddOrEditUserComponent} from "./components/add-or-edit-user/add-or-edit-user.component";
-import {IColumn} from "../../../../layout/common/data-table/data-table.component";
+import {SettingService} from '../setting.service';
+import {forkJoin} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {AddGroupDialogComponent} from './components/add-group-dialog/add-group-dialog.component';
+import {take} from 'rxjs/operators';
+import {ConfirmDialogComponent} from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseComponent} from '../../../../core/base.component';
+import {AddOrEditUserComponent} from './components/add-or-edit-user/add-or-edit-user.component';
+import {IColumn} from '../../../../layout/common/data-table/data-table.component';
 
 @Component({
     selector: 'app-user',
@@ -16,10 +16,12 @@ import {IColumn} from "../../../../layout/common/data-table/data-table.component
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent extends BaseComponent implements OnInit {
+  _permissionCodeName: 'DSNV';
+
     columns: IColumn[] = [
         {
             columnDef: 'stt',
-            header: 'STT',
+            header: 'common.stt',
             flex: 0.3,
         },
         {
@@ -49,13 +51,13 @@ export class UserComponent extends BaseComponent implements OnInit {
         },
         {
             columnDef: 'action',
-            header: 'Actions',
+            header: 'common.actions',
             flex: 1.5
         }
     ];
-    groups = []
-    users = []
-    authorities = []
+    groups = [];
+    users = [];
+    authorities = [];
 
     paginate: any = {
         keyword: '',
@@ -64,7 +66,7 @@ export class UserComponent extends BaseComponent implements OnInit {
         size: 10,
         page: 0,
         total: 0
-    }
+    };
 
     constructor(injector: Injector, private settingService: SettingService) {
         super(injector);

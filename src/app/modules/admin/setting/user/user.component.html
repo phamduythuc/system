@@ -1,9 +1,9 @@
-<ng-container *transloco="let t">
+ <ng-container *transloco="let t">
     <div class="px-4 flex md:px-6 w-full">
         <div class="w-1/4 h-full pr-6">
             <mat-card class="bg-card h-full">
                 <div class="header border-b">
-                    <div class="text-xl font-bold card-title mb-3">
+                    <div class="text-xl font-bold card-title mb-3 capitalize">
                         {{t('setting.user.group')}}
                     </div>
                 </div>
@@ -27,7 +27,7 @@
         <div class="w-3/4 h-full">
             <mat-card class="bg-card h-full">
                 <div class="header border-b">
-                    <div class="text-xl font-bold card-title mb-3">
+                    <div class="text-xl font-bold card-title mb-3 capitalize">
                         {{t('setting.user.userList')}}
                     </div>
                 </div>
@@ -62,7 +62,9 @@
                         </div>
                     </div>
                     <div class="data-table w-full mt-4">
-                        <app-data-table [rows]="users"
+                        <app-data-table
+                          [roleName]="_permissionCodeName"
+                          [rows]="users"
                                         [columns]="columns"
                                         [paginate]="true"
                                         [limit]="paginate.size"

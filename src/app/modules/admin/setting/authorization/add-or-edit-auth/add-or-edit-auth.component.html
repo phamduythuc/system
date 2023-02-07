@@ -1,0 +1,58 @@
+<ng-container *transloco="let t">
+    <!--    header-->
+    <div class="header border-b flex justify-between items-center border-borderDialog pb-2">
+        <div class="text-4xl font-bold card-title capitalize py-2 pl-8 leading-9">
+            {{(roleData ? 'setting.editGroupRole' : 'setting.addGroupRole') | transloco}}
+        </div>
+        <div class="mr-8">
+            <button mat-icon-button (click)="dialogRef.close()">
+                <mat-icon svgIcon="heroicons_outline:x" title="Edit" class="icon-size-5"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <!--    content-->
+    <form class="content mt-8 flex-1 px-8 overflow-auto" [formGroup]="formGroup">
+        <div class="field flex mb-4">
+            <label class="w-1/6 font-medium text-base required">{{'common.name'|transloco}}</label>
+            <div class="w-5/6 input">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
+                    <input class="w-full inputDialog" id="name"
+                           formControlName="name"
+                           matInput>
+                </mat-form-field>
+              <app-error-message [control]="formGroup.get('name')" [name]="'common.name'|transloco" [textPattern]="'specialText.textPattern_1'|transloco"></app-error-message>
+            </div>
+        </div>
+<!--        <div class="field flex mb-4" *ngIf="roleId">-->
+<!--            <label class="w-1/6 text-base required">Trạng thái</label>-->
+<!--            <div class="input w-5/6">-->
+<!--                <mat-radio-group formControlName="activated">-->
+<!--                    <mat-radio-button [value]="0" class="text-base mr-40">Tắt</mat-radio-button>-->
+<!--                    <mat-radio-button [value]="1" class="text-base">Bật</mat-radio-button>-->
+<!--                </mat-radio-group>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="field flex mb-4">
+            <label class="w-1/6 font-medium text-base flex items-center">{{'common.description'|transloco}}</label>
+            <div class="w-5/6 input">
+                <mat-form-field
+                    class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                    <textarea class="w-full inputDialog h-20" id="description"
+                              formControlName="description"
+                              matInput></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+      <div class="footer mt-6 flex justify-end">
+        <button type="submit" mat-raised-button color="primary" class="mr-3" [disabled]="formGroup.invalid" (click)="formGroup.valid && save(formGroup.value)">
+          <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
+          <span>{{t("button.save")}}</span>
+        </button>
+        <button mat-raised-button (click)="dialogRef.close()">
+          <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
+          <span>{{t("button.cancel")}}</span>
+        </button>
+      </div>
+    </form>
+</ng-container>

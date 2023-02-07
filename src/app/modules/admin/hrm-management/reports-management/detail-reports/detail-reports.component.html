@@ -1,0 +1,148 @@
+<ng-container *transloco="let t">
+  <div class="header border-b flex justify-between items-center pb-3">
+    <div class="text-2xl font-bold card-title capitalize">
+      {{
+        (dialogId ? "common.title.detail" : "common.title.create")
+          | transloco
+            : { screenName: "hrm-management.reports.title" | transloco }
+      }}
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        class="hover:bg-slate-100"
+        (click)="dialogRef.close()"
+      >
+        <mat-icon
+          svgIcon="heroicons_outline:x"
+          title="Edit"
+          class="icon-size-5"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <!--    content-->
+  <div class="content mt-6" [formGroup]="formGroup">
+    <div class="field flex mb-4 gap-5">
+      <div class="w-1/2 flex flex-wrap">
+        <label class="w-full font-medium required" for="name">{{
+          "hrm-management.reports.form.name" | transloco
+        }}</label>
+        <div class="input w-full">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <input
+              class="w-full"
+              id="name"
+              [placeholder]="'hrm-management.reports.form.name' | transloco"
+              formControlName="name"
+              matInput
+              [readonly]="readonly"
+            />
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('name')"
+            [name]="'hrm-management.reports.form.name' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex flex-wrap">
+        <mat-label class="w-full font-medium required" for="code">{{
+          "hrm-management.reports.form.code" | transloco
+        }}</mat-label>
+        <div class="input w-full">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <input
+              class="w-full"
+              id="code"
+              [placeholder]="'hrm-management.reports.form.code' | transloco"
+              formControlName="code"
+              matInput
+              [readonly]="readonly"
+            />
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('code')"
+            [name]="'hrm-management.reports.form.code' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+    </div>
+
+    <div class="field flex mb-4 items-center gap-5">
+      <button
+        mat-raised-button
+        color="primary"
+      >
+        <mat-icon
+          class="icon-size-5 mr-2"
+          svgIcon="heroicons_outline:paper-clip"
+        ></mat-icon>
+        <!-- <span>{{ (dialogId ? "button.edit" : "button.save") | transloco }}</span> -->
+        <label>Template</label>
+      </button>
+      <label>{{
+        (this.detailsData?.templateName
+          ? this.detailsData?.templateName
+          : "Upload file"
+        ) | transloco
+      }}</label>
+    </div>
+    <div class="field flex mb-4 gap-5">
+      <div class="w-1/2 flex flex-wrap gap-5">
+        <span
+          class="cursor-pointer italic underline text-[#4f9cad]"
+          (click)="download(formGroup.value.templatePath,'1')"
+          >{{
+            "hrm-management.reports.detail.downloadTemplate" | transloco
+          }}</span
+        >
+        <!-- <span class="cursor-pointer italic underline text-[#4f9cad]">{{
+          "hrm-management.reports.detail.viewReports" | transloco
+        }}</span> -->
+        <span
+          class="cursor-pointer italic underline text-[#4f9cad]"
+          (click)="download(detailsData.id,'2')"
+          >{{
+            "hrm-management.reports.detail.downloadReports" | transloco
+          }}</span
+        >
+      </div>
+    </div>
+
+    <div class="field flex mb-4 gap-5">
+      <div class="w-full flex flex-wrap">
+        <label class="w-full font-medium required" for="description">{{
+          "hrm-management.reports.form.description" | transloco
+        }}</label>
+        <div class="input w-full">
+          <mat-form-field class="fuse-mat-no-subscript w-full">
+            <textarea
+              class="w-full"
+              id="description"
+              [placeholder]="
+                'hrm-management.reports.form.description' | transloco
+              "
+              formControlName="description"
+              matInput
+              [readonly]="readonly"
+            ></textarea>
+          </mat-form-field>
+          <app-error-message
+            [control]="formGroup.get('description')"
+            [name]="'hrm-management.reports.form.description' | transloco"
+          ></app-error-message>
+        </div>
+      </div>
+    </div>
+    <div class="data-table w-full mt-4 h-3/5">
+
+      <app-list-param-reports [data]="detailsData?.listSheet" [addRow]="random" [readonly]="readonly"></app-list-param-reports>
+      
+    
+    </div>
+  </div>
+
+  <!--    footer-->
+
+</ng-container>

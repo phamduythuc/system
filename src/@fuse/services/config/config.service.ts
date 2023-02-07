@@ -18,7 +18,7 @@ export class FuseConfigService
         // Private
         this._config = new BehaviorSubject(config);
     }
-
+ 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
     // -----------------------------------------------------------------------------------------------------
@@ -42,6 +42,12 @@ export class FuseConfigService
     get config$(): Observable<any>
     {
         return this._config.asObservable();
+    }
+
+
+    get configValue(): any
+    {
+        return this._config.getValue();
     }
 
     // -----------------------------------------------------------------------------------------------------

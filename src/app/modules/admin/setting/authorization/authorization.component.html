@@ -1,1 +1,91 @@
-<p>authorization works!</p>
+<ng-container *transloco="let t">
+  <div class="flex flex-col w-full">
+    <div class="header flex items-center justify-between p-4 border-b md:px-6 py-6 bg-white dark:bg-default">
+      <div class="title xl:text-4xl md:text-3xl font-bold">
+        {{'setting.groupRole'|transloco}}
+      </div>
+<!--      <div class="flex justify-center items-center">-->
+<!--        <mat-form-field-->
+<!--          class="fuse-mat-no-subscript w-full sm:w-64 sm:ml-4 bg-default text-lg rounded-input mr-2">-->
+<!--          <mat-select [(ngModel)]="selectedRole" (selectionChange)="choseRole()">-->
+<!--            <mat-option *ngFor="let authority of listRole"-->
+<!--                        [value]="authority">{{authority.name}}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--        <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">-->
+<!--          <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>-->
+<!--        </button>-->
+<!--        <button mat-mini-fab class="text-white shadow-none bg-[#F2A104] mr-2" (click)="addOrEditRole(selectedRole)">-->
+<!--          <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>-->
+<!--        </button>-->
+<!--        <button mat-raised-button color="primary" class="w-36" (click)="submitPermission()">-->
+<!--          {{'button.edit'|transloco}}-->
+<!--        </button>-->
+<!--      </div>-->
+    </div>
+    <div class="content h-full flex bg-white dark:bg-default">
+      <div class="module w-1/4 border-r p-6 py-4">
+        <div class="title flex justify-between text-3xl font-bold h-18 pt-3">
+          <span>{{'setting.role'|transloco}}</span>
+          <button mat-mini-fab color="primary" class="text-white shadow-none mr-2" (click)="addOrEditRole()">
+            <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+          </button>
+        </div>
+        <div class="overflow-auto h-full">
+          <div class="flex flex-col divide-y border-t border-b">
+            <ng-container *ngFor="let role of roles; index as i">
+              <div
+                class="flex col-span-5 py-5 cursor-pointer w-full"
+                [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedRoleId || selectedRoleId !== role.roleId,
+                                    'bg-primary-50 dark:bg-hover': selectedRoleId && selectedRoleId === role.roleId}"
+                (click)="goToRole(role.roleId)">
+                <mat-icon class="w-1/5"
+                          [ngClass]="{'text-hint': !selectedRoleId || selectedRoleId !== role.roleId,
+                                        'text-primary dark:text-primary-500': selectedRoleId && selectedRoleId === role.roleId}"
+                          [svgIcon]="'heroicons_solid:user-group'"></mat-icon>
+                <div class="ml-3 col-span-3 w-3/5">
+                  <div
+                    class="font-medium leading-6"
+                    [ngClass]="{'text-primary dark:text-primary-500': selectedRoleId && selectedRoleId === role.roleId}">
+                    {{role.name}}
+                  </div>
+                  <div class="mt-0.5 text-secondary">
+                    {{role.description}}
+                  </div>
+                </div>
+                <div class="actions flex w-2/5">
+                  <button mat-icon-button class="hover:bg-slate-200" (click)="addOrEditRole(role)">
+                    <mat-icon svgIcon="heroicons_outline:pencil-alt" title="Edit" class="icon-size-5"></mat-icon>
+                  </button>
+                  <button mat-icon-button class="hover:bg-slate-200" (click)="deleteConfirmDialog(role.roleId)">
+                    <mat-icon svgIcon="heroicons_outline:trash" title="Delete" class="icon-size-5"></mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="permission w-3/4">
+        <div
+          class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-4 sm:px-4 bg-default dark:bg-transparent">
+          <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+              <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                {{'setting.menu'|transloco}}
+              </h2>
+            </div>
+          </div>
+          <!-- Actions -->
+          <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button mat-raised-button color="primary" (click)="saveMenu()">
+            {{'button.save'|transloco}}
+          </button>
+          </div>
+        </div>
+        <app-menu-tree #menuChild [roleId]="selectedRoleId"></app-menu-tree>
+      </div>
+    </div>
+  </div>
+</ng-container>
