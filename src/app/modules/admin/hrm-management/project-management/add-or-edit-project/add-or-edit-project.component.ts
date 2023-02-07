@@ -119,8 +119,6 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
   getListPartner(){
     this.partnerService.search().subscribe(res=>{
       // this.listPartner = res.data;
-      console.log(res.data);
-
       res.data.forEach((itemStatus) => {
         console.log(itemStatus);
 

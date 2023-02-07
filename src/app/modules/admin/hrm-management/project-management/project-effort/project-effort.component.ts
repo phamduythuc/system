@@ -22,6 +22,7 @@ import FileSaver from 'file-saver';
 import { DecimalPipe } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { SalaryService } from '@shared/services/salary.service';
+import { items } from 'app/mock-api/apps/file-manager/data';
 
 @Component({
   selector: 'app-project-effort',
@@ -52,6 +53,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   priceDefalt = 30000000;
   effortDifferenceVnd: any = '';
   listStatusStaff: any = [];
+
+  disBtn = false;
+  disabledLogErr = true;
 
   option = {
     page: 0,
@@ -439,7 +443,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.sprintService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
         // this.listStaffLevels = res.data;
-        console.log(res.data);
         res.data.forEach(itemStatus => {
           if (itemStatus.status == 1) {
 
@@ -483,10 +486,35 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.efforts
       .at(index)
       .patchValue({ staffCode: this.mapStaff[event.value].staffCode });
-    // const lstStaffIds = this.efforts.value.map(item => item.staffId);
-    // this.efforts.value.forEach((item, idx) => {
-    //   this.listStaff[idx] = [...this.listStaffOrigin.filter(i => i.id === item.staffId || !lstStaffIds.includes(i.id))];
+
+    const lstStaffIds = this.efforts.value.map(item => item.staffId);
+
+    const findDuplicateVal = (lstStaffIds) => lstStaffIds.filter((item, index) => lstStaffIds.indexOf(item) != index);
+
+    const arrLenghtDuplicateVal = findDuplicateVal(lstStaffIds).length;
+    // const val = lstStaffIds[index];
+    // // lstStaffIds.splice(val, 1);
+
+    // console.log(lstStaffIds);
+
+    // lstStaffIds.forEach((item, idx) => {
+
+    //   const ts = lstStaffIds.indexOf(item);
+    //   console.log(ts);
+
     // });
+
+    // console.log(lstStaffIds);
+
+      // if(arrLenghtDuplicateVal !== 0){
+      //   this.disBtn = true;
+      //   this.disabledLogErr = false;
+      // }else{
+      //   this.disBtn = false;
+      //   this.disabledLogErr = true;
+
+      // }
+
   }
 
   downloadDocument(recordUrl: any) {
