@@ -29,7 +29,7 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   }
 
   private updateView(): void {
-    const hasAnyAuthority = this.accountService.hasAnyAuthority(this.authorities);
+    const hasAnyAuthority = !this.authorities || this.accountService.hasAnyAuthority(this.authorities);
     // console.log(this.authorities);
 
     this.viewContainerRef.clear();
