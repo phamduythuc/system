@@ -502,7 +502,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
       }
 
-      // console.log(findDuplicateVal(lstStaffIds));
+      // console.log(lstStaffIds);
 
 
   }
