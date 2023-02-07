@@ -489,31 +489,21 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
 
     const lstStaffIds = this.efforts.value.map(item => item.staffId);
 
-    const findDuplicateVal = (lstStaffIds) => lstStaffIds.filter((item, index) => lstStaffIds.indexOf(item) != index);
+    const findDuplicateVal = (lstStaffIds) => lstStaffIds.filter((item, index) => lstStaffIds.indexOf(item) !== index);
 
     const arrLenghtDuplicateVal = findDuplicateVal(lstStaffIds).length;
-    // const val = lstStaffIds[index];
-    // // lstStaffIds.splice(val, 1);
 
-    // console.log(lstStaffIds);
+      if(arrLenghtDuplicateVal !== 0){
+        this.disBtn = true;
+        this.disabledLogErr = false;
+      }else{
+        this.disBtn = false;
+        this.disabledLogErr = true;
 
-    // lstStaffIds.forEach((item, idx) => {
+      }
 
-    //   const ts = lstStaffIds.indexOf(item);
-    //   console.log(ts);
+      // console.log(findDuplicateVal(lstStaffIds));
 
-    // });
-
-    // console.log(lstStaffIds);
-
-      // if(arrLenghtDuplicateVal !== 0){
-      //   this.disBtn = true;
-      //   this.disabledLogErr = false;
-      // }else{
-      //   this.disBtn = false;
-      //   this.disabledLogErr = true;
-
-      // }
 
   }
 
