@@ -9,7 +9,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
     type: 'group',
     icon: 'heroicons_outline:home',
     link: '/dashboards',
-    role: [AuthoritiesConstant.DASHBOARD],
     children: [
       {
         id: 'dashboards',
@@ -17,7 +16,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:home',
         link: '/dashboards',
-        role: [AuthoritiesConstant.DASHBOARD],
       },
       {
         id: 'profile',
@@ -25,12 +23,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user',
         link: '/profile/profile-management',
-        role: [
-          AuthoritiesConstant.CONTRACT,
-          AuthoritiesConstant.CONTRACT_CREATE,
-          AuthoritiesConstant.CONTRACT_UPDATE,
-          AuthoritiesConstant.CONTRACT_READ,
-        ],
       },
     ],
   },

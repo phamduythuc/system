@@ -8,6 +8,7 @@ import { StaffKpiComponent } from './staff-kpi/staff-kpi.component';
 import { AddOrEditStaffDrawerComponent } from './add-or-edit-staff-drawer/add-or-edit-staff-drawer.component';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { TranslocoModule } from '@ngneat/transloco';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 
@@ -27,6 +28,7 @@ import { TranslocoModule } from '@ngneat/transloco';
         StaffManagementRoutingModule,
         TranslocoModule,
         SharedModule,
+        NgxMatSelectSearchModule
     ],
 })
 export class StaffManagementModule { }
