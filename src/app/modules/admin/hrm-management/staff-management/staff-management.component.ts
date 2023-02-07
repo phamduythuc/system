@@ -7,6 +7,7 @@ import { ProfileDashboardsComponent } from '../../dashboards/profile-dashboards/
 import { FuseConfigService } from '@fuse/services/config';
 import { Theme, ViewType } from 'app/core/config/app.config';
 
+
 @Component({
   selector: 'app-staff-management',
   templateUrl: './staff-management.component.html',
@@ -73,7 +74,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     {
       columnDef: 'action',
       header: 'common.actions',
-      actions: ['view', 'edit'],
+      actions: ['view', 'edit','delete'],
       flex: 1.3,
     },
   ];
