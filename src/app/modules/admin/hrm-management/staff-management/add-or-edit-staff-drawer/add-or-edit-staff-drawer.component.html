@@ -642,7 +642,7 @@
                     >{{ t("hrm-management.team.title") }}
                     <!--                    Nhóm / Team-->
                   </mat-label>
-                  <mat-select formControlName="teamId">
+                  <mat-select formControlName="teamId" [required]="formGroup.get('isWorker').value">
                     <mat-option *ngFor="let item of listTeam; let i = index" [selected]="item.id" [value]="item.id">
                       {{ item.name }}
                     </mat-option>

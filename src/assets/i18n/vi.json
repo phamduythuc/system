@@ -282,7 +282,7 @@
       "roleDescription": "Mô tả",
       "roleStatus": "Trạng thái",
       "createdByRole":"Người tạo",
-      "createdDateRole": "Ngày chỉnh sửa",
+      "createdDateRole": "Ngày tạo",
       "modifiedByRole":"Người chỉnh sửa",
       "modifiedDateRole": "Ngày chỉnh sửa"
     },
@@ -367,7 +367,8 @@
     "acknowledgmentOfEffortMM" : "Ghi nhận nỗ lực (MM)",
     "role": "Vai trò",
     "add": "Thêm",
-    "chooseFile":"Chọn file"
+    "chooseFile":"Chọn file",
+    "same_name_err":"Trùng tên"
   },
   "staff": {
     "staffName" : "Tên nhân viên",
