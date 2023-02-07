@@ -24,6 +24,9 @@ export class StaffService extends BaseService {
   updateStaff(formData: FormData): Observable<any> {
     return this.http.post(`${environment.apiUrl}/staff/update`, formData);
   }
+  deleteStaff(id: any): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/staff/${id}`)
+  }
 
   getListDepartment(searchData): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/department`, {params: searchData});
