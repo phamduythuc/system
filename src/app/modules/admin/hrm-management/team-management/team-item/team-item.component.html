@@ -4,8 +4,10 @@
             <!-- Team Name -->
             <div class="w-full flex justify-between py-2 border-gray-400 border-b-2">
                 <div class="flex w-7/12">
-                    <mat-label class="font-bold capitalize">{{team.name + ' ' + '(' + totalMember + ' ' +
-                        ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label>
+                    <!-- <mat-label class="font-bold capitalize">{{team.name + ' ' + '(' + totalMember + ' ' +
+                        ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label> -->
+                        <mat-label class="font-bold">{{team.name + ' ' + '(' + totalMember + ' ' +
+                          ('hrm-management.team.form.member'|transloco) + ')'}}</mat-label>
                 </div>
                 <!-- status -->
                 <div *ngIf="team.status==1; else template1">

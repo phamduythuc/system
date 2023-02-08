@@ -104,7 +104,7 @@ export class DetailProfileDashboardsComponent
     username: [null],
     role: [],
     workExperience: [],
-    salary: [],
+    salary: [''],
     file: [],
     teamNames: [],
     permanentResidence: []
