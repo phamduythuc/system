@@ -98,7 +98,7 @@ export class AddOrEditStaffDrawerComponent
     //Dân tộc
     ethnic: [],
     //Họ và tên
-    fullName: [null, Validators.required],
+    fullName: [null, [Validators.required, Validators.maxLength(50)]],
     //Giời tính
     gender: [null, Validators.required],
     //Ngày tuyển dụng

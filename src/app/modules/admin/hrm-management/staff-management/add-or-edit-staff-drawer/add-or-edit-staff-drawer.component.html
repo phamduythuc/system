@@ -56,7 +56,7 @@
                   <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                       <mat-label>
-                        <!--                        Họ tên / Full Name-->
+                                               <!-- Họ tên / Full Name -->
                         {{ t("common.fullName") }}
                       </mat-label>
                       <input required formControlName="fullName" matInput />
@@ -449,7 +449,9 @@
                   </mat-label>
                   <mat-select formControlName="positionId" #singleSelect>
                     <mat-option>
-                      <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco" [placeholderLabel]="'common.position' | transloco" [formControlName]="'searchStaff'">
+                      <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco"
+                       [placeholderLabel]="'common.position' | transloco"
+                       [formControlName]="'positionIdFilter'">
                         <mat-icon ngxMatSelectSearchClear
                                   class="icon-size-5"
                                   [svgIcon]="'heroicons_solid:x'"

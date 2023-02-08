@@ -292,6 +292,12 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         valEffortDifferenceVnd.replace(this.numberChars, '')
       );
     }
+    const valCumulativeDifferenceVnd = formValue.cumulativeDifferenceVnd;
+    if (valCumulativeDifferenceVnd != null) {
+      formValue.cumulativeDifferenceVnd = Number(
+        valCumulativeDifferenceVnd.replace(this.numberChars, '')
+      );
+    }
     const valCumulativeDifference = formValue.cumulativeDifference;
     if (valCumulativeDifference != null) {
       formValue.cumulativeDifference = Number(
