@@ -99,12 +99,12 @@ export class DetailProfileDashboardsComponent
     staffCode: [null],
     staffStatus: [null],
     status: [],
-    roleName: [],
+    roleName: '',
     summary: [],
     username: [null],
     role: [],
     workExperience: [],
-    salary: [],
+    salary: [''],
     file: [],
     teamNames: [],
     permanentResidence: []
@@ -130,23 +130,30 @@ export class DetailProfileDashboardsComponent
     private DashboardsProfileService:DashboardsProfileService
   ) {
     super(injector, staffService);
-    this.genders = this.getListCategories().genders
+    this.genders = this.getListCategories().genders;
   }
 
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getListRoleStaff();
+    // this.getListRoleStaff();
     this.mapData();
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
-
+    this.formGroup.patchValue({
+      departmentId: this.data.departmentNames,
+      positionId: this.data.positionNames,
+      positionJob: this.data.positionNames,
+      religion: this.data.religionName,
+      staffStatus: this.data.staffStatusName,
+      gender: this.data.genderName
+    });
   }
 
   ngOnInit(): void {
-    this.getListRoleStaff();
+    // this.getListRoleStaff();
   }
 
-  getListRoleStaff():void {
+  getListRoleStaff(): void {
     this.staffService.getRoleStaff(this.option).subscribe((res) => {
       if (res.code === '00') {
         this.listRoleStaff = res.data;
@@ -201,24 +208,24 @@ export class DetailProfileDashboardsComponent
   }
 
   mapData() :void {
-    this.genders.map((x: any) => {
-      if (x.code === Number(this.data.gender)) {
-        this.data.gender = x.name;
-        return x;
-      }
-    });
-    this.religions.map((x: any) => {
-      if (x.value === this.data.religion) {
-        this.data.religion = x.name;
-        return x;
-      }
-    });
-    this.staffStatus.map((x: any) => {
-      if (x.value === this.data.staffStatus) {
-        this.data.staffStatus = x.name;
-        return x;
-      }
-    });
+    // this.genders.map((x: any) => {
+    //   if (x.code === Number(this.data.gender)) {
+    //     this.data.gender = x.name;
+    //     return x;
+    //   }
+    // });
+    // this.religions.map((x: any) => {
+    //   if (x.value === this.data.religion) {
+    //     this.data.religion = x.name;
+    //     return x;
+    //   }
+    // });
+    // this.staffStatus.map((x: any) => {
+    //   if (x.value === this.data.staffStatus) {
+    //     this.data.staffStatus = x.name;
+    //     return x;
+    //   }
+    // });
     this.data.dateOfBirth = CommonUtilsService.dateToString(
       this.data.dateOfBirth,
       false
@@ -240,10 +247,10 @@ export class DetailProfileDashboardsComponent
     //   style: 'currency',
     //   currency: 'VND',
     // });
-
-    this.data.salary = CommonUtilsService.formatVND(parseInt(this.data.salary)),
-
-    this.formGroup.patchValue(this.data);
+    if (this.data.salary != null) {
+      this.data.salary = CommonUtilsService.formatVND(parseInt(this.data.salary)),
+      this.formGroup.patchValue(this.data);
+    }
   }
 
   convertBase64(imageUrl): void {
@@ -255,6 +262,4 @@ export class DetailProfileDashboardsComponent
       });
     }
   }
-
-
 }

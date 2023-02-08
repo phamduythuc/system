@@ -41,7 +41,7 @@
                 class="flex justify-center items-center w-full h-full"
               >
                 <img
-                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full"
+                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full object-cover"
                   [src]="imageUrl"
                   *ngIf="imageUrl"
                 />
@@ -56,7 +56,7 @@
                   <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                       <mat-label>
-                        <!--                        Họ tên / Full Name-->
+                                               <!-- Họ tên / Full Name -->
                         {{ t("common.fullName") }}
                       </mat-label>
                       <input required formControlName="fullName" matInput />
@@ -449,7 +449,9 @@
                   </mat-label>
                   <mat-select formControlName="positionId" #singleSelect>
                     <mat-option>
-                      <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco" [placeholderLabel]="'common.position' | transloco" [formControlName]="'searchStaff'">
+                      <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco"
+                       [placeholderLabel]="'common.position' | transloco"
+                       [formControlName]="'positionIdFilter'">
                         <mat-icon ngxMatSelectSearchClear
                                   class="icon-size-5"
                                   [svgIcon]="'heroicons_solid:x'"
