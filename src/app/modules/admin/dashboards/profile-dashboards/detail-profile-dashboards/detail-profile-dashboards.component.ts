@@ -130,7 +130,7 @@ export class DetailProfileDashboardsComponent
     private DashboardsProfileService:DashboardsProfileService
   ) {
     super(injector, staffService);
-    this.genders = this.getListCategories().genders
+    this.genders = this.getListCategories().genders;
   }
 
 
@@ -240,10 +240,10 @@ export class DetailProfileDashboardsComponent
     //   style: 'currency',
     //   currency: 'VND',
     // });
-
-    this.data.salary = CommonUtilsService.formatVND(parseInt(this.data.salary)),
-
-    this.formGroup.patchValue(this.data);
+    if (this.data.salary != null) {
+      this.data.salary = CommonUtilsService.formatVND(parseInt(this.data.salary)),
+      this.formGroup.patchValue(this.data);
+    }
   }
 
   convertBase64(imageUrl): void {
@@ -255,6 +255,4 @@ export class DetailProfileDashboardsComponent
       });
     }
   }
-
-
 }
