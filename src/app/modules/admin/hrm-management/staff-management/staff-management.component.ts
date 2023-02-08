@@ -229,7 +229,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     this.searchModel.status = '';
     }
     this.doSearch();
-    
+
     // if(data == 2){
     //   this.columns.map(x=>{
     //     if(x.columnDef == 'action'){
@@ -245,7 +245,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     //     return x
     //   })
     // }
-    
+
 
   }
 }
