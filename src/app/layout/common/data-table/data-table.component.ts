@@ -149,7 +149,7 @@ export class DataTableComponent
   }
 
   getRowIndex(row: any): any {
-    return this.rows.indexOf(row);
+    return this.pageIndex * this.limit + this.rows.indexOf(row);
   }
 
   getListActions(): any {
