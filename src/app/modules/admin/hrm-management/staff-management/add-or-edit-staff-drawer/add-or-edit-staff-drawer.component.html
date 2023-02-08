@@ -447,12 +447,20 @@
                     >{{ t("common.position") }}
                     <!--                    Chức vụ / Position-->
                   </mat-label>
-                  <mat-select formControlName="positionId">
-                    <mat-option
-                      *ngFor="let item of listPositions"
-                      [value]="item?.id"
-                      >{{ item?.name }}</mat-option
-                    >
+                  <mat-select formControlName="positionId" #singleSelect>
+                    <mat-option>
+                      <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco" [placeholderLabel]="'common.position' | transloco" [formControlName]="'searchStaff'">
+                        <mat-icon ngxMatSelectSearchClear
+                                  class="icon-size-5"
+                                  [svgIcon]="'heroicons_solid:x'"
+                                  matPrefix></mat-icon>
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <ng-container *ngFor="let item of listPositions">
+                      <mat-option [value]="item?.id">
+                        {{ item?.name }}
+                      </mat-option>
+                    </ng-container>
                   </mat-select>
                 </mat-form-field>
                 <app-error-message
@@ -499,7 +507,7 @@
                 </mat-form-field>
                 <app-error-message
                   [control]="formGroup.get('levelId')"
-                  [name]="'common.level' | transloco"
+                  [name]="'common.specialize' | transloco"
                 ></app-error-message>
               </div>
             </div>
