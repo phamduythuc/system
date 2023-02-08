@@ -446,8 +446,6 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
       if (res.code === '00') {
         // this.listStaffLevels = res.data;
         res.data.forEach((itemStatus) => {
-      console.log(itemStatus);
-
           if (itemStatus.status === 1) {
             this.listStaffLevels.push(itemStatus);
           // console.log(this.listStaffLevels);
