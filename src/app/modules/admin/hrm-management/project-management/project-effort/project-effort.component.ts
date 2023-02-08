@@ -37,6 +37,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
   recordUrl: any = '';
   unitPrice: any = '';
   cumulativeDifference: any = '';
+  cumulativeDifferenceVnd: any = '';
   revenue: any = '';
   cost: any = '';
   documentName: any = '';
@@ -176,6 +177,9 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
         this.effortDifferenceVnd = this.formatCurrency(
           res.data.effortDifferenceVnd
         );
+        this.cumulativeDifferenceVnd = this.formatCurrency(
+          res.data.cumulativeDifferenceVnd
+        );
         this.acceptanceDate = res.data.acceptanceDate ? moment(res.data.acceptanceDate) : null;
 
         const urlName = res.data.recordUrl;
@@ -202,7 +206,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
           effortDifference: res.data.effortDifference,
           cumulativeDifference: this.cumulativeDifference,
           effortDifferenceVnd: this.effortDifferenceVnd,
-          cumulativeDifferenceVnd: res.data.cumulativeDifferenceVnd,
+          cumulativeDifferenceVnd: this.cumulativeDifferenceVnd,
           revenue: this.revenue,
           cost: this.cost,
           efficiency: res.data.efficiency,
