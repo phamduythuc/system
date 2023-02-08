@@ -135,7 +135,7 @@ export class DetailProfileDashboardsComponent
 
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getListRoleStaff();
+    // this.getListRoleStaff();
     this.mapData();
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
@@ -143,7 +143,7 @@ export class DetailProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    this.getListRoleStaff();
+    // this.getListRoleStaff();
   }
 
   getListRoleStaff():void {
