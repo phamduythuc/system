@@ -9,6 +9,7 @@ import { AddOrEditStaffDrawerComponent } from './add-or-edit-staff-drawer/add-or
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { FormSearchComponent } from './add-or-edit-staff-drawer/form-search/form-search.component';
 
 
 
@@ -17,7 +18,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
         AddOrEditStaffComponent,
         DetailsStaffComponent,
         StaffKpiComponent,
-        AddOrEditStaffDrawerComponent
+        AddOrEditStaffDrawerComponent,
+        FormSearchComponent
     ],
     exports: [
         AddOrEditStaffDrawerComponent

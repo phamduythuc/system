@@ -126,7 +126,7 @@
             appearance="fill"
             class="fuse-mat-no-subscript w-full bg-card"
           >
-            <mat-select
+            <!-- <mat-select
               [placeholder]="
                 ('hrm-management.project.form.partner' | transloco) + ' ...'
               "
@@ -138,6 +138,26 @@
                 [value]="partner.id"
                 >{{ partner?.name }}</mat-option
               >
+            </mat-select> -->
+            <mat-select formControlName="partnerId"
+            [placeholder]="
+                ('hrm-management.project.form.partner' | transloco) + ' ...'" #singleSelect>
+              <mat-option>
+                <ngx-mat-select-search [noEntriesFoundLabel]="'hrm-management.contract.notFound' | transloco"
+                [placeholderLabel]="
+                ('hrm-management.project.form.partner' | transloco) + ' ...'"
+                [formControlName]="'partnerIdFilter'">
+                  <mat-icon ngxMatSelectSearchClear
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:x'"
+                            matPrefix></mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+              <ng-container *ngFor="let partner of listPartner">
+                <mat-option [value]="partner.id" *ngIf = "partner.status === 1">
+                  {{ partner?.name }}
+                </mat-option>
+              </ng-container>
             </mat-select>
           </mat-form-field>
           <app-error-message

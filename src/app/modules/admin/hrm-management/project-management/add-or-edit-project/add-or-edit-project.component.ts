@@ -8,6 +8,7 @@ import moment from 'moment';
 import {CommonUtilsService} from '@shared/common-utils.service';
 import {PartnerService} from '@shared/services/partner.service';
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
+import { map, distinctUntilChanged } from 'rxjs';
 
 
 
@@ -35,8 +36,9 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     contactName: [null ,[Validators.maxLength(100) ,Validators.required]],
     contactPhone: [null ,[Validators.pattern('(\\(\\+84\\)|0)+([0-9]{9})\\b'), Validators.required]],
     contactMail: [null ,[Validators.required,Validators.pattern('^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$')]],
-
     status: [1, Validators.required],
+    partnerIdFilter: [null],
+
   });
 
   date: any;
@@ -58,8 +60,18 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
     this.getListPartner();
     if(this.dialogId){
       this.getDetails(this.dialogId);
-    }
-
+    };
+    this.formGroup.get('partnerIdFilter').valueChanges.pipe(map((e) => e),distinctUntilChanged())
+    .subscribe(res => {
+      this.listPartner.map(x => {
+        if (x.name?.toLowerCase().includes(res.toLowerCase())) {
+          x.status = 1;
+        } else {
+          x.status = 2;
+        }
+        return x;
+      })
+    })
   }
 
   ngOnInit(): void {
@@ -118,12 +130,8 @@ export class AddOrEditProjectComponent extends BaseComponent implements OnInit {
 
   getListPartner(){
     this.partnerService.search().subscribe(res=>{
-      // this.listPartner = res.data;
       res.data.forEach((itemStatus) => {
-        console.log(itemStatus);
-
         if (itemStatus.status == 1) {
-
           this.listPartner.push(itemStatus);
         }
       });

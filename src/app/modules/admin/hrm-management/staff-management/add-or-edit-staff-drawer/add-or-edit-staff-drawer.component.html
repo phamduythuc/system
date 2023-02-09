@@ -442,10 +442,10 @@
           <div class="w-full flex mb-2 gap-2">
             <div class="w-1/3">
               <div class="w-full">
-                <mat-form-field class="fuse-mat-no-subscript w-full">
+                <!-- <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
                     >{{ t("common.position") }}
-                    <!--                    Chức vụ / Position-->
+                                       Chức vụ / Position
                   </mat-label>
                   <mat-select formControlName="positionId" #singleSelect>
                     <mat-option>
@@ -459,24 +459,30 @@
                       </ngx-mat-select-search>
                     </mat-option>
                     <ng-container *ngFor="let item of listPositions">
-                      <mat-option [value]="item?.id">
+                      <mat-option [value]="item?.id" *ngIf = "item.status === 1">
                         {{ item?.name }}
                       </mat-option>
                     </ng-container>
                   </mat-select>
-                </mat-form-field>
-                <app-error-message
+                </mat-form-field> -->
+                <app-form-search [formSearch]="formGroup" 
+                [ctlName]="formGroup.get('positionId')" 
+                [list] = "listPositions"  
+                [lableName]=" 'common.position' | transloco" >
+              </app-form-search>
+                <!-- <app-error-message
                   [control]="formGroup.get('positionId')"
                   [name]="'common.position' | transloco"
-                ></app-error-message>
+                ></app-error-message> -->
               </div>
             </div>
+            <!--                    Phòng ban/ Department-->
             <div class="w-1/3">
               <div class="w-full">
-                <mat-form-field class="fuse-mat-no-subscript w-full">
+                <!-- <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
                     >{{ t("common.department") }}
-                    <!--                    Phòng ban/ Department-->
+                    
                   </mat-label>
                   <mat-select formControlName="departmentId">
                     <mat-option
@@ -489,15 +495,21 @@
                 <app-error-message
                   [control]="formGroup.get('departmentId')"
                   [name]="'common.department' | transloco"
-                ></app-error-message>
+                ></app-error-message> -->
+                <app-form-search [formSearch]="formGroup"
+                [ctlName]="formGroup.get('departmentId')" 
+                [list] = "listDepartment"  
+                [lableName]=" 'common.department' | transloco" >
+              </app-form-search>
               </div>
             </div>
+             <!--                    Cấp bậc/ Level-->
             <div class="w-1/3">
               <div class="w-full">
-                <mat-form-field class="fuse-mat-no-subscript w-full">
+                <!-- <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
                     >{{ t("common.specialize") }}
-                    <!--                    Cấp bậc/ Level-->
+                   
                   </mat-label>
                   <mat-select formControlName="levelId">
                     <mat-option
@@ -510,7 +522,12 @@
                 <app-error-message
                   [control]="formGroup.get('levelId')"
                   [name]="'common.specialize' | transloco"
-                ></app-error-message>
+                ></app-error-message> -->
+                <app-form-search [formSearch]="formGroup" 
+                [ctlName]="formGroup.get('levelId')" 
+                [list] = "listStaffLevels"  
+                [lableName]=" 'common.specialize' | transloco" >
+              </app-form-search>
               </div>
             </div>
           </div>
