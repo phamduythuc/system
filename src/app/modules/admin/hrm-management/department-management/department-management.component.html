@@ -59,6 +59,7 @@
         <div class="data-table w-full mt-4">
           <app-data-table
             [roleName]="_permissionCodeName"
+            [ngClass]="line-clamp"
             [rows]="searchResult.data"
             [columns]="columns"
             [paginate]="true"
