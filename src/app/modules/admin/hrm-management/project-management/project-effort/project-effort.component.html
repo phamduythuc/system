@@ -286,11 +286,21 @@
                       <div class="input w-5/6">
                         <mat-form-field class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
                           <mat-select placeholder="{{ 'effort.role' | transloco }}" formControlName="roleId">
+                            <mat-select-filter [placeholder]="'common.search' | transloco" [displayMember]="'name'"
+                              [array]="listRole[index]" (filteredReturn)="filteredListRole[index] = $event">
+                            </mat-select-filter>
+                            <mat-option *ngFor="let rolName of filteredListRole[index]" [value]="rolName.id">
+                              {{ rolName?.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <!-- <mat-form-field class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card">
+                          <mat-select placeholder="{{ 'effort.role' | transloco }}" formControlName="roleId">
                             <mat-option *ngFor="let item of listStaffLevels" [value]="item?.id">
                               {{ item?.name }}
                             </mat-option>
                           </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
                         <app-error-message [control]="efforts.controls[index].get('roleId')"
                           [name]="'effort.role' | transloco">
                         </app-error-message>
