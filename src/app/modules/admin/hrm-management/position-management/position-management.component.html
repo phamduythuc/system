@@ -66,13 +66,13 @@
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">
             <!-- <ng-template #rowTemplate let-row='row' let-column="column">
-              <ng-container [ngSwitch]="column.columnDef" 
+              <ng-container [ngSwitch]="column.columnDef"
               >
                 <ng-container *ngSwitchDefault >{{row[column.columnDef]}}</ng-container>
                 <ng-container *ngSwitchCase="'createdDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
                 <ng-container *ngSwitchCase="'modifiedDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
               </ng-container>
-              
+
             </ng-template> -->
           </app-data-table>
         </div>

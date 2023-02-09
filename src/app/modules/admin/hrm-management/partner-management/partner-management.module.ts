@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
 import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { DetailsPartnerComponent } from './component/details-partner/details-partner.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -22,7 +23,8 @@ import { DetailsPartnerComponent } from './component/details-partner/details-par
     FormsModule,
     ErrorMessageModule,
     ReactiveFormsModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    MatTooltipModule
   ]
 })
 export class PartnerManagementModule { }

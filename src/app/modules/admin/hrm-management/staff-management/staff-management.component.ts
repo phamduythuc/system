@@ -126,7 +126,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     }
   ];
 
-  typeView = 'list';
+  typeView = 'grid';
 
   constructor(
     injector: Injector,

@@ -1,6 +1,6 @@
 .line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
 }

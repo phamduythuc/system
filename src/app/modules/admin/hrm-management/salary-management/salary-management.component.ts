@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input, Output, EventEmitter } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
@@ -8,12 +8,17 @@ import moment, { Moment } from 'moment';
 
 import { DateAdapter } from '@angular/material/core';
 
+
 @Component({
   selector: 'app-salary-management',
   templateUrl: './salary-management.component.html',
   styleUrls: ['./salary-management.component.scss'],
 })
 export class SalaryManagementComponent extends BaseComponent implements OnInit {
+
+  @Input('pageIndex') defaultPage: number;
+  @Output() setPageNum = new EventEmitter<number>();
+
   _permissionCodeName = 'DSNV';
   value: any;
   columns: IColumn[] = [
@@ -94,16 +99,19 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
 
   changePage(e: any) {
 
+
+
     this.paginate.month = CommonUtilsService.dateToString(
       this.startDate.value.startMonth,
       false
     );
     this.paginate.keyword = this.startDate.value.keyword;
-    this.paginate.page = e.pageIndex;
+    // this.paginate.page = e.pageIndex;
+    this.defaultPage = e.pageIndex;
     this.paginate.pageSize = e.pageSize;
 
     this.dataTable.dataFull = this.chunkArray(this.searchResult.data);
-    this.dataTable.dataIndex = this.dataTable.dataFull[this.paginate.page];
+    this.dataTable.dataIndex = this.dataTable.dataFull[this.defaultPage];
 
   }
 
@@ -152,6 +160,8 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
         pageSize: 10000000,
         status: 1,
       };
+      this.defaultPage = 0;
+      this.setPageNum.emit(this.defaultPage);
 
     this.SalaryService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
@@ -172,10 +182,8 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
           };
         });
         this.searchResult.data = convertData;
-
         this.dataTable.dataFull = this.chunkArray(this.searchResult.data);
         this.dataTable.dataIndex = this.dataTable.dataFull[this.paginate.page];
-        console.log(this.dataTable);
       }
     });
   }
