@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       });
     }
   }
-  list = ['CONTACT_TYPE', 'CONTRACT_STATUS', 'GENDER', 'PARAMETER_TYPE'];
+  list = ['CONTACT_TYPE', 'CONTRACT_STATUS', 'GENDER', 'PARAMETER_TYPE', 'STAFF_STATUS', 'RELIGION'];
   value: any;
   getList() {
     let data: any = {};
