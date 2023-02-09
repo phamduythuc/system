@@ -73,13 +73,14 @@
             [rows]="searchResult.data||[]"
             [columns]="columns"
             [paginate]="true"
-            [(pageIndex)]="searchModel.page"
             [limit]="searchModel.pageSize"
             [count]="searchResult.totalRecords"
             [typeView]="typeView"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">
           </app-data-table>
+          <!-- [(pageIndex)]="searchModel.page" -->
+
         </div>
       </div>
     </mat-card>

@@ -117,13 +117,14 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   list_type_view: any = [
     {
+      type: 'grid',
+      name: 'setting.typeView.grid',
+    },
+    {
       type: 'list',
       name: 'setting.typeView.list',
     },
-    {
-      type: 'grid',
-      name: 'setting.typeView.grid',
-    }
+
   ];
 
   typeView = 'grid';
