@@ -75,7 +75,7 @@
                         <!--                        Giới tính / Gender-->
                       </mat-label>
                       <mat-select [formControlName]="'gender'">
-                        <mat-option *ngFor="let g of genders" [value]="g.value">
+                        <mat-option *ngFor="let g of genders" [value]="g.code">
                           {{ g.name }}
                         </mat-option>
                       </mat-select>
@@ -192,7 +192,7 @@
                       <mat-select formControlName="religion">
                         <mat-option
                           *ngFor="let r of religions"
-                          [value]="r.value"
+                          [value]="r.code"
                         >
                           {{ r.name }}
                         </mat-option>
@@ -360,7 +360,7 @@
                     <!--                        Trạng thái / Staff Status-->
                   </mat-label>
                   <mat-select [formControlName]="'staffStatus'">
-                    <mat-option *ngFor="let s of staffStatus" [value]="s.value">
+                    <mat-option *ngFor="let s of staffStatus" [value]="s.code">
                       {{ s.name }}
                     </mat-option>
                   </mat-select>

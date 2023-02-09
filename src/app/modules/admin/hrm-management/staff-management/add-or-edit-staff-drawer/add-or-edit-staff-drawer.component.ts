@@ -23,21 +23,9 @@ export class AddOrEditStaffDrawerComponent
     pageSize: 999999,
   };
   genders = [
-    {
-      name: this.translocoService.translate('gender.female'),
-      value: '1',
-    },
-    {
-      name: this.translocoService.translate('gender.male'),
-      value: '2',
-    },
-    {
-      name: this.translocoService.translate('gender.other'),
-      value: '3',
-    },
   ];
   staffStatus = [
-    {
+   /* {
       name: this.translocoService.translate('staff_status.official'),
       value: 1,
     },
@@ -48,17 +36,9 @@ export class AddOrEditStaffDrawerComponent
     {
       name: this.translocoService.translate('staff_status.quit'),
       value: 3,
-    },
+    },*/
   ];
   religions = [
-    {
-      name: this.translocoService.translate('religion.yes'),
-      value: '1',
-    },
-    {
-      name: this.translocoService.translate('religion.no'),
-      value: '2',
-    },
   ];
 
   listRoleStaff: any;
@@ -167,6 +147,9 @@ export class AddOrEditStaffDrawerComponent
   ) {
     super(injector, staffService);
     this.getListRoleStaff();
+    this.staffStatus = this.getListCategories().STAFF_STATUS;
+    this.genders = this.getListCategories().genders;
+    this.religions = this.getListCategories().RELIGION;
   }
 
   ngOnInit(): void {
@@ -178,7 +161,7 @@ export class AddOrEditStaffDrawerComponent
         this.formGroup.patchValue(this.detailsData);
       });
     }
-    this.getListTeam()
+    this.getListTeam();
 
     this.translocoService.langChanges$.subscribe((activeLang) => {
       this._adapter.setLocale(activeLang);
