@@ -1,5 +1,5 @@
 export const envConfig = {
-  apiSSO: 'http://103.226.248.168:8182',
+  apiSSO: 'https://sso.lifesup.com.vn',
   clientId: 'lifesup_hrm',
   scope: 'read',
   baseUrl: window.location.origin,
