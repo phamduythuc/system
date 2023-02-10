@@ -155,7 +155,6 @@ export class AddOrEditStaffDrawerComponent
   }
 
   ngOnInit(): void {
-
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
         this.convertBase64(imageUrl);
@@ -178,6 +177,7 @@ export class AddOrEditStaffDrawerComponent
           (item) => (item.roleId = Number(item.roleId))
         );
       }
+      console.log(this.listRoleStaff);
     });
     this.staffService.getListPosition(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {

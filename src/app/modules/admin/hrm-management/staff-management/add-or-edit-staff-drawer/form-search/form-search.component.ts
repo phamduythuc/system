@@ -26,14 +26,17 @@ export class FormSearchComponent  extends BaseComponent implements OnInit {
       distinctUntilChanged()
     )
     .subscribe((res) => {
-      this.list.filter((x) => {
-        if (x.name?.toLowerCase().includes(res.toLowerCase())) {
-          x.status = 1;
-        } else {
-          x.status = 2;
-        }
-        return x;
-      });
+      if(res != null) {
+        this.list.filter((x) => {
+          if (x.name?.toLowerCase().includes(res.toLowerCase())) {
+            x.status = 1;
+          } else {
+            x.status = 2;
+          }
+          return x;
+        });
+      }
+     ;
     });
   }
 

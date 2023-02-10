@@ -131,7 +131,7 @@ export class AddOrEditContractComponent
   save() {
     const formData = new FormData();
     const data = this.formGroup.value;
-    if (data.insurance || data.termPeriod) {
+    if (data.insurance && data.termPeriod ) {
       data.insurance = data.insurance.replace(/,/g, '');
       data.termPeriod = data.termPeriod.replace(/,/g, '');
     } else {
