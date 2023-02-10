@@ -83,11 +83,11 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
     keyword: [''],
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0,
-  };
+  // paginate = {
+  //   page: 0,
+  //   size: 10,
+  //   total: 0,
+  // };
 
   panelOpenState: false;
 
@@ -117,16 +117,17 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   list_type_view: any = [
     {
+      type: 'grid',
+      name: 'setting.typeView.grid',
+    },
+    {
       type: 'list',
       name: 'setting.typeView.list',
     },
-    {
-      type: 'grid',
-      name: 'setting.typeView.grid',
-    }
+
   ];
 
-  typeView = 'list';
+  typeView = 'grid';
 
   constructor(
     injector: Injector,

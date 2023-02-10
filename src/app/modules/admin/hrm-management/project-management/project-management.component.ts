@@ -80,11 +80,11 @@ export class ProjectManagementComponent extends BaseComponent implements OnInit 
     keyword: [''],
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  // paginate = {
+  //   page: 0,
+  //   size: 10,
+  //   total: 0
+  // };
   panelOpenState: boolean = false;
 
   list_status = [];

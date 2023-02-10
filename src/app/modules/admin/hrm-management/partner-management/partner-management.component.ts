@@ -62,11 +62,11 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     // phone: ['']
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  // paginate = {
+  //   page: 0,
+  //   size: 10,
+  //   total: 0
+  // };
   partners = [];
   panelOpenState: false;
 

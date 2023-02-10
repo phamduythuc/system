@@ -34,7 +34,7 @@
                 panelClass="example-month-picker"
               ></mat-datepicker>
             </mat-form-field>
- 
+
           </div>
 
         </div>
@@ -72,15 +72,16 @@
             [rows]="this.dataTable.dataIndex || []"
             [columns]="columns"
             [paginate]="true"
-            [limit]="searchModel.pageSize"
-            [(pageIndex)]="searchModel.page"
+            [(limit)]="sizePage"
+            [(pageIndex)]="defaultPage"
             [count]="searchResult?.totalRecords"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >
+          <!-- slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1) -->
           <ng-template #rowTemplate let-row="row" let-column="column">
-            
+
             <ng-container [ngSwitch]="column.columnDef">
               <ng-container *ngSwitchDefault>{{
                 row[column.columnDef]
@@ -96,7 +97,7 @@
                       trim="blur"
                       #rateInput="ngModel"
                       [(ngModel)]="row[column.columnDef]"
-                      (ngModelChange)="change(row['staffId'])"   
+                      (ngModelChange)="change(row['staffId'])"
                       (keydown)="validateNumber($event)"
                     />
                   </mat-form-field>
@@ -121,6 +122,9 @@
           </app-data-table>
         </div>
       </div>
+
+
+
       <div class="w-full flex justify-end items-end">
         <button
           mat-raised-button
@@ -138,5 +142,5 @@
 
     </mat-card>
   </div>
-  
+
 </ng-container>

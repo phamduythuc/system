@@ -1,18 +1,21 @@
-import {Component, Injector, OnInit} from '@angular/core';
-import {IColumn} from '@layout/common/data-table/data-table.component';
-import {BaseComponent} from '@core/base.component';
-import {PositionService} from '@shared/services/position.service';
-import {AddOrEditPositionComponent} from './compoment/add-or-edit-position/add-or-edit-position.component';
-import {CommonUtilsService} from '@shared/common-utils.service';
-import {DetailPositionComponent} from './compoment/detail-position/detail-position.component';
-import {Validators} from '@angular/forms';
+import { Component, Injector, OnInit } from '@angular/core';
+import { IColumn } from '@layout/common/data-table/data-table.component';
+import { BaseComponent } from '@core/base.component';
+import { PositionService } from '@shared/services/position.service';
+import { AddOrEditPositionComponent } from './compoment/add-or-edit-position/add-or-edit-position.component';
+import { CommonUtilsService } from '@shared/common-utils.service';
+import { DetailPositionComponent } from './compoment/detail-position/detail-position.component';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-position-management',
   templateUrl: './position-management.component.html',
-  styleUrls: ['./position-management.component.scss']
+  styleUrls: ['./position-management.component.scss'],
 })
-export class PositionManagementComponent extends BaseComponent implements OnInit {
+export class PositionManagementComponent
+  extends BaseComponent
+  implements OnInit
+{
   _permissionCodeName = 'DSVT';
 
   columns: IColumn[] = [
@@ -33,12 +36,14 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.createdDate),
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+      cellRenderer: (element: any) =>
+        CommonUtilsService.dateToString(element.modifiedDate),
     },
     {
       columnDef: 'createdBy',
@@ -48,31 +53,28 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
       columnDef: 'action',
       header: 'common.actions',
       actions: ['view', 'edit', 'delete'],
-    }
+    },
   ];
   formSearch = this.fb.group({
-    keyword: ['',Validators.maxLength(100)],
+    keyword: ['', Validators.maxLength(100)],
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  // paginate = {
+  //   page: 0,
+  //   size: 10,
+  //   total: 0
+  // };
   positions = [];
-  panelOpenState: boolean = false;
+  // panelOpenState: boolean = false;
 
-  list_status = []
+  list_status = [];
 
   typeStatus = '1';
 
-
-  constructor(injector: Injector,
-              private positionService: PositionService) {
+  constructor(injector: Injector, private positionService: PositionService) {
     super(injector, positionService);
 
     this.list_status = JSON.parse(localStorage.getItem('listType')).LIST_STATUS;
-
   }
 
   ngOnInit(): void {
@@ -80,17 +82,21 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
     this.doSearch();
   }
 
-  filterStatus(data){
-    if(data){
+  filterStatus(data) {
+    if (data) {
       this.searchModel.status = Number(data);
-    }else{
-    this.searchModel.status = '';
+    } else {
+      this.searchModel.status = '';
     }
     this.doSearch();
   }
 
   doSearch() {
-    this.searchModel = {...this.searchModel,page: 0, ...this.formSearch.value};
+    this.searchModel = {
+      ...this.searchModel,
+      page: 0,
+      ...this.formSearch.value,
+    };
     this.processSearch(this.searchModel);
   }
 
@@ -108,29 +114,32 @@ export class PositionManagementComponent extends BaseComponent implements OnInit
 
   showDetail(id) {
     this.showDialog(DetailPositionComponent, {
-        data: {
-          id
-        },
-        width: '60vw',
-        // height: '45vh',
-        disableClose: true
-      }
-    );
-  }
-
-  addOrEditPosition(id?: any): void {
-    const ref = this.showDialog(AddOrEditPositionComponent, {
       data: {
         id,
       },
       width: '60vw',
       // height: '45vh',
-      disableClose: true
-    }, (value) => {
-      if (value) {
-        this.doSearch();
-      }
+      disableClose: true,
     });
+  }
+
+  addOrEditPosition(id?: any): void {
+    const ref = this.showDialog(
+      AddOrEditPositionComponent,
+      {
+        data: {
+          id,
+        },
+        width: '60vw',
+        // height: '45vh',
+        disableClose: true,
+      },
+      (value) => {
+        if (value) {
+          this.doSearch();
+        }
+      }
+    );
     // ref.onclose()
   }
 }

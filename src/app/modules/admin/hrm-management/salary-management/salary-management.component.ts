@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input, Output, EventEmitter } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base.component';
 import { IColumn } from '@layout/common/data-table/data-table.component';
@@ -8,12 +8,20 @@ import moment, { Moment } from 'moment';
 
 import { DateAdapter } from '@angular/material/core';
 
+
 @Component({
   selector: 'app-salary-management',
   templateUrl: './salary-management.component.html',
   styleUrls: ['./salary-management.component.scss'],
 })
 export class SalaryManagementComponent extends BaseComponent implements OnInit {
+
+  @Input('pageIndex') defaultPage: number;
+  @Output() setPageNum = new EventEmitter<number>();
+
+  @Input('limit') sizePage: number;
+  @Output() setPageSz = new EventEmitter<number>();
+
   _permissionCodeName = 'DSNV';
   value: any;
   columns: IColumn[] = [
@@ -99,12 +107,12 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       false
     );
     this.paginate.keyword = this.startDate.value.keyword;
-    this.paginate.page = e.pageIndex;
-    this.paginate.pageSize = e.pageSize;
+    // this.paginate.page = e.pageIndex;
+    this.defaultPage = e.pageIndex;
+    this.sizePage = e.pageSize;
 
     this.dataTable.dataFull = this.chunkArray(this.searchResult.data);
-    this.dataTable.dataIndex = this.dataTable.dataFull[this.paginate.page];
-
+    this.dataTable.dataIndex = this.dataTable.dataFull[this.defaultPage];
   }
 
   doSearch() {
@@ -142,7 +150,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   }
 
   view() {
-    let  params = {
+    const  params = {
         keyword: this.startDate.value.keyword,
         month: CommonUtilsService.dateToString(
           this.startDate.value.startMonth,
@@ -152,16 +160,21 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
         pageSize: 10000000,
         status: 1,
       };
+      this.defaultPage = 0;
+      this.sizePage = 10;
+
+      this.setPageNum.emit(this.defaultPage);
+      this.setPageSz.emit(this.sizePage);
 
     this.SalaryService.getViewSalarybyMonth(params).subscribe((res) => {
       if (res.code === '00') {
+
         this.searchResult.totalRecords = res.totalRecords;
         // const VND = new Intl.NumberFormat('vi-VN', {
         //   style: 'currency',
         //   currency: 'VND',
         // });
-        let convertData = res.data.map((obj) => {
-          return {
+        const convertData = res.data.map((obj) => ({
             fullName: obj.fullName,
             // salaryActual: parseInt(obj.salaryActual),
             salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
@@ -169,13 +182,11 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
             revenueMonth: obj.revenueMonth,
             staffCode: obj.staffCode,
             staffId: obj.staffId,
-          };
-        });
+          }));
         this.searchResult.data = convertData;
-
         this.dataTable.dataFull = this.chunkArray(this.searchResult.data);
-        this.dataTable.dataIndex = this.dataTable.dataFull[this.paginate.page];
-        console.log(this.dataTable);
+        this.dataTable.dataIndex = this.dataTable.dataFull[this.defaultPage];
+
       }
     });
   }
@@ -184,7 +195,7 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     return arr.length
       ? arr.reduce(
           (t, v) => (
-            t[t.length - 1].length === this.paginate.pageSize
+            t[t.length - 1].length === this.sizePage
               ? t.push([v])
               : t[t.length - 1].push(v),
             t
