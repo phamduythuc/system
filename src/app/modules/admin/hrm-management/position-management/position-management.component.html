@@ -56,15 +56,16 @@
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table
             [roleName]="_permissionCodeName"
-            [rows]="searchResult.data //| slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1)"
+            [rows]="searchResult.data || []"
             [columns]="columns"
             [paginate]="true"
             [(pageIndex)]="searchModel.page"
-            [limit]="paginate.size"
-            [count]="searchResult.totalRecords"
+            [limit]="searchModel.pageSize"
+            [count]="searchResult?.totalRecords"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">
+
             <!-- <ng-template #rowTemplate let-row='row' let-column="column">
               <ng-container [ngSwitch]="column.columnDef"
               >

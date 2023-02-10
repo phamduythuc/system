@@ -53,11 +53,11 @@ export class StaffLevelManagementComponent extends BaseComponent implements OnIn
     keyword: [''],
   });
 
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  // paginate = {
+  //   page: 0,
+  //   size: 10,
+  //   total: 0
+  // };
 
   list_status = []
 

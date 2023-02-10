@@ -74,7 +74,8 @@
             [columns]="columns"
             [paginate]="true"
             [limit]="searchModel.pageSize"
-            [count]="searchResult.totalRecords"
+            [(pageIndex)]="searchModel.page"
+            [count]="searchResult?.totalRecords"
             [typeView]="typeView"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">
