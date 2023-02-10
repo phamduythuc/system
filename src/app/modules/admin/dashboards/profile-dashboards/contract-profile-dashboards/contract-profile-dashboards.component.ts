@@ -67,12 +67,7 @@ export class ContractProfileDashboardsComponent
       flex: 0.5,
     },
   ];
-
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  
   constructor(
     injector: Injector,
     public achievementService: AchievementService,
