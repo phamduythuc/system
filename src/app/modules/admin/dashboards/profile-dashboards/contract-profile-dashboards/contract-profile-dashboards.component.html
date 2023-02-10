@@ -11,7 +11,7 @@
       [columns]="columns"
       [paginate]="true"
       [limit]="searchModel.pageSize"
-      [count]="searchResult?.totalRecords"
+      [count]="count"
       [rowTemplate]="rowTemplate"
     >
     <ng-template #rowTemplate let-row="row" let-column="column">
