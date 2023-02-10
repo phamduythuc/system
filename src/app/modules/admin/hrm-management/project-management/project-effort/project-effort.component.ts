@@ -129,7 +129,7 @@ export class ProjectEffortComponent extends BaseComponent implements OnInit {
     this.formGroup = this.fb.group({
       id: [''],
       startDate: [month, Validators.required],
-      estimate: ['', [Validators.pattern('^\\d+$')]],
+      estimate: ['', Validators.required],
       unitPrice: [''],
       progress: [''],
       effort: [''] /* ???? Ghi nhan NL (NN) */,
