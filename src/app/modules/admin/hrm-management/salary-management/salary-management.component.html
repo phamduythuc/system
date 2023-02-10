@@ -72,13 +72,14 @@
             [rows]="this.dataTable.dataIndex || []"
             [columns]="columns"
             [paginate]="true"
-            [limit]="searchModel.pageSize"
+            [(limit)]="sizePage"
             [(pageIndex)]="defaultPage"
             [count]="searchResult?.totalRecords"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >
+          <!-- slice: paginate.size * paginate.page : paginate.size * (paginate.page + 1) -->
           <ng-template #rowTemplate let-row="row" let-column="column">
 
             <ng-container [ngSwitch]="column.columnDef">
