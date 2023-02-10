@@ -15,6 +15,8 @@ import { AchievementService } from '@shared/services/achievement.service';
 import { DashboardsProfileService } from '@shared/services/dashboards-profile.service';
 import { EffortService } from '@shared/services/effort.service';
 import { StaffService } from '@shared/services/staff.service';
+import {AccountService} from "@core/auth/account.service";
+import {AuthoritiesConstant} from "../../../../../authorities.constant";
 
 @Component({
   selector: 'app-detail-profile-dashboards',
@@ -127,7 +129,7 @@ export class DetailProfileDashboardsComponent
     private effortService: EffortService,
     private staffService: StaffService,
     private achievementService: AchievementService,
-    private DashboardsProfileService:DashboardsProfileService
+    private accountService: AccountService
   ) {
     super(injector, staffService);
     this.genders = this.getListCategories().genders;
@@ -150,7 +152,9 @@ export class DetailProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    this.getListRoleStaff();
+    if (this.accountService.hasAnyAuthority(AuthoritiesConstant.DSNV_READ)) {
+      this.getListRoleStaff();
+    }
   }
 
   getListRoleStaff(): void {
