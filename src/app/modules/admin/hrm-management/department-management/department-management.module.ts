@@ -8,6 +8,7 @@ import {ErrorMessageModule} from '../../../../shared/components/error-message/er
 import { AddOrEditDepartmentComponent } from './add-or-edit-department/add-or-edit-department.component';
 import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import { DetailsDepartmentComponent } from './details-department/details-department.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DetailsDepartmentComponent } from './details-department/details-departm
     FormsModule,
     ErrorMessageModule,
     ReactiveFormsModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    MatTooltipModule
   ]
 })
 export class DepartmentManagementModule { }

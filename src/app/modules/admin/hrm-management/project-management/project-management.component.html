@@ -41,7 +41,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            
+
           </div>
         </div>
         <div class="mb-2">
@@ -59,7 +59,7 @@
             [rows]="searchResult.data||[]"
             [columns]="columns"
             [(pageIndex)]="pageIndex"
-            [limit]="paginate.size"
+            [limit]="searchModel.pageSize"
             [count]="searchResult.totalRecords"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)">

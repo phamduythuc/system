@@ -47,7 +47,7 @@
                 (MM)</label>
             </div>
             <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
-              <input id="estimate" [formControlName]="'estimate'" type="text" matInput onlyNumber
+              <input id="estimate" [formControlName]="'estimate'" type="text" matInput decimalNumber
                 [placeholder]="('effort.effort_estimate' | transloco) + ' (MM)'" />
             </mat-form-field>
             <app-error-message [control]="formGroup.get('estimate')" [name]="'effort.effort_estimate' | transloco"
