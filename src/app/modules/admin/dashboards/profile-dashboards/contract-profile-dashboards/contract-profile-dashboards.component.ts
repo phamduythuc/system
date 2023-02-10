@@ -19,7 +19,16 @@ export class ContractProfileDashboardsComponent
   @Input() data: any;
 
   searchModel: any;
+  searchResult : any;
+  count: any;
   _permissionCodeName = 'DSNV';
+  paginate: any = {
+    keyword: '',
+    month: '',
+    page: 0,
+    pageSize: 10,
+    status: 1,
+  };
 
   columns: IColumn[] = [
     {
@@ -58,12 +67,7 @@ export class ContractProfileDashboardsComponent
       flex: 0.5,
     },
   ];
-
-  paginate = {
-    page: 0,
-    size: 10,
-    total: 0
-  };
+  
   constructor(
     injector: Injector,
     public achievementService: AchievementService,
@@ -73,16 +77,17 @@ export class ContractProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    this.searchModel = { staffId: this.data };
+    this.searchModel = { 
+      staffId: this.data, 
+      page: 0,
+      pageSize: 10,
+      status:1 
+    };
     this.doSearch();
   }
 
   mapData(data: any) {
-    // const VND = new Intl.NumberFormat('vi-VN', {
-    //   style: 'currency',
-    //   currency: 'VND',
-    // });
-
+    this.count = data.length;
     data.map((x) => {
       x.type = this.getTypeContract(x.type);
       x.effDate = CommonUtilsService.dateToString(x.effDate, false);
@@ -101,6 +106,7 @@ export class ContractProfileDashboardsComponent
       this.ContractService.getListContractByToken().subscribe(res=>{
         console.log(res);
         this.searchResult.data = this.mapData(res.data);
+        console.log(this.searchResult);
       })
     }
 

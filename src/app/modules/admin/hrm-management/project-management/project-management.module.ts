@@ -15,6 +15,9 @@ import { NumberOnlyDirective } from '@shared/directives/number-only.directive';
 import { DecimalNumberDirective } from '@shared/directives/decimal-number.directive';
 import { AlphabetOnlyDirective } from '@shared/directives/alphabet-only.directive';
 import { MinMaxDirective } from '@shared/directives/min-max.directive';
+// import { FormSearchComponent } from '../staff-management/add-or-edit-staff/form-search/form-search.component';
+import { StaffManagementModule } from '../staff-management/staff-management.module';
+
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { MinMaxDirective } from '@shared/directives/min-max.directive';
     NumberOnlyDirective,
     DecimalNumberDirective,
     AlphabetOnlyDirective,
-    MinMaxDirective
+    MinMaxDirective,
+    // FormSearchComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { MinMaxDirective } from '@shared/directives/min-max.directive';
     NgxMatSelectSearchModule,
     MatExpansionModule,
     HttpClientModule,
+    // StaffManagementModule
+
   ],
   providers: [ CurrencyPipe, DecimalPipe ]
 

@@ -10,8 +10,8 @@
       [rows]="searchResult?.data"
       [columns]="columns"
       [paginate]="true"
-      [limit]="paginate.size"
-      [count]="searchResult?.totalRecords"
+      [limit]="searchModel.pageSize"
+      [count]="count"
       [rowTemplate]="rowTemplate"
     >
     <ng-template #rowTemplate let-row="row" let-column="column">

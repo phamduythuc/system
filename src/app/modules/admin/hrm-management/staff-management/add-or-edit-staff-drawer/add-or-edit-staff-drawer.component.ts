@@ -5,6 +5,7 @@ import { StaffService } from '@shared/services/staff.service';
 import { AchievementService } from '@shared/services/achievement.service';
 import { DateAdapter } from '@angular/material/core';
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
+import { distinctUntilChanged, map, filter } from 'rxjs';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -136,7 +137,8 @@ export class AddOrEditStaffDrawerComponent
     salary: [],
     file: [],
     teamId: [null],
-    isWorker: [false]
+    isWorker: [false],
+    positionIdFilter: [null],
   });
 
   constructor(
@@ -153,11 +155,9 @@ export class AddOrEditStaffDrawerComponent
   }
 
   ngOnInit(): void {
-
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
         this.convertBase64(imageUrl);
-        // alert("aaa")
         this.formGroup.patchValue(this.detailsData);
       });
     }
@@ -177,6 +177,7 @@ export class AddOrEditStaffDrawerComponent
           (item) => (item.roleId = Number(item.roleId))
         );
       }
+      console.log(this.listRoleStaff);
     });
     this.staffService.getListPosition(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {
