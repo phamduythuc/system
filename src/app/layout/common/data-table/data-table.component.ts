@@ -149,8 +149,6 @@ export class DataTableComponent
   }
 
   getRowIndex(row: any): any {
-    console.log(this.limit);
-
     return this.pageIndex * this.limit + this.rows.indexOf(row);
   }
 
