@@ -1,16 +1,16 @@
 <ng-container *transloco="let t">
   <div class="w-full h-full px-4">
     <mat-card class="bg-card h-full">
-      <div class="header border-b flex justify-between">
-        <div class="text-2xl font-bold card-title mb-3 capitalize flex justify-between gap-5">
-          <div class="flex justify-between gap-3 items-end">
-            <form class="content overflow-hidden flex justify-between gap-3" [formGroup]="formSearch">
-              <div class="field flex-col w-full">
-                <div class="input min-w-140">
+      <div class="header border-b flex justify-between md: flex-row lg: flex-row xl: flex-wrap-reverse sm: flex-wrap-reverse">
+        <div class="text-2xl font-bold card-title mb-3 capitalize justify-between gap-5">
+          <div class="flex justify-between gap-3 items-end md: flex-row lg: flex-row sm: flex-wrap"> <!---sm:flex-wrap flex-wrap-reverse --->
+            <form class="content overflow-hidden flex justify-between  gap-3 " [formGroup]="formSearch">
+              <div class="field flex-col w-full ">
+                <div class="input lg:min-w-140 sm: min-w-50 sls">
                   <!-- <label class=" font-medium">{{t("common.keyword")}}</label> -->
                   <mat-form-field
                     class="fuse-mat-no-subscript w-full  sm:mt-0 bg-card">
-                    <input class="w-full"
+                    <input class="w-full "
                            [placeholder]="('common.keyword' | transloco)+' ...'"
                            formControlName="keyword"
                            matInput trim='blur'>
@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <div class="content mt-4 w-full">
+      <div class="content mt-4 w-full overflow-auto sm:overflow-scroll">
         <div class="data-table w-full mt-4 h-3/5">
           <app-data-table
             [roleName]="_permissionCodeName"
