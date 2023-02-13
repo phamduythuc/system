@@ -14,7 +14,7 @@
 
     <div class="field flex mb-4">
       <mat-label class="w-1/6 p-2 font-semibold">{{"common.name_specialize"|transloco}}</mat-label>
-      <div class="flex justify-center items-center border b-radius p-2 w-5/6">
+      <div class="flex justify-center items-center border b-radius p-2 w-5/6 bg-card">
         <div class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
           {{detailsData?.name}}
         </div>
@@ -23,7 +23,7 @@
 
     <div class="field flex mb-4">
       <mat-label class="w-1/6 p-2 font-semibold">{{"common.description"|transloco}}</mat-label>
-      <div class="flex justify-center items-center border b-radius p-2 w-5/6">
+      <div class="flex justify-center items-center border b-radius p-2 w-5/6 bg-card">
         <div
           class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
           {{detailsData.description ? detailsData.description : ''}}
@@ -34,7 +34,7 @@
     <div class="field flex mb-4">
       <div class="w-1/2 flex">
         <mat-label class="w-1/3 p-2 font-semibold">{{"common.createdBy"|transloco}}</mat-label>
-        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2 bg-card">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
             {{detailsData.createdBy ? detailsData.createdBy : ''}}
@@ -43,7 +43,7 @@
       </div>
       <div class="w-1/2 flex">
         <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{"common.createdDate"|transloco}}</mat-label>
-        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3 bg-card">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
             {{(detailsData.createdDate ? detailsData.createdDate : '')|date:'dd/MM/yyyy'}}
@@ -54,7 +54,7 @@
     <div class="field flex mb-4">
       <div class="w-1/2 flex">
         <mat-label class="w-1/3 p-2 font-semibold">{{"common.modifiedBy"|transloco}}</mat-label>
-        <div class="w-2/3 flex justify-center items-center border b-radius p-2">
+        <div class="w-2/3 flex justify-center items-center border b-radius p-2 bg-card">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
             {{detailsData.modifiedBy ? detailsData.modifiedBy : ''}}
@@ -63,7 +63,7 @@
       </div>
       <div class="w-1/2 flex">
         <mat-label class="w-1/3 ml-4 p-2 font-semibold">{{"common.modifiedDate"|transloco}}</mat-label>
-        <div class="flex justify-center items-center border b-radius p-2 w-2/3">
+        <div class="flex justify-center items-center border b-radius p-2 w-2/3 bg-card">
           <div
             class="fuse-mat-no-subscript w-full mt-4 sm:mt-0 bg-card ">
             {{(detailsData.modifiedDate ? detailsData.modifiedDate : '')|date:'dd/MM/yyyy'}}
