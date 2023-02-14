@@ -114,7 +114,8 @@
     "homeTown": "Home town",
     "educationLevel": "Education Level",
     "salary": "Salary",
-    "noData": "No data"
+    "noData": "No data",
+    "upload": "Upload"
   },
   "setting": {
     "title":"Setting",
