@@ -1,36 +1,57 @@
 <ng-container *transloco="let t">
-    <div class="w-full">
-        <div class="header border-b flex justify-between items-center pb-3">
-            <div class="text-2xl font-bold card-title">
-                <!-- {{dialogId?t("hrm-management.editHeader"):t("hrm-management.addHeader")}} -->
-                {{t("hrm-management.editHeader")}}
-            </div>
-            <div>
-                <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
-                    <mat-icon class="icon-size-5" svgIcon="heroicons_outline:x" title="Close"></mat-icon>
-                </button>
-            </div>
-        </div>
-        <div class="w-full mt-6">
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label class="capitalize font-bold">{{"common.leader"|transloco}}</mat-label>
-                <mat-select [(value)]="leadId" (selectionChange)="changeLeader($event.value)">
-                    <mat-option *ngFor="let member of listMembers" [value]="member.staffId">{{member.staffName}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-    </div>
-
-    <div class="footer mt-6 flex justify-end">
-        <button mat-raised-button color="primary" class="mr-3" (click)="save()">
-            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:check"></mat-icon>
-            <span>{{t('button.save')}}</span>
+  <div class="w-full">
+    <div class="header border-b flex justify-between items-center pb-3">
+      <div class="text-2xl font-bold card-title">
+        <!-- {{dialogId?t("hrm-management.editHeader"):t("hrm-management.addHeader")}} -->
+        {{ t("hrm-management.editHeader") }}
+      </div>
+      <div>
+        <button
+          mat-icon-button
+          class="hover:bg-slate-200"
+          (click)="dialogRef.close()"
+        >
+          <mat-icon
+            class="icon-size-5"
+            svgIcon="heroicons_outline:x"
+            title="Close"
+          ></mat-icon>
         </button>
-        <button mat-raised-button (click)="dialogRef.close()">
-            <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
-            <span>{{t('button.cancel')}}</span>
-        </button>
+      </div>
     </div>
+    <div class="w-full mt-6">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label class="capitalize font-bold">{{
+          "common.leader" | transloco
+        }}</mat-label>
+        <mat-select
+          [(value)]="leadId"
+          (selectionChange)="changeLeader($event.value)"
+        >
+          <mat-option
+            *ngFor="let member of listMembers"
+            [value]="member.staffId"
+            >{{ member.staffName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
+  <div class="footer mt-6 flex justify-end">
+    <button mat-raised-button class="mr-3" (click)="dialogRef.close()">
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:x"
+      ></mat-icon>
+      <span>{{ t("button.cancel") }}</span>
+    </button>
+    <button mat-raised-button color="primary" (click)="save()">
+      <mat-icon
+        class="icon-size-5 mr-2"
+        svgIcon="heroicons_outline:check"
+      ></mat-icon>
+      <span>{{ t("button.save") }}</span>
+    </button>
+  </div>
 </ng-container>
