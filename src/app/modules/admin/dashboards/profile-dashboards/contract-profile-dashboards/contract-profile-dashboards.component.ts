@@ -22,6 +22,7 @@ export class ContractProfileDashboardsComponent
   searchResult : any;
   count: any;
   _permissionCodeName = 'DSNV';
+  
   paginate: any = {
     keyword: '',
     month: '',
@@ -67,7 +68,7 @@ export class ContractProfileDashboardsComponent
       flex: 0.5,
     },
   ];
-  
+
   constructor(
     injector: Injector,
     public achievementService: AchievementService,
