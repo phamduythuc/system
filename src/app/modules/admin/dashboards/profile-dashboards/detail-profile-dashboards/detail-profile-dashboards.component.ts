@@ -109,7 +109,10 @@ export class DetailProfileDashboardsComponent
     salary: [''],
     file: [],
     teamNames: [],
-    permanentResidence: []
+    permanentResidence: [],
+    genderName: [],
+    religionName: [],
+    staffStatusName: [],
   });
 
   option = {
