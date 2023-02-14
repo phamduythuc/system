@@ -152,9 +152,9 @@ export class DetailProfileDashboardsComponent
   }
 
   ngOnInit(): void {
-    if (this.accountService.hasAnyAuthority(AuthoritiesConstant.DSNV_READ)) {
-      this.getListRoleStaff();
-    }
+    // if (this.accountService.hasAnyAuthority(AuthoritiesConstant.DSNV_READ)) {
+    //   this.getListRoleStaff();
+    // }
   }
 
   getListRoleStaff(): void {
@@ -175,7 +175,7 @@ export class DetailProfileDashboardsComponent
       res.data.map((x: any) => {
         if (x.id === this.data.positionId) {
           this.data.positionId = x.name;
-          this.data.positionJob = x.name
+          this.data.positionJob = x.name;
         }
         return x;
       });
