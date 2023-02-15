@@ -64,8 +64,8 @@
                 <span>{{'hrm-management.salary.dowloadFileSample' |transloco}}</span>
             </button>
             <button mat-raised-button color="primary" class="mr-3" style="margin-left: 12px;"
-                [disabled]="formGroup.invalid||(fileUpload.value=='')"
-                (click)="formGroup.valid && save(formGroup.value)">
+                [disabled]="fileUpload.value ===''"
+                (click)="save()">
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:arrow-circle-up"></mat-icon>
                 <span>{{'hrm-management.salary.uploadFiles' |transloco}}</span>
             </button>

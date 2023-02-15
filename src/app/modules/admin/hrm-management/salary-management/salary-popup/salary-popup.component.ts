@@ -14,7 +14,7 @@ export class SalaryPopupComponent extends BaseComponent implements OnInit {
   visibleBtnUpload: boolean = true;
   formGroup = this.fb.group({
     timeKeepImport: [],
-    file: [],
+    file: [''],
   });
   constructor( public dialogRef: MatDialogRef<SalaryPopupComponent>,
     injector: Injector,
@@ -27,25 +27,26 @@ export class SalaryPopupComponent extends BaseComponent implements OnInit {
   dowloadFile() {
     alert('Chưa có file');
   }
+  file: any;
   save() {
     const formData = new FormData();
-    const data = this.formGroup.value;
-    this.handleCoverTimeToString(data);
-      formData.append('file', this.fileUpload.value || null);
-      formData.append(
-        'data',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
+    const data = {
+      month: CommonUtilsService.dateToString(this.data.month)};
+    // const data = CommonUtilsService.dateToString(this.data.month);
+    // const dataTitle = this.formGroup.value;
+    formData.append('file', this.file);
+    formData.append(
+      'month',
+      new Blob([JSON.stringify(data)], { type: 'application/json' })
+    );
+      this.salaryService.saveImport(formData).subscribe(
+        data1=> {
+          console.log(data1);
+          alert('ok');
+        },error => {
+          console.log(error);
+        }
       );
-    console.log(formData);
-    const  params = {
-      month: CommonUtilsService.dateToString(
-        this.data.month,
-        false
-      ),
-      file : formData,
-    };
-    console.log(params);
-      this.salaryService.saveImport(params).subscribe();
   }
   fileUpload: any = {
     name: '',
@@ -53,15 +54,15 @@ export class SalaryPopupComponent extends BaseComponent implements OnInit {
     file: '',
   };
   uploadFile(event: any): void {
-    const reader = new FileReader(); // HTML5 FileReader API
-    const file = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(file);
-      this.formGroup.patchValue({ file });
-      reader.onload = () => {
-        this.fileUpload.file = file;
-        this.documentName = file.name;
-      };
-    }
+    // const reader = new FileReader(); // HTML5 FileReader API
+    this.file = event.target.files[0];
+    this.fileUpload.file = this.file;
+    this.documentName = this.file.name;
+    // this.formGroup.patchValue({ file });
+    // reader.onload = () => {
+    // this.fileUpload.file = this.file;
+    // this.documentName = this.file.name;
+    //   console.log(this.documentName)
+    // };
   }
 }
