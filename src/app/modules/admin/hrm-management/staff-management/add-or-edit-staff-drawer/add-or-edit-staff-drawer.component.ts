@@ -5,7 +5,6 @@ import { StaffService } from '@shared/services/staff.service';
 import { AchievementService } from '@shared/services/achievement.service';
 import { DateAdapter } from '@angular/material/core';
 import { datePickerValidator } from '@shared/validation/date-picker.validation';
-import { distinctUntilChanged, map, filter } from 'rxjs';
 
 @Component({
   selector: 'app-add-or-edit-staff-drawer',
@@ -148,7 +147,6 @@ export class AddOrEditStaffDrawerComponent
   ) {
     super(injector, staffService);
     this.getListRoleStaff();
-    this.staffStatus = this.getListCategories().STAFF_STATUS;
     this.genders = this.getListCategories().genders;
   }
 
@@ -200,14 +198,18 @@ export class AddOrEditStaffDrawerComponent
     this.staffService.getStaff('religion').subscribe(
       res => {
         if(res.code === '00') {
-          this.religion = res.data;
+          const codeRevert = res.data.map(i => ({code: Number(i.code), name: i.name}));
+          this.religion = codeRevert;
         }
       }
     );
     this.staffService.getStaff('staff_status').subscribe(
       res => {
         if(res.code === '00') {
-          this.staffStatus = res.data;
+          if(res.code === '00') {
+            const codeRevert = res.data.map(i => ({code: Number(i.code), name: i.name}));
+            this.staffStatus = codeRevert;
+          }
         }
       }
     );
@@ -285,7 +287,7 @@ export class AddOrEditStaffDrawerComponent
       status: 1,
       pageSize: 9999999,
     }).subscribe(res=>{
-      this.listTeam = res.data
+      this.listTeam = res.data;
 
       this.formGroup.patchValue(this.formGroup.value);
     });
