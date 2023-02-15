@@ -34,7 +34,13 @@ export class AddOrEditDepartmentComponent
     if (this.dialogId) {
       this.getDetails(this.dialogId);
     }
-    this.departments = dialogData?.departments;
+    // this.departments = dialogData?.departments;
+    this.departmentService.getAllDepartment().subscribe(
+      res => {
+        this.departments = res.data;
+        this.departments = this.departments.filter(el => el.status === 1);
+      }
+    );
   }
 
   ngOnInit(): void {
