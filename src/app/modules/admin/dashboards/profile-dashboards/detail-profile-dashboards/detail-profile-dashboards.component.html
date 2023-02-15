@@ -20,15 +20,34 @@
                 accept=".png, .jpg, .jpeg, .jfif"
                 (change)="uploadFile($event)"
               /> -->
-              <label
+
+              <ng-container *ngIf="!imageUrl; else elseBlock">
+                <label
+                for="avatar"
+                class="flex justify-center items-center w-full h-full"
+              >
+              <img
+                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full object-cover border border-solid"
+                  src="../../../../../../assets/images/avatars/noImgPerson.jpg"
+                />
+                <!-- <img
+                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full object-cover border border-solid"
+
+                /> -->
+              </label>
+              </ng-container>
+              <ng-template #elseBlock>
+                <label
                 for="avatar"
                 class="flex justify-center items-center w-full h-full"
               >
                 <img
-                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full object-cover"
+                  class="xl:h-72 xl:w-72 md:w-52 md:h-52 bg-contain bg-no-repeat bg-fixed bg-center rounded-full object-cover border border-solid"
                   [src]="imageUrl"
+
                 />
               </label>
+              </ng-template>
             </div>
 
             <div class="w-2/3 ml-2">
@@ -51,7 +70,7 @@
                         {{ t("common.gender") }}
                         <!--                        Giới tính / Gender-->
                       </mat-label>
-                      <input formControlName="gender" matInput readonly />
+                      <input formControlName="genderName" matInput readonly />
                     </mat-form-field>
                   </div>
                 </div>
@@ -104,7 +123,7 @@
                         >{{ t("common.religion") }}
                         <!--                        Tôn giáo / Religion-->
                       </mat-label>
-                      <input formControlName="religion" matInput readonly />
+                      <input formControlName="religionName" matInput readonly />
                     </mat-form-field>
                   </div>
                 </div>
@@ -254,7 +273,7 @@
                     >{{ t("common.staffStatus") }}
                     <!--                        Trạng thái / Staff Status-->
                   </mat-label>
-                  <input formControlName="staffStatus" matInput readonly />
+                  <input formControlName="staffStatusName" matInput readonly />
                 </mat-form-field>
                 <app-error-message
                   [control]="formGroup.get('staffStatus')"
@@ -400,7 +419,7 @@
                   <mat-label
                     >{{ t("setting.groupRole") }}
                   </mat-label>
-                  <input formControlName="roleName" matInput readonly />
+                  <input formControlName="role" matInput readonly />
                 </mat-form-field>
               </div>
             </div>

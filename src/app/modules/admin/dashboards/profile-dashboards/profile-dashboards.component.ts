@@ -17,27 +17,19 @@ export class ProfileDashboardsComponent extends BaseComponent implements OnInit 
   listTab: any = [
     {
       id: 1,
-      name: this.translocoService.translate(
-        'dashboard.profile.tab.detail.title'
-      ),
+      name: 'dashboard.profile.tab.detail.title'
     },
     {
       id: 2,
-      name: this.translocoService.translate(
-        'dashboard.profile.tab.contract.title'
-      ),
+      name: 'dashboard.profile.tab.contract.title'
     },
     {
       id: 3,
-      name: this.translocoService.translate(
-        'dashboard.profile.tab.sprint.title'
-      ),
+      name:'dashboard.profile.tab.sprint.title'
     },
     {
       id: 4,
-      name: this.translocoService.translate(
-        'dashboard.profile.tab.chart.title'
-      ),
+      name: 'dashboard.profile.tab.chart.title'
     },
   ];
 

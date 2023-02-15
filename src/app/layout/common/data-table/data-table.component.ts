@@ -79,7 +79,7 @@ export class DataTableComponent
     },
     {
       id: 'configEffort',
-      label: this.transloco.translate('Giai đoạn'),
+      label: this.transloco.translate('effort.spring'),
       icon: 'heroicons_outline:plus-circle',
       color: 'green',
       role: 'CREATE',
