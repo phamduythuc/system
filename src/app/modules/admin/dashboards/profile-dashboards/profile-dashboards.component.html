@@ -15,7 +15,7 @@
     <!-- <mat-expansion-panel *ngFor="let item of listTab; let i = index" [expanded]="i"> -->
     <mat-expansion-panel *ngFor="let item of listTab; first as isFirst" [expanded]="isFirst">
 
-      
+
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{item.name}}
@@ -28,7 +28,7 @@
         <app-sprint-profile-dashboards [staffId]="this.dialogId" (callback)="handleData($event, item.id)" *ngIf="item.id == '3'"></app-sprint-profile-dashboards>
         <app-chart-profile-dashboards  [staffId]="this.dialogId" (callback)="handleData($event, item.id)" *ngIf="item.id == '4'"></app-chart-profile-dashboards>
       </ng-template>
-      
+
 
       </mat-expansion-panel>
   </mat-accordion>

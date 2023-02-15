@@ -191,7 +191,7 @@
                       </mat-label>
                       <mat-select formControlName="religion">
                         <mat-option
-                          *ngFor="let r of religions"
+                          *ngFor="let r of religion"
                           [value]="r.code"
                         >
                           {{ r.name }}
@@ -465,9 +465,9 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field> -->
-                <app-form-search [formSearch]="formGroup" 
-                [ctlName]="formGroup.get('positionId')" 
-                [list] = "listPositions"  
+                <app-form-search [formSearch]="formGroup"
+                [ctlName]="formGroup.get('positionId')"
+                [list] = "listPositions"
                 [lableName]=" 'common.position' | transloco" >
               </app-form-search>
                 <!-- <app-error-message
@@ -482,7 +482,7 @@
                 <!-- <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
                     >{{ t("common.department") }}
-                    
+
                   </mat-label>
                   <mat-select formControlName="departmentId">
                     <mat-option
@@ -497,8 +497,8 @@
                   [name]="'common.department' | transloco"
                 ></app-error-message> -->
                 <app-form-search [formSearch]="formGroup"
-                [ctlName]="formGroup.get('departmentId')" 
-                [list] = "listDepartment"  
+                [ctlName]="formGroup.get('departmentId')"
+                [list] = "listDepartment"
                 [lableName]=" 'common.department' | transloco" >
               </app-form-search>
               </div>
@@ -509,7 +509,7 @@
                 <!-- <mat-form-field class="fuse-mat-no-subscript w-full">
                   <mat-label
                     >{{ t("common.specialize") }}
-                   
+
                   </mat-label>
                   <mat-select formControlName="levelId">
                     <mat-option
@@ -523,9 +523,9 @@
                   [control]="formGroup.get('levelId')"
                   [name]="'common.specialize' | transloco"
                 ></app-error-message> -->
-                <app-form-search [formSearch]="formGroup" 
-                [ctlName]="formGroup.get('levelId')" 
-                [list] = "listStaffLevels"  
+                <app-form-search [formSearch]="formGroup"
+                [ctlName]="formGroup.get('levelId')"
+                [list] = "listStaffLevels"
                 [lableName]=" 'common.specialize' | transloco" >
               </app-form-search>
               </div>

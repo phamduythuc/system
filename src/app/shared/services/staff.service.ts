@@ -55,12 +55,13 @@ export class StaffService extends BaseService {
   getRoleStaff(option): Observable<any>{
     return this.http.get(`${environment.apiUrl}/role`, {params: option});
   }
-
-
   getListTeam(searchData): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/team`, {params: searchData});
   };
   getListStaffOnl(keyStatus): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/staff`, {params: keyStatus});
+  }
+  getStaff(option): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/categories/group/${option}`);
   }
 }

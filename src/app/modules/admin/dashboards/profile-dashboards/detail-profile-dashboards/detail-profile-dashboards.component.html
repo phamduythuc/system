@@ -51,7 +51,7 @@
                         {{ t("common.gender") }}
                         <!--                        Giới tính / Gender-->
                       </mat-label>
-                      <input formControlName="gender" matInput readonly />
+                      <input formControlName="genderName" matInput readonly />
                     </mat-form-field>
                   </div>
                 </div>
@@ -104,7 +104,7 @@
                         >{{ t("common.religion") }}
                         <!--                        Tôn giáo / Religion-->
                       </mat-label>
-                      <input formControlName="religion" matInput readonly />
+                      <input formControlName="religionName" matInput readonly />
                     </mat-form-field>
                   </div>
                 </div>
@@ -254,7 +254,7 @@
                     >{{ t("common.staffStatus") }}
                     <!--                        Trạng thái / Staff Status-->
                   </mat-label>
-                  <input formControlName="staffStatus" matInput readonly />
+                  <input formControlName="staffStatusName" matInput readonly />
                 </mat-form-field>
                 <app-error-message
                   [control]="formGroup.get('staffStatus')"
@@ -400,7 +400,7 @@
                   <mat-label
                     >{{ t("setting.groupRole") }}
                   </mat-label>
-                  <input formControlName="roleName" matInput readonly />
+                  <input formControlName="role" matInput readonly />
                 </mat-form-field>
               </div>
             </div>
