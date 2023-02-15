@@ -270,7 +270,9 @@
       "time_percent_err": "Mức lương thực nhận là trường bắt buộc",
       "time_percent_err_1": "Mức lương không hợp lệ",
       "name": "Tên nhân viên",
-      "staffID": "Mã nhân viên"
+      "staffID": "Mã nhân viên",
+      "dowloadFileSample" : "Tải xuống tệp mẫu",
+      "uploadFiles":"Tải lên file"
 
     },
     "role": {

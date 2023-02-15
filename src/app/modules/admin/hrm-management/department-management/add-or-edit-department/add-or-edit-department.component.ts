@@ -43,8 +43,7 @@ export class AddOrEditDepartmentComponent
     );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   save(data) {
     data.id = this.dialogId || null;

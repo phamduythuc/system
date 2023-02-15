@@ -7,6 +7,8 @@ import { SalaryService } from '@shared/services/salary.service';
 import moment, { Moment } from 'moment';
 
 import { DateAdapter } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SalaryPopupComponent } from './salary-popup/salary-popup.component';
 
 
 @Component({
@@ -74,7 +76,8 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
   constructor(
     injector: Injector,
     public SalaryService: SalaryService,
-    private _adapter: DateAdapter<any>
+    private _adapter: DateAdapter<any>,
+    public dialog: MatDialog
   ) {
     super(injector, SalaryService);
     this.view();
@@ -258,6 +261,15 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
       } else {
         this.showSnackBar(res.message, 'error');
       }
+    });
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SalaryPopupComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
     });
   }
 }
