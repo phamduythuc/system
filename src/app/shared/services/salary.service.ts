@@ -18,4 +18,7 @@ export class SalaryService extends BaseService {
   saveSalary(params): Observable<any> {
     return this.http.post(`${environment.apiUrl}/salary`, params);
   }
+  saveImport(formData): Observable<any>  {
+    return this.http.post(`${environment.apiUrl}/salary/import-template`, formData);
+  }
 }
