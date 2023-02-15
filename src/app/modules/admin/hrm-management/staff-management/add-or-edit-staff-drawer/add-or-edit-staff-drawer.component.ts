@@ -39,14 +39,13 @@ export class AddOrEditStaffDrawerComponent
       value: 3,
     },*/
   ];
-  religions = [
-  ];
+  religion: any;
 
   listRoleStaff: any;
   listPositions: any = [];
   listStaffLevels: any = [];
   listDepartment: any = [];
-  listTeam:any
+  listTeam: any;
 
   formGroup = this.fb.group({
     //Địa chỉ đầy đủ
@@ -151,7 +150,6 @@ export class AddOrEditStaffDrawerComponent
     this.getListRoleStaff();
     this.staffStatus = this.getListCategories().STAFF_STATUS;
     this.genders = this.getListCategories().genders;
-    this.religions = this.getListCategories().RELIGION;
   }
 
   ngOnInit(): void {
@@ -177,7 +175,6 @@ export class AddOrEditStaffDrawerComponent
           (item) => (item.roleId = Number(item.roleId))
         );
       }
-      console.log(this.listRoleStaff);
     });
     this.staffService.getListPosition(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {
@@ -185,7 +182,6 @@ export class AddOrEditStaffDrawerComponent
           this.listPositions.push(itemStatus);
         }
       });
-      // this.listPositions = res.data;
     });
     this.staffService.getListStaffLevel(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {
@@ -193,7 +189,6 @@ export class AddOrEditStaffDrawerComponent
           this.listStaffLevels.push(itemStatus);
         }
       });
-      // this.listStaffLevels = res.data;
     });
     this.staffService.getListDepartment(this.option).subscribe((res) => {
       res.data.forEach((itemStatus) => {
@@ -201,9 +196,21 @@ export class AddOrEditStaffDrawerComponent
           this.listDepartment.push(itemStatus);
         }
       });
-
-      // this.listDepartment = res.data;
     });
+    this.staffService.getStaff('religion').subscribe(
+      res => {
+        if(res.code === '00') {
+          this.religion = res.data;
+        }
+      }
+    );
+    this.staffService.getStaff('staff_status').subscribe(
+      res => {
+        if(res.code === '00') {
+          this.staffStatus = res.data;
+        }
+      }
+    );
   }
 
   close() {
