@@ -73,7 +73,7 @@ export class AddOrEditStaffDrawerComponent
     //Cấp bậc giáo dục
     education: [],
     //Email cá nhân
-    email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+    email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     //Thông tin liên lạc khẩn cấp
     emergencyUser: [],
     //Dân tộc
