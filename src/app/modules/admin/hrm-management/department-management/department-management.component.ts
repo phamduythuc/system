@@ -19,34 +19,52 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     {
       columnDef: 'stt',
       header: 'common.stt',
-      flex: 0.3,
+      flex: 0.1
     },
     {
       columnDef: 'name',
       header: 'hrm-management.department.form.name',
-      flex: 0.3,
+      flex: 0.3
+
     },
     {
       columnDef: 'code',
       header: 'common.code',
+      flex: 0.2
     },
     {
       columnDef: 'parentName',
       header: 'common.parentName',
+      flex: 0.4
+
     },
     {
       columnDef: 'description',
       header: 'common.description',
+      flex: 0.2
+
     },
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate))
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate)),
+      flex: 0.2
+    },
+    {
+      columnDef: 'createdBy',
+      header: 'common.createdBy',
+      flex: 0.2
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
-      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate))
+      cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate)),
+      flex: 0.2
+    },
+    {
+      columnDef: 'modifiedBy',
+      header: 'common.modifiedBy',
+      flex: 0.2
     },
     {
       columnDef: 'action',

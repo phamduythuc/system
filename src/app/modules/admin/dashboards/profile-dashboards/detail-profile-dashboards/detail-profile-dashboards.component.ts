@@ -150,7 +150,7 @@ export class DetailProfileDashboardsComponent
       positionJob: this.data.positionNames,
       religion: this.data.religionName,
       staffStatus: this.data.staffStatusName,
-      gender: this.data.genderName
+      gender: this.data.gender
     });
   }
 
@@ -215,12 +215,12 @@ export class DetailProfileDashboardsComponent
   }
 
   mapData() :void {
-    // this.genders.map((x: any) => {
-    //   if (x.code === Number(this.data.gender)) {
-    //     this.data.gender = x.name;
-    //     return x;
-    //   }
-    // });
+    this.genders.map((x: any) => {
+      if (x.code === Number(this.data.gender)) {
+        this.data.gender = x.name;
+        return x;
+      }
+    });
     // this.religions.map((x: any) => {
     //   if (x.value === this.data.religion) {
     //     this.data.religion = x.name;

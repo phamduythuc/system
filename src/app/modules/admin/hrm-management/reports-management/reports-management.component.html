@@ -17,7 +17,7 @@
                     </mat-form-field>
                   </div>
                 </div>
-  
+
                 <div class="w-full flex justify-center">
                   <button type="submit" mat-raised-button color="primary" [disabled]="formSearch.invalid"
                           (click)="doSearch()">
@@ -29,7 +29,7 @@
                     <span>{{t("common.search")}}</span>
                   </button>
                 </div>
-  
+
               </form>
               <div class="flex w-40 grid-view">
                 <mat-form-field class="fuse-mat-no-subscript w-full">
@@ -66,10 +66,31 @@
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
           >
+          <ng-template #rowTemplate let-row="row" let-column="column">
+            <ng-container [ngSwitch]="column.columnDef">
+              <ng-container *ngSwitchDefault>
+                <div matTooltip="{{ row[column.columnDef] }}">
+                  {{ row[column.columnDef] }}
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'description'">
+                <div
+                  class="line-clamp"
+                >
+                  {{ row[column.columnDef] }}
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'createdDate'">{{
+                row[column.columnDef] | date : "dd/MM/YYYY"
+              }}</ng-container>
+              <ng-container *ngSwitchCase="'modifiedDate'">{{
+                row[column.columnDef] | date : "dd/MM/YYYY"
+              }}</ng-container>
+            </ng-container>
+          </ng-template>
             </app-data-table>
           </div>
         </div>
       </mat-card>
     </div>
   </ng-container>
-  

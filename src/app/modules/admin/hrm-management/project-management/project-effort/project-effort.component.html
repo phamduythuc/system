@@ -117,10 +117,10 @@
           <!-- NGHIỆM THU -->
           <div class="sm:col-span-1">
             <div class="mb-1">
-              <label class="w-full font-medium" for="acceptanceEffort">{{ "effort.effort_accept" | transloco }}</label>
+              <label class="w-full font-medium" for="acceptanceEffort">{{ "effort.effort_accept" | transloco }}(MM)</label>
             </div>
             <mat-form-field class="fuse-mat-no-subscript w-full">
-              <input id="acceptanceEffort" [formControlName]="'acceptanceEffort'" type="text" matInput onlyNumber
+              <input id="acceptanceEffort" [formControlName]="'acceptanceEffort'" type="text" matInput decimalNumber
                 [placeholder]="'effort.effort_accept' | transloco" />
             </mat-form-field>
             <app-error-message [control]="formGroup.get('acceptanceEffort')"
