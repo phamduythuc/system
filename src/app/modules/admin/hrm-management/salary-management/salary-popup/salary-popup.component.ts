@@ -11,7 +11,6 @@ import {CommonUtilsService} from '@shared/common-utils.service';
 })
 export class SalaryPopupComponent extends BaseComponent implements OnInit {
   documentName: any;
-  visibleBtnUpload: boolean = true;
   formGroup = this.fb.group({
     timeKeepImport: [],
     file: [],
