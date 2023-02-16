@@ -156,7 +156,7 @@ export class DetailProfileDashboardsComponent
 
   ngOnInit(): void {
     // if (this.accountService.hasAnyAuthority(AuthoritiesConstant.DSNV_READ)) {
-    //   this.getListRoleStaff();
+      this.getListRoleStaff();
     // }
   }
 
@@ -167,6 +167,7 @@ export class DetailProfileDashboardsComponent
         res.data.map((x: any) => {
           if (Number(x.roleId) === this.data.role) {
             this.data.role = x.name;
+
           }
           return x;
         });
@@ -174,35 +175,35 @@ export class DetailProfileDashboardsComponent
       this.formGroup.patchValue(this.data);
     });
 
-    this.staffService.getListPosition(this.option).subscribe((res) => {
-      res.data.map((x: any) => {
-        if (x.id === this.data.positionId) {
-          this.data.positionId = x.name;
-          this.data.positionJob = x.name;
-        }
-        return x;
-      });
-    });
+    // this.staffService.getListPosition(this.option).subscribe((res) => {
+    //   res.data.map((x: any) => {
+    //     if (x.id === this.data.positionId) {
+    //       this.data.positionId = x.name;
+    //       this.data.positionJob = x.name;
+    //     }
+    //     return x;
+    //   });
+    // });
 
-    this.staffService.getListStaffLevel(this.option).subscribe((res) => {
-      this.listStaffLevels = res.data;
-      res.data.map((x: any) => {
-        if (x.id === this.data.levelId) {
-          this.data.levelId = x.name;
-          this.data.levelName = x.name
-        }
-        return x;
-      });
-    });
+    // this.staffService.getListStaffLevel(this.option).subscribe((res) => {
+    //   this.listStaffLevels = res.data;
+    //   res.data.map((x: any) => {
+    //     if (x.id === this.data.levelId) {
+    //       this.data.levelId = x.name;
+    //       this.data.levelName = x.name
+    //     }
+    //     return x;
+    //   });
+    // });
 
-    this.staffService.getListDepartment(this.option).subscribe((res) => {
-      res.data.map((x: any) => {
-        if (x.id === this.data.departmentId) {
-          this.data.departmentId = x.name;
-        }
-        return x;
-      });
-    });
+    // this.staffService.getListDepartment(this.option).subscribe((res) => {
+    //   res.data.map((x: any) => {
+    //     if (x.id === this.data.departmentId) {
+    //       this.data.departmentId = x.name;
+    //     }
+    //     return x;
+    //   });
+    // });
 
     // this.staffService.getListTeam(this.option).subscribe((res) => {
     //   res.data.map((x: any) => {
