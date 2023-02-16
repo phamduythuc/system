@@ -41,7 +41,7 @@ export class SprintProfileDashboardsComponent
       header: 'common.stt',
     },
     {
-      columnDef: 'projectId',
+      columnDef: 'projectCode',
       header: 'dashboard.profile.tab.sprint.project_code',
     },
     {

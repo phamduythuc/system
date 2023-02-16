@@ -68,7 +68,7 @@ export class StaffKpiComponent extends BaseComponent implements OnInit {
     if (dialogId) {
       this.getDetails(dialogId,()=>{
         console.log(this.detailsData);
-        
+
       });
     }
     this.formGroup.patchValue({staffId: data?.id});

@@ -1,9 +1,11 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[alphabetOnly]'
 })
 export class AlphabetOnlyDirective {
+
+  constructor(private _el: ElementRef) { }
 
   @HostListener('input', ['$event'])
   onInputChange(event: KeyboardEvent) {
@@ -14,7 +16,7 @@ export class AlphabetOnlyDirective {
   }
 
   @HostListener('paste', ['$event'])
-  onPaste(event: ClipboardEvent) {
+  onPaste(event: KeyboardEvent) {
     event.preventDefault();
     const input = event.target as HTMLInputElement;
     input.value = '';

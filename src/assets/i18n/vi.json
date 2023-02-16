@@ -113,7 +113,9 @@
     "educationLevel": "Trình độ học vấn",
     "salary": "Mức lương",
     "noData": "Không có bản ghi nào",
-    "upload": "Nhập ảnh"
+    "upload": "Nhập ảnh",
+    "alphabet": "Không nhập tiếng việt có dấu"
+
   },
   "setting": {
     "title":"Cấu hình",
@@ -267,7 +269,7 @@
     "salary": {
       "title": "Lương",
       "salaryVND": "Lương (VNĐ)",
-      "salaryReceived": "Mức lương thực nhận(VNĐ)",
+      "salaryReceived": "Mức lương thực nhận (VNĐ)",
       "time_percent_err": "Mức lương thực nhận là trường bắt buộc",
       "time_percent_err_1": "Mức lương không hợp lệ",
       "name": "Tên nhân viên",
@@ -415,22 +417,24 @@
           "month": "Tháng",
           "from": "Từ tháng",
           "to": "Đến tháng",
-          "salary": "Mức lương(VNĐ)",
-          "target_kpi": "KPI mục tiêu(MM)",
-          "salary_received": "Mức lương thực nhận(VNĐ)",
-          "guaranteed_kpi": "KPI đảm bảo(MM)",
+          "salary": "Mức lương",
+          "target_kpi": "KPI mục tiêu",
+          "salary_received": "Mức lương thực nhận",
+          "guaranteed_kpi": "KPI đảm bảo",
           "reality_kpi": "KPI phân bổ thực tế",
           "project_code": "Mã dự án",
           "project_name": "Tên dự án",
-          "recognize": "Ghi nhận nỗ lực(MM)",
-          "recognize_exchange": "Nỗ lực quy đổi(MM)",
+          "recognize": "Ghi nhận nỗ lực (MM)",
+          "recognize_exchange": "Nỗ lực quy đổi (MM)",
           "time_percent": "% phân bổ thời gian",
           "time_percent_err": "Phân bổ thời gian là trường bắt buộc",
           "time_percent_err_1": "Số phải nằm trong khoảng từ 0 đến 100",
           "percent_effort_err": "Tổng % phân bổ thời gian phải bằng 100%"
         },
         "chart": {
-          "title": "Biểu đồ KPI"
+          "title": "Biểu đồ KPI",
+          "realistic_KPI": "KPI thực tế"
+
         }
       }
     }

@@ -125,7 +125,6 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.searchDetail.teamId = this.team.id;
     this.searchDetail.month = CommonUtilsService.dateToString(this.currentTime,false); //New code
-    console.log(this.searchDetail);
 
     this.getDetailTeamBySprint(this.searchDetail);
     this.formGroup.patchValue({
@@ -173,7 +172,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
     this.teamService.getTeamDetaiBySprint(searchDetail).subscribe((res) => {
       if (res.data[0] != null) {
         this.data = res.data[0];
-        console.log(this.data);
+        this.listMember = [];
         this.formGroup.patchValue(this.data);
         if (this.data.staffName != null) {
           this.listStaffName = this.data.staffName.split(',');
@@ -185,6 +184,7 @@ export class TeamItemComponent extends BaseComponent implements OnInit {
               staffId: this.listStaffId[index],
               staffName: this.listStaffName[index],
             };
+
             this.listMember.push(this.member);
           }
           // this.totalMember = this.listStaffId.length;
