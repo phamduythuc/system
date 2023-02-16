@@ -7,9 +7,10 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { DataTableModule } from '@layout/common/data-table/data-table.module';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { SalaryPopupComponent } from './salary-popup/salary-popup.component';
 
 @NgModule({
-  declarations: [SalaryManagementComponent],
+  declarations: [SalaryManagementComponent, SalaryPopupComponent],
   imports: [
     CommonModule,
     DataTableModule,

@@ -273,7 +273,9 @@
       "time_percent_err": "Salary Received is required",
       "time_percent_err_1": "Invalid salary",
       "name": "Name",
-      "staffID": "Staff ID"
+      "staffID": "Staff ID",
+      "dowloadFileSample" : "Download the sample file",
+      "uploadFiles":"Upload files"
     },
     "role": {
       "title": "Role",
