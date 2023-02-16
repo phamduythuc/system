@@ -115,7 +115,8 @@
     "educationLevel": "Education Level",
     "salary": "Salary",
     "noData": "No data",
-    "upload": "Upload"
+    "upload": "Upload",
+    "alphabet": "Do not enter Vietnamese"
   },
   "setting": {
     "title":"Setting",

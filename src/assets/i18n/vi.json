@@ -113,7 +113,9 @@
     "educationLevel": "Trình độ học vấn",
     "salary": "Mức lương",
     "noData": "Không có bản ghi nào",
-    "upload": "Nhập ảnh"
+    "upload": "Nhập ảnh",
+    "alphabet": "Không nhập tiếng việt có dấu"
+
   },
   "setting": {
     "title":"Cấu hình",

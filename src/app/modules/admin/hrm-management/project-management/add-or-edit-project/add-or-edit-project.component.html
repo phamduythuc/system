@@ -287,21 +287,21 @@
             "hrm-management.project.form.actualEndTime" | transloco
           }}</label>
           <div class="input w-2/3">
-            <div class="w-full my-border">
+            <mat-form-field class="fuse-mat-no-subscript w-full">
               <input
-                class=" "
-                matInput
-                [min]="formGroup.value.startTime"
-                [max]="formGroup.value.actualEndTime"
-                [matDatepicker]="actualEndTime"
-                datePickerFormat="DD/MM/YYYY"
-                formControlName="actualEndTime"
-                [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
-              />
-              <mat-datepicker-toggle [for]="actualEndTime">
-              </mat-datepicker-toggle>
-              <mat-datepicker #actualEndTime></mat-datepicker>
-            </div>
+              class=" "
+              matInput
+              [min]="formGroup.value.startTime"
+              [max]="formGroup.value.actualEndTime"
+              [matDatepicker]="actualEndTime"
+              datePickerFormat="DD/MM/YYYY"
+              formControlName="actualEndTime"
+              [placeholder]="('placeholder.chooseDate' | transloco) + ' ...'"
+            />
+            <mat-datepicker-toggle [for]="actualEndTime">
+            </mat-datepicker-toggle>
+            <mat-datepicker #actualEndTime></mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
       </div>
