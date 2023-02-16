@@ -47,10 +47,10 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
   formGroup = this._formBuilder.group({
     startMonth: [
-      moment().subtract(5, 'months'),
+      moment().subtract(7, 'months'),
       Validators.required,
     ],
-    endMonth: [moment().subtract(0, 'months'), Validators.required],
+    endMonth: [moment().subtract(1, 'months'), Validators.required],
     staffId: [],
   });
 
