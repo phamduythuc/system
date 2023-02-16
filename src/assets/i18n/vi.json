@@ -432,7 +432,9 @@
           "percent_effort_err": "Tổng % phân bổ thời gian phải bằng 100%"
         },
         "chart": {
-          "title": "Biểu đồ KPI"
+          "title": "Biểu đồ KPI",
+          "realistic_KPI": "KPI thực tế"
+
         }
       }
     }

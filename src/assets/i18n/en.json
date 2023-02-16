@@ -450,7 +450,8 @@
           "percent_effort_err": "Total % of time allocation must be 100%"
         },
         "chart": {
-          "title": "Chart KPI"
+          "title": "Chart KPI",
+          "realistic_KPI": "Realistic KPIs"
         }
       }
     }
