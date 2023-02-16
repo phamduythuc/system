@@ -267,9 +267,10 @@ export class SalaryManagementComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialog.open(SalaryPopupComponent, {
       data: {
         month: this.startDate.value.startMonth
-      },
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.view();
     });
   }
 }

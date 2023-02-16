@@ -3,8 +3,7 @@
         <!--        header-->
         <div class="header border-b flex justify-between items-center pb-3">
             <div class="text-2xl font-bold card-title capitalize">
-                {{dialogId?t("hrm-management.editHeader")+("
-                ")+("File"):t("hrm-management.addHeader")+(" ")+("File")}}
+                {{t("hrm-management.salary.uploadFiles")}}
             </div>
             <div>
                 <button mat-icon-button class="hover:bg-slate-200" (click)="dialogRef.close()">
@@ -15,25 +14,25 @@
 
         <div class="w-full pl-2 pr-2 content overflow-auto">
             <!-- Form -->
-            <form [formGroup]="formGroup">
+            <form [formGroup]="formGroup" enctype="multipart/form-data">
                 <!-- Section -->
 
-                <div class="grid sm:grid-cols-1 gap-6 w-full mt-8">
-                    <!-- Name -->
-                    <div class="sm:col-span-2">
-                        <mat-form-field class="fuse-mat-no-subscript w-full">
-                            <mat-label>Tên File</mat-label>
-                            <!-- <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:user'" matPrefix></mat-icon> -->
-                            <input [formControlName]="'timeKeepImport'" matInput>
-                        </mat-form-field>
-                        <app-error-message [control]="formGroup.get('timeKeepImport')"
-                            [name]="'common.name'|transloco"></app-error-message>
-                    </div>
-                </div>
+<!--                <div class="grid sm:grid-cols-1 gap-6 w-full mt-8">-->
+<!--                    &lt;!&ndash; Name &ndash;&gt;-->
+<!--                    <div class="sm:col-span-2">-->
+<!--                        <mat-form-field class="fuse-mat-no-subscript w-full">-->
+<!--                            <mat-label>Tên File</mat-label>-->
+<!--                            &lt;!&ndash; <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:user'" matPrefix></mat-icon> &ndash;&gt;-->
+<!--                            <input [formControlName]="'timeKeepImport'" matInput>-->
+<!--                        </mat-form-field>-->
+<!--                        <app-error-message [control]="formGroup.get('timeKeepImport')"-->
+<!--                            [name]="'common.name'|transloco"></app-error-message>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <!-- upload file -->
                 <div class="mt-5 mb-5 flex items-center" >
-                    <label for="file-input">
+                    <label for="file">
                         <!-- <mat-icon svgIcon="feather:file"></mat-icon> -->
                     </label>
                     <button mat-raised-button color="primary" class="cursor-pointer">
@@ -46,7 +45,7 @@
                     <label class="ml-2" for="file">{{
                         (this.documentName
                         ? this.documentName
-                        : "Upload file"
+                        : ""
                         ) | transloco
                         }}</label>
                 </div>
@@ -59,13 +58,13 @@
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:x"></mat-icon>
                 <span>{{ "button.cancel" | transloco }}</span>
             </button>
-            <button mat-raised-button color="primary" (click)="dowloadFile()" style="margin-left: 12px;">
-                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:arrow-circle-down"></mat-icon>
-                <span>{{'hrm-management.salary.dowloadFileSample' |transloco}}</span>
-            </button>
+<!--            <button mat-raised-button color="primary" (click)="dowloadFile()" style="margin-left: 12px;">-->
+<!--                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:arrow-circle-down"></mat-icon>-->
+<!--                <span>{{'hrm-management.salary.dowloadFileSample' |transloco}}</span>-->
+<!--            </button>-->
             <button mat-raised-button color="primary" class="mr-3" style="margin-left: 12px;"
-                [disabled]="formGroup.invalid||(fileUpload.value=='')"
-                (click)="formGroup.valid && save(formGroup.value)">
+                [disabled]="fileUpload.value ===''"
+                (click)="save()">
                 <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_outline:arrow-circle-up"></mat-icon>
                 <span>{{'hrm-management.salary.uploadFiles' |transloco}}</span>
             </button>

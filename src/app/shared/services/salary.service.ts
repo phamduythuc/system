@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {BaseService} from '@core/base.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {environment} from '@env/environment';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class SalaryService extends BaseService {
   saveSalary(params): Observable<any> {
     return this.http.post(`${environment.apiUrl}/salary`, params);
   }
-  saveImport(formData): Observable<any>  {
-    return this.http.post(`${environment.apiUrl}/salary/import-template`, formData);
+  saveImport(month, formData): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/salary/import-template?month=${month}` , formData);
   }
 }

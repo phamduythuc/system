@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, Injector } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base.component';
 import { SalaryService } from '@shared/services/salary.service';
-import {CommonUtilsService} from "@shared/common-utils.service";
+import {CommonUtilsService} from '@shared/common-utils.service';
 
 @Component({
   selector: 'app-salary-popup',
@@ -27,33 +27,29 @@ export class SalaryPopupComponent extends BaseComponent implements OnInit {
   dowloadFile() {
     alert('Chưa có file');
   }
-  save() {
-    const formData = new FormData();
-    const data = this.formGroup.value;
-    this.handleCoverTimeToString(data);
-      formData.append('file', this.fileUpload.value || null);
-      // formData.append(
-      //   'data',
-      //   new Blob([JSON.stringify(data)], { type: 'application/json' })
-      // );
-    console.log(formData);
-      this.salaryService.saveImport(formData).subscribe();
-  }
   fileUpload: any = {
     name: '',
     type: '',
     file: '',
   };
+  fileURL: any;
   uploadFile(event: any): void {
     const reader = new FileReader(); // HTML5 FileReader API
     const file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
-      this.formGroup.patchValue({ file });
+      this.fileUpload.file = file;
+      this.documentName = file.name;
       reader.onload = () => {
-        this.fileUpload.file = file;
-        this.documentName = file.name;
-      };
+        this.fileURL = reader.result;
+    };
     }
+  }
+  save() {
+    const formData = new FormData();
+    const dataMonth = CommonUtilsService.dateToString(this.data.month);
+    formData.append('file', this.fileUpload.file);
+    this.salaryService.saveImport(dataMonth, formData).subscribe();
+    this.dialogRef.close();
   }
 }
