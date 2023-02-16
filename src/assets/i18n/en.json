@@ -456,5 +456,14 @@
   },
   "profile":{
     "title": "Profile"
+  },
+  "staffTranslate": {
+    "yes": "Yes",
+    "no": "No",
+    "male": "Male",
+    "female": "Female",
+    "Other" : "Other",
+    "doing" : "Doing",
+    "resting" : "Resting"
   }
 }

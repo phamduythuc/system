@@ -437,5 +437,14 @@
   },
   "profile":{
     "title": "Thông tin cá nhân"
+  },
+  "staffTranslate": {
+    "yes": "Có",
+    "no": "Không",
+    "male": "Nam",
+    "female": "Nữ",
+    "other" : "Khác",
+    "doing" : "Đang làm",
+    "resting" : "Đã nghỉ"
   }
 }

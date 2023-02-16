@@ -194,7 +194,7 @@
                           *ngFor="let r of religion"
                           [value]="r.code"
                         >
-                          {{ r.name }}
+                          {{ r.title | transloco }}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -361,7 +361,7 @@
                   </mat-label>
                   <mat-select [formControlName]="'staffStatus'">
                     <mat-option *ngFor="let s of staffStatus" [value]="s.code">
-                      {{ s.name }}
+                      {{ s.title | transloco }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
