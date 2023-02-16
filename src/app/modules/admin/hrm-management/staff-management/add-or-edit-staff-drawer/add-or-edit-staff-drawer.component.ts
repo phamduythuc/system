@@ -285,7 +285,7 @@ export class AddOrEditStaffDrawerComponent
       status: 1,
       pageSize: 9999999,
     }).subscribe(res=>{
-      this.listTeam = res.data
+      this.listTeam = res.data;
 
       this.formGroup.patchValue(this.formGroup.value);
     });
