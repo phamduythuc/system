@@ -32,20 +32,12 @@ export class SalaryPopupComponent extends BaseComponent implements OnInit {
     const data = this.formGroup.value;
     this.handleCoverTimeToString(data);
       formData.append('file', this.fileUpload.value || null);
-      formData.append(
-        'data',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      );
+      // formData.append(
+      //   'data',
+      //   new Blob([JSON.stringify(data)], { type: 'application/json' })
+      // );
     console.log(formData);
-    const  params = {
-      month: CommonUtilsService.dateToString(
-        this.data.month,
-        false
-      ),
-      file : formData,
-    };
-    console.log(params);
-      this.salaryService.saveImport(params).subscribe();
+      this.salaryService.saveImport(formData).subscribe();
   }
   fileUpload: any = {
     name: '',
