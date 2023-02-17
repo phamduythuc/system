@@ -52,7 +52,6 @@
             [(pageIndex)]="searchModel.page"
             [limit]="searchModel.pageSize"
             [count]="searchResult.totalRecords"
-            [typeView]="typeView"
             [rowTemplate]="rowTemplate"
             (action)="actionClick($event)"
             (pageChange)="changePage($event)"
@@ -70,8 +69,8 @@
                     >{{'hrm-management.contract.link'| transloco}}
                   </span>
                 </ng-container>
-                <ng-container *ngSwitchCase="'effDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
-                <ng-container *ngSwitchCase="'salary'">{{row[column.columnDef]|currency:'USD':''}} đ</ng-container>
+                <ng-container *ngSwitchCase="'effDate'">{{formatDate(row.effDate)}}</ng-container>
+                <ng-container *ngSwitchCase="'salary'">{{formatCurrency(row.salary)}}</ng-container>
               </ng-container>
             </ng-template>
           </app-data-table>

@@ -117,14 +117,14 @@ export class ContractManagementComponent
       //   currency: 'VND',
       // });
       this.searchResult.data = this.mapData(this.searchResult.data);
-      let convertData = this.searchResult.data.map((obj) => {
-        let convetSalary = {
-          ...obj,
-          salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
-        };
-        return convetSalary;
-      });
-      this.searchResult.data = convertData;
+      // let convertData = this.searchResult.data.map((obj) => {
+      //   let convetSalary = {
+      //     ...obj,
+      //     // salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
+      //   };
+      //   return convetSalary;
+      // });
+      // this.searchResult.data = convertData;
 
       this.dataDocument = this.searchResult.data.map((item) => {
         return item.documentName;
@@ -208,5 +208,15 @@ export class ContractManagementComponent
     this.StaffService.getListStaffOnl(keyStatus).subscribe((res: any) => {
       this.listUser = res.data;
     });
+  }
+
+  formatDate(date) {
+    return CommonUtilsService.dateToString(date, false);
+  }
+
+
+
+  formatCurrency(currency) {
+    return CommonUtilsService.formatVND(currency);
   }
 }

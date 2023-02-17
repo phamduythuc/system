@@ -69,6 +69,6 @@ export class CommonUtilsService {
     if(value){
       value = VND.format(parseInt(value));
     }
-    return value
-  }  
+    return value;
+  }
 }

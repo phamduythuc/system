@@ -48,11 +48,11 @@ export class ListStaffComponent extends BaseComponent implements OnInit, OnChang
       this.firstStaff = this.searchResult.data[0].id;
       this.idChosed=this.firstStaff;
       this.router.navigate([`/hrm-management/time-keeping/staff/${this.firstStaff}`]);
-      this.searchResult.data.forEach((item) => {
-        if (item.imageUrl) {
-          this.convertBase64(item.imageUrl, item);
-        }
-      })
+      // this.searchResult.data.forEach((item) => {
+      //   if (item.imageUrl) {
+      //     this.convertBase64(item.imageUrl, item);
+      //   }
+      // })
     }
 
   }
