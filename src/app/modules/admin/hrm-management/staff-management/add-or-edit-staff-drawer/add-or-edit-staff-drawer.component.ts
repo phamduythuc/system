@@ -224,6 +224,7 @@ export class AddOrEditStaffDrawerComponent
           const list = {
             1 : 'staffTranslate.male',
             2 : 'staffTranslate.female',
+            3 : 'staffTranslate.other',
           };
           this.genders = this.translateObj(res, list);
         }
@@ -236,8 +237,10 @@ export class AddOrEditStaffDrawerComponent
     const mapObj = codeRevert.map(i => {
       if(i.code === 1) {
         return {...i, title: list[1]};
-      }else  {
-        return {...i, title: list[2]};
+      }else if (i.code === 2) {
+        return  {...i, title: list[2]};
+      }
+      else {return {...i, title: list[3]};
       }
     });
     return mapObj;

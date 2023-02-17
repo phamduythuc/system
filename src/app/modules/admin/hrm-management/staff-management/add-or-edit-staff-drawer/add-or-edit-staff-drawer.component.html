@@ -78,7 +78,7 @@
                       </mat-label>
                       <mat-select [formControlName]="'gender'">
                         <mat-option *ngFor="let g of genders" [value]="g.code">
-                          {{ g.name }}
+                          {{ g.title | transloco }}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>

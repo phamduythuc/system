@@ -464,7 +464,7 @@
     "no": "No",
     "male": "Male",
     "female": "Female",
-    "Other" : "Other",
+    "other" : "Other",
     "doing" : "Doing",
     "resting" : "Resting"
   }
