@@ -63,7 +63,7 @@
                 matTooltip="{{ t('dashboard.profile.tab.sprint.salary') }}
                 "
               >
-                {{ t("dashboard.profile.tab.sprint.salary") }}
+                {{ t("dashboard.profile.tab.sprint.salary") }} (VNĐ)
               </p>
             </mat-label>
             <input formControlName="salary" matInput readonly />
@@ -80,7 +80,7 @@
                 class="pe"
                 matTooltip="{{ t('dashboard.profile.tab.sprint.target_kpi') }}"
               >
-                {{ t("dashboard.profile.tab.sprint.target_kpi") }}
+                {{ t("dashboard.profile.tab.sprint.target_kpi") }} (MM)
               </p>
             </mat-label>
             <input formControlName="kpiTarget" matInput readonly />
@@ -99,7 +99,7 @@
                   t('dashboard.profile.tab.sprint.salary_received')
                 }}"
               >
-                {{ t("dashboard.profile.tab.sprint.salary_received") }}
+                {{ t("dashboard.profile.tab.sprint.salary_received") }} (VNĐ)
               </p>
             </mat-label>
             <input formControlName="salaryActual" matInput readonly />
@@ -118,7 +118,7 @@
                   t('dashboard.profile.tab.sprint.guaranteed_kpi')
                 }}"
               >
-                {{ t("dashboard.profile.tab.sprint.guaranteed_kpi") }}
+                {{ t("dashboard.profile.tab.sprint.guaranteed_kpi") }} (MM)
               </p>
             </mat-label>
             <input formControlName="kpiInsure" matInput readonly />
@@ -218,7 +218,6 @@
     </div>
   </form> -->
 
-
   <div class="data-table w-full mt-4">
     <div class="mb-2 text-base font-semibold uppercase">
       {{ "dashboard.profile.tab.sprint.reality_kpi" | transloco }}
@@ -272,22 +271,23 @@
                 !staffId
               "
             >
-              <div [hidden]="!rateInput.errors.pattern">
+              <!-- <div [hidden]="!rateInput.errors.pattern">
                 <span>{{
                   "dashboard.profile.tab.sprint.time_percent_err_1" | transloco
                 }}</span>
-              </div>
-              <div [hidden]="!rateInput.errors.required">
+              </div> -->
+              <!-- <div [hidden]="!rateInput.errors.required">
                 {{
                   "dashboard.profile.tab.sprint.time_percent_err" | transloco
                 }}
-              </div>
+              </div> -->
             </div>
             <div [hidden]="disabledLogErr" class="errors">
               <span>{{
                 "dashboard.profile.tab.sprint.percent_effort_err" | transloco
               }}</span>
             </div>
+            <!-- <ng-template #elseBlock>Content to render when condition is false.</ng-template> -->
           </ng-container>
         </ng-container>
       </ng-template>

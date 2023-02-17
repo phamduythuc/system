@@ -150,7 +150,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
                   type: 'kpiInsure',
                 },
               ];
-    
+
               this.renderKPI(res.data);
               this.random = (Math.random() + 1).toString(36).substring(7);
             } else {
@@ -184,7 +184,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
                   type: 'kpiInsure',
                 },
               ];
-    
+
               this.renderKPI(res.data);
               this.random = (Math.random() + 1).toString(36).substring(7);
             } else {
@@ -199,11 +199,11 @@ export class ChartProfileDashboardsComponent implements OnInit {
         });
       }
 
-   
+
   }
 
   renderKPI(data: any) {
-    
+
     for (let i = 0; i < data.length; i++) {
       this.data.map((x: any) => {
         if (x.type == 'effortExchange') {
@@ -225,7 +225,7 @@ export class ChartProfileDashboardsComponent implements OnInit {
 
     this.options.series = this.data;
     console.log(this.options.series);
-    
+
   }
 
   showSnackBar(messages?: string, type?: string): void {
