@@ -34,7 +34,9 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     if (this.dialogId) {
       this.getDetails(this.dialogId, () => {
+        console.log(this.detailsData.type);
         this.listCaregories.CONTACT_TYPE.map((x) => {
+          console.log('x.code', x.code, this.detailsData.type == x.code);
           if (x.code == this.detailsData.type) {
             this.detailsData.type = x.name;
             this.detailsData.effDate = CommonUtilsService.dateToString(
@@ -59,8 +61,9 @@ export class DetailsContractComponent extends BaseComponent implements OnInit {
             );
             this.detailsData.salary =
               Number(this.detailsData.salary).toLocaleString() + ' đ';
-            this.detailsData.insurance =
-              this.detailsData.insurance.toLocaleString() + ' đ';
+            this.detailsData.insurance = this.detailsData?.insurance
+              ? this.detailsData?.insurance.toLocaleString() + ' đ'
+              : '';
           }
         });
 
