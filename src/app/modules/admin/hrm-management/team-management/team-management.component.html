@@ -1,70 +1,101 @@
 <ng-container *transloco="let t">
-    <div class="flex-col w-full h-full px-4">
-        <mat-card class="bg-card h-full">
-            <!-- header -->
-            <div class="header border-b flex flex-wrap justify-between w-full">
-                <div class="flex justify-between w-3/5">
-                    <div class="w-full">
-                        <form [formGroup]="formSearch">
-                            <div class="flex w-full ">
-                                <!-- search box -->
-                                <div class="w-full">
-                                    <mat-form-field appearance="fill" class="w-full">
-                                        <input matInput [formControlName]="'name'">
-                                    </mat-form-field>
-                                </div>
-
-
-                                <!-- button search -->
-                                <div class="px-3">
-                                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button
-                                        color="primary" (click)="doSearch()">
-                                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:search"></mat-icon>
-                                        {{t('button.search')}}
-                                    </button>
-                                </div>
-
-
-                                <!-- view option seaarch -->
-                                <div class="w-2/6">
-                                    <mat-form-field class="w-full">
-                                        <mat-select [formControlName]="'option'"
-                                            (selectionChange)="onStatusChange($event)">
-                                            <mat-option value="">{{'common.all'|transloco}}</mat-option>
-                                            <mat-option value="2">{{'common.notActive'|transloco}}</mat-option>
-                                            <mat-option value="1">{{'common.activing'|transloco}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
+  <div class="flex-col w-full h-full px-4">
+    <mat-card class="bg-card h-full">
+      <!-- header -->
+      <div class="header border-b flex flex-wrap justify-between w-full">
+        <div class="flex justify-between w-3/5">
+          <div class="w-full">
+            <form [formGroup]="formSearch">
+              <div class="flex w-full">
+                <!-- search box -->
+                <div class="w-full">
+                  <mat-form-field appearance="fill" class="w-full">
+                    <input matInput [formControlName]="'name'" />
+                  </mat-form-field>
                 </div>
 
-                <!-- button -->
-                <div class="mb-2 flex justify-end">
-                    <button *hasAnyAuthority="_permissionCodeName+'_CREATE'" mat-raised-button color="primary"
-                        (click)="addOrEdit()">
-                        <mat-icon class="icon-size-6" svgIcon="heroicons_outline:plus"></mat-icon>
-                        {{t('button.new')}}
-                    </button>
+                <!-- button search -->
+                <div class="px-3">
+                  <button
+                    *hasAnyAuthority="_permissionCodeName + '_CREATE'"
+                    mat-raised-button
+                    color="primary"
+                    (click)="doSearch()"
+                  >
+                    <mat-icon
+                      class="icon-size-6"
+                      svgIcon="heroicons_outline:search"
+                    ></mat-icon>
+                    {{ t("button.search") }}
+                  </button>
                 </div>
-            </div>
 
-            <!-- content -->
-            <div class="flex flex-wrap justify-around w-full mt-5">
-                <div class=" w-120 m-2 mt-3 " *ngFor="let value of searchResult.data; total as total">
-                    <app-team-item (reSearch)="doSearch()" [team]="value" [random]="random"></app-team-item>
+                <!-- view option seaarch -->
+                <div class="w-2/6">
+                  <mat-form-field class="w-full">
+                    <mat-select
+                      [formControlName]="'option'"
+                      (selectionChange)="onStatusChange($event)"
+                    >
+                      <mat-option value="">{{
+                        "common.all" | transloco
+                      }}</mat-option>
+                      <mat-option value="2">{{
+                        "common.notActive" | transloco
+                      }}</mat-option>
+                      <mat-option value="1">{{
+                        "common.activing" | transloco
+                      }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-            </div>
-            <div>
-                <mat-paginator [length]="searchResult.totalRecords" [pageSize]="3" [pageSizeOptions]="[3, 6, 9, 12]"
-                    [showFirstLastButtons]="true" aria-label="Select page" (page)="handlePageEvent($event)"
-                    [hidePageSize]="false">
-                </mat-paginator>
-            </div>
-        </mat-card>
-    </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- button -->
+        <div class="mb-2 flex justify-end">
+          <button
+            *hasAnyAuthority="_permissionCodeName + '_CREATE'"
+            mat-raised-button
+            color="primary"
+            (click)="addOrEdit()"
+          >
+            <mat-icon
+              class="icon-size-6"
+              svgIcon="heroicons_outline:plus"
+            ></mat-icon>
+            {{ t("button.new") }}
+          </button>
+        </div>
+      </div>
+
+      <!-- content -->
+      <div class="flex flex-wrap justify-around w-full mt-5">
+        <div
+          class="w-120 m-2 mt-3"
+          *ngFor="let value of searchResult.data; total as total"
+        >
+          <app-team-item
+            (reSearch)="doSearch()"
+            [team]="value"
+            [random]="random"
+          ></app-team-item>
+        </div>
+      </div>
+      <div>
+        <mat-paginator
+          [length]="searchResult.totalRecords"
+          [pageSize]="3"
+          [pageSizeOptions]="[3, 6, 9, 12]"
+          [showFirstLastButtons]="true"
+          aria-label="Select page"
+          (page)="handlePageEvent($event)"
+          [hidePageSize]="false"
+        >
+        </mat-paginator>
+      </div>
+    </mat-card>
+  </div>
 </ng-container>

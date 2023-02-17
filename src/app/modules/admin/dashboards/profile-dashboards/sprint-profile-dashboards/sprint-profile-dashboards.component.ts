@@ -83,7 +83,7 @@ export class SprintProfileDashboardsComponent
     page: 0,
     pageSize: 10,
     status: 1,
-    staffId: '',
+    // staffId: '',
   };
 
   constructor(
@@ -157,7 +157,7 @@ export class SprintProfileDashboardsComponent
   }
 
   getData(data) {
-    this.DashboardsProfileService.getSprint(data).subscribe((res: any) => {
+    this.DashboardsProfileService.getSprint(this.staffId,data).subscribe((res: any) => {
       this.data = {
         data: res.data,
         totalRecords: res.data.length,
