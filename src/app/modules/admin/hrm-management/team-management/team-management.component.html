@@ -87,6 +87,7 @@
       <div>
         <mat-paginator
           [length]="searchResult.totalRecords"
+          [pageIndex]="searchModel.page"
           [pageSize]="3"
           [pageSizeOptions]="[3, 6, 9, 12]"
           [showFirstLastButtons]="true"
