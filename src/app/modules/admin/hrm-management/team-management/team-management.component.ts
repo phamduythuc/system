@@ -27,7 +27,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
 
   formSearch: FormGroup;
   team = 'team';
-  selected = 'domain'
+  selected = 'domain';
   list_type_view: any = [
     {
       type: 'list',
@@ -51,7 +51,7 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
     });
   }
 
-  random: any
+  random: any;
   ngOnChanges(changes: SimpleChanges): void {
     this.random = (Math.random() + 1).toString(36).substring(7);
 
@@ -77,29 +77,22 @@ export class TeamManagementComponent extends BaseComponent implements OnInit {
 
   handlePageEvent(e?: any) {
     this.searchModel = {
+      ...this.searchModel,
       page: e.pageIndex,
       pageSize: e.pageSize,
       status: this.formSearch.value['option']
-    }
+    };
     this.processSearch(this.searchModel);
 
   }
 
   doSearch(): void {
-    if (this.formSearch.value.name != '') {
-      this.searchModel = {
-        ...this.searchModel,
-        page: 0,
-        ...this.formSearch.value,
-      };
-    }
-    else {
-      this.searchModel = {
-        page: 0,
-        pageSize: 3,
-        status: this.formSearch.value['option']
-      }
-    }
+    this.searchModel = {
+      ...this.searchModel,
+      ...this.formSearch.value,
+      page: 0,
+      status: this.formSearch.value['option']
+    };
     this.processSearch(this.searchModel);
   }
 
