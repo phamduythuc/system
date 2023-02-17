@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { Validators } from '@angular/forms';
 import { StaffService } from '@shared/services/staff.service';
@@ -17,6 +17,7 @@ export class AddOrEditStaffDrawerComponent
 {
   @Input() staffSelected: any;
   @Input() drawer: any;
+  @Output() search: EventEmitter<any> = new EventEmitter<any>();
   imageUrl: any = '';
   option = {
     page: 0,
@@ -147,7 +148,7 @@ export class AddOrEditStaffDrawerComponent
   ) {
     super(injector, staffService);
     this.getListRoleStaff();
-    this.genders = this.getListCategories().genders;
+    // this.genders = this.getListCategories().genders;
   }
 
   ngOnInit(): void {
@@ -199,23 +200,53 @@ export class AddOrEditStaffDrawerComponent
     this.staffService.getStaff('religion').subscribe(
       res => {
         if(res.code === '00') {
-          const codeRevert = res.data.map(i => ({code: Number(i.code), name: i.name}));
-          this.religion = codeRevert;
+           const list = {
+            1 : 'staffTranslate.yes',
+            2 : 'staffTranslate.no',
+          };
+           this.religion= this.translateObj(res, list);
         }
       }
     );
     this.staffService.getStaff('staff_status').subscribe(
       res => {
         if(res.code === '00') {
-          if(res.code === '00') {
-            const codeRevert = res.data.map(i => ({code: Number(i.code), name: i.name}));
-            this.staffStatus = codeRevert;
-          }
+          const list = {
+            1 : 'staffTranslate.doing',
+            2 : 'staffTranslate.resting',
+          };
+          // const codeRevert = res.data.map(i => ({code: Number(i.code), name: i.name}));
+          this.staffStatus = this.translateObj(res, list);
+        }
+      }
+    );
+    this.staffService.getStaff('gender').subscribe(
+      res => {
+        if(res.code === '00') {
+          const list = {
+            1 : 'staffTranslate.male',
+            2 : 'staffTranslate.female',
+            3 : 'staffTranslate.other',
+          };
+          this.genders = this.translateObj(res, list);
         }
       }
     );
   }
-
+  translateObj(obj, list) {
+    console.log(list);
+    const codeRevert = obj.data.map(i => ({code: Number(i.code), name: i.name}));
+    const mapObj = codeRevert.map(i => {
+      if(i.code === 1) {
+        return {...i, title: list[1]};
+      }else if (i.code === 2) {
+        return  {...i, title: list[2]};
+      }
+      else {return {...i, title: list[3]};
+      }
+    });
+    return mapObj;
+  };
   close() {
     this.drawer?.toggle(true);
   }
@@ -248,6 +279,7 @@ export class AddOrEditStaffDrawerComponent
       this.staffService.updateStaff(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
+          this.search.emit();
           this.close();
         } else {
           this.showSnackBar(res.message, 'error');

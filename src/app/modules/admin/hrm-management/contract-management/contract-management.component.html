@@ -70,6 +70,8 @@
                     >{{'hrm-management.contract.link'| transloco}}
                   </span>
                 </ng-container>
+                <ng-container *ngSwitchCase="'effDate'">{{row[column.columnDef]|date :'dd/MM/YYYY'}}</ng-container>
+                <ng-container *ngSwitchCase="'salary'">{{row[column.columnDef]|currency:'USD':''}} đ</ng-container>
               </ng-container>
             </ng-template>
           </app-data-table>

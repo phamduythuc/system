@@ -49,6 +49,7 @@ export class PartnerManagementComponent extends BaseComponent implements OnInit 
     {
       columnDef: 'note',
       header: 'common.note',
+      flex: 0.3,
     },
     {
       columnDef: 'action',
