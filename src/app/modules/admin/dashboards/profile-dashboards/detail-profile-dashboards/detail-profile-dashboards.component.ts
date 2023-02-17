@@ -113,6 +113,7 @@ export class DetailProfileDashboardsComponent
     genderName: [],
     religionName: [],
     staffStatusName: [],
+    departmentNames: [''],
   });
 
   option = {
@@ -140,12 +141,15 @@ export class DetailProfileDashboardsComponent
 
 
   ngOnChanges(changes: SimpleChanges) {
+    if (!this.data) {
+      return;
+    }
     // this.getListRoleStaff();
     this.mapData();
     this.convertBase64(this.data.imageUrl);
     this.formGroup.patchValue(this.data);
     this.formGroup.patchValue({
-      departmentId: this.data.departmentNames,
+      // departmentId: this.data.departmentNames,
       positionId: this.data.positionNames,
       positionJob: this.data.positionNames,
       religion: this.data.religionName,
@@ -215,7 +219,7 @@ export class DetailProfileDashboardsComponent
     // });
   }
 
-  mapData() :void {
+  mapData(): void {
     this.genders.map((x: any) => {
       if (x.code === Number(this.data.gender)) {
         this.data.gender = x.name;
@@ -262,12 +266,13 @@ export class DetailProfileDashboardsComponent
   }
 
   convertBase64(imageUrl): void {
-    if (imageUrl) {
+    this.imageUrl = imageUrl;
+  /*  if (imageUrl) {
       this.achievementService.downloadFile(imageUrl).subscribe((res1) => {
         this.imageUrl = this._sanitizer.bypassSecurityTrustUrl(
           URL.createObjectURL(res1.body)
         );
       });
-    }
+    }*/
   }
 }

@@ -153,7 +153,8 @@ export class AddOrEditStaffDrawerComponent
   ngOnInit(): void {
     if (this.staffSelected && this.staffSelected !== -1) {
       this.getDetails(this.staffSelected, ({ imageUrl }) => {
-        this.convertBase64(imageUrl);
+        // this.convertBase64(imageUrl);
+        this.imageUrl = this.detailsData.imageUrl;
         this.formGroup.patchValue(this.detailsData);
       });
     }
@@ -216,7 +217,7 @@ export class AddOrEditStaffDrawerComponent
   }
 
   close() {
-    this.drawer?.toggle();
+    this.drawer?.toggle(true);
   }
 
   convertBase64(imageUrl): void {

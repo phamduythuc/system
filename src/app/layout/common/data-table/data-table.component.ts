@@ -127,7 +127,7 @@ export class DataTableComponent
     this.getListActions();
     if(this.typeView === 'grid'){
       this.rows.map((x: any,index: any)=>{
-        x.avatar = this.convertBase64(x.imageUrl,index);
+        x.avatar = x.imageUrl;
         return x;
       });
     }
@@ -167,13 +167,14 @@ export class DataTableComponent
   }
 
   convertBase64(imageUrl,index) {
-    if (imageUrl) {
-      this.achievementService.downloadFile(imageUrl).subscribe((res1) => {
-        this.rows[index].avatar = this._sanitizer.bypassSecurityTrustUrl(
-          URL.createObjectURL(res1.body)
-        );
-      });
-    }
+    this.rows[index].avatar = imageUrl;
+    // if (imageUrl) {
+    //   this.achievementService.downloadFile(imageUrl).subscribe((res1) => {
+    //     this.rows[index].avatar = this._sanitizer.bypassSecurityTrustUrl(
+    //       URL.createObjectURL(res1.body)
+    //     );
+    //   });
+    // }
   }
 }
 
