@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@core/base.component';
 import { Validators } from '@angular/forms';
 import { StaffService } from '@shared/services/staff.service';
@@ -17,6 +17,7 @@ export class AddOrEditStaffDrawerComponent
 {
   @Input() staffSelected: any;
   @Input() drawer: any;
+  @Output() search: EventEmitter<any> = new EventEmitter<any>();
   imageUrl: any = '';
   option = {
     page: 0,
@@ -277,6 +278,7 @@ export class AddOrEditStaffDrawerComponent
       this.staffService.updateStaff(formData).subscribe((res) => {
         if ('00' === res.code) {
           this.showSnackBar(res.message, 'success');
+          this.search.emit();
           this.close();
         } else {
           this.showSnackBar(res.message, 'error');
