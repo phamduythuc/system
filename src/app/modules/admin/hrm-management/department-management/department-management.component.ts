@@ -19,52 +19,51 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
     {
       columnDef: 'stt',
       header: 'common.stt',
-      flex: 0.1
+      flex: 0.2
     },
     {
       columnDef: 'name',
       header: 'hrm-management.department.form.name',
-      flex: 0.3
+      flex: 1
 
     },
     {
       columnDef: 'code',
       header: 'common.code',
-      flex: 0.2
+      flex: 0.6
     },
     {
       columnDef: 'parentName',
       header: 'common.parentName',
-      flex: 0.4
-
+      flex: 1
     },
     {
       columnDef: 'description',
       header: 'common.description',
-      flex: 0.2
+      flex: 1
 
     },
     {
       columnDef: 'createdDate',
       header: 'common.createdDate',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.createdDate)),
-      flex: 0.2
+      flex: 0.6
     },
     {
       columnDef: 'createdBy',
       header: 'common.createdBy',
-      flex: 0.2
+      flex: 0.4
     },
     {
       columnDef: 'modifiedDate',
       header: 'common.modifiedDate',
       cellRenderer: (element: any) => (CommonUtilsService.dateToString(element.modifiedDate)),
-      flex: 0.2
+      flex: 0.6
     },
     {
       columnDef: 'modifiedBy',
       header: 'common.modifiedBy',
-      flex: 0.2
+      flex: 0.4
     },
     {
       columnDef: 'action',
@@ -77,7 +76,7 @@ export class DepartmentManagementComponent extends BaseComponent implements OnIn
   });
   panelOpenState: false;
 
-  list_status = []
+  list_status = [];
 
   typeStatus = '1';
 

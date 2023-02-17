@@ -211,7 +211,7 @@ export class StaffManagementComponent extends BaseComponent implements OnInit {
   openDrawerChange($event: boolean) {
     if (!$event) {
       this.staffSelected = null;
-      this.doSearch();
+      // this.doSearch();
     }
   }
 

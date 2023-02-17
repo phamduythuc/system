@@ -95,7 +95,7 @@
              [position]="'right'"
              (openedChanged)="openDrawerChange($event)"
              #drawer>
-  <app-add-or-edit-staff-drawer *ngIf="staffSelected" class="w-full" [staffSelected]="staffSelected"
+  <app-add-or-edit-staff-drawer *ngIf="staffSelected" (search)="doSearch()" class="w-full" [staffSelected]="staffSelected"
                           [drawer]="drawer"
   ></app-add-or-edit-staff-drawer>
 </fuse-drawer>
