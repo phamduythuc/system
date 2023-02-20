@@ -307,7 +307,7 @@
             class="hidden"
             accept=".pdf, .doc, .docx"
             (change)="uploadFile($event)"
-          
+
           />
           <label
             for="file"
@@ -316,7 +316,7 @@
             <span *ngIf="!fileUpload.name " class="cursor-pointer">Upload file</span>
             <!-- <span *ngIf="detailsData?.documentName && dialogId" class="cursor-pointer">{{detailsData?.documentName}}</span> -->
             <span *ngIf="fileUpload.name" class="cursor-pointer">{{fileUpload.name}}</span>
-            
+
             <!-- <span
               class="flex justify-start items-center gap-3"
               *ngIf="fileUpload.type"

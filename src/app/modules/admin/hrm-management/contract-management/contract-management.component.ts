@@ -30,15 +30,17 @@ export class ContractManagementComponent
     {
       columnDef: 'code',
       header: 'hrm-management.staff.detail.contract.contract_code',
-      flex: 0.7,
+      flex: 1,
     },
     {
       columnDef: 'staffName',
       header: 'hrm-management.staff.title',
+      flex: 1,
     },
     {
       columnDef: 'type',
       header: 'hrm-management.staff.detail.contract.contract',
+      flex: 1,
     },
     {
       columnDef: 'termPeriod',
@@ -48,6 +50,12 @@ export class ContractManagementComponent
     {
       columnDef: 'effDate',
       header: 'hrm-management.staff.detail.contract.startTime',
+      flex: 0.5,
+    },
+    {
+      columnDef: 'expDate',
+      header: 'hrm-management.contract.expDate',
+      flex: 0.5,
     },
     {
       columnDef: 'salary',
@@ -81,11 +89,11 @@ export class ContractManagementComponent
 
   constructor(
     injector: Injector,
-    public StaffService: StaffService,
+    public staffService: StaffService,
     public achievementService: AchievementService,
-    public ContractService: ContractService
+    public contractService: ContractService
   ) {
-    super(injector, ContractService, achievementService);
+    super(injector, contractService, achievementService);
     this.getListUser();
   }
 
@@ -112,23 +120,8 @@ export class ContractManagementComponent
       ...this.formSearch.value,
     };
     this.processSearch(this.searchModel, () => {
-      // const VND = new Intl.NumberFormat('vi-VN', {
-      //   style: 'currency',
-      //   currency: 'VND',
-      // });
       this.searchResult.data = this.mapData(this.searchResult.data);
-      // let convertData = this.searchResult.data.map((obj) => {
-      //   let convetSalary = {
-      //     ...obj,
-      //     // salary: CommonUtilsService.formatVND(parseInt(obj.salary)),
-      //   };
-      //   return convetSalary;
-      // });
-      // this.searchResult.data = convertData;
-
-      this.dataDocument = this.searchResult.data.map((item) => {
-        return item.documentName;
-      });
+      this.dataDocument = this.searchResult.data.map((item) => item.documentName);
     });
   }
 
@@ -175,7 +168,9 @@ export class ContractManagementComponent
         disableClose: false,
       },
       (value) => {
-        if (value) this.doSearch();
+        if (value) {
+          this.doSearch();
+        }
       }
     );
     // ref.onclose()
@@ -205,7 +200,7 @@ export class ContractManagementComponent
     const keyStatus = {
       status: 1,
     };
-    this.StaffService.getListStaffOnl(keyStatus).subscribe((res: any) => {
+    this.staffService.getListStaffOnl(keyStatus).subscribe((res: any) => {
       this.listUser = res.data;
     });
   }

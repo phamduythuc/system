@@ -28,7 +28,7 @@ export class ErrorMessageComponent {
     dateRange:(params: any, name: any) => `${this.tran.translate('specialText.error_10')}`,
   };
 
-  shouldShowErrors(): boolean { 
+  shouldShowErrors(): boolean {
     return this.control?.errors && (this.control.dirty || this.control.touched);
   }
 
