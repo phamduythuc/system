@@ -70,6 +70,7 @@
                   </span>
                 </ng-container>
                 <ng-container *ngSwitchCase="'effDate'">{{formatDate(row.effDate)}}</ng-container>
+                <ng-container *ngSwitchCase="'expDate'">{{formatDate(row.expDate)}}</ng-container>
                 <ng-container *ngSwitchCase="'salary'">{{formatCurrency(row.salary)}}</ng-container>
               </ng-container>
             </ng-template>
