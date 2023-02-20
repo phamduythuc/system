@@ -135,17 +135,23 @@ export class ChartProfileDashboardsComponent implements OnInit {
             if (res.data.length > 0) {
               this.data = [
                 {
-                  name: 'KPI mục tiêu',
+                  name: this.translocoService.translate(
+                    'dashboard.profile.tab.sprint.target_kpi'
+                  ),
                   data: [],
                   type: 'effortExchange',
                 },
                 {
-                  name: 'KPI đảm bảo',
+                  name: this.translocoService.translate(
+                    'dashboard.profile.tab.sprint.guaranteed_kpi'
+                  ),
                   data: [],
                   type: 'kpiTarget',
                 },
                 {
-                  name: 'KPI thực tế',
+                  name: this.translocoService.translate(
+                    'dashboard.profile.tab.chart.realistic_KPI'
+                  ),
                   data: [],
                   type: 'kpiInsure',
                 },
