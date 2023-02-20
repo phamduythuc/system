@@ -12,7 +12,7 @@
                 [ngClass]="{'bg-[#4f46e5] shadow text-white':(idChosed===staff.id)}" (click)="idChosed=staff.id">
                 <a [routerLink]="['staff', staff.id]" class="w-full flex items-center justify-start">
                     <div class=" absolute inline-block w-14 z-[2] -top-[2px] -left-[1px]">
-                        <img matListItemAvatar [src]="staff.imageUrl" alt="" class="rounded-[50%] h-[56px] bg-white">
+                        <img matListItemAvatar [src]="staff.imageUrl || 'assets/images/avatars/noImgPerson.jpg'" alt="" class="rounded-[50%] h-[56px] bg-white">
                     </div>
                     <div class="absolute inline-block h-full ml-[30px] w-[80%]">
                         <div class="flex w-full h-full items-center justify-center rounded-l-[10px] rounded-r-[20px]">

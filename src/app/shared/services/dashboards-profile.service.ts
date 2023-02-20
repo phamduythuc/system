@@ -31,8 +31,8 @@ export class DashboardsProfileService extends BaseService {
   }
 
 
-  getSprint(data): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/sprint/project-staff`, {params: data});
+  getSprint(staffId,data): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/sprint/project-staff/${staffId}`, {params: data});
   }
 
   updateEffort(data): Observable<any> {
