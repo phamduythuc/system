@@ -22,7 +22,7 @@ import {NgxTrimDirectiveModule} from 'ngx-trim-directive';
 import {ErrorMessageModule} from '@shared/components/error-message/error-message.module';
 import {TreeviewModule} from 'ngx-treeview';
 import { ChartLineComponent } from './charts/chart-line/chart-line.component';
-import {HighchartsChartModule} from 'highcharts-angular';
+// import {HighchartsChartModule} from 'highcharts-angular';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -58,7 +58,7 @@ export const MAT_MODULES = [
         ReactiveFormsModule,
         MatIconModule,
       TreeviewModule,
-      HighchartsChartModule,
+      // HighchartsChartModule,
       ...MAT_MODULES
     ],
     declarations: [

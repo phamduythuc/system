@@ -134,36 +134,36 @@ export const appRoutes: Route[] = [
           ),
         data: { breadcrumb: { label: 'Dashboards', url: '' } },
       },
-      {
-        path: 'hrm-management',
-        // canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
-        loadChildren: () =>
-          import('app/modules/admin/hrm-management/hrm-management.module').then(
-            (m) => m.HrmManagementModule
-          ),
-        data: { breadcrumb: { label: 'hrm-management.label', url: '' } },
-      },
-      // setting
-      {
-        path: 'setting',
-        loadChildren: () =>
-          import('app/modules/admin/setting/setting.module').then(
-            (m) => m.SettingModule
-          ),
-        data: { breadcrumb: { label: 'Setting', url: '' } },
-      },
-
-      {
-        path: 'profile',
-        // canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
-        loadChildren: () =>
-          import('app/modules/admin/profile/profile.module').then(
-            (m) => m.ProfileModule
-          ),
-        data: { breadcrumb: { label: 'profile.title', url: '' } },
-      },
+      // {
+      //   path: 'hrm-management',
+      //   // canActivate: [AuthGuard],
+      //   canActivateChild: [AuthGuard],
+      //   loadChildren: () =>
+      //     import('app/modules/admin/hrm-management/hrm-management.module').then(
+      //       (m) => m.HrmManagementModule
+      //     ),
+      //   data: { breadcrumb: { label: 'hrm-management.label', url: '' } },
+      // },
+      // // setting
+      // {
+      //   path: 'setting',
+      //   loadChildren: () =>
+      //     import('app/modules/admin/setting/setting.module').then(
+      //       (m) => m.SettingModule
+      //     ),
+      //   data: { breadcrumb: { label: 'Setting', url: '' } },
+      // },
+      //
+      // {
+      //   path: 'profile',
+      //   // canActivate: [AuthGuard],
+      //   canActivateChild: [AuthGuard],
+      //   loadChildren: () =>
+      //     import('app/modules/admin/profile/profile.module').then(
+      //       (m) => m.ProfileModule
+      //     ),
+      //   data: { breadcrumb: { label: 'profile.title', url: '' } },
+      // },
     ],
   },
 ];
