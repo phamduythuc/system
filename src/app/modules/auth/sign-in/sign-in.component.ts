@@ -43,7 +43,7 @@ export class AuthSignInComponent implements OnInit {
     ngOnInit(): void {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            username: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required],
             rememberMe: ['']
         });
@@ -72,10 +72,10 @@ export class AuthSignInComponent implements OnInit {
         const credential = {
             ...this.signInForm.value,
             password: this.b64EncodeUnicode(this.signInForm.value.password),
-            tokenDevice: 'test_1',
-            deviceName: 'device_test1',
-            sso: false,
-            ticket: ''
+            // tokenDevice: 'test_1',
+            // deviceName: 'device_test1',
+            // sso: false,
+            // ticket: ''
         };
         this._authService.signIn(credential)
             .subscribe(

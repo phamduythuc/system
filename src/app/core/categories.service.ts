@@ -8,8 +8,8 @@ import {environment} from '@env/environment';
 })
 export class CategoriesService {
 
-  constructor(private http :HttpClient) { }
-  getCategories(group?:any): Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/categories/group/${group}`)
+  constructor(private http: HttpClient) { }
+  getCategories(group?: any): Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/categories/group/${group}`);
   }
 }

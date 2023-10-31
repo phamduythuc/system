@@ -45,9 +45,7 @@ export class AccountService {
   identity(force?: boolean): Observable<User | null> {
     if (!this.accountCache$ || force || !this.isAuthenticated()) {
       this.accountCache$ = this.fetch().pipe(
-        catchError(() => {
-          return of(null);
-        }),
+        catchError(() => of(null)),
         tap((account: User | null) => {
           if (account) {
             account.fullName = `${account.firstName || ''} ${account.lastName || ''}`.trim();
@@ -83,7 +81,7 @@ export class AccountService {
   }
 
   private fetch(): Observable<User> {
-    return this.http.get<User>(`${environment.apiSSO}/user-info`);
+    return this.http.get<User>(`${environment.apiUrl}/user-info`);
   }
 
   private navigateToStoredUrl(): void {

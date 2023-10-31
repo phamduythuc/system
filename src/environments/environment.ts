@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 export const envConfig = {
-  apiSSO: 'http://103.226.248.168:8082',
+  api: 'http://localhost:8080',
   baseUrl: window.location.origin,
   clientId: 'lifesup_hrm',
   scope: 'read',
@@ -11,9 +11,8 @@ export const envConfig = {
 export const environment = {
   production: false,
   baseUrl: window.location.origin,
-  apiUrl: 'http://103.226.248.168:8089/api',
-  apiSSO: `${envConfig.apiSSO}/api`,
-  redirectUrl: `${envConfig.apiSSO}/auth?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
+  apiUrl: `${envConfig.api}/api`,
+  redirectUrl: `${envConfig.api}/auth?client_id=${envConfig.clientId}&redirect_uri=${envConfig.baseUrl}&scope=${envConfig.scope}`
 };
 
 

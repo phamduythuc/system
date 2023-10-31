@@ -44,6 +44,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       map(account => {
         if (account) {
           const authorities = route.data['authorities'];
+          console.log(authorities);
           if (!authorities || authorities.length === 0 || this.accountService.hasAnyAuthority(authorities)) {
             return true;
           }
@@ -54,7 +55,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           this._router.navigate(['accessdenied']);
           return false;
         }
-        window.location.href = environment.redirectUrl;
+        // window.location.href = environment.redirectUrl;
+        // this._router.navigateByUrl('/dashboards');
         return false;
       })
     );

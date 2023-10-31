@@ -75,17 +75,16 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post(environment.apiUrl + '/authenticate', credentials, {observe: 'response'}).pipe(
+        return this._httpClient.post(environment.apiUrl + '/login', credentials, {observe: 'response'}).pipe(
             switchMap((response: any) => {
+              console.log(response);
 
                 // Store the access token in the local storage
-                const jwt = response.headers.get('Authorization');
-                if (jwt?.startsWith('Bearer ')) {
-                    this.accessToken = jwt.split(' ')[1];
-
+                const jwt = response.body.message;
+                if (jwt) {
+                    this.accessToken = jwt;
                     // Set the authenticated flag to true
                     this._authenticated = true;
-
                     // Store the user on the user service
                     // this._userService.user = response.user;
                 }
@@ -148,7 +147,7 @@ export class AuthService
      */
     signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post(`${environment.apiUrl}/register`, user);
     }
 
     /**
