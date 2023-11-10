@@ -48,7 +48,8 @@ export class AccountService {
         catchError(() => of(null)),
         tap((account: User | null) => {
           if (account) {
-            account.fullName = `${account.firstName || ''} ${account.lastName || ''}`.trim();
+            const user = {...account};
+            account.fullName = `${account?.data.firstName || ''} ${account?.data.lastName || ''}`.trim();
           }
           this.authenticate(account);
 

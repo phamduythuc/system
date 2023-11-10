@@ -30,6 +30,7 @@ export interface User {
   status: number;
   roleGroup: RoleGroup;
   listRoleGroup: RoleGroup[];
+  data?: any;
 }
 
 export interface Authority {

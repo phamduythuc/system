@@ -7,7 +7,7 @@ import { BaseComponent } from './base.component';
 @Injectable()
 export class GetListComponent extends BaseComponent {
 
-  type_contract:any = []
+  type_contract: any = [];
 
   constructor(
     injector: Injector,
@@ -21,8 +21,8 @@ export class GetListComponent extends BaseComponent {
     this.type_contract = JSON.parse(localStorage.getItem('listType')).CONTACT_TYPE;
     let value: any;
 
-    this.type_contract.map((x:any) => {
-      if (x.code == type) {
+    this.type_contract.map((x: any) => {
+      if (x.code === type) {
         value = x.name;
       }
     });
@@ -41,7 +41,7 @@ export class GetListComponent extends BaseComponent {
         );
       });
     }
-    return data
+    return data;
   }
 
 }

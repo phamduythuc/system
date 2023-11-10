@@ -15,6 +15,7 @@ import {UserService} from 'app/core/user/user.service';
 import {environment} from '@env/environment';
 import {DOCUMENT} from '@angular/common';
 import {AccountService} from '@core/auth/account.service';
+import {AuthService} from "@core/auth/auth.service";
 
 @Component({
   selector: 'user',
@@ -40,6 +41,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _router: Router,
     private _accountService: AccountService,
+    private authService: AuthService,
     @Inject(DOCUMENT) private document: Document
   ) {
   }
@@ -57,6 +59,7 @@ export class UserComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((user: User) => {
         this.user = user;
+        console.log(this.user);
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
@@ -101,6 +104,7 @@ export class UserComponent implements OnInit, OnDestroy {
   signOut(): void {
     localStorage.clear();
     sessionStorage.clear();
-    this.document.location.href = environment.redirectUrl;
+    // this.document.location.href = environment.redirectUrl;
+    this._router.navigateByUrl('/sign-out');
   }
 }
